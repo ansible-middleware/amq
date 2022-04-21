@@ -1,0 +1,29 @@
+---
+namespace: middleware_automation
+name: amq
+version: "0.0.1"
+readme: README.md
+authors:
+  - Guido Grazioli <ggraziol@redhat.com>
+description: Install and configure AMQ services.
+license_file: "LICENSE"
+tags:
+  - amq
+  - activemq
+  - broker
+  - streams
+  - rhn
+  - server
+  - messagebus
+  - infrastructure
+dependencies:
+  "middleware_automation.redhat_csp_download": ">=1.2.1"
+repository: https://github.com/ansible-middleware/amq
+documentation: https://ansible-middleware.github.io/amq
+homepage: https://github.com/ansible-middleware/amq
+issues: https://github.com/ansible-middleware/amq/issues
+build_ignore:
+  - molecule
+  - .github
+  - '*.tar.gz'
+  - '*.zip'

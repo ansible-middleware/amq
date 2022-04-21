@@ -1,0 +1,58 @@
+---
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  COLORTERM: 'yes'
+  TERM: 'xterm-256color'
+  PYTEST_ADDOPTS: '--color=yes'
+
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python_version: ["3.10"]
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          path: ansible_collections/middleware_automation/amq
+
+      - name: Set up Python ${{ matrix.python_version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python_version }}
+
+      - name: Install yamllint, ansible and molecule
+        run: |
+          python -m pip install --upgrade pip
+          pip install yamllint molecule[lint,docker] ansible-core flake8 ansible-lint voluptuous
+          if [ -f ansible_collections/middleware_automation/infinispan/requirements.txt ]; then
+            pip install -r ansible_collections/middleware_automation/infinispan/requirements.txt
+          fi
+
+      - name: Create default collection path
+        run: |
+          mkdir -p /home/runner/.ansible/collections/ansible_collections        
+
+      - name: Install ansible-lint custom rules
+        uses: actions/checkout@v2
+        with:
+          repository: ansible-middleware/ansible-lint-custom-rules
+          path: ansible_collections/ansible-lint-custom-rules/
+
+      - name: Run sanity tests
+        run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }}
+        working-directory: ./ansible_collections/middleware_automation/amq
+
+      - name: Run molecule test
+        run: molecule test --all
+        working-directory: ./ansible_collections/middleware_automation/amq
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'

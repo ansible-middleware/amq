@@ -1,0 +1,24 @@
+*.pyc
+*.retry
+.vscode
+
+__pycache__/
+
+# Galaxy artifacts.
+*.tar.gz
+*.zip
+
+# Temporary test files.
+tests/output
+
+.tmp
+.cache
+docs/plugins/
+docs/roles/
+docs/_build/
+.pytest_cache/
+.mypy_cache/
+*.retry
+
+inventory
+changelogs/.plugin-cache.yaml
