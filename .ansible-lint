@@ -22,6 +22,7 @@ warn_list:
   - no-handler
   - fqcn-builtins
   - no-log-password
+  - no-empty-data-files
 
 use_default_rules: true
 parseable: true
