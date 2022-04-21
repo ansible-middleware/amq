@@ -1,0 +1,28 @@
+---
+collections:
+  - middleware_automation.redhat_csp_download
+
+galaxy_info:
+  role_name: amq_broker
+  namespace: middleware_automation
+  author: Guido Grazioli
+  description: Installs
+  company: Red Hat, Inc.
+
+  license: Apache License 2.0
+
+  min_ansible_version: "2.9"
+
+  platforms:
+   - name: EL
+     versions:
+     - 8
+
+  galaxy_tags:
+    - activemq
+    - amq
+    - redhat
+    - rhel
+    - rhn
+    - server
+    - infrastructure

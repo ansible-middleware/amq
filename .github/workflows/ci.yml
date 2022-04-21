@@ -12,7 +12,7 @@ env:
   PYTEST_ADDOPTS: '--color=yes'
 
 jobs:
-  molecule:
+  CI:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -47,7 +47,7 @@ jobs:
           path: ansible_collections/ansible-lint-custom-rules/
 
       - name: Run sanity tests
-        run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }}
+        run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }} --exclude changelogs/fragments/.gitignore
         working-directory: ./ansible_collections/middleware_automation/amq
 
       - name: Run molecule test
