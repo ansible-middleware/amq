@@ -13,6 +13,11 @@ platforms:
     pre_build_image: true
     privileged: true
     command: "/usr/sbin/init"
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
   config_options:
