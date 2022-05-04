@@ -1,0 +1,28 @@
+---
+- name: Ensure required package firewalld are installed
+  ansible.builtin.include_tasks: fastpackages.yml
+  vars:
+    packages_list:
+      - firewalld
+
+- name: Enable and start the firewalld service
+  become: yes
+  ansible.builtin.systemd:
+    name: firewalld
+    enabled: yes
+    state: started
+
+- name: "Configure firewall for {{ amq_broker.service_name }} ports"
+  become: yes
+  firewalld:
+    port: "{{ item }}"
+    permanent: true
+    state: enabled
+    immediate: yes
+  loop:
+    - "{{ amq_broker_http_port }}/tcp"
+    - "{{ amq_broker_port }}/tcp"
+    - "{{ amq_broker_port_hornetq }}/tcp"
+    - "{{ amq_broker_port_amqp }}/tcp"
+    - "{{ amq_broker_port_mqtt }}/tcp"
+    - "{{ amq_broker_port_stomp }}/tcp"

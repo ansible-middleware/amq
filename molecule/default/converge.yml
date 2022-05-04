@@ -2,3 +2,7 @@
 - name: Converge
   hosts: all
   gather_facts: yes
+  collections:
+    - middleware_automation.redhat_csp_download
+  roles:
+    - amq_broker

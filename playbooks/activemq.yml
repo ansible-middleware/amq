@@ -1,0 +1,7 @@
+---
+- name: Playbook for Red Hat AMQ Broker
+  hosts: all
+  collections:
+   - middleware_automation.redhat_csp_download
+  roles:
+   - amq_broker

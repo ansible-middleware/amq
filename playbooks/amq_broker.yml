@@ -1,0 +1,12 @@
+---
+- name: Playbook for Red Hat AMQ Broker
+  hosts: all
+  vars:
+    # requires amq-broker-{{amq_broker_version}}-bin.zip to be in playbook directory
+    rhn_username: foo
+    rhn_password: bar
+    amq_broker_offline_install: True
+  collections:
+   - middleware_automation.redhat_csp_download
+  roles:
+   - amq_broker

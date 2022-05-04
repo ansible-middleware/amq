@@ -1,0 +1,76 @@
+---
+- name: Determine JAVA_HOME for selected JVM RPM  # noqa blocked_modules
+  ansible.builtin.shell: |
+    set -o pipefail
+    rpm -ql {{ amq_broker_jvm_package }} | grep -Po '/usr/lib/jvm/.*(?=/bin/java$)'
+  args:
+    executable: /bin/bash
+  changed_when: False
+  register: rpm_java_home
+
+- name: "Configure sysconfig file for {{ amq_broker.instance_name }} {{ amq_broker.service_name }} service"
+  become: yes
+  ansible.builtin.template:
+    src: amq_broker.sysconfig.j2
+    dest: "/etc/sysconfig/{{ amq_broker.instance_name }}"
+    owner: root
+    group: root
+    mode: 0644
+  vars:
+    amq_broker_rpm_java_home: "{{ rpm_java_home.stdout }}"
+  notify:
+    - restart amq_broker
+
+- name: "Configure systemd unit file for {{ amq_broker.instance_name }} {{ amq_broker.service_name }} service"
+  ansible.builtin.template:
+    src: amq_broker.service.j2
+    dest: "/etc/systemd/system/{{ amq_broker.instance_name }}.service"
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  register: systemdunit
+  notify:
+    - restart amq_broker
+
+- name: "Check instance directory: {{ amq_broker_dest }}/{{ amq_broker.instance_name }}"
+  ansible.builtin.stat:
+    path: "{{ amq_broker_dest }}/{{ amq_broker.instance_name }}"
+  register: instance_directory
+  become: yes
+
+- name: "Create instance {{ amq_broker.instance_name }} of {{ amq_broker.service_name }}"
+  ansible.builtin.command:
+    cmd: "{{ amq_broker.home }}/bin/artemis create {{ amq_broker_dest }}/{{ amq_broker.instance_name }} --user {{ amq_broker_instance_username }} --password {{ amq_broker_instance_password }} --require-login"
+    creates: "{{ amq_broker.instance_home }}/bin/artemis-service"
+  become: yes
+  when:
+    - not instance_directory.stat.exists
+
+- name: Reload systemd
+  become: yes
+  ansible.builtin.systemd:
+    daemon_reload: yes
+  when: systemdunit.changed
+
+- name: "Start and wait for {{ amq_broker.service_name }} service (first node)"
+  ansible.builtin.include_tasks: start.yml
+  run_once: yes
+  when: amq_broker_db_enabled
+
+- name: "Start and wait for {{ amq_broker.service_name }} service (remaining nodes)"
+  ansible.builtin.include_tasks: start.yml
+
+- name: Check service status
+  ansible.builtin.command: "systemctl status {{ amq_broker.instance_name }}"
+  register: amq_broker_service_status
+  changed_when: False
+
+- name: Verify service status
+  ansible.builtin.assert:
+    that:
+      - amq_broker_service_status is defined
+      - amq_broker_service_status.stdout is defined
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers

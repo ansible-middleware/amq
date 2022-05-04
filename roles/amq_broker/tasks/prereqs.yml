@@ -1,0 +1,34 @@
+---
+# - name: Validate admin console password
+#   ansible.builtin.assert:
+#     that:
+#       - amq_broker_admin_password | length > 12
+#     quiet: True
+#     fail_msg: "The console administrator password is empty or invalid. Please set the amq_broker_admin_password variable to a 16+ char long string"
+#     success_msg: "{{ 'Console administrator password OK' }}"
+
+# - name: Validate configuration
+#   ansible.builtin.assert:
+#     that:
+#       - (amq_broker_ha_enabled and amq_broker_db_enabled) or (not amq_broker_ha_enabled and amq_broker_db_enabled) or (not amq_broker_ha_enabled and not amq_broker_db_enabled)
+#     quiet: True
+#     fail_msg: "Cannot install HA setup without a backend database service. Check amq_broker_ha_enabled and amq_broker_db_enabled"
+#     success_msg: "{{ 'Configuring HA' if amq_broker_ha_enabled else 'Configuring standalone' }}"
+
+- name: Validate credentials
+  ansible.builtin.assert:
+    that:
+      - (rhn_username is defined and amq_broker_enable) or not amq_broker_enable or amq_broker_offline_install
+      - (rhn_password is defined and amq_broker_enable) or not amq_broker_enable or amq_broker_offline_install
+    quiet: True
+    fail_msg: "Cannot install Red Hat AMQ Broker without RHN credentials. Check rhn_username and rhn_password are defined"
+    success_msg: "{{ 'Installing Red Hat AMQ Broker' if amq_broker_enable else 'Installing Apache ActiveMQ' }}"
+
+- name: Ensure required packages are installed
+  ansible.builtin.include_tasks: fastpackages.yml
+  vars:
+    packages_list:
+      - "{{ amq_broker_jvm_package }}"
+      - unzip
+      - procps-ng
+      - initscripts

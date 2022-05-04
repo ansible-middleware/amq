@@ -1,0 +1,3 @@
+# {{ ansible_managed }}
+JAVA_OPTS='{{ amq_broker_java_opts }}'
+JAVA_HOME={{ amq_broker_java_home  | default(amq_broker_rpm_java_home, true) }}

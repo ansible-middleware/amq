@@ -1,1 +1,38 @@
 ---
+- name: Check prerequisites
+  ansible.builtin.include_tasks: prereqs.yml
+  tags:
+    - prereqs
+
+- name: Include firewall config tasks
+  ansible.builtin.include_tasks: firewalld.yml
+  when: amq_broker_configure_firewalld
+  tags:
+    - firewall
+
+- name: Include install tasks
+  ansible.builtin.include_tasks: install.yml
+  tags:
+    - install
+
+- name: Include systemd tasks
+  ansible.builtin.include_tasks: systemd.yml
+  tags:
+    - systemd
+
+
+- name: Create default logs directory
+  become: yes
+  ansible.builtin.file:
+    state: directory
+    dest: "/var/log/{{ amq_broker.service_name }}"
+    owner: "{{ amq_broker_service_user }}"
+    group: "{{ amq_broker_service_group }}"
+    mode: 0750
+
+- name: Link default logs directory
+  become: yes
+  ansible.builtin.file:
+    state: link
+    src: "{{ amq_broker.instance_home }}/log"
+    dest: "/var/log/{{ amq_broker.service_name }}/{{ amq_broker.instance_name }}"

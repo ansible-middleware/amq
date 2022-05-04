@@ -1,0 +1,7 @@
+---
+- name: "Start and enable instance {{ amq_broker.instance_name }} for {{ amq_broker.service_name }} service"
+  ansible.builtin.systemd:
+    name: "{{ amq_broker.instance_name }}"
+    enabled: yes
+    state: started
+  become: yes

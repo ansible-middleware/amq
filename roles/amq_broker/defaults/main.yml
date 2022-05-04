@@ -1,1 +1,53 @@
 ---
+### AMQ Version settings
+# setting for apache activemq artemis
+amq_broker_activemq_version: 2.18.0
+amq_broker_activemq_archive: "apache-artemis-{{ amq_broker_activemq_version }}-bin.zip"
+amq_broker_activemq_download_url: "https://archive.apache.org/dist/activemq/activemq-artemis/{{ amq_broker_activemq_version }}/{{ amq_broker_activemq_archive }}"  
+amq_broker_activemq_installdir: "{{ amq_broker_dest }}/apache-artemis-{{ amq_broker_activemq_version }}"
+# settings for Red Hat AMQ Broker
+amq_broker_enable: "{{ True if rhn_username is defined and rhn_password is defined else False }}"
+amq_broker_version: 7.9.4
+amq_broker_archive: "amq-broker-{{ amq_broker_version }}-bin.zip"
+amq_broker_installdir: "{{ amq_broker_dest }}/amq-broker-{{ amq_broker_version }}"
+
+### Install location and service settings
+amq_broker_dest: /opt/amq
+amq_broker_offline_install: False
+amq_broker_config_dir: "conf"
+amq_broker_config_xml: amq-broker.xml
+amq_broker_config_override_template: ''
+amq_broker_service_user: amq-broker
+amq_broker_service_group: amq-broker
+amq_broker_instance_name: amq-broker
+amq_broker_instance_username: amq-broker
+amq_broker_instance_password: amq-broker
+amq_broker_instance_anonymous: False
+amq_broker_service_pidfile: data/artemis.pid
+amq_broker_configure_firewalld: False
+
+### Common configuration settings
+amq_broker_bind_address: 0.0.0.0
+amq_broker_host: localhost
+amq_broker_http_port: 8161
+amq_broker_jolokia_url: "http://{{ amq_broker_host }}:{{ amq_broker_http_port }}/console/jolokia"
+amq_broker_console_url: "http://{{ amq_broker_host }}:{{ amq_broker_http_port }}/console/"
+amq_broker_jvm_package: java-11-openjdk-headless
+amq_broker_java_home:
+amq_broker_java_opts: "-Xms1024m -Xmx2048m"
+amq_broker_port: 61616        # for protocols [CORE,MQTT,AMQP,STOMP,HORNETQ,OPENWIRE]
+amq_broker_port_hornetq: 5445 # for protocols [HORNETQ,STOMP]
+amq_broker_port_amqp: 5672    # for protocols [AMQP]
+amq_broker_port_mqtt: 1883    # for protocols [MQTT]
+amq_broker_port_stomp: 61613  # for protocols [STOMP]
+
+### Enable configuration for high availability
+amq_broker_ha_enabled: False
+
+### Enable database configuration for JDBC persistence
+amq_broker_db_enabled: False
+
+### Enable SSLServerSocket transport
+amq_broker_ssl_enabled: False
+amq_broker_ssl_keystore_path: broker.ks
+amq_broker_ssl_keystore_password: changeme
