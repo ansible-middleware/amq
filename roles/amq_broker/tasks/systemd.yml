@@ -49,7 +49,7 @@
 
 - name: Reload systemd
   become: yes
-  ansible.builtin.systemd:
+  ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler, because of start/flush below
     daemon_reload: yes
   when: systemdunit.changed
 

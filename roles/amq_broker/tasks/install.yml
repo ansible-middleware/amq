@@ -131,7 +131,7 @@
   become: yes
 
 - name: "Extract {{ amq_broker.name }} archive on target"
-  ansible.builtin.unarchive:
+  ansible.builtin.unarchive: # noqa no-handler definitely not a candidate for a handler
     remote_src: yes
     src: "{{ archive }}"
     dest: "{{ amq_broker_dest }}"

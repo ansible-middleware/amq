@@ -8,13 +8,13 @@
 amq_broker_rhn_baseurl: 'https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId='
 amq_broker_rhn_id: "{{ amq_broker_rhn_ids[amq_broker_version].id }}"
 amq_broker_rhn_ids:
-  '7.9.4':
+  '7.9.4': # noqa vars_in_vars_files_have_valid_names we need the dict with the version as key
     id: '104297'
-  '7.9.3':
+  '7.9.3': # noqa vars_in_vars_files_have_valid_names we need the dict with the version as key
     id: '104184'
-  '7.9.2':
+  '7.9.2': # noqa vars_in_vars_files_have_valid_names we need the dict with the version as key
     id: '104123'
-  '7.8.6':
+  '7.8.6': # noqa vars_in_vars_files_have_valid_names we need the dict with the version as key
     id: '104306'
 
 # internal main interpolated variables
