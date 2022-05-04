@@ -1,0 +1,208 @@
+argument_specs:
+    main:
+        options:
+            amq_broker_activemq_version:
+                # line 4 of defaults/main.yml
+                default: "2.18.0"
+                description: "Apache Artemis version"
+                type: "str"
+            amq_broker_activemq_archive:
+                # line 5 of defaults/main.yml
+                default: "apache-artemis-{{ amq_broker_activemq_version }}-bin.zip"
+                description: "Apache Artemis install archive filename"
+                type: "str"
+            amq_broker_activemq_download_url:
+                # line 6 of defaults/main.yml
+                default: "https://archive.apache.org/dist/activemq/activemq-artemis/{{ amq_broker_activemq_version }}/{{ amq_broker_activemq_archive }}"
+                description: "Apache Artemis download URL"
+                type: "str"
+            amq_broker_activemq_installdir:
+                # line 7 of defaults/main.yml
+                default: "{{ amq_broker_dest }}/apache-artemis-{{ amq_broker_activemq_version }}"
+                description: "Apache Artemis Installation path"
+                type: "str"
+            amq_broker_enable:
+                # line 9 of defaults/main.yml
+                default: "{{ True if rhn_username is defined and rhn_password is defined else False }}"
+                description: "Enable installation of Red Hat AMQ Broker"
+                type: "bool"
+            amq_broker_version:
+                # line 10 of defaults/main.yml
+                default: "7.9.4"
+                description: "Red Hat AMQ Broker version"
+                type: "str"
+            amq_broker_archive:
+                # line 11 of defaults/main.yml
+                default: "amq-broker-{{ amq_broker_version }}-bin.zip"
+                description: "Red Hat AMQ Broker install archive filename"
+                type: "str"
+            amq_broker_installdir:
+                # line 12 of defaults/main.yml
+                default: "{{ amq_broker_dest }}/amq-broker-{{ amq_broker_version }}"
+                description: "Red Hat AMQ Broker installation path"
+                type: "str"
+            amq_broker_dest:
+                # line 15 of defaults/main.yml
+                default: "/opt/amq"
+                description: "Root installation directory"
+                type: "str"
+            amq_broker_offline_install:
+                # line 16 of defaults/main.yml
+                default: false
+                description: "Perform an offline installation"
+                type: "bool"
+            amq_broker_config_dir:
+                # line 17 of defaults/main.yml
+                default: "conf"
+                description: "Broker instance configuration directory"
+                type: "str"
+            amq_broker_config_xml:
+                # line 18 of defaults/main.yml
+                default: "amq-broker.xml"
+                description: "Broker instance configuration file"
+                type: "str"
+            amq_broker_config_override_template:
+                # line 19 of defaults/main.yml
+                default: ""
+                description: "TODO document argument"
+                type: "str"
+            amq_broker_service_user:
+                # line 20 of defaults/main.yml
+                default: "amq-broker"
+                description: "POSIX user running the service"
+                type: "str"
+            amq_broker_service_group:
+                # line 21 of defaults/main.yml
+                default: "amq-broker"
+                description: "POSIX group running the service"
+                type: "str"
+            amq_broker_instance_name:
+                # line 22 of defaults/main.yml
+                default: "amq-broker"
+                description: "Name of broker instance to deploy"
+                type: "str"
+            amq_broker_instance_username:
+                # line 23 of defaults/main.yml
+                default: "amq-broker"
+                description: "Username for accessing the broker instance"
+                type: "str"
+            amq_broker_instance_password:
+                # line 24 of defaults/main.yml
+                default: "amq-broker"
+                description: "Password for accessing the broker instance"
+                type: "str"
+            amq_broker_instance_anonymous:
+                # line 25 of defaults/main.yml
+                default: false
+                description: "Whether to allow anonymous logins to the instance"
+                type: "bool"
+            amq_broker_service_pidfile:
+                # line 26 of defaults/main.yml
+                default: "data/artemis.pid"
+                description: "PID file for service"
+                type: "str"
+            amq_broker_configure_firewalld:
+                # line 27 of defaults/main.yml
+                default: false
+                description: "Whether to install and configure firewalld"
+                type: "bool"
+            amq_broker_bind_address:
+                # line 30 of defaults/main.yml
+                default: "0.0.0.0"
+                description: "Service bind address"
+                type: "str"
+            amq_broker_host:
+                # line 31 of defaults/main.yml
+                default: "localhost"
+                description: "Service hostname"
+                type: "str"
+            amq_broker_http_port:
+                # line 32 of defaults/main.yml
+                default: 8161
+                description: "Service http port serving console and REST api"
+                type: "int"
+            amq_broker_jolokia_url:
+                # line 33 of defaults/main.yml
+                default: "http://{{ amq_broker_host }}:{{ amq_broker_http_port }}/console/jolokia"
+                description: "URL for jolokia REST api"
+                type: "str"
+            amq_broker_console_url:
+                # line 34 of defaults/main.yml
+                default: "http://{{ amq_broker_host }}:{{ amq_broker_http_port }}/console/"
+                description: "URL for console service"
+                type: "str"
+            amq_broker_jvm_package:
+                # line 35 of defaults/main.yml
+                default: "java-11-openjdk-headless"
+                description: "RPM package to install for the service"
+                type: "str"
+            amq_broker_java_home:
+                # line 36 of defaults/main.yml
+                required: true
+                description: "JAVA_HOME of installed JRE, leave empty for using specified amq_broker_jvm_package path"
+                type: "str"
+            amq_broker_java_opts:
+                # line 37 of defaults/main.yml
+                default: "-Xms1024m -Xmx2048m"
+                description: "Additional JVM options for the service"
+                type: "str"
+            amq_broker_port:
+                # line 38 of defaults/main.yml
+                default: 61616
+                description: "Main port for the broker instance"
+                type: "int"
+            amq_broker_port_hornetq:
+                # line 39 of defaults/main.yml
+                default: 5445
+                description: "hornetq port for the broker instance"
+                type: "int"
+            amq_broker_port_amqp:
+                # line 40 of defaults/main.yml
+                default: 5672
+                description: "AMQP port for the broker instance"
+                type: "int"
+            amq_broker_port_mqtt:
+                # line 41 of defaults/main.yml
+                default: 1883
+                description: "MQTT port for the broker instance"
+                type: "int"
+            amq_broker_port_stomp:
+                # line 42 of defaults/main.yml
+                default: 61613
+                description: "STOMP port for the broker instance"
+                type: "int"
+            amq_broker_ha_enabled:
+                # line 45 of defaults/main.yml
+                default: false
+                description: "Whether to enable clustering"
+                type: "bool"
+            amq_broker_db_enabled:
+                # line 48 of defaults/main.yml
+                default: false
+                description: "Whether to enable JDBC persistence"
+                type: "bool"
+            amq_broker_ssl_enabled:
+                # line 51 of defaults/main.yml
+                default: false
+                description: "Whether to enable SSL listeners"
+                type: "bool"
+            amq_broker_ssl_keystore_path:
+                # line 52 of defaults/main.yml
+                default: "broker.ks"
+                description: "Keystore path for SSL listener"
+                type: "str"
+            amq_broker_ssl_keystore_password:
+                # line 53 of defaults/main.yml
+                default: "changeme"
+                description: "Keystore password for SSL listener"
+                type: "str"
+            amq_broker_rhn_baseurl:
+                # line 8 of vars/main.yml
+                default: "https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId="
+                description: "Base RHN download URL for Red Hat AMQ Broker"
+                type: "str"
+            amq_broker_rhn_id:
+                # line 9 of vars/main.yml
+                default: "{{ amq_broker_rhn_ids[amq_broker_version].id }}"
+                description: "RHN Product ID for Red Hat AMQ Broker"
+                type: "str"
