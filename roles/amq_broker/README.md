@@ -25,6 +25,8 @@ Versions
 Role Defaults
 -------------
 
+* Install options
+
 | Variable | Description | Default |
 |:---------|:------------|:--------|
 |`amq_broker_activemq_version`| Apache Artemis version | `2.18.0` |
@@ -37,9 +39,15 @@ Role Defaults
 |`amq_broker_installdir`| Red Hat AMQ Broker installation path | `{{ amq_broker_dest }}/amq-broker-{{ amq_broker_version }}` |
 |`amq_broker_dest`| Root installation directory | `/opt/amq` |
 |`amq_broker_offline_install`| Perform an offline installation | `False` |
+
+
+* Common configuration
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
 |`amq_broker_config_dir`| Broker instance configuration directory | `conf` |
 |`amq_broker_config_xml`| Broker instance configuration file | `amq-broker.xml` |
-|`amq_broker_config_override_template`| TODO document argument | `` |
+|`amq_broker_config_override_template`| TODO document argument | `TODO` |
 |`amq_broker_service_user`| POSIX user running the service | `amq-broker` |
 |`amq_broker_service_group`| POSIX group running the service | `amq-broker` |
 |`amq_broker_instance_name`| Name of broker instance to deploy | `amq-broker` |
@@ -60,14 +68,47 @@ Role Defaults
 |`amq_broker_port_amqp`| AMQP port for the broker instance | `5672` |
 |`amq_broker_port_mqtt`| MQTT port for the broker instance | `1883` |
 |`amq_broker_port_stomp`| STOMP port for the broker instance | `61613` |
-|`amq_broker_ha_enabled`| Whether to enable clustering | `False` |
-|`amq_broker_db_enabled`| Whether to enable JDBC persistence | `False` |
-|`amq_broker_ssl_enabled`| Whether to enable SSL listeners | `False` |
-|`amq_broker_ssl_keystore_path`| Keystore path for SSL listener | `broker.ks` |
-|`amq_broker_ssl_keystore_password`| Keystore password for SSL listener | `changeme` |
+|`amq_broker_ports_offset_enabled`| Whether to enable port offset | `False` |
+|`amq_broker_ports_offset`| Port offset for all default ports | `0` |
 |`amq_broker_rhn_baseurl`| Base RHN download URL for Red Hat AMQ Broker | `https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=` |
 |`amq_broker_rhn_id`| RHN Product ID for Red Hat AMQ Broker | `{{ amq_broker_rhn_ids[amq_broker_version].id }}` |
 
+
+* Clustering
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`amq_broker_ha_enabled`| Whether to enable clustering | `False` |
+|`amq_broker_cluster_user`| Cluster username | `amq-cluster-user` |
+|`amq_broker_cluster_pass`| Cluster user password | `amq-cluster-pass` |
+|`amq_broker_cluster_maxhops`| Cluster max hops | `1` |
+|`amq_broker_cluster_lb_policy`| Policy for cluster load balancing | `ON_DEMAND` |
+|`amq_broker_replicate`| Enables replication | `False` |
+|`amq_broker_replicated`| Designate instance as replicated node | `False` |
+
+
+* TLS/SSL protocol
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`amq_broker_tls_enabled`| Whether to enable TLS | `False` |
+|`amq_broker_tls_keystore_dest`| Path for installation of truststore | `{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/identity.ks` |
+|`amq_broker_tls_mutual_authentication`| Whether to enable TLS mutual auth, requires TLS enabled | `False` |
+|`amq_broker_tls_truststore_dest`| Path for installation of truststore | `{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/trust.ks` |
+
+
+* Other options
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`amq_broker_nio_enabled`| Enable Native IO using libaio | `False` |
+|`amq_broker_shared_storage`| Use shared filesystem directory for storage | `False` |
+|`amq_broker_disable_destination_autocreate`| Disable automatic creation of destination | `True` |
+|`amq_broker_queues`| Queue names comma separated | `queue.in,queue.out` |
+|`amq_broker_disable_amqp_protocol`| Whether to disable AMQP protocol | `False` |
+|`amq_broker_disable_hornetq_protocol`| Whether to disable HORNETQ protocol | `False` |
+|`amq_broker_disable_mqtt_protocol`| Whether to disable MQTT protocol | `False` |
+|`amq_broker_disable_stomp_protocol`| Whether to disable STOMP protocol | `False` |
 
 
 Role Variables
@@ -76,6 +117,11 @@ Role Variables
 | Variable | Description | Required |
 |:---------|:------------|:---------|
 |`amq_broker_java_home`| JAVA_HOME of installed JRE, leave empty for using specified amq_broker_jvm_package path | `no` |
+|`amq_broker_tls_keystore_path`| Keystore path for TLS connections | when `amq_broker_tls_enabled` is `True` |
+|`amq_broker_tls_keystore_password`| Keystore password for TLS connections | when `amq_broker_tls_enabled` is `True` |
+|`amq_broker_tls_truststore`| Truststore to use for TLS mutual authentication | when `amq_broker_tls_mutual_authentication` is `True` |
+|`amq_broker_tls_truststore_password`| Password for truststore | when `amq_broker_tls_mutual_authentication` is `True` |
+
 <!--end argument_specs-->
 
 
