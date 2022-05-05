@@ -39,11 +39,17 @@
   register: instance_directory
   become: yes
 
+- name: "Generate configuration for: {{ amq_broker_dest }}/{{ amq_broker.instance_name }}"
+  ansible.builtin.include_tasks: configure.yml
+  when:
+    - not instance_directory.stat.exists
+
 - name: "Create instance {{ amq_broker.instance_name }} of {{ amq_broker.service_name }}"
   ansible.builtin.command:
-    cmd: "{{ amq_broker.home }}/bin/artemis create {{ amq_broker_dest }}/{{ amq_broker.instance_name }} --user {{ amq_broker_instance_username }} --password {{ amq_broker_instance_password }} --require-login"
+    cmd: "{{ amq_broker.home }}/bin/artemis create {{ amq_broker.instance_home }} {{ amq_broker_options }}"
     creates: "{{ amq_broker.instance_home }}/bin/artemis-service"
   become: yes
+  register: broker_created
   when:
     - not instance_directory.stat.exists
 

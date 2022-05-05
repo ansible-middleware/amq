@@ -9,6 +9,10 @@ EnvironmentFile=-/etc/sysconfig/{{ amq_broker.instance_name }}
 PIDFile={{ amq_broker.instance_home }}/{{ amq_broker_service_pidfile }}
 ExecStart={{ amq_broker.instance_home }}/bin/artemis-service start
 ExecStop={{ amq_broker.instance_home }}/bin/artemis-service stop
+SuccessExitStatus = 0 143
+RestartSec = 60
+Restart = on-failure
+LimitNOFILE=102642
 
 [Install]
 WantedBy=multi-user.target

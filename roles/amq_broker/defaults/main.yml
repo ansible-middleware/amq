@@ -43,11 +43,44 @@ amq_broker_port_stomp: 61613  # for protocols [STOMP]
 
 ### Enable configuration for high availability
 amq_broker_ha_enabled: False
+amq_broker_cluster_user: amq-cluster-user
+amq_broker_cluster_pass: amq-cluster-pass
+amq_broker_cluster_maxhops: 1
+amq_broker_cluster_lb_policy: ON_DEMAND
+amq_broker_replicate: False
+amq_broker_replicated: False
 
 ### Enable database configuration for JDBC persistence
 amq_broker_db_enabled: False
 
-### Enable SSLServerSocket transport
-amq_broker_ssl_enabled: False
-amq_broker_ssl_keystore_path: broker.ks
-amq_broker_ssl_keystore_password: changeme
+### Enable TLS
+amq_broker_tls_enabled: False
+amq_broker_tls_keystore_path: identity.ks
+amq_broker_tls_keystore_password: changeme
+amq_broker_tls_keystore_dest: "{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/identity.ks"
+
+# Mutual authentication (requires TLS)
+amq_broker_tls_mutual_authentication: False
+amq_broker_tls_truststore:
+amq_broker_tls_truststore_password:
+amq_broker_tls_truststore_dest: "{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/trust.ks"
+
+# NIO option
+amq_broker_nio_enabled: False
+
+## Shared Storage
+amq_broker_shared_storage: False
+
+## Ports
+amq_broker_ports_offset_enabled: False
+amq_broker_ports_offset: 0
+
+# Queues
+amq_broker_disable_destination_autocreate: True
+amq_broker_queues: queue.in,queue.out
+
+# Protocol disablement
+amq_broker_disable_amqp_protocol: False
+amq_broker_disable_hornetq_protocol: False
+amq_broker_disable_mqtt_protocol: False
+amq_broker_disable_stomp_protocol: False

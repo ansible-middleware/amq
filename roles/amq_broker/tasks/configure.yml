@@ -1,0 +1,156 @@
+---
+- name: Create broker cluster node members
+  set_fact:
+    amq_broker_cluster_nodes: >
+      {{ amq_broker_cluster_nodes | default( [] ) + [
+           {
+             "name": amq_broker.instance_name,
+             "address": item,
+             "inventory_host": item,
+             "value": "tcp://" + item + ":" + (((61616|int + amq_broker_ports_offset|int)|abs)|string)
+           }
+         ] }}
+  loop: "{{ ansible_play_batch }}"
+
+- name: Prepare broker creation options
+  set_fact:
+    amq_broker_options:
+      - "--name {{ amq_broker.instance_name }}"
+
+- name: Enable clustering
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--clustered"
+      - "--cluster-user {{ amq_broker_cluster_user }}"
+      - "--cluster-password {{ amq_broker_cluster_pass }}"
+      - "--max-hops {{ amq_broker_cluster_maxhops }}"
+      - "--message-load-balancing {{ amq_broker_cluster_load_balancing_policy }}"
+      - "--failover-on-shutdown"
+  when: amq_broker_ha_enabled
+
+- name: Enable security
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--require-login"
+      - "--user {{ amq_broker_instance_username }}"
+      - "--password {{ amq_broker_instance_password }}"
+  when: not amq_broker_instance_anonymous
+
+- name: Set address broker accepts connections on
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--host {{ amq_broker_host }}"
+
+- name: Set address embedded web server accepts connections on
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--http-host {{ amq_broker_host }}"
+
+- name: Disable automatic creation of queues
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--no-autocreate"
+  when: amq_broker_disable_destination_autocreate
+
+- name: Set up queues
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--queues {{ amq_broker_queues }}"
+
+- name: Set up data directory
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--data {{ amq_broker.instance_home }}/data"
+  when: not amq_broker_shared_storage
+
+- name: Set as replicated node
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--slave"
+  when: amq_broker_replicate
+
+- name: Enable replication
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--replicated"
+  when: amq_broker_replicated
+
+- name: Enable shared storage
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--shared-store"
+      - "--data {{ amq_broker.home }}/data"
+  when: amq_broker_shared_storage
+
+- name: Set up port offset
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--port-offset {{ (0|int + amq_broker_ports_offset|int)|abs }}"
+  when: amq_broker_ports_offset_enabled
+
+- name: Disable AMQP protocol
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--no-amqp-acceptor"
+  when: amq_broker_disable_amqp_protocol
+
+- name: Disable HornetQ protocol
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--no-hornetq-acceptor"
+  when: amq_broker_disable_hornetq_protocol
+
+- name: Disable MQTT protocol
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--no-mqtt-acceptor"
+  when: amq_broker_disable_mqtt_protocol
+
+- name: Disable STOMP
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--no-stomp-acceptor"
+  when: amq_broker_disable_stomp_protocol
+
+- name: Set the journal as nio
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--nio"
+  when: amq_broker_nio_enabled
+
+- name: Enable TLS for web UI
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--ssl-key {{ amq_broker_tls_keystore_dest }}"
+      - "--ssl-key-password {{ amq_broker_tls_keystore_password }}"
+  when: amq_broker_tls_enabled and amq_broker_tls_keystore and amq_broker_tls_keystore_password
+
+- name: Enable TLS client authentication for web UI
+  set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--ssl-trust {{ amq_broker_tls_truststore_dest }}"
+      - "--ssl-trust-password {{ amq_broker_tls_truststore_password }}"
+      - "--use-client-auth"
+  when: amq_broker_tls_enabled and amq_broker_tls_mutual_authentication and amq_broker_tls_truststore and amq_broker_tls_truststore_password
+
+- name: Create final broker creation options
+  set_fact:
+    amq_broker_options: "{{ amq_broker_options | join(' ') }}"
