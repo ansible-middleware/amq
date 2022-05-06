@@ -40,7 +40,20 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Ansible Collection - AMQ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ansible Collection - AMQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#about">About</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ansible-version-compatibility">Ansible version compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#included-content">Included content</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-the-collection">Installing the collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#collections">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-and-usage">Installation and Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="roles/index.html">Role Index</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
@@ -81,7 +94,62 @@
   <section id="ansible-collection-amq">
 <h1>Ansible Collection - AMQ<a class="headerlink" href="#ansible-collection-amq" title="Permalink to this headline"></a></h1>
 <p><a class="reference external" href="https://github.com/ansible-middleware/amq/actions/workflows/ci.yml"><img alt="Build Status" src="https://github.com/ansible-middleware/amq/workflows/CI/badge.svg?branch=main" /></a></p>
-<p>This collection is a Work in Progress.</p>
+<section id="about">
+<h2>About<a class="headerlink" href="#about" title="Permalink to this headline"></a></h2>
+<p>Collection to install and configure <a class="reference external" href="https://activemq.apache.org/components/artemis">Apache ActiveMQ Artemis</a> or <a class="reference external" href="https://www.redhat.com/en/technologies/jboss-middleware/amq">AMQ broker</a>.</p>
+<!--start requires_ansible-->
+</section>
+<section id="ansible-version-compatibility">
+<h2>Ansible version compatibility<a class="headerlink" href="#ansible-version-compatibility" title="Permalink to this headline"></a></h2>
+<p>This collection has been tested against following Ansible versions: <strong>&gt;=2.9.10</strong>.</p>
+</section>
+<section id="install">
+<h2>Install<a class="headerlink" href="#install" title="Permalink to this headline"></a></h2>
+<p>Plugins and modules within a collection may be tested with only specific Ansible versions. A collection may contain metadata that identifies these versions.</p>
+<!--end requires_ansible-->
+</section>
+<section id="included-content">
+<h2>Included content<a class="headerlink" href="#included-content" title="Permalink to this headline"></a></h2>
+<section id="installing-the-collection">
+<h3>Installing the collection<a class="headerlink" href="#installing-the-collection" title="Permalink to this headline"></a></h3>
+<p>Click on the name of a plugin or module to view that content’s documentation:</p>
+<p>To install this Ansible collection simply download the latest tarball and run the following command:</p>
+</section>
+<section id="collections">
+<h3>Collections<a class="headerlink" href="#collections" title="Permalink to this headline"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection install /path/to/middleware_automation.amq.tgz
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>middleware_automation.redhat_csp_download</p>
+<ul>
+<li><p>This collection is required to download resources from RedHat Customer Portal.</p></li>
+<li><p>Documentation to collection can be found at <a class="reference external" href="https://github.com/ansible-middleware/redhat-csp-download">https://github.com/ansible-middleware/redhat-csp-download</a></p></li>
+</ul>
+</li>
+</ul>
+<p>Alternatively, you can simply build the tarball (and then install it):</p>
+</section>
+</section>
+<section id="installation-and-usage">
+<h2>Installation and Usage<a class="headerlink" href="#installation-and-usage" title="Permalink to this headline"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection build
+</pre></div>
+</div>
+<p>You can the playbook directly from this folder for demonstration purpose, however, the proper way to install the collection is to build it and install it :</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection build .
+ansible-galaxy collection install middleware_automation-amq-*.tar.gz
+</pre></div>
+</div>
+</section>
+<section id="support">
+<h2>Support<a class="headerlink" href="#support" title="Permalink to this headline"></a></h2>
+<p>The amq collection is a Beta release and for <a class="reference external" href="https://access.redhat.com/support/offerings/techpreview">Technical Preview</a>. If you have any issues or questions related to collection, please don’t hesitate to contact us on <a class="reference external" href="mailto:Ansible-middleware-core&#37;&#52;&#48;redhat&#46;com">Ansible-middleware-core<span>&#64;</span>redhat<span>&#46;</span>com</a> or open an issue on <a class="reference external" href="https://github.com/ansible-middleware/amq/issues">https://github.com/ansible-middleware/amq/issues</a></p>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://github.com/ansible-middleware/amq/blob/main/LICENSE">GNU General Public License v2.0</a></p>
+</section>
 </section>
 
 
