@@ -177,25 +177,130 @@ argument_specs:
                 description: "Whether to enable clustering"
                 type: "bool"
             amq_broker_db_enabled:
-                # line 48 of defaults/main.yml
+                # line 54 of defaults/main.yml
                 default: false
                 description: "Whether to enable JDBC persistence"
                 type: "bool"
-            amq_broker_ssl_enabled:
+            amq_broker_cluster_user:
+                # line 46 of defaults/main.yml
+                default: "amq-cluster-user"
+                description: "Cluster username"
+                type: "str"
+            amq_broker_cluster_pass:
+                # line 47 of defaults/main.yml
+                default: "amq-cluster-pass"
+                description: "Cluster user password"
+                type: "str"
+            amq_broker_cluster_maxhops:
+                # line 48 of defaults/main.yml
+                default: 1
+                description: "Cluster max hops"
+                type: "int"
+            amq_broker_cluster_lb_policy:
+                # line 49 of defaults/main.yml
+                default: "ON_DEMAND"
+                description: "Policy for cluster load balancing"
+                type: "str"
+            amq_broker_replicate:
+                # line 50 of defaults/main.yml
+                default: false
+                description: "Enables replication"
+                type: "bool"
+            amq_broker_replicated:
                 # line 51 of defaults/main.yml
                 default: false
-                description: "Whether to enable SSL listeners"
+                description: "Designate instance as replicated node"
                 type: "bool"
-            amq_broker_ssl_keystore_path:
-                # line 52 of defaults/main.yml
-                default: "broker.ks"
-                description: "Keystore path for SSL listener"
+            amq_broker_tls_enabled:
+                # line 57 of defaults/main.yml
+                default: false
+                description: "Whether to enable TLS"
+                type: "bool"
+            amq_broker_tls_keystore_path:
+                # line 58 of defaults/main.yml
+                default: "identity.ks"
+                description: "Keystore path for TLS connections"
                 type: "str"
-            amq_broker_ssl_keystore_password:
-                # line 53 of defaults/main.yml
+            amq_broker_tls_keystore_password:
+                # line 59 of defaults/main.yml
                 default: "changeme"
-                description: "Keystore password for SSL listener"
+                description: "Keystore password for TLS connections"
                 type: "str"
+            amq_broker_tls_keystore_dest:
+                # line 60 of defaults/main.yml
+                default: "{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/identity.ks"
+                description: "Path for installation of truststore"
+                type: "str"
+            amq_broker_tls_mutual_authentication:
+                # line 63 of defaults/main.yml
+                default: false
+                description: "Whether to enable TLS mutual auth, requires TLS enabled"
+                type: "bool"
+            amq_broker_tls_truststore:
+                # line 64 of defaults/main.yml
+                default: None
+                description: "Truststore to use for TLS mutual authentication"
+                type: "str"
+            amq_broker_tls_truststore_password:
+                # line 65 of defaults/main.yml
+                default: None
+                description: "Password for truststore"
+                type: "str"
+            amq_broker_tls_truststore_dest:
+                # line 66 of defaults/main.yml
+                default: "{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/trust.ks"
+                description: "Path for installation of truststore"
+                type: "str"
+            amq_broker_nio_enabled:
+                # line 69 of defaults/main.yml
+                default: false
+                description: "Enable Native IO using libaio"
+                type: "bool"
+            amq_broker_shared_storage:
+                # line 72 of defaults/main.yml
+                default: false
+                description: "Use shared filesystem directory for storage"
+                type: "bool"
+            amq_broker_ports_offset_enabled:
+                # line 75 of defaults/main.yml
+                default: false
+                description: "Whether to enable port offset"
+                type: "bool"
+            amq_broker_ports_offset:
+                # line 76 of defaults/main.yml
+                default: 0
+                description: "Port offset for all default ports"
+                type: "int"
+            amq_broker_disable_destination_autocreate:
+                # line 79 of defaults/main.yml
+                default: true
+                description: "Disable automatic creation of destination"
+                type: "bool"
+            amq_broker_queues:
+                # line 80 of defaults/main.yml
+                default: "queue.in,queue.out"
+                description: "Queue names comma separated"
+                type: "str"
+            amq_broker_disable_amqp_protocol:
+                # line 83 of defaults/main.yml
+                default: false
+                description: "Whether to disable AMQP protocol"
+                type: "bool"
+            amq_broker_disable_hornetq_protocol:
+                # line 84 of defaults/main.yml
+                default: false
+                description: "Whether to disable HORNETQ protocol"
+                type: "bool"
+            amq_broker_disable_mqtt_protocol:
+                # line 85 of defaults/main.yml
+                default: false
+                description: "Whether to disable MQTT protocol"
+                type: "bool"
+            amq_broker_disable_stomp_protocol:
+                # line 86 of defaults/main.yml
+                default: false
+                description: "Whether to disable STOMP protocol"
+                type: "bool"
             amq_broker_rhn_baseurl:
                 # line 8 of vars/main.yml
                 default: "https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId="
