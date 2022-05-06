@@ -127,6 +127,9 @@ To install, from the collection root directory, run:</p>
 </section>
 <section id="role-defaults">
 <h2>Role Defaults<a class="headerlink" href="#role-defaults" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Install options</p></li>
+</ul>
 <table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="text-left head"><p>Variable</p></th>
@@ -175,6 +178,19 @@ To install, from the collection root directory, run:</p>
 <td class="text-left"><p>Perform an offline installation</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Common configuration</p></li>
+</ul>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-left head"><p>Variable</p></th>
+<th class="text-left head"><p>Description</p></th>
+<th class="text-left head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_config_dir</span></code></p></td>
 <td class="text-left"><p>Broker instance configuration directory</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">conf</span></code></p></td>
@@ -185,7 +201,7 @@ To install, from the collection root directory, run:</p>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_config_override_template</span></code></p></td>
 <td class="text-left"><p>TODO document argument</p></td>
-<td class="text-left"><p>``</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">TODO</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_service_user</span></code></p></td>
 <td class="text-left"><p>POSIX user running the service</p></td>
@@ -267,33 +283,136 @@ To install, from the collection root directory, run:</p>
 <td class="text-left"><p>STOMP port for the broker instance</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">61613</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_ha_enabled</span></code></p></td>
-<td class="text-left"><p>Whether to enable clustering</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_ports_offset_enabled</span></code></p></td>
+<td class="text-left"><p>Whether to enable port offset</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_db_enabled</span></code></p></td>
-<td class="text-left"><p>Whether to enable JDBC persistence</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_ports_offset</span></code></p></td>
+<td class="text-left"><p>Port offset for all default ports</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_ssl_enabled</span></code></p></td>
-<td class="text-left"><p>Whether to enable SSL listeners</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_ssl_keystore_path</span></code></p></td>
-<td class="text-left"><p>Keystore path for SSL listener</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">broker.ks</span></code></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_ssl_keystore_password</span></code></p></td>
-<td class="text-left"><p>Keystore password for SSL listener</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">changeme</span></code></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_rhn_baseurl</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_rhn_baseurl</span></code></p></td>
 <td class="text-left"><p>Base RHN download URL for Red Hat AMQ Broker</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_rhn_id</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_rhn_id</span></code></p></td>
 <td class="text-left"><p>RHN Product ID for Red Hat AMQ Broker</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_broker_rhn_ids[amq_broker_version].id</span> <span class="pre">}}</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Clustering</p></li>
+</ul>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-left head"><p>Variable</p></th>
+<th class="text-left head"><p>Description</p></th>
+<th class="text-left head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_ha_enabled</span></code></p></td>
+<td class="text-left"><p>Whether to enable clustering</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_cluster_user</span></code></p></td>
+<td class="text-left"><p>Cluster username</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-cluster-user</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_cluster_pass</span></code></p></td>
+<td class="text-left"><p>Cluster user password</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-cluster-pass</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_cluster_maxhops</span></code></p></td>
+<td class="text-left"><p>Cluster max hops</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_cluster_lb_policy</span></code></p></td>
+<td class="text-left"><p>Policy for cluster load balancing</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ON_DEMAND</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_replicate</span></code></p></td>
+<td class="text-left"><p>Enables replication</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_replicated</span></code></p></td>
+<td class="text-left"><p>Designate instance as replicated node</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>TLS/SSL protocol</p></li>
+</ul>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-left head"><p>Variable</p></th>
+<th class="text-left head"><p>Description</p></th>
+<th class="text-left head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_enabled</span></code></p></td>
+<td class="text-left"><p>Whether to enable TLS</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_keystore_dest</span></code></p></td>
+<td class="text-left"><p>Path for installation of truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_broker_dest</span> <span class="pre">}}/{{</span> <span class="pre">amq_broker_instance_name</span> <span class="pre">}}/etc/identity.ks</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_mutual_authentication</span></code></p></td>
+<td class="text-left"><p>Whether to enable TLS mutual auth, requires TLS enabled</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_truststore_dest</span></code></p></td>
+<td class="text-left"><p>Path for installation of truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_broker_dest</span> <span class="pre">}}/{{</span> <span class="pre">amq_broker_instance_name</span> <span class="pre">}}/etc/trust.ks</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Other options</p></li>
+</ul>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-left head"><p>Variable</p></th>
+<th class="text-left head"><p>Description</p></th>
+<th class="text-left head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_nio_enabled</span></code></p></td>
+<td class="text-left"><p>Enable Native IO using libaio</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_shared_storage</span></code></p></td>
+<td class="text-left"><p>Use shared filesystem directory for storage</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_destination_autocreate</span></code></p></td>
+<td class="text-left"><p>Disable automatic creation of destination</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_queues</span></code></p></td>
+<td class="text-left"><p>Queue names comma separated</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">queue.in,queue.out</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_amqp_protocol</span></code></p></td>
+<td class="text-left"><p>Whether to disable AMQP protocol</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_hornetq_protocol</span></code></p></td>
+<td class="text-left"><p>Whether to disable HORNETQ protocol</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_mqtt_protocol</span></code></p></td>
+<td class="text-left"><p>Whether to disable MQTT protocol</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_stomp_protocol</span></code></p></td>
+<td class="text-left"><p>Whether to disable STOMP protocol</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -311,6 +430,22 @@ To install, from the collection root directory, run:</p>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_java_home</span></code></p></td>
 <td class="text-left"><p>JAVA_HOME of installed JRE, leave empty for using specified amq_broker_jvm_package path</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">no</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_keystore_path</span></code></p></td>
+<td class="text-left"><p>Keystore path for TLS connections</p></td>
+<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">amq_broker_tls_enabled</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_keystore_password</span></code></p></td>
+<td class="text-left"><p>Keystore password for TLS connections</p></td>
+<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">amq_broker_tls_enabled</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_truststore</span></code></p></td>
+<td class="text-left"><p>Truststore to use for TLS mutual authentication</p></td>
+<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">amq_broker_tls_mutual_authentication</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_truststore_password</span></code></p></td>
+<td class="text-left"><p>Password for truststore</p></td>
+<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">amq_broker_tls_mutual_authentication</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
 </tbody>
 </table>

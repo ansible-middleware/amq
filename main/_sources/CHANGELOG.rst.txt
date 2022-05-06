@@ -7,3 +7,8 @@ middleware_automation.amq Release Notes
 
 v0.0.1-devel
 ============
+
+Minor Changes
+-------------
+
+- Import artemis create configuration tasks `#1 <https://github.com/ansible-middleware/amq/pull/1>`_
