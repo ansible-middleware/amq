@@ -354,6 +354,10 @@ To install, from the collection root directory, run:</p>
 <td class="text-left"><p>Designate instance as replicated node</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_cluster_discovery</span></code></p></td>
+<td class="text-left"><p>Cluster discovery: [<code class="docutils literal notranslate"><span class="pre">jgroups</span></code> (shared file ping), <code class="docutils literal notranslate"><span class="pre">multicast</span></code> (UDP), <code class="docutils literal notranslate"><span class="pre">static</span></code> (node list)]</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">static</span></code></p></td>
+</tr>
 </tbody>
 </table>
 <ul class="simple">
@@ -404,27 +408,31 @@ To install, from the collection root directory, run:</p>
 <td class="text-left"><p>Use shared filesystem directory for storage</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_destination_autocreate</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_shared_storage_path</span></code></p></td>
+<td class="text-left"><p>Path of shared directory relative to activemq home directory</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/shared</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_destination_autocreate</span></code></p></td>
 <td class="text-left"><p>Disable automatic creation of destination</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_queues</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_queues</span></code></p></td>
 <td class="text-left"><p>Queue names comma separated</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">queue.in,queue.out</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_amqp_protocol</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_amqp_protocol</span></code></p></td>
 <td class="text-left"><p>Whether to disable AMQP protocol</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_hornetq_protocol</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_hornetq_protocol</span></code></p></td>
 <td class="text-left"><p>Whether to disable HORNETQ protocol</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_mqtt_protocol</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_mqtt_protocol</span></code></p></td>
 <td class="text-left"><p>Whether to disable MQTT protocol</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_stomp_protocol</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_stomp_protocol</span></code></p></td>
 <td class="text-left"><p>Whether to disable STOMP protocol</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
