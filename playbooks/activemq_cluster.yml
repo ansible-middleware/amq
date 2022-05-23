@@ -1,0 +1,29 @@
+---
+- name: Playbook for Red Hat AMQ Broker
+  hosts: all
+  vars:
+    amq_broker_ha_enabled: true
+    amq_broker_disable_hornetq_protocol: true
+    amq_broker_disable_mqtt_protocol: true
+    amq_broker_shared_storage: true
+    amq_broker_configure_firewalld: true
+  collections:
+   - middleware_automation.redhat_csp_download
+   - middleware_automation.amq
+  roles:
+   - amq_broker
+  pre_tasks:
+    - name: Create nfs shared directory
+      ansible.builtin.file:
+        state: directory
+        path: /opt/amq/amq-broker/data/shared
+        owner: root
+        group: root
+        mode: 0775
+    - name: Create mount NFS volume
+      ansible.posix.mount:
+       src: 10.0.153.34:/nfs
+       path: /opt/amq/amq-broker/data/shared
+       opts: rw,sync,hard,intr
+       state: mounted
+       fstype: nfs

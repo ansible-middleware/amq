@@ -7,7 +7,7 @@
              "name": amq_broker.instance_name,
              "address": item,
              "inventory_host": item,
-             "value": "tcp://" + item + ":" + (((61616|int + amq_broker_ports_offset|int)|abs)|string)
+             "value": "tcp://" + item + ":" + (((amq_broker_port|int + amq_broker_ports_offset|int)|abs)|string)
            }
          ] }}
   loop: "{{ ansible_play_batch }}"
@@ -25,9 +25,18 @@
       - "--cluster-user {{ amq_broker_cluster_user }}"
       - "--cluster-password {{ amq_broker_cluster_pass }}"
       - "--max-hops {{ amq_broker_cluster_maxhops }}"
-      - "--message-load-balancing {{ amq_broker_cluster_load_balancing_policy }}"
+      - "--message-load-balancing {{ amq_broker_cluster_lb_policy }}"
       - "--failover-on-shutdown"
   when: amq_broker_ha_enabled
+
+- name: Enable static clustering
+  ansible.builtin.set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--staticCluster {{ amq_broker_cluster_nodes | map(attribute='value') | join(',') }}"
+  when:
+    - amq_broker_ha_enabled
+    - amq_broker_cluster_discovery == "static"
 
 - name: Enable security
   ansible.builtin.set_fact:
@@ -48,7 +57,7 @@
   ansible.builtin.set_fact:
     amq_broker_options:
       - "{{ amq_broker_options | join(' ') }}"
-      - "--http-host {{ amq_broker_host }}"
+      - "--http-host {{ amq_broker_bind_address }}"
 
 - name: Disable automatic creation of queues
   ansible.builtin.set_fact:
@@ -89,7 +98,7 @@
     amq_broker_options:
       - "{{ amq_broker_options | join(' ') }}"
       - "--shared-store"
-      - "--data {{ amq_broker.home }}/data"
+      - "--data {{ amq_broker.instance_home }}/{{ amq_broker_shared_storage_path }}"
   when: amq_broker_shared_storage
 
 - name: Set up port offset

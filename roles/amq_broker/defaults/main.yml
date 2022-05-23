@@ -49,6 +49,8 @@ amq_broker_cluster_maxhops: 1
 amq_broker_cluster_lb_policy: ON_DEMAND
 amq_broker_replicate: False
 amq_broker_replicated: False
+# cluster discovery: ['jgroups' for shared file ping, 'multicast' for UDP multicast, 'static' for static declaration]
+amq_broker_cluster_discovery: static
 
 ### Enable database configuration for JDBC persistence
 amq_broker_db_enabled: False
@@ -70,6 +72,7 @@ amq_broker_nio_enabled: False
 
 ## Shared Storage
 amq_broker_shared_storage: False
+amq_broker_shared_storage_path: data/shared
 
 ## Ports
 amq_broker_ports_offset_enabled: False
