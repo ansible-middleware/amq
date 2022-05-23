@@ -12,4 +12,3 @@ Minor Changes
 -------------
 
 - Import artemis create configuration tasks `#1 <https://github.com/ansible-middleware/amq/pull/1>`_
-- Import artemis create configuration tasks `#1 <https://github.com/ansible-middleware/amq/pull/1>`_
