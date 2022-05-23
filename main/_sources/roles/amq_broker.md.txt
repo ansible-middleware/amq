@@ -25,6 +25,11 @@ Versions
 Role Defaults
 -------------
 
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`amq_broker_db_enabled`| Whether to enable JDBC persistence | `False` |
+
+
 * Install options
 
 | Variable | Description | Default |
