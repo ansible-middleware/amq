@@ -1,1 +1,11 @@
+ancestor: null
 releases:
+  0.0.1:
+    changes:
+      minor_changes:
+      - 'Import artemis create configuration tasks `#1 <https://github.com/ansible-middleware/amq/pull/1>`_
+
+        '
+    fragments:
+    - 1.yaml
+    release_date: '2022-05-23'
