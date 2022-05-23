@@ -90,6 +90,7 @@ Role Defaults
 |`amq_broker_cluster_lb_policy`| Policy for cluster load balancing | `ON_DEMAND` |
 |`amq_broker_replicate`| Enables replication | `False` |
 |`amq_broker_replicated`| Designate instance as replicated node | `False` |
+|`amq_broker_cluster_discovery` | Cluster discovery: [`jgroups` (shared file ping), `multicast` (UDP), `static` (node list)] | `static` |
 
 
 * TLS/SSL protocol
@@ -108,6 +109,7 @@ Role Defaults
 |:---------|:------------|:--------|
 |`amq_broker_nio_enabled`| Enable Native IO using libaio | `False` |
 |`amq_broker_shared_storage`| Use shared filesystem directory for storage | `False` |
+|`amq_broker_shared_storage_path`| Path of shared directory relative to activemq home directory | `data/shared` |
 |`amq_broker_disable_destination_autocreate`| Disable automatic creation of destination | `True` |
 |`amq_broker_queues`| Queue names comma separated | `queue.in,queue.out` |
 |`amq_broker_disable_amqp_protocol`| Whether to disable AMQP protocol | `False` |

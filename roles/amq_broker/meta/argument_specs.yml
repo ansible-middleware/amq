@@ -201,6 +201,10 @@ argument_specs:
                 default: "ON_DEMAND"
                 description: "Policy for cluster load balancing"
                 type: "str"
+            amq_broker_cluster_discovery:
+                default: "static"
+                description: "Cluster discovery: ['jgroups' for shared file ping, 'multicast' for UDP multicast, 'static' for static declaration]"
+                type: "str"
             amq_broker_replicate:
                 # line 50 of defaults/main.yml
                 default: false
@@ -261,6 +265,10 @@ argument_specs:
                 default: false
                 description: "Use shared filesystem directory for storage"
                 type: "bool"
+            amq_broker_shared_storage_path:
+                default: "data/shared"
+                description: "Path of shared directory relative to activemq home directory"
+                type: "str"
             amq_broker_ports_offset_enabled:
                 # line 75 of defaults/main.yml
                 default: false

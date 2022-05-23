@@ -1,0 +1,9 @@
+---
+- name: configure - clustering - remove discovery groups
+  xml:
+    path: "{{ amq_broker.home }}/etc/broker.xml"
+    xpath: /conf:configuration/core:core/core:discovery-groups
+    state: absent
+    namespaces:
+      conf: urn:activemq
+      core: urn:activemq:core

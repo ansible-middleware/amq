@@ -35,14 +35,20 @@
 
 - name: "Check instance directory: {{ amq_broker_dest }}/{{ amq_broker.instance_name }}"
   ansible.builtin.stat:
-    path: "{{ amq_broker_dest }}/{{ amq_broker.instance_name }}"
+    path: "{{ amq_broker_dest }}/{{ amq_broker.instance_name }}/bin"
   register: instance_directory
   become: yes
 
-- name: "Generate configuration for: {{ amq_broker_dest }}/{{ amq_broker.instance_name }}"
+- name: "Generate artemis configuration for: {{ amq_broker_dest }}/{{ amq_broker.instance_name }}"
   ansible.builtin.include_tasks: configure.yml
   when:
     - not instance_directory.stat.exists
+
+- name: "Setup clustering with jgroups"
+  ansible.builtin.include_tasks: jgroups.yml
+  when:
+    - amq_broker_ha_enabled
+    - amq_broker_cluster_discovery == 'jgroups'
 
 - name: "Create instance {{ amq_broker.instance_name }} of {{ amq_broker.service_name }}"
   ansible.builtin.command:
@@ -71,6 +77,8 @@
   ansible.builtin.command: "systemctl status {{ amq_broker.instance_name }}"
   register: amq_broker_service_status
   changed_when: False
+  retries: 6
+  delay: 5
 
 - name: Verify service status
   ansible.builtin.assert:
