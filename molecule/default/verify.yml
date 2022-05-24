@@ -1,3 +1,23 @@
 ---
 - name: Verify
   hosts: all
+  tasks:
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+
+    - name: Check if amq-broker service is started
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.services["amq-broker.service"]["state"] == "running"
+          - ansible_facts.services["amq-broker.service"]["status"] == "enabled"
+
+    - name: Read content of logs
+      slurp:
+        src: /var/log/activemq/amq-broker/artemis.log
+      register: slurped_log
+
+    - name: Check status
+      assert:
+        that:
+          - "'Server is now live' in slurped.content|b64decode"
+        quiet: true
