@@ -19,5 +19,5 @@
     - name: Check status
       assert:
         that:
-          - "'Server is now live' in slurped.content|b64decode"
+          - "'Server is now live' in slurped_log.content|b64decode"
         quiet: true
