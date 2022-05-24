@@ -16,16 +16,27 @@
         src: /var/log/activemq/amq-broker/artemis.log
       register: slurped_log_instance1
       delegate_to: instance1
+      run_once: true
 
     - name: Read content of instance1 logs
       slurp:
         src: /var/log/activemq/amq-broker/artemis.log
       register: slurped_log_instance2
       delegate_to: instance2
+      run_once: true
 
     - name: Check cluster status
-      assert:
-        that:
-          - "'Waiting indefinitely to obtain live lock' in slurped_log_instance2.content|b64decode"
-          - "'Server is now live' in slurped_log_instance1.content|b64decode"
-        quiet: true
+      block:
+        - name: master on instance1
+          assert:
+            that:
+              - "'Waiting indefinitely to obtain live lock' in slurped_log_instance2.content|b64decode"
+              - "'Server is now live' in slurped_log_instance1.content|b64decode"
+            quiet: true
+      rescue:
+        - name: master on instance2
+          assert:
+            that:
+              - "'Waiting indefinitely to obtain live lock' in slurped_log_instance1.content|b64decode"
+              - "'Server is now live' in slurped_log_instance2.content|b64decode"
+            quiet: true
