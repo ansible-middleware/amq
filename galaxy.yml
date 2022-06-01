@@ -27,3 +27,4 @@ build_ignore:
   - .github
   - '*.tar.gz'
   - '*.zip'
+  - changelogs/fragments/.gitignore
