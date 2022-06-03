@@ -24,15 +24,16 @@ Welcome to AMQ Collection documentation
    :caption: General
 
    Changelog <CHANGELOG>
+   License <LICENSE>
 
 .. toctree::
    :maxdepth: 2
    :caption: Middleware collections
 
-   `Infinispan / Red Hat Data Grid <https://ansible-middleware.github.io/infinispan/>`_
-   `Keycloak / Red Hat Single Sign-On <https://ansible-middleware.github.io/keycloak/>`_
-   `Wildfly / Red Hat JBoss EAP <https://ansible-middleware.github.io/wildfly/>`_
-   `Tomcat / Red Hat JWS <https://ansible-middleware.github.io/jws-ansible-playbook/>`_
-   `ActiveMQ / Red Hat AMQ <https://ansible-middleware.github.io/amq/>`_
-   `Red Hat CSP Download <https://ansible-middleware.github.io/redhat-csp-download/>`_
-   `JCliff <https://ansible-middleware.github.io/ansible_collections_jcliff/>`_
+   Infinispan / Red Hat Data Grid <https://ansible-middleware.github.io/infinispan/>
+   Keycloak / Red Hat Single Sign-On <https://ansible-middleware.github.io/keycloak/>
+   Wildfly / Red Hat JBoss EAP <https://ansible-middleware.github.io/wildfly/>
+   Tomcat / Red Hat JWS <https://ansible-middleware.github.io/jws-ansible-playbook/>
+   ActiveMQ / Red Hat AMQ <https://ansible-middleware.github.io/amq/>
+   Red Hat CSP Download <https://ansible-middleware.github.io/redhat-csp-download/>
+   JCliff <https://ansible-middleware.github.io/ansible_collections_jcliff/>
