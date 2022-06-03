@@ -25,8 +25,14 @@ Welcome to AMQ Collection documentation
 
    Changelog <CHANGELOG>
 
-Indices and tables
-==================
+.. toctree::
+   :maxdepth: 2
+   :caption: Middleware collections
 
-* :ref:`genindex`
-* :ref:`search`
+   `Infinispan / Red Hat Data Grid <https://ansible-middleware.github.io/infinispan/>`_
+   `Keycloak / Red Hat Single Sign-On <https://ansible-middleware.github.io/keycloak/>`_
+   `Wildfly / Red Hat JBoss EAP <https://ansible-middleware.github.io/wildfly/>`_
+   `Tomcat / Red Hat JWS <https://ansible-middleware.github.io/jws-ansible-playbook/>`_
+   `ActiveMQ / Red Hat AMQ <https://ansible-middleware.github.io/amq/>`_
+   `Red Hat CSP Download <https://ansible-middleware.github.io/redhat-csp-download/>`_
+   `JCliff <https://ansible-middleware.github.io/ansible_collections_jcliff/>`_

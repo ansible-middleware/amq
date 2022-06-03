@@ -24,7 +24,6 @@
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
             <p class="caption" role="heading"><span class="caption-text">Middleware Automation</span></p>
             <ul>
-              <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/">Index</a></li>
               <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
               <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/keycloak/">Keycloak / Red Hat Single Sign-On</a></li>
               <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
