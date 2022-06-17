@@ -8,6 +8,11 @@ middleware_automation.amq Release Notes
 v0.0.3-devel
 ============
 
+Minor Changes
+-------------
+
+- Add vars and template for logging configuration `#4 <https://github.com/ansible-middleware/amq/pull/4>`_
+
 v0.0.2
 ======
 
