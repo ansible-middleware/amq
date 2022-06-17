@@ -319,3 +319,47 @@ argument_specs:
                 default: "{{ amq_broker_rhn_ids[amq_broker_version].id }}"
                 description: "RHN Product ID for Red Hat AMQ Broker"
                 type: "str"
+            amq_broker_enable_audit:
+                default: False
+                description: "Whether to enable audit file logging"
+                type: "bool"
+            amq_broker_logger_level:
+                description: "Whether to enable audit file logging"
+                default: 'INFO'
+                type: "str"
+            amq_broker_logger_core_server_level:
+                description: "Whether to enable audit file logging"
+                default: 'INFO'
+                type: "str"
+            amq_broker_logger_journal_level:
+                description: "Whether to enable audit file logging"
+                default: 'INFO'
+                type: "str"
+            amq_broker_logger_utils_level:
+                description: "Whether to enable audit file logging"
+                default: 'INFO'
+                type: "str"
+            amq_broker_logger_utils_critical_level:
+                description: "Whether to enable audit file logging"
+                default: 'INFO'
+                type: "str"
+            amq_broker_logger_jms_level:
+                description: "Whether to enable audit file logging"
+                default: 'INFO'
+                type: "str"
+            amq_broker_logger_integration_bootstrap_level:
+                description: "Whether to enable audit file logging"
+                default: 'INFO'
+                type: "str"
+            amq_broker_logger_jetty_level:
+                description: "Whether to enable audit file logging"
+                default: 'WARN'
+                type: "str"
+            amq_broker_logger_curator_level:
+                description: "Whether to enable audit file logging"
+                default: 'WARN'
+                type: "str"
+            amq_broker_logger_zookeeper_level:
+                description: "Whether to enable audit file logging"
+                default: 'ERROR'
+                type: "str"

@@ -44,12 +44,6 @@
   when:
     - not instance_directory.stat.exists
 
-- name: "Setup clustering with jgroups"
-  ansible.builtin.include_tasks: jgroups.yml
-  when:
-    - amq_broker_ha_enabled
-    - amq_broker_cluster_discovery == 'jgroups'
-
 - name: "Create instance {{ amq_broker.instance_name }} of {{ amq_broker.service_name }}"
   ansible.builtin.command:
     cmd: "{{ amq_broker.home }}/bin/artemis create {{ amq_broker.instance_home }} {{ amq_broker_options }}"
@@ -58,6 +52,23 @@
   register: broker_created
   when:
     - not instance_directory.stat.exists
+
+- name: "Setup clustering with jgroups"
+  ansible.builtin.include_tasks: jgroups.yml
+  when:
+    - amq_broker_ha_enabled
+    - amq_broker_cluster_discovery == 'jgroups'
+
+- name: "Configure AMQ broker logging"
+  become: yes
+  ansible.builtin.template:
+    src: logging.properties.j2
+    dest: "{{ amq_broker.instance_home }}/etc/logging.properties"
+    owner: "{{ amq_broker_service_user }}"
+    group: "{{ amq_broker_service_group }}"
+    mode: 0644
+  notify:
+    - restart amq_broker
 
 - name: Reload systemd
   become: yes

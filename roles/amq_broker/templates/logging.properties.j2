@@ -1,0 +1,75 @@
+# {{ ansible_managed }}
+# Additional logger names to configure (root logger is always configured)
+# Root logger option
+loggers=org.eclipse.jetty,org.jboss.logging,org.apache.activemq.artemis.core.server,org.apache.activemq.artemis.utils,org.apache.activemq.artemis.utils.critical,org.apache.activemq.artemis.journal,org.apache.activemq.artemis.jms.server,org.apache.activemq.artemis.integration.bootstrap,org.apache.activemq.audit.base,org.apache.activemq.audit.message,org.apache.activemq.audit.resource,org.apache.curator,org.apache.zookeeper
+
+# Root logger level
+logger.level={{ amq_broker_logger_level }}
+
+# ActiveMQ Artemis logger levels
+logger.org.apache.activemq.artemis.core.server.level={{ amq_broker_logger_core_server_level }}
+logger.org.apache.activemq.artemis.journal.level={{ amq_broker_logger_journal_level }}
+logger.org.apache.activemq.artemis.utils.level={{ amq_broker_logger_utils_level }}
+
+# if you have issues with CriticalAnalyzer, setting this as TRACE would give you extra troubleshooting information.
+# but do not use it regularly as it would incur in some extra CPU usage for this diagnostic.
+logger.org.apache.activemq.artemis.utils.critical.level={{ amq_broker_logger_utils_critical_level }}
+
+logger.org.apache.activemq.artemis.jms.level={{ amq_broker_logger_jms_level }}
+logger.org.apache.activemq.artemis.integration.bootstrap.level={{ amq_broker_logger_integration_bootstrap_level }}
+logger.org.eclipse.jetty.level={{ amq_broker_logger_jetty_level }}
+# Root logger handlers
+logger.handlers=FILE,CONSOLE
+
+# quorum logger levels
+logger.org.apache.curator.level={{ amq_broker_logger_curator_level }}
+logger.org.apache.zookeeper.level={{ amq_broker_logger_zookeeper_level }}
+
+# to enable audit change the level to INFO
+logger.org.apache.activemq.audit.base.level={{ 'ERROR' if amq_broker_enable_audit else 'INFO' }}
+logger.org.apache.activemq.audit.base.handlers=AUDIT_FILE
+logger.org.apache.activemq.audit.base.useParentHandlers=false
+
+logger.org.apache.activemq.audit.resource.level={{ 'ERROR' if amq_broker_enable_audit else 'INFO' }}
+logger.org.apache.activemq.audit.resource.handlers=AUDIT_FILE
+logger.org.apache.activemq.audit.resource.useParentHandlers=false
+
+logger.org.apache.activemq.audit.message.level={{ 'ERROR' if amq_broker_enable_audit else 'INFO' }}
+logger.org.apache.activemq.audit.message.handlers=AUDIT_FILE
+logger.org.apache.activemq.audit.message.useParentHandlers=false
+
+# Console handler configuration
+handler.CONSOLE=org.jboss.logmanager.handlers.ConsoleHandler
+handler.CONSOLE.properties=autoFlush
+handler.CONSOLE.level=DEBUG
+handler.CONSOLE.autoFlush=true
+handler.CONSOLE.formatter=PATTERN
+
+# File handler configuration
+handler.FILE=org.jboss.logmanager.handlers.PeriodicRotatingFileHandler
+handler.FILE.level=DEBUG
+handler.FILE.properties=suffix,append,autoFlush,fileName
+handler.FILE.suffix=.yyyy-MM-dd
+handler.FILE.append=true
+handler.FILE.autoFlush=true
+handler.FILE.fileName=${artemis.instance}/log/artemis.log
+handler.FILE.formatter=PATTERN
+
+# Formatter pattern configuration
+formatter.PATTERN=org.jboss.logmanager.formatters.PatternFormatter
+formatter.PATTERN.properties=pattern
+formatter.PATTERN.pattern=%d %-5p [%c] %s%E%n
+
+#Audit logger
+handler.AUDIT_FILE=org.jboss.logmanager.handlers.PeriodicRotatingFileHandler
+handler.AUDIT_FILE.level=INFO
+handler.AUDIT_FILE.properties=suffix,append,autoFlush,fileName
+handler.AUDIT_FILE.suffix=.yyyy-MM-dd
+handler.AUDIT_FILE.append=true
+handler.AUDIT_FILE.autoFlush=true
+handler.AUDIT_FILE.fileName=${artemis.instance}/log/audit.log
+handler.AUDIT_FILE.formatter=AUDIT_PATTERN
+
+formatter.AUDIT_PATTERN=org.jboss.logmanager.formatters.PatternFormatter
+formatter.AUDIT_PATTERN.properties=pattern
+formatter.AUDIT_PATTERN.pattern=%d [AUDIT](%t) %s%E%n
