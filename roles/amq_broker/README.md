@@ -103,6 +103,23 @@ Role Defaults
 |`amq_broker_tls_truststore_dest`| Path for installation of truststore | `{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/trust.ks` |
 
 
+* Logging
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`amq_broker_enable_audit`| Whether to enable audit file logging | `False` |
+|`amq_broker_logger_level`| Root logging level | `INFO` |
+|`amq_broker_logger_core_server_level`| Logging level for org.apache.activemq.artemis.core.server | `INFO` |
+|`amq_broker_logger_journal_level`| Logging level for org.apache.activemq.artemis.journal | `INFO` |
+|`amq_broker_logger_utils_level`| Logging level for org.apache.activemq.artemis.utils | `INFO` |
+|`amq_broker_logger_utils_critical_level`| Logging level for org.apache.activemq.artemis.utils.critical | `INFO` |
+|`amq_broker_logger_jms_level`| Logging level for org.apache.activemq.artemis.jms | `INFO` |
+|`amq_broker_logger_integration_bootstrap_level`| Logging level for org.apache.activemq.artemis.integration.bootstrap | `INFO` |
+|`amq_broker_logger_jetty_level`| Logging level for org.eclipse.jetty | `WARN` |
+|`amq_broker_logger_curator_level`| Logging level for org.apache.curator | `WARN` |
+|`amq_broker_logger_zookeeper_level`| Logging level for org.apache.zookeeper | `ERROR` |
+
+
 * Other options
 
 | Variable | Description | Default |

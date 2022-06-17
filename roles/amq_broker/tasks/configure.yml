@@ -2,12 +2,12 @@
 - name: Create broker cluster node members
   ansible.builtin.set_fact:
     amq_broker_cluster_nodes: >
-      {{ amq_broker_cluster_nodes | default( [] ) + [
+      {{ amq_broker_cluster_nodes | default([]) + [
            {
              "name": amq_broker.instance_name,
              "address": item,
              "inventory_host": item,
-             "value": "tcp://" + item + ":" + (((amq_broker_port|int + amq_broker_ports_offset|int)|abs)|string)
+             "value": "tcp://" + item + ":" + (((amq_broker_port | int + amq_broker_ports_offset | int) | abs) | string)
            }
          ] }}
   loop: "{{ ansible_play_batch }}"
@@ -105,7 +105,7 @@
   ansible.builtin.set_fact:
     amq_broker_options:
       - "{{ amq_broker_options | join(' ') }}"
-      - "--port-offset {{ (0|int + amq_broker_ports_offset|int)|abs }}"
+      - "--port-offset {{ (0 | int + amq_broker_ports_offset | int) | abs }}"
   when: amq_broker_ports_offset_enabled
 
 - name: Disable AMQP protocol

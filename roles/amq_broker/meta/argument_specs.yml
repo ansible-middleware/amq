@@ -324,42 +324,42 @@ argument_specs:
                 description: "Whether to enable audit file logging"
                 type: "bool"
             amq_broker_logger_level:
-                description: "Whether to enable audit file logging"
+                description: "Root logging level"
                 default: 'INFO'
                 type: "str"
             amq_broker_logger_core_server_level:
-                description: "Whether to enable audit file logging"
+                description: "Logging level for org.apache.activemq.artemis.core.server "
                 default: 'INFO'
                 type: "str"
             amq_broker_logger_journal_level:
-                description: "Whether to enable audit file logging"
+                description: "Logging level for org.apache.activemq.artemis.journal"
                 default: 'INFO'
                 type: "str"
             amq_broker_logger_utils_level:
-                description: "Whether to enable audit file logging"
+                description: "Logging level for org.apache.activemq.artemis.utils"
                 default: 'INFO'
                 type: "str"
             amq_broker_logger_utils_critical_level:
-                description: "Whether to enable audit file logging"
+                description: "Logging level for org.apache.activemq.artemis.utils.critical"
                 default: 'INFO'
                 type: "str"
             amq_broker_logger_jms_level:
-                description: "Whether to enable audit file logging"
+                description: "Logging level for org.apache.activemq.artemis.jms"
                 default: 'INFO'
                 type: "str"
             amq_broker_logger_integration_bootstrap_level:
-                description: "Whether to enable audit file logging"
+                description: "Logging level for org.apache.activemq.artemis.integration.bootstrap"
                 default: 'INFO'
                 type: "str"
             amq_broker_logger_jetty_level:
-                description: "Whether to enable audit file logging"
+                description: "Logging level for org.eclipse.jetty"
                 default: 'WARN'
                 type: "str"
             amq_broker_logger_curator_level:
-                description: "Whether to enable audit file logging"
+                description: "Logging level for org.apache.curator"
                 default: 'WARN'
                 type: "str"
             amq_broker_logger_zookeeper_level:
-                description: "Whether to enable audit file logging"
+                description: "Logging level for org.apache.zookeeper"
                 default: 'ERROR'
                 type: "str"
