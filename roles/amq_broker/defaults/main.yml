@@ -87,3 +87,16 @@ amq_broker_disable_amqp_protocol: False
 amq_broker_disable_hornetq_protocol: False
 amq_broker_disable_mqtt_protocol: False
 amq_broker_disable_stomp_protocol: False
+
+# Logging
+amq_broker_enable_audit: False
+amq_broker_logger_level: INFO
+amq_broker_logger_core_server_level: INFO
+amq_broker_logger_journal_level: INFO
+amq_broker_logger_utils_level: INFO
+amq_broker_logger_utils_critical_level: INFO
+amq_broker_logger_jms_level: INFO
+amq_broker_logger_integration_bootstrap_level: INFO
+amq_broker_logger_jetty_level: WARN
+amq_broker_logger_curator_level: WARN
+amq_broker_logger_zookeeper_level: ERROR
