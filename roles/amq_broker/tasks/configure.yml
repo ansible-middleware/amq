@@ -7,7 +7,7 @@
              "name": amq_broker.instance_name,
              "address": item,
              "inventory_host": item,
-             "value": "tcp://" + item + ":" + (((amq_broker_port | int + amq_broker_ports_offset | int) | abs) | string)
+             "value": "tcp://" + hostvars[item].ansible_default_ipv4.address | default(item) + ":" + (((amq_broker_port | int + amq_broker_ports_offset | int) | abs) | string)
            }
          ] }}
   loop: "{{ ansible_play_batch }}"
