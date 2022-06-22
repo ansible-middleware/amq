@@ -12,6 +12,7 @@ Minor Changes
 -------------
 
 - Add vars and template for logging configuration `#4 <https://github.com/ansible-middleware/amq/pull/4>`_
+- Add vars for prometheus_jmx_exporter setup `#5 <https://github.com/ansible-middleware/amq/pull/5>`_
 
 v0.0.2
 ======
