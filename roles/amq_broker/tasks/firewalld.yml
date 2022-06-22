@@ -26,3 +26,12 @@
     - "{{ amq_broker_port_amqp }}/tcp"
     - "{{ amq_broker_port_mqtt }}/tcp"
     - "{{ amq_broker_port_stomp }}/tcp"
+
+- name: "Configure firewall for JMX exporter port"
+  become: yes
+  firewalld:
+    port: "{{ amq_broker_jmx_exporter_port }}/tcp"
+    permanent: true
+    state: enabled
+    immediate: yes
+  when: amq_broker_jmx_exporter_enabled
