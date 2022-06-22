@@ -363,3 +363,15 @@ argument_specs:
                 description: "Logging level for org.apache.zookeeper"
                 default: 'ERROR'
                 type: "str"
+            amq_broker_jmx_exporter_port:
+                default: 18080
+                type: "int"
+                description: "Port for prometheus JMX exporter to listen"
+            amq_broker_jmx_exporter_config_path:
+                default: "{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/jmx_exporter.yml"
+                type: "str"
+                description: "JMX exporter configuration path"
+            amq_broker_jmx_exporter_enabled:
+                description: "Enable install and configuration of prometheus-jmx-exporter"
+                default: False
+                type: "bool"

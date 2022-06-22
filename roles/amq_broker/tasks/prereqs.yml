@@ -41,3 +41,9 @@
       - procps-ng
       - initscripts
       - libaio
+
+- name: Ensure required packages are installed
+  ansible.builtin.dnf:
+    name: prometheus-jmx-exporter
+    state: present
+  when: amq_broker_jmx_exporter_enabled
