@@ -5,6 +5,16 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v0.0.3
+======
+
+Minor Changes
+-------------
+
+- Add prometheus metrics export plugin `#6 <https://github.com/ansible-middleware/amq/pull/6>`_
+- Add vars and template for logging configuration `#4 <https://github.com/ansible-middleware/amq/pull/4>`_
+- Add vars for prometheus_jmx_exporter setup `#5 <https://github.com/ansible-middleware/amq/pull/5>`_
+
 v0.0.2
 ======
 
