@@ -133,6 +133,10 @@ Role Defaults
 |`amq_broker_disable_hornetq_protocol`| Whether to disable HORNETQ protocol | `False` |
 |`amq_broker_disable_mqtt_protocol`| Whether to disable MQTT protocol | `False` |
 |`amq_broker_disable_stomp_protocol`| Whether to disable STOMP protocol | `False` |
+|`amq_broker_jmx_exporter_port` | Port for prometheus JMX exporter to listen | `18080` |
+|`amq_broker_jmx_exporter_config_path`| JMX exporter configuration path |`{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/jmx_exporter.yml` |
+|`amq_broker_jmx_exporter_enabled`| Enable install and configuration of prometheus-jmx-exporter | `False` |
+|`amq_broker_prometheus_enabled`| Enable install and configuration of prometheus metrics plugin | `False` |
 
 
 Role Variables

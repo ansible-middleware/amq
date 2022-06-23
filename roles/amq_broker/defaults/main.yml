@@ -101,7 +101,8 @@ amq_broker_logger_jetty_level: WARN
 amq_broker_logger_curator_level: WARN
 amq_broker_logger_zookeeper_level: ERROR
 
-# Misc
+# Metrics
 amq_broker_jmx_exporter_port: 18080
 amq_broker_jmx_exporter_config_path: "{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/jmx_exporter.yml"
 amq_broker_jmx_exporter_enabled: False
+amq_broker_prometheus_enabled: False
