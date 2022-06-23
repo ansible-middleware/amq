@@ -375,3 +375,7 @@ argument_specs:
                 description: "Enable install and configuration of prometheus-jmx-exporter"
                 default: False
                 type: "bool"
+            amq_broker_prometheus_enabled:
+                description: "Enable install and configuration of prometheus metrics plugin"
+                default: False
+                type: "bool"

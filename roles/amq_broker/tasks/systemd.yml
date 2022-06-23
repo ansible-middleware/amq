@@ -70,6 +70,32 @@
   notify:
     - restart amq_broker
 
+- name: "Configure prometheus metrics"
+  become: yes
+  when: amq_broker_prometheus_enabled
+  block:
+    - name: Ensure lib is available to instance
+      ansible.builtin.copy:
+        src: "{{ amq_broker.home }}/lib/artemis-prometheus-metrics-plugin-1.1.0.redhat-00002.jar"
+        dest: "{{ amq_broker.instance_home }}/lib/"
+        remote_src: yes
+        owner: "{{ amq_broker_service_user }}"
+        group: "{{ amq_broker_service_group }}"
+        mode: 0644
+      notify:
+        - restart amq_broker
+    - name: Configure metrics plugin
+      xml:
+        path: "{{ amq_broker.instance_home }}/etc/broker.xml"
+        xpath: /conf:configuration/core:core/core:metrics/core:plugin
+        attribute: class-name
+        value: org.apache.activemq.artemis.core.server.metrics.plugins.ArtemisPrometheusMetricsPlugin
+        namespaces:
+          conf: urn:activemq
+          core: urn:activemq:core
+      notify:
+        - restart amq_broker
+
 - name: Reload systemd
   become: yes
   ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler, because of start/flush below

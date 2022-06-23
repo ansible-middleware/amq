@@ -47,6 +47,15 @@
       - "--password {{ amq_broker_instance_password }}"
   when: not amq_broker_instance_anonymous
 
+- name: Disable security
+  ansible.builtin.set_fact:
+    amq_broker_options:
+      - "{{ amq_broker_options | join(' ') }}"
+      - "--allow-anonymous"
+      - "--user {{ amq_broker_instance_username }}"
+      - "--password {{ amq_broker_instance_password }}"
+  when: amq_broker_instance_anonymous
+
 - name: Set address broker accepts connections on
   ansible.builtin.set_fact:
     amq_broker_options:
