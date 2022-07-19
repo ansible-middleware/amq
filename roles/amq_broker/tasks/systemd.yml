@@ -70,6 +70,10 @@
   notify:
     - restart amq_broker
 
+- name: Create user and roles
+  ansible.builtin.include_tasks: user_roles.yml
+  when: amq_broker_users | length > 0
+
 - name: "Configure prometheus metrics"
   become: yes
   when: amq_broker_prometheus_enabled

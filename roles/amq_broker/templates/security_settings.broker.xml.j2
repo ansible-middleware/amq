@@ -1,0 +1,5 @@
+    <security-setting match="#">
+    {% for permission in item.permissions %}
+    <permission type="{{ permission }}" roles="{{ item.name }}"/>
+    {% endfor %}
+    </security-setting>

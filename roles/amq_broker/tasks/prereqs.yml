@@ -41,6 +41,7 @@
       - procps-ng
       - initscripts
       - libaio
+      - python3-lxml
 
 - name: Ensure required packages are installed
   ansible.builtin.dnf:
