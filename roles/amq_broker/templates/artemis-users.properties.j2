@@ -17,5 +17,5 @@
 ## ---------------------------------------------------------------------------
 
 {% for user in amq_broker_masked_users %}
-{{ user.user }} = ENC(1024:{{ user.password }})
+{{ user.user }} = ENC({{ user.password }})
 {% endfor %}

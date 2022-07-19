@@ -3,7 +3,7 @@
   ansible.builtin.include_tasks: mask_password.yml
   loop: "{{ amq_broker_users }}"
   loop_control:
-        label: "{{ item.user }}"
+    label: "{{ item.user }}"
 
 - name: Configure users
   ansible.builtin.template:
