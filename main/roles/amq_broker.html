@@ -522,6 +522,27 @@ To install, from the collection root directory, run:</p>
 </tr>
 </tbody>
 </table>
+<ul class="simple">
+<li><p>User / Role configuration</p></li>
+</ul>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-left head"><p>Variable</p></th>
+<th class="text-left head"><p>Description</p></th>
+<th class="text-left head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_users</span></code></p></td>
+<td class="text-left"><p>List of users the create with role; user is not created if password empty. List of (user,password,role) dicts</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_broker_instance_username</span> <span class="pre">}}/{{</span> <span class="pre">amq_broker_instance_password</span> <span class="pre">}}/amq</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_roles</span></code></p></td>
+<td class="text-left"><p>List of roles to create. List of (role,permissions) dicts where permissions is a list of amq broker permissions</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq</span></code></p></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="role-variables">
 <h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this heading"></a></h2>
