@@ -2,6 +2,11 @@
 - name: Converge
   hosts: all
   gather_facts: yes
+  vars:
+    amq_broker_users:
+    - user: amq
+      password: amqbrokerpass
+      role: admin
   collections:
     - middleware_automation.redhat_csp_download
   roles:

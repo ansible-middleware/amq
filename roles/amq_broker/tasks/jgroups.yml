@@ -1,5 +1,5 @@
 ---
-- name: configure - clustering - remove discovery groups
+- name: Remove discovery groups
   xml:
     path: "{{ amq_broker.home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:discovery-groups

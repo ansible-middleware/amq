@@ -67,6 +67,20 @@ amq_broker_tls_truststore:
 amq_broker_tls_truststore_password:
 amq_broker_tls_truststore_dest: "{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/trust.ks"
 
+# Users
+# list of users the create, user is not created if password empty; list of (user,password,role) dicts
+amq_broker_users:
+  - user: "{{ amq_broker_instance_username }}"
+    password: "{{ amq_broker_instance_password }}"
+    role: amq
+
+# Roles
+# .permissions is subset of:
+# [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
+amq_broker_roles:
+  - name: amq
+    permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
+
 # NIO option
 amq_broker_nio_enabled: False
 

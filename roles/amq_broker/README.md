@@ -139,6 +139,14 @@ Role Defaults
 |`amq_broker_prometheus_enabled`| Enable install and configuration of prometheus metrics plugin | `False` |
 
 
+* User / Role configuration
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`amq_broker_users`| List of users the create with role; user is not created if password empty. List of (user,password,role) dicts | `{{ amq_broker_instance_username }}/{{ amq_broker_instance_password }}/amq` |
+|`amq_broker_roles`| List of roles to create. List of (role,permissions) dicts where permissions is a list of amq broker permissions | `amq` |
+
+
 Role Variables
 --------------
 
