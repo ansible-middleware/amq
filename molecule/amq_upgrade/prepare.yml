@@ -1,0 +1,10 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Install requirements for tests
+      yum:
+        name:
+          - sudo
+          - iproute
+        state: present

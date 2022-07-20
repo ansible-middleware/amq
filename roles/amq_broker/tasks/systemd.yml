@@ -53,6 +53,12 @@
   when:
     - not instance_directory.stat.exists
 
+- name: "Include post-upgrade tasks"
+  ansible.builtin.include_tasks: upgrade.yml
+  when:
+    - instance_directory.stat.exists
+    - new_version_extracted.changed
+
 - name: "Setup clustering with jgroups"
   ansible.builtin.include_tasks: jgroups.yml
   when:
