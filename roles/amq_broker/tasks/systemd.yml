@@ -53,6 +53,20 @@
   when:
     - not instance_directory.stat.exists
 
+- name: "Update profile for instance {{ amq_broker.instance_name }} with new artemis version"
+  ansible.builtin.lineinfile:
+    path: "{{ amq_broker.instance_home }}/etc/artemis.profile"
+    regexp: '^(ARTEMIS_HOME=).*'
+    line: "\g<1>'{{ amq_broker.home }}'"
+    backrefs: yes
+  become: yes
+  register: broker_updated
+  when:
+    - instance_directory.stat.exists
+    - new_version_extracted.changed
+  notify:
+    - restart amq_broker
+
 - name: "Setup clustering with jgroups"
   ansible.builtin.include_tasks: jgroups.yml
   when:

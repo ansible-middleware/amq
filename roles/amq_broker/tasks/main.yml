@@ -20,7 +20,6 @@
   tags:
     - systemd
 
-
 - name: Create default logs directory
   become: yes
   ansible.builtin.file:

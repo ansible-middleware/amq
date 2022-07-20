@@ -139,6 +139,7 @@
     owner: "{{ amq_broker_service_user }}"
     group: "{{ amq_broker_service_group }}"
   become: yes
+  register: new_version_extracted
   when:
     - new_version_downloaded.changed or not path_to_workdir.stat.exists
   notify:
