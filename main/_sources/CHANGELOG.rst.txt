@@ -5,8 +5,8 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
-v1.0.0-devel
-============
+v1.0.0
+======
 
 Minor Changes
 -------------
