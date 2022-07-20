@@ -5,6 +5,15 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v1.0.0
+======
+
+Minor Changes
+-------------
+
+- Configuration for users and roles `#7 <https://github.com/ansible-middleware/amq/pull/7>`_
+- Perform artemis post-upgrade operations on existing instances `#8 <https://github.com/ansible-middleware/amq/pull/8>`_
+
 v0.0.3
 ======
 

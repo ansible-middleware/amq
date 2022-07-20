@@ -35,3 +35,16 @@ releases:
     - 5.yaml
     - 6.yaml
     release_date: '2022-06-23'
+  1.0.0:
+    changes:
+      minor_changes:
+      - 'Configuration for users and roles `#7 <https://github.com/ansible-middleware/amq/pull/7>`_
+
+        '
+      - 'Perform artemis post-upgrade operations on existing instances `#8 <https://github.com/ansible-middleware/amq/pull/8>`_
+
+        '
+    fragments:
+    - 7.yaml
+    - 8.yaml
+    release_date: '2022-07-20'
