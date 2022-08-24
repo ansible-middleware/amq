@@ -1,174 +1,174 @@
 ---
 - name: Create broker cluster node members
   ansible.builtin.set_fact:
-    amq_broker_cluster_nodes: >
-      {{ amq_broker_cluster_nodes | default([]) + [
+    activemq_cluster_nodes: >
+      {{ activemq_cluster_nodes | default([]) + [
            {
-             "name": amq_broker.instance_name,
+             "name": activemq.instance_name,
              "address": item,
              "inventory_host": item,
-             "value": "tcp://" + hostvars[item].ansible_default_ipv4.address | default(item) + ":" + (((amq_broker_port | int + amq_broker_ports_offset | int) | abs) | string)
+             "value": "tcp://" + hostvars[item].ansible_default_ipv4.address | default(item) + ":" + (((activemq_port | int + activemq_ports_offset | int) | abs) | string)
            }
          ] }}
   loop: "{{ ansible_play_batch }}"
 
 - name: Prepare broker creation options
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "--name {{ amq_broker.instance_name }}"
+    activemq_options:
+      - "--name {{ activemq.instance_name }}"
 
 - name: Enable clustering
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
       - "--clustered"
-      - "--cluster-user {{ amq_broker_cluster_user }}"
-      - "--cluster-password {{ amq_broker_cluster_pass }}"
-      - "--max-hops {{ amq_broker_cluster_maxhops }}"
-      - "--message-load-balancing {{ amq_broker_cluster_lb_policy }}"
+      - "--cluster-user {{ activemq_cluster_user }}"
+      - "--cluster-password {{ activemq_cluster_pass }}"
+      - "--max-hops {{ activemq_cluster_maxhops }}"
+      - "--message-load-balancing {{ activemq_cluster_lb_policy }}"
       - "--failover-on-shutdown"
-  when: amq_broker_ha_enabled
+  when: activemq_ha_enabled
 
 - name: Enable static clustering
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
-      - "--staticCluster {{ amq_broker_cluster_nodes | map(attribute='value') | join(',') }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
+      - "--staticCluster {{ activemq_cluster_nodes | map(attribute='value') | join(',') }}"
   when:
-    - amq_broker_ha_enabled
-    - amq_broker_cluster_discovery == "static"
+    - activemq_ha_enabled
+    - activemq_cluster_discovery == "static"
 
 - name: Enable security
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
       - "--require-login"
-      - "--user {{ amq_broker_instance_username }}"
-      - "--password {{ amq_broker_instance_password }}"
-  when: not amq_broker_instance_anonymous
+      - "--user {{ activemq_instance_username }}"
+      - "--password {{ activemq_instance_password }}"
+  when: not activemq_instance_anonymous
 
 - name: Disable security
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
       - "--allow-anonymous"
-      - "--user {{ amq_broker_instance_username }}"
-      - "--password {{ amq_broker_instance_password }}"
-  when: amq_broker_instance_anonymous
+      - "--user {{ activemq_instance_username }}"
+      - "--password {{ activemq_instance_password }}"
+  when: activemq_instance_anonymous
 
 - name: Set address broker accepts connections on
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
-      - "--host {{ amq_broker_host }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
+      - "--host {{ activemq_host }}"
 
 - name: Set address embedded web server accepts connections on
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
-      - "--http-host {{ amq_broker_bind_address }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
+      - "--http-host {{ activemq_bind_address }}"
 
 - name: Disable automatic creation of queues
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
       - "--no-autocreate"
-  when: amq_broker_disable_destination_autocreate
+  when: activemq_disable_destination_autocreate
 
 - name: Set up queues
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
-      - "--queues {{ amq_broker_queues }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
+      - "--queues {{ activemq_queues }}"
 
 - name: Set up data directory
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
-      - "--data {{ amq_broker.instance_home }}/data"
-  when: not amq_broker_shared_storage
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
+      - "--data {{ activemq.instance_home }}/data"
+  when: not activemq_shared_storage
 
 - name: Set as replicated node
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
       - "--slave"
-  when: amq_broker_replicate
+  when: activemq_replicate
 
 - name: Enable replication
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
       - "--replicated"
-  when: amq_broker_replicated
+  when: activemq_replicated
 
 - name: Enable shared storage
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
       - "--shared-store"
-      - "--data {{ amq_broker.instance_home }}/{{ amq_broker_shared_storage_path }}"
-  when: amq_broker_shared_storage
+      - "--data {{ activemq.instance_home }}/{{ activemq_shared_storage_path }}"
+  when: activemq_shared_storage
 
 - name: Set up port offset
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
-      - "--port-offset {{ (0 | int + amq_broker_ports_offset | int) | abs }}"
-  when: amq_broker_ports_offset_enabled
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
+      - "--port-offset {{ (0 | int + activemq_ports_offset | int) | abs }}"
+  when: activemq_ports_offset_enabled
 
 - name: Disable AMQP protocol
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
       - "--no-amqp-acceptor"
-  when: amq_broker_disable_amqp_protocol
+  when: activemq_disable_amqp_protocol
 
 - name: Disable HornetQ protocol
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
       - "--no-hornetq-acceptor"
-  when: amq_broker_disable_hornetq_protocol
+  when: activemq_disable_hornetq_protocol
 
 - name: Disable MQTT protocol
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
       - "--no-mqtt-acceptor"
-  when: amq_broker_disable_mqtt_protocol
+  when: activemq_disable_mqtt_protocol
 
 - name: Disable STOMP
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
       - "--no-stomp-acceptor"
-  when: amq_broker_disable_stomp_protocol
+  when: activemq_disable_stomp_protocol
 
 - name: Set the journal as nio
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
       - "--nio"
-  when: amq_broker_nio_enabled
+  when: activemq_nio_enabled
 
 - name: Enable TLS for web UI
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
-      - "--ssl-key {{ amq_broker_tls_keystore_dest }}"
-      - "--ssl-key-password {{ amq_broker_tls_keystore_password }}"
-  when: amq_broker_tls_enabled and amq_broker_tls_keystore and amq_broker_tls_keystore_password
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
+      - "--ssl-key {{ activemq_tls_keystore_dest }}"
+      - "--ssl-key-password {{ activemq_tls_keystore_password }}"
+  when: activemq_tls_enabled and activemq_tls_keystore and activemq_tls_keystore_password
 
 - name: Enable TLS client authentication for web UI
   ansible.builtin.set_fact:
-    amq_broker_options:
-      - "{{ amq_broker_options | join(' ') }}"
-      - "--ssl-trust {{ amq_broker_tls_truststore_dest }}"
-      - "--ssl-trust-password {{ amq_broker_tls_truststore_password }}"
+    activemq_options:
+      - "{{ activemq_options | join(' ') }}"
+      - "--ssl-trust {{ activemq_tls_truststore_dest }}"
+      - "--ssl-trust-password {{ activemq_tls_truststore_password }}"
       - "--use-client-auth"
-  when: amq_broker_tls_enabled and amq_broker_tls_mutual_authentication and amq_broker_tls_truststore and amq_broker_tls_truststore_password
+  when: activemq_tls_enabled and activemq_tls_mutual_authentication and activemq_tls_truststore and activemq_tls_truststore_password
 
 - name: Create final broker creation options
   ansible.builtin.set_fact:
-    amq_broker_options: "{{ amq_broker_options | join(' ') }}"
+    activemq_options: "{{ activemq_options | join(' ') }}"

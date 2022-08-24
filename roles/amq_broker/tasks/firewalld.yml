@@ -12,7 +12,7 @@
     enabled: yes
     state: started
 
-- name: "Configure firewall for {{ amq_broker.service_name }} ports"
+- name: "Configure firewall for {{ activemq.service_name }} ports"
   become: yes
   firewalld:
     port: "{{ item }}"
@@ -20,18 +20,18 @@
     state: enabled
     immediate: yes
   loop:
-    - "{{ amq_broker_http_port }}/tcp"
-    - "{{ amq_broker_port }}/tcp"
-    - "{{ amq_broker_port_hornetq }}/tcp"
-    - "{{ amq_broker_port_amqp }}/tcp"
-    - "{{ amq_broker_port_mqtt }}/tcp"
-    - "{{ amq_broker_port_stomp }}/tcp"
+    - "{{ activemq_http_port }}/tcp"
+    - "{{ activemq_port }}/tcp"
+    - "{{ activemq_port_hornetq }}/tcp"
+    - "{{ activemq_port_amqp }}/tcp"
+    - "{{ activemq_port_mqtt }}/tcp"
+    - "{{ activemq_port_stomp }}/tcp"
 
 - name: "Configure firewall for JMX exporter port"
   become: yes
   firewalld:
-    port: "{{ amq_broker_jmx_exporter_port }}/tcp"
+    port: "{{ activemq_jmx_exporter_port }}/tcp"
     permanent: true
     state: enabled
     immediate: yes
-  when: amq_broker_jmx_exporter_enabled
+  when: activemq_jmx_exporter_enabled

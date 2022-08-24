@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: yes
   vars:
-    amq_broker_users:
+    activemq_users:
     - user: amq
       password: amqbrokerpass
       role: admin

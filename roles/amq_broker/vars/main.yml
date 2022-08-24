@@ -3,30 +3,13 @@
 
 
 ### internal variables
-
-# RHN related variables
-amq_broker_rhn_baseurl: 'https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId='
-amq_broker_rhn_id: "{{ amq_broker_rhn_ids[amq_broker_version].id }}"
-amq_broker_rhn_ids:
-  '7.10.0': # noqa vars_in_vars_files_have_valid_names we need the dict with the version as key
-    id: '104526'
-  '7.9.4': # noqa vars_in_vars_files_have_valid_names we need the dict with the version as key
-    id: '104297'
-  '7.9.3': # noqa vars_in_vars_files_have_valid_names we need the dict with the version as key
-    id: '104184'
-  '7.9.2': # noqa vars_in_vars_files_have_valid_names we need the dict with the version as key
-    id: '104123'
-  '7.8.6': # noqa vars_in_vars_files_have_valid_names we need the dict with the version as key
-    id: '104306'
-
-# internal main interpolated variables
-amq_broker:
-  home: "{{ amq_broker_installdir if amq_broker_enable else amq_broker_activemq_installdir }}"
-  version: "{{ amq_broker_version if amq_broker_enable else amq_broker_activemq_version }}"
-  download_url: "{{ (amq_broker_rhn_baseurl + amq_broker_rhn_id) if amq_broker_enable else amq_broker_activemq_download_url }}"
-  bundle: "{{ amq_broker_archive if amq_broker_enable else amq_broker_activemq_archive }}"
-  name: "{{ 'Red Hat AMQ Broker' if amq_broker_enable else 'Apache ActiveMQ' }}"
-  service_name: "{{ 'amq_broker' if amq_broker_enable else 'activemq' }}"
-  instance_name: "{{ amq_broker_instance_name }}"
-  instance_home: "{{ amq_broker_dest }}/{{ amq_broker_instance_name }}"
+activemq:
+  home: "{{ activemq_installdir }}"
+  version: "{{ activemq_version }}"
+  download_url: "{{ activemq_download_url }}"
+  bundle: "{{ activemq_archive }}"
+  name: "{{ activemq_name }}"
+  service_name: "{{ activemq_service_name }}"
+  instance_name: "{{ activemq_instance_name }}"
+  instance_home: "{{ activemq_dest }}/{{ activemq_instance_name }}"
   

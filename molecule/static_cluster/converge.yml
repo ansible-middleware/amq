@@ -3,11 +3,11 @@
   hosts: all
   gather_facts: yes
   vars:
-    amq_broker_ha_enabled: true
-    amq_broker_disable_hornetq_protocol: true
-    amq_broker_disable_mqtt_protocol: true
-    amq_broker_shared_storage: true
-    amq_broker_configure_firewalld: false  
+    activemq_ha_enabled: true
+    activemq_disable_hornetq_protocol: true
+    activemq_disable_mqtt_protocol: true
+    activemq_shared_storage: true
+    activemq_configure_firewalld: false  
   collections:
     - middleware_automation.redhat_csp_download
   roles:

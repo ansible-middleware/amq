@@ -6,7 +6,7 @@
 
 - name: Include firewall config tasks
   ansible.builtin.include_tasks: firewalld.yml
-  when: amq_broker_configure_firewalld
+  when: activemq_configure_firewalld
   tags:
     - firewall
 
@@ -24,14 +24,14 @@
   become: yes
   ansible.builtin.file:
     state: directory
-    dest: "/var/log/{{ amq_broker.service_name }}"
-    owner: "{{ amq_broker_service_user }}"
-    group: "{{ amq_broker_service_group }}"
+    dest: "/var/log/{{ activemq.service_name }}"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
     mode: 0750
 
 - name: Link default logs directory
   become: yes
   ansible.builtin.file:
     state: link
-    src: "{{ amq_broker.instance_home }}/log"
-    dest: "/var/log/{{ amq_broker.service_name }}/{{ amq_broker.instance_name }}"
+    src: "{{ activemq.instance_home }}/log"
+    dest: "/var/log/{{ activemq.service_name }}/{{ activemq.instance_name }}"

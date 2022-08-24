@@ -3,9 +3,9 @@
   hosts: all
   gather_facts: yes
   vars:
-    amq_broker_enable: True
-    amq_broker_offline_install: True
-    amq_broker_users:
+    activemq_enable: True
+    activemq_offline_install: True
+    activemq_users:
     - user: amq
       password: amqbrokerpass
       role: admin
@@ -35,5 +35,5 @@
       ansible.builtin.include_role:
         name: amq_broker
       vars:
-        amq_broker_version: 7.10.0
+        activemq_version: 7.10.0
       when: local_archive_path.stat.exists
