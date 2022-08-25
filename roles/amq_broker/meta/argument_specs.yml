@@ -10,7 +10,7 @@ argument_specs:
                 description: "Apache Artemis install archive filename"
                 type: "str"
             activemq_download_url:
-                default: "https://archive.apache.org/dist/activemq/activemq-artemis/{{ amq_broker_activemq_version }}/{{ amq_broker_activemq_archive }}"
+                default: "https://archive.apache.org/dist/activemq/activemq-artemis/{{ activemq_version }}/{{ activemq_archive }}"
                 description: "Apache Artemis download URL"
                 type: "str"
             activemq_installdir:
@@ -112,7 +112,7 @@ argument_specs:
             activemq_java_home:
                 # line 36 of defaults/main.yml
                 required: true
-                description: "JAVA_HOME of installed JRE, leave empty for using specified amq_broker_jvm_package path"
+                description: "JAVA_HOME of installed JRE, leave empty for using specified activemq_jvm_package path"
                 type: "str"
             activemq_java_opts:
                 # line 37 of defaults/main.yml
