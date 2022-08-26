@@ -2,29 +2,29 @@
 - name: Determine JAVA_HOME for selected JVM RPM  # noqa blocked_modules
   ansible.builtin.shell: |
     set -o pipefail
-    rpm -ql {{ amq_broker_jvm_package }} | grep -Po '/usr/lib/jvm/.*(?=/bin/java$)'
+    rpm -ql {{ activemq_jvm_package }} | grep -Po '/usr/lib/jvm/.*(?=/bin/java$)'
   args:
     executable: /bin/bash
   changed_when: False
   register: rpm_java_home
 
-- name: "Configure sysconfig file for {{ amq_broker.instance_name }} {{ amq_broker.service_name }} service"
+- name: "Configure sysconfig file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
   become: yes
   ansible.builtin.template:
     src: amq_broker.sysconfig.j2
-    dest: "/etc/sysconfig/{{ amq_broker.instance_name }}"
+    dest: "/etc/sysconfig/{{ activemq.instance_name }}"
     owner: root
     group: root
     mode: 0644
   vars:
-    amq_broker_rpm_java_home: "{{ rpm_java_home.stdout }}"
+    activemq_rpm_java_home: "{{ rpm_java_home.stdout }}"
   notify:
     - restart amq_broker
 
-- name: "Configure systemd unit file for {{ amq_broker.instance_name }} {{ amq_broker.service_name }} service"
+- name: "Configure systemd unit file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
   ansible.builtin.template:
     src: amq_broker.service.j2
-    dest: "/etc/systemd/system/{{ amq_broker.instance_name }}.service"
+    dest: "/etc/systemd/system/{{ activemq.instance_name }}.service"
     owner: root
     group: root
     mode: 0644
@@ -33,21 +33,21 @@
   notify:
     - restart amq_broker
 
-- name: "Check instance directory: {{ amq_broker_dest }}/{{ amq_broker.instance_name }}"
+- name: "Check instance directory: {{ activemq_dest }}/{{ activemq.instance_name }}"
   ansible.builtin.stat:
-    path: "{{ amq_broker_dest }}/{{ amq_broker.instance_name }}/bin"
+    path: "{{ activemq_dest }}/{{ activemq.instance_name }}/bin"
   register: instance_directory
   become: yes
 
-- name: "Generate artemis configuration for: {{ amq_broker_dest }}/{{ amq_broker.instance_name }}"
+- name: "Generate artemis configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
   ansible.builtin.include_tasks: configure.yml
   when:
     - not instance_directory.stat.exists
 
-- name: "Create instance {{ amq_broker.instance_name }} of {{ amq_broker.service_name }}"
+- name: "Create instance {{ activemq.instance_name }} of {{ activemq.service_name }}"
   ansible.builtin.command:
-    cmd: "{{ amq_broker.home }}/bin/artemis create {{ amq_broker.instance_home }} {{ amq_broker_options }}"
-    creates: "{{ amq_broker.instance_home }}/bin/artemis-service"
+    cmd: "{{ activemq.home }}/bin/artemis create {{ activemq.instance_home }} {{ activemq_options }}"
+    creates: "{{ activemq.instance_home }}/bin/artemis-service"
   become: yes
   register: broker_created
   when:
@@ -62,41 +62,41 @@
 - name: "Setup clustering with jgroups"
   ansible.builtin.include_tasks: jgroups.yml
   when:
-    - amq_broker_ha_enabled
-    - amq_broker_cluster_discovery == 'jgroups'
+    - activemq_ha_enabled
+    - activemq_cluster_discovery == 'jgroups'
 
 - name: "Configure AMQ broker logging"
   become: yes
   ansible.builtin.template:
     src: logging.properties.j2
-    dest: "{{ amq_broker.instance_home }}/etc/logging.properties"
-    owner: "{{ amq_broker_service_user }}"
-    group: "{{ amq_broker_service_group }}"
+    dest: "{{ activemq.instance_home }}/etc/logging.properties"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
     mode: 0644
   notify:
     - restart amq_broker
 
 - name: Create user and roles
   ansible.builtin.include_tasks: user_roles.yml
-  when: amq_broker_users | length > 0
+  when: activemq_users | length > 0
 
 - name: "Configure prometheus metrics"
   become: yes
-  when: amq_broker_prometheus_enabled
+  when: activemq_prometheus_enabled
   block:
     - name: Ensure lib is available to instance
       ansible.builtin.copy:
-        src: "{{ amq_broker.home }}/lib/artemis-prometheus-metrics-plugin-1.1.0.redhat-00002.jar"
-        dest: "{{ amq_broker.instance_home }}/lib/"
+        src: "{{ activemq.home }}/lib/artemis-prometheus-metrics-plugin-1.1.0.redhat-00002.jar"
+        dest: "{{ activemq.instance_home }}/lib/"
         remote_src: yes
-        owner: "{{ amq_broker_service_user }}"
-        group: "{{ amq_broker_service_group }}"
+        owner: "{{ activemq_service_user }}"
+        group: "{{ activemq_service_group }}"
         mode: 0644
       notify:
         - restart amq_broker
     - name: Configure metrics plugin
       xml:
-        path: "{{ amq_broker.instance_home }}/etc/broker.xml"
+        path: "{{ activemq.instance_home }}/etc/broker.xml"
         xpath: /conf:configuration/core:core/core:metrics/core:plugin
         attribute: class-name
         value: org.apache.activemq.artemis.core.server.metrics.plugins.ArtemisPrometheusMetricsPlugin
@@ -112,17 +112,17 @@
     daemon_reload: yes
   when: systemdunit.changed
 
-- name: "Start and wait for {{ amq_broker.service_name }} service (first node)"
+- name: "Start and wait for {{ activemq.service_name }} service (first node)"
   ansible.builtin.include_tasks: start.yml
   run_once: yes
-  when: amq_broker_db_enabled
+  when: activemq_db_enabled
 
-- name: "Start and wait for {{ amq_broker.service_name }} service (remaining nodes)"
+- name: "Start and wait for {{ activemq.service_name }} service (remaining nodes)"
   ansible.builtin.include_tasks: start.yml
 
 - name: Check service status
-  ansible.builtin.command: "systemctl status {{ amq_broker.instance_name }}"
-  register: amq_broker_service_status
+  ansible.builtin.command: "systemctl status {{ activemq.instance_name }}"
+  register: activemq_service_status
   changed_when: False
   retries: 6
   delay: 5
@@ -130,8 +130,8 @@
 - name: Verify service status
   ansible.builtin.assert:
     that:
-      - amq_broker_service_status is defined
-      - amq_broker_service_status.stdout is defined
+      - activemq_service_status is defined
+      - activemq_service_status.stdout is defined
 
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers

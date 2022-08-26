@@ -1,7 +1,7 @@
 ---
 - name: Remove discovery groups
   xml:
-    path: "{{ amq_broker.home }}/etc/broker.xml"
+    path: "{{ activemq.home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:discovery-groups
     state: absent
     namespaces:

@@ -2,42 +2,42 @@
 - name: Validate parameters
   ansible.builtin.assert:
     that:
-      - amq_broker.home is defined
-      - amq_broker_service_user is defined
-      - amq_broker_dest is defined
-      - amq_broker.bundle is defined
-      - amq_broker.download_url is defined
-      - amq_broker.version is defined
+      - activemq.home is defined
+      - activemq_service_user is defined
+      - activemq_dest is defined
+      - activemq.bundle is defined
+      - activemq.download_url is defined
+      - activemq.version is defined
     quiet: true
 
-- name: "Create {{ amq_broker.service_name }} service group"
+- name: "Create {{ activemq.service_name }} service group"
   become: yes
   ansible.builtin.group:
-    name: "{{ amq_broker_service_group }}"
+    name: "{{ activemq_service_group }}"
     system: yes
 
-- name: "Create {{ amq_broker.service_name }} service user"
+- name: "Create {{ activemq.service_name }} service user"
   become: yes
   ansible.builtin.user:
-    name: "{{ amq_broker_service_user }}"
-    group: "{{ amq_broker_service_group }}"
-    home: "{{ amq_broker.home }}"
+    name: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
+    home: "{{ activemq.home }}"
     system: yes
     create_home: no
 
-- name: "Check {{ amq_broker.service_name }} install location"
+- name: "Check {{ activemq.service_name }} install location"
   become: yes
   ansible.builtin.stat:
-    path: "{{ amq_broker_dest }}"
+    path: "{{ activemq_dest }}"
   register: install_location
 
-- name: "Create {{ amq_broker.service_name }} install location"
+- name: "Create {{ activemq.service_name }} install location"
   become: yes
   ansible.builtin.file:
-    dest: "{{ amq_broker_dest }}"
+    dest: "{{ activemq_dest }}"
     state: directory
-    owner: "{{ amq_broker_service_user }}"
-    group: "{{ amq_broker_service_group }}"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
     mode: 0750
   when:
     - not install_location.stat.exists
@@ -45,7 +45,7 @@
 ## check remote archive
 - name: Set download archive path
   ansible.builtin.set_fact:
-    archive: "{{ amq_broker_dest }}/{{ amq_broker.bundle }}"
+    archive: "{{ activemq_dest }}/{{ activemq.bundle }}"
 
 - name: Check download archive path
   become: yes
@@ -62,21 +62,21 @@
 
 - name: Download AMQ archive
   ansible.builtin.get_url: # noqa risky-file-permissions delegated, uses controller host user
-    url: "{{ amq_broker.download_url }}"
-    dest: "{{ local_path.stat.path }}/{{ amq_broker.bundle }}"
+    url: "{{ activemq.download_url }}"
+    dest: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
     mode: 0640
   delegate_to: localhost
   when:
     - archive_path is defined
     - archive_path.stat is defined
     - not archive_path.stat.exists
-    - not amq_broker_enable
-    - not amq_broker_offline_install
+    - not amq_broker_enable is defined or not amq_broker_enable
+    - not activemq_offline_install
 
 - name: Perform download from RHN
   redhat_csp_download:
-    url: "{{ amq_broker.download_url }}"
-    dest: "{{ local_path.stat.path }}/{{ amq_broker.bundle }}"
+    url: "{{ activemq.download_url }}"
+    dest: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
     username: "{{ rhn_username }}"
     password: "{{ rhn_password }}"
   no_log: "{{ omit_rhn_output | default(true) }}"
@@ -85,37 +85,37 @@
     - archive_path is defined
     - archive_path.stat is defined
     - not archive_path.stat.exists
-    - amq_broker_enable
-    - not amq_broker_offline_install
-    - amq_broker_rhn_baseurl in amq_broker.download_url
+    - amq_broker_enable is defined and amq_broker_enable
+    - not activemq_offline_install
+    - amq_broker_rhn_baseurl is defined and amq_broker_rhn_baseurl in activemq.download_url
 
 - name: Download AMQ archive from alternate location
   ansible.builtin.get_url: # noqa risky-file-permissions delegated, uses controller host user
-    url: "{{ amq_broker.download_url }}"
-    dest: "{{ local_path.stat.path }}/{{ amq_broker.bundle }}"
+    url: "{{ activemq.download_url }}"
+    dest: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
     mode: 0640
   delegate_to: localhost
   when:
     - archive_path is defined
     - archive_path.stat is defined
     - not archive_path.stat.exists
-    - amq_broker_enable
-    - not amq_broker_offline_install
-    - not amq_broker_rhn_baseurl in amq_broker.download_url
+    - amq_broker_enable is defined and amq_broker_enable
+    - not activemq_offline_install
+    - amq_broker_rhn_baseurl is not defined or not amq_broker_rhn_baseurl in activemq.download_url
 
 - name: Check downloaded archive
   ansible.builtin.stat:
-    path: "{{ local_path.stat.path }}/{{ amq_broker.bundle }}"
+    path: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
   register: local_archive_path
   delegate_to: localhost
 
 ## copy and unpack
 - name: Copy archive to target nodes
   ansible.builtin.copy:
-    src: "{{ local_path.stat.path }}/{{ amq_broker.bundle }}"
+    src: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
     dest: "{{ archive }}"
-    owner: "{{ amq_broker_service_user }}"
-    group: "{{ amq_broker_service_group }}"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
     mode: 0750
   register: new_version_downloaded
   when:
@@ -124,20 +124,20 @@
     - local_archive_path.stat.exists
   become: yes
 
-- name: "Check target directory: {{ amq_broker.home }}"
+- name: "Check target directory: {{ activemq.home }}"
   ansible.builtin.stat:
-    path: "{{ amq_broker.home }}"
+    path: "{{ activemq.home }}"
   register: path_to_workdir
   become: yes
 
-- name: "Extract {{ amq_broker.name }} archive on target"
+- name: "Extract {{ activemq.name }} archive on target"
   ansible.builtin.unarchive: # noqa no-handler definitely not a candidate for a handler
     remote_src: yes
     src: "{{ archive }}"
-    dest: "{{ amq_broker_dest }}"
-    creates: "{{ amq_broker.home }}"
-    owner: "{{ amq_broker_service_user }}"
-    group: "{{ amq_broker_service_group }}"
+    dest: "{{ activemq_dest }}"
+    creates: "{{ activemq.home }}"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
   become: yes
   register: new_version_extracted
   when:
@@ -146,7 +146,7 @@
     - restart amq_broker
 
 - name: Inform decompression was not executed
-  ansible.builtin.debug:
-    msg: "{{ amq_broker.home }} already exists and version unchanged, skipping decompression"
+  ansible.builtin.debug: # noqa no-handler definitely not a candidate for a handler
+    msg: "{{ activemq.home }} already exists and version unchanged, skipping decompression"
   when:
     - not new_version_downloaded.changed and path_to_workdir.stat.exists

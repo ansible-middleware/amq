@@ -1,30 +1,30 @@
 ---
 - name: Set masked user passwords
   ansible.builtin.include_tasks: mask_password.yml
-  loop: "{{ amq_broker_users }}"
+  loop: "{{ activemq_users }}"
   loop_control:
     label: "{{ item.user }}"
 
 - name: Configure users
   ansible.builtin.template:
     src: artemis-users.properties.j2
-    dest: "{{ amq_broker.instance_home }}/etc/artemis-users.properties"
-    owner: "{{ amq_broker_service_user }}"
-    group: "{{ amq_broker_service_group }}"
+    dest: "{{ activemq.instance_home }}/etc/artemis-users.properties"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
     mode: 0640
   no_log: True
 
 - name: Configure roles
   ansible.builtin.template:
     src: artemis-roles.properties.j2
-    dest: "{{ amq_broker.instance_home }}/etc/artemis-roles.properties"
-    owner: "{{ amq_broker_service_user }}"
-    group: "{{ amq_broker_service_group }}"
+    dest: "{{ activemq.instance_home }}/etc/artemis-roles.properties"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
     mode: 0640
 
 - name: Create messaging roles permissions
   xml:
-    path: "{{ amq_broker.instance_home }}/etc/broker.xml"
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:security-settings
     input_type: xml
     add_children: "{{ lookup('template', 'security_settings.broker.xml.j2') }}"
@@ -33,4 +33,4 @@
       core: urn:activemq:core
     pretty_print: yes
   changed_when: False
-  loop: "{{ amq_broker_roles }}"
+  loop: "{{ activemq_roles }}"

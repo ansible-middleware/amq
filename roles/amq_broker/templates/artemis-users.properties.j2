@@ -16,6 +16,6 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-{% for user in amq_broker_masked_users %}
+{% for user in activemq_masked_users %}
 {{ user.user }} = ENC({{ user.password }})
 {% endfor %}

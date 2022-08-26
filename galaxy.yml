@@ -1,7 +1,7 @@
 ---
 namespace: middleware_automation
 name: amq
-version: "1.0.0"
+version: "1.1.0"
 readme: README.md
 authors:
   - Guido Grazioli <ggraziol@redhat.com>
@@ -11,7 +11,7 @@ tags:
   - amq
   - activemq
   - broker
-  - streams
+  - messaging
   - rhn
   - server
   - messagebus
@@ -23,9 +23,15 @@ documentation: https://ansible-middleware.github.io/amq
 homepage: https://github.com/ansible-middleware/amq
 issues: https://github.com/ansible-middleware/amq/issues
 build_ignore:
-  - molecule
+  - .gitignore
   - .github
+  - .ansible-lint
+  - .yamllint
   - '*.tar.gz'
   - '*.zip'
-  - changelogs/fragments/.gitignore
-  - .gitignore
+  - molecule
+  - changelogs
+  - docs/_gh_include
+  - docs/conf.py
+  - docs/roles.rst.template
+  - docs/requirements.yml

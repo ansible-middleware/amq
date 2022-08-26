@@ -1,7 +1,7 @@
 ---
-- name: "Restart and enable instance {{ amq_broker.instance_name }} for {{ amq_broker.service_name }} service"
+- name: "Restart and enable instance {{ activemq.instance_name }} for {{ activemq.service_name }} service"
   ansible.builtin.systemd:
-    name: "{{ amq_broker.instance_name }}"
+    name: "{{ activemq.instance_name }}"
     enabled: yes
     state: restarted
   become: yes

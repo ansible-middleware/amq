@@ -27,7 +27,7 @@
               <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
               <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/keycloak/">Keycloak / Red Hat Single Sign-On</a></li>
               <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
-              <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/jws-ansible-playbook/">Tomcat / Red Hat JWS</a></li>
+              <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
               <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ</a></li>
               <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
               <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>

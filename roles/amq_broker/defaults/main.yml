@@ -1,122 +1,118 @@
 ---
-### AMQ Version settings
-# setting for apache activemq artemis
-amq_broker_activemq_version: 2.18.0
-amq_broker_activemq_archive: "apache-artemis-{{ amq_broker_activemq_version }}-bin.zip"
-amq_broker_activemq_download_url: "https://archive.apache.org/dist/activemq/activemq-artemis/{{ amq_broker_activemq_version }}/{{ amq_broker_activemq_archive }}"  
-amq_broker_activemq_installdir: "{{ amq_broker_dest }}/apache-artemis-{{ amq_broker_activemq_version }}"
-# settings for Red Hat AMQ Broker
-amq_broker_enable: "{{ True if rhn_username is defined and rhn_password is defined else False }}"
-amq_broker_version: 7.9.4
-amq_broker_archive: "amq-broker-{{ amq_broker_version }}-bin.zip"
-amq_broker_installdir: "{{ amq_broker_dest }}/amq-broker-{{ amq_broker_version }}"
+### Version settings
+activemq_version: 2.18.0
+activemq_archive: "apache-artemis-{{ activemq_version }}-bin.zip"
+activemq_download_url: "https://archive.apache.org/dist/activemq/activemq-artemis/{{ activemq_version }}/{{ activemq_archive }}"  
+activemq_installdir: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
 
 ### Install location and service settings
-amq_broker_dest: /opt/amq
-amq_broker_offline_install: False
-amq_broker_config_dir: "conf"
-amq_broker_config_xml: amq-broker.xml
-amq_broker_config_override_template: ''
-amq_broker_service_user: amq-broker
-amq_broker_service_group: amq-broker
-amq_broker_instance_name: amq-broker
-amq_broker_instance_username: amq-broker
-amq_broker_instance_password: amq-broker
-amq_broker_instance_anonymous: False
-amq_broker_service_pidfile: data/artemis.pid
-amq_broker_configure_firewalld: False
+activemq_dest: /opt/amq
+activemq_offline_install: False
+activemq_config_dir: "conf"
+activemq_config_xml: amq-broker.xml
+activemq_config_override_template: ''
+activemq_service_user: amq-broker
+activemq_service_group: amq-broker
+activemq_instance_name: amq-broker
+activemq_instance_username: amq-broker
+activemq_instance_password: amq-broker
+activemq_instance_anonymous: False
+activemq_service_pidfile: data/artemis.pid
+activemq_configure_firewalld: False
 
 ### Common configuration settings
-amq_broker_bind_address: 0.0.0.0
-amq_broker_host: localhost
-amq_broker_http_port: 8161
-amq_broker_jolokia_url: "http://{{ amq_broker_host }}:{{ amq_broker_http_port }}/console/jolokia"
-amq_broker_console_url: "http://{{ amq_broker_host }}:{{ amq_broker_http_port }}/console/"
-amq_broker_jvm_package: java-11-openjdk-headless
-amq_broker_java_home:
-amq_broker_java_opts: "-Xms1024m -Xmx2048m"
-amq_broker_port: 61616        # for protocols [CORE,MQTT,AMQP,STOMP,HORNETQ,OPENWIRE]
-amq_broker_port_hornetq: 5445 # for protocols [HORNETQ,STOMP]
-amq_broker_port_amqp: 5672    # for protocols [AMQP]
-amq_broker_port_mqtt: 1883    # for protocols [MQTT]
-amq_broker_port_stomp: 61613  # for protocols [STOMP]
+activemq_bind_address: 0.0.0.0
+activemq_host: localhost
+activemq_http_port: 8161
+activemq_jolokia_url: "http://{{ activemq_host }}:{{ activemq_http_port }}/console/jolokia"
+activemq_console_url: "http://{{ activemq_host }}:{{ activemq_http_port }}/console/"
+activemq_jvm_package: java-11-openjdk-headless
+activemq_java_home:
+activemq_java_opts: "-Xms1024m -Xmx2048m"
+activemq_port: 61616        # for protocols [CORE,MQTT,AMQP,STOMP,HORNETQ,OPENWIRE]
+activemq_port_hornetq: 5445 # for protocols [HORNETQ,STOMP]
+activemq_port_amqp: 5672    # for protocols [AMQP]
+activemq_port_mqtt: 1883    # for protocols [MQTT]
+activemq_port_stomp: 61613  # for protocols [STOMP]
+activemq_name: 'Apache ActiveMQ'
+activemq_service_name: activemq
 
 ### Enable configuration for high availability
-amq_broker_ha_enabled: False
-amq_broker_cluster_user: amq-cluster-user
-amq_broker_cluster_pass: amq-cluster-pass
-amq_broker_cluster_maxhops: 1
-amq_broker_cluster_lb_policy: ON_DEMAND
-amq_broker_replicate: False
-amq_broker_replicated: False
+activemq_ha_enabled: False
+activemq_cluster_user: amq-cluster-user
+activemq_cluster_pass: amq-cluster-pass
+activemq_cluster_maxhops: 1
+activemq_cluster_lb_policy: ON_DEMAND
+activemq_replicate: False
+activemq_replicated: False
 # cluster discovery: ['jgroups' for shared file ping, 'multicast' for UDP multicast, 'static' for static declaration]
-amq_broker_cluster_discovery: static
+activemq_cluster_discovery: static
 
 ### Enable database configuration for JDBC persistence
-amq_broker_db_enabled: False
+activemq_db_enabled: False
 
 ### Enable TLS
-amq_broker_tls_enabled: False
-amq_broker_tls_keystore_path: identity.ks
-amq_broker_tls_keystore_password: changeme
-amq_broker_tls_keystore_dest: "{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/identity.ks"
+activemq_tls_enabled: False
+activemq_tls_keystore_path: identity.ks
+activemq_tls_keystore_password: changeme
+activemq_tls_keystore_dest: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/identity.ks"
 
 # Mutual authentication (requires TLS)
-amq_broker_tls_mutual_authentication: False
-amq_broker_tls_truststore:
-amq_broker_tls_truststore_password:
-amq_broker_tls_truststore_dest: "{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/trust.ks"
+activemq_tls_mutual_authentication: False
+activemq_tls_truststore:
+activemq_tls_truststore_password:
+activemq_tls_truststore_dest: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/trust.ks"
 
 # Users
 # list of users the create, user is not created if password empty; list of (user,password,role) dicts
-amq_broker_users:
-  - user: "{{ amq_broker_instance_username }}"
-    password: "{{ amq_broker_instance_password }}"
+activemq_users:
+  - user: "{{ activemq_instance_username }}"
+    password: "{{ activemq_instance_password }}"
     role: amq
 
 # Roles
 # .permissions is subset of:
 # [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
-amq_broker_roles:
+activemq_roles:
   - name: amq
     permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
 
 # NIO option
-amq_broker_nio_enabled: False
+activemq_nio_enabled: False
 
 ## Shared Storage
-amq_broker_shared_storage: False
-amq_broker_shared_storage_path: data/shared
+activemq_shared_storage: False
+activemq_shared_storage_path: data/shared
 
 ## Ports
-amq_broker_ports_offset_enabled: False
-amq_broker_ports_offset: 0
+activemq_ports_offset_enabled: False
+activemq_ports_offset: 0
 
 # Queues
-amq_broker_disable_destination_autocreate: True
-amq_broker_queues: queue.in,queue.out
+activemq_disable_destination_autocreate: True
+activemq_queues: queue.in,queue.out
 
 # Protocol disablement
-amq_broker_disable_amqp_protocol: False
-amq_broker_disable_hornetq_protocol: False
-amq_broker_disable_mqtt_protocol: False
-amq_broker_disable_stomp_protocol: False
+activemq_disable_amqp_protocol: False
+activemq_disable_hornetq_protocol: False
+activemq_disable_mqtt_protocol: False
+activemq_disable_stomp_protocol: False
 
 # Logging
-amq_broker_enable_audit: False
-amq_broker_logger_level: INFO
-amq_broker_logger_core_server_level: INFO
-amq_broker_logger_journal_level: INFO
-amq_broker_logger_utils_level: INFO
-amq_broker_logger_utils_critical_level: INFO
-amq_broker_logger_jms_level: INFO
-amq_broker_logger_integration_bootstrap_level: INFO
-amq_broker_logger_jetty_level: WARN
-amq_broker_logger_curator_level: WARN
-amq_broker_logger_zookeeper_level: ERROR
+activemq_enable_audit: False
+activemq_logger_level: INFO
+activemq_logger_core_server_level: INFO
+activemq_logger_journal_level: INFO
+activemq_logger_utils_level: INFO
+activemq_logger_utils_critical_level: INFO
+activemq_logger_jms_level: INFO
+activemq_logger_integration_bootstrap_level: INFO
+activemq_logger_jetty_level: WARN
+activemq_logger_curator_level: WARN
+activemq_logger_zookeeper_level: ERROR
 
 # Metrics
-amq_broker_jmx_exporter_port: 18080
-amq_broker_jmx_exporter_config_path: "{{ amq_broker_dest }}/{{ amq_broker_instance_name }}/etc/jmx_exporter.yml"
-amq_broker_jmx_exporter_enabled: False
-amq_broker_prometheus_enabled: False
+activemq_jmx_exporter_port: 18080
+activemq_jmx_exporter_config_path: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/jmx_exporter.yml"
+activemq_jmx_exporter_enabled: False
+activemq_prometheus_enabled: False
