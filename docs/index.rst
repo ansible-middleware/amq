@@ -33,7 +33,7 @@ Welcome to AMQ Collection documentation
    Infinispan / Red Hat Data Grid <https://ansible-middleware.github.io/infinispan/>
    Keycloak / Red Hat Single Sign-On <https://ansible-middleware.github.io/keycloak/>
    Wildfly / Red Hat JBoss EAP <https://ansible-middleware.github.io/wildfly/>
-   Tomcat / Red Hat JWS <https://ansible-middleware.github.io/jws-ansible-playbook/>
+   Tomcat / Red Hat JWS <https://ansible-middleware.github.io/jws/>
    ActiveMQ / Red Hat AMQ <https://ansible-middleware.github.io/amq/>
    Red Hat CSP Download <https://ansible-middleware.github.io/redhat-csp-download/>
    JCliff <https://ansible-middleware.github.io/ansible_collections_jcliff/>

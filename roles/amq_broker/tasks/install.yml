@@ -146,7 +146,7 @@
     - restart amq_broker
 
 - name: Inform decompression was not executed
-  ansible.builtin.debug:
+  ansible.builtin.debug: # noqa no-handler definitely not a candidate for a handler
     msg: "{{ activemq.home }} already exists and version unchanged, skipping decompression"
   when:
     - not new_version_downloaded.changed and path_to_workdir.stat.exists
