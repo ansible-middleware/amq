@@ -8,11 +8,8 @@ authors:
 description: Install and configure AMQ services.
 license_file: "LICENSE"
 tags:
-  - amq
-  - activemq
   - broker
   - messaging
-  - rhn
   - server
   - messagebus
   - infrastructure
