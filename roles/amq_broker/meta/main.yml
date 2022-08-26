@@ -6,7 +6,7 @@ galaxy_info:
   role_name: amq_broker
   namespace: middleware_automation
   author: Guido Grazioli
-  description: Installs
+  description: Installs and configures activemq services.
   company: Red Hat, Inc.
 
   license: Apache License 2.0
@@ -19,10 +19,11 @@ galaxy_info:
      - 8
 
   galaxy_tags:
-    - activemq
     - amq
+    - broker
     - redhat
     - rhel
-    - rhn
     - server
+    - infrastructure
+    - messagebus
     - infrastructure
