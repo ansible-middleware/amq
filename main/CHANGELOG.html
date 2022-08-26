@@ -52,20 +52,24 @@
 <p class="caption" role="heading"><span class="caption-text">General</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v1-1-0-devel">v1.1.0-devel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#major-changes">Major Changes</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-0-0">v1.0.0</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#minor-changes">Minor Changes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-0-3">v0.0.3</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Minor Changes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-0-2">v0.0.2</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#major-changes">Major Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Major Changes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-0-1">v0.0.1</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id8">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Minor Changes</a></li>
 </ul>
 </li>
 </ul>
@@ -76,7 +80,7 @@
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/keycloak/">Keycloak / Red Hat Single Sign-On</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws-ansible-playbook/">Tomcat / Red Hat JWS</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
@@ -107,40 +111,54 @@
            <div itemprop="articleBody">
              
   <section id="middleware-automation-amq-release-notes">
-<h1><a class="toc-backref" href="#id10">middleware_automation.amq Release Notes</a><a class="headerlink" href="#middleware-automation-amq-release-notes" title="Permalink to this heading"></a></h1>
+<h1><a class="toc-backref" href="#id12">middleware_automation.amq Release Notes</a><a class="headerlink" href="#middleware-automation-amq-release-notes" title="Permalink to this heading"></a></h1>
 <div class="contents topic" id="topics">
 <p class="topic-title">Topics</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#middleware-automation-amq-release-notes" id="id10">middleware_automation.amq Release Notes</a></p>
+<li><p><a class="reference internal" href="#middleware-automation-amq-release-notes" id="id12">middleware_automation.amq Release Notes</a></p>
 <ul>
-<li><p><a class="reference internal" href="#v1-0-0" id="id11">v1.0.0</a></p>
+<li><p><a class="reference internal" href="#v1-1-0-devel" id="id13">v1.1.0-devel</a></p>
 <ul>
-<li><p><a class="reference internal" href="#minor-changes" id="id12">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#major-changes" id="id14">Major Changes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v0-0-3" id="id13">v0.0.3</a></p>
+<li><p><a class="reference internal" href="#v1-0-0" id="id15">v1.0.0</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id3" id="id14">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#minor-changes" id="id16">Minor Changes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v0-0-2" id="id15">v0.0.2</a></p>
+<li><p><a class="reference internal" href="#v0-0-3" id="id17">v0.0.3</a></p>
 <ul>
-<li><p><a class="reference internal" href="#major-changes" id="id16">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id18">Minor Changes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v0-0-1" id="id17">v0.0.1</a></p>
+<li><p><a class="reference internal" href="#v0-0-2" id="id19">v0.0.2</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id8" id="id18">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id8" id="id20">Major Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v0-0-1" id="id21">v0.0.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id10" id="id22">Minor Changes</a></p></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </div>
+<section id="v1-1-0-devel">
+<h2><a class="toc-backref" href="#id13">v1.1.0-devel</a><a class="headerlink" href="#v1-1-0-devel" title="Permalink to this heading"></a></h2>
+<section id="major-changes">
+<h3><a class="toc-backref" href="#id14">Major Changes</a><a class="headerlink" href="#major-changes" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Rename variables prefix to <code class="docutils literal notranslate"><span class="pre">activemq_</span></code> <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/11">#11</a></p></li>
+</ul>
+</section>
+</section>
 <section id="v1-0-0">
-<h2><a class="toc-backref" href="#id11">v1.0.0</a><a class="headerlink" href="#v1-0-0" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id15">v1.0.0</a><a class="headerlink" href="#v1-0-0" title="Permalink to this heading"></a></h2>
 <section id="minor-changes">
-<h3><a class="toc-backref" href="#id12">Minor Changes</a><a class="headerlink" href="#minor-changes" title="Permalink to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id16">Minor Changes</a><a class="headerlink" href="#minor-changes" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Configuration for users and roles <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/7">#7</a></p></li>
 <li><p>Perform artemis post-upgrade operations on existing instances <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/8">#8</a></p></li>
@@ -148,9 +166,9 @@
 </section>
 </section>
 <section id="v0-0-3">
-<h2><a class="toc-backref" href="#id13">v0.0.3</a><a class="headerlink" href="#v0-0-3" title="Permalink to this heading"></a></h2>
-<section id="id3">
-<h3><a class="toc-backref" href="#id14">Minor Changes</a><a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id17">v0.0.3</a><a class="headerlink" href="#v0-0-3" title="Permalink to this heading"></a></h2>
+<section id="id4">
+<h3><a class="toc-backref" href="#id18">Minor Changes</a><a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add prometheus metrics export plugin <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/6">#6</a></p></li>
 <li><p>Add vars and template for logging configuration <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/4">#4</a></p></li>
@@ -159,18 +177,18 @@
 </section>
 </section>
 <section id="v0-0-2">
-<h2><a class="toc-backref" href="#id15">v0.0.2</a><a class="headerlink" href="#v0-0-2" title="Permalink to this heading"></a></h2>
-<section id="major-changes">
-<h3><a class="toc-backref" href="#id16">Major Changes</a><a class="headerlink" href="#major-changes" title="Permalink to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id19">v0.0.2</a><a class="headerlink" href="#v0-0-2" title="Permalink to this heading"></a></h2>
+<section id="id8">
+<h3><a class="toc-backref" href="#id20">Major Changes</a><a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>amq_broker: configuration of static cluster <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/3">#3</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v0-0-1">
-<h2><a class="toc-backref" href="#id17">v0.0.1</a><a class="headerlink" href="#v0-0-1" title="Permalink to this heading"></a></h2>
-<section id="id8">
-<h3><a class="toc-backref" href="#id18">Minor Changes</a><a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id21">v0.0.1</a><a class="headerlink" href="#v0-0-1" title="Permalink to this heading"></a></h2>
+<section id="id10">
+<h3><a class="toc-backref" href="#id22">Minor Changes</a><a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Import artemis create configuration tasks <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/1">#1</a></p></li>
 </ul>

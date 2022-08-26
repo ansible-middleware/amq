@@ -69,7 +69,7 @@
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/keycloak/">Keycloak / Red Hat Single Sign-On</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws-ansible-playbook/">Tomcat / Red Hat JWS</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
@@ -102,7 +102,7 @@
              
   <section id="amq-broker">
 <h1>amq_broker<a class="headerlink" href="#amq-broker" title="Permalink to this heading"></a></h1>
-<p>Installs and configures <a class="reference external" href="https://activemq.apache.org/components/artemis/">Apache ActiveMQ Artemis</a> or <a class="reference external" href="https://www.redhat.com/en/technologies/jboss-middleware/amq">Red Hat AMQ Broker</a> services.</p>
+<p>Installs and configures <a class="reference external" href="https://activemq.apache.org/components/artemis/">Apache ActiveMQ Artemis</a> services.</p>
 <section id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
 <p>The roles depends on the <code class="docutils literal notranslate"><span class="pre">redhat_csp_download</span></code> role of <a class="reference external" href="https://github.com/ansible-middleware/redhat-csp-download">middleware_automation.redhat_csp_download</a> collection.
@@ -122,12 +122,17 @@ To install, from the collection root directory, run:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ</span> <span class="pre">7.9</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ</span> <span class="pre">7.10</span></code></p></td>
+<td class="text-left"><p>2021.Q4</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.20.0</span></code></p></td>
+<td class="text-left"><p><a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_amq_broker/7.10/html/release_notes_for_red_hat_amq_broker_7.10/index">Release Notes</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ</span> <span class="pre">7.9</span></code></p></td>
 <td class="text-left"><p>2021.Q3</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.18.0</span></code></p></td>
 <td class="text-left"><p><a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_amq/2021.q3/html-single/release_notes_for_red_hat_amq_broker_7.9/index">Release Notes</a></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ</span> <span class="pre">7.8</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ</span> <span class="pre">7.8</span></code></p></td>
 <td class="text-left"><p>2020.Q4</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.16.0</span></code></p></td>
 <td class="text-left"><p><a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_amq/2020.q4/html-single/release_notes_for_red_hat_amq_broker_7.8/index">Release Notes</a></p></td>
@@ -138,20 +143,6 @@ To install, from the collection root directory, run:</p>
 </section>
 <section id="role-defaults">
 <h2>Role Defaults<a class="headerlink" href="#role-defaults" title="Permalink to this heading"></a></h2>
-<table class="colwidths-auto docutils align-default">
-<thead>
-<tr class="row-odd"><th class="text-left head"><p>Variable</p></th>
-<th class="text-left head"><p>Description</p></th>
-<th class="text-left head"><p>Default</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_db_enabled</span></code></p></td>
-<td class="text-left"><p>Whether to enable JDBC persistence</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
-</tr>
-</tbody>
-</table>
 <ul class="simple">
 <li><p>Install options</p></li>
 </ul>
@@ -163,43 +154,27 @@ To install, from the collection root directory, run:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_activemq_version</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_version</span></code></p></td>
 <td class="text-left"><p>Apache Artemis version</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.18.0</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_activemq_archive</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_archive</span></code></p></td>
 <td class="text-left"><p>Apache Artemis install archive filename</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">apache-artemis-{{</span> <span class="pre">amq_broker_activemq_version</span> <span class="pre">}}-bin.zip</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">apache-artemis-{{</span> <span class="pre">activemq_version</span> <span class="pre">}}-bin.zip</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_activemq_download_url</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_download_url</span></code></p></td>
 <td class="text-left"><p>Apache Artemis download URL</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://archive.apache.org/dist/activemq/activemq-artemis/{{</span> <span class="pre">amq_broker_activemq_version</span> <span class="pre">}}/{{</span> <span class="pre">amq_broker_activemq_archive</span> <span class="pre">}}</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://archive.apache.org/dist/activemq/activemq-artemis/{{</span> <span class="pre">activemq_version</span> <span class="pre">}}/{{</span> <span class="pre">activemq_archive</span> <span class="pre">}}</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_activemq_installdir</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_installdir</span></code></p></td>
 <td class="text-left"><p>Apache Artemis Installation path</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_broker_dest</span> <span class="pre">}}/apache-artemis-{{</span> <span class="pre">amq_broker_activemq_version</span> <span class="pre">}}</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/apache-artemis-{{</span> <span class="pre">activemq_version</span> <span class="pre">}}</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_enable</span></code></p></td>
-<td class="text-left"><p>Enable installation of Red Hat AMQ Broker</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">True</span> <span class="pre">if</span> <span class="pre">rhn_username</span> <span class="pre">is</span> <span class="pre">defined</span> <span class="pre">and</span> <span class="pre">rhn_password</span> <span class="pre">is</span> <span class="pre">defined</span> <span class="pre">else</span> <span class="pre">False</span> <span class="pre">}}</span></code></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_version</span></code></p></td>
-<td class="text-left"><p>Red Hat AMQ Broker version</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">7.9.4</span></code></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_archive</span></code></p></td>
-<td class="text-left"><p>Red Hat AMQ Broker install archive filename</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker-{{</span> <span class="pre">amq_broker_version</span> <span class="pre">}}-bin.zip</span></code></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_installdir</span></code></p></td>
-<td class="text-left"><p>Red Hat AMQ Broker installation path</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_broker_dest</span> <span class="pre">}}/amq-broker-{{</span> <span class="pre">amq_broker_version</span> <span class="pre">}}</span></code></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_dest</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_dest</span></code></p></td>
 <td class="text-left"><p>Root installation directory</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt/amq</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_offline_install</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_offline_install</span></code></p></td>
 <td class="text-left"><p>Perform an offline installation</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
@@ -216,113 +191,105 @@ To install, from the collection root directory, run:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_config_dir</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_config_dir</span></code></p></td>
 <td class="text-left"><p>Broker instance configuration directory</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">conf</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_config_xml</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_config_xml</span></code></p></td>
 <td class="text-left"><p>Broker instance configuration file</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker.xml</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_config_override_template</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_config_override_template</span></code></p></td>
 <td class="text-left"><p>TODO document argument</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">TODO</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_service_user</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_user</span></code></p></td>
 <td class="text-left"><p>POSIX user running the service</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_service_group</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_group</span></code></p></td>
 <td class="text-left"><p>POSIX group running the service</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_instance_name</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_name</span></code></p></td>
 <td class="text-left"><p>Name of broker instance to deploy</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_instance_username</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_username</span></code></p></td>
 <td class="text-left"><p>Username for accessing the broker instance</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_instance_password</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_password</span></code></p></td>
 <td class="text-left"><p>Password for accessing the broker instance</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_instance_anonymous</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_anonymous</span></code></p></td>
 <td class="text-left"><p>Whether to allow anonymous logins to the instance</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_service_pidfile</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_pidfile</span></code></p></td>
 <td class="text-left"><p>PID file for service</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/artemis.pid</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_configure_firewalld</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_configure_firewalld</span></code></p></td>
 <td class="text-left"><p>Whether to install and configure firewalld</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_bind_address</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_bind_address</span></code></p></td>
 <td class="text-left"><p>Service bind address</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_host</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_host</span></code></p></td>
 <td class="text-left"><p>Service hostname</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">localhost</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_http_port</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_http_port</span></code></p></td>
 <td class="text-left"><p>Service http port serving console and REST api</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">8161</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_jolokia_url</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jolokia_url</span></code></p></td>
 <td class="text-left"><p>URL for jolokia REST api</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">http://{{</span> <span class="pre">amq_broker_host</span> <span class="pre">}}:{{</span> <span class="pre">amq_broker_http_port</span> <span class="pre">}}/console/jolokia</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">http://{{</span> <span class="pre">activemq_host</span> <span class="pre">}}:{{</span> <span class="pre">activemq_http_port</span> <span class="pre">}}/console/jolokia</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_console_url</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_console_url</span></code></p></td>
 <td class="text-left"><p>URL for console service</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">http://{{</span> <span class="pre">amq_broker_host</span> <span class="pre">}}:{{</span> <span class="pre">amq_broker_http_port</span> <span class="pre">}}/console/</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">http://{{</span> <span class="pre">activemq_host</span> <span class="pre">}}:{{</span> <span class="pre">activemq_http_port</span> <span class="pre">}}/console/</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_jvm_package</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jvm_package</span></code></p></td>
 <td class="text-left"><p>RPM package to install for the service</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">java-11-openjdk-headless</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_java_opts</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_java_opts</span></code></p></td>
 <td class="text-left"><p>Additional JVM options for the service</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-Xms1024m</span> <span class="pre">-Xmx2048m</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_port</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_port</span></code></p></td>
 <td class="text-left"><p>Main port for the broker instance</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">61616</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_port_hornetq</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_port_hornetq</span></code></p></td>
 <td class="text-left"><p>hornetq port for the broker instance</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">5445</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_port_amqp</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_port_amqp</span></code></p></td>
 <td class="text-left"><p>AMQP port for the broker instance</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">5672</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_port_mqtt</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_port_mqtt</span></code></p></td>
 <td class="text-left"><p>MQTT port for the broker instance</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1883</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_port_stomp</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_port_stomp</span></code></p></td>
 <td class="text-left"><p>STOMP port for the broker instance</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">61613</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_ports_offset_enabled</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ports_offset_enabled</span></code></p></td>
 <td class="text-left"><p>Whether to enable port offset</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_ports_offset</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ports_offset</span></code></p></td>
 <td class="text-left"><p>Port offset for all default ports</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_rhn_baseurl</span></code></p></td>
-<td class="text-left"><p>Base RHN download URL for Red Hat AMQ Broker</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=</span></code></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_rhn_id</span></code></p></td>
-<td class="text-left"><p>RHN Product ID for Red Hat AMQ Broker</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_broker_rhn_ids[amq_broker_version].id</span> <span class="pre">}}</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -337,35 +304,35 @@ To install, from the collection root directory, run:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_ha_enabled</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ha_enabled</span></code></p></td>
 <td class="text-left"><p>Whether to enable clustering</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_cluster_user</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_user</span></code></p></td>
 <td class="text-left"><p>Cluster username</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-cluster-user</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_cluster_pass</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_pass</span></code></p></td>
 <td class="text-left"><p>Cluster user password</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-cluster-pass</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_cluster_maxhops</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_maxhops</span></code></p></td>
 <td class="text-left"><p>Cluster max hops</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_cluster_lb_policy</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_lb_policy</span></code></p></td>
 <td class="text-left"><p>Policy for cluster load balancing</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ON_DEMAND</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_replicate</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_replicate</span></code></p></td>
 <td class="text-left"><p>Enables replication</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_replicated</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_replicated</span></code></p></td>
 <td class="text-left"><p>Designate instance as replicated node</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_cluster_discovery</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_discovery</span></code></p></td>
 <td class="text-left"><p>Cluster discovery: [<code class="docutils literal notranslate"><span class="pre">jgroups</span></code> (shared file ping), <code class="docutils literal notranslate"><span class="pre">multicast</span></code> (UDP), <code class="docutils literal notranslate"><span class="pre">static</span></code> (node list)]</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">static</span></code></p></td>
 </tr>
@@ -382,21 +349,21 @@ To install, from the collection root directory, run:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_enabled</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_enabled</span></code></p></td>
 <td class="text-left"><p>Whether to enable TLS</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_keystore_dest</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_keystore_dest</span></code></p></td>
 <td class="text-left"><p>Path for installation of truststore</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_broker_dest</span> <span class="pre">}}/{{</span> <span class="pre">amq_broker_instance_name</span> <span class="pre">}}/etc/identity.ks</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/{{</span> <span class="pre">activemq_instance_name</span> <span class="pre">}}/etc/identity.ks</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_mutual_authentication</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_mutual_authentication</span></code></p></td>
 <td class="text-left"><p>Whether to enable TLS mutual auth, requires TLS enabled</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_truststore_dest</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_truststore_dest</span></code></p></td>
 <td class="text-left"><p>Path for installation of truststore</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_broker_dest</span> <span class="pre">}}/{{</span> <span class="pre">amq_broker_instance_name</span> <span class="pre">}}/etc/trust.ks</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/{{</span> <span class="pre">activemq_instance_name</span> <span class="pre">}}/etc/trust.ks</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -411,47 +378,47 @@ To install, from the collection root directory, run:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_enable_audit</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_enable_audit</span></code></p></td>
 <td class="text-left"><p>Whether to enable audit file logging</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_logger_level</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_level</span></code></p></td>
 <td class="text-left"><p>Root logging level</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_logger_core_server_level</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_core_server_level</span></code></p></td>
 <td class="text-left"><p>Logging level for org.apache.activemq.artemis.core.server</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_logger_journal_level</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_journal_level</span></code></p></td>
 <td class="text-left"><p>Logging level for org.apache.activemq.artemis.journal</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_logger_utils_level</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_utils_level</span></code></p></td>
 <td class="text-left"><p>Logging level for org.apache.activemq.artemis.utils</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_logger_utils_critical_level</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_utils_critical_level</span></code></p></td>
 <td class="text-left"><p>Logging level for org.apache.activemq.artemis.utils.critical</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_logger_jms_level</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_jms_level</span></code></p></td>
 <td class="text-left"><p>Logging level for org.apache.activemq.artemis.jms</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_logger_integration_bootstrap_level</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_integration_bootstrap_level</span></code></p></td>
 <td class="text-left"><p>Logging level for org.apache.activemq.artemis.integration.bootstrap</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_logger_jetty_level</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_jetty_level</span></code></p></td>
 <td class="text-left"><p>Logging level for org.eclipse.jetty</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">WARN</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_logger_curator_level</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_curator_level</span></code></p></td>
 <td class="text-left"><p>Logging level for org.apache.curator</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">WARN</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_logger_zookeeper_level</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_zookeeper_level</span></code></p></td>
 <td class="text-left"><p>Logging level for org.apache.zookeeper</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ERROR</span></code></p></td>
 </tr>
@@ -468,56 +435,68 @@ To install, from the collection root directory, run:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_nio_enabled</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_nio_enabled</span></code></p></td>
 <td class="text-left"><p>Enable Native IO using libaio</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_shared_storage</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_shared_storage</span></code></p></td>
 <td class="text-left"><p>Use shared filesystem directory for storage</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_shared_storage_path</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_shared_storage_path</span></code></p></td>
 <td class="text-left"><p>Path of shared directory relative to activemq home directory</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/shared</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_destination_autocreate</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_destination_autocreate</span></code></p></td>
 <td class="text-left"><p>Disable automatic creation of destination</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_queues</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_queues</span></code></p></td>
 <td class="text-left"><p>Queue names comma separated</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">queue.in,queue.out</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_amqp_protocol</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_amqp_protocol</span></code></p></td>
 <td class="text-left"><p>Whether to disable AMQP protocol</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_hornetq_protocol</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_hornetq_protocol</span></code></p></td>
 <td class="text-left"><p>Whether to disable HORNETQ protocol</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_mqtt_protocol</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_mqtt_protocol</span></code></p></td>
 <td class="text-left"><p>Whether to disable MQTT protocol</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_disable_stomp_protocol</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_stomp_protocol</span></code></p></td>
 <td class="text-left"><p>Whether to disable STOMP protocol</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_jmx_exporter_port</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jmx_exporter_port</span></code></p></td>
 <td class="text-left"><p>Port for prometheus JMX exporter to listen</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">18080</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_jmx_exporter_config_path</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jmx_exporter_config_path</span></code></p></td>
 <td class="text-left"><p>JMX exporter configuration path</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_broker_dest</span> <span class="pre">}}/{{</span> <span class="pre">amq_broker_instance_name</span> <span class="pre">}}/etc/jmx_exporter.yml</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/{{</span> <span class="pre">activemq_instance_name</span> <span class="pre">}}/etc/jmx_exporter.yml</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_jmx_exporter_enabled</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jmx_exporter_enabled</span></code></p></td>
 <td class="text-left"><p>Enable install and configuration of prometheus-jmx-exporter</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_prometheus_enabled</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_prometheus_enabled</span></code></p></td>
 <td class="text-left"><p>Enable install and configuration of prometheus metrics plugin</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_name</span></code></p></td>
+<td class="text-left"><p>Human readable service name</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Apache</span> <span class="pre">ActiveMQ</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_name</span></code></p></td>
+<td class="text-left"><p>systemd service unit name</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_enabled</span></code></p></td>
+<td class="text-left"><p>Whether to enable JDBC persistence</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
 </tbody>
@@ -533,11 +512,11 @@ To install, from the collection root directory, run:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_users</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_users</span></code></p></td>
 <td class="text-left"><p>List of users the create with role; user is not created if password empty. List of (user,password,role) dicts</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_broker_instance_username</span> <span class="pre">}}/{{</span> <span class="pre">amq_broker_instance_password</span> <span class="pre">}}/amq</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_instance_username</span> <span class="pre">}}/{{</span> <span class="pre">activemq_instance_password</span> <span class="pre">}}/amq</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_roles</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_roles</span></code></p></td>
 <td class="text-left"><p>List of roles to create. List of (role,permissions) dicts where permissions is a list of amq broker permissions</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq</span></code></p></td>
 </tr>
@@ -554,25 +533,25 @@ To install, from the collection root directory, run:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_java_home</span></code></p></td>
-<td class="text-left"><p>JAVA_HOME of installed JRE, leave empty for using specified amq_broker_jvm_package path</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_java_home</span></code></p></td>
+<td class="text-left"><p>JAVA_HOME of installed JRE, leave empty for using specified activemq_jvm_package path</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">no</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_keystore_path</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_keystore_path</span></code></p></td>
 <td class="text-left"><p>Keystore path for TLS connections</p></td>
-<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">amq_broker_tls_enabled</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">activemq_tls_enabled</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_keystore_password</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_keystore_password</span></code></p></td>
 <td class="text-left"><p>Keystore password for TLS connections</p></td>
-<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">amq_broker_tls_enabled</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">activemq_tls_enabled</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_truststore</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_truststore</span></code></p></td>
 <td class="text-left"><p>Truststore to use for TLS mutual authentication</p></td>
-<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">amq_broker_tls_mutual_authentication</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">activemq_tls_mutual_authentication</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_broker_tls_truststore_password</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_truststore_password</span></code></p></td>
 <td class="text-left"><p>Password for truststore</p></td>
-<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">amq_broker_tls_mutual_authentication</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">activemq_tls_mutual_authentication</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
 </tbody>
 </table>

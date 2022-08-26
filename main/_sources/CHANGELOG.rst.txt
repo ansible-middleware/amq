@@ -5,6 +5,14 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v1.1.0-devel
+============
+
+Major Changes
+-------------
+
+- Rename variables prefix to ``activemq_`` `#11 <https://github.com/ansible-middleware/amq/pull/11>`_
+
 v1.0.0
 ======
 
