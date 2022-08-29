@@ -8,7 +8,7 @@
     activemq_users:
     - user: amq
       password: amqbrokerpass
-      role: admin
+      roles: [ amq ]
   collections:
     - middleware_automation.redhat_csp_download
   tasks:
