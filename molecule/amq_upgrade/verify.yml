@@ -4,7 +4,7 @@
   tasks:
     - name: Check local download archive path
       ansible.builtin.stat:
-        path: "{{ activemq_local_archive_repository }}"
+        path: "{{ lookup('env', 'PWD') }}"
       register: local_path
       delegate_to: localhost    
     - name: Check archive for 7.9.4
