@@ -351,12 +351,16 @@ argument_specs:
                 default: "Administrative role 'amq'"
                 type: "list"
             activemq_name:
-                description: 'TODO'
+                description: 'Human friendly name for service'
                 default: "Apache ActiveMQ"
                 type: "str"
             activemq_service_name:
-                description: "TODO"
+                description: "Systemd unit name"
                 default: "activemq"
+                type: "str"
+            activemq_local_archive_repository:
+                description: "Path local to controller for offline/download of install archives"
+                default: "{{ lookup('env', 'PWD') }}"
                 type: "str"
     downstream:
         options:
@@ -395,10 +399,10 @@ argument_specs:
                 description: "RHN Product ID for Red Hat AMQ Broker"
                 type: "str"
             amq_broker_name:
-                description: 'TODO'
+                description: "Human friendly name for service"
                 default: "Red Hat AMQ Broker"
                 type: "str"
-            aamq_broker_service_name:
-                description: "TODO"
+            amq_broker_service_name:
+                description: "Systemd unit name"
                 default: "amq_broker"
                 type: "str"
