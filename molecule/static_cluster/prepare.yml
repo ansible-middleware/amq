@@ -8,3 +8,16 @@
           - sudo
           - iproute
         state: present
+    - name: "Create {{ activemq.service_name }} service user"
+      become: yes
+      ansible.builtin.user:
+        name: amq-broker
+        home: /opt/amq/
+        system: yes
+        create_home: no
+    - name: Set ownership on nfs mounted parent
+      file:
+        path: /opt/amq/amq-broker/
+        owner: amq-broker
+        group: amq-broker
+        mode: 0755

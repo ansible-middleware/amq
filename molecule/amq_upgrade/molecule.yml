@@ -47,7 +47,7 @@ scenario:
     - create
     - prepare
     - converge
-    # - idempotence since it performs an upgrade, it cannot be idempotent
+    - idempotence
     - side_effect
     - verify
     - cleanup
