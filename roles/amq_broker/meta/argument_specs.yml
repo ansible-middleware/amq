@@ -343,7 +343,7 @@ argument_specs:
                 default: False
                 type: "bool"
             activemq_users:
-                description: "List of users the create with role; user is not created if password empty. List of (user,password,role) dicts"
+                description: "List of users to create with roles; user is not created if password empty. List of (user,password,roles) dicts"
                 default: "{{ activemq_instance_username }}/{{ activemq_instance_password }} with default admin 'amq' role"
                 type: "list"
             activemq_roles:

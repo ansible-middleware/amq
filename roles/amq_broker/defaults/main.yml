@@ -64,17 +64,19 @@ activemq_tls_truststore_password:
 activemq_tls_truststore_dest: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/trust.ks"
 
 # Users
-# list of users the create, user is not created if password empty; list of (user,password,role) dicts
+# list of users the create, user is not created if password empty; list of (user,password,roles) dicts
+# .roles is a list of activemq_roles.name
 activemq_users:
   - user: "{{ activemq_instance_username }}"
     password: "{{ activemq_instance_password }}"
-    role: amq
+    roles: [ amq ]
 
 # Roles
 # .permissions is subset of:
 # [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
 activemq_roles:
   - name: amq
+    match: '#'
     permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
 
 # NIO option

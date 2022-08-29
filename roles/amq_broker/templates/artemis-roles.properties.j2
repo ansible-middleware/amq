@@ -16,6 +16,6 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-{% for user in activemq_masked_users %}
-{{ user.user }} = {{ user.role }}
+{% for role in activemq_roles %}
+{{ role.name }}={{ activemq_users | selectattr('roles','issuperset',[ role.name ]) | list | map(attribute='user') | list | join(',') }}
 {% endfor %}
