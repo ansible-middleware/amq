@@ -13,6 +13,11 @@ Major Changes
 
 - Rename variables prefix to ``activemq_`` `#11 <https://github.com/ansible-middleware/amq/pull/11>`_
 
+Minor Changes
+-------------
+
+- Variable to config controller download/offline directory `#18 <https://github.com/ansible-middleware/amq/pull/18>`_
+
 Bugfixes
 --------
 
