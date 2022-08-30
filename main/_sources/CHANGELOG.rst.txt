@@ -23,6 +23,7 @@ Bugfixes
 --------
 
 - Add become_user to artemis commands `#17 <https://github.com/ansible-middleware/amq/pull/17>`_
+- Update java_args to be same as activemq defaults `#20 <https://github.com/ansible-middleware/amq/pull/20>`_
 
 v1.0.0
 ======
