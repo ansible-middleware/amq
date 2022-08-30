@@ -36,6 +36,7 @@ Role Defaults
 |`activemq_installdir`| Apache Artemis Installation path | `{{ activemq_dest }}/apache-artemis-{{ activemq_version }}` |
 |`activemq_dest`| Root installation directory | `/opt/amq` |
 |`activemq_offline_install`| Perform an offline installation | `False` |
+|`activemq_local_archive_repository`| Path local to controller for offline/download of install archives | `{{ lookup('env', 'PWD') }}` |
 
 
 * Common configuration

@@ -116,3 +116,6 @@ activemq_jmx_exporter_port: 18080
 activemq_jmx_exporter_config_path: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/jmx_exporter.yml"
 activemq_jmx_exporter_enabled: False
 activemq_prometheus_enabled: False
+
+### Contoller defaults
+activemq_local_archive_repository: "{{ lookup('env', 'PWD') }}"

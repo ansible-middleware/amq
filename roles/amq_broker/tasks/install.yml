@@ -56,7 +56,7 @@
 ## download to controller
 - name: Check local download archive path
   ansible.builtin.stat:
-    path: "{{ lookup('env', 'PWD') }}"
+    path: "{{ activemq_local_archive_repository }}"
   register: local_path
   delegate_to: localhost
 
