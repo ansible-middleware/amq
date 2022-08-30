@@ -12,7 +12,7 @@
           - ansible_facts.services["amq-broker.service"]["status"] == "enabled"
 
     - name: Read content of logs
-      slurp:
+      ansible.builtin.slurp:
         src: /var/log/activemq/amq-broker/artemis.log
       register: slurped_log
 
@@ -21,3 +21,16 @@
         that:
           - "'Server is now live' in slurped_log.content|b64decode"
         quiet: true
+        fail_msg: "Service failed to start correctly"
+
+    - name: Check ownership
+      ansible.builtin.stat:
+        path: /opt/amq/amq-broker/bin/
+      register: broker_bin
+
+    - name: Check ownership
+      assert:
+        that:
+          - "broker_bin.stat.pw_name == 'amq-broker'"
+        quiet: true
+        fail_msg: "Wrong ownership of instance directories"
