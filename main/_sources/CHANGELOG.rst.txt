@@ -13,6 +13,11 @@ Major Changes
 
 - Rename variables prefix to ``activemq_`` `#11 <https://github.com/ansible-middleware/amq/pull/11>`_
 
+Bugfixes
+--------
+
+- Add become_user to artemis commands `#17 <https://github.com/ansible-middleware/amq/pull/17>`_
+
 v1.0.0
 ======
 
