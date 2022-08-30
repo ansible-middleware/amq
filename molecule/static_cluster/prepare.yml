@@ -2,12 +2,11 @@
 - name: Prepare
   hosts: all
   tasks:
-    - name: Install requirements for tests
-      yum:
-        name:
-          - sudo
-          - iproute
-        state: present
+    - name: "Run preparation common to all scenario"
+      ansible.builtin.include_tasks: ../prepare.yml
+      vars:
+        assets:
+          - "{{ assets_server }}/amq/broker/7.9.4/amq-broker-7.9.4-bin.zip"
     - name: "Create {{ activemq.service_name }} service user"
       become: yes
       ansible.builtin.user:

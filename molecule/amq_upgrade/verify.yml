@@ -2,18 +2,8 @@
 - name: Verify
   hosts: all
   tasks:
-    - name: Check local download archive path
-      ansible.builtin.stat:
-        path: "{{ lookup('env', 'PWD') }}"
-      register: local_path
-      delegate_to: localhost    
-    - name: Check archive for 7.9.4
-      ansible.builtin.stat:
-        path: "{{ local_path.stat.path }}/amq-broker-7.9.4-bin.zip"
-      register: local_archive_path
-      delegate_to: localhost    
     - name: Verify only if zipfiles present
-      when: local_archive_path.stat.exists
+      when: "amq-broker-7.10.0-bin.zip is exists"
       block:
         - name: Populate service facts
           ansible.builtin.service_facts:

@@ -12,19 +12,9 @@
   collections:
     - middleware_automation.redhat_csp_download
   tasks:
-    - name: Check local download archive path
-      ansible.builtin.stat:
-        path: "{{ lookup('env', 'PWD') }}"
-      register: local_path
-      delegate_to: localhost    
-    - name: Check archive for 7.10.0
-      ansible.builtin.stat:
-        path: "{{ local_path.stat.path }}/amq-broker-7.10.0-bin.zip"
-      register: local_archive_path
-      delegate_to: localhost
     - name: Include AMQ role for 7.10 upgrade
       ansible.builtin.include_role:
         name: amq_broker
       vars:
         activemq_version: 7.10.0
-      when: local_archive_path.stat.exists
+      when: "amq-broker-7.10.0-bin.zip is exists"

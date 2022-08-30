@@ -2,23 +2,13 @@
 - name: Prepare
   hosts: all
   tasks:
-    - name: Install requirements for tests
-      yum:
-        name:
-          - sudo
-          - iproute
-        state: present
-    - name: Check local download archive path
-      ansible.builtin.stat:
-        path: "{{ lookup('env', 'PWD') }}"
-      register: local_path
-      delegate_to: localhost
-    - name: Check archive for 7.9.4
-      ansible.builtin.stat:
-        path: "{{ local_path.stat.path }}/amq-broker-7.9.4-bin.zip"
-      register: local_archive_path
-      delegate_to: localhost
+    - name: "Run preparation common to all scenario"
+      ansible.builtin.include_tasks: ../prepare.yml
+      vars:
+        assets:
+          - "{{ assets_server }}/amq/broker/7.9.4/amq-broker-7.9.4-bin.zip"
+          - "{{ assets_server }}/amq/broker/7.10.0/amq-broker-7.10.0-bin.zip"
     - name: Include AMQ role for 7.9
       ansible.builtin.include_role:
         name: amq_broker
-      when: local_archive_path.stat.exists
+      when: "amq-broker-7.9.4-bin.zip is exists"
