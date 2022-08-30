@@ -17,4 +17,4 @@
         name: amq_broker
       vars:
         activemq_version: 7.10.0
-      when: "amq-broker-7.10.0-bin.zip is exists"
+      when: "'amq-broker-7.10.0-bin.zip' is exists"

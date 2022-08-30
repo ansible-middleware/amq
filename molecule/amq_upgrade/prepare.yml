@@ -11,4 +11,4 @@
     - name: Include AMQ role for 7.9
       ansible.builtin.include_role:
         name: amq_broker
-      when: "amq-broker-7.9.4-bin.zip is exists"
+      when: "'amq-broker-7.9.4-bin.zip' is exists"

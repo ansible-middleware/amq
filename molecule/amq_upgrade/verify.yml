@@ -3,7 +3,7 @@
   hosts: all
   tasks:
     - name: Verify only if zipfiles present
-      when: "amq-broker-7.10.0-bin.zip is exists"
+      when: "'amq-broker-7.10.0-bin.zip' is exists"
       block:
         - name: Populate service facts
           ansible.builtin.service_facts:
