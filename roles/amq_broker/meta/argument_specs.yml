@@ -116,7 +116,7 @@ argument_specs:
                 type: "str"
             activemq_java_opts:
                 # line 37 of defaults/main.yml
-                default: "-Xms1024m -Xmx2048m"
+                default: "-Xms512M -Xmx2G -XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication -Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal -Djolokia.policyLocation=${ARTEMIS_INSTANCE_ETC_URI}jolokia-access.xml "
                 description: "Additional JVM options for the service"
                 type: "str"
             activemq_port:

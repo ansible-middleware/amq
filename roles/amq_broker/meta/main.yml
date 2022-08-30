@@ -24,6 +24,6 @@ galaxy_info:
     - redhat
     - rhel
     - server
-    - infrastructure
+    - messaging
     - messagebus
     - infrastructure
