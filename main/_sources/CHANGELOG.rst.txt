@@ -11,6 +11,7 @@ v1.1.0-devel
 Major Changes
 -------------
 
+- Allow to list roles for users, specify security setting match address `#19 <https://github.com/ansible-middleware/amq/pull/19>`_
 - Rename variables prefix to ``activemq_`` `#11 <https://github.com/ansible-middleware/amq/pull/11>`_
 
 Minor Changes
