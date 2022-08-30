@@ -22,15 +22,18 @@
     group: "{{ activemq_service_group }}"
     mode: 0640
 
+- name: Create security settings
+  ansible.builtin.set_fact:
+    security_settings: "{{ security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2') ] }}"
+  loop: "{{ activemq_roles }}"
+
 - name: Create messaging roles permissions
   xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:security-settings
     input_type: xml
-    add_children: "{{ lookup('template', 'security_settings.broker.xml.j2') }}"
+    set_children: "{{ security_settings }}"
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
     pretty_print: yes
-  changed_when: False
-  loop: "{{ activemq_roles }}"
