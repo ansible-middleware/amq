@@ -8,14 +8,12 @@
 
 - name: Prepare
   hosts: all
-  tasks:
+  pre_tasks:
     - name: "Run preparation common to all scenario"
       ansible.builtin.include_tasks: ../prepare.yml
       vars:
         assets:
           - "{{ assets_server }}/amq/broker/7.9.4/amq-broker-7.9.4-bin.zip"
           - "{{ assets_server }}/amq/broker/7.10.0/amq-broker-7.10.0-bin.zip"
-    - name: Include AMQ role for 7.9
-      ansible.builtin.include_role:
-        name: amq_broker
-      when: "'amq-broker-7.9.4-bin.zip' is exists"
+  roles:
+    - amq_broker

@@ -12,9 +12,8 @@
   collections:
     - middleware_automation.redhat_csp_download
   tasks:
-    - name: Include AMQ role for 7.10 upgrade
+    - name: Include role for broker upgrade
       ansible.builtin.include_role:
         name: amq_broker
       vars:
-        activemq_version: 7.10.0
-      when: "'amq-broker-7.10.0-bin.zip' is exists"
+        activemq_version: "{{ '2.20.0' if amq-broker-7.10.0-bin.zip' is not exists else '7.10.0' }}"
