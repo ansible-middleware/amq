@@ -35,7 +35,7 @@
          oob_thread_pool.queue_max_size="100"
          oob_thread_pool.rejection_policy="discard" />
 
-    <FILE_PING location="{{ amq_broker.home }}/{{ activemq_shared_storage_path }}/file-ping" />
+    <FILE_PING location="{{ activemq_shared_storage_path }}/file-ping" />
     <MERGE3  min_interval="10000"
              max_interval="30000"/>
     <FD_SOCK/>

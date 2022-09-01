@@ -84,7 +84,7 @@ activemq_nio_enabled: False
 
 ## Shared Storage
 activemq_shared_storage: False
-activemq_shared_storage_path: data/shared
+activemq_shared_storage_path: "{{ activemq_dest }}/{{ activemq_instance_name }}/data/shared"
 
 ## Ports
 activemq_ports_offset_enabled: False
