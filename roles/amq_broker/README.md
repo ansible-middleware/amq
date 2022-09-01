@@ -117,7 +117,7 @@ Role Defaults
 |:---------|:------------|:--------|
 |`activemq_nio_enabled`| Enable Native IO using libaio | `False` |
 |`activemq_shared_storage`| Use shared filesystem directory for storage | `False` |
-|`activemq_shared_storage_path`| Path of shared directory relative to activemq home directory | `data/shared` |
+|`activemq_shared_storage_path`| Absolute path of shared directory | `{{ activemq_dest }}/{{ activemq_instance_name }}/data/shared` |
 |`activemq_disable_destination_autocreate`| Disable automatic creation of destination | `True` |
 |`activemq_queues`| Queue names comma separated | `queue.in,queue.out` |
 |`activemq_disable_amqp_protocol`| Whether to disable AMQP protocol | `False` |

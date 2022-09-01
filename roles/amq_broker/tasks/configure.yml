@@ -107,7 +107,7 @@
     activemq_options:
       - "{{ activemq_options | join(' ') }}"
       - "--shared-store"
-      - "--data {{ activemq.instance_home }}/{{ activemq_shared_storage_path }}"
+      - "--data {{ activemq_shared_storage_path }}"
   when: activemq_shared_storage
 
 - name: Set up port offset

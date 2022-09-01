@@ -239,8 +239,8 @@ argument_specs:
                 description: "Use shared filesystem directory for storage"
                 type: "bool"
             activemq_shared_storage_path:
-                default: "data/shared"
-                description: "Path of shared directory relative to activemq home directory"
+                default: "{{ activemq_dest }}/{{ activemq_instance_name }}/data/shared"
+                description: "Absolute path of shared directory"
                 type: "str"
             activemq_ports_offset_enabled:
                 # line 75 of defaults/main.yml
