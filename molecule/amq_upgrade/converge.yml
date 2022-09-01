@@ -3,8 +3,6 @@
   hosts: all
   gather_facts: yes
   vars:
-    activemq_enable: True
-    activemq_offline_install: True
     activemq_users:
     - user: amq
       password: amqbrokerpass
