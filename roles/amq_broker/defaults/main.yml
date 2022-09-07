@@ -84,6 +84,11 @@ activemq_roles:
     match: '#'
     permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
 
+# Jolokia
+activemq_hawtio_role: amq
+activemq_cors_allow_origin: '*://0.0.0.0*'
+activemq_cors_strict_checking: True
+
 # NIO option
 activemq_nio_enabled: False
 

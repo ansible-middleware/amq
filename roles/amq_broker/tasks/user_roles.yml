@@ -43,3 +43,12 @@
       conf: urn:activemq
       core: urn:activemq:core
     pretty_print: yes
+
+- name: "Update hawtio role"
+  ansible.builtin.lineinfile:
+    path: "{{ activemq.instance_home }}/etc/artemis.profile"
+    regexp: '^HAWTIO_ROLE=.*'
+    line: "HAWTIO_ROLE='{{ activemq_hawtio_role }}'"
+  become: yes
+  notify:
+    - restart amq_broker
