@@ -5,3 +5,10 @@ JAVA_ARGS='{{ activemq_java_opts }} -javaagent:/usr/share/java/prometheus-jmx-ex
 JAVA_ARGS='{{ activemq_java_opts }}'
 {% endif %}
 JAVA_HOME={{ activemq_java_home  | default(activemq_rpm_java_home, true) }}
+HAWTIO_ROLE='{{ activemq_hawtio_role }}'
+ARTEMIS_INSTANCE_URI='file:/opt/amq/amq-broker/'
+ARTEMIS_INSTANCE_ETC_URI='file:/opt/amq/amq-broker/etc/'
+ARTEMIS_HOME='/opt/amq/apache-artemis-2.18.0'
+ARTEMIS_INSTANCE='/opt/amq/amq-broker'
+ARTEMIS_DATA_DIR='/opt/amq/amq-broker/data'
+ARTEMIS_ETC_DIR='/opt/amq/amq-broker/etc'

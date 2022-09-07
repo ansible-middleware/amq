@@ -362,6 +362,10 @@ argument_specs:
                 description: "Path local to controller for offline/download of install archives"
                 default: "{{ lookup('env', 'PWD') }}"
                 type: "str"
+            activemq_hawtio_role:
+                description: "Artemis role for hawtio console access"
+                default: "amq"
+                type: "str"
     downstream:
         options:
             amq_broker_version:

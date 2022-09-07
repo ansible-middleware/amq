@@ -139,6 +139,7 @@ Role Defaults
 |:---------|:------------|:--------|
 |`activemq_users`| List of users the create with role; user is not created if password empty. List of (user,password,role) dicts | `{{ activemq_instance_username }}/{{ activemq_instance_password }}/amq` |
 |`activemq_roles`| List of roles to create. List of (role,permissions) dicts where permissions is a list of amq broker permissions | `amq` |
+|`activemq_hawtio_role`| Artemis role for hawtio console access | `amq` |
 
 
 Role Variables
