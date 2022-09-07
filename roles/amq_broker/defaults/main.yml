@@ -28,7 +28,12 @@ activemq_jolokia_url: "http://{{ activemq_host }}:{{ activemq_http_port }}/conso
 activemq_console_url: "http://{{ activemq_host }}:{{ activemq_http_port }}/console/"
 activemq_jvm_package: java-11-openjdk-headless
 activemq_java_home:
-activemq_java_opts: "-Xms512M -Xmx2G -XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication -Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal -Djolokia.policyLocation=${ARTEMIS_INSTANCE_ETC_URI}jolokia-access.xml "
+activemq_java_opts: "{{ [
+   '-Xms512M -Xmx2G',
+   '-XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication',
+   '-Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal',
+   '-Djolokia.policyLocation=' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml'
+ ] | join(' ') }}"
 activemq_port: 61616        # for protocols [CORE,MQTT,AMQP,STOMP,HORNETQ,OPENWIRE]
 activemq_port_hornetq: 5445 # for protocols [HORNETQ,STOMP]
 activemq_port_amqp: 5672    # for protocols [AMQP]
