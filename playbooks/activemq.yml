@@ -5,4 +5,4 @@
    - middleware_automation.redhat_csp_download
    - middleware_automation.amq
   roles:
-   - amq_broker
+   - activemq

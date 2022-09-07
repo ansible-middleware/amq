@@ -12,6 +12,6 @@
   tasks:
     - name: Include role for broker upgrade
       ansible.builtin.include_role:
-        name: amq_broker
+        name: activemq
       vars:
         activemq_version: "{{ '2.20.0' if 'amq-broker-7.10.0-bin.zip' is not exists else '7.10.0' }}"
