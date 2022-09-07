@@ -81,6 +81,28 @@
   ansible.builtin.include_tasks: user_roles.yml
   when: activemq_users | length > 0
 
+- name: "Configure jolokia access"
+  become: yes
+  ansible.builtin.template:
+    src: jolokia-access.xml.j2
+    dest: "{{ activemq.instance_home }}/etc/jolokia-access.xml"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
+    mode: 0644
+  notify:
+    - restart amq_broker
+
+- name: "Configure management.xml"
+  become: yes
+  ansible.builtin.template:
+    src: management.xml.j2
+    dest: "{{ activemq.instance_home }}/etc/management.xml"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
+    mode: 0644
+  notify:
+    - restart amq_broker
+
 - name: "Configure prometheus metrics"
   become: yes
   when: activemq_prometheus_enabled

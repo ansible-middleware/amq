@@ -362,6 +362,18 @@ argument_specs:
                 description: "Path local to controller for offline/download of install archives"
                 default: "{{ lookup('env', 'PWD') }}"
                 type: "str"
+            activemq_hawtio_role:
+                description: "Artemis role for hawtio console access"
+                default: "amq"
+                type: "str"
+            activemq_cors_allow_origin:
+                description: "CORS allow origin setting for jolokia"
+                default: "*://0.0.0.0*"
+                type: "str"
+            activemq_cors_strict_checking:
+                description: "Whether to enforce strict checking for CORS"
+                default: True
+                type: "bool"
     downstream:
         options:
             amq_broker_version:
