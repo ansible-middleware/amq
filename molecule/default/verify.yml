@@ -17,7 +17,7 @@
       register: slurped_log
 
     - name: Check status
-      assert:
+      ansible.builtin.assert:
         that:
           - "'Server is now live' in slurped_log.content|b64decode"
         quiet: true
@@ -29,8 +29,21 @@
       register: broker_bin
 
     - name: Check ownership
-      assert:
+      ansible.builtin.assert:
         that:
           - "broker_bin.stat.pw_name == 'amq-broker'"
         quiet: true
         fail_msg: "Wrong ownership of instance directories"
+
+    - name: Retrieve users and roles from cli
+      ansible.builtin.command: "/opt/amq/amq-broker/bin/artemis user list --user amq --password amqbrokerpass"
+      changed_when: False
+      register: user_roles
+
+    - name: Verify users and roles
+      ansible.builtin.assert:
+        that:
+          - "'\"other\"(producer,consumer)' in user_roles.stdout"
+          - "'\"amq\"(admin)' in user_roles.stdout"
+        quiet: true
+        fail_msg: "Failed to retrieve configured users"
