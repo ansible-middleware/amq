@@ -32,7 +32,7 @@ activemq_java_opts: "{{ [
    '-Xms512M -Xmx2G',
    '-XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication',
    '-Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal',
-   '-Djolokia.policyLocation=' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml'
+   '-Djolokia.policyLocation=file:' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml'
  ] | join(' ') }}"
 activemq_port: 61616        # for protocols [CORE,MQTT,AMQP,STOMP,HORNETQ,OPENWIRE]
 activemq_port_hornetq: 5445 # for protocols [HORNETQ,STOMP]
