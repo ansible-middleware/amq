@@ -1,4 +1,9 @@
 ---
+- name: Retrieve existing users
+  ansible.builtin.slurp:
+    src: "{{ activemq.instance_home }}/etc/artemis-users.properties"
+  register: existing_users
+
 - name: Set masked user passwords
   ansible.builtin.include_tasks: mask_password.yml
   loop: "{{ activemq_users }}"
@@ -12,6 +17,7 @@
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
     mode: 0640
+    backup: True
   no_log: True
 
 - name: Configure roles

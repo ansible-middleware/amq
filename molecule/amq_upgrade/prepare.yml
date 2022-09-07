@@ -1,11 +1,4 @@
 ---
-- name: Sleep to allow the container to become available
-  hosts: localhost
-  tasks:
-    - name: "sleep"
-      ansible.builtin.pause:
-        seconds: 20
-
 - name: Prepare
   hosts: all
   pre_tasks:
