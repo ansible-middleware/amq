@@ -24,6 +24,8 @@ Bugfixes
 --------
 
 - Add become_user to artemis commands `#17 <https://github.com/ansible-middleware/amq/pull/17>`_
+- Correctly set etc path and allow cors config for jolokia `#24 <https://github.com/ansible-middleware/amq/pull/24>`_
+- Implement idempotent user password hashes `#25 <https://github.com/ansible-middleware/amq/pull/25>`_
 - Update java_args to be same as activemq defaults `#20 <https://github.com/ansible-middleware/amq/pull/20>`_
 
 v1.0.0
