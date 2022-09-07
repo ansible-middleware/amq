@@ -47,3 +47,26 @@
           - "'\"amq\"(admin)' in user_roles.stdout"
         quiet: true
         fail_msg: "Failed to retrieve configured users"
+
+    - name: Check console redirect to login page
+      ansible.builtin.uri:
+        url: http://0.0.0.0:8161/console/
+        follow_redirects: none
+        status_code: 302
+        headers:
+          Origin: http://0.0.0.0
+
+    - name: Check jolokia authenticated api call
+      ansible.builtin.uri:
+        url: 'http://0.0.0.0:8161/console/jolokia/read/org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=acceptors,name=!%22artemis!%22/Started'
+        user: amq
+        password: amqbrokerpass
+        force_basic_auth: yes
+        status_code: 200
+        headers:
+          Origin: http://0.0.0.0
+      register: this
+      no_log: True
+      failed_when:
+        - this.value is true
+        - this.status is 200

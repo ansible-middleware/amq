@@ -92,6 +92,17 @@
   notify:
     - restart amq_broker
 
+- name: "Configure management.xml"
+  become: yes
+  ansible.builtin.template:
+    src: management.xml.j2
+    dest: "{{ activemq.instance_home }}/etc/management.xml"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
+    mode: 0644
+  notify:
+    - restart amq_broker
+
 - name: "Configure prometheus metrics"
   become: yes
   when: activemq_prometheus_enabled
