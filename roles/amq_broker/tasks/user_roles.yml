@@ -1,5 +1,5 @@
 ---
-- name: Fetch existing users
+- name: Retrieve existing users
   ansible.builtin.slurp:
     src: "{{ activemq.instance_home }}/etc/artemis-users.properties"
   register: existing_users
