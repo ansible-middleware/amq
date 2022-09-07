@@ -4,15 +4,17 @@ import base64
 import sys
 import hashlib
 
+
 def pbkdf2_hmac(string, hexsalt, iterations=1024):
     key = hashlib.pbkdf2_hmac(
-        hash_name = 'sha1',
-        password = str.encode(string),
-        salt = bytearray.fromhex(hexsalt),
-        iterations = iterations,
-        dklen = 64
+        hash_name='sha1',
+        password=str.encode(string),
+        salt=bytearray.fromhex(hexsalt),
+        iterations=iterations,
+        dklen=64
     )
     return key.hex().upper()
+
 
 class FilterModule(object):
     ''' Ansible core jinja2 filters '''
