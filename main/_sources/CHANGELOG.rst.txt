@@ -13,12 +13,17 @@ Major Changes
 
 - Allow to list roles for users, specify security setting match address `#19 <https://github.com/ansible-middleware/amq/pull/19>`_
 - Make varible activemq_shared_storage_path represent an absolute path `#21 <https://github.com/ansible-middleware/amq/pull/21>`_
-- Rename variables prefix to ``activemq_`` `#11 <https://github.com/ansible-middleware/amq/pull/11>`_
 
 Minor Changes
 -------------
 
 - Variable to config controller download/offline directory `#18 <https://github.com/ansible-middleware/amq/pull/18>`_
+
+Breaking Changes / Porting Guide
+--------------------------------
+
+- Rename role amq_broker to activemq `#26 <https://github.com/ansible-middleware/amq/pull/26>`_
+- Rename variables prefix to ``activemq_`` `#11 <https://github.com/ansible-middleware/amq/pull/11>`_
 
 Bugfixes
 --------

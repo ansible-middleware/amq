@@ -1,4 +1,4 @@
-amq_broker
+activemq
 ==========
 
 Installs and configures [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis/) services.
@@ -166,5 +166,5 @@ Example Playbook
   collections:
     - middleware_automation.amq
   roles:
-    - amq_broker
+    - activemq
 ```
