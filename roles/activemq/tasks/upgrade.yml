@@ -17,6 +17,7 @@
     namespaces:
       xs: http://www.w3.org/2001/XMLSchema
   register: activemq_xsd
+  become: yes
 
 - name: "Ensure bootstrap xsd namespace {{ activemq_xsd.matches[0]['{http://www.w3.org/2001/XMLSchema}schema'].targetNamespace }} is correct for instance {{ activemq.instance_name }}"
   ansible.builtin.lineinfile:

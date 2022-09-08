@@ -3,6 +3,7 @@
   ansible.builtin.slurp:
     src: "{{ activemq.instance_home }}/etc/artemis-users.properties"
   register: existing_users
+  become: yes
 
 - name: Set masked user passwords
   ansible.builtin.include_tasks: mask_password.yml
@@ -17,8 +18,8 @@
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
     mode: 0640
-    backup: True
   no_log: True
+  become: yes
 
 - name: Configure roles
   ansible.builtin.template:
@@ -27,6 +28,7 @@
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
     mode: 0640
+  become: yes
 
 - name: Create security settings
   ansible.builtin.set_fact:
@@ -43,6 +45,7 @@
       conf: urn:activemq
       core: urn:activemq:core
     pretty_print: yes
+  become: yes
 
 - name: "Update hawtio role"
   ansible.builtin.lineinfile:

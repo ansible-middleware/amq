@@ -146,6 +146,7 @@
 - name: Check service status
   ansible.builtin.command: "systemctl status {{ activemq.instance_name }}"
   register: activemq_service_status
+  become: yes
   changed_when: False
   retries: 6
   delay: 5
