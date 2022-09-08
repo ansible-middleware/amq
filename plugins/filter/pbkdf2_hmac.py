@@ -17,7 +17,6 @@ def pbkdf2_hmac(string, hexsalt, iterations=1024):
 
 
 class FilterModule(object):
-    ''' Ansible core jinja2 filters '''
 
     def filters(self):
         return {
