@@ -3,7 +3,7 @@ collections:
   - middleware_automation.redhat_csp_download
 
 galaxy_info:
-  role_name: amq_broker
+  role_name: activemq
   namespace: middleware_automation
   author: Guido Grazioli
   description: Installs and configures activemq services.

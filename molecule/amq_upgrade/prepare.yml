@@ -9,4 +9,4 @@
           - "{{ assets_server }}/amq/broker/7.9.4/amq-broker-7.9.4-bin.zip"
           - "{{ assets_server }}/amq/broker/7.10.0/amq-broker-7.10.0-bin.zip"
   roles:
-    - amq_broker
+    - activemq

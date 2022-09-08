@@ -11,7 +11,7 @@
    - middleware_automation.redhat_csp_download
    - middleware_automation.amq
   roles:
-   - amq_broker
+   - activemq
   pre_tasks:
     - name: Create nfs shared directory
       ansible.builtin.file:
