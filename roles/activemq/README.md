@@ -140,6 +140,8 @@ Role Defaults
 |`activemq_users`| List of users the create with role; user is not created if password empty. List of (user,password,role) dicts | `{{ activemq_instance_username }}/{{ activemq_instance_password }}/amq` |
 |`activemq_roles`| List of roles to create. List of (role,permissions) dicts where permissions is a list of amq broker permissions | `amq` |
 |`activemq_hawtio_role`| Artemis role for hawtio console access | `amq` |
+|`activemq_management_access_default`| Management console access methods for roles activemq_hawtio_role | `[ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]` |
+|`activemq_management_access_domains`| Management console access methods per domain for roles activemq_hawtio_role | Access for `java.lang`, `org.apache.artemis.activemq` |
 |`activemq_cors_allow_origin`| CORS allow origin setting for jolokia | `*://0.0.0.0*` |
 |`activemq_cors_strict_checking`| Whether to enforce strict checking for CORS | `True` |
 

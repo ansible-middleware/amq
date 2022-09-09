@@ -374,6 +374,14 @@ argument_specs:
                 description: "Whether to enforce strict checking for CORS"
                 default: True
                 type: "bool"
+            activemq_management_access_default:
+                description: "management console access methods for roles activemq_hawtio_role"
+                default: "[ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]"
+                type: "list"
+            activemq_management_access_domains:
+                description: "Management console access methods per domain for roles activemq_hawtio_role"
+                default: "Access for java.lang and org.apache.artemis.activemq"
+                type: "list"
     downstream:
         options:
             amq_broker_version:
