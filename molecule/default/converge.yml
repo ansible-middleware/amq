@@ -20,6 +20,27 @@
       - name: producer
         match: topics.#
         permissions: [ send, browse ]
+    activemq_acceptors:
+      - name: artemis
+        bind_address: "{{ activemq_host }}"
+        bind_port: "{{ activemq_port }}"
+        parameters:
+          tcpSendBufferSize: 1048576
+          tcpReceiveBufferSize: 1048576
+          protocols: CORE,MQTT
+          useEpoll: true
+      - name: amqp
+        bind_address: "{{ activemq_host }}"
+        bind_port: "{{ activemq_port_amqp }}"
+        parameters:
+          tcpSendBufferSize: 1048576
+          tcpReceiveBufferSize: 1048576
+          protocols: AMQP
+          useEpoll: true
+          amqpMinLargeMessageSize: 102400
+          amqpCredits: 1000
+          amqpLowCredits: 300
+          amqpDuplicateDetection: true
   collections:
     - middleware_automation.redhat_csp_download
   roles:

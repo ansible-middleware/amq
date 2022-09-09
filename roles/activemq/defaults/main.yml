@@ -142,3 +142,56 @@ activemq_prometheus_enabled: False
 
 ### Contoller defaults
 activemq_local_archive_repository: "{{ lookup('env', 'PWD') }}"
+
+### Acceptors configuration
+activemq_acceptors:
+  - name: artemis
+    bind_address: "{{ activemq_host }}"
+    bind_port: "{{ activemq_port }}"
+    parameters:
+      tcpSendBufferSize: 1048576
+      tcpReceiveBufferSize: 1048576
+      amqpMinLargeMessageSize: 102400
+      protocols: CORE,AMQP,STOMP,HORNETQ,MQTT,OPENWIRE
+      useEpoll: true
+      amqpCredits: 1000
+      amqpLowCredits: 300
+      amqpDuplicateDetection: true
+      supportAdvisory: false
+      suppressInternalManagementObjects: false
+  - name: amqp
+    bind_address: "{{ activemq_host }}"
+    bind_port: "{{ activemq_port_amqp }}"
+    parameters:
+      tcpSendBufferSize: 1048576
+      tcpReceiveBufferSize: 1048576
+      protocols: AMQP
+      useEpoll: true
+      amqpMinLargeMessageSize: 102400
+      amqpCredits: 1000
+      amqpLowCredits: 300
+      amqpDuplicateDetection: true
+  - name: stomp
+    bind_address: "{{ activemq_host }}"
+    bind_port: "{{ activemq_port_stomp }}"
+    parameters:
+      tcpSendBufferSize: 1048576
+      tcpReceiveBufferSize: 1048576
+      protocols: STOMP
+      useEpoll: true
+  - name: hornetq
+    bind_address: "{{ activemq_host }}"
+    bind_port: "{{ activemq_port_hornetq }}"
+    parameters:
+      anycastPrefix: jms.queue.
+      multicastPrefix: jms.topic.
+      protocols: HORNETQ,STOMP
+      useEpoll: true
+  - name: mqtt
+    bind_address: "{{ activemq_host }}"
+    bind_port: "{{ activemq_port_mqtt }}"
+    parameters:
+      tcpSendBufferSize: 1048576
+      tcpReceiveBufferSize: 1048576
+      protocols: MQTT
+      useEpoll: true
