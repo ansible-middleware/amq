@@ -298,6 +298,38 @@ To install, from the collection root directory, run:</p>
 </tbody>
 </table>
 <ul class="simple">
+<li><p>Acceptors</p></li>
+</ul>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-left head"><p>Variable</p></th>
+<th class="text-left head"><p>Description</p></th>
+<th class="text-left head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_acceptors</span></code></p></td>
+<td class="text-left"><p>Acceptors configuration; list of <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">name(str),</span> <span class="pre">bind_address(str),</span> <span class="pre">bind_port(int),</span> <span class="pre">parameters(dict)</span> <span class="pre">}</span></code></p></td>
+<td class="text-left"><p>Generate same configuration as <code class="docutils literal notranslate"><span class="pre">artemis</span> <span class="pre">create</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Sample acceptor:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqp</span><span class="w"></span>
+<span class="w">    </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">activemq_host</span> <span class="cp">}}</span><span class="w"></span>
+<span class="w">    </span><span class="nt">bind_port</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">activemq_port_amqp</span> <span class="cp">}}</span><span class="w"></span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tcpSendBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tcpReceiveBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span><span class="w"></span>
+<span class="w">      </span><span class="nt">protocols</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AMQP</span><span class="w"></span>
+<span class="w">      </span><span class="nt">useEpoll</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">      </span><span class="nt">amqpMinLargeMessageSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">102400</span><span class="w"></span>
+<span class="w">      </span><span class="nt">amqpCredits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span><span class="w"></span>
+<span class="w">      </span><span class="nt">amqpLowCredits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span><span class="w"></span>
+<span class="w">      </span><span class="nt">amqpDuplicateDetection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
 <li><p>Clustering</p></li>
 </ul>
 <table class="colwidths-auto docutils align-default">
