@@ -382,6 +382,10 @@ argument_specs:
                 description: "Management console access methods per domain for roles activemq_hawtio_role"
                 default: "Access for java.lang and org.apache.artemis.activemq"
                 type: "list"
+            activemq_acceptors:
+                description: "Acceptors configuration; list of `{ name, bind_address, bind_port, parameters(dict) }`"
+                default: "Generate same configuration as `artemis create`"
+                type: "list"
     downstream:
         options:
             amq_broker_version:

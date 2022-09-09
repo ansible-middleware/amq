@@ -70,6 +70,30 @@ Role Defaults
 |`activemq_ports_offset`| Port offset for all default ports | `0` |
 
 
+* Acceptors
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`activemq_acceptors`| Acceptors configuration; list of `{ name(str), bind_address(str), bind_port(int), parameters(dict) }` | Generate same configuration as `artemis create` |
+
+Sample acceptor:
+
+```
+  - name: amqp
+    bind_address: {{ activemq_host }}
+    bind_port: {{ activemq_port_amqp }}
+    parameters:
+      tcpSendBufferSize: 1048576
+      tcpReceiveBufferSize: 1048576
+      protocols: AMQP
+      useEpoll: true
+      amqpMinLargeMessageSize: 102400
+      amqpCredits: 1000
+      amqpLowCredits: 300
+      amqpDuplicateDetection: true
+```
+
+
 * Clustering
 
 | Variable | Description | Default |

@@ -81,6 +81,10 @@
   ansible.builtin.include_tasks: user_roles.yml
   when: activemq_users | length > 0
 
+- name: Configure acceptors
+  ansible.builtin.include_tasks: acceptors.yml
+  when: activemq_acceptors | length > 0
+
 - name: "Configure jolokia access"
   become: yes
   ansible.builtin.template:

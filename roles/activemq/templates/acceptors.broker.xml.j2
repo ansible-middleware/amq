@@ -1,0 +1,1 @@
+         <acceptor name="{{ acceptor.name }}">tcp://{{ acceptor.bind_address }}:{{ acceptor.bind_port }}?{{ acceptor.parameters.values() | list | join(';') | replace(': ','=') }}</acceptor>

@@ -1,0 +1,20 @@
+---
+- name: Create security settings
+  ansible.builtin.set_fact:
+    acceptors: "{{ acceptors | default([]) + [ lookup('template', 'acceptors.broker.xml.j2') ] }}"
+  loop: "{{ activemq_acceptors }}"
+  loop_control:
+    loop_var: acceptor
+    label: "{{ acceptor.name }}"
+
+- name: Create messaging roles permissions
+  xml:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
+    xpath: /conf:configuration/core:core/core:acceptors
+    input_type: xml
+    set_children: "{{ acceptors }}"
+    namespaces:
+      conf: urn:activemq
+      core: urn:activemq:core
+    pretty_print: yes
+  become: yes
