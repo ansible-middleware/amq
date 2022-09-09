@@ -72,24 +72,22 @@
     loop_var: domain
     label: "{{ domain.name }}"
 
-- name: Create management access configuration
+- name: Create management default access configuration
   xml:
     path: "{{ activemq.instance_home }}/etc/management.xml"
-    xpath: /management-context/authorisation/default-access
+    xpath: //*[local-name()='default-access']
     input_type: xml
     set_children: "{{ management_access_default }}"
-    pretty_print: yes
   become: yes
   notify:
     - restart amq_broker
 
-- name: Create management access configuration
+- name: Create management access roles configuration
   xml:
     path: "{{ activemq.instance_home }}/etc/management.xml"
-    xpath: /management-context/authorisation/role-access
+    xpath: //*[local-name()='role-access']
     input_type: xml
-    set_children: "{{ management_access_default }}"
-    pretty_print: yes
+    set_children: "{{ management_access_domains }}"
   become: yes
   notify:
     - restart amq_broker
