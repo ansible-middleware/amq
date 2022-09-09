@@ -56,6 +56,13 @@
   notify:
     - restart amq_broker
 
+- name: Ensure management.xml has no comments (lxml bug workaround)
+  ansible.builtin.replace:
+    path: "{{ activemq.instance_home }}/etc/management.xml"
+    regexp: '<!--[\s\S]*?-->'
+    replace: ''
+  become: yes
+
 - name: Create management access default
   ansible.builtin.set_fact:
     management_access_default: "{{ management_access_default | default([]) + [ lookup('template', 'default_access.management.xml.j2') ] }}"
