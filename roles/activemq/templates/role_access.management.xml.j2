@@ -1,0 +1,5 @@
+            <match domain="{{ domain.name }}">
+{% for method in domain.methods %}
+                <access method="{{ method }}" roles="{{ activemq_hawtio_role }}"/>
+{% endfor %}
+            </match>

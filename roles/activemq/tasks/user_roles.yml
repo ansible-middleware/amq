@@ -55,3 +55,41 @@
   become: yes
   notify:
     - restart amq_broker
+
+- name: Create management access default
+  ansible.builtin.set_fact:
+    management_access_default: "{{ management_access_default | default([]) + [ lookup('template', 'default_access.management.xml.j2') ] }}"
+  loop: "{{ activemq_management_access_default }}"
+  loop_control:
+    loop_var: method
+    label: "{{ method }}"
+
+- name: Create management access domains
+  ansible.builtin.set_fact:
+    management_access_domains: "{{ management_access_domains | default([]) + [ lookup('template', 'role_access.management.xml.j2') ] }}"
+  loop: "{{ activemq_management_access_domains }}"
+  loop_control:
+    loop_var: domain
+    label: "{{ domain.name }}"
+
+- name: Create management access configuration
+  xml:
+    path: "{{ activemq.instance_home }}/etc/management.xml"
+    xpath: /management-context/authorisation/default-access
+    input_type: xml
+    set_children: "{{ management_access_default }}"
+    pretty_print: yes
+  become: yes
+  notify:
+    - restart amq_broker
+
+- name: Create management access configuration
+  xml:
+    path: "{{ activemq.instance_home }}/etc/management.xml"
+    xpath: /management-context/authorisation/role-access
+    input_type: xml
+    set_children: "{{ management_access_default }}"
+    pretty_print: yes
+  become: yes
+  notify:
+    - restart amq_broker

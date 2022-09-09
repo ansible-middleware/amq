@@ -84,6 +84,17 @@ activemq_roles:
     match: '#'
     permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
 
+# management console access methods for roles activemq_hawtio_role
+activemq_management_access_default: [ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]
+
+# management console access methods per domain for roles activemq_hawtio_role
+activemq_management_access_domains:
+  - name: org.apache.activemq.artemis
+    methods: [ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]
+  - name: java.lang
+    methods: [ 'list*', 'get*', 'is*', 'set*', '*' ]
+
+
 # Jolokia
 activemq_hawtio_role: amq
 activemq_cors_allow_origin: '*://0.0.0.0*'
