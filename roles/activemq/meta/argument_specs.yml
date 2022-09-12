@@ -213,7 +213,7 @@ argument_specs:
                 default: false
                 description: "Whether to enable TLS mutual auth, requires TLS enabled"
                 type: "bool"
-            activemq_tls_truststore:
+            activemq_tls_truststore_path:
                 # line 64 of defaults/main.yml
                 default: None
                 description: "Truststore to use for TLS mutual authentication"
@@ -384,6 +384,10 @@ argument_specs:
                 type: "list"
             activemq_acceptors:
                 description: "Acceptors configuration; list of `{ name, bind_address, bind_port, parameters(dict) }`"
+                default: "Generate same configuration as `artemis create`"
+                type: "list"
+            activemq_connectors:
+                description: "Connectors configuration; list of `{ name, address, port, parameters(dict) }`"
                 default: "Generate same configuration as `artemis create`"
                 type: "list"
     downstream:

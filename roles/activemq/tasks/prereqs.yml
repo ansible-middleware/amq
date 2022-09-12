@@ -24,11 +24,22 @@
     fail_msg: "Cannot install Red Hat AMQ Broker without RHN credentials. Check rhn_username and rhn_password are defined or use offline installation"
     success_msg: "{{ 'Installing ' + activemq.service_name }}"
 
+- name: Validate TLS config
+  ansible.builtin.assert:
+    that:
+      - activemq_tls_truststore_path is defined
+      - activemq_tls_truststore_password is defined
+      - activemq_tls_keystore_path is defined
+      - activemq_tls_keystore_password is defined
+  when: activemq_tls_enabled
+
 - name: Validate TLS mutual auth config
   ansible.builtin.assert:
     that:
-      - activemq_tls_truststore is defined
+      - activemq_tls_truststore_path is defined
       - activemq_tls_truststore_password is defined
+      - activemq_tls_keystore_path is defined
+      - activemq_tls_keystore_password is defined
       - activemq_tls_enabled
   when: activemq_tls_mutual_authentication
 
