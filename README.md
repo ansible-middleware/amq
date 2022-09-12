@@ -4,42 +4,50 @@
 
 ## About
 
-Collection to install and configure [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis) or [AMQ broker](https://www.redhat.com/en/technologies/jboss-middleware/amq).
+Collection to install and configure [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis) or [Red Hat AMQ broker](https://www.redhat.com/en/technologies/jboss-middleware/amq).
 
 <!--start requires_ansible-->
 ## Ansible version compatibility
 
 This collection has been tested against following Ansible versions: **>=2.9.10**.
-
-## Install
-
-Plugins and modules within a collection may be tested with only specific Ansible versions. A collection may contain metadata that identifies these versions.
 <!--end requires_ansible-->
+
+
 ## Included content
 
-### Installing the collection
+*Roles:*
+- activemq: Perform installation and configuration
 
-Click on the name of a plugin or module to view that content's documentation:
+*Plugins:*
+- filter pbkdf2_hmac: used internally to generate unidirectional activemq users password hashes
 
-To install this Ansible collection simply download the latest tarball and run the following command:
 
-### Collections
+## Installation
 
-    ansible-galaxy collection install /path/to/middleware_automation.amq.tgz
+### From galaxy
 
-- middleware_automation.redhat_csp_download
-  - This collection is required to download resources from RedHat Customer Portal.
-  - Documentation to collection can be found at <https://github.com/ansible-middleware/redhat-csp-download>
+    ansible-galaxy collection install middleware_automation-amq
 
-Alternatively, you can simply build the tarball (and then install it):
 
-## Installation and Usage
-
-    ansible-galaxy collection build
-You can the playbook directly from this folder for demonstration purpose, however, the proper way to install the collection is to build it and install it :
+### Building locally
 
     ansible-galaxy collection build .
     ansible-galaxy collection install middleware_automation-amq-*.tar.gz
+
+
+### Dependencies
+
+*Ansible collections:*
+- [middleware_automation.redhat_csp_download](https://github.com/ansible-middleware/redhat-csp-download)
+- ansible.posix
+
+To install all the dependencies via galaxy:
+
+    ansible-galaxy collection install -r requirements.yml
+
+*Python:*
+- no extra python dependencies are currently required
+
 
 ## Support
 
