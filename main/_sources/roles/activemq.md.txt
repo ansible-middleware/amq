@@ -7,7 +7,7 @@ Installs and configures [Apache ActiveMQ Artemis](https://activemq.apache.org/co
 Dependencies
 ------------
 
-The roles depends on the `redhat_csp_download` role of [middleware_automation.redhat_csp_download](https://github.com/ansible-middleware/redhat-csp-download) collection.
+The role depends on the `redhat_csp_download` role of [middleware_automation.redhat_csp_download](https://github.com/ansible-middleware/redhat-csp-download) collection.
 To install, from the collection root directory, run:
 
     ansible-galaxy collections install -r requirements.yml
@@ -21,6 +21,7 @@ Versions
 | `AMQ 7.10`  | 2021.Q4           | `2.20.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq_broker/7.10/html/release_notes_for_red_hat_amq_broker_7.10/index)|
 | `AMQ 7.9`   | 2021.Q3           | `2.18.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq/2021.q3/html-single/release_notes_for_red_hat_amq_broker_7.9/index)|
 | `AMQ 7.8`   | 2020.Q4           | `2.16.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq/2020.q4/html-single/release_notes_for_red_hat_amq_broker_7.8/index)|
+
 
 <!--start argument_specs-->
 Role Defaults
@@ -137,6 +138,8 @@ Sample connector:
 |`activemq_tls_mutual_authentication`| Whether to enable TLS mutual auth, requires TLS enabled | `False` |
 |`activemq_tls_truststore_dest`| Path for installation of truststore | `{{ activemq_dest }}/{{ activemq_instance_name }}/etc/trust.ks` |
 
+See _Role Variables_ below for additional TLS/SSL settings.
+
 
 * Logging
 
@@ -188,6 +191,28 @@ Sample connector:
 |`activemq_management_access_domains`| Management console access methods per domain for roles activemq_hawtio_role | Access for `java.lang`, `org.apache.artemis.activemq` |
 |`activemq_cors_allow_origin`| CORS allow origin setting for jolokia | `*://0.0.0.0*` |
 |`activemq_cors_strict_checking`| Whether to enforce strict checking for CORS | `True` |
+
+Sample user/role configuration with one admin, a consumer and a producer:
+
+```
+    activemq_hawtio_role: admin
+    activemq_users:
+      - user: amq
+        password: amqbrokerpass
+        roles: [ admin ]
+      - user: other
+        password: amqotherpass
+        roles: [ consumer, producer ]
+    activemq_roles:
+      - name: admin
+        permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
+      - name: consumer
+        match: topics.#
+        permissions: [ consume, browse ]
+      - name: producer
+        match: topics.#
+        permissions: [ send, browse ]
+```
 
 
 Role Variables

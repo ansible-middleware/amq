@@ -105,7 +105,7 @@
 <p>Installs and configures <a class="reference external" href="https://activemq.apache.org/components/artemis/">Apache ActiveMQ Artemis</a> services.</p>
 <section id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
-<p>The roles depends on the <code class="docutils literal notranslate"><span class="pre">redhat_csp_download</span></code> role of <a class="reference external" href="https://github.com/ansible-middleware/redhat-csp-download">middleware_automation.redhat_csp_download</a> collection.
+<p>The role depends on the <code class="docutils literal notranslate"><span class="pre">redhat_csp_download</span></code> role of <a class="reference external" href="https://github.com/ansible-middleware/redhat-csp-download">middleware_automation.redhat_csp_download</a> collection.
 To install, from the collection root directory, run:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collections install -r requirements.yml
 </pre></div>
@@ -424,6 +424,7 @@ To install, from the collection root directory, run:</p>
 </tr>
 </tbody>
 </table>
+<p>See <em>Role Variables</em> below for additional TLS/SSL settings.</p>
 <ul class="simple">
 <li><p>Logging</p></li>
 </ul>
@@ -599,6 +600,26 @@ To install, from the collection root directory, run:</p>
 </tr>
 </tbody>
 </table>
+<p>Sample user/role configuration with one admin, a consumer and a producer:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">activemq_hawtio_role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span><span class="w"></span>
+<span class="w">    </span><span class="nt">activemq_users</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq</span><span class="w"></span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqbrokerpass</span><span class="w"></span>
+<span class="w">        </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">admin</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">other</span><span class="w"></span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqotherpass</span><span class="w"></span>
+<span class="w">        </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">consumer</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">producer</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">activemq_roles</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span><span class="w"></span>
+<span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">createNonDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">deleteNonDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">createDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">deleteDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">createAddress</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">deleteAddress</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">consume</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">send</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">manage</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">consumer</span><span class="w"></span>
+<span class="w">        </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topics.#</span><span class="w"></span>
+<span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">consume</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">producer</span><span class="w"></span>
+<span class="w">        </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topics.#</span><span class="w"></span>
+<span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">send</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+</pre></div>
+</div>
 </section>
 <section id="role-variables">
 <h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this heading"></a></h2>

@@ -44,13 +44,13 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Ansible Collection - AMQ</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#about">About</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ansible-version-compatibility">Ansible version compatibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#included-content">Included content</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#installing-the-collection">Installing the collection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#collections">Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#included-content">Included content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#from-galaxy">From galaxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-locally">Building locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#installation-and-usage">Installation and Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#support">Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
 </ul>
@@ -107,51 +107,56 @@
 <p><a class="reference external" href="https://github.com/ansible-middleware/amq/actions/workflows/ci.yml"><img alt="Build Status" src="https://github.com/ansible-middleware/amq/workflows/CI/badge.svg?branch=main" /></a></p>
 <section id="about">
 <h2>About<a class="headerlink" href="#about" title="Permalink to this heading"></a></h2>
-<p>Collection to install and configure <a class="reference external" href="https://activemq.apache.org/components/artemis">Apache ActiveMQ Artemis</a> or <a class="reference external" href="https://www.redhat.com/en/technologies/jboss-middleware/amq">AMQ broker</a>.</p>
+<p>Collection to install and configure <a class="reference external" href="https://activemq.apache.org/components/artemis">Apache ActiveMQ Artemis</a> or <a class="reference external" href="https://www.redhat.com/en/technologies/jboss-middleware/amq">Red Hat AMQ broker</a>.</p>
 <!--start requires_ansible-->
 </section>
 <section id="ansible-version-compatibility">
 <h2>Ansible version compatibility<a class="headerlink" href="#ansible-version-compatibility" title="Permalink to this heading"></a></h2>
 <p>This collection has been tested against following Ansible versions: <strong>&gt;=2.9.10</strong>.</p>
-</section>
-<section id="install">
-<h2>Install<a class="headerlink" href="#install" title="Permalink to this heading"></a></h2>
-<p>Plugins and modules within a collection may be tested with only specific Ansible versions. A collection may contain metadata that identifies these versions.</p>
 <!--end requires_ansible-->
 </section>
 <section id="included-content">
 <h2>Included content<a class="headerlink" href="#included-content" title="Permalink to this heading"></a></h2>
-<section id="installing-the-collection">
-<h3>Installing the collection<a class="headerlink" href="#installing-the-collection" title="Permalink to this heading"></a></h3>
-<p>Click on the name of a plugin or module to view that content’s documentation:</p>
-<p>To install this Ansible collection simply download the latest tarball and run the following command:</p>
-</section>
-<section id="collections">
-<h3>Collections<a class="headerlink" href="#collections" title="Permalink to this heading"></a></h3>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection install /path/to/middleware_automation.amq.tgz
-</pre></div>
-</div>
+<p><em>Roles:</em></p>
 <ul class="simple">
-<li><p>middleware_automation.redhat_csp_download</p>
-<ul>
-<li><p>This collection is required to download resources from RedHat Customer Portal.</p></li>
-<li><p>Documentation to collection can be found at <a class="reference external" href="https://github.com/ansible-middleware/redhat-csp-download">https://github.com/ansible-middleware/redhat-csp-download</a></p></li>
+<li><p>activemq: Perform installation and configuration</p></li>
 </ul>
-</li>
+<p><em>Plugins:</em></p>
+<ul class="simple">
+<li><p>filter pbkdf2_hmac: used internally to generate unidirectional activemq users password hashes</p></li>
 </ul>
-<p>Alternatively, you can simply build the tarball (and then install it):</p>
 </section>
-</section>
-<section id="installation-and-usage">
-<h2>Installation and Usage<a class="headerlink" href="#installation-and-usage" title="Permalink to this heading"></a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection build
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<section id="from-galaxy">
+<h3>From galaxy<a class="headerlink" href="#from-galaxy" title="Permalink to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection install middleware_automation-amq
 </pre></div>
 </div>
-<p>You can the playbook directly from this folder for demonstration purpose, however, the proper way to install the collection is to build it and install it :</p>
+</section>
+<section id="building-locally">
+<h3>Building locally<a class="headerlink" href="#building-locally" title="Permalink to this heading"></a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection build .
 ansible-galaxy collection install middleware_automation-amq-*.tar.gz
 </pre></div>
 </div>
+</section>
+<section id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h3>
+<p><em>Ansible collections:</em></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ansible-middleware/redhat-csp-download">middleware_automation.redhat_csp_download</a></p></li>
+<li><p>ansible.posix</p></li>
+</ul>
+<p>To install all the dependencies via galaxy:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection install -r requirements.yml
+</pre></div>
+</div>
+<p><em>Python:</em></p>
+<ul class="simple">
+<li><p>no extra python dependencies are currently required</p></li>
+</ul>
+</section>
 </section>
 <section id="support">
 <h2>Support<a class="headerlink" href="#support" title="Permalink to this heading"></a></h2>
