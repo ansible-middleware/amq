@@ -18,3 +18,5 @@
       core: urn:activemq:core
     pretty_print: yes
   become: yes
+  notify:
+    - restart amq_broker

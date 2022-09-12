@@ -70,11 +70,12 @@ Role Defaults
 |`activemq_ports_offset`| Port offset for all default ports | `0` |
 
 
-* Acceptors
+* Acceptors / connectors
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
 |`activemq_acceptors`| Acceptors configuration; list of `{ name(str), bind_address(str), bind_port(int), parameters(dict) }` | Generate same configuration as `artemis create` |
+|`activemq_connectors`| Connectors configuration; list of `{ name(str), address(str), port(int), parameters(dict) }` | Generate same configuration as `artemis create` |
 
 Sample acceptor:
 
@@ -91,6 +92,25 @@ Sample acceptor:
       amqpCredits: 1000
       amqpLowCredits: 300
       amqpDuplicateDetection: true
+```
+
+Sample connector:
+
+```
+  - name: amqp
+    address: 172.168.10.43
+    port: 61616
+    parameters:
+      tcpSendBufferSize: 1048576
+      tcpReceiveBufferSize: 1048576
+      protocols: CORE
+      useEpoll: true
+      sslEnabled: True
+      keyStorePath: "{{ activemq_tls_keystore_dest }}"
+      keyStorePassword: "{{ activemq_tls_keystore_pasword }}"
+      trustStorePath: "{{ activemq_tls_truststore_dest }}"
+      trustStorePassword: "{{ activemq_tls_truststore_password }}"
+      verifyHost: False
 ```
 
 
@@ -178,7 +198,7 @@ Role Variables
 |`activemq_java_home`| JAVA_HOME of installed JRE, leave empty for using specified activemq_jvm_package path | `no` |
 |`activemq_tls_keystore_path`| Keystore path for TLS connections | when `activemq_tls_enabled` is `True` |
 |`activemq_tls_keystore_password`| Keystore password for TLS connections | when `activemq_tls_enabled` is `True` |
-|`activemq_tls_truststore`| Truststore to use for TLS mutual authentication | when `activemq_tls_mutual_authentication` is `True` |
+|`activemq_tls_truststore_path`| Truststore to use for TLS mutual authentication | when `activemq_tls_mutual_authentication` is `True` |
 |`activemq_tls_truststore_password`| Password for truststore | when `activemq_tls_mutual_authentication` is `True` |
 
 <!--end argument_specs-->

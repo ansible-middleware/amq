@@ -7,7 +7,7 @@
              "name": activemq.instance_name,
              "address": item,
              "inventory_host": item,
-             "value": "tcp://" + hostvars[item].ansible_default_ipv4.address | default(item) + ":" + (((activemq_port | int + activemq_ports_offset | int) | abs) | string)
+             "value": "tcp://" + hostvars[item].ansible_default_ipv4.address | default(activemq.instance_name) + ":" + (((activemq_port | int + activemq_ports_offset | int) | abs) | string)
            }
          ] }}
   loop: "{{ ansible_play_batch }}"
@@ -158,7 +158,7 @@
       - "{{ activemq_options | join(' ') }}"
       - "--ssl-key {{ activemq_tls_keystore_dest }}"
       - "--ssl-key-password {{ activemq_tls_keystore_password }}"
-  when: activemq_tls_enabled and activemq_tls_keystore and activemq_tls_keystore_password
+  when: activemq_tls_enabled and activemq_tls_keystore_path and activemq_tls_keystore_password
 
 - name: Enable TLS client authentication for web UI
   ansible.builtin.set_fact:
@@ -167,7 +167,7 @@
       - "--ssl-trust {{ activemq_tls_truststore_dest }}"
       - "--ssl-trust-password {{ activemq_tls_truststore_password }}"
       - "--use-client-auth"
-  when: activemq_tls_enabled and activemq_tls_mutual_authentication and activemq_tls_truststore and activemq_tls_truststore_password
+  when: activemq_tls_enabled and activemq_tls_mutual_authentication and activemq_tls_truststore_path and activemq_tls_truststore_password
 
 - name: Create final broker creation options
   ansible.builtin.set_fact:

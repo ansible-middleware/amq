@@ -58,13 +58,13 @@ activemq_db_enabled: False
 
 ### Enable TLS
 activemq_tls_enabled: False
-activemq_tls_keystore_path: identity.ks
-activemq_tls_keystore_password: changeme
+activemq_tls_keystore_path:
+activemq_tls_keystore_password:
 activemq_tls_keystore_dest: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/identity.ks"
 
 # Mutual authentication (requires TLS)
 activemq_tls_mutual_authentication: False
-activemq_tls_truststore:
+activemq_tls_truststore_path:
 activemq_tls_truststore_password:
 activemq_tls_truststore_dest: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/trust.ks"
 
@@ -195,3 +195,20 @@ activemq_acceptors:
       tcpReceiveBufferSize: 1048576
       protocols: MQTT
       useEpoll: true
+
+### Connectors configuration
+activemq_connectors:
+  - name: artemis
+    address: localhost
+    port: "{{ activemq_port }}"
+    parameters:
+      tcpSendBufferSize: 1048576
+      tcpReceiveBufferSize: 1048576
+      protocols: CORE,AMQP,STOMP,HORNETQ,MQTT,OPENWIRE
+      useEpoll: true
+      amqpCredits: 1000
+      amqpLowCredits: 300
+      amqpDuplicateDetection: true
+      amqpMinLargeMessageSize: 102400
+      supportAdvisory: false
+      suppressInternalManagementObjects: false
