@@ -5,35 +5,47 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
-v1.1.0-devel
-============
+v1.1.0
+======
 
 Major Changes
 -------------
 
 - Allow for listing roles for users. Specify security setting match address `#19 <https://github.com/ansible-middleware/amq/pull/19>`_
+- Allow for listing roles for users. Specify security setting match address `#19 <https://github.com/ansible-middleware/amq/pull/19>`_
+- Make variable ``activemq_shared_storage_path`` represent an absolute path `#21 <https://github.com/ansible-middleware/amq/pull/21>`_
 - Make variable ``activemq_shared_storage_path`` represent an absolute path `#21 <https://github.com/ansible-middleware/amq/pull/21>`_
 
 Minor Changes
 -------------
 
 - Arbitrary acceptors configuration via ``activemq_acceptors`` variable `#30 <https://github.com/ansible-middleware/amq/pull/30>`_
+- Arbitrary acceptors configuration via ``activemq_acceptors`` variable `#30 <https://github.com/ansible-middleware/amq/pull/30>`_
+- Arbitrary connectors configuration via ``activemq_connectors`` variable `#31 <https://github.com/ansible-middleware/amq/pull/31>`_
 - Arbitrary connectors configuration via ``activemq_connectors`` variable `#31 <https://github.com/ansible-middleware/amq/pull/31>`_
 - Configuration for management role access `#29 <https://github.com/ansible-middleware/amq/pull/29>`_
+- Configuration for management role access `#29 <https://github.com/ansible-middleware/amq/pull/29>`_
+- Variable to config controller download/offline directory `#18 <https://github.com/ansible-middleware/amq/pull/18>`_
 - Variable to config controller download/offline directory `#18 <https://github.com/ansible-middleware/amq/pull/18>`_
 
 Breaking Changes / Porting Guide
 --------------------------------
 
 - Rename role ``amq_broker`` to ``activemq`` `#26 <https://github.com/ansible-middleware/amq/pull/26>`_
+- Rename role ``amq_broker`` to ``activemq`` `#26 <https://github.com/ansible-middleware/amq/pull/26>`_
+- Rename variables prefix to ``activemq_`` `#11 <https://github.com/ansible-middleware/amq/pull/11>`_
 - Rename variables prefix to ``activemq_`` `#11 <https://github.com/ansible-middleware/amq/pull/11>`_
 
 Bugfixes
 --------
 
 - Add ``become_user`` to artemis commands `#17 <https://github.com/ansible-middleware/amq/pull/17>`_
+- Add ``become_user`` to artemis commands `#17 <https://github.com/ansible-middleware/amq/pull/17>`_
+- Correctly set etc path and allow cors config for jolokia `#24 <https://github.com/ansible-middleware/amq/pull/24>`_
 - Correctly set etc path and allow cors config for jolokia `#24 <https://github.com/ansible-middleware/amq/pull/24>`_
 - Implement idempotent user password hashes `#25 <https://github.com/ansible-middleware/amq/pull/25>`_
+- Implement idempotent user password hashes `#25 <https://github.com/ansible-middleware/amq/pull/25>`_
+- Update ``activemq_java_opts`` to be same as activemq defaults `#20 <https://github.com/ansible-middleware/amq/pull/20>`_
 - Update ``activemq_java_opts`` to be same as activemq defaults `#20 <https://github.com/ansible-middleware/amq/pull/20>`_
 
 v1.0.0
