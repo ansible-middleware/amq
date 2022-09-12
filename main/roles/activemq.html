@@ -298,7 +298,7 @@ To install, from the collection root directory, run:</p>
 </tbody>
 </table>
 <ul class="simple">
-<li><p>Acceptors</p></li>
+<li><p>Acceptors / connectors</p></li>
 </ul>
 <table class="colwidths-auto docutils align-default">
 <thead>
@@ -310,6 +310,10 @@ To install, from the collection root directory, run:</p>
 <tbody>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_acceptors</span></code></p></td>
 <td class="text-left"><p>Acceptors configuration; list of <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">name(str),</span> <span class="pre">bind_address(str),</span> <span class="pre">bind_port(int),</span> <span class="pre">parameters(dict)</span> <span class="pre">}</span></code></p></td>
+<td class="text-left"><p>Generate same configuration as <code class="docutils literal notranslate"><span class="pre">artemis</span> <span class="pre">create</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_connectors</span></code></p></td>
+<td class="text-left"><p>Connectors configuration; list of <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">name(str),</span> <span class="pre">address(str),</span> <span class="pre">port(int),</span> <span class="pre">parameters(dict)</span> <span class="pre">}</span></code></p></td>
 <td class="text-left"><p>Generate same configuration as <code class="docutils literal notranslate"><span class="pre">artemis</span> <span class="pre">create</span></code></p></td>
 </tr>
 </tbody>
@@ -327,6 +331,23 @@ To install, from the collection root directory, run:</p>
 <span class="w">      </span><span class="nt">amqpCredits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span><span class="w"></span>
 <span class="w">      </span><span class="nt">amqpLowCredits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span><span class="w"></span>
 <span class="w">      </span><span class="nt">amqpDuplicateDetection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Sample connector:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqp</span><span class="w"></span>
+<span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">172.168.10.43</span><span class="w"></span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">61616</span><span class="w"></span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tcpSendBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tcpReceiveBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span><span class="w"></span>
+<span class="w">      </span><span class="nt">protocols</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CORE</span><span class="w"></span>
+<span class="w">      </span><span class="nt">useEpoll</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">      </span><span class="nt">sslEnabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="w">      </span><span class="nt">keyStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_keystore_dest</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">keyStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_keystore_pasword</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">trustStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_truststore_dest</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">trustStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_truststore_password</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">verifyHost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -601,7 +622,7 @@ To install, from the collection root directory, run:</p>
 <td class="text-left"><p>Keystore password for TLS connections</p></td>
 <td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">activemq_tls_enabled</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_truststore</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_truststore_path</span></code></p></td>
 <td class="text-left"><p>Truststore to use for TLS mutual authentication</p></td>
 <td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">activemq_tls_mutual_authentication</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>

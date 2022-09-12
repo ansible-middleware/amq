@@ -17,8 +17,9 @@ Major Changes
 Minor Changes
 -------------
 
+- Arbitrary acceptors configuration via activemq_acceptors variable `#30 <https://github.com/ansible-middleware/amq/pull/30>`_
+- Arbitrary connectors configuration via ``activemq_connectors`` variable `#31 <https://github.com/ansible-middleware/amq/pull/31>`_
 - Configuration for management role access `#29 <https://github.com/ansible-middleware/amq/pull/29>`_
-- Template arbitrary acceptors configuration `#30 <https://github.com/ansible-middleware/amq/pull/30>`_
 - Variable to config controller download/offline directory `#18 <https://github.com/ansible-middleware/amq/pull/18>`_
 
 Breaking Changes / Porting Guide
