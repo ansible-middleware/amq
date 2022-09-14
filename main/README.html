@@ -46,8 +46,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#ansible-version-compatibility">Ansible version compatibility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#included-content">Included content</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#from-galaxy">From galaxy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#building-locally">Building locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-from-galaxy">Download from galaxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-and-install-locally">Build and install locally</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
 </ul>
 </li>
@@ -119,23 +119,23 @@
 <h2>Included content<a class="headerlink" href="#included-content" title="Permalink to this heading"></a></h2>
 <p><em>Roles:</em></p>
 <ul class="simple">
-<li><p>activemq: Perform installation and configuration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">activemq</span></code>: Perform installation and configuration</p></li>
 </ul>
 <p><em>Plugins:</em></p>
 <ul class="simple">
-<li><p>filter pbkdf2_hmac: used internally to generate unidirectional activemq users password hashes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pbkdf2_hmac</span></code>: filter plugin used internally to generate unidirectional activemq users password hashes</p></li>
 </ul>
 </section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
-<section id="from-galaxy">
-<h3>From galaxy<a class="headerlink" href="#from-galaxy" title="Permalink to this heading"></a></h3>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection install middleware_automation-amq
+<section id="download-from-galaxy">
+<h3>Download from galaxy<a class="headerlink" href="#download-from-galaxy" title="Permalink to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection install middleware_automation.amq
 </pre></div>
 </div>
 </section>
-<section id="building-locally">
-<h3>Building locally<a class="headerlink" href="#building-locally" title="Permalink to this heading"></a></h3>
+<section id="build-and-install-locally">
+<h3>Build and install locally<a class="headerlink" href="#build-and-install-locally" title="Permalink to this heading"></a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection build .
 ansible-galaxy collection install middleware_automation-amq-*.tar.gz
 </pre></div>

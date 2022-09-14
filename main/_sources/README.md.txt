@@ -16,20 +16,20 @@ This collection has been tested against following Ansible versions: **>=2.9.10**
 ## Included content
 
 *Roles:*
-- activemq: Perform installation and configuration
+- `activemq`: Perform installation and configuration
 
 *Plugins:*
-- filter pbkdf2_hmac: used internally to generate unidirectional activemq users password hashes
+- `pbkdf2_hmac`: filter plugin used internally to generate unidirectional activemq users password hashes
 
 
 ## Installation
 
-### From galaxy
+### Download from galaxy
 
-    ansible-galaxy collection install middleware_automation-amq
+    ansible-galaxy collection install middleware_automation.amq
 
 
-### Building locally
+### Build and install locally
 
     ansible-galaxy collection build .
     ansible-galaxy collection install middleware_automation-amq-*.tar.gz

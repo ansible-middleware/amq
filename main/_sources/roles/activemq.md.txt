@@ -40,20 +40,24 @@ Role Defaults
 |`activemq_local_archive_repository`| Path local to controller for offline/download of install archives | `{{ lookup('env', 'PWD') }}` |
 
 
+* Service configuration
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`activemq_service_user`| POSIX user running the service | `amq-broker` |
+|`activemq_service_group`| POSIX group running the service | `amq-broker` |
+|`activemq_service_pidfile`| PID file for service | `data/artemis.pid` |
+|`activemq_service_name`| systemd service unit name | `activemq` |
+
+
 * Common configuration
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
-|`activemq_config_dir`| Broker instance configuration directory | `conf` |
-|`activemq_config_xml`| Broker instance configuration file | `amq-broker.xml` |
-|`activemq_config_override_template`| TODO document argument | `TODO` |
-|`activemq_service_user`| POSIX user running the service | `amq-broker` |
-|`activemq_service_group`| POSIX group running the service | `amq-broker` |
 |`activemq_instance_name`| Name of broker instance to deploy | `amq-broker` |
 |`activemq_instance_username`| Username for accessing the broker instance | `amq-broker` |
 |`activemq_instance_password`| Password for accessing the broker instance | `amq-broker` |
 |`activemq_instance_anonymous`| Whether to allow anonymous logins to the instance | `False` |
-|`activemq_service_pidfile`| PID file for service | `data/artemis.pid` |
 |`activemq_configure_firewalld`| Whether to install and configure firewalld | `False` |
 |`activemq_bind_address`| Service bind address | `0.0.0.0` |
 |`activemq_host`| Service hostname | `localhost` |
@@ -69,6 +73,10 @@ Role Defaults
 |`activemq_port_stomp`| STOMP port for the broker instance | `61613` |
 |`activemq_ports_offset_enabled`| Whether to enable port offset | `False` |
 |`activemq_ports_offset`| Port offset for all default ports | `0` |
+|`activemq_shared_storage`| Use shared filesystem directory for storage | `False` |
+|`activemq_shared_storage_path`| Absolute path of shared directory | `{{ activemq_dest }}/{{ activemq_instance_name }}/data/shared` |
+|`activemq_disable_destination_autocreate`| Disable automatic creation of destination | `True` |
+|`activemq_queues`| Queue names comma separated | `queue.in,queue.out` |
 
 
 * Acceptors / connectors
@@ -95,7 +103,7 @@ Sample acceptor:
       amqpDuplicateDetection: true
 ```
 
-Sample connector:
+Sample connector with TLS:
 
 ```
   - name: amqp
@@ -163,10 +171,6 @@ See _Role Variables_ below for additional TLS/SSL settings.
 | Variable | Description | Default |
 |:---------|:------------|:--------|
 |`activemq_nio_enabled`| Enable Native IO using libaio | `False` |
-|`activemq_shared_storage`| Use shared filesystem directory for storage | `False` |
-|`activemq_shared_storage_path`| Absolute path of shared directory | `{{ activemq_dest }}/{{ activemq_instance_name }}/data/shared` |
-|`activemq_disable_destination_autocreate`| Disable automatic creation of destination | `True` |
-|`activemq_queues`| Queue names comma separated | `queue.in,queue.out` |
 |`activemq_disable_amqp_protocol`| Whether to disable AMQP protocol | `False` |
 |`activemq_disable_hornetq_protocol`| Whether to disable HORNETQ protocol | `False` |
 |`activemq_disable_mqtt_protocol`| Whether to disable MQTT protocol | `False` |
@@ -176,8 +180,10 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_jmx_exporter_enabled`| Enable install and configuration of prometheus-jmx-exporter | `False` |
 |`activemq_prometheus_enabled`| Enable install and configuration of prometheus metrics plugin | `False` |
 |`activemq_name`| Human readable service name | `Apache ActiveMQ` |
-|`activemq_service_name`| systemd service unit name | `activemq` |
 |`activemq_db_enabled`| Whether to enable JDBC persistence | `False` |
+|`activemq_config_dir`| Broker instance configuration directory | `conf` |
+|`activemq_config_xml`| Broker instance configuration file | `amq-broker.xml` |
+|`activemq_config_override_template`| TODO document argument | `TODO` |
 
 
 * User / Role configuration
@@ -187,8 +193,8 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_users`| List of users the create with role; user is not created if password empty. List of (user,password,role) dicts | `{{ activemq_instance_username }}/{{ activemq_instance_password }}/amq` |
 |`activemq_roles`| List of roles to create. List of (role,permissions) dicts where permissions is a list of amq broker permissions | `amq` |
 |`activemq_hawtio_role`| Artemis role for hawtio console access | `amq` |
-|`activemq_management_access_default`| Management console access methods for roles activemq_hawtio_role | `[ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]` |
-|`activemq_management_access_domains`| Management console access methods per domain for roles activemq_hawtio_role | Access for `java.lang`, `org.apache.artemis.activemq` |
+|`activemq_management_access_default`| Management console access methods for roles in `activemq_hawtio_role` | `[ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]` |
+|`activemq_management_access_domains`| Management console access methods per domain for roles in `activemq_hawtio_role` | `java.lang`, `org.apache.artemis.activemq` |
 |`activemq_cors_allow_origin`| CORS allow origin setting for jolokia | `*://0.0.0.0*` |
 |`activemq_cors_strict_checking`| Whether to enforce strict checking for CORS | `True` |
 
@@ -220,7 +226,7 @@ Role Variables
 
 | Variable | Description | Required |
 |:---------|:------------|:---------|
-|`activemq_java_home`| JAVA_HOME of installed JRE, leave empty for using specified activemq_jvm_package path | `no` |
+|`activemq_java_home`| `JAVA_HOME` of installed JRE, leave empty for using specified `activemq_jvm_package` path | `no` |
 |`activemq_tls_keystore_path`| Keystore path for TLS connections | when `activemq_tls_enabled` is `True` |
 |`activemq_tls_keystore_password`| Keystore password for TLS connections | when `activemq_tls_enabled` is `True` |
 |`activemq_tls_truststore_path`| Truststore to use for TLS mutual authentication | when `activemq_tls_mutual_authentication` is `True` |

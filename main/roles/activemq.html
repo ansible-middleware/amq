@@ -185,6 +185,35 @@ To install, from the collection root directory, run:</p>
 </tbody>
 </table>
 <ul class="simple">
+<li><p>Service configuration</p></li>
+</ul>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-left head"><p>Variable</p></th>
+<th class="text-left head"><p>Description</p></th>
+<th class="text-left head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_user</span></code></p></td>
+<td class="text-left"><p>POSIX user running the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_group</span></code></p></td>
+<td class="text-left"><p>POSIX group running the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_pidfile</span></code></p></td>
+<td class="text-left"><p>PID file for service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/artemis.pid</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_name</span></code></p></td>
+<td class="text-left"><p>systemd service unit name</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
 <li><p>Common configuration</p></li>
 </ul>
 <table class="colwidths-auto docutils align-default">
@@ -195,45 +224,21 @@ To install, from the collection root directory, run:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_config_dir</span></code></p></td>
-<td class="text-left"><p>Broker instance configuration directory</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">conf</span></code></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_config_xml</span></code></p></td>
-<td class="text-left"><p>Broker instance configuration file</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker.xml</span></code></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_config_override_template</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">TODO</span></code></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_user</span></code></p></td>
-<td class="text-left"><p>POSIX user running the service</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_group</span></code></p></td>
-<td class="text-left"><p>POSIX group running the service</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_name</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_name</span></code></p></td>
 <td class="text-left"><p>Name of broker instance to deploy</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_username</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_username</span></code></p></td>
 <td class="text-left"><p>Username for accessing the broker instance</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_password</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_password</span></code></p></td>
 <td class="text-left"><p>Password for accessing the broker instance</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_anonymous</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_anonymous</span></code></p></td>
 <td class="text-left"><p>Whether to allow anonymous logins to the instance</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_pidfile</span></code></p></td>
-<td class="text-left"><p>PID file for service</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/artemis.pid</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_configure_firewalld</span></code></p></td>
 <td class="text-left"><p>Whether to install and configure firewalld</p></td>
@@ -295,6 +300,22 @@ To install, from the collection root directory, run:</p>
 <td class="text-left"><p>Port offset for all default ports</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
 </tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_shared_storage</span></code></p></td>
+<td class="text-left"><p>Use shared filesystem directory for storage</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_shared_storage_path</span></code></p></td>
+<td class="text-left"><p>Absolute path of shared directory</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/{{</span> <span class="pre">activemq_instance_name</span> <span class="pre">}}/data/shared</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_destination_autocreate</span></code></p></td>
+<td class="text-left"><p>Disable automatic creation of destination</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_queues</span></code></p></td>
+<td class="text-left"><p>Queue names comma separated</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">queue.in,queue.out</span></code></p></td>
+</tr>
 </tbody>
 </table>
 <ul class="simple">
@@ -333,7 +354,7 @@ To install, from the collection root directory, run:</p>
 <span class="w">      </span><span class="nt">amqpDuplicateDetection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Sample connector:</p>
+<p>Sample connector with TLS:</p>
 <div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqp</span><span class="w"></span>
 <span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">172.168.10.43</span><span class="w"></span>
 <span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">61616</span><span class="w"></span>
@@ -497,22 +518,6 @@ To install, from the collection root directory, run:</p>
 <td class="text-left"><p>Enable Native IO using libaio</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_shared_storage</span></code></p></td>
-<td class="text-left"><p>Use shared filesystem directory for storage</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_shared_storage_path</span></code></p></td>
-<td class="text-left"><p>Absolute path of shared directory</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/{{</span> <span class="pre">activemq_instance_name</span> <span class="pre">}}/data/shared</span></code></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_destination_autocreate</span></code></p></td>
-<td class="text-left"><p>Disable automatic creation of destination</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_queues</span></code></p></td>
-<td class="text-left"><p>Queue names comma separated</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">queue.in,queue.out</span></code></p></td>
-</tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_amqp_protocol</span></code></p></td>
 <td class="text-left"><p>Whether to disable AMQP protocol</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
@@ -549,13 +554,21 @@ To install, from the collection root directory, run:</p>
 <td class="text-left"><p>Human readable service name</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Apache</span> <span class="pre">ActiveMQ</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_name</span></code></p></td>
-<td class="text-left"><p>systemd service unit name</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq</span></code></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_enabled</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_enabled</span></code></p></td>
 <td class="text-left"><p>Whether to enable JDBC persistence</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_config_dir</span></code></p></td>
+<td class="text-left"><p>Broker instance configuration directory</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">conf</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_config_xml</span></code></p></td>
+<td class="text-left"><p>Broker instance configuration file</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker.xml</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_config_override_template</span></code></p></td>
+<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">TODO</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -583,12 +596,12 @@ To install, from the collection root directory, run:</p>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_management_access_default</span></code></p></td>
-<td class="text-left"><p>Management console access methods for roles activemq_hawtio_role</p></td>
+<td class="text-left"><p>Management console access methods for roles in <code class="docutils literal notranslate"><span class="pre">activemq_hawtio_role</span></code></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">'list*',</span> <span class="pre">'get*',</span> <span class="pre">'is*',</span> <span class="pre">'set*',</span> <span class="pre">'browse*',</span> <span class="pre">'count*',</span> <span class="pre">'*'</span> <span class="pre">]</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_management_access_domains</span></code></p></td>
-<td class="text-left"><p>Management console access methods per domain for roles activemq_hawtio_role</p></td>
-<td class="text-left"><p>Access for <code class="docutils literal notranslate"><span class="pre">java.lang</span></code>, <code class="docutils literal notranslate"><span class="pre">org.apache.artemis.activemq</span></code></p></td>
+<td class="text-left"><p>Management console access methods per domain for roles in <code class="docutils literal notranslate"><span class="pre">activemq_hawtio_role</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">java.lang</span></code>, <code class="docutils literal notranslate"><span class="pre">org.apache.artemis.activemq</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cors_allow_origin</span></code></p></td>
 <td class="text-left"><p>CORS allow origin setting for jolokia</p></td>
@@ -632,7 +645,7 @@ To install, from the collection root directory, run:</p>
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_java_home</span></code></p></td>
-<td class="text-left"><p>JAVA_HOME of installed JRE, leave empty for using specified activemq_jvm_package path</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code> of installed JRE, leave empty for using specified <code class="docutils literal notranslate"><span class="pre">activemq_jvm_package</span></code> path</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">no</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_keystore_path</span></code></p></td>
