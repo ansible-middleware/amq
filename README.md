@@ -16,7 +16,7 @@ This collection has been tested against following Ansible versions: **>=2.9.10**
 ## Included content
 
 *Roles:*
-- `activemq`: Perform installation and configuration
+- [`activemq`]((https://github.com/ansible-middleware/amq/tree/main/roles/activemq): Perform installation and configuration
 
 *Plugins:*
 - `pbkdf2_hmac`: filter plugin used internally to generate unidirectional activemq users password hashes
