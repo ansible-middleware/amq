@@ -16,8 +16,6 @@ platforms:
     tmpfs:
       - /run
       - /tmp
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     port_bindings:
       - 8161:8161
     published_ports:

@@ -19,7 +19,7 @@ galaxy_info:
      - 8
 
   galaxy_tags:
-    - amq
+    - activemq
     - broker
     - redhat
     - rhel
