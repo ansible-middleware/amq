@@ -14,7 +14,7 @@
 
 - name: "Configure firewall for {{ activemq.service_name }} ports"
   become: yes
-  firewalld:
+  ansible.posix.firewalld:
     port: "{{ item }}"
     permanent: true
     state: enabled
@@ -29,7 +29,7 @@
 
 - name: "Configure firewall for JMX exporter port"
   become: yes
-  firewalld:
+  ansible.posix.firewalld:
     port: "{{ activemq_jmx_exporter_port }}/tcp"
     permanent: true
     state: enabled
