@@ -2,22 +2,23 @@
 - name: Verify
   hosts: all
   tasks:
-    - name: Verify only if zipfiles present
-      when: "'amq-broker-7.10.0-bin.zip' is exists"
-      block:
-        - name: Populate service facts
-          ansible.builtin.service_facts:
-        - name: Check if amq-broker service is started
-          ansible.builtin.assert:
-            that:
-              - ansible_facts.services["amq-broker.service"]["state"] == "running"
-              - ansible_facts.services["amq-broker.service"]["status"] == "enabled"
-        - name: Read content of logs
-          slurp:
-            src: /var/log/amq_broker/amq-broker/artemis.log
-          register: slurped_log
-        - name: Check status
-          assert:
-            that:
-              - "'Server is now live' in slurped_log.content|b64decode"
-            quiet: true
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+
+    - name: Check if amq-broker service is started
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.services["amq-broker.service"]["state"] == "running"
+          - ansible_facts.services["amq-broker.service"]["status"] == "enabled"
+
+    - name: Read content of logs
+      ansible.builtin.slurp:
+        src: /var/log/activemq/amq-broker/artemis.log
+      register: slurped_log
+
+    - name: Check status
+      ansible.builtin.assert:
+        that:
+          - "'Server is now live' in slurped_log.content|b64decode"
+        quiet: true
+        fail_msg: "Service failed to start correctly"
