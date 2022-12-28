@@ -8,7 +8,7 @@
     label: "{{ acceptor.name }}"
 
 - name: Create acceptor configuration in broker.xml
-  xml:
+  community.general.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:acceptors
     input_type: xml

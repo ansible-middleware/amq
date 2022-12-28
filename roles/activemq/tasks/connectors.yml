@@ -8,7 +8,7 @@
     label: "{{ connector.name }}"
 
 - name: Create connector configuration in broker.xml
-  xml:
+  community.general.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:connectors
     input_type: xml

@@ -36,7 +36,7 @@
   loop: "{{ activemq_roles }}"
 
 - name: Create messaging roles permissions
-  xml:
+  community.general.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:security-settings
     input_type: xml
@@ -80,7 +80,7 @@
     label: "{{ domain.name }}"
 
 - name: Create management default access configuration
-  xml:
+  community.general.xml:
     path: "{{ activemq.instance_home }}/etc/management.xml"
     xpath: //*[local-name()='default-access']
     input_type: xml
@@ -90,7 +90,7 @@
     - restart amq_broker
 
 - name: Create management access roles configuration
-  xml:
+  community.general.xml:
     path: "{{ activemq.instance_home }}/etc/management.xml"
     xpath: //*[local-name()='role-access']
     input_type: xml
