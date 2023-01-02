@@ -342,35 +342,35 @@ To install, from the collection root directory, run:</p>
 </tbody>
 </table>
 <p>Sample acceptor:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqp</span><span class="w"></span>
-<span class="w">    </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">activemq_host</span> <span class="cp">}}</span><span class="w"></span>
-<span class="w">    </span><span class="nt">bind_port</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">activemq_port_amqp</span> <span class="cp">}}</span><span class="w"></span>
-<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">tcpSendBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span><span class="w"></span>
-<span class="w">      </span><span class="nt">tcpReceiveBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span><span class="w"></span>
-<span class="w">      </span><span class="nt">protocols</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AMQP</span><span class="w"></span>
-<span class="w">      </span><span class="nt">useEpoll</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">      </span><span class="nt">amqpMinLargeMessageSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">102400</span><span class="w"></span>
-<span class="w">      </span><span class="nt">amqpCredits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span><span class="w"></span>
-<span class="w">      </span><span class="nt">amqpLowCredits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span><span class="w"></span>
-<span class="w">      </span><span class="nt">amqpDuplicateDetection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqp</span>
+<span class="w">    </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">activemq_host</span> <span class="cp">}}</span>
+<span class="w">    </span><span class="nt">bind_port</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">activemq_port_amqp</span> <span class="cp">}}</span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tcpSendBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span>
+<span class="w">      </span><span class="nt">tcpReceiveBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span>
+<span class="w">      </span><span class="nt">protocols</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AMQP</span>
+<span class="w">      </span><span class="nt">useEpoll</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">amqpMinLargeMessageSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">102400</span>
+<span class="w">      </span><span class="nt">amqpCredits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">      </span><span class="nt">amqpLowCredits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+<span class="w">      </span><span class="nt">amqpDuplicateDetection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
 <p>Sample connector with TLS:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqp</span><span class="w"></span>
-<span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">172.168.10.43</span><span class="w"></span>
-<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">61616</span><span class="w"></span>
-<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">tcpSendBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span><span class="w"></span>
-<span class="w">      </span><span class="nt">tcpReceiveBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span><span class="w"></span>
-<span class="w">      </span><span class="nt">protocols</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CORE</span><span class="w"></span>
-<span class="w">      </span><span class="nt">useEpoll</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">      </span><span class="nt">sslEnabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
-<span class="w">      </span><span class="nt">keyStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_keystore_dest</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="nt">keyStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_keystore_pasword</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="nt">trustStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_truststore_dest</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="nt">trustStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_truststore_password</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="nt">verifyHost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqp</span>
+<span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">172.168.10.43</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">61616</span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tcpSendBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span>
+<span class="w">      </span><span class="nt">tcpReceiveBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span>
+<span class="w">      </span><span class="nt">protocols</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CORE</span>
+<span class="w">      </span><span class="nt">useEpoll</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">sslEnabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">      </span><span class="nt">keyStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_keystore_dest</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">      </span><span class="nt">keyStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_keystore_pasword</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">      </span><span class="nt">trustStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_truststore_dest</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">      </span><span class="nt">trustStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_truststore_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">      </span><span class="nt">verifyHost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -616,23 +616,23 @@ To install, from the collection root directory, run:</p>
 </tbody>
 </table>
 <p>Sample user/role configuration with one admin, a consumer and a producer:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">activemq_hawtio_role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span><span class="w"></span>
-<span class="w">    </span><span class="nt">activemq_users</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq</span><span class="w"></span>
-<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqbrokerpass</span><span class="w"></span>
-<span class="w">        </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">admin</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">other</span><span class="w"></span>
-<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqotherpass</span><span class="w"></span>
-<span class="w">        </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">consumer</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">producer</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="w">    </span><span class="nt">activemq_roles</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span><span class="w"></span>
-<span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">createNonDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">deleteNonDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">createDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">deleteDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">createAddress</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">deleteAddress</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">consume</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">send</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">manage</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">consumer</span><span class="w"></span>
-<span class="w">        </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topics.#</span><span class="w"></span>
-<span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">consume</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">producer</span><span class="w"></span>
-<span class="w">        </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topics.#</span><span class="w"></span>
-<span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">send</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">activemq_hawtio_role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span>
+<span class="w">    </span><span class="nt">activemq_users</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq</span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqbrokerpass</span>
+<span class="w">        </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">admin</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">other</span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqotherpass</span>
+<span class="w">        </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">consumer</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">producer</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">activemq_roles</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span>
+<span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">createNonDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">deleteNonDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">createDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">deleteDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">createAddress</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">deleteAddress</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">consume</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">send</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">manage</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">consumer</span>
+<span class="w">        </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topics.#</span>
+<span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">consume</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">producer</span>
+<span class="w">        </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topics.#</span>
+<span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">send</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="w"> </span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </section>
@@ -672,12 +672,12 @@ To install, from the collection root directory, run:</p>
 </section>
 <section id="example-playbook">
 <h2>Example Playbook<a class="headerlink" href="#example-playbook" title="Permalink to this heading"></a></h2>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span><span class="w"></span>
-<span class="w">  </span><span class="nt">collections</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">middleware_automation.amq</span><span class="w"></span>
-<span class="w">  </span><span class="nt">roles</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">activemq</span><span class="w"></span>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">collections</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">middleware_automation.amq</span>
+<span class="w">  </span><span class="nt">roles</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">activemq</span>
 </pre></div>
 </div>
 </section>
@@ -694,7 +694,7 @@ To install, from the collection root directory, run:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Red Hat, Inc..</p>
+    <p>&#169; Copyright 2023, Red Hat, Inc..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
