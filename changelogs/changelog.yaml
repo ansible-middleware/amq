@@ -114,6 +114,9 @@ releases:
       - 'Add systemd RequiresMountsFor and unit custom template `#36 <https://github.com/ansible-middleware/amq/pull/36>`_
 
         '
+      - 'Stop using ansible.builtin.command module arguments incompatible with ansible 2.14
+
+        '
     fragments:
     - 36.yaml
     release_date: '2023-01-03'

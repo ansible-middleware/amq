@@ -6,7 +6,7 @@ galaxy_info:
   role_name: activemq
   namespace: middleware_automation
   author: Guido Grazioli
-  description: Installs and configures activemq services.
+  description: Installs and configures ActiveMQ services.
   company: Red Hat, Inc.
 
   license: Apache License 2.0

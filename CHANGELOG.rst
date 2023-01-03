@@ -12,6 +12,7 @@ Bugfixes
 --------
 
 - Add systemd RequiresMountsFor and unit custom template `#36 <https://github.com/ansible-middleware/amq/pull/36>`_
+- Stop using ansible.builtin.command module arguments incompatible with ansible 2.14
 
 v1.1.0
 ======
