@@ -108,3 +108,12 @@ releases:
     - 30.yaml
     - 31.yaml
     release_date: '2022-09-12'
+  1.1.1:
+    changes:
+      bugfixes:
+      - 'Add systemd RequiresMountsFor and unit custom template `#36 <https://github.com/ansible-middleware/amq/pull/36>`_
+
+        '
+    fragments:
+    - 36.yaml
+    release_date: '2023-01-03'
