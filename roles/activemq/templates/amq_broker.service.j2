@@ -2,6 +2,9 @@
 [Unit]
 Description={{ activemq.instance_name }} {{ activemq.name }} Service
 After=network.target
+{% if activemq_shared_storage and activemq_shared_storage_mounted %}
+RequiresMountsFor={{ activemq_shared_storage_path }}
+{% endif %}
 
 [Service]
 Type=forking

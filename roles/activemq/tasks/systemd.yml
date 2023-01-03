@@ -23,7 +23,7 @@
 
 - name: "Configure systemd unit file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
   ansible.builtin.template:
-    src: amq_broker.service.j2
+    src: "{{ activemq_service_override_template | default('amq_broker.service.j2', true) }}"
     dest: "/etc/systemd/system/{{ activemq.instance_name }}.service"
     owner: root
     group: root
@@ -126,7 +126,7 @@
 
 - name: "Configure prometheus metrics"
   become: yes
-  when: activemq_prometheus_enabled
+  when: activemq_prometheus_enabled and amq_broker_enable is defined and amq_broker_enable
   block:
     - name: Ensure lib is available to instance
       ansible.builtin.copy:

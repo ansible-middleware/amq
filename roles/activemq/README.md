@@ -75,6 +75,7 @@ Role Defaults
 |`activemq_ports_offset`| Port offset for all default ports | `0` |
 |`activemq_shared_storage`| Use shared filesystem directory for storage | `False` |
 |`activemq_shared_storage_path`| Absolute path of shared directory | `{{ activemq_dest }}/{{ activemq_instance_name }}/data/shared` |
+|`activemq_shared_storage_mounted`| Whether the systemd unit must require a mounted path (only when using shared storage) | `True` |
 |`activemq_disable_destination_autocreate`| Disable automatic creation of destination | `True` |
 |`activemq_queues`| Queue names comma separated | `queue.in,queue.out` |
 
@@ -183,7 +184,8 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_db_enabled`| Whether to enable JDBC persistence | `False` |
 |`activemq_config_dir`| Broker instance configuration directory | `conf` |
 |`activemq_config_xml`| Broker instance configuration file | `amq-broker.xml` |
-|`activemq_config_override_template`| TODO document argument | `TODO` |
+|`activemq_config_override_template`| Filename of custom broker xml configuration file to be deployed | `` |
+|`activemq_service_override_template`| Filename of custom systemd unit template to be deployed | `` |
 
 
 * User / Role configuration
