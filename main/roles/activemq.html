@@ -310,11 +310,15 @@ To install, from the collection root directory, run:</p>
 <td class="text-left"><p>Absolute path of shared directory</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/{{</span> <span class="pre">activemq_instance_name</span> <span class="pre">}}/data/shared</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_destination_autocreate</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_shared_storage_mounted</span></code></p></td>
+<td class="text-left"><p>Whether the systemd unit must require a mounted path (only when using shared storage)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_destination_autocreate</span></code></p></td>
 <td class="text-left"><p>Disable automatic creation of destination</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_queues</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_queues</span></code></p></td>
 <td class="text-left"><p>Queue names comma separated</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">queue.in,queue.out</span></code></p></td>
 </tr>
@@ -569,8 +573,12 @@ To install, from the collection root directory, run:</p>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker.xml</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_config_override_template</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">TODO</span></code></p></td>
+<td class="text-left"><p>Filename of custom broker xml configuration file to be deployed</p></td>
+<td class="text-left"><p>``</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_override_template</span></code></p></td>
+<td class="text-left"><p>Filename of custom systemd unit template to be deployed</p></td>
+<td class="text-left"><p>``</p></td>
 </tr>
 </tbody>
 </table>
