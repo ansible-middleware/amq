@@ -41,6 +41,7 @@ activemq_port_mqtt: 1883    # for protocols [MQTT]
 activemq_port_stomp: 61613  # for protocols [STOMP]
 activemq_name: 'Apache ActiveMQ'
 activemq_service_name: activemq
+activemq_service_override_template: ''
 
 ### Enable configuration for high availability
 activemq_ha_enabled: False
@@ -105,6 +106,7 @@ activemq_nio_enabled: False
 
 ## Shared Storage
 activemq_shared_storage: False
+activemq_shared_storage_mounted: True
 activemq_shared_storage_path: "{{ activemq_dest }}/{{ activemq_instance_name }}/data/shared"
 
 ## Ports

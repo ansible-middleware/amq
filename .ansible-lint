@@ -24,12 +24,12 @@ warn_list:
   - fqcn-builtins
   - no-log-password
   - no-empty-data-files
-  - jinja[spacing]
   - name[template]
 
 skip_list:
   - vars_should_not_be_used
   - file_is_small_enough
+  - jinja[spacing]
 
 use_default_rules: true
 parseable: true

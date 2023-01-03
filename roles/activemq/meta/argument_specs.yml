@@ -37,7 +37,7 @@ argument_specs:
             activemq_config_override_template:
                 # line 19 of defaults/main.yml
                 default: ""
-                description: "TODO document argument"
+                description: "Filename of custom broker xml configuration file to be deployed"
                 type: "str"
             activemq_service_user:
                 # line 20 of defaults/main.yml
@@ -242,6 +242,10 @@ argument_specs:
                 default: "{{ activemq_dest }}/{{ activemq_instance_name }}/data/shared"
                 description: "Absolute path of shared directory"
                 type: "str"
+            activemq_shared_storage_mounted:
+                default: True
+                description: "Whether the systemd unit must require a mounted path (only when using shared storage)"
+                type: "bool"
             activemq_ports_offset_enabled:
                 # line 75 of defaults/main.yml
                 default: false
@@ -390,6 +394,10 @@ argument_specs:
                 description: "Connectors configuration; list of `{ name, address, port, parameters(dict) }`"
                 default: "Generate same configuration as `artemis create`"
                 type: "list"
+            activemq_service_override_template:
+                description: "Filename of custom systemd unit template to be deployed"
+                default: ""
+                type: "str"
     downstream:
         options:
             amq_broker_version:
