@@ -36,7 +36,7 @@
 
 .. Title
 
-middleware_automation.amq.pbkdf2_hmac filter -- Generate a salted PBKDF2\_HMAC password hash
+pbkdf2_hmac -- Generate a salted PBKDF2\_HMAC password hash
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. Collection note
