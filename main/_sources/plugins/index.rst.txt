@@ -3,5 +3,6 @@ Plugin Index
 
 .. toctree::
    :caption: filter plugins
-    pbkdf2_hmac
+
+   pbkdf2_hmac
 
