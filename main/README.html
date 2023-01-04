@@ -45,11 +45,19 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Ansible Collection - AMQ</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#about">About</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ansible-version-compatibility">Ansible version compatibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#included-content">Included content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#included-content">Included content</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#roles">Roles:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plugins">Plugins:</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#download-from-galaxy">Download from galaxy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#build-and-install-locally">Build and install locally</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ansible-collections">Ansible collections:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python">Python:</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#support">Support</a></li>
@@ -119,14 +127,18 @@
 </section>
 <section id="included-content">
 <h2>Included content<a class="headerlink" href="#included-content" title="Permalink to this heading"></a></h2>
-<p><em>Roles:</em></p>
+<section id="roles">
+<h3>Roles:<a class="headerlink" href="#roles" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/ansible-middleware/amq/tree/main/roles/activemq"><code class="docutils literal notranslate"><span class="pre">activemq</span></code></a>: Perform installation and configuration</p></li>
 </ul>
-<p><em>Plugins:</em></p>
+</section>
+<section id="plugins">
+<h3>Plugins:<a class="headerlink" href="#plugins" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">pbkdf2_hmac</span></code>: filter plugin used internally to generate unidirectional activemq users password hashes</p></li>
 </ul>
+</section>
 </section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
@@ -138,6 +150,7 @@
 </section>
 <section id="build-and-install-locally">
 <h3>Build and install locally<a class="headerlink" href="#build-and-install-locally" title="Permalink to this heading"></a></h3>
+<p>Clone the repository, checkout the tag you want to build, or pick the main branch for the development version; then:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection build .
 ansible-galaxy collection install middleware_automation-amq-*.tar.gz
 </pre></div>
@@ -145,19 +158,24 @@ ansible-galaxy collection install middleware_automation-amq-*.tar.gz
 </section>
 <section id="dependencies">
 <h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h3>
-<p><em>Ansible collections:</em></p>
+<section id="ansible-collections">
+<h4>Ansible collections:<a class="headerlink" href="#ansible-collections" title="Permalink to this heading"></a></h4>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/ansible-middleware/redhat-csp-download">middleware_automation.redhat_csp_download</a></p></li>
-<li><p>ansible.posix</p></li>
+<li><p><a class="reference external" href="https://docs.ansible.com/ansible/latest/collections/ansible/posix/index.html">ansible.posix</a></p></li>
+<li><p><a class="reference external" href="https://docs.ansible.com/ansible/latest/collections/community/general/index.html">community.general</a></p></li>
 </ul>
 <p>To install all the dependencies via galaxy:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection install -r requirements.yml
 </pre></div>
 </div>
-<p><em>Python:</em></p>
+</section>
+<section id="python">
+<h4>Python:<a class="headerlink" href="#python" title="Permalink to this heading"></a></h4>
 <ul class="simple">
 <li><p>no extra python dependencies are currently required</p></li>
 </ul>
+</section>
 </section>
 </section>
 <section id="support">

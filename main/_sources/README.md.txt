@@ -15,11 +15,13 @@ This collection has been tested against following Ansible versions: **>=2.9.10**
 
 ## Included content
 
-*Roles:*
-- [`activemq`](https://github.com/ansible-middleware/amq/tree/main/roles/activemq): Perform installation and configuration
+### Roles:
 
-*Plugins:*
-- `pbkdf2_hmac`: filter plugin used internally to generate unidirectional activemq users password hashes
+* [`activemq`](https://github.com/ansible-middleware/amq/tree/main/roles/activemq): Perform installation and configuration
+
+### Plugins:
+
+* `pbkdf2_hmac`: filter plugin used internally to generate unidirectional activemq users password hashes
 
 
 ## Installation
@@ -31,22 +33,28 @@ This collection has been tested against following Ansible versions: **>=2.9.10**
 
 ### Build and install locally
 
+Clone the repository, checkout the tag you want to build, or pick the main branch for the development version; then:
+
     ansible-galaxy collection build .
     ansible-galaxy collection install middleware_automation-amq-*.tar.gz
 
 
 ### Dependencies
 
-*Ansible collections:*
-- [middleware_automation.redhat_csp_download](https://github.com/ansible-middleware/redhat-csp-download)
-- ansible.posix
+#### Ansible collections:
+
+* [middleware_automation.redhat_csp_download](https://github.com/ansible-middleware/redhat-csp-download)
+* [ansible.posix](https://docs.ansible.com/ansible/latest/collections/ansible/posix/index.html)
+* [community.general](https://docs.ansible.com/ansible/latest/collections/community/general/index.html)
+
 
 To install all the dependencies via galaxy:
 
     ansible-galaxy collection install -r requirements.yml
 
-*Python:*
-- no extra python dependencies are currently required
+#### Python:
+
+* no extra python dependencies are currently required
 
 
 ## Support
