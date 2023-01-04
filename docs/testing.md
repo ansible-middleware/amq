@@ -30,6 +30,6 @@ cat << EOF > inventory
 localhost ansible_connection=local
 EOF
 # run the playbook
-ansible-playbook -i inventory playbooks/amq.yml
+ansible-playbook -i inventory playbooks/activemq.yml
 ```
 

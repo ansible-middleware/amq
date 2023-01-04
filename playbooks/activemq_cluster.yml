@@ -1,5 +1,5 @@
 ---
-- name: Playbook for Red Hat AMQ Broker
+- name: Playbook to deploy activemq in master/standby with shared datadir
   hosts: all
   vars:
     activemq_ha_enabled: true

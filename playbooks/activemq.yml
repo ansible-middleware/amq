@@ -1,5 +1,5 @@
 ---
-- name: Playbook for Red Hat AMQ Broker
+- name: Playbook for ActiveMQ Artemis
   hosts: all
   collections:
    - middleware_automation.redhat_csp_download

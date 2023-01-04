@@ -1,7 +1,7 @@
 DOCUMENTATION:
   name: pbkdf2_hmac
   author: ggraziol@redhat.com
-  version_added: '1.2.0'
+  version_added: '1.1.0'
   short_description: Generate a salted PBKDF2_HMAC password hash
   description:
     - Generate a salted one-way PBKDF2 HMAC_password hash
