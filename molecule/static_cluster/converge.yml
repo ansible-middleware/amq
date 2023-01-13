@@ -12,7 +12,7 @@
     activemq_configure_firewalld: false  
     activemq_tls_enabled: True
     activemq_tls_keystore_path: nfs/identity.ks
-    activemq_tls_keystore_pasword: changeme
+    activemq_tls_keystore_password: changeme
     activemq_tls_truststore_path: nfs/trust.ks
     activemq_tls_truststore_password: changeit
     activemq_acceptors:
@@ -26,7 +26,7 @@
           useEpoll: true
           sslEnabled: true
           keyStorePath: "{{ activemq_tls_keystore_dest }}"
-          keyStorePassword: "{{ activemq_tls_keystore_pasword }}"
+          keyStorePassword: "{{ activemq_tls_keystore_password }}"
           trustStorePath: "{{ activemq_tls_truststore_dest }}"
           trustStorePassword: "{{ activemq_tls_truststore_password }}"
           verifyHost: False
@@ -41,7 +41,7 @@
           useEpoll: true
           sslEnabled: true
           keyStorePath: "{{ activemq_tls_keystore_dest }}"
-          keyStorePassword: "{{ activemq_tls_keystore_pasword }}"
+          keyStorePassword: "{{ activemq_tls_keystore_password }}"
           trustStorePath: "{{ activemq_tls_truststore_dest }}"
           trustStorePassword: "{{ activemq_tls_truststore_password }}"
           verifyHost: False
@@ -55,7 +55,7 @@
           useEpoll: true
           sslEnabled: true
           keyStorePath: "{{ activemq_tls_keystore_dest }}"
-          keyStorePassword: "{{ activemq_tls_keystore_pasword }}"
+          keyStorePassword: "{{ activemq_tls_keystore_password }}"
           trustStorePath: "{{ activemq_tls_truststore_dest }}"
           trustStorePassword: "{{ activemq_tls_truststore_password }}"
           verifyHost: False
@@ -69,7 +69,7 @@
           useEpoll: true
           sslEnabled: true
           keyStorePath: "{{ activemq_tls_keystore_dest }}"
-          keyStorePassword: "{{ activemq_tls_keystore_pasword }}"
+          keyStorePassword: "{{ activemq_tls_keystore_password }}"
           trustStorePath: "{{ activemq_tls_truststore_dest }}"
           trustStorePassword: "{{ activemq_tls_truststore_password }}"
           verifyHost: False

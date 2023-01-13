@@ -117,7 +117,7 @@ Sample connector with TLS:
       useEpoll: true
       sslEnabled: True
       keyStorePath: "{{ activemq_tls_keystore_dest }}"
-      keyStorePassword: "{{ activemq_tls_keystore_pasword }}"
+      keyStorePassword: "{{ activemq_tls_keystore_password }}"
       trustStorePath: "{{ activemq_tls_truststore_dest }}"
       trustStorePassword: "{{ activemq_tls_truststore_password }}"
       verifyHost: False
