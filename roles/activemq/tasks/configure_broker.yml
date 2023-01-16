@@ -40,9 +40,17 @@
   become: yes
   when: activemq_prometheus_enabled and amq_broker_enable is defined and amq_broker_enable
   block:
+    - name: Find available library path from installation
+      ansible.builtin.find:
+        paths: "{{ activemq.home }}/lib/"
+        file_type: file
+        use_regex: yes
+        recurse: yes
+        patterns: [ 'artemis-prometheus-metrics-plugin-([0-9]+[.]){3}redhat-[0-9]+.jar$' ]
+      register: prometheus_filename
     - name: Ensure lib is available to instance
       ansible.builtin.copy:
-        src: "{{ activemq.home }}/lib/artemis-prometheus-metrics-plugin-1.1.0.redhat-00002.jar"
+        src: "{{ activemq.home }}/lib/{{ prometheus_filename.files[0].path }}"
         dest: "{{ activemq.instance_home }}/lib/"
         remote_src: yes
         owner: "{{ activemq_service_user }}"
@@ -61,3 +69,7 @@
           core: urn:activemq:core
       notify:
         - restart amq_broker
+  rescue:
+    - name: Report metrics plugin failure
+      debug:
+        msg: "Could not install prometheus metrics plugin because the installation zipfile does not provide it"
