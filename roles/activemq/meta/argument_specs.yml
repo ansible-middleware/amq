@@ -398,6 +398,86 @@ argument_specs:
                 description: "Filename of custom systemd unit template to be deployed"
                 default: ""
                 type: "str"
+            activemq_persistence_enabled:
+                default: True
+                type: 'bool'
+                description: "Whether to use the file based journal for persistence"
+            activemq_persist_id_cache:
+                description: 'Whether to persist cache IDs to the journal'
+                default: True
+                type: 'bool'
+            activemq_id_cache_size:
+                description: 'The duplicate detection circular cache size'
+                default: 20000
+                type: 'int'
+            activemq_journal_type:
+                default: 'ASYNCIO'
+                description: 'Journal type, valid values are [ ASYNCIO: libaio, MAPPED: mmap files, NIO: Plain Java Files  ]'
+                type: "str"
+            activemq_paging_directory:
+                description: 'The directory to store paged messages in'
+                default: 'data/paging'
+                type: "str"
+            activemq_bindings_directory:
+                description: 'The folder in use for the bindings folder'
+                default: 'data/bindings'
+                type: "str"
+            activemq_journal_directory:
+                description: 'The directory to store the journal files in'
+                default: 'data/journal'
+                type: "str"
+            activemq_large_messages_directory:
+                description: 'The directory to store large messages'
+                default: 'data/largemessages'
+                type: "str"
+            activemq_journal_datasync:
+                description: 'Whether to use msync/fsync on journal operations'
+                default: True
+                type: 'bool'
+            activemq_journal_min_files:
+                description: 'How many journal files to pre-create'
+                default: 2
+                type: "int"
+            activemq_journal_pool_files:
+                description: 'The upper threshold of the journal file pool, -1 means no Limit'
+                default: -1
+                type: "int"
+            activemq_journal_device_block_size:
+                description: 'The block size by the device'
+                default: 4096
+                type: "int"
+            activemq_journal_file_size:
+                description: 'The size (in bytes) of each journal file'
+                default: '10M'
+                type: "str"
+            activemq_journal_buffer_timeout:
+                description: 'The Flush timeout for the journal buffer'
+                default: "{{ 500000 if activemq_journal_type == 'ASYNCIO' else 3333333 }}"
+                type: "int"
+            activemq_journal_max_io:
+                description: 'The maximum number of write requests that can be in the ASYNCIO queue at any one time'
+                default: "{{ 4096 if activemq_journal_type == 'ASYNCIO' else 1 }}"
+                type: "int"
+            activemq_db_jdbc_url:
+                description: 'The full JDBC connection URL for your database server'
+                default: 'jdbc:derby:target/derby/database-store;create=true'
+                type: "str"
+            activemq_db_bindings_table:
+                description: 'The name of the table in which bindings data will be persisted'
+                default: 'BINDINGS_TABLE'
+                type: "str"
+            activemq_db_message_table:
+                description: 'The name of the table in which bindings data will be persisted'
+                default: 'MESSAGE_TABLE'
+                type: "str"
+            activemq_db_large_message_table:
+                description: 'The name of the table in which messages and related data will be persisted'
+                default: 'LARGE_MESSAGES_TABLE'
+                type: "str"
+            activemq_db_jdbc_driver_class:
+                description: 'The fully qualified class name of the desired database Driver'
+                default: 'org.apache.derby.jdbc.EmbeddedDriver'
+                type: "str"
     downstream:
         options:
             amq_broker_version:

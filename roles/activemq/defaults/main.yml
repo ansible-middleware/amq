@@ -54,8 +54,31 @@ activemq_replicated: False
 # cluster discovery: ['jgroups' for shared file ping, 'multicast' for UDP multicast, 'static' for static declaration]
 activemq_cluster_discovery: static
 
-### Enable database configuration for JDBC persistence
+### Enable persistence and persistence options
+activemq_persistence_enabled: True
+activemq_persist_id_cache: True
+activemq_id_cache_size: 20000
+# file journal configuration
+# journal type, valid values are [ ASYNCIO: libaio, MAPPED: mmap files, NIO: Plain Java Files  ]
+activemq_journal_type: ASYNCIO
+activemq_paging_directory: data/paging
+activemq_bindings_directory: data/bindings
+activemq_journal_directory: data/journal
+activemq_large_messages_directory: data/largemessages
+activemq_journal_datasync: True
+activemq_journal_min_files: 2
+activemq_journal_pool_files: -1
+activemq_journal_device_block_size: 4096
+activemq_journal_file_size: 10M
+activemq_journal_buffer_timeout: "{{ 500000 if activemq_journal_type == 'ASYNCIO' else 3333333 }}"
+activemq_journal_max_io: "{{ 4096 if activemq_journal_type == 'ASYNCIO' else 1 }}"
+# database configuration for JDBC persistence
 activemq_db_enabled: False
+activemq_db_jdbc_url: 'jdbc:derby:target/derby/database-store;create=true'
+activemq_db_bindings_table: BINDINGS_TABLE
+activemq_db_message_table: MESSAGE_TABLE
+activemq_db_large_message_table: LARGE_MESSAGES_TABLE
+activemq_db_jdbc_driver_class: org.apache.derby.jdbc.EmbeddedDriver
 
 ### Enable TLS
 activemq_tls_enabled: False

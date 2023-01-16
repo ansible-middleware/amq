@@ -20,6 +20,59 @@
   tags:
     - systemd
 
+- name: Include post upgrade tasks
+  ansible.builtin.include_tasks: upgrade.yml
+  when:
+    - instance_directory.stat.exists
+    - new_version_extracted.changed
+
+- name: Setup clustering with jgroups
+  ansible.builtin.include_tasks: jgroups.yml
+  when:
+    - activemq_ha_enabled
+    - activemq_cluster_discovery == 'jgroups'
+
+- name: Include keystore copy tasks
+  ansible.builtin.include_tasks: keystores.yml
+  when:
+    - activemq_tls_enabled
+  tags:
+    - keystores
+
+- name: "Generate broker configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
+  ansible.builtin.include_tasks: configure_broker.yml
+
+- name: Reload systemd
+  become: yes
+  ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler, because of start/flush below
+    daemon_reload: yes
+  when: systemdunit.changed
+
+- name: "Start and wait for {{ activemq.service_name }} service (first node)"
+  ansible.builtin.include_tasks: start.yml
+  run_once: yes
+  when: activemq_db_enabled
+
+- name: "Start and wait for {{ activemq.service_name }} service (remaining nodes)"
+  ansible.builtin.include_tasks: start.yml
+
+- name: Check service status
+  ansible.builtin.command: "systemctl status {{ activemq.instance_name }}"
+  register: activemq_service_status
+  become: yes
+  changed_when: False
+  retries: 6
+  delay: 5
+
+- name: Verify service status
+  ansible.builtin.assert:
+    that:
+      - activemq_service_status is defined
+      - activemq_service_status.stdout is defined
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
 - name: Create default logs directory
   become: yes
   ansible.builtin.file:
