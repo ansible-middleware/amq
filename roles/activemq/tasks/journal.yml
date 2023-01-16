@@ -1,0 +1,31 @@
+---
+- name: Set journal configuration
+  community.general.xml:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
+    xpath: "/conf:configuration/core:core/core:{{ item.key }}"
+    value: "{{ item.value }}"
+    namespaces:
+      conf: urn:activemq
+      core: urn:activemq:core
+    pretty_print: yes
+  become: yes
+  notify:
+    - restart amq_broker
+  loop:
+    - 'persistence-enabled': "{{ activemq_persistence_enabled }}"
+    - 'persist-id-cache': "{{ activemq_persist_id_cache }}"
+    - 'id-cache-size': "{{ activemq_id_cache_size }}"
+    - 'journal-type': "{{ activemq_journal_type }}"
+    - 'paging-directory': "{{ activemq_paging_directory }}"
+    - 'bindings-directory': "{{ activemq_bindings_directory }}"
+    - 'journal-directory': "{{ activemq_journal_directory }}"
+    - 'large-messages-directory': "{{ activemq_large_messages_directory }}"
+    - 'journal-datasync': "{{ activemq_journal_datasync }}"
+    - 'journal-min-files': "{{ activemq_journal_min_files }}"
+    - 'journal-pool-files': "{{ activemq_journal_pool_files }}"
+    - 'journal-device-block-size': "{{ activemq_journal_device_block_size }}"
+    - 'journal-file-size': "{{ activemq_journal_file_size }}"
+    - 'journal-buffer-timeout': "{{ activemq_journal_buffer_timeout }}"
+    - 'journal-max-io': "{{ activemq_journal_max_io }}"
+  loop_control:
+    label: "{{ item.key }}"

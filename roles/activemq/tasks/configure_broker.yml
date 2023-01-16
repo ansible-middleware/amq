@@ -1,0 +1,63 @@
+---
+- name: "Configure AMQ broker logging"
+  become: yes
+  ansible.builtin.template:
+    src: logging.properties.j2
+    dest: "{{ activemq.instance_home }}/etc/logging.properties"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
+    mode: 0644
+  notify:
+    - restart amq_broker
+
+- name: Create user and roles
+  ansible.builtin.include_tasks: user_roles.yml
+  when: activemq_users | length > 0
+
+- name: Configure acceptors
+  ansible.builtin.include_tasks: acceptors.yml
+  when: activemq_acceptors | length > 0
+
+- name: Configure connectors
+  ansible.builtin.include_tasks: connectors.yml
+  when: activemq_connectors | length > 0
+
+- name: Configure journal
+  ansible.builtin.include_tasks: journal.yml
+
+- name: "Configure jolokia access"
+  become: yes
+  ansible.builtin.template:
+    src: jolokia-access.xml.j2
+    dest: "{{ activemq.instance_home }}/etc/jolokia-access.xml"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
+    mode: 0644
+  notify:
+    - restart amq_broker
+
+- name: "Configure prometheus metrics"
+  become: yes
+  when: activemq_prometheus_enabled and amq_broker_enable is defined and amq_broker_enable
+  block:
+    - name: Ensure lib is available to instance
+      ansible.builtin.copy:
+        src: "{{ activemq.home }}/lib/artemis-prometheus-metrics-plugin-1.1.0.redhat-00002.jar"
+        dest: "{{ activemq.instance_home }}/lib/"
+        remote_src: yes
+        owner: "{{ activemq_service_user }}"
+        group: "{{ activemq_service_group }}"
+        mode: 0644
+      notify:
+        - restart amq_broker
+    - name: Configure metrics plugin
+      community.general.xml:
+        path: "{{ activemq.instance_home }}/etc/broker.xml"
+        xpath: /conf:configuration/core:core/core:metrics/core:plugin
+        attribute: class-name
+        value: org.apache.activemq.artemis.core.server.metrics.plugins.ArtemisPrometheusMetricsPlugin
+        namespaces:
+          conf: urn:activemq
+          core: urn:activemq:core
+      notify:
+        - restart amq_broker
