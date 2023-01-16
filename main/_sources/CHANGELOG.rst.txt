@@ -8,6 +8,11 @@ middleware_automation.amq Release Notes
 v1.1.2-devel
 ============
 
+Minor Changes
+-------------
+
+- Add configuration parameters for journal `#43 <https://github.com/ansible-middleware/amq/pull/43>`_
+
 v1.1.1
 ======
 
