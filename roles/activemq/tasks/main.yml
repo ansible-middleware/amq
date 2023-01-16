@@ -39,6 +39,9 @@
   tags:
     - keystores
 
+- name: "Generate broker configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
+  ansible.builtin.include_tasks: configure_broker.yml
+
 - name: Reload systemd
   become: yes
   ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler, because of start/flush below
