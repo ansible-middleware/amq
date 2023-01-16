@@ -84,26 +84,27 @@ Role Defaults
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
-|`activemq_persistence_enabled`| Whether to use the file based journal for persistence" | `True` |
-|`activemq_persist_id_cache`| Whether to persist cache IDs to the journal' | `True` |
-|`activemq_id_cache_size`| The duplicate detection circular cache size' | `20000` |
+|`activemq_persistence_enabled`| Whether to use the file based journal for persistence | `True` |
+|`activemq_persist_id_cache`| Whether to persist cache IDs to the journal | `True` |
+|`activemq_id_cache_size`| The duplicate detection circular cache size | `20000` |
 |`activemq_journal_type`| Journal type, valid values are [ `ASYNCIO`: libaio, `MAPPED`: mmap files, `NIO`: Plain Java Files  ] | `ASYNCIO` |
-|`activemq_paging_directory`| The directory to store paged messages in' | `data/paging` |
-|`activemq_bindings_directory`| The folder in use for the bindings folder' | `data/bindings` |
-|`activemq_journal_directory`| The directory to store the journal files in' | `data/journal` |
-|`activemq_large_messages_directory`| The directory to store large messages' | `data/largemessages` |
-|`activemq_journal_datasync`| Whether to use msync/fsync on journal operations' | `True` |
-|`activemq_journal_min_files`| How many journal files to pre-create' | `2` |
-|`activemq_journal_pool_files`| The upper threshold of the journal file pool, -1 means no Limit' | `-1` |
-|`activemq_journal_device_block_size`| The block size by the device' | `4096` |
-|`activemq_journal_file_size`| The size (in bytes) of each journal file' | `10M` |
-|`activemq_journal_buffer_timeout`| The Flush timeout for the journal buffer' | `500000` if 'ASYNCIO' else `3333333` |
-|`activemq_journal_max_io`| The maximum number of write requests that can be in the ASYNCIO queue at any one time' | `4096` if 'ASYNCIO' else `1` |
-|`activemq_db_jdbc_url`| The full JDBC connection URL for your database server' | `jdbc:derby:target/derby/database-store;create=true` |
-|`activemq_db_bindings_table`| The name of the table in which bindings data will be persisted' | `BINDINGS_TABLE` |
-|`activemq_db_message_table`| The name of the table in which bindings data will be persisted' | `MESSAGE_TABLE` |
-|`activemq_db_large_message_table`| The name of the table in which messages and related data will be persisted' | `LARGE_MESSAGES_TABLE` |
-|`activemq_db_jdbc_driver_class`| The fully qualified class name of the desired database Driver' | `org.apache.derby.jdbc.EmbeddedDriver` |
+|`activemq_paging_directory`| The directory to store paged messages in | `data/paging` |
+|`activemq_bindings_directory`| The folder in use for the bindings folder | `data/bindings` |
+|`activemq_journal_directory`| The directory to store the journal files in | `data/journal` |
+|`activemq_large_messages_directory`| The directory to store large messages | `data/largemessages` |
+|`activemq_journal_datasync`| Whether to use msync/fsync on journal operations | `True` |
+|`activemq_journal_min_files`| How many journal files to pre-create | `2` |
+|`activemq_journal_pool_files`| The upper threshold of the journal file pool, -1 means no Limit | `-1` |
+|`activemq_journal_device_block_size`| The block size by the device | `4096` |
+|`activemq_journal_file_size`| The size (in bytes) of each journal file | `10M` |
+|`activemq_journal_buffer_timeout`| The Flush timeout for the journal buffer | `500000` if 'ASYNCIO' else `3333333` |
+|`activemq_journal_max_io`| The maximum number of write requests that can be in the ASYNCIO queue at any one time | `4096` if 'ASYNCIO' else `1` |
+|`activemq_db_enabled`| Whether to enable JDBC persistence | `False` |
+|`activemq_db_jdbc_url`| The full JDBC connection URL for your database server | `jdbc:derby:target/derby/database-store;create=true` |
+|`activemq_db_bindings_table`| The name of the table in which bindings data will be persisted | `BINDINGS_TABLE` |
+|`activemq_db_message_table`| The name of the table in which bindings data will be persisted | `MESSAGE_TABLE` |
+|`activemq_db_large_message_table`| The name of the table in which messages and related data will be persisted | `LARGE_MESSAGES_TABLE` |
+|`activemq_db_jdbc_driver_class`| The fully qualified class name of the desired database Driver | `org.apache.derby.jdbc.EmbeddedDriver` |
 
 
 * Acceptors / connectors
@@ -207,7 +208,6 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_jmx_exporter_enabled`| Enable install and configuration of prometheus-jmx-exporter | `False` |
 |`activemq_prometheus_enabled`| Enable install and configuration of prometheus metrics plugin | `False` |
 |`activemq_name`| Human readable service name | `Apache ActiveMQ` |
-|`activemq_db_enabled`| Whether to enable JDBC persistence | `False` |
 |`activemq_config_dir`| Broker instance configuration directory | `conf` |
 |`activemq_config_xml`| Broker instance configuration file | `amq-broker.xml` |
 |`activemq_config_override_template`| Filename of custom broker xml configuration file to be deployed | `` |
