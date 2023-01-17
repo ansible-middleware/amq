@@ -10,6 +10,7 @@
   loop: "{{ activemq_users }}"
   loop_control:
     label: "{{ item.user }}"
+  no_log: True
 
 - name: Configure users
   ansible.builtin.template:

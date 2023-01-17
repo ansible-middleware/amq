@@ -6,6 +6,7 @@
   loop_control:
     loop_var: acceptor
     label: "{{ acceptor.name }}"
+  no_log: True
 
 - name: Create acceptor configuration in broker.xml
   community.general.xml:
@@ -18,5 +19,6 @@
       core: urn:activemq:core
     pretty_print: yes
   become: yes
+  no_log: True
   notify:
     - restart amq_broker
