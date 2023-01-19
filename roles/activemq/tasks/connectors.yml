@@ -23,20 +23,25 @@
   notify:
     - restart amq_broker
 
-- name: Create cluster connections configuration string
-  ansible.builtin.set_fact:
-    cluster_connections: "{{ lookup('template', 'cluster_connections.broker.xml.j2') }}"
+- name: Configure static cluster
+  when:
+    - activemq_cluster_discovery == 'static'
+    - activemq_ha_enabled
+  block:
+    - name: Create cluster connections configuration string
+      ansible.builtin.set_fact:
+        cluster_connections: "{{ lookup('template', 'cluster_connections.broker.xml.j2') }}"
 
-- name: Create cluster connections in broker.xml
-  community.general.xml:
-    path: "{{ activemq.instance_home }}/etc/broker.xml"
-    xpath: /conf:configuration/core:core/core:cluster-connections
-    input_type: xml
-    set_children: "{{ cluster_connections }}"
-    namespaces:
-      conf: urn:activemq
-      core: urn:activemq:core
-    pretty_print: yes
-  become: yes
-  notify:
-    - restart amq_broker
+    - name: Create cluster connections in broker.xml
+      community.general.xml:
+        path: "{{ activemq.instance_home }}/etc/broker.xml"
+        xpath: /conf:configuration/core:core/core:cluster-connections
+        input_type: xml
+        set_children: "{{ cluster_connections }}"
+        namespaces:
+          conf: urn:activemq
+          core: urn:activemq:core
+        pretty_print: yes
+      become: yes
+      notify:
+        - restart amq_broker
