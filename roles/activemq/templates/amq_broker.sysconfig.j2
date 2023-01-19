@@ -10,5 +10,9 @@ ARTEMIS_INSTANCE_URI='file:{{ activemq.instance_home }}/'
 ARTEMIS_INSTANCE_ETC_URI='file:{{ activemq.instance_home }}/etc/'
 ARTEMIS_HOME='{{ activemq.home }}'
 ARTEMIS_INSTANCE='{{ activemq.instance_home }}'
+{% if activemq_shared_storage %}
+ARTEMIS_DATA_DIR='{{ activemq_shared_storage_path }}'
+{% else %}
 ARTEMIS_DATA_DIR='{{ activemq.instance_home }}/data'
+{% endif %}
 ARTEMIS_ETC_DIR='{{ activemq.instance_home }}/etc'
