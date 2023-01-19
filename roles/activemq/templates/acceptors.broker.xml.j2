@@ -1,1 +1,1 @@
-         <acceptor name="{{ acceptor.name }}">tcp://{{ acceptor.bind_address }}:{{ acceptor.bind_port }}?{% for param in lookup('ansible.builtin.dict', acceptor.parameters) %}{{ param.key }}={{ param.value }};{% endfor %}</acceptor>
+         <acceptor name="{{ acceptor.name }}">tcp://{{ acceptor.bind_address }}:{{ acceptor.bind_port }}?{% for param in lookup('ansible.builtin.dict', acceptor.parameters, wantlist=True) %}{{ param.key }}={{ param.value }};{% endfor %}</acceptor>
