@@ -16,6 +16,7 @@ Minor Changes
 Bugfixes
 --------
 
+- Fix templating error when acceptors or connectors have a single parameter `#47 <https://github.com/ansible-middleware/amq/pull/47>`_
 - Hide secrets from playbook output `#45 <https://github.com/ansible-middleware/amq/pull/45>`_
 
 v1.1.1
