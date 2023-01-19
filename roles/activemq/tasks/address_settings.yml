@@ -1,0 +1,22 @@
+---
+- name: Create address settings configuration string
+  ansible.builtin.set_fact:
+    address_settings: "{{ address_settings | default([]) + [ lookup('template', 'address_settings.broker.xml.j2') ] }}"
+  loop: "{{ activemq_address_settings }}"
+  loop_control:
+    loop_var: address_setting
+    label: "{{ address_setting.match }}"
+
+- name: Create address settings configuration in broker.xml
+  community.general.xml:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
+    xpath: /conf:configuration/core:core/core:address-settings
+    input_type: xml
+    set_children: "{{ address_settings }}"
+    namespaces:
+      conf: urn:activemq
+      core: urn:activemq:core
+    pretty_print: yes
+  become: yes
+  notify:
+    - restart amq_broker

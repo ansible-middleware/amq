@@ -1,0 +1,6 @@
+         <cluster-connection name="{{ activemq_service_name }}">
+            <connector-ref>{% for param in activemq_connectors %}{% if param.address == 'localhost' or param.address == inventory_hostname %}{{ param.name }}{% endif %}{% endfor %}</connector-ref>
+            <static-connectors>
+               {% for param in activemq_connectors %}<connector-ref>{{ param.name }}</connector-ref>{% endfor %}
+            </static-connectors>
+         </cluster-connection>
