@@ -13,6 +13,8 @@
 - name: Create user and roles
   ansible.builtin.include_tasks: user_roles.yml
   when: activemq_users | length > 0
+  tags:
+    - users
 
 - name: Configure acceptors
   ansible.builtin.include_tasks: acceptors.yml

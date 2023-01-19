@@ -23,7 +23,9 @@
 - name: Include post upgrade tasks
   ansible.builtin.include_tasks: upgrade.yml
   when:
+    - instance_directory is defined
     - instance_directory.stat.exists
+    - new_version_extracted is defined
     - new_version_extracted.changed
 
 - name: Setup clustering with jgroups
@@ -46,7 +48,9 @@
   become: yes
   ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler, because of start/flush below
     daemon_reload: yes
-  when: systemdunit.changed
+  when:
+    - systemdunit is defined
+    - systemdunit.changed
 
 - name: "Start and wait for {{ activemq.service_name }} service (first node)"
   ansible.builtin.include_tasks: start.yml
