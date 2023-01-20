@@ -10,7 +10,7 @@
   notify:
     - restart amq_broker
 
-- name: Reset internal variables
+- name: Set internal variables
   ansible.builtin.set_fact:
     security_settings: []
     management_access_default: []
