@@ -56,6 +56,7 @@
 
 - name: Ensure required packages are installed
   ansible.builtin.dnf:
-    name: prometheus-jmx-exporter
+    name: prometheus-jmx-exporter-openjdk11
     state: present
   when: activemq_jmx_exporter_enabled
+  become: yes
