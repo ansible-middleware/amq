@@ -70,6 +70,7 @@
     activemq_options:
       - "{{ activemq_options | join(' ') }}"
       - "--http-host {{ activemq_bind_address }}"
+      - "--http-port {{ activemq_http_port }}"
 
 - name: Disable automatic creation of queues
   ansible.builtin.set_fact:
