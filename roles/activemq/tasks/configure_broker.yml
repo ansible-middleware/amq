@@ -65,7 +65,7 @@
       register: prometheus_filename
     - name: Ensure lib is available to instance
       ansible.builtin.copy:
-        src: "{{ activemq.home }}/lib/{{ prometheus_filename.files[0].path }}"
+        src: "{{ prometheus_filename.files[0].path }}"
         dest: "{{ activemq.instance_home }}/lib/"
         remote_src: yes
         owner: "{{ activemq_service_user }}"
