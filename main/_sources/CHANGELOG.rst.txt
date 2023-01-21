@@ -11,6 +11,7 @@ v1.1.2-devel
 Minor Changes
 -------------
 
+- Add address/queue configuration `#51 <https://github.com/ansible-middleware/amq/pull/51>`_
 - Add configuration parameters for journal `#43 <https://github.com/ansible-middleware/amq/pull/43>`_
 - Add configuration variables for address settings `#49 <https://github.com/ansible-middleware/amq/pull/49>`_
 - New flags make systemd unit wait for activemq ports or logs `#50 <https://github.com/ansible-middleware/amq/pull/50>`_

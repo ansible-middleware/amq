@@ -476,6 +476,35 @@ To install, from the collection root directory, run:</p>
 </pre></div>
 </div>
 <ul class="simple">
+<li><p>Addresses configuration</p></li>
+</ul>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-left head"><p>Variable</p></th>
+<th class="text-left head"><p>Description</p></th>
+<th class="text-left head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_addresses</span></code></p></td>
+<td class="text-left"><p>Addresses/queue configuration; list of <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">name,</span> <span class="pre">[anycast</span> <span class="pre">or</span> <span class="pre">multicast],</span> <span class="pre">and</span> <span class="pre">parameters</span> <span class="pre">}</span></code></p></td>
+<td class="text-left"><p>Generate same configuration as <code class="docutils literal notranslate"><span class="pre">artemis</span> <span class="pre">create</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Sample addresses:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpiryQueue</span>
+<span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpiryQueue</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Virtual</span>
+<span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Virtual</span>
+<span class="w">        </span><span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;discard=&#39;true&#39;&quot;</span>
+<span class="w">        </span><span class="nt">max_consumers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">        </span><span class="nt">consumers_before_dispatch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+<ul class="simple">
 <li><p>Address settings</p></li>
 </ul>
 <table class="colwidths-auto docutils align-default">
@@ -747,8 +776,8 @@ To install, from the collection root directory, run:</p>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">java.lang</span></code>, <code class="docutils literal notranslate"><span class="pre">org.apache.artemis.activemq</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cors_allow_origin</span></code></p></td>
-<td class="text-left"><p>CORS allow origin setting for jolokia</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">*://0.0.0.0*</span></code></p></td>
+<td class="text-left"><p>List of CORS allow origin setting for jolokia</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">*://0.0.0.0*</span> <span class="pre">]</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cors_strict_checking</span></code></p></td>
 <td class="text-left"><p>Whether to enforce strict checking for CORS</p></td>
