@@ -1,0 +1,22 @@
+---
+- name: Create diverts configuration string
+  ansible.builtin.set_fact:
+    diverts: "{{ diverts | default([]) + [ lookup('template', 'diverts.broker.xml.j2') ] }}"
+  loop: "{{ activemq_diverts }}"
+  loop_control:
+    loop_var: divert
+    label: "{{ divert.name }}"
+
+- name: Create diverts configuration in broker.xml
+  community.general.xml:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
+    xpath: /conf:configuration/core:core/core:diverts
+    input_type: xml
+    set_children: "{{ diverts }}"
+    namespaces:
+      conf: urn:activemq
+      core: urn:activemq:core
+    pretty_print: yes
+  become: yes
+  notify:
+    - restart amq_broker
