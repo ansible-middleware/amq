@@ -14,6 +14,7 @@ Minor Changes
 - Add address/queue configuration `#51 <https://github.com/ansible-middleware/amq/pull/51>`_
 - Add configuration parameters for journal `#43 <https://github.com/ansible-middleware/amq/pull/43>`_
 - Add configuration variables for address settings `#49 <https://github.com/ansible-middleware/amq/pull/49>`_
+- Add diverts configuration `#52 <https://github.com/ansible-middleware/amq/pull/52>`_
 - New flags make systemd unit wait for activemq ports or logs `#50 <https://github.com/ansible-middleware/amq/pull/50>`_
 
 Bugfixes
