@@ -7,6 +7,17 @@
     loop_var: divert
     label: "{{ divert.name }}"
 
+- name: Ensure diverts element exists in broker.xml
+  community.general.xml:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
+    xpath: /conf:configuration/core:core/core:diverts
+    input_type: xml
+    state: present
+    namespaces:
+      conf: urn:activemq
+      core: urn:activemq:core
+    pretty_print: yes
+
 - name: Create diverts configuration in broker.xml
   community.general.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"

@@ -41,6 +41,13 @@
           amqpCredits: 1000
           amqpLowCredits: 300
           amqpDuplicateDetection: true
+    activemq_diverts:
+      - name: TESTDIVERT
+        address: queue.in
+        forwarding_address: queue.out
+        routing_type: ANYCAST
+        filter: "msgType LIKE '%ff%'"
+        exclusive: True
   collections:
     - middleware_automation.redhat_csp_download
   roles:

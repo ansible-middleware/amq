@@ -70,3 +70,25 @@
       failed_when:
         - this.value is true
         - this.status is 200
+
+    - name: Check diverts element exists in broker.xml
+      community.general.xml:
+        path: "/opt/amq/amq-broker/etc/broker.xml"
+        xpath: /conf:configuration/core:core/core:diverts/core:divert
+        input_type: xml
+        state: present
+        content: attribute
+        namespaces:
+          conf: urn:activemq
+          core: urn:activemq:core
+        pretty_print: yes
+      register: diverts
+
+    - debug: var=diverts
+
+    - name: Check created divert configuration
+      ansible.builtin.assert:
+        that:
+          - diverts.count == 1
+        quiet: true
+        fail_msg: "Failed to retrieve generated divert"

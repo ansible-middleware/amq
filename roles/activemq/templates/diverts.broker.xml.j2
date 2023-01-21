@@ -2,6 +2,6 @@
            <address>{{ divert.address }}</address>
            <forwarding-address>{{ divert.forwarding_address }}</forwarding-address>
            <routing-type>{{ divert.routing_type | default('ANYCAST') }}</routing-type>
-           {% if divert.filter is defined %}<filter string="{{ divert.filter }}"/>{% endif %}
-           <exclusive>{{ divert.exclusive | default('false') | lower }}</exclusive>
+{% if divert.filter is defined %}           <filter string="{{ divert.filter }}"/>
+{% endif %}           <exclusive>{{ divert.exclusive | default('false') | lower }}</exclusive>
         </divert>
