@@ -395,7 +395,11 @@ argument_specs:
                 default: "Generate same configuration as `artemis create`"
                 type: "list"
             activemq_address_settings:
-                description: "Address settings configuration; list of `{ match address string and parameters }`"
+                description: "Address settings configuration; list of `{ match address string, and parameters }`"
+                default: "Generate same configuration as `artemis create`"
+                type: "list"
+            activemq_addresses:
+                description: "Address/queue configuration; list of `{ name, [anycast|multicast], and parameters }`"
                 default: "Generate same configuration as `artemis create`"
                 type: "list"
             activemq_service_override_template:

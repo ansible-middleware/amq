@@ -151,6 +151,27 @@ Sample connector with TLS:
 ```
 
 
+* Addresses configuration
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`activemq_addresses`| Addresses/queue configuration; list of `{ name, [anycast|multicast], and parameters }` | "Generate same configuration as `artemis create`" |
+
+Sample addresses:
+
+```
+  - name: ExpiryQueue
+    anycast:
+      - name: ExpiryQueue
+  - name: Virtual
+    anycast:
+      - name: Virtual
+        filter: 'discard="true"'
+        max_consumers: 5
+        consumers_before_dispatch: 1
+```
+
+
 * Address settings
 
 | Variable | Description | Default |
