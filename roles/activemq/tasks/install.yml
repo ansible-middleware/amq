@@ -59,6 +59,7 @@
     path: "{{ activemq_local_archive_repository }}"
   register: local_path
   delegate_to: localhost
+  run_once: yes
 
 - name: Download AMQ archive
   ansible.builtin.get_url: # noqa risky-file-permissions delegated, uses controller host user
@@ -66,6 +67,7 @@
     dest: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
     mode: 0640
   delegate_to: localhost
+  run_once: yes
   when:
     - archive_path is defined
     - archive_path.stat is defined
@@ -81,6 +83,7 @@
     password: "{{ rhn_password }}"
   no_log: "{{ omit_rhn_output | default(true) }}"
   delegate_to: localhost
+  run_once: yes
   when:
     - archive_path is defined
     - archive_path.stat is defined
@@ -95,6 +98,7 @@
     dest: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
     mode: 0640
   delegate_to: localhost
+  run_once: yes
   when:
     - archive_path is defined
     - archive_path.stat is defined
