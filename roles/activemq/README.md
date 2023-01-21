@@ -206,8 +206,8 @@ Sample divert:
 ```
   - name: SAMPLEDIVERT
     address: FROMQUEUE
-    forwarding-address: TOQUEUE
-    routing-type: ANYCAST
+    forwarding_address: TOQUEUE
+    routing_type: ANYCAST
     filter: "msgType LIKE '%ff%'"
     exclusive: True
 ```
