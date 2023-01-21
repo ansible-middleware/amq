@@ -53,6 +53,7 @@ activemq_replicate: False
 activemq_replicated: False
 # cluster discovery: ['jgroups' for shared file ping, 'multicast' for UDP multicast, 'static' for static declaration]
 activemq_cluster_discovery: static
+activemq_systemd_wait_for_port: "{{ activemq_ha_enabled }}"
 
 ### Enable persistence and persistence options
 activemq_persistence_enabled: True

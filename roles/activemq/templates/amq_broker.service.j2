@@ -17,6 +17,9 @@ RestartSec = 60
 Restart = on-failure
 LimitNOFILE=102642
 TimeoutSec=600
+{% if activemq_systemd_wait_for_port %}
+ExecStartPost=/usr/bin/timeout 60 sh -c 'while ! ss -H -t -l -n sport = :{{ activemq_port }} | grep -q "^LISTEN.*:{{ activemq_port }}"; do sleep 1; done'
+{% endif %}
 
 [Install]
 WantedBy=multi-user.target

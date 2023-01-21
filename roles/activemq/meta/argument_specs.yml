@@ -482,6 +482,10 @@ argument_specs:
                 description: 'The fully qualified class name of the desired database Driver'
                 default: 'org.apache.derby.jdbc.EmbeddedDriver'
                 type: "str"
+            activemq_systemd_wait_for_port:
+                description: 'Whether systemd unit should wait for activemq port before returning'
+                default: "{{ activemq_ha_enabled }}"
+                type: 'bool'
     downstream:
         options:
             amq_broker_version:

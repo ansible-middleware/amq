@@ -49,6 +49,7 @@
     packages_list:
       - "{{ activemq_jvm_package }}"
       - unzip
+      - iproute
       - procps-ng
       - initscripts
       - libaio
