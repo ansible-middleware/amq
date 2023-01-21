@@ -50,6 +50,7 @@
       - "{{ activemq_jvm_package }}"
       - unzip
       - iproute
+      - sed
       - procps-ng
       - initscripts
       - libaio

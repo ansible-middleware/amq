@@ -13,12 +13,15 @@ PIDFile={{ activemq.instance_home }}/{{ activemq_service_pidfile }}
 ExecStart={{ activemq.instance_home }}/bin/artemis-service start
 ExecStop={{ activemq.instance_home }}/bin/artemis-service stop
 SuccessExitStatus = 0 143
-RestartSec = 60
+RestartSec = 120
 Restart = on-failure
 LimitNOFILE=102642
 TimeoutSec=600
 {% if activemq_systemd_wait_for_port %}
 ExecStartPost=/usr/bin/timeout 60 sh -c 'while ! ss -H -t -l -n sport = :{{ activemq_port }} | grep -q "^LISTEN.*:{{ activemq_port }}"; do sleep 1; done'
+{% endif %}
+{% if activemq_systemd_wait_for_log %}
+ExecStartPost=/usr/bin/timeout 60 sh -c 'tail -f /var/log/{{ activemq.service_name }}/{{ activemq.instance_name }}/artemis.log | sed "/AMQ221034/ q"'
 {% endif %}
 
 [Install]
