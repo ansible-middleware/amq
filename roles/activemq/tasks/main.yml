@@ -20,13 +20,31 @@
   tags:
     - systemd
 
+- name: "Check target directory profile version"
+  when:
+    - path_to_workdir is defined
+    - path_to_workdir.stat.exists
+  become: yes
+  block:
+    - name: Reset upgrade flag
+      ansible.builtin.set_fact:
+        needs_upgrade: no
+    - name: Read profile file
+      ansible.builtin.slurp:
+        src: "{{ activemq.instance_home }}/etc/artemis.profile"
+      register: profile_file
+    - name: Set upgrade flag
+      ansible.builtin.set_fact:
+        needs_upgrade: yes
+      when: profile_file.content | b64decode | regex_search("ARTEMIS_HOME='" + activemq_installdir + "'", multiline=True) | length == 0
+
 - name: Include post upgrade tasks
   ansible.builtin.include_tasks: upgrade.yml
   when:
     - instance_directory is defined
     - instance_directory.stat.exists
-    - new_version_extracted is defined
-    - new_version_extracted.changed
+    - needs_upgrade is defined
+    - needs_upgrade
 
 - name: Setup clustering with jgroups
   ansible.builtin.include_tasks: jgroups.yml
