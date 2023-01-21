@@ -151,6 +151,27 @@ Sample connector with TLS:
 ```
 
 
+* Addresses configuration
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`activemq_addresses`| Addresses/queue configuration; list of `{ name, [anycast or multicast], and parameters }` | Generate same configuration as `artemis create` |
+
+Sample addresses:
+
+```
+  - name: ExpiryQueue
+    anycast:
+      - name: ExpiryQueue
+  - name: Virtual
+    anycast:
+      - name: Virtual
+        filter: "discard='true'"
+        max_consumers: 5
+        consumers_before_dispatch: 1
+```
+
+
 * Address settings
 
 | Variable | Description | Default |
@@ -248,7 +269,7 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_hawtio_role`| Artemis role for hawtio console access | `amq` |
 |`activemq_management_access_default`| Management console access methods for roles in `activemq_hawtio_role` | `[ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]` |
 |`activemq_management_access_domains`| Management console access methods per domain for roles in `activemq_hawtio_role` | `java.lang`, `org.apache.artemis.activemq` |
-|`activemq_cors_allow_origin`| CORS allow origin setting for jolokia | `*://0.0.0.0*` |
+|`activemq_cors_allow_origin`| List of CORS allow origin setting for jolokia | `[ *://0.0.0.0* ]` |
 |`activemq_cors_strict_checking`| Whether to enforce strict checking for CORS | `True` |
 
 Sample user/role configuration with one admin, a consumer and a producer:
