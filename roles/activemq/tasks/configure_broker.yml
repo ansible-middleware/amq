@@ -19,6 +19,7 @@
     acceptors: []
     connectors: []
     address_settings: []
+    diverts: []
 
 - name: Create user and roles
   ansible.builtin.include_tasks: user_roles.yml
@@ -44,6 +45,10 @@
 - name: Configure address settings
   ansible.builtin.include_tasks: address_settings.yml
   when: activemq_address_settings | length > 0
+
+- name: Configure diverts
+  ansible.builtin.include_tasks: diverts.yml
+  when: activemq_diverts | length > 0
 
 - name: "Configure jolokia access"
   become: yes

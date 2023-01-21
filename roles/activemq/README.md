@@ -195,6 +195,24 @@ Sample address settings:
 ```
 
 
+* Diverts configuration
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`activemq_diverts`| Diverts configuration; list of `{ name with parameters }` | `[]` |
+
+Sample divert:
+
+```
+  - name: SAMPLEDIVERT
+    address: FROMQUEUE
+    forwarding-address: TOQUEUE
+    routing-type: ANYCAST
+    filter: "msgType LIKE '%ff%'"
+    exclusive: True
+```
+
+
 * Clustering
 
 | Variable | Description | Default |

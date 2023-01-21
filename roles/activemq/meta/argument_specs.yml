@@ -402,6 +402,10 @@ argument_specs:
                 description: "Address/queue configuration; list of `{ name, [anycast|multicast], and parameters }`"
                 default: "Generate same configuration as `artemis create`"
                 type: "list"
+            activemq_diverts:
+                description: "Diverts configuration; list of `{ name with parameters }`"
+                default: "[]"
+                type: "list"
             activemq_service_override_template:
                 description: "Filename of custom systemd unit template to be deployed"
                 default: ""
