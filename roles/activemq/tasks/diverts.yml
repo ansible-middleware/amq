@@ -17,6 +17,7 @@
       conf: urn:activemq
       core: urn:activemq:core
     pretty_print: yes
+  become: yes
 
 - name: Create diverts configuration in broker.xml
   community.general.xml:
