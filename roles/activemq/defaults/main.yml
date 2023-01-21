@@ -281,6 +281,3 @@ activemq_address_settings:
     auto_create_jms_topics: false
     auto_delete_queues: false
     auto_delete_addresses: false
-
-### Divert configuration
-activemq_diverts: []
