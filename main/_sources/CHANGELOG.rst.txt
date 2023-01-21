@@ -5,8 +5,13 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
-v1.1.2-devel
+v1.2.0-devel
 ============
+
+Major Changes
+-------------
+
+- Type for ``activemq_cors_allow_origin`` changed from string to list of strings `#53 <https://github.com/ansible-middleware/amq/pull/53>`_
 
 Minor Changes
 -------------
