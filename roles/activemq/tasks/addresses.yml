@@ -1,0 +1,22 @@
+---
+- name: Create addresses string
+  ansible.builtin.set_fact:
+    addresses: "{{ addresses | default([]) + [ lookup('template', 'addresses.broker.xml.j2') ] }}"
+  loop: "{{ activemq_addresses }}"
+  loop_control:
+    loop_var: address
+    label: "{{ address.name }}"
+
+- name: Create addresses configuration in broker.xml
+  community.general.xml:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
+    xpath: /conf:configuration/core:core/core:addresses
+    input_type: xml
+    set_children: "{{ addresses }}"
+    namespaces:
+      conf: urn:activemq
+      core: urn:activemq:core
+    pretty_print: yes
+  become: yes
+  notify:
+    - restart amq_broker

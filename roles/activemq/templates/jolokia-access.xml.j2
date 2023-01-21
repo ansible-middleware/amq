@@ -23,7 +23,9 @@ under the License.
    see: https://jolokia.org/reference/html/security.html -->
 <restrict>
     <cors>
-        <allow-origin>{{ activemq_cors_allow_origin }}</allow-origin>
+{% for origin in activemq_cors_allow_origin %}
+        <allow-origin>{{ origin }}</allow-origin>
+{% endfor %}
 {% if activemq_cors_strict_checking %}        <strict-checking/>
 {% endif %}
     </cors>

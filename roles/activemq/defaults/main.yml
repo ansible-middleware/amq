@@ -123,7 +123,7 @@ activemq_management_access_domains:
 
 # Jolokia
 activemq_hawtio_role: amq
-activemq_cors_allow_origin: '*://0.0.0.0*'
+activemq_cors_allow_origin: [ '*://0.0.0.0*' ]
 activemq_cors_strict_checking: True
 
 # NIO option
@@ -240,6 +240,21 @@ activemq_connectors:
       supportAdvisory: false
       suppressInternalManagementObjects: false
 
+### Addresses configuration
+activemq_addresses:
+  - name: queue.in
+    anycast:
+      - name: queue.in
+  - name: queue.out
+    anycast:
+      - name: queue.out
+  - name: DLQ
+    anycast:
+      - name: DLQ
+  - name: ExpiryQueue
+    anycast:
+      - name: ExpiryQueue
+
 ### Address settings configuration
 activemq_address_settings:
   - match: activemq.management#
@@ -266,3 +281,6 @@ activemq_address_settings:
     auto_create_jms_topics: false
     auto_delete_queues: false
     auto_delete_addresses: false
+
+### Divert configuration
+activemq_diverts: []
