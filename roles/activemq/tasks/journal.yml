@@ -27,5 +27,6 @@
     - journal_file_size
     - journal_buffer_timeout
     - journal_max_io
+    - configuration_file_refresh_period
   loop_control:
     label: "{{ item }}"
