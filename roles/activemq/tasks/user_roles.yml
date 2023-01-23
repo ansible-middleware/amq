@@ -47,6 +47,8 @@
       core: urn:activemq:core
     pretty_print: yes
   become: yes
+  notify:
+    - restart amq_broker with no config refresh
 
 - name: "Update hawtio role"
   ansible.builtin.lineinfile:

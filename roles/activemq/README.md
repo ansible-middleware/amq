@@ -78,6 +78,7 @@ Role Defaults
 |`activemq_shared_storage_mounted`| Whether the systemd unit must require a mounted path (only when using shared storage) | `True` |
 |`activemq_disable_destination_autocreate`| Disable automatic creation of destination | `True` |
 |`activemq_queues`| Queue names comma separated | `queue.in,queue.out` |
+|`activemq_configuration_refresh_period`| Periodic refresh of configuration in milliseconds; can be disabled by specifying -1 | `5000` |
 
 
 * Journal configuration

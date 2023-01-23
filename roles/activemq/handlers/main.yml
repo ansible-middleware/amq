@@ -2,3 +2,8 @@
 - name: "Restart handler"
   ansible.builtin.include_tasks: restart.yml
   listen: "restart amq_broker"
+
+- name: "Restart handler"
+  ansible.builtin.include_tasks: restart.yml
+  when: activemq_configuration_refresh_period < 1
+  listen: "restart amq_broker with no config refresh"
