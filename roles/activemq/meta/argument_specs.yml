@@ -498,7 +498,7 @@ argument_specs:
                 description: 'Whether systemd unit should wait for service to be up in logs'
                 default: "{{ activemq_ha_enabled and activemq_shared_storage }}"
                 type: 'bool'
-            activemq_configuration_refresh_period:
+            activemq_configuration_file_refresh_period:
                 description: 'Periodic refresh of configuration in milliseconds; can be disabled by specifying -1'
                 default: 5000
                 type: 'int'
