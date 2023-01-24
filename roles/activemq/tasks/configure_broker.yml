@@ -20,6 +20,7 @@
     connectors: []
     address_settings: []
     diverts: []
+    masked_users: []
 
 - name: Create user and roles
   ansible.builtin.include_tasks: user_roles.yml
