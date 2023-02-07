@@ -85,6 +85,7 @@ Role Defaults
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
+|`activemq_data_directory`| The activemq data directory path | `data/`, or the value of `activemq_shared_storage_path` if activemq_shared_storage is set |
 |`activemq_persistence_enabled`| Whether to use the file based journal for persistence | `True` |
 |`activemq_persist_id_cache`| Whether to persist cache IDs to the journal | `True` |
 |`activemq_id_cache_size`| The duplicate detection circular cache size | `20000` |
