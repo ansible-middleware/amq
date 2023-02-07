@@ -114,9 +114,59 @@ releases:
       - 'Add systemd RequiresMountsFor and unit custom template `#36 <https://github.com/ansible-middleware/amq/pull/36>`_
 
         '
-      - 'Stop using ansible.builtin.command module arguments incompatible with ansible 2.14
+      - 'Stop using ansible.builtin.command module arguments incompatible with ansible
+        2.14
 
         '
     fragments:
     - 36.yaml
     release_date: '2023-01-03'
+  1.2.0:
+    changes:
+      bugfixes:
+      - 'Add ``activemq_data_directory`` variable `#57 <https://github.com/ansible-middleware/amq/pull/57>`_
+
+        '
+      - 'Fix templating error when acceptors or connectors have a single parameter
+        `#47 <https://github.com/ansible-middleware/amq/pull/47>`_
+
+        '
+      - 'Hide secrets from playbook output `#45 <https://github.com/ansible-middleware/amq/pull/45>`_
+
+        '
+      major_changes:
+      - 'Type for ``activemq_cors_allow_origin`` changed from string to list of strings
+        `#53 <https://github.com/ansible-middleware/amq/pull/53>`_
+
+        '
+      minor_changes:
+      - 'Add address/queue configuration `#51 <https://github.com/ansible-middleware/amq/pull/51>`_
+
+        '
+      - 'Add configuration parameters for journal `#43 <https://github.com/ansible-middleware/amq/pull/43>`_
+
+        '
+      - 'Add configuration variables for address settings `#49 <https://github.com/ansible-middleware/amq/pull/49>`_
+
+        '
+      - 'Add diverts configuration `#52 <https://github.com/ansible-middleware/amq/pull/52>`_
+
+        '
+      - 'Don''t trigger restarts when config auto-refresh is enabled `#54 <https://github.com/ansible-middleware/amq/pull/54>`_
+
+        '
+      - 'New flags make systemd unit wait for activemq ports or logs `#50 <https://github.com/ansible-middleware/amq/pull/50>`_
+
+        '
+    fragments:
+    - 43.yaml
+    - 45.yaml
+    - 47.yaml
+    - 49.yaml
+    - 50.yaml
+    - 51.yaml
+    - 52.yaml
+    - 53.yaml
+    - 54.yaml
+    - 57.yaml
+    release_date: '2023-02-07'
