@@ -340,87 +340,91 @@ To install, from the collection root directory, run:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_persistence_enabled</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_data_directory</span></code></p></td>
+<td class="text-left"><p>The activemq data directory path</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/</span></code>, or the value of <code class="docutils literal notranslate"><span class="pre">activemq_shared_storage_path</span></code> if activemq_shared_storage is set</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_persistence_enabled</span></code></p></td>
 <td class="text-left"><p>Whether to use the file based journal for persistence</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_persist_id_cache</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_persist_id_cache</span></code></p></td>
 <td class="text-left"><p>Whether to persist cache IDs to the journal</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_id_cache_size</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_id_cache_size</span></code></p></td>
 <td class="text-left"><p>The duplicate detection circular cache size</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">20000</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_type</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_type</span></code></p></td>
 <td class="text-left"><p>Journal type, valid values are [ <code class="docutils literal notranslate"><span class="pre">ASYNCIO</span></code>: libaio, <code class="docutils literal notranslate"><span class="pre">MAPPED</span></code>: mmap files, <code class="docutils literal notranslate"><span class="pre">NIO</span></code>: Plain Java Files  ]</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ASYNCIO</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_paging_directory</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_paging_directory</span></code></p></td>
 <td class="text-left"><p>The directory to store paged messages in</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/paging</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_bindings_directory</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_bindings_directory</span></code></p></td>
 <td class="text-left"><p>The folder in use for the bindings folder</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/bindings</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_directory</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_directory</span></code></p></td>
 <td class="text-left"><p>The directory to store the journal files in</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/journal</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_large_messages_directory</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_large_messages_directory</span></code></p></td>
 <td class="text-left"><p>The directory to store large messages</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/largemessages</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_datasync</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_datasync</span></code></p></td>
 <td class="text-left"><p>Whether to use msync/fsync on journal operations</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_min_files</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_min_files</span></code></p></td>
 <td class="text-left"><p>How many journal files to pre-create</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_pool_files</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_pool_files</span></code></p></td>
 <td class="text-left"><p>The upper threshold of the journal file pool, -1 means no Limit</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-1</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_device_block_size</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_device_block_size</span></code></p></td>
 <td class="text-left"><p>The block size by the device</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">4096</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_file_size</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_file_size</span></code></p></td>
 <td class="text-left"><p>The size (in bytes) of each journal file</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">10M</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_buffer_timeout</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_buffer_timeout</span></code></p></td>
 <td class="text-left"><p>The Flush timeout for the journal buffer</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">500000</span></code> if ‘ASYNCIO’ else <code class="docutils literal notranslate"><span class="pre">3333333</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_max_io</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_max_io</span></code></p></td>
 <td class="text-left"><p>The maximum number of write requests that can be in the ASYNCIO queue at any one time</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">4096</span></code> if ‘ASYNCIO’ else <code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_enabled</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_enabled</span></code></p></td>
 <td class="text-left"><p>Whether to enable JDBC persistence</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_jdbc_url</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_jdbc_url</span></code></p></td>
 <td class="text-left"><p>The full JDBC connection URL for your database server</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">jdbc:derby:target/derby/database-store;create=true</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_bindings_table</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_bindings_table</span></code></p></td>
 <td class="text-left"><p>The name of the table in which bindings data will be persisted</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">BINDINGS_TABLE</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_message_table</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_message_table</span></code></p></td>
 <td class="text-left"><p>The name of the table in which bindings data will be persisted</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">MESSAGE_TABLE</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_large_message_table</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_large_message_table</span></code></p></td>
 <td class="text-left"><p>The name of the table in which messages and related data will be persisted</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">LARGE_MESSAGES_TABLE</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_jdbc_driver_class</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_jdbc_driver_class</span></code></p></td>
 <td class="text-left"><p>The fully qualified class name of the desired database Driver</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">org.apache.derby.jdbc.EmbeddedDriver</span></code></p></td>
 </tr>
