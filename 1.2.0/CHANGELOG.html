@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>middleware_automation.amq Release Notes &mdash; AMQ Ansible Collection  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/ansible-basic-sphinx-ext.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Collection Versioning Strategy" href="releasing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> AMQ Ansible Collection
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Ansible Collection - AMQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins/index.html">Plugin Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roles/index.html">Role Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing.html">Contributor’s Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releasing.html">Collection Versioning Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v1-2-0">v1.2.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#major-changes">Major Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#minor-changes">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bugfixes">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-1-1">v1.1.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-1-0">v1.1.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Major Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#breaking-changes-porting-guide">Breaking Changes / Porting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-0-0">v1.0.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id28">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-0-3">v0.0.3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id31">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-0-2">v0.0.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id35">Major Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-0-1">v0.0.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id37">Minor Changes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/keycloak/">Keycloak / Red Hat Single Sign-On</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AMQ Ansible Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">middleware_automation.amq Release Notes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/CHANGELOG.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="middleware-automation-amq-release-notes">
+<h1><a class="toc-backref" href="#id39">middleware_automation.amq Release Notes</a><a class="headerlink" href="#middleware-automation-amq-release-notes" title="Permalink to this heading"></a></h1>
+<div class="contents topic" id="topics">
+<p class="topic-title">Topics</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#middleware-automation-amq-release-notes" id="id39">middleware_automation.amq Release Notes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#v1-2-0" id="id40">v1.2.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#major-changes" id="id41">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#minor-changes" id="id42">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#bugfixes" id="id43">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-1-1" id="id44">v1.1.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id11" id="id45">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-1-0" id="id46">v1.1.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id13" id="id47">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#id16" id="id48">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#breaking-changes-porting-guide" id="id49">Breaking Changes / Porting Guide</a></p></li>
+<li><p><a class="reference internal" href="#id23" id="id50">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-0-0" id="id51">v1.0.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id28" id="id52">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v0-0-3" id="id53">v0.0.3</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id31" id="id54">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v0-0-2" id="id55">v0.0.2</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id35" id="id56">Major Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v0-0-1" id="id57">v0.0.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id37" id="id58">Minor Changes</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="v1-2-0">
+<h2><a class="toc-backref" href="#id40">v1.2.0</a><a class="headerlink" href="#v1-2-0" title="Permalink to this heading"></a></h2>
+<section id="major-changes">
+<h3><a class="toc-backref" href="#id41">Major Changes</a><a class="headerlink" href="#major-changes" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Type for <code class="docutils literal notranslate"><span class="pre">activemq_cors_allow_origin</span></code> changed from string to list of strings <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/53">#53</a></p></li>
+</ul>
+</section>
+<section id="minor-changes">
+<h3><a class="toc-backref" href="#id42">Minor Changes</a><a class="headerlink" href="#minor-changes" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add address/queue configuration <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/51">#51</a></p></li>
+<li><p>Add configuration parameters for journal <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/43">#43</a></p></li>
+<li><p>Add configuration variables for address settings <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/49">#49</a></p></li>
+<li><p>Add diverts configuration <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/52">#52</a></p></li>
+<li><p>Don’t trigger restarts when config auto-refresh is enabled <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/54">#54</a></p></li>
+<li><p>New flags make systemd unit wait for activemq ports or logs <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/50">#50</a></p></li>
+</ul>
+</section>
+<section id="bugfixes">
+<h3><a class="toc-backref" href="#id43">Bugfixes</a><a class="headerlink" href="#bugfixes" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">activemq_data_directory</span></code> variable <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/57">#57</a></p></li>
+<li><p>Fix templating error when acceptors or connectors have a single parameter <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/47">#47</a></p></li>
+<li><p>Hide secrets from playbook output <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/45">#45</a></p></li>
+</ul>
+</section>
+</section>
+<section id="v1-1-1">
+<h2><a class="toc-backref" href="#id44">v1.1.1</a><a class="headerlink" href="#v1-1-1" title="Permalink to this heading"></a></h2>
+<section id="id11">
+<h3><a class="toc-backref" href="#id45">Bugfixes</a><a class="headerlink" href="#id11" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add systemd RequiresMountsFor and unit custom template <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/36">#36</a></p></li>
+<li><p>Stop using ansible.builtin.command module arguments incompatible with ansible 2.14</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-1-0">
+<h2><a class="toc-backref" href="#id46">v1.1.0</a><a class="headerlink" href="#v1-1-0" title="Permalink to this heading"></a></h2>
+<section id="id13">
+<h3><a class="toc-backref" href="#id47">Major Changes</a><a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Allow for listing roles for users. Specify security setting match address <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/19">#19</a></p></li>
+<li><p>Make variable <code class="docutils literal notranslate"><span class="pre">activemq_shared_storage_path</span></code> represent an absolute path <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/21">#21</a></p></li>
+</ul>
+</section>
+<section id="id16">
+<h3><a class="toc-backref" href="#id48">Minor Changes</a><a class="headerlink" href="#id16" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Arbitrary acceptors configuration via <code class="docutils literal notranslate"><span class="pre">activemq_acceptors</span></code> variable <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/30">#30</a></p></li>
+<li><p>Arbitrary connectors configuration via <code class="docutils literal notranslate"><span class="pre">activemq_connectors</span></code> variable <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/31">#31</a></p></li>
+<li><p>Configuration for management role access <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/29">#29</a></p></li>
+<li><p>Variable to config controller download/offline directory <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/18">#18</a></p></li>
+</ul>
+</section>
+<section id="breaking-changes-porting-guide">
+<h3><a class="toc-backref" href="#id49">Breaking Changes / Porting Guide</a><a class="headerlink" href="#breaking-changes-porting-guide" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Rename role <code class="docutils literal notranslate"><span class="pre">amq_broker</span></code> to <code class="docutils literal notranslate"><span class="pre">activemq</span></code> <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/26">#26</a></p></li>
+<li><p>Rename variables prefix to <code class="docutils literal notranslate"><span class="pre">activemq_</span></code> <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/11">#11</a></p></li>
+</ul>
+</section>
+<section id="id23">
+<h3><a class="toc-backref" href="#id50">Bugfixes</a><a class="headerlink" href="#id23" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">become_user</span></code> to artemis commands <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/17">#17</a></p></li>
+<li><p>Correctly set etc path and allow cors config for jolokia <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/24">#24</a></p></li>
+<li><p>Implement idempotent user password hashes <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/25">#25</a></p></li>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">activemq_java_opts</span></code> to be same as activemq defaults <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/20">#20</a></p></li>
+</ul>
+</section>
+</section>
+<section id="v1-0-0">
+<h2><a class="toc-backref" href="#id51">v1.0.0</a><a class="headerlink" href="#v1-0-0" title="Permalink to this heading"></a></h2>
+<section id="id28">
+<h3><a class="toc-backref" href="#id52">Minor Changes</a><a class="headerlink" href="#id28" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Configuration for users and roles <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/7">#7</a></p></li>
+<li><p>Perform artemis post-upgrade operations on existing instances <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/8">#8</a></p></li>
+</ul>
+</section>
+</section>
+<section id="v0-0-3">
+<h2><a class="toc-backref" href="#id53">v0.0.3</a><a class="headerlink" href="#v0-0-3" title="Permalink to this heading"></a></h2>
+<section id="id31">
+<h3><a class="toc-backref" href="#id54">Minor Changes</a><a class="headerlink" href="#id31" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add prometheus metrics export plugin <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/6">#6</a></p></li>
+<li><p>Add vars and template for logging configuration <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/4">#4</a></p></li>
+<li><p>Add vars for prometheus_jmx_exporter setup <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/5">#5</a></p></li>
+</ul>
+</section>
+</section>
+<section id="v0-0-2">
+<h2><a class="toc-backref" href="#id55">v0.0.2</a><a class="headerlink" href="#v0-0-2" title="Permalink to this heading"></a></h2>
+<section id="id35">
+<h3><a class="toc-backref" href="#id56">Major Changes</a><a class="headerlink" href="#id35" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>amq_broker: configuration of static cluster <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/3">#3</a></p></li>
+</ul>
+</section>
+</section>
+<section id="v0-0-1">
+<h2><a class="toc-backref" href="#id57">v0.0.1</a><a class="headerlink" href="#v0-0-1" title="Permalink to this heading"></a></h2>
+<section id="id37">
+<h3><a class="toc-backref" href="#id58">Minor Changes</a><a class="headerlink" href="#id37" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Import artemis create configuration tasks <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/1">#1</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="releasing.html" class="btn btn-neutral float-left" title="Collection Versioning Strategy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Red Hat, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
