@@ -64,10 +64,11 @@ activemq_id_cache_size: 20000
 # file journal configuration
 # journal type, valid values are [ ASYNCIO: libaio, MAPPED: mmap files, NIO: Plain Java Files  ]
 activemq_journal_type: ASYNCIO
-activemq_paging_directory: data/paging
-activemq_bindings_directory: data/bindings
-activemq_journal_directory: data/journal
-activemq_large_messages_directory: data/largemessages
+activemq_data_directory: "{{ activemq_shared_storage_path if activemq_shared_storage else activemq_dest + '/' + activemq_instance_name  + '/data' }}"
+activemq_paging_directory: "{{ activemq_data_directory }}/paging"
+activemq_bindings_directory: "{{ activemq_data_directory }}/bindings"
+activemq_journal_directory: "{{ activemq_data_directory }}/journal"
+activemq_large_messages_directory: "{{ activemq_data_directory }}/largemessages"
 activemq_journal_datasync: True
 activemq_journal_min_files: 2
 activemq_journal_pool_files: -1

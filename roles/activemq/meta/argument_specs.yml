@@ -502,6 +502,10 @@ argument_specs:
                 description: 'Periodic refresh of configuration in milliseconds; can be disabled by specifying -1'
                 default: 5000
                 type: 'int'
+            activemq_data_directory:
+                description: "The activemq data directory path"
+                default: "{{ activemq_shared_storage_path if activemq_shared_storage else activemq_dest + '/' + activemq_instance_name  + '/data' }}"
+                type: 'str'
     downstream:
         options:
             amq_broker_version:

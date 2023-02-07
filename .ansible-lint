@@ -25,6 +25,7 @@ warn_list:
   - no-log-password
   - no-empty-data-files
   - name[template]
+  - fqcn[keyword]
 
 skip_list:
   - vars_should_not_be_used
