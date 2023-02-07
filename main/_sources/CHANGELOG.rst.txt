@@ -5,29 +5,39 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
-v1.2.0-devel
-============
+v1.2.0
+======
 
 Major Changes
 -------------
 
+- Type for ``activemq_cors_allow_origin`` changed from string to list of strings `#53 <https://github.com/ansible-middleware/amq/pull/53>`_
 - Type for ``activemq_cors_allow_origin`` changed from string to list of strings `#53 <https://github.com/ansible-middleware/amq/pull/53>`_
 
 Minor Changes
 -------------
 
 - Add address/queue configuration `#51 <https://github.com/ansible-middleware/amq/pull/51>`_
+- Add address/queue configuration `#51 <https://github.com/ansible-middleware/amq/pull/51>`_
+- Add configuration parameters for journal `#43 <https://github.com/ansible-middleware/amq/pull/43>`_
 - Add configuration parameters for journal `#43 <https://github.com/ansible-middleware/amq/pull/43>`_
 - Add configuration variables for address settings `#49 <https://github.com/ansible-middleware/amq/pull/49>`_
+- Add configuration variables for address settings `#49 <https://github.com/ansible-middleware/amq/pull/49>`_
+- Add diverts configuration `#52 <https://github.com/ansible-middleware/amq/pull/52>`_
 - Add diverts configuration `#52 <https://github.com/ansible-middleware/amq/pull/52>`_
 - Don't trigger restarts when config auto-refresh is enabled `#54 <https://github.com/ansible-middleware/amq/pull/54>`_
+- Don't trigger restarts when config auto-refresh is enabled `#54 <https://github.com/ansible-middleware/amq/pull/54>`_
+- New flags make systemd unit wait for activemq ports or logs `#50 <https://github.com/ansible-middleware/amq/pull/50>`_
 - New flags make systemd unit wait for activemq ports or logs `#50 <https://github.com/ansible-middleware/amq/pull/50>`_
 
 Bugfixes
 --------
 
 - Add ``activemq_data_directory`` variable `#57 <https://github.com/ansible-middleware/amq/pull/57>`_
+- Add ``activemq_data_directory`` variable `#57 <https://github.com/ansible-middleware/amq/pull/57>`_
 - Fix templating error when acceptors or connectors have a single parameter `#47 <https://github.com/ansible-middleware/amq/pull/47>`_
+- Fix templating error when acceptors or connectors have a single parameter `#47 <https://github.com/ansible-middleware/amq/pull/47>`_
+- Hide secrets from playbook output `#45 <https://github.com/ansible-middleware/amq/pull/45>`_
 - Hide secrets from playbook output `#45 <https://github.com/ansible-middleware/amq/pull/45>`_
 
 v1.1.1
