@@ -8,7 +8,7 @@
     label: "{{ address_setting.match }}"
 
 - name: Create address settings configuration in broker.xml
-  community.general.xml:
+  ansible_middleware.amq.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:address-settings
     input_type: xml

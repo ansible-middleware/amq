@@ -10,7 +10,7 @@
     - restart amq_broker
 
 - name: "Check artemis {{ activemq.home }} activemq schema"
-  community.general.xml:
+  ansible_middleware.amq.xml:
     path: "{{ activemq.home }}/schema/activemq.xsd"
     xpath: /xs:schema
     content: attribute

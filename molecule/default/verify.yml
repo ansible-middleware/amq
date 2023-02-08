@@ -72,7 +72,7 @@
         - this.status is 200
 
     - name: Check diverts element exists in broker.xml
-      community.general.xml:
+      ansible_middleware.amq.xml:
         path: "/opt/amq/amq-broker/etc/broker.xml"
         xpath: /conf:configuration/core:core/core:diverts/core:divert
         input_type: xml

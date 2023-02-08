@@ -1,6 +1,6 @@
 ---
 - name: Set journal configuration
-  community.general.xml:
+  ansible_middleware.amq.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: "/conf:configuration/core:core/core:{{ item | replace('_','-') }}"
     value: "{{ lookup('ansible.builtin.vars', 'activemq_' + item) | to_json | replace('\"','') }}"

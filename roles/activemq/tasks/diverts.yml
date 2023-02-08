@@ -8,7 +8,7 @@
     label: "{{ divert.name }}"
 
 - name: Ensure diverts element exists in broker.xml
-  community.general.xml:
+  ansible_middleware.amq.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:diverts
     input_type: xml
@@ -20,7 +20,7 @@
   become: yes
 
 - name: Create diverts configuration in broker.xml
-  community.general.xml:
+  ansible_middleware.amq.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:diverts
     input_type: xml
