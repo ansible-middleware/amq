@@ -8,6 +8,11 @@ middleware_automation.amq Release Notes
 v1.2.1-devel
 ============
 
+Minor Changes
+-------------
+
+- Remove dependency on community.general collection `#59 <https://github.com/ansible-middleware/amq/pull/59>`_
+
 v1.2.0
 ======
 

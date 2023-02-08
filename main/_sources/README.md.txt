@@ -45,7 +45,6 @@ Clone the repository, checkout the tag you want to build, or pick the main branc
 
 * [middleware_automation.redhat_csp_download](https://github.com/ansible-middleware/redhat-csp-download)
 * [ansible.posix](https://docs.ansible.com/ansible/latest/collections/ansible/posix/index.html)
-* [community.general](https://docs.ansible.com/ansible/latest/collections/community/general/index.html)
 
 
 To install all the dependencies via galaxy:
