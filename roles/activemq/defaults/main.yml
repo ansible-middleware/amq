@@ -270,7 +270,7 @@ activemq_address_settings:
     auto_create_addresses: true
     auto_create_jms_queues: true
     auto_create_jms_topics: true
-  - match: #
+  - match: '#'
     dead_letter_address: DLQ
     expiry_address: ExpiryQueue
     redelivery_delay: 0

@@ -12,7 +12,6 @@
             <auto-create-dead-letter-resources>{{ address_setting.auto_create_dead_letter_resources | default('false') | lower }}</auto-create-dead-letter-resources>
             <auto-delete-queues>{{ address_setting.auto_delete_queues | default('true') | lower }}</auto-delete-queues>
             <auto-delete-addresses>{{ address_setting.auto_delete_addresses | default('true') | lower }}</auto-delete-addresses>
-            <auto-create-dead-letter-resources>{{ address_setting.auto_create_dead_letter_resources | default('false') | lower }}</auto-create-dead-letter-resources>
             <dead-letter-queue-prefix>{{ address_setting.dead_letter_prefix | default('DLQ.') }}</dead-letter-queue-prefix>
             <dead-letter-queue-suffix>{{ address_setting.dead_letter_suffix | default('') }}</dead-letter-queue-suffix>
             <auto-create-expiry-resources>{{ address_setting.auto_create_expiry_resources | default('false') | lower }}</auto-create-expiry-resources>
