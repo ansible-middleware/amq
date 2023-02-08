@@ -9,7 +9,7 @@
   no_log: True
 
 - name: Create acceptor configuration in broker.xml
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:acceptors
     input_type: xml
