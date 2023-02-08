@@ -9,7 +9,7 @@
   no_log: True
 
 - name: Create connector configuration in broker.xml
-  community.general.xml:
+  middleware_automation.amq.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:connectors
     input_type: xml
@@ -33,7 +33,7 @@
         cluster_connections: "{{ lookup('template', 'cluster_connections.broker.xml.j2') }}"
 
     - name: Create cluster connections in broker.xml
-      community.general.xml:
+      middleware_automation.amq.xml:
         path: "{{ activemq.instance_home }}/etc/broker.xml"
         xpath: /conf:configuration/core:core/core:cluster-connections
         input_type: xml

@@ -85,7 +85,7 @@
       notify:
         - restart amq_broker
     - name: Configure metrics plugin
-      community.general.xml:
+      middleware_automation.amq.xml:
         path: "{{ activemq.instance_home }}/etc/broker.xml"
         xpath: /conf:configuration/core:core/core:metrics/core:plugin
         attribute: class-name

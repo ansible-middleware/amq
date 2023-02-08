@@ -8,7 +8,7 @@
     label: "{{ address.name }}"
 
 - name: Create addresses configuration in broker.xml
-  community.general.xml:
+  middleware_automation.amq.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:addresses
     input_type: xml

@@ -10,7 +10,7 @@
     - restart amq_broker
 
 - name: "Check artemis {{ activemq.home }} activemq schema"
-  community.general.xml:
+  middleware_automation.amq.xml:
     path: "{{ activemq.home }}/schema/activemq.xsd"
     xpath: /xs:schema
     content: attribute

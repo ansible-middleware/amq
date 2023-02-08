@@ -14,7 +14,7 @@
   ansible.builtin.set_fact:
     assets_server: "{{ lookup('env','MIDDLEWARE_DOWNLOAD_RELEASE_SERVER_URL') }}"
 
-- name: "Download and deploy jws zips from {{ assets_server }}"
+- name: "Download and deploy install zips from assets server"
   ansible.builtin.get_url:
     url: "{{ asset }}"
     dest: "{{ lookup('env', 'PWD') }}"

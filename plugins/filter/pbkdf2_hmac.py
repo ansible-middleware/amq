@@ -1,3 +1,4 @@
+# Copyright (c) 2022, Red Hat, Inc.
 # Copyright (c) 2022, Guido Grazioli <ggraziol@redhat.com>
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
