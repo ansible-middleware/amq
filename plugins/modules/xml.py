@@ -176,20 +176,20 @@ EXAMPLES = r'''
 # </business>
 
 - name: Remove the 'subjective' attribute of the 'rating' element
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: /foo/bar.xml
     xpath: /business/rating/@subjective
     state: absent
 
 - name: Set the rating to '11'
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: /foo/bar.xml
     xpath: /business/rating
     value: 11
 
 # Retrieve and display the number of nodes
 - name: Get count of 'beers' nodes
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: /foo/bar.xml
     xpath: /business/beers/beer
     count: true
@@ -200,13 +200,13 @@ EXAMPLES = r'''
 
 # Example where parent XML nodes are created automatically
 - name: Add a 'phonenumber' element to the 'business' element
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: /foo/bar.xml
     xpath: /business/phonenumber
     value: 555-555-1234
 
 - name: Add several more beers to the 'beers' element
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: /foo/bar.xml
     xpath: /business/beers
     add_children:
@@ -215,7 +215,7 @@ EXAMPLES = r'''
     - beer: Old Curmudgeon
 
 - name: Add several more beers to the 'beers' element and add them before the 'Rochefort 10' element
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: /foo/bar.xml
     xpath: '/business/beers/beer[text()="Rochefort 10"]'
     insertbefore: true
@@ -226,17 +226,17 @@ EXAMPLES = r'''
 
 # NOTE: The 'state' defaults to 'present' and 'value' defaults to 'null' for elements
 - name: Add a 'validxhtml' element to the 'website' element
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: /foo/bar.xml
     xpath: /business/website/validxhtml
 
 - name: Add an empty 'validatedon' attribute to the 'validxhtml' element
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: /foo/bar.xml
     xpath: /business/website/validxhtml/@validatedon
 
 - name: Add or modify an attribute, add element if needed
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: /foo/bar.xml
     xpath: /business/website/validxhtml
     attribute: validatedon
@@ -244,7 +244,7 @@ EXAMPLES = r'''
 
 # How to read an attribute value and access it in Ansible
 - name: Read an element's attribute values
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: /foo/bar.xml
     xpath: /business/website/validxhtml
     content: attribute
@@ -255,13 +255,13 @@ EXAMPLES = r'''
     var: xmlresp.matches[0].validxhtml.validatedon
 
 - name: Remove all children from the 'website' element (option 1)
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: /foo/bar.xml
     xpath: /business/website/*
     state: absent
 
 - name: Remove all children from the 'website' element (option 2)
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: /foo/bar.xml
     xpath: /business/website
     set_children: []
@@ -276,7 +276,7 @@ EXAMPLES = r'''
 
 # NOTE: There is the prefix 'x' in front of the 'bar' element, too.
 - name: Set namespaced '/x:foo/x:bar/y:baz/@z:my_namespaced_attribute' to 'false'
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: foo.xml
     xpath: /x:foo/x:bar/y:baz
     namespaces:
@@ -287,7 +287,7 @@ EXAMPLES = r'''
     value: 'false'
 
 - name: Adding building nodes with floor subnodes from a YAML variable
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: /foo/bar.xml
     xpath: /business
     add_children:
@@ -314,7 +314,7 @@ EXAMPLES = r'''
 # </config>
 
 - name: Delete element node based upon attribute
-  ansible_middleware.amq.xml:
+  middleware_automation.amq.xml:
     path: bar.xml
     xpath: /config/element[@name='test1']
     state: absent
