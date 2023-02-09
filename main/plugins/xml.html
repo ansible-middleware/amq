@@ -407,20 +407,20 @@ see <a class="reference internal" href="#ansible-collections-middleware-automati
 <span class="c1"># &lt;/business&gt;</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Remove the &#39;subjective&#39; attribute of the &#39;rating&#39; element</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/foo/bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/business/rating/@subjective</span>
 <span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set the rating to &#39;11&#39;</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/foo/bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/business/rating</span>
 <span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">11</span>
 
 <span class="c1"># Retrieve and display the number of nodes</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Get count of &#39;beers&#39; nodes</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/foo/bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/business/beers/beer</span>
 <span class="w">    </span><span class="nt">count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -431,13 +431,13 @@ see <a class="reference internal" href="#ansible-collections-middleware-automati
 
 <span class="c1"># Example where parent XML nodes are created automatically</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add a &#39;phonenumber&#39; element to the &#39;business&#39; element</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/foo/bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/business/phonenumber</span>
 <span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">555-555-1234</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add several more beers to the &#39;beers&#39; element</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/foo/bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/business/beers</span>
 <span class="w">    </span><span class="nt">add_children</span><span class="p">:</span>
@@ -446,7 +446,7 @@ see <a class="reference internal" href="#ansible-collections-middleware-automati
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">beer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Old Curmudgeon</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add several more beers to the &#39;beers&#39; element and add them before the &#39;Rochefort 10&#39; element</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/foo/bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;/business/beers/beer[text()=&quot;Rochefort</span><span class="nv"> </span><span class="s">10&quot;]&#39;</span>
 <span class="w">    </span><span class="nt">insertbefore</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -457,17 +457,17 @@ see <a class="reference internal" href="#ansible-collections-middleware-automati
 
 <span class="c1"># NOTE: The &#39;state&#39; defaults to &#39;present&#39; and &#39;value&#39; defaults to &#39;null&#39; for elements</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add a &#39;validxhtml&#39; element to the &#39;website&#39; element</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/foo/bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/business/website/validxhtml</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add an empty &#39;validatedon&#39; attribute to the &#39;validxhtml&#39; element</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/foo/bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/business/website/validxhtml/@validatedon</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add or modify an attribute, add element if needed</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/foo/bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/business/website/validxhtml</span>
 <span class="w">    </span><span class="nt">attribute</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">validatedon</span>
@@ -475,7 +475,7 @@ see <a class="reference internal" href="#ansible-collections-middleware-automati
 
 <span class="c1"># How to read an attribute value and access it in Ansible</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Read an element&#39;s attribute values</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/foo/bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/business/website/validxhtml</span>
 <span class="w">    </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
@@ -486,13 +486,13 @@ see <a class="reference internal" href="#ansible-collections-middleware-automati
 <span class="w">    </span><span class="nt">var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xmlresp.matches[0].validxhtml.validatedon</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Remove all children from the &#39;website&#39; element (option 1)</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/foo/bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/business/website/*</span>
 <span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Remove all children from the &#39;website&#39; element (option 2)</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/foo/bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/business/website</span>
 <span class="w">    </span><span class="nt">set_children</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
@@ -507,7 +507,7 @@ see <a class="reference internal" href="#ansible-collections-middleware-automati
 
 <span class="c1"># NOTE: There is the prefix &#39;x&#39; in front of the &#39;bar&#39; element, too.</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set namespaced &#39;/x:foo/x:bar/y:baz/@z:my_namespaced_attribute&#39; to &#39;false&#39;</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/x:foo/x:bar/y:baz</span>
 <span class="w">    </span><span class="nt">namespaces</span><span class="p">:</span>
@@ -518,7 +518,7 @@ see <a class="reference internal" href="#ansible-collections-middleware-automati
 <span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;false&#39;</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Adding building nodes with floor subnodes from a YAML variable</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/foo/bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/business</span>
 <span class="w">    </span><span class="nt">add_children</span><span class="p">:</span>
@@ -545,7 +545,7 @@ see <a class="reference internal" href="#ansible-collections-middleware-automati
 <span class="c1"># &lt;/config&gt;</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete element node based upon attribute</span>
-<span class="w">  </span><span class="nt">ansible_middleware.amq.xml</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">middleware_automation.amq.xml</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bar.xml</span>
 <span class="w">    </span><span class="nt">xpath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/config/element[@name=&#39;test1&#39;]</span>
 <span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span>
