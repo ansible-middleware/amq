@@ -506,6 +506,10 @@ argument_specs:
                 description: "The activemq data directory path"
                 default: "{{ activemq_shared_storage_path if activemq_shared_storage else activemq_dest + '/' + activemq_instance_name  + '/data' }}"
                 type: 'str'
+            activemq_jmx_exporter_package:
+                description: "The rpm package name providing JMX exporter"
+                default: "prometheus-jmx-exporter-openjdk11"
+                type: 'str'
     downstream:
         options:
             amq_broker_version:

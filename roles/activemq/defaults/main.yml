@@ -167,6 +167,7 @@ activemq_logger_zookeeper_level: ERROR
 activemq_jmx_exporter_port: 18080
 activemq_jmx_exporter_config_path: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/jmx_exporter.yml"
 activemq_jmx_exporter_enabled: False
+activemq_jmx_exporter_package: prometheus-jmx-exporter-openjdk11
 activemq_prometheus_enabled: False
 
 ### Contoller defaults

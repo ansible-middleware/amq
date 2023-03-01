@@ -54,13 +54,6 @@
   register: archive_path
 
 ## download to controller
-- name: Check local download archive path
-  ansible.builtin.stat:
-    path: "{{ activemq_local_archive_repository }}"
-  register: local_path
-  delegate_to: localhost
-  run_once: yes
-
 - name: Download AMQ archive
   ansible.builtin.get_url: # noqa risky-file-permissions delegated, uses controller host user
     url: "{{ activemq.download_url }}"

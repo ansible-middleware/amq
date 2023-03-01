@@ -1,0 +1,18 @@
+---
+- name: Create address settings configuration string
+  ansible.builtin.set_fact:
+    validate_address_settings: "{{ validate_address_settings | default([]) + [ lookup('template', 'address_settings.broker.xml.j2') ] }}"
+  loop: "{{ activemq_address_settings }}"
+  loop_control:
+    loop_var: address_setting
+    label: "{{ address_setting.match }}"
+
+- name: Validate address settings
+  middleware_automation.amq.xml:
+    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><address-settings>{{ validate_address_settings | join(' ') | trim }}</address-settings></core>"
+    validate: yes
+    input_type: xml
+  become: yes
+  run_once: yes
+  delegate_to: localhost

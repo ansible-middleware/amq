@@ -1,19 +1,23 @@
 ---
-# - name: Validate admin console password
+# - name: Validate password strength
 #   ansible.builtin.assert:
 #     that:
 #       - activemq_admin_password | length > 12
 #     quiet: True
-#     fail_msg: "The console administrator password is empty or invalid. Please set the activemq_admin_password variable to a 16+ char long string"
-#     success_msg: "{{ 'Console administrator password OK' }}"
+#     fail_msg: "The password is empty, invalid, or too weak. Please set the variable to a 16+ char long string"
+#     success_msg: "Password OK: {{ item }}"
 
-# - name: Validate configuration
-#   ansible.builtin.assert:
-#     that:
-#       - (activemq_ha_enabled and activemq_db_enabled) or (not activemq_ha_enabled and activemq_db_enabled) or (not activemq_ha_enabled and not activemq_db_enabled)
-#     quiet: True
-#     fail_msg: "Cannot install HA setup without a backend database service. Check activemq_ha_enabled and activemq_db_enabled"
-#     success_msg: "{{ 'Configuring HA' if activemq_ha_enabled else 'Configuring standalone' }}"
+- name: Clear internal templating variables
+  ansible.builtin.set_fact:
+    security_settings: []
+    management_access_default: []
+    management_access_domains: []
+    addresses: []
+    acceptors: []
+    connectors: []
+    address_settings: []
+    diverts: []
+    masked_users: []
 
 - name: Validate credentials
   ansible.builtin.assert:
@@ -43,22 +47,33 @@
       - activemq_tls_enabled
   when: activemq_tls_mutual_authentication
 
+- name: Check local download archive path
+  ansible.builtin.stat:
+    path: "{{ activemq_local_archive_repository }}"
+  register: local_path
+  delegate_to: localhost
+  run_once: yes
+
+- name: Validate local download path
+  ansible.builtin.assert:
+    that:
+      - local_path.stat.exists
+    quiet: True
+    fail_msg: "Defined controller path for downloading resource is incorrect: {{ activemq_local_archive_repository }}"
+    success_msg: "Will download resource to controller path: {{ local_path.stat.path }}"
+
+- name: Fetch artemis configuration xsd schema for requested version
+  ansible.builtin.get_url: # noqa risky-file-permissions delegated, uses controller host user
+    url: "{{ item }}"
+    dest: "{{ local_path.stat.path }}/"
+    mode: 0640
+  delegate_to: localhost
+  run_once: yes
+  loop:
+    - "{{ activemq.config_xsd }}"
+    - https://www.w3.org/2001/03/xml.xsd
+
 - name: Ensure required packages are installed
   ansible.builtin.include_tasks: fastpackages.yml
   vars:
-    packages_list:
-      - "{{ activemq_jvm_package }}"
-      - unzip
-      - iproute
-      - sed
-      - procps-ng
-      - initscripts
-      - libaio
-      - python3-lxml
-
-- name: Ensure required packages are installed
-  ansible.builtin.dnf:
-    name: prometheus-jmx-exporter-openjdk11
-    state: present
-  when: activemq_jmx_exporter_enabled
-  become: yes
+    packages_list: "{{ activemq.package_list }}"

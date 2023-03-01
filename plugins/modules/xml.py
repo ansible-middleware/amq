@@ -723,6 +723,20 @@ def get_element_attr(module, tree, xpath, namespaces):
     finish(module, tree, xpath, namespaces, changed=False, msg=len(elements), hitcount=len(elements), matches=elements)
 
 
+def validate_xml_with_xsd(module, tree, schema):
+    result = dict(
+        changed=False,
+    )
+    xmlschema_doc = etree.parse(schema)
+    xmlschema = etree.XMLSchema(xmlschema_doc)
+
+    try:
+        validation_result = xmlschema.assertValid(tree)
+        module.exit_json(**result)
+    except etree.DocumentInvalid as e:
+        module.fail_json(msg="Failed to validate with XSD: %s " % e)
+
+
 def child_to_element(module, child, in_type):
     if in_type == 'xml':
         infile = BytesIO(to_bytes(child, errors='surrogate_or_strict'))
@@ -837,6 +851,7 @@ def main():
     module = AnsibleModule(
         argument_spec=dict(
             path=dict(type='path', aliases=['dest', 'file']),
+            xsd_path=dict(type='path'),
             xmlstring=dict(type='str'),
             xpath=dict(type='str'),
             namespaces=dict(type='dict', default={}),
@@ -848,6 +863,7 @@ def main():
             count=dict(type='bool', default=False),
             print_match=dict(type='bool', default=False),
             pretty_print=dict(type='bool', default=False),
+            validate=dict(type='bool', default=False),
             content=dict(type='str', choices=['attribute', 'text']),
             input_type=dict(type='str', default='yaml', choices=['xml', 'yaml']),
             backup=dict(type='bool', default=False),
@@ -862,25 +878,28 @@ def main():
             content=['xpath'],
             set_children=['xpath'],
             value=['xpath'],
+            xsd_path=['validate']
         ),
         required_if=[
             ['count', True, ['xpath']],
             ['print_match', True, ['xpath']],
             ['insertbefore', True, ['xpath']],
             ['insertafter', True, ['xpath']],
+            ['validate', True, ['xsd_path']],
         ],
         required_one_of=[
             ['path', 'xmlstring'],
-            ['add_children', 'content', 'count', 'pretty_print', 'print_match', 'set_children', 'value'],
+            ['add_children', 'content', 'count', 'pretty_print', 'print_match', 'set_children', 'validate', 'value'],
         ],
         mutually_exclusive=[
-            ['add_children', 'content', 'count', 'print_match', 'set_children', 'value'],
+            ['add_children', 'content', 'count', 'print_match', 'set_children', 'validate', 'value'],
             ['path', 'xmlstring'],
             ['insertbefore', 'insertafter'],
         ],
     )
 
     xml_file = module.params['path']
+    xsd_file = module.params['xsd_path']
     xml_string = module.params['xmlstring']
     xpath = module.params['xpath']
     namespaces = module.params['namespaces']
@@ -893,6 +912,7 @@ def main():
     content = module.params['content']
     input_type = module.params['input_type']
     print_match = module.params['print_match']
+    validate = module.params['validate']
     count = module.params['count']
     backup = module.params['backup']
     strip_cdata_tags = module.params['strip_cdata_tags']
@@ -943,6 +963,9 @@ def main():
         get_element_attr(module, doc, xpath, namespaces)
     elif content == 'text':
         get_element_text(module, doc, xpath, namespaces)
+
+    if validate:
+        validate_xml_with_xsd(module, doc, xsd_file)
 
     # File exists:
     if state == 'absent':

@@ -272,6 +272,7 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_jmx_exporter_port` | Port for prometheus JMX exporter to listen | `18080` |
 |`activemq_jmx_exporter_config_path`| JMX exporter configuration path |`{{ activemq_dest }}/{{ activemq_instance_name }}/etc/jmx_exporter.yml` |
 |`activemq_jmx_exporter_enabled`| Enable install and configuration of prometheus-jmx-exporter | `False` |
+|`activemq_jmx_exporter_package`| The rpm package name providing JMX exporter | `prometheus-jmx-exporter-openjdk11` |
 |`activemq_prometheus_enabled`| Enable install and configuration of prometheus metrics plugin | `False` |
 |`activemq_name`| Human readable service name | `Apache ActiveMQ` |
 |`activemq_config_dir`| Broker instance configuration directory | `conf` |

@@ -4,6 +4,11 @@
   tags:
     - prereqs
 
+- name: Validate broker configuration
+  ansible.builtin.include_tasks: validate_config.yml
+  tags:
+    - validation
+
 - name: Include firewall config tasks
   ansible.builtin.include_tasks: firewalld.yml
   when: activemq_configure_firewalld
