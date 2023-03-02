@@ -68,13 +68,7 @@
     - not amq_broker_enable is defined or not amq_broker_enable
     - not activemq_offline_install
 
-- name: Perform download from RHN
-  redhat_csp_download:
-    url: "{{ activemq.download_url }}"
-    dest: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
-    username: "{{ rhn_username }}"
-    password: "{{ rhn_password }}"
-  no_log: "{{ omit_rhn_output | default(true) }}"
+- name: Perform download from RHN using JBoss Network API
   delegate_to: localhost
   run_once: yes
   when:
@@ -84,6 +78,34 @@
     - amq_broker_enable is defined and amq_broker_enable
     - not activemq_offline_install
     - amq_broker_rhn_baseurl is defined and amq_broker_rhn_baseurl in activemq.download_url
+  block:
+    - name: Search Product download using JBoss Network API
+      middleware_automation.common.product_search:
+        client_id: "{{ rhn_username }}"
+        client_secret: "{{ rhn_password }}"
+        product_type: DISTRIBUTION
+        product_version: "{{ amq_broker_version }}"
+        product_category: "{{ amq_broker_product_category }}"
+      register: rhn_products
+      delegate_to: localhost
+      run_once: yes
+
+    - name: Filter install zipfile
+      ansible.builtin.set_fact:
+        rhn_filtered_product: "{{ rhn_product.results | selectattr('file_path', 'match', '.*-{{ amq_broker_version }}/amq-broker-{{ amq_broker_version }}-bin.zip') }}"
+      delegate_to: localhost
+      run_once: yes
+
+    - name: Download JWS Documentation
+      middleware_automation.common.product_download:
+        client_id: "{{ rhn_username }}"
+        client_secret: "{{ rhn_password }}"
+        product_id: "{{ (rhn_filtered_products | first).id }}"
+        dest: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
+      no_log: "{{ omit_rhn_output | default(true) }}"
+      delegate_to: localhost
+      run_once: yes
+
 
 - name: Download AMQ archive from alternate location
   ansible.builtin.get_url: # noqa risky-file-permissions delegated, uses controller host user

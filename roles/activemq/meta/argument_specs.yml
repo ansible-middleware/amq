@@ -2,7 +2,7 @@ argument_specs:
     main:
         options:
             activemq_version:
-                default: "2.18.0"
+                default: "2.21.0"
                 description: "Apache Artemis version"
                 type: "str"
             activemq_archive:
@@ -520,12 +520,16 @@ argument_specs:
                 default: "7.9.4"
                 description: "Red Hat AMQ Broker version"
                 type: "str"
+            amq_broker_product_category:
+                default: "jboss.amq.broker"
+                description: "JBossNetwork API category for amq_broker"
+                type: "str"
             amq_broker_enable:
                 default: True
                 description: "Enable installation of Red Hat AMQ Broker"
                 type: "bool"
             amq_broker_offline_install:
-                default: true
+                default: False
                 description: "Perform an offline installation"
                 type: "bool"
             amq_broker_archive:
@@ -541,14 +545,6 @@ argument_specs:
             amq_broker_dest:
                 default: "/opt/amq"
                 description: "Root installation directory"
-                type: "str"
-            amq_broker_rhn_baseurl:
-                default: "https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId="
-                description: "Base RHN download URL for Red Hat AMQ Broker"
-                type: "str"
-            amq_broker_rhn_id:
-                default: "104526"
-                description: "RHN Product ID for Red Hat AMQ Broker"
                 type: "str"
             amq_broker_name:
                 description: "Human friendly name for service"

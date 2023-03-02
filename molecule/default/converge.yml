@@ -49,6 +49,6 @@
         filter: "msgType LIKE '%ff%'"
         exclusive: True
   collections:
-    - middleware_automation.redhat_csp_download
+    - middleware_automation.common
   roles:
     - activemq
