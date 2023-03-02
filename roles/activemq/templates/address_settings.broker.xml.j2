@@ -1,56 +1,5 @@
          <address-setting match="{{ address_setting.match }}">
-            <dead-letter-address>{{ address_setting.dead_letter_address }}</dead-letter-address>
-            <expiry-address>{{ address_setting.expiry_address }}</expiry-address>
-            <redelivery-delay>{{ address_setting.redelivery_delay | default(0) }}</redelivery-delay>
-            <max-size-bytes>{{ address_setting.max_size_bytes | default(-1) }}</max-size-bytes>
-            <message-counter-history-day-limit>{{ address_setting.message_counter_history_day_limit | default(0) }}</message-counter-history-day-limit>
-            <address-full-policy>{{ address_setting.address_full_policy }}</address-full-policy>
-            <auto-create-queues>{{ address_setting.auto_create_queues | default('true') | lower }}</auto-create-queues>
-            <auto-create-addresses>{{ address_setting.auto_create_addresses | default('true') | lower }}</auto-create-addresses>
-            <auto-create-jms-queues>{{ address_setting.auto_create_jms_queues | default('true') | lower }}</auto-create-jms-queues>
-            <auto-create-jms-topics>{{ address_setting.auto_create_jms_topics | default('true') | lower }}</auto-create-jms-topics>
-            <auto-create-dead-letter-resources>{{ address_setting.auto_create_dead_letter_resources | default('false') | lower }}</auto-create-dead-letter-resources>
-            <auto-delete-queues>{{ address_setting.auto_delete_queues | default('true') | lower }}</auto-delete-queues>
-            <auto-delete-addresses>{{ address_setting.auto_delete_addresses | default('true') | lower }}</auto-delete-addresses>
-            <dead-letter-queue-prefix>{{ address_setting.dead_letter_prefix | default('DLQ.') }}</dead-letter-queue-prefix>
-            <dead-letter-queue-suffix>{{ address_setting.dead_letter_suffix | default('') }}</dead-letter-queue-suffix>
-            <auto-create-expiry-resources>{{ address_setting.auto_create_expiry_resources | default('false') | lower }}</auto-create-expiry-resources>
-            <expiry-queue-prefix>{{ address_setting.expiry_queue_prefix | default('EXP.') }}</expiry-queue-prefix>
-            <expiry-queue-suffix>{{ address_setting.expiry_queue_suffix | default('') }}</expiry-queue-suffix>
-            <expiry-delay>{{ address_setting.expiry_delay | default(123) }}</expiry-delay>
-            <redelivery-delay-multiplier>{{ address_setting.redelivery_delay_multiplier | default('1.0') }}</redelivery-delay-multiplier>
-            <redelivery-collision-avoidance-factor>{{ address_setting.redelivery_collision_avoidance_factor | default('0.0') }}</redelivery-collision-avoidance-factor>
-            <max-redelivery-delay>{{ address_setting.max_redelivery_delay | default(10000) }}</max-redelivery-delay>
-            <max-delivery-attempts>{{ address_setting.max_delivery_attempts | default(3) }}</max-delivery-attempts>
-            <max-size-messages>{{ address_setting.max_size_messages | default(1000) }}</max-size-messages>
-            <max-size-bytes-reject-threshold>{{ address_setting.max_size_bytes_reject_threshold | default(-1) }}</max-size-bytes-reject-threshold>
-            <page-size-bytes>{{ address_setting.page_size_bytes | default(20000) }}</page-size-bytes>
-            <default-last-value-queue>{{ address_setting.default_last_value_queue | default('false') | lower }}</default-last-value-queue>
-            <default-non-destructive>{{ address_setting.default_non_destructive | default('false') | lower }}</default-non-destructive>
-            <default-exclusive-queue>{{ address_setting.default_exclusive_queue | default('false') | lower }}</default-exclusive-queue>
-            <default-consumers-before-dispatch>{{ address_setting.default_consumers_before_dispatch | default(0) }}</default-consumers-before-dispatch>
-            <default-delay-before-dispatch>{{ address_setting.default_delay_before_dispatch | default(-1) }}</default-delay-before-dispatch>
-            <redistribution-delay>{{ address_setting.redistribution_delay | default(0) }}</redistribution-delay>
-            <send-to-dla-on-no-route>{{ address_setting.send_to_dla_on_no_route | default('false') | lower }}</send-to-dla-on-no-route>
-            <slow-consumer-threshold>{{ address_setting.slow_consumer_threshold | default(-1) }}</slow-consumer-threshold>
-            <slow-consumer-threshold-measurement-unit>{{ address_setting.slow_consumer_threshold_measurement_unit | default('MESSAGES_PER_SECOND') }}</slow-consumer-threshold-measurement-unit>
-            <slow-consumer-policy>{{ address_setting.slow_consumer_policy | default('NOTIFY') }}</slow-consumer-policy>
-            <slow-consumer-check-period>{{ address_setting.slow_consumer_check_period | default(5) }}</slow-consumer-check-period>
-            <auto-delete-created-queues>{{ address_setting.auto_delete_created_queues | default('false') | lower }}</auto-delete-created-queues>
-            <auto-delete-queues-delay>{{ address_setting.auto_create_queues_delay | default(0) }}</auto-delete-queues-delay>
-            <auto-delete-queues-message-count>{{ address_setting.auto_delete_queues_message_count | default(0) }}</auto-delete-queues-message-count>
-            <config-delete-queues>{{ address_setting.config_delete_queues | default('OFF') }}</config-delete-queues>
-            <config-delete-diverts>{{ address_setting.config_delete_diverts | default('OFF') }}</config-delete-diverts>
-            <auto-delete-addresses-delay>{{ address_setting.auto_delete_address_delay | default(0) }}</auto-delete-addresses-delay>
-            <config-delete-addresses>{{ address_setting.config_delete_address | default('OFF') }}</config-delete-addresses>
-            <management-browse-page-size>{{ address_setting.management_browse_page_size | default(200) }}</management-browse-page-size>
-            <management-message-attribute-size-limit>{{ address_setting.management_message_attribute_size_limit | default(256) }}</management-message-attribute-size-limit>
-            <default-purge-on-no-consumers>{{ address_setting.default_purge_on_no_consumers | default('false') | lower }}</default-purge-on-no-consumers>
-            <default-max-consumers>{{ address_setting.default_max_consumers | default(-1) }}</default-max-consumers>
-            <default-queue-routing-type>{{ address_setting.default_queue_routing_type | default('') }}</default-queue-routing-type>
-            <default-address-routing-type>{{ address_setting.default_address_routing_type | default('') }}</default-address-routing-type>
-            <default-ring-size>{{ address_setting.default_ring_size | default(-1) }}</default-ring-size>
-            <retroactive-message-count>{{ address_setting.retroactive_message_count | default(0) }}</retroactive-message-count>
-            <enable-metrics>{{ address_setting.enable_metrics | default('true') | lower }}</enable-metrics>
-            <enable-ingress-timestamp>{{ address_setting.enable_ingress_timestamp | default('false') | lower }}</enable-ingress-timestamp>
+{% for param in lookup('ansible.builtin.dict', address_setting.parameters, wantlist=True) %}
+            <{{ param.key | replace('_','-') }}>{{ param.value | lower }}</{{ param.key | replace('_','-') }}>
+{% endfor %}
          </address-setting>

@@ -178,23 +178,26 @@ Sample addresses:
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
-|`activemq_address_settings`| Address settings configuration; list of `{ match address string and parameters }` | "Generate same configuration as `artemis create`" |
+|`activemq_address_settings`| Address settings configuration; list of `{ match address string and parameters(dict) }` | "Generate same configuration as `artemis create`" |
 
 Sample address settings:
 
 ```
   - match: activemq.management#
-    dead_letter_address: DLQ
-    expiry_address: ExpiryQueue
-    redelivery_delay: 0
-    max_size_bytes: -1
-    message_counter_history_day_limit: 10
-    address_full_policy: PAGE
-    auto_create_queues: true
-    auto_create_addresses: true
-    auto_create_jms_queues: true
-    auto_create_jms_topics: true
+    parameters:
+      dead_letter_address: DLQ
+      expiry_address: ExpiryQueue
+      redelivery_delay: 0
+      max_size_bytes: -1
+      message_counter_history_day_limit: 10
+      address_full_policy: PAGE
+      auto_create_queues: true
+      auto_create_addresses: true
+      auto_create_jms_queues: true
+      auto_create_jms_topics: true
 ```
+
+The parameters are snake_cased variants of the artemis configuration schema elements, which are kebab-cased (ie. `dead-letter-address` -> `dead_letter_address`).
 
 
 * Diverts configuration

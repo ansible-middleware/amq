@@ -395,7 +395,7 @@ argument_specs:
                 default: "Generate same configuration as `artemis create`"
                 type: "list"
             activemq_address_settings:
-                description: "Address settings configuration; list of `{ match address string, and parameters }`"
+                description: "Address settings configuration; list of `{ match address string, and parameters(dict) }`"
                 default: "Generate same configuration as `artemis create`"
                 type: "list"
             activemq_addresses:
@@ -510,6 +510,10 @@ argument_specs:
                 description: "The rpm package name providing JMX exporter"
                 default: "prometheus-jmx-exporter-openjdk11"
                 type: 'str'
+            activemq_base_package_list:
+                description: "The base list of rpm dependencies to install"
+                default: "[unzip,iproute,sed,procps-ng,initscripts,libaio,python3-lxml]"
+                type: 'list'
     downstream:
         options:
             amq_broker_version:
