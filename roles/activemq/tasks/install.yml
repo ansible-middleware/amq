@@ -79,7 +79,7 @@
     - not activemq_offline_install
     - amq_broker_rhn_baseurl is defined and amq_broker_rhn_baseurl in activemq.download_url
   block:
-    - name: Search Product download using JBoss Network API
+    - name: Retrieve product download using JBoss Network API
       middleware_automation.common.product_search:
         client_id: "{{ rhn_username }}"
         client_secret: "{{ rhn_password }}"
@@ -90,13 +90,13 @@
       delegate_to: localhost
       run_once: yes
 
-    - name: Filter install zipfile
+    - name: Determine install zipfile from search results
       ansible.builtin.set_fact:
         rhn_filtered_product: "{{ rhn_product.results | selectattr('file_path', 'match', '.*-{{ amq_broker_version }}/amq-broker-{{ amq_broker_version }}-bin.zip') }}"
       delegate_to: localhost
       run_once: yes
 
-    - name: Download JWS Documentation
+    - name: Download AMQ Broker
       middleware_automation.common.product_download:
         client_id: "{{ rhn_username }}"
         client_secret: "{{ rhn_password }}"
