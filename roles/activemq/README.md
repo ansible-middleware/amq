@@ -7,7 +7,8 @@ Installs and configures [Apache ActiveMQ Artemis](https://activemq.apache.org/co
 Dependencies
 ------------
 
-The role depends on the `redhat_csp_download` role of [middleware_automation.redhat_csp_download](https://github.com/ansible-middleware/redhat-csp-download) collection.
+The role depends on the `redhat_csp_download` role of [middleware_automation.redhat_csp_download](https://github.com/ansible-middleware/redhat-csp-download) collection, and [ansible.posix](https://github.com/ansible-collections/ansible.posix) collection.
+
 To install, from the collection root directory, run:
 
     ansible-galaxy collections install -r requirements.yml
