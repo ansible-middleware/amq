@@ -86,7 +86,7 @@
 - name: Validate diverts
   middleware_automation.amq.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
-    xmlstring: "<core xmlns=\"urn:activemq:core\"><diverts>{{ validate_diverts | join(' ') | trim }}</diverts></core>"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><diverts>{{ validate_diverts | default([]) | join(' ') | trim }}</diverts></core>"
     validate: yes
     input_type: xml
   become: yes
