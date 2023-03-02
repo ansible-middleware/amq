@@ -167,6 +167,7 @@ activemq_logger_zookeeper_level: ERROR
 activemq_jmx_exporter_port: 18080
 activemq_jmx_exporter_config_path: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/jmx_exporter.yml"
 activemq_jmx_exporter_enabled: False
+activemq_jmx_exporter_package: prometheus-jmx-exporter-openjdk11
 activemq_prometheus_enabled: False
 
 ### Contoller defaults
@@ -260,29 +261,31 @@ activemq_addresses:
 ### Address settings configuration
 activemq_address_settings:
   - match: activemq.management#
-    dead_letter_address: DLQ
-    expiry_address: ExpiryQueue
-    redelivery_delay: 0
-    max_size_bytes: -1
-    message_counter_history_day_limit: 10
-    address_full_policy: PAGE
-    auto_create_queues: true
-    auto_create_addresses: true
-    auto_create_jms_queues: true
-    auto_create_jms_topics: true
-  - match: #
-    dead_letter_address: DLQ
-    expiry_address: ExpiryQueue
-    redelivery_delay: 0
-    max_size_bytes: -1
-    message_counter_history_day_limit: 10
-    address_full_policy: PAGE
-    auto_create_queues: false
-    auto_create_addresses: false
-    auto_create_jms_queues: false
-    auto_create_jms_topics: false
-    auto_delete_queues: false
-    auto_delete_addresses: false
+    parameters:
+      dead_letter_address: DLQ
+      expiry_address: ExpiryQueue
+      redelivery_delay: 0
+      max_size_bytes: -1
+      message_counter_history_day_limit: 10
+      address_full_policy: PAGE
+      auto_create_queues: true
+      auto_create_addresses: true
+      auto_create_jms_queues: true
+      auto_create_jms_topics: true
+  - match: '#'
+    parameters:
+      dead_letter_address: DLQ
+      expiry_address: ExpiryQueue
+      redelivery_delay: 0
+      max_size_bytes: -1
+      message_counter_history_day_limit: 10
+      address_full_policy: PAGE
+      auto_create_queues: false
+      auto_create_addresses: false
+      auto_create_jms_queues: false
+      auto_create_jms_topics: false
+      auto_delete_queues: false
+      auto_delete_addresses: false
 
 ### Divert configuration
 activemq_diverts: []

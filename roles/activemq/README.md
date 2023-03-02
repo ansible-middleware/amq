@@ -7,7 +7,8 @@ Installs and configures [Apache ActiveMQ Artemis](https://activemq.apache.org/co
 Dependencies
 ------------
 
-The role depends on the `redhat_csp_download` role of [middleware_automation.redhat_csp_download](https://github.com/ansible-middleware/redhat-csp-download) collection.
+The role depends on the `redhat_csp_download` role of [middleware_automation.redhat_csp_download](https://github.com/ansible-middleware/redhat-csp-download) collection, and [ansible.posix](https://github.com/ansible-collections/ansible.posix) collection.
+
 To install, from the collection root directory, run:
 
     ansible-galaxy collections install -r requirements.yml
@@ -178,23 +179,26 @@ Sample addresses:
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
-|`activemq_address_settings`| Address settings configuration; list of `{ match address string and parameters }` | "Generate same configuration as `artemis create`" |
+|`activemq_address_settings`| Address settings configuration; list of `{ match address string and parameters(dict) }` | "Generate same configuration as `artemis create`" |
 
 Sample address settings:
 
 ```
   - match: activemq.management#
-    dead_letter_address: DLQ
-    expiry_address: ExpiryQueue
-    redelivery_delay: 0
-    max_size_bytes: -1
-    message_counter_history_day_limit: 10
-    address_full_policy: PAGE
-    auto_create_queues: true
-    auto_create_addresses: true
-    auto_create_jms_queues: true
-    auto_create_jms_topics: true
+    parameters:
+      dead_letter_address: DLQ
+      expiry_address: ExpiryQueue
+      redelivery_delay: 0
+      max_size_bytes: -1
+      message_counter_history_day_limit: 10
+      address_full_policy: PAGE
+      auto_create_queues: true
+      auto_create_addresses: true
+      auto_create_jms_queues: true
+      auto_create_jms_topics: true
 ```
+
+The parameters are snake_cased variants of the artemis configuration schema elements, which are kebab-cased (ie. `dead-letter-address` -> `dead_letter_address`).
 
 
 * Diverts configuration
@@ -272,6 +276,7 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_jmx_exporter_port` | Port for prometheus JMX exporter to listen | `18080` |
 |`activemq_jmx_exporter_config_path`| JMX exporter configuration path |`{{ activemq_dest }}/{{ activemq_instance_name }}/etc/jmx_exporter.yml` |
 |`activemq_jmx_exporter_enabled`| Enable install and configuration of prometheus-jmx-exporter | `False` |
+|`activemq_jmx_exporter_package`| The rpm package name providing JMX exporter | `prometheus-jmx-exporter-openjdk11` |
 |`activemq_prometheus_enabled`| Enable install and configuration of prometheus metrics plugin | `False` |
 |`activemq_name`| Human readable service name | `Apache ActiveMQ` |
 |`activemq_config_dir`| Broker instance configuration directory | `conf` |

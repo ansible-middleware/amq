@@ -51,9 +51,15 @@ To install all the dependencies via galaxy:
 
     ansible-galaxy collection install -r requirements.yml
 
+
 #### Python:
 
-* no extra python dependencies are currently required
+* lxml
+* jmespath
+
+To install all the dependencies:
+
+    pip install -r requirements.txt
 
 
 ## Support
@@ -62,4 +68,4 @@ The amq collection is a Beta release and for [Technical Preview](https://access.
 
 ## License
 
-[GNU General Public License v2.0](https://github.com/ansible-middleware/amq/blob/main/LICENSE)
+[Apache License 2.0](https://github.com/ansible-middleware/amq/blob/main/LICENSE)

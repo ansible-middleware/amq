@@ -1,0 +1,109 @@
+---
+- name: Create address settings configuration string
+  ansible.builtin.set_fact:
+    validate_address_settings: "{{ validate_address_settings | default([]) + [ lookup('template', 'address_settings.broker.xml.j2') ] }}"
+  loop: "{{ activemq_address_settings }}"
+  loop_control:
+    loop_var: address_setting
+    label: "{{ address_setting.match }}"
+
+- name: Validate address settings
+  middleware_automation.amq.xml:
+    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><address-settings>{{ validate_address_settings | join(' ') | trim }}</address-settings></core>"
+    validate: yes
+    input_type: xml
+  become: yes
+  run_once: yes
+  delegate_to: localhost
+
+- name: Create acceptor configuration string
+  ansible.builtin.set_fact:
+    validate_acceptors: "{{ validate_acceptors | default([]) + [ lookup('template', 'acceptors.broker.xml.j2') ] }}"
+  loop: "{{ activemq_acceptors }}"
+  loop_control:
+    loop_var: acceptor
+    label: "{{ acceptor.name }}"
+  no_log: True
+
+- name: Validate acceptors
+  middleware_automation.amq.xml:
+    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><acceptors>{{ validate_acceptors | join(' ') | trim }}</acceptors></core>"
+    validate: yes
+    input_type: xml
+  become: yes
+  run_once: yes
+  no_log: True
+  delegate_to: localhost
+
+- name: Create connector configuration string
+  ansible.builtin.set_fact:
+    validate_connectors: "{{ validate_connectors | default([]) + [ lookup('template', 'connectors.broker.xml.j2') ] }}"
+  loop: "{{ activemq_connectors }}"
+  loop_control:
+    loop_var: connector
+    label: "{{ connector.name }}"
+  no_log: True
+
+- name: Validate connectors
+  middleware_automation.amq.xml:
+    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><connectors>{{ validate_connectors | join(' ') | trim }}</connectors></core>"
+    validate: yes
+    input_type: xml
+  become: yes
+  run_once: yes
+  no_log: True
+  delegate_to: localhost
+
+- name: Create addresses string
+  ansible.builtin.set_fact:
+    validate_addresses: "{{ validate_addresses | default([]) + [ lookup('template', 'addresses.broker.xml.j2') ] }}"
+  loop: "{{ activemq_addresses }}"
+  loop_control:
+    loop_var: address
+    label: "{{ address.name }}"
+
+- name: Validate addresses
+  middleware_automation.amq.xml:
+    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><addresses>{{ validate_addresses | join(' ') | trim }}</addresses></core>"
+    validate: yes
+    input_type: xml
+  become: yes
+  run_once: yes
+  delegate_to: localhost
+
+- name: Create diverts configuration string
+  ansible.builtin.set_fact:
+    validate_diverts: "{{ validate_diverts | default([]) + [ lookup('template', 'diverts.broker.xml.j2') ] }}"
+  loop: "{{ activemq_diverts }}"
+  loop_control:
+    loop_var: divert
+    label: "{{ divert.name }}"
+
+- name: Validate diverts
+  middleware_automation.amq.xml:
+    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><diverts>{{ validate_diverts | default([]) | join(' ') | trim }}</diverts></core>"
+    validate: yes
+    input_type: xml
+  become: yes
+  run_once: yes
+  delegate_to: localhost
+
+- name: Create security settings
+  ansible.builtin.set_fact:
+    validate_security_settings: "{{ validate_security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2') ] }}"
+  loop: "{{ activemq_roles }}"
+
+- name: Validate security settings
+  middleware_automation.amq.xml:
+    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><security-settings>{{ validate_security_settings | join(' ') | trim }}</security-settings></core>"
+    validate: yes
+    input_type: xml
+  become: yes
+  run_once: yes
+  delegate_to: localhost

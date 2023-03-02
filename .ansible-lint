@@ -26,6 +26,7 @@ warn_list:
   - no-empty-data-files
   - name[template]
   - fqcn[keyword]
+  - schema[meta]
 
 skip_list:
   - vars_should_not_be_used

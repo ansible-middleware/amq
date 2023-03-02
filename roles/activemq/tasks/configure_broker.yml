@@ -10,18 +10,6 @@
   notify:
     - restart amq_broker
 
-- name: Set internal variables
-  ansible.builtin.set_fact:
-    security_settings: []
-    management_access_default: []
-    management_access_domains: []
-    addresses: []
-    acceptors: []
-    connectors: []
-    address_settings: []
-    diverts: []
-    masked_users: []
-
 - name: Create user and roles
   ansible.builtin.include_tasks: user_roles.yml
   when: activemq_users | length > 0
