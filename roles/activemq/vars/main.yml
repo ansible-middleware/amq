@@ -13,9 +13,9 @@ activemq:
   instance_name: "{{ activemq_instance_name }}"
   instance_home: "{{ activemq_dest }}/{{ activemq_instance_name }}"
   config_xsd: https://github.com/apache/activemq-artemis/raw/{{ activemq_version }}/artemis-server/src/main/resources/schema/artemis-configuration.xsd
-  package_list: "{{ base_package_list + [activemq_jvm_package] + ([activemq_jmx_exporter_package] if activemq_jmx_exporter_enabled else []) }}"
+  package_list: "{{ activemq_base_package_list + [activemq_jvm_package] + ([activemq_jmx_exporter_package] if activemq_jmx_exporter_enabled else []) }}"
 
-base_package_list:
+activemq_base_package_list:
   - unzip
   - iproute
   - sed
