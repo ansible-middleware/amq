@@ -69,6 +69,8 @@
     mode: 0640
   delegate_to: localhost
   run_once: yes
+  retries: 3
+  delay: 5
   loop:
     - "{{ activemq.config_xsd }}"
     - https://www.w3.org/2001/03/xml.xsd

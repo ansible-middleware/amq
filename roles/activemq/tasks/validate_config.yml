@@ -74,3 +74,36 @@
   become: yes
   run_once: yes
   delegate_to: localhost
+
+- name: Create diverts configuration string
+  ansible.builtin.set_fact:
+    validate_diverts: "{{ validate_diverts | default([]) + [ lookup('template', 'diverts.broker.xml.j2') ] }}"
+  loop: "{{ activemq_diverts }}"
+  loop_control:
+    loop_var: divert
+    label: "{{ divert.name }}"
+
+- name: Validate diverts
+  middleware_automation.amq.xml:
+    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><diverts>{{ validate_diverts | join(' ') | trim }}</diverts></core>"
+    validate: yes
+    input_type: xml
+  become: yes
+  run_once: yes
+  delegate_to: localhost
+
+- name: Create security settings
+  ansible.builtin.set_fact:
+    validate_security_settings: "{{ validate_security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2') ] }}"
+  loop: "{{ activemq_roles }}"
+
+- name: Validate security settings
+  middleware_automation.amq.xml:
+    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><security-settings>{{ validate_security_settings | join(' ') | trim }}</security-settings></core>"
+    validate: yes
+    input_type: xml
+  become: yes
+  run_once: yes
+  delegate_to: localhost
