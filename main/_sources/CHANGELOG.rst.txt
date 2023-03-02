@@ -8,6 +8,11 @@ middleware_automation.amq Release Notes
 v1.2.1-devel
 ============
 
+Major Changes
+-------------
+
+- Configuration pre-install validation against schema `#58 <https://github.com/ansible-middleware/amq/pull/58>`_
+
 Minor Changes
 -------------
 

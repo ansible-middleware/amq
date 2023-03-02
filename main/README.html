@@ -12,10 +12,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -177,8 +175,13 @@ ansible-galaxy collection install middleware_automation-amq-*.tar.gz
 <section id="python">
 <h4>Python:<a class="headerlink" href="#python" title="Permalink to this heading"></a></h4>
 <ul class="simple">
-<li><p>no extra python dependencies are currently required</p></li>
+<li><p>lxml</p></li>
+<li><p>jmespath</p></li>
 </ul>
+<p>To install all the dependencies:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install -r requirements.txt
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -188,7 +191,7 @@ ansible-galaxy collection install middleware_automation-amq-*.tar.gz
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
-<p><a class="reference external" href="https://github.com/ansible-middleware/amq/blob/main/LICENSE">GNU General Public License v2.0</a></p>
+<p><a class="reference external" href="https://github.com/ansible-middleware/amq/blob/main/LICENSE">Apache License 2.0</a></p>
 </section>
 </section>
 

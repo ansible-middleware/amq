@@ -747,6 +747,50 @@ Parameters
   * - .. raw:: html
 
         <div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-validate"></div>
+
+      .. _ansible_collections.middleware_automation.amq.xml_module__parameter-validate:
+
+      .. rst-class:: ansible-option-title
+
+      **validate**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-validate" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`boolean`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-cell">
+
+      Perform schema validation of the XML input.
+
+      This parameter requires \ :emphasis:`xsd\_path`\  to be set.
+
+
+      .. rst-class:: ansible-option-line
+
+      :ansible-option-choices:`Choices:`
+
+      - :ansible-option-choices-entry-default:`false` :ansible-option-choices-default-mark:`← (default)`
+      - :ansible-option-choices-entry:`true`
+
+
+      .. raw:: html
+
+        </div>
+
+  * - .. raw:: html
+
+        <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-value"></div>
 
       .. _ansible_collections.middleware_automation.amq.xml_module__parameter-value:
@@ -850,6 +894,44 @@ Parameters
       A valid XPath expression describing the item(s) you want to manipulate.
 
       Operates on the document root, \ :literal:`/`\ , by default.
+
+
+      .. raw:: html
+
+        </div>
+
+  * - .. raw:: html
+
+        <div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-xsd_path"></div>
+
+      .. _ansible_collections.middleware_automation.amq.xml_module__parameter-xsd_path:
+
+      .. rst-class:: ansible-option-title
+
+      **xsd_path**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-xsd_path" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`path`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-cell">
+
+      Path to the xsd schema file to perform xml validation
+
+      This file must exist ahead of time.
+
+      This parameter is required when \ :emphasis:`validate`\  is true.
 
 
       .. raw:: html
