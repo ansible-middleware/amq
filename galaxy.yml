@@ -14,7 +14,7 @@ tags:
   - messagebus
   - infrastructure
 dependencies:
-  "middleware_automation.common": ">=1.0.0"
+  "middleware_automation.common": ">=0.0.1"
   "ansible.posix": ">=1.4.0"
 repository: https://github.com/ansible-middleware/amq
 documentation: https://ansible-middleware.github.io/amq
