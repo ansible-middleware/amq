@@ -25,6 +25,12 @@ options:
     - This parameter is required, unless I(xmlstring) is given.
     type: path
     aliases: [ dest, file ]
+  xsd_path:
+    description:
+    - Path to the xsd schema file to perform xml validation
+    - This file must exist ahead of time.
+    - This parameter is required when I(validate) is true.
+    type: path
   xmlstring:
     description:
     - A string containing XML on which to operate.
@@ -92,6 +98,12 @@ options:
   pretty_print:
     description:
     - Pretty print XML output.
+    type: bool
+    default: false
+  validate:
+    description:
+    - Perform schema validation of the XML input.
+    - This parameter requires I(xsd_path) to be set.
     type: bool
     default: false
   content:
