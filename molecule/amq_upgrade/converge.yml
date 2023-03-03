@@ -8,10 +8,10 @@
       password: amqbrokerpass
       roles: [ amq ]
   collections:
-    - middleware_automation.redhat_csp_download
+    - middleware_automation.common
   tasks:
     - name: Include role for broker upgrade
       ansible.builtin.include_role:
         name: activemq
       vars:
-        activemq_version: "{{ '7.10.0' if amq_broker_enable is defined and amq_broker_enable else '2.20.0' }}"
+        activemq_version: "{{ '7.10.1' if amq_broker_enable is defined and amq_broker_enable else '2.21.0' }}"

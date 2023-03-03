@@ -7,6 +7,6 @@
       vars:
         assets:
           - "{{ assets_server }}/amq/broker/7.9.4/amq-broker-7.9.4-bin.zip"
-          - "{{ assets_server }}/amq/broker/7.10.0/amq-broker-7.10.0-bin.zip"
+          - "{{ assets_server }}/amq/broker/7.10.1/amq-broker-7.10.1-bin.zip"
   roles:
     - activemq

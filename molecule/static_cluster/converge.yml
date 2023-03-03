@@ -74,6 +74,6 @@
           trustStorePassword: "{{ activemq_tls_truststore_password }}"
           verifyHost: False
   collections:
-    - middleware_automation.redhat_csp_download
+    - middleware_automation.common
   roles:
     - activemq

@@ -43,7 +43,7 @@ Clone the repository, checkout the tag you want to build, or pick the main branc
 
 #### Ansible collections:
 
-* [middleware_automation.redhat_csp_download](https://github.com/ansible-middleware/redhat-csp-download)
+* [middleware_automation.common](https://github.com/ansible-middleware/common)
 * [ansible.posix](https://docs.ansible.com/ansible/latest/collections/ansible/posix/index.html)
 
 
