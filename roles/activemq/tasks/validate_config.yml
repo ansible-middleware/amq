@@ -13,7 +13,6 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><address-settings>{{ validate_address_settings | join(' ') | trim }}</address-settings></core>"
     validate: yes
     input_type: xml
-  become: yes
   run_once: yes
   delegate_to: localhost
 
@@ -32,7 +31,6 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><acceptors>{{ validate_acceptors | join(' ') | trim }}</acceptors></core>"
     validate: yes
     input_type: xml
-  become: yes
   run_once: yes
   no_log: True
   delegate_to: localhost
@@ -52,7 +50,6 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><connectors>{{ validate_connectors | join(' ') | trim }}</connectors></core>"
     validate: yes
     input_type: xml
-  become: yes
   run_once: yes
   no_log: True
   delegate_to: localhost
@@ -71,7 +68,6 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><addresses>{{ validate_addresses | join(' ') | trim }}</addresses></core>"
     validate: yes
     input_type: xml
-  become: yes
   run_once: yes
   delegate_to: localhost
 
@@ -89,7 +85,6 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><diverts>{{ validate_diverts | default([]) | join(' ') | trim }}</diverts></core>"
     validate: yes
     input_type: xml
-  become: yes
   run_once: yes
   delegate_to: localhost
 
@@ -104,6 +99,5 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><security-settings>{{ validate_security_settings | join(' ') | trim }}</security-settings></core>"
     validate: yes
     input_type: xml
-  become: yes
   run_once: yes
   delegate_to: localhost
