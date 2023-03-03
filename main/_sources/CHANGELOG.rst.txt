@@ -5,7 +5,7 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
-v1.2.1-devel
+v1.3.0-devel
 ============
 
 Major Changes
@@ -17,6 +17,7 @@ Minor Changes
 -------------
 
 - Remove dependency on community.general collection `#59 <https://github.com/ansible-middleware/amq/pull/59>`_
+- Switch middleware_automation.redhat_csp_download for middleware_automation.common `#60 <https://github.com/ansible-middleware/amq/pull/60>`_
 
 v1.2.0
 ======

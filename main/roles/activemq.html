@@ -110,7 +110,11 @@
 <p>Installs and configures <a class="reference external" href="https://activemq.apache.org/components/artemis/">Apache ActiveMQ Artemis</a> services.</p>
 <section id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
-<p>The role depends on the <code class="docutils literal notranslate"><span class="pre">redhat_csp_download</span></code> role of <a class="reference external" href="https://github.com/ansible-middleware/redhat-csp-download">middleware_automation.redhat_csp_download</a> collection, and <a class="reference external" href="https://github.com/ansible-collections/ansible.posix">ansible.posix</a> collection.</p>
+<p>The role depends on the following collections:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ansible-middleware/common">middleware_automation.common</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ansible-collections/ansible.posix">ansible.posix</a></p></li>
+</ul>
 <p>To install, from the collection root directory, run:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collections install -r requirements.yml
 </pre></div>
@@ -129,7 +133,7 @@
 <tbody>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ</span> <span class="pre">7.10</span></code></p></td>
 <td class="text-left"><p>2021.Q4</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.20.0</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.21.0</span></code></p></td>
 <td class="text-left"><p><a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_amq_broker/7.10/html/release_notes_for_red_hat_amq_broker_7.10/index">Release Notes</a></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ</span> <span class="pre">7.9</span></code></p></td>
