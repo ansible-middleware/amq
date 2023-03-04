@@ -1,8 +1,5 @@
 ---
 - name: Playbook for ActiveMQ Artemis
   hosts: all
-  collections:
-   - middleware_automation.common
-   - middleware_automation.amq
   roles:
-   - activemq
+   - middleware_automation.amq.activemq

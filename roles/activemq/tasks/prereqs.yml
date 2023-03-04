@@ -62,18 +62,36 @@
     fail_msg: "Defined controller path for downloading resource is incorrect: {{ activemq_local_archive_repository }}"
     success_msg: "Will download resource to controller path: {{ local_path.stat.path }}"
 
-- name: Fetch artemis configuration xsd schema for requested version
-  ansible.builtin.get_url: # noqa risky-file-permissions delegated, uses controller host user
-    url: "{{ item }}"
-    dest: "{{ local_path.stat.path }}/"
-    mode: 0640
-  delegate_to: localhost
-  run_once: yes
-  retries: 3
-  delay: 5
-  loop:
-    - "{{ activemq.config_xsd }}"
-    - https://www.w3.org/2001/03/xml.xsd
+
+- name: Retrieve xsd schemas
+  block:
+    - name: Make collection xsd available for validation
+      ansible.builtin.copy: # noqa risky-file-permissions delegated, uses controller host user
+        src: "artemis-configuration-{{ activemq_version | split('.')[:2] | join('.') }}.xsd"
+        dest: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+        mode: 0644
+      delegate_to: localhost
+      run_once: yes
+    - name: Make collection xml.xsd available for validation
+      ansible.builtin.copy: # noqa risky-file-permissions delegated, uses controller host user
+        src: "xml.xsd"
+        dest: "{{ local_path.stat.path }}/xml.xsd"
+        mode: 0644
+      delegate_to: localhost
+      run_once: yes
+  rescue:
+    - name: Fetch artemis configuration xsd schema for requested version
+      ansible.builtin.get_url: # noqa risky-file-permissions delegated, uses controller host user
+        url: "{{ item }}"
+        dest: "{{ local_path.stat.path }}/"
+        mode: 0640
+      delegate_to: localhost
+      run_once: yes
+      retries: 3
+      delay: 5
+      loop:
+        - "{{ activemq.config_xsd }}"
+        - https://www.w3.org/2001/03/xml.xsd
 
 - name: Ensure required packages are installed
   ansible.builtin.include_tasks: fastpackages.yml
