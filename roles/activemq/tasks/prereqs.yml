@@ -67,7 +67,7 @@
   block:
     - name: Make collection xsd available for validation
       ansible.builtin.copy: # noqa risky-file-permissions delegated, uses controller host user
-        src: "artemis-configuration-{{ activemq_version | split('.')[:2] | join('.') }}.xsd"
+        src: "artemis-configuration-{{ activemq_version.split('.')[:2] | join('.') }}.xsd"
         dest: "{{ local_path.stat.path }}/artemis-configuration.xsd"
         mode: 0644
       delegate_to: localhost
