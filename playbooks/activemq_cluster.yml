@@ -7,11 +7,8 @@
     activemq_disable_mqtt_protocol: true
     activemq_shared_storage: true
     activemq_configure_firewalld: true
-  collections:
-   - middleware_automation.common
-   - middleware_automation.amq
   roles:
-   - activemq
+   - middleware_automation.amq.activemq
   pre_tasks:
     - name: Create nfs shared directory
       ansible.builtin.file:
