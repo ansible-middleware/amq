@@ -170,3 +170,22 @@ releases:
     - 54.yaml
     - 57.yaml
     release_date: '2023-02-07'
+  1.3.0:
+    changes:
+      major_changes:
+      - 'Configuration pre-install validation against schema `#58 <https://github.com/ansible-middleware/amq/pull/58>`_
+
+        '
+      minor_changes:
+      - 'Remove dependency on community.general collection `#59 <https://github.com/ansible-middleware/amq/pull/59>`_
+
+        '
+      - 'Switch middleware_automation.redhat_csp_download for middleware_automation.common
+        `#60 <https://github.com/ansible-middleware/amq/pull/60>`_
+
+        '
+    fragments:
+    - 58.yaml
+    - 59.yaml
+    - 60.yaml
+    release_date: '2023-03-06'
