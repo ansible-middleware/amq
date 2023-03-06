@@ -1,0 +1,15 @@
+Plugin Index
+============
+
+.. toctree::
+   :caption: filter plugins
+   :maxdepth: 0
+
+   pbkdf2_hmac
+
+.. toctree::
+   :caption: modules plugins
+   :maxdepth: 0
+
+   xml
+
