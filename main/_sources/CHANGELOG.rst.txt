@@ -12,14 +12,11 @@ Major Changes
 -------------
 
 - Configuration pre-install validation against schema `#58 <https://github.com/ansible-middleware/amq/pull/58>`_
-- Configuration pre-install validation against schema `#58 <https://github.com/ansible-middleware/amq/pull/58>`_
 
 Minor Changes
 -------------
 
 - Remove dependency on community.general collection `#59 <https://github.com/ansible-middleware/amq/pull/59>`_
-- Remove dependency on community.general collection `#59 <https://github.com/ansible-middleware/amq/pull/59>`_
-- Switch middleware_automation.redhat_csp_download for middleware_automation.common `#60 <https://github.com/ansible-middleware/amq/pull/60>`_
 - Switch middleware_automation.redhat_csp_download for middleware_automation.common `#60 <https://github.com/ansible-middleware/amq/pull/60>`_
 
 v1.2.0
