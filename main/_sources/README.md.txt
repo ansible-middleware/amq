@@ -1,10 +1,10 @@
 # Ansible Collection - AMQ
 
+<!--start build_status -->
 [![Build Status](https://github.com/ansible-middleware/amq/workflows/CI/badge.svg?branch=main)](https://github.com/ansible-middleware/amq/actions/workflows/ci.yml)
+<!--end build_status -->
 
-## About
-
-Collection to install and configure [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis) or [Red Hat AMQ broker](https://www.redhat.com/en/technologies/jboss-middleware/amq).
+Collection to install and configure [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis) / [Red Hat AMQ broker](https://www.redhat.com/en/technologies/jboss-middleware/amq).
 
 <!--start requires_ansible-->
 ## Ansible version compatibility
