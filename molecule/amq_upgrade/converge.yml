@@ -15,3 +15,14 @@
         name: activemq
       vars:
         activemq_version: "{{ '7.10.1' if amq_broker_enable is defined and amq_broker_enable else '2.21.0' }}"
+  pre_tasks:
+    - name: "Retrieve assets server from env"
+      ansible.builtin.set_fact:
+        assets_server: "{{ lookup('env','MIDDLEWARE_DOWNLOAD_RELEASE_SERVER_URL') }}"
+
+    - name: "Set offline when assets server from env is defined"
+      ansible.builtin.set_fact:
+        activemq_offline_install: True
+      when:
+        - assets_server is defined
+        - assets_server | length > 0
