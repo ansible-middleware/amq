@@ -22,7 +22,7 @@
 
     - name: "Set offline when assets server from env is defined"
       ansible.builtin.set_fact:
-        activemq_offline_install: True
+        amq_broker_offline_install: True
       when:
         - assets_server is defined
         - assets_server | length > 0
