@@ -26,9 +26,12 @@ This collection has been tested against following Ansible versions: **>=2.9.10**
 
 ## Installation
 
-### Download from galaxy
+<!--start galaxy_download -->
+### Installing the Collection from Ansible Galaxy
 
     ansible-galaxy collection install middleware_automation.amq
+
+<!--end galaxy_download -->
 
 
 ### Build and install locally
@@ -47,7 +50,7 @@ Clone the repository, checkout the tag you want to build, or pick the main branc
 * [ansible.posix](https://docs.ansible.com/ansible/latest/collections/ansible/posix/index.html)
 
 
-To install all the dependencies via galaxy:
+The dependencies will be installed automatically when installing the collection with ansible-galaxy, or to install manually use:
 
     ansible-galaxy collection install -r requirements.yml
 
@@ -62,9 +65,43 @@ To install all the dependencies:
     pip install -r requirements.txt
 
 
-## Support
+## Usage
 
-The amq collection is a Beta release and for [Technical Preview](https://access.redhat.com/support/offerings/techpreview). If you have any issues or questions related to collection, please don't hesitate to contact us on <Ansible-middleware-core@redhat.com> or open an issue on <https://github.com/ansible-middleware/amq/issues>
+### Install Playbook
+
+* [`playbooks/activemq.yml`](https://github.com/ansible-middleware/amq/blob/main/playbooks/activemq.yml) deploys based on the collections defaults.
+
+For full service configuration details, refer to the [activemq role README](https://github.com/ansible-middleware/keycloak/blob/main/roles/keycloak/README.md).
+
+
+#### Install from controller node
+
+By default the collection will download the desired version of the install zipfile to the ansible controller node, then it will distribute to target nodes.
+The variable `activemq_local_archive_repository` controls the path on the controller where the install zipfiles will be located, and by default will be the playbook working directory.
+
+
+#### Offline from controller node
+
+Making the install zipfile archive available to the playbook working directory, and setting `activemq_offline_install` to `True`, allows to skip
+the download tasks. The local path for the archive does match the downloaded archive path, so that it is also used as a cache when multiple hosts are provisioned in a cluster.
+
+```yaml
+activemq_offline_install: True
+```
+
+
+<!--start rhn_credentials -->
+<!--end rhn_credentials -->
+
+
+#### Clustered / high availability deployments
+
+When deploying clustered configurations, all hosts belonging to the cluster must be present in `ansible_play_batch`; ie. they must be targeted by the same ansible-playbook execution.
+
+
+<!--start support -->
+<!--end support -->
+
 
 ## License
 
