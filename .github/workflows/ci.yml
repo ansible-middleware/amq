@@ -24,9 +24,10 @@ jobs:
           path: ansible_collections/middleware_automation/amq
 
       - name: Set up Python ${{ matrix.python_version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python_version }}
+          cache: 'pip'
 
       - name: Install yamllint, ansible and molecule
         run: |
