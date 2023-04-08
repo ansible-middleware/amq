@@ -31,17 +31,26 @@
     mode: 0640
   become: yes
 
+- name: Create security settings matches
+  ansible.builtin.set_fact:
+    security_settings_matches: "{{ security_settings_matches | default({}) | combine( { match: { item.1: [ item.0.name ] }  }, recursive=True, list_merge='append' ) }}"
+  vars:
+    match: "{{ item.0.match | default('#') }}"
+  loop: "{{ activemq_roles | subelements('permissions') }}"
+  loop_control:
+    label: "{{ item.0.match | default('#') }}"
+
 - name: Create security settings
   ansible.builtin.set_fact:
-    security_settings: "{{ security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2') ] }}"
-  loop: "{{ activemq_roles }}"
+    security_settings: "{{ security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2', wantlist=True) ] }}"
+  loop: "{{ security_settings_matches | dict2items(key_name='match', value_name='permissions') }}"
 
 - name: Create messaging roles permissions
   middleware_automation.amq.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:security-settings
     input_type: xml
-    set_children: "{{ security_settings }}"
+    set_children: "{{ security_settings | flatten }}"
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core

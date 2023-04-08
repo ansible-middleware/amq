@@ -88,15 +88,24 @@
   run_once: yes
   delegate_to: localhost
 
+- name: Create security settings matches
+  ansible.builtin.set_fact:
+    validate_security_settings_matches: "{{ validate_security_settings_matches | default({}) | combine( { match: { item.1: [ item.0.name ] }  }, recursive=True, list_merge='append' ) }}"
+  vars:
+    match: "{{ item.0.match | default('#') }}"
+  loop: "{{ activemq_roles | subelements('permissions') }}"
+  loop_control:
+    label: "{{ item.0.match | default('#') }}"
+
 - name: Create security settings
   ansible.builtin.set_fact:
-    validate_security_settings: "{{ validate_security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2') ] }}"
-  loop: "{{ activemq_roles }}"
+    validate_security_settings: "{{ validate_security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2', wantlist=True) ] }}"
+  loop: "{{ validate_security_settings_matches | dict2items(key_name='match', value_name='permissions') }}"
 
 - name: Validate security settings
   middleware_automation.amq.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
-    xmlstring: "<core xmlns=\"urn:activemq:core\"><security-settings>{{ validate_security_settings | join(' ') | trim }}</security-settings></core>"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><security-settings>{{ validate_security_settings | flatten | join(' ') | trim }}</security-settings></core>"
     validate: yes
     input_type: xml
   run_once: yes

@@ -14,6 +14,11 @@
     activemq_roles:
       - name: admin
         permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
+      - name: manager
+        permissions: [ browse, manage ]
+      - name: topicsmanager
+        match: topics.#
+        permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, browse, manage ]
       - name: consumer
         match: topics.#
         permissions: [ consume, browse ]

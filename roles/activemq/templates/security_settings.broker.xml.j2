@@ -1,5 +1,5 @@
-    <security-setting match="{{ item.match | default('#') }}">
-{% for permission in item.permissions %}
-        <permission type="{{ permission }}" roles="{{ item.name }}"/>
+    <security-setting match="{{ item.match }}">
+{% for permission, roles in item.permissions.items()  %}
+        <permission type="{{ permission }}" roles="{{ roles | join(',') }}"/>
 {% endfor %}
-      </security-setting>
+    </security-setting>
