@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>activemq &mdash; AMQ Ansible Collection  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/ansible-basic-sphinx-ext.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Testing" href="../testing.html" />
+    <link rel="prev" title="Role Index" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AMQ Ansible Collection
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Ansible Collection - AMQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/index.html">Plugin Index</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Role Index</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">activemq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#versions">Versions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#role-defaults">Role Defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#role-variables">Role Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-playbook">Example Playbook</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing.html">Contributor’s Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releasing.html">Collection Versioning Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/keycloak/">Keycloak / Red Hat Single Sign-On</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AMQ Ansible Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Role Index</a></li>
+      <li class="breadcrumb-item active">activemq</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/roles/activemq.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="activemq">
+<h1>activemq<a class="headerlink" href="#activemq" title="Permalink to this heading"></a></h1>
+<p>Installs and configures <a class="reference external" href="https://activemq.apache.org/components/artemis/">Apache ActiveMQ Artemis</a> services.</p>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>The role depends on the following collections:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ansible-middleware/common">middleware_automation.common</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ansible-collections/ansible.posix">ansible.posix</a></p></li>
+</ul>
+<p>To install, from the collection root directory, run:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collections install -r requirements.yml
+</pre></div>
+</div>
+</section>
+<section id="versions">
+<h2>Versions<a class="headerlink" href="#versions" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>AMQ VERSION</p></th>
+<th class="head text-left"><p>Release Date</p></th>
+<th class="head text-left"><p>Artemis Version</p></th>
+<th class="head text-left"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ</span> <span class="pre">7.10</span></code></p></td>
+<td class="text-left"><p>2021.Q4</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.21.0</span></code></p></td>
+<td class="text-left"><p><a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_amq_broker/7.10/html/release_notes_for_red_hat_amq_broker_7.10/index">Release Notes</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ</span> <span class="pre">7.9</span></code></p></td>
+<td class="text-left"><p>2021.Q3</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.18.0</span></code></p></td>
+<td class="text-left"><p><a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_amq/2021.q3/html-single/release_notes_for_red_hat_amq_broker_7.9/index">Release Notes</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ</span> <span class="pre">7.8</span></code></p></td>
+<td class="text-left"><p>2020.Q4</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.16.0</span></code></p></td>
+<td class="text-left"><p><a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_amq/2020.q4/html-single/release_notes_for_red_hat_amq_broker_7.8/index">Release Notes</a></p></td>
+</tr>
+</tbody>
+</table>
+<!--start argument_specs-->
+</section>
+<section id="role-defaults">
+<h2>Role Defaults<a class="headerlink" href="#role-defaults" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Install options</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_version</span></code></p></td>
+<td class="text-left"><p>Apache Artemis version</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.18.0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_archive</span></code></p></td>
+<td class="text-left"><p>Apache Artemis install archive filename</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">apache-artemis-{{</span> <span class="pre">activemq_version</span> <span class="pre">}}-bin.zip</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_download_url</span></code></p></td>
+<td class="text-left"><p>Apache Artemis download URL</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://archive.apache.org/dist/activemq/activemq-artemis/{{</span> <span class="pre">activemq_version</span> <span class="pre">}}/{{</span> <span class="pre">activemq_archive</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_installdir</span></code></p></td>
+<td class="text-left"><p>Apache Artemis Installation path</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/apache-artemis-{{</span> <span class="pre">activemq_version</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_dest</span></code></p></td>
+<td class="text-left"><p>Root installation directory</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt/amq</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_offline_install</span></code></p></td>
+<td class="text-left"><p>Perform an offline installation</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_local_archive_repository</span></code></p></td>
+<td class="text-left"><p>Path local to controller for offline/download of install archives</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">lookup('env',</span> <span class="pre">'PWD')</span> <span class="pre">}}</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Service configuration</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_user</span></code></p></td>
+<td class="text-left"><p>POSIX user running the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_group</span></code></p></td>
+<td class="text-left"><p>POSIX group running the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_pidfile</span></code></p></td>
+<td class="text-left"><p>PID file for service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/artemis.pid</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_name</span></code></p></td>
+<td class="text-left"><p>systemd service unit name</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Common configuration</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_name</span></code></p></td>
+<td class="text-left"><p>Name of broker instance to deploy</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_username</span></code></p></td>
+<td class="text-left"><p>Username for accessing the broker instance</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_password</span></code></p></td>
+<td class="text-left"><p>Password for accessing the broker instance</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_anonymous</span></code></p></td>
+<td class="text-left"><p>Whether to allow anonymous logins to the instance</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_configure_firewalld</span></code></p></td>
+<td class="text-left"><p>Whether to install and configure firewalld</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_bind_address</span></code></p></td>
+<td class="text-left"><p>Service bind address</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_host</span></code></p></td>
+<td class="text-left"><p>Service hostname</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">localhost</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_http_port</span></code></p></td>
+<td class="text-left"><p>Service http port serving console and REST api</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">8161</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jolokia_url</span></code></p></td>
+<td class="text-left"><p>URL for jolokia REST api</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">http://{{</span> <span class="pre">activemq_host</span> <span class="pre">}}:{{</span> <span class="pre">activemq_http_port</span> <span class="pre">}}/console/jolokia</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_console_url</span></code></p></td>
+<td class="text-left"><p>URL for console service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">http://{{</span> <span class="pre">activemq_host</span> <span class="pre">}}:{{</span> <span class="pre">activemq_http_port</span> <span class="pre">}}/console/</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jvm_package</span></code></p></td>
+<td class="text-left"><p>RPM package to install for the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">java-11-openjdk-headless</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_java_opts</span></code></p></td>
+<td class="text-left"><p>Additional JVM options for the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-Xms512M</span> <span class="pre">-Xmx2G</span> <span class="pre">[...]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_port</span></code></p></td>
+<td class="text-left"><p>Main port for the broker instance</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">61616</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_port_hornetq</span></code></p></td>
+<td class="text-left"><p>hornetq port for the broker instance</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">5445</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_port_amqp</span></code></p></td>
+<td class="text-left"><p>AMQP port for the broker instance</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">5672</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_port_mqtt</span></code></p></td>
+<td class="text-left"><p>MQTT port for the broker instance</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1883</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_port_stomp</span></code></p></td>
+<td class="text-left"><p>STOMP port for the broker instance</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">61613</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ports_offset_enabled</span></code></p></td>
+<td class="text-left"><p>Whether to enable port offset</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ports_offset</span></code></p></td>
+<td class="text-left"><p>Port offset for all default ports</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_shared_storage</span></code></p></td>
+<td class="text-left"><p>Use shared filesystem directory for storage</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_shared_storage_path</span></code></p></td>
+<td class="text-left"><p>Absolute path of shared directory</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/{{</span> <span class="pre">activemq_instance_name</span> <span class="pre">}}/data/shared</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_shared_storage_mounted</span></code></p></td>
+<td class="text-left"><p>Whether the systemd unit must require a mounted path (only when using shared storage)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_destination_autocreate</span></code></p></td>
+<td class="text-left"><p>Disable automatic creation of destination</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_queues</span></code></p></td>
+<td class="text-left"><p>Queue names comma separated</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">queue.in,queue.out</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_configuration_file_refresh_period</span></code></p></td>
+<td class="text-left"><p>Periodic refresh of configuration in milliseconds; can be disabled by specifying -1</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">5000</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Journal configuration</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_data_directory</span></code></p></td>
+<td class="text-left"><p>The activemq data directory path</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/</span></code>, or the value of <code class="docutils literal notranslate"><span class="pre">activemq_shared_storage_path</span></code> if activemq_shared_storage is set</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_persistence_enabled</span></code></p></td>
+<td class="text-left"><p>Whether to use the file based journal for persistence</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_persist_id_cache</span></code></p></td>
+<td class="text-left"><p>Whether to persist cache IDs to the journal</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_id_cache_size</span></code></p></td>
+<td class="text-left"><p>The duplicate detection circular cache size</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">20000</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_type</span></code></p></td>
+<td class="text-left"><p>Journal type, valid values are [ <code class="docutils literal notranslate"><span class="pre">ASYNCIO</span></code>: libaio, <code class="docutils literal notranslate"><span class="pre">MAPPED</span></code>: mmap files, <code class="docutils literal notranslate"><span class="pre">NIO</span></code>: Plain Java Files  ]</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ASYNCIO</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_paging_directory</span></code></p></td>
+<td class="text-left"><p>The directory to store paged messages in</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/paging</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_bindings_directory</span></code></p></td>
+<td class="text-left"><p>The folder in use for the bindings folder</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/bindings</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_directory</span></code></p></td>
+<td class="text-left"><p>The directory to store the journal files in</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/journal</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_large_messages_directory</span></code></p></td>
+<td class="text-left"><p>The directory to store large messages</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/largemessages</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_datasync</span></code></p></td>
+<td class="text-left"><p>Whether to use msync/fsync on journal operations</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_min_files</span></code></p></td>
+<td class="text-left"><p>How many journal files to pre-create</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_pool_files</span></code></p></td>
+<td class="text-left"><p>The upper threshold of the journal file pool, -1 means no Limit</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-1</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_device_block_size</span></code></p></td>
+<td class="text-left"><p>The block size by the device</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">4096</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_file_size</span></code></p></td>
+<td class="text-left"><p>The size (in bytes) of each journal file</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">10M</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_buffer_timeout</span></code></p></td>
+<td class="text-left"><p>The Flush timeout for the journal buffer</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">500000</span></code> if ‘ASYNCIO’ else <code class="docutils literal notranslate"><span class="pre">3333333</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_max_io</span></code></p></td>
+<td class="text-left"><p>The maximum number of write requests that can be in the ASYNCIO queue at any one time</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">4096</span></code> if ‘ASYNCIO’ else <code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_enabled</span></code></p></td>
+<td class="text-left"><p>Whether to enable JDBC persistence</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_jdbc_url</span></code></p></td>
+<td class="text-left"><p>The full JDBC connection URL for your database server</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">jdbc:derby:target/derby/database-store;create=true</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_bindings_table</span></code></p></td>
+<td class="text-left"><p>The name of the table in which bindings data will be persisted</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">BINDINGS_TABLE</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_message_table</span></code></p></td>
+<td class="text-left"><p>The name of the table in which bindings data will be persisted</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">MESSAGE_TABLE</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_large_message_table</span></code></p></td>
+<td class="text-left"><p>The name of the table in which messages and related data will be persisted</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">LARGE_MESSAGES_TABLE</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_jdbc_driver_class</span></code></p></td>
+<td class="text-left"><p>The fully qualified class name of the desired database Driver</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">org.apache.derby.jdbc.EmbeddedDriver</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Acceptors / connectors</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_acceptors</span></code></p></td>
+<td class="text-left"><p>Acceptors configuration; list of <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">name(str),</span> <span class="pre">bind_address(str),</span> <span class="pre">bind_port(int),</span> <span class="pre">parameters(dict)</span> <span class="pre">}</span></code></p></td>
+<td class="text-left"><p>Generate same configuration as <code class="docutils literal notranslate"><span class="pre">artemis</span> <span class="pre">create</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_connectors</span></code></p></td>
+<td class="text-left"><p>Connectors configuration; list of <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">name(str),</span> <span class="pre">address(str),</span> <span class="pre">port(int),</span> <span class="pre">parameters(dict)</span> <span class="pre">}</span></code></p></td>
+<td class="text-left"><p>Generate same configuration as <code class="docutils literal notranslate"><span class="pre">artemis</span> <span class="pre">create</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Sample acceptor:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqp</span>
+<span class="w">    </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">activemq_host</span> <span class="cp">}}</span>
+<span class="w">    </span><span class="nt">bind_port</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">activemq_port_amqp</span> <span class="cp">}}</span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tcpSendBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span>
+<span class="w">      </span><span class="nt">tcpReceiveBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span>
+<span class="w">      </span><span class="nt">protocols</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AMQP</span>
+<span class="w">      </span><span class="nt">useEpoll</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">amqpMinLargeMessageSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">102400</span>
+<span class="w">      </span><span class="nt">amqpCredits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">      </span><span class="nt">amqpLowCredits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+<span class="w">      </span><span class="nt">amqpDuplicateDetection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p>Sample connector with TLS:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqp</span>
+<span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">172.168.10.43</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">61616</span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tcpSendBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span>
+<span class="w">      </span><span class="nt">tcpReceiveBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span>
+<span class="w">      </span><span class="nt">protocols</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CORE</span>
+<span class="w">      </span><span class="nt">useEpoll</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">sslEnabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">      </span><span class="nt">keyStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_keystore_dest</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">      </span><span class="nt">keyStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_keystore_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">      </span><span class="nt">trustStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_truststore_dest</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">      </span><span class="nt">trustStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_truststore_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">      </span><span class="nt">verifyHost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Addresses configuration</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_addresses</span></code></p></td>
+<td class="text-left"><p>Addresses/queue configuration; list of <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">name,</span> <span class="pre">[anycast</span> <span class="pre">or</span> <span class="pre">multicast],</span> <span class="pre">and</span> <span class="pre">parameters</span> <span class="pre">}</span></code></p></td>
+<td class="text-left"><p>Generate same configuration as <code class="docutils literal notranslate"><span class="pre">artemis</span> <span class="pre">create</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Sample addresses:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpiryQueue</span>
+<span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpiryQueue</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Virtual</span>
+<span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Virtual</span>
+<span class="w">        </span><span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;discard=&#39;true&#39;&quot;</span>
+<span class="w">        </span><span class="nt">max_consumers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">        </span><span class="nt">consumers_before_dispatch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Address settings</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_address_settings</span></code></p></td>
+<td class="text-left"><p>Address settings configuration; list of <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">match</span> <span class="pre">address</span> <span class="pre">string</span> <span class="pre">and</span> <span class="pre">parameters(dict)</span> <span class="pre">}</span></code></p></td>
+<td class="text-left"><p>“Generate same configuration as <code class="docutils literal notranslate"><span class="pre">artemis</span> <span class="pre">create</span></code>”</p></td>
+</tr>
+</tbody>
+</table>
+<p>Sample address settings:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">activemq.management#</span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">dead_letter_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DLQ</span>
+<span class="w">      </span><span class="nt">expiry_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpiryQueue</span>
+<span class="w">      </span><span class="nt">redelivery_delay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">      </span><span class="nt">max_size_bytes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1</span>
+<span class="w">      </span><span class="nt">message_counter_history_day_limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">      </span><span class="nt">address_full_policy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PAGE</span>
+<span class="w">      </span><span class="nt">auto_create_queues</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">auto_create_addresses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">auto_create_jms_queues</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">auto_create_jms_topics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p>The parameters are snake_cased variants of the artemis configuration schema elements, which are kebab-cased (ie. <code class="docutils literal notranslate"><span class="pre">dead-letter-address</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">dead_letter_address</span></code>).</p>
+<ul class="simple">
+<li><p>Diverts configuration</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_diverts</span></code></p></td>
+<td class="text-left"><p>Diverts configuration; list of <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">name</span> <span class="pre">with</span> <span class="pre">parameters</span> <span class="pre">}</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Sample divert:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SAMPLEDIVERT</span>
+<span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FROMQUEUE</span>
+<span class="w">    </span><span class="nt">forwarding_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TOQUEUE</span>
+<span class="w">    </span><span class="nt">routing_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANYCAST</span>
+<span class="w">    </span><span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;msgType</span><span class="nv"> </span><span class="s">LIKE</span><span class="nv"> </span><span class="s">&#39;%ff%&#39;&quot;</span>
+<span class="w">    </span><span class="nt">exclusive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Clustering</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ha_enabled</span></code></p></td>
+<td class="text-left"><p>Whether to enable clustering</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_user</span></code></p></td>
+<td class="text-left"><p>Cluster username</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-cluster-user</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_pass</span></code></p></td>
+<td class="text-left"><p>Cluster user password</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-cluster-pass</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_maxhops</span></code></p></td>
+<td class="text-left"><p>Cluster max hops</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_lb_policy</span></code></p></td>
+<td class="text-left"><p>Policy for cluster load balancing</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ON_DEMAND</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_replicate</span></code></p></td>
+<td class="text-left"><p>Enables replication</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_replicated</span></code></p></td>
+<td class="text-left"><p>Designate instance as replicated node</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_discovery</span></code></p></td>
+<td class="text-left"><p>Cluster discovery: [<code class="docutils literal notranslate"><span class="pre">jgroups</span></code> (shared file ping), <code class="docutils literal notranslate"><span class="pre">multicast</span></code> (UDP), <code class="docutils literal notranslate"><span class="pre">static</span></code> (node list)]</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">static</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port</span></code></p></td>
+<td class="text-left"><p>Whether systemd unit should wait for activemq port before returning</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when activemq_ha_enabled is <code class="docutils literal notranslate"><span class="pre">True</span></code> and activemq_shared_storage is <code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code></p></td>
+<td class="text-left"><p>Whether systemd unit should wait for service to be up in logs</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when activemq_ha_enabled and activemq_shared_storage are <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>TLS/SSL protocol</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_enabled</span></code></p></td>
+<td class="text-left"><p>Whether to enable TLS</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_keystore_dest</span></code></p></td>
+<td class="text-left"><p>Path for installation of truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/{{</span> <span class="pre">activemq_instance_name</span> <span class="pre">}}/etc/identity.ks</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_mutual_authentication</span></code></p></td>
+<td class="text-left"><p>Whether to enable TLS mutual auth, requires TLS enabled</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_truststore_dest</span></code></p></td>
+<td class="text-left"><p>Path for installation of truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/{{</span> <span class="pre">activemq_instance_name</span> <span class="pre">}}/etc/trust.ks</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>See <em>Role Variables</em> below for additional TLS/SSL settings.</p>
+<ul class="simple">
+<li><p>Logging</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_enable_audit</span></code></p></td>
+<td class="text-left"><p>Whether to enable audit file logging</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_level</span></code></p></td>
+<td class="text-left"><p>Root logging level</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_core_server_level</span></code></p></td>
+<td class="text-left"><p>Logging level for org.apache.activemq.artemis.core.server</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_journal_level</span></code></p></td>
+<td class="text-left"><p>Logging level for org.apache.activemq.artemis.journal</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_utils_level</span></code></p></td>
+<td class="text-left"><p>Logging level for org.apache.activemq.artemis.utils</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_utils_critical_level</span></code></p></td>
+<td class="text-left"><p>Logging level for org.apache.activemq.artemis.utils.critical</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_jms_level</span></code></p></td>
+<td class="text-left"><p>Logging level for org.apache.activemq.artemis.jms</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_integration_bootstrap_level</span></code></p></td>
+<td class="text-left"><p>Logging level for org.apache.activemq.artemis.integration.bootstrap</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_jetty_level</span></code></p></td>
+<td class="text-left"><p>Logging level for org.eclipse.jetty</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">WARN</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_curator_level</span></code></p></td>
+<td class="text-left"><p>Logging level for org.apache.curator</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">WARN</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_zookeeper_level</span></code></p></td>
+<td class="text-left"><p>Logging level for org.apache.zookeeper</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ERROR</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Other options</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_nio_enabled</span></code></p></td>
+<td class="text-left"><p>Enable Native IO using libaio</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_amqp_protocol</span></code></p></td>
+<td class="text-left"><p>Whether to disable AMQP protocol</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_hornetq_protocol</span></code></p></td>
+<td class="text-left"><p>Whether to disable HORNETQ protocol</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_mqtt_protocol</span></code></p></td>
+<td class="text-left"><p>Whether to disable MQTT protocol</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_disable_stomp_protocol</span></code></p></td>
+<td class="text-left"><p>Whether to disable STOMP protocol</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jmx_exporter_port</span></code></p></td>
+<td class="text-left"><p>Port for prometheus JMX exporter to listen</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">18080</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jmx_exporter_config_path</span></code></p></td>
+<td class="text-left"><p>JMX exporter configuration path</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/{{</span> <span class="pre">activemq_instance_name</span> <span class="pre">}}/etc/jmx_exporter.yml</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jmx_exporter_enabled</span></code></p></td>
+<td class="text-left"><p>Enable install and configuration of prometheus-jmx-exporter</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jmx_exporter_package</span></code></p></td>
+<td class="text-left"><p>The rpm package name providing JMX exporter</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">prometheus-jmx-exporter-openjdk11</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_prometheus_enabled</span></code></p></td>
+<td class="text-left"><p>Enable install and configuration of prometheus metrics plugin</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_name</span></code></p></td>
+<td class="text-left"><p>Human readable service name</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Apache</span> <span class="pre">ActiveMQ</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_config_dir</span></code></p></td>
+<td class="text-left"><p>Broker instance configuration directory</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">conf</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_config_xml</span></code></p></td>
+<td class="text-left"><p>Broker instance configuration file</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker.xml</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_config_override_template</span></code></p></td>
+<td class="text-left"><p>Filename of custom broker xml configuration file to be deployed</p></td>
+<td class="text-left"><p>``</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_override_template</span></code></p></td>
+<td class="text-left"><p>Filename of custom systemd unit template to be deployed</p></td>
+<td class="text-left"><p>``</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>User / Role configuration</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_users</span></code></p></td>
+<td class="text-left"><p>List of users the create with role; user is not created if password empty. List of (user,password,role) dicts</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_instance_username</span> <span class="pre">}}/{{</span> <span class="pre">activemq_instance_password</span> <span class="pre">}}/amq</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_roles</span></code></p></td>
+<td class="text-left"><p>List of roles to create. List of (role,permissions) dicts where permissions is a list of amq broker permissions</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_hawtio_role</span></code></p></td>
+<td class="text-left"><p>Artemis role for hawtio console access</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_management_access_default</span></code></p></td>
+<td class="text-left"><p>Management console access methods for roles in <code class="docutils literal notranslate"><span class="pre">activemq_hawtio_role</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">'list*',</span> <span class="pre">'get*',</span> <span class="pre">'is*',</span> <span class="pre">'set*',</span> <span class="pre">'browse*',</span> <span class="pre">'count*',</span> <span class="pre">'*'</span> <span class="pre">]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_management_access_domains</span></code></p></td>
+<td class="text-left"><p>Management console access methods per domain for roles in <code class="docutils literal notranslate"><span class="pre">activemq_hawtio_role</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">java.lang</span></code>, <code class="docutils literal notranslate"><span class="pre">org.apache.artemis.activemq</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cors_allow_origin</span></code></p></td>
+<td class="text-left"><p>List of CORS allow origin setting for jolokia</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">*://0.0.0.0*</span> <span class="pre">]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cors_strict_checking</span></code></p></td>
+<td class="text-left"><p>Whether to enforce strict checking for CORS</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Sample user/role configuration with one admin, a consumer and a producer:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">activemq_hawtio_role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span>
+<span class="w">    </span><span class="nt">activemq_users</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq</span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqbrokerpass</span>
+<span class="w">        </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">admin</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">other</span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqotherpass</span>
+<span class="w">        </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">consumer</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">producer</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">activemq_roles</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span>
+<span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">createNonDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">deleteNonDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">createDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">deleteDurableQueue</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">createAddress</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">deleteAddress</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">consume</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">send</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">manage</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">consumer</span>
+<span class="w">        </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topics.#</span>
+<span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">consume</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">producer</span>
+<span class="w">        </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topics.#</span>
+<span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">send</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="w"> </span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</section>
+<section id="role-variables">
+<h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Required</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_java_home</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code> of installed JRE, leave empty for using specified <code class="docutils literal notranslate"><span class="pre">activemq_jvm_package</span></code> path</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">no</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_keystore_path</span></code></p></td>
+<td class="text-left"><p>Keystore path for TLS connections</p></td>
+<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">activemq_tls_enabled</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_keystore_password</span></code></p></td>
+<td class="text-left"><p>Keystore password for TLS connections</p></td>
+<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">activemq_tls_enabled</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_truststore_path</span></code></p></td>
+<td class="text-left"><p>Truststore to use for TLS mutual authentication</p></td>
+<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">activemq_tls_mutual_authentication</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_tls_truststore_password</span></code></p></td>
+<td class="text-left"><p>Password for truststore</p></td>
+<td class="text-left"><p>when <code class="docutils literal notranslate"><span class="pre">activemq_tls_mutual_authentication</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<!--end argument_specs-->
+</section>
+<section id="example-playbook">
+<h2>Example Playbook<a class="headerlink" href="#example-playbook" title="Permalink to this heading"></a></h2>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">collections</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">middleware_automation.amq</span>
+<span class="w">  </span><span class="nt">roles</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">activemq</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Role Index" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../testing.html" class="btn btn-neutral float-right" title="Testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Red Hat, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
