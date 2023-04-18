@@ -5,6 +5,14 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v1.3.1
+======
+
+Bugfixes
+--------
+
+- Avoid generating duplicated security-settings match elements `#65 <https://github.com/ansible-middleware/amq/pull/65>`_
+
 v1.3.0
 ======
 
