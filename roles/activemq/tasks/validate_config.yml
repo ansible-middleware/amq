@@ -1,4 +1,16 @@
 ---
+- name: Clear internal validation variables
+  ansible.builtin.set_fact:
+    validate_security_settings: []
+    validate_security_settings_matches: {}
+    validate_management_access_default: []
+    validate_management_access_domains: []
+    validate_addresses: []
+    validate_acceptors: []
+    validate_connectors: []
+    validate_address_settings: []
+    validate_diverts: []
+
 - name: Create address settings configuration string
   ansible.builtin.set_fact:
     validate_address_settings: "{{ validate_address_settings | default([]) + [ lookup('template', 'address_settings.broker.xml.j2') ] }}"
