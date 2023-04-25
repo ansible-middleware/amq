@@ -12,7 +12,6 @@ Bugfixes
 --------
 
 - Avoid generating duplicated security-settings match elements `#65 <https://github.com/ansible-middleware/amq/pull/65>`_
-- Avoid generating duplicated security-settings match elements `#65 <https://github.com/ansible-middleware/amq/pull/65>`_
 
 v1.3.0
 ======
