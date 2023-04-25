@@ -51,6 +51,10 @@ provisioner:
     host_vars:
       localhost:
         ansible_python_interpreter: "{{ ansible_playbook_python }}"
+      instance1:
+        activemq_ha_role: 'master'
+      instance2:
+        activemq_ha_role: 'slave'
   env:
     ANSIBLE_FORCE_COLOR: "true"        
 verifier:
