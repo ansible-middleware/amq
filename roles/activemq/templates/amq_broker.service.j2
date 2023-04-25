@@ -21,7 +21,11 @@ TimeoutSec=600
 ExecStartPost=/usr/bin/timeout 60 sh -c 'while ! ss -H -t -l -n sport = :{{ activemq_port }} | grep -q "^LISTEN.*:{{ activemq_port }}"; do sleep 1; done && /bin/sleep 10'
 {% endif %}
 {% if activemq_systemd_wait_for_log %}
+{% if activemq_ha_enabled and activemq_ha_role == 'slave' %}
+ExecStartPost=/usr/bin/timeout 60 sh -c 'tail -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221031/ q" && /bin/sleep 10'
+{% else %}
 ExecStartPost=/usr/bin/timeout 60 sh -c 'tail -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221034/ q" && /bin/sleep 10'
+{% endif %}
 {% endif %}
 
 [Install]
