@@ -11,15 +11,14 @@
 {% endif %}
 {% if activemq_ha_enabled and activemq_shared_storage %}
         <shared-store>
-{% if activemq_ha_role == 'master' %}
-          <master>
-            <failover-on-shutdown>true</failover-on-shutdown>
-          </master>
-{% endif %}
 {% if activemq_ha_role == 'slave' %}
           <slave>
             <allow-failback>true</allow-failback>
           </slave>
+{% else %}
+          <master>
+            <failover-on-shutdown>true</failover-on-shutdown>
+          </master>
 {% endif %}
         </shared-store>
 {% endif %}
