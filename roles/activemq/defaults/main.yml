@@ -56,6 +56,7 @@ activemq_replicated: False
 activemq_cluster_discovery: static
 activemq_systemd_wait_for_port: "{{ activemq_ha_enabled and not activemq_shared_storage }}"
 activemq_systemd_wait_for_log: "{{ activemq_ha_enabled and activemq_shared_storage }}"
+activemq_ha_role: live-only
 
 ### Enable persistence and persistence options
 activemq_persistence_enabled: True

@@ -1,3 +1,23 @@
+{% if activemq_ha_enabled and not activemq_replicate and not activemq_shared_storage %}
         <live-only>
-            <scale-down />
+            <scale-down>
+{% for param in activemq_connectors %}
+{% if param.name != 'artemis' %}
+            <connector-ref>{{ param.name }}</connector-ref>
+{% endif %}
+{% endfor %}
+            </scale-down>
         </live-only>
+{% endif %}
+{% if activemq_ha_enabled and activemq_shared_storage %}
+{% if activemq_ha_role == 'master' %}
+        <master>
+            <failover-on-shutdown>true</failover-on-shutdown>
+        </master>
+{% endif %}
+{% if activemq_ha_role == 'slave' %}
+        <slave>
+            <allow-failback>true</allow-failback>
+        </slave>
+{% endif %}
+{% endif %}

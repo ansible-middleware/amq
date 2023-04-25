@@ -149,6 +149,10 @@ argument_specs:
                 default: false
                 description: "Whether to enable clustering"
                 type: "bool"
+            activemq_ha_role:
+                default: "live-only"
+                type: "str"
+                description: "Instance role for high availability"
             activemq_db_enabled:
                 # line 54 of defaults/main.yml
                 default: false
