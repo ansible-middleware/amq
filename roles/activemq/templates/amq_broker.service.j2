@@ -18,10 +18,10 @@ Restart = on-failure
 LimitNOFILE=102642
 TimeoutSec=600
 {% if activemq_systemd_wait_for_port %}
-ExecStartPost=/usr/bin/timeout 60 sh -c 'while ! ss -H -t -l -n sport = :{{ activemq_port }} | grep -q "^LISTEN.*:{{ activemq_port }}"; do sleep 1; done'
+ExecStartPost=/usr/bin/timeout 60 sh -c 'while ! ss -H -t -l -n sport = :{{ activemq_port }} | grep -q "^LISTEN.*:{{ activemq_port }}"; do sleep 1; done && /bin/sleep 10'
 {% endif %}
 {% if activemq_systemd_wait_for_log %}
-ExecStartPost=/usr/bin/timeout 60 sh -c 'tail -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221034/ q"'
+ExecStartPost=/usr/bin/timeout 60 sh -c 'tail -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221034/ q" && /bin/sleep 10'
 {% endif %}
 
 [Install]
