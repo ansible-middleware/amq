@@ -13,8 +13,9 @@
 - name: "Configure ha-policy"
   middleware_automation.amq.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
-    xpath: "/conf:configuration/core:core/core:ha-policy"
+    xpath: /conf:configuration/core:core/core:ha-policy
     set_children: "{{ [ lookup('template', 'ha_policy.xml.j2') ] }}"
+    input_type: xml
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
