@@ -15,8 +15,6 @@ platforms:
     command: "/usr/sbin/init"
     networks:
       - name: amq
-    groups:
-      - amq
     tmpfs:
       - /run
       - /tmp
@@ -29,8 +27,6 @@ platforms:
     command: "/usr/sbin/init"
     networks:
       - name: amq
-    groups:
-      - amq
     tmpfs:
       - /run
       - /tmp

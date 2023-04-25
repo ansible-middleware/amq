@@ -284,8 +284,8 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_name`| Human readable service name | `Apache ActiveMQ` |
 |`activemq_config_dir`| Broker instance configuration directory | `conf` |
 |`activemq_config_xml`| Broker instance configuration file | `amq-broker.xml` |
-|`activemq_config_override_template`| Filename of custom broker xml configuration file to be deployed | `` |
-|`activemq_service_override_template`| Filename of custom systemd unit template to be deployed | `` |
+|`activemq_config_override_template`| Filename of custom broker xml configuration file to be deployed | `''` |
+|`activemq_service_override_template`| Filename of custom systemd unit template to be deployed | `''` |
 
 
 * User / Role configuration
