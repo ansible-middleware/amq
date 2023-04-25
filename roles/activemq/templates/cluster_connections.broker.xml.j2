@@ -3,4 +3,6 @@
             <static-connectors>
                {% for param in activemq_connectors %}<connector-ref>{{ param.name }}</connector-ref>{% endfor %}
             </static-connectors>
+            <message-load-balancing>{{ activemq_cluster_lb_policy }}</message-load-balancing>
+            <max-hops>{{ activemq_cluster_maxhops }}</max-hops>
          </cluster-connection>
