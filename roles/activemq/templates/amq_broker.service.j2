@@ -18,13 +18,13 @@ Restart = on-failure
 LimitNOFILE=102642
 TimeoutSec=600
 {% if activemq_systemd_wait_for_port %}
-ExecStartPost=/usr/bin/timeout 60 sh -c 'while ! ss -H -t -l -n sport = :{{ activemq_port }} | grep -q "^LISTEN.*:{{ activemq_port }}"; do sleep 1; done && /bin/sleep 10'
+ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'while ! ss -H -t -l -n sport = :{{ activemq_port }} | grep -q "^LISTEN.*:{{ activemq_port }}"; do sleep 1; done && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
 {% endif %}
 {% if activemq_systemd_wait_for_log %}
 {% if activemq_ha_enabled and activemq_ha_role == 'slave' %}
-ExecStartPost=/usr/bin/timeout 60 sh -c 'tail -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221031/ q" && /bin/sleep 10'
+ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221031/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
 {% else %}
-ExecStartPost=/usr/bin/timeout 60 sh -c 'tail -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221034/ q" && /bin/sleep 10'
+ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221034/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
 {% endif %}
 {% endif %}
 
