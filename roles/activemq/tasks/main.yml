@@ -84,13 +84,17 @@
     - systemdunit is defined
     - systemdunit.changed
 
-- name: "Start and wait for {{ activemq.service_name }} service (first node)"
-  ansible.builtin.include_tasks: start.yml
-  run_once: yes
-  when: activemq_db_enabled
+# - name: "Start and wait for {{ activemq.service_name }} service (first node)"
+#   ansible.builtin.include_tasks: start.yml
+#   run_once: yes
+#   when: activemq_db_enabled
 
-- name: "Start and wait for {{ activemq.service_name }} service (remaining nodes)"
-  ansible.builtin.include_tasks: start.yml
+# - name: "Start and wait for {{ activemq.service_name }} service (remaining nodes)"
+#   ansible.builtin.include_tasks: start.yml
+#   register: initial_start
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: Check service status
   ansible.builtin.command: "systemctl status {{ activemq.instance_name }}"
@@ -105,9 +109,6 @@
     that:
       - activemq_service_status is defined
       - activemq_service_status.stdout is defined
-
-- name: Flush handlers
-  ansible.builtin.meta: flush_handlers
 
 - name: Create default logs directory
   become: yes

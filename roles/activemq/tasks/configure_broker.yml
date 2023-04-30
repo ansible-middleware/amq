@@ -10,6 +10,36 @@
   notify:
     - restart amq_broker
 
+- name: Configure ha policy
+  when: activemq_ha_enabled
+  block:
+    - name: "Ensure ha-policy element exists"
+      middleware_automation.amq.xml:
+        path: "{{ activemq.instance_home }}/etc/broker.xml"
+        xpath: /conf:configuration/core:core/core:ha-policy
+        state: present
+        input_type: xml
+        namespaces:
+          conf: urn:activemq
+          core: urn:activemq:core
+        pretty_print: yes
+      become: yes
+      notify:
+        - restart amq_broker
+    - name: "Configure ha-policy"
+      middleware_automation.amq.xml:
+        path: "{{ activemq.instance_home }}/etc/broker.xml"
+        xpath: /conf:configuration/core:core/core:ha-policy
+        set_children: "{{ [ lookup('template', 'ha_policy.xml.j2') ] }}"
+        input_type: xml
+        namespaces:
+          conf: urn:activemq
+          core: urn:activemq:core
+        pretty_print: yes
+      become: yes
+      notify:
+        - restart amq_broker
+
 - name: Create user and roles
   ansible.builtin.include_tasks: user_roles.yml
   when: activemq_users | length > 0

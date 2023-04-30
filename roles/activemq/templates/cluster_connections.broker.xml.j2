@@ -1,5 +1,7 @@
          <cluster-connection name="{{ activemq_service_name }}">
             <connector-ref>{% for param in activemq_connectors %}{% if param.address == 'localhost' or param.address == inventory_hostname %}{{ param.name }}{% endif %}{% endfor %}</connector-ref>
+            <message-load-balancing>{{ activemq_cluster_lb_policy }}</message-load-balancing>
+            <max-hops>{{ activemq_cluster_maxhops }}</max-hops>
             <static-connectors>
                {% for param in activemq_connectors %}<connector-ref>{{ param.name }}</connector-ref>{% endfor %}
             </static-connectors>
