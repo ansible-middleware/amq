@@ -231,11 +231,14 @@ Sample divert:
 |`activemq_cluster_pass`| Cluster user password | `amq-cluster-pass` |
 |`activemq_cluster_maxhops`| Cluster max hops | `1` |
 |`activemq_cluster_lb_policy`| Policy for cluster load balancing | `ON_DEMAND` |
+|`activemq_ha_role` | Instance role for high availability | `live-only` |
 |`activemq_replicate`| Enables replication | `False` |
 |`activemq_replicated`| Designate instance as replicated node | `False` |
 |`activemq_cluster_discovery` | Cluster discovery: [`jgroups` (shared file ping), `multicast` (UDP), `static` (node list)] | `static` |
 |`activemq_systemd_wait_for_port` | Whether systemd unit should wait for activemq port before returning | `True` when activemq_ha_enabled is `True` and activemq_shared_storage is `False` |
 |`activemq_systemd_wait_for_log` | Whether systemd unit should wait for service to be up in logs | `True` when activemq_ha_enabled and activemq_shared_storage are `True` |
+|`activemq_systemd_wait_for_timeout`| How long to wait for service to be alive (seconds) | `60` |
+|`activemq_systemd_wait_for_delay`| Activation delay for service systemd unit | `10` |
 
 
 * TLS/SSL protocol
@@ -284,8 +287,8 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_name`| Human readable service name | `Apache ActiveMQ` |
 |`activemq_config_dir`| Broker instance configuration directory | `conf` |
 |`activemq_config_xml`| Broker instance configuration file | `amq-broker.xml` |
-|`activemq_config_override_template`| Filename of custom broker xml configuration file to be deployed | `` |
-|`activemq_service_override_template`| Filename of custom systemd unit template to be deployed | `` |
+|`activemq_config_override_template`| Filename of custom broker xml configuration file to be deployed | `''` |
+|`activemq_service_override_template`| Filename of custom systemd unit template to be deployed | `''` |
 
 
 * User / Role configuration
