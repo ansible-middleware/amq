@@ -231,6 +231,7 @@ Sample divert:
 |`activemq_cluster_pass`| Cluster user password | `amq-cluster-pass` |
 |`activemq_cluster_maxhops`| Cluster max hops | `1` |
 |`activemq_cluster_lb_policy`| Policy for cluster load balancing | `ON_DEMAND` |
+|`activemq_ha_role` | Instance role for high availability | `live-only` |
 |`activemq_replicate`| Enables replication | `False` |
 |`activemq_replicated`| Designate instance as replicated node | `False` |
 |`activemq_cluster_discovery` | Cluster discovery: [`jgroups` (shared file ping), `multicast` (UDP), `static` (node list)] | `static` |
