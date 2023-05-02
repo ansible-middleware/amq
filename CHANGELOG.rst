@@ -5,6 +5,14 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v1.3.2
+======
+
+Minor Changes
+-------------
+
+- Provide ha-policy implementation `#66 <https://github.com/ansible-middleware/amq/pull/66>`_
+
 v1.3.1
 ======
 
