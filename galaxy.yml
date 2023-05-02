@@ -13,6 +13,9 @@ tags:
   - server
   - messagebus
   - infrastructure
+  - runtimes
+  - middleware
+  - A4MW
 dependencies:
   "middleware_automation.common": ">=0.0.1"
   "ansible.posix": ">=1.4.0"
