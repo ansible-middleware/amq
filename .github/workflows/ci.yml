@@ -48,6 +48,12 @@ jobs:
           repository: ansible-middleware/ansible-lint-custom-rules
           path: ansible_collections/ansible-lint-custom-rules/
 
+      - name: Run linter
+        run: |
+          ansible-lint --version
+          ansible-lint -v
+        working-directory: ./ansible_collections/middleware_automation/amq
+
       - name: Run sanity tests
         run: ansible-test sanity -v --color --python ${{ matrix.python_version }} --exclude changelogs/fragments/.gitignore --skip-test symlinks
         working-directory: ./ansible_collections/middleware_automation/amq
