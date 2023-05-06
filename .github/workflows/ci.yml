@@ -44,6 +44,9 @@ jobs:
           if [ -f ansible_collections/middleware_automation/amq/requirements.yml ]; then
             ansible-galaxy collection install -r ansible_collections/middleware_automation/amq/requirements.yml -p /home/runner/.ansible/collections --force-with-deps
           fi
+          if [ -f ansible_collections/middleware_automation/amq/molecule/requirements.yml ]; then
+            ansible-galaxy collection install -r ansible_collections/middleware_automation/amq/molecule/requirements.yml -p /home/runner/.ansible/collections
+          fi
 
       - name: Install ansible-lint custom rules
         uses: actions/checkout@v2
