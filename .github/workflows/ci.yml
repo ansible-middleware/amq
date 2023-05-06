@@ -51,6 +51,9 @@ jobs:
       - name: Run linter
         run: |
           ansible-lint --version
+          if [ -f ansible_collections/middleware_automation/amq/requirements.yml ]; then
+            ansible-galaxy collection install -p $HOME/.ansible/collections --force-with-deps -r ansible_collections/middleware_automation/amq/requirements.yml
+          fi
           ansible-lint -v
         working-directory: ./ansible_collections/middleware_automation/amq
 
