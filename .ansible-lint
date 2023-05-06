@@ -9,7 +9,7 @@ exclude_paths:
   - playbooks/roles/
 
 rulesdir:
-   - ../../ansible-lint-custom-rules/rules/
+   - ../../../ansible-lint-custom-rules/rules/
 
 enable_list:
   - fqcn-builtins  # opt-in
