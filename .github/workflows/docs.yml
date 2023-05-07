@@ -44,6 +44,7 @@ jobs:
           if [ -f ansible_collections/middleware_automation/amq/requirements.txt ]; then
             pip install -r ansible_collections/middleware_automation/amq/requirements.txt
           fi
+          sudo apt --fix-missing update
           sudo apt install -y sed hub
 
       - name: Create default collection path
