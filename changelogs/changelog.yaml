@@ -207,3 +207,12 @@ releases:
     fragments:
     - 66.yaml
     release_date: '2023-05-02'
+  1.3.3:
+    changes:
+      bugfixes:
+      - 'Restore wait_for_log string in live-only ha `#68 <https://github.com/ansible-middleware/amq/pull/68>`_
+
+        '
+    fragments:
+    - 68.yaml
+    release_date: '2023-05-08'

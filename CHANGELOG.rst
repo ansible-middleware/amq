@@ -5,6 +5,14 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v1.3.3
+======
+
+Bugfixes
+--------
+
+- Restore wait_for_log string in live-only ha `#68 <https://github.com/ansible-middleware/amq/pull/68>`_
+
 v1.3.2
 ======
 
