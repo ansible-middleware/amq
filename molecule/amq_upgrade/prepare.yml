@@ -8,5 +8,9 @@
         assets:
           - "{{ assets_server }}/amq/broker/7.9.4/amq-broker-7.9.4-bin.zip"
           - "{{ assets_server }}/amq/broker/7.10.1/amq-broker-7.10.1-bin.zip"
-  roles:
-    - activemq
+  tasks:
+    - name: Include role for broker install
+      ansible.builtin.include_role:
+        name: activemq
+      vars:
+        activemq_version: "{{ '7.9.4' if amq_broker_enable is defined and amq_broker_enable else '2.18.0' }}"

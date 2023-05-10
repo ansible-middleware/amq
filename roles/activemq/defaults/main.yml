@@ -292,3 +292,6 @@ activemq_address_settings:
 
 ### Divert configuration
 activemq_diverts: []
+
+### Broker connections configuration
+activemq_broker_connections: []

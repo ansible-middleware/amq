@@ -10,6 +10,7 @@
     validate_connectors: []
     validate_address_settings: []
     validate_diverts: []
+    validate_broker_connections: []
 
 - name: Create address settings configuration string
   ansible.builtin.set_fact:
@@ -95,6 +96,23 @@
   middleware_automation.amq.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><diverts>{{ validate_diverts | default([]) | join(' ') | trim }}</diverts></core>"
+    validate: yes
+    input_type: xml
+  run_once: yes
+  delegate_to: localhost
+
+- name: Create amqp broker connections configuration string
+  ansible.builtin.set_fact:
+    validate_broker_connections: "{{ validate_broker_connections | default([]) + [ lookup('template', 'broker_connections.broker.xml.j2') ] }}"
+  loop: "{{ activemq_broker_connections }}"
+  loop_control:
+    loop_var: broker_connection
+    label: "{{ broker_connection.name }} - {{ broker_connection.uri }}"
+
+- name: Validate amqp broker connections
+  middleware_automation.amq.xml:
+    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><broker-connections>{{ validate_broker_connections | default([]) | join(' ') | trim }}</broker-connections></core>"
     validate: yes
     input_type: xml
   run_once: yes
