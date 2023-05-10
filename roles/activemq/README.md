@@ -274,8 +274,6 @@ activemq_broker_connections:
       - type: receiver
         parameters:
           address-match: 'remotequeues.#'
-  </amqp-connection>
-</broker-connections>
 ```
 
 Notice the local queues for `remotequeues.#` need to be created on this broker.

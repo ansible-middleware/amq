@@ -87,6 +87,7 @@
 - name: Create diverts configuration string
   ansible.builtin.set_fact:
     validate_diverts: "{{ validate_diverts | default([]) + [ lookup('template', 'diverts.broker.xml.j2') ] }}"
+  when: activemq_diverts | length > 0
   loop: "{{ activemq_diverts }}"
   loop_control:
     loop_var: divert
@@ -98,12 +99,14 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><diverts>{{ validate_diverts | default([]) | join(' ') | trim }}</diverts></core>"
     validate: yes
     input_type: xml
+  when: activemq_diverts | length > 0
   run_once: yes
   delegate_to: localhost
 
 - name: Create amqp broker connections configuration string
   ansible.builtin.set_fact:
     validate_broker_connections: "{{ validate_broker_connections | default([]) + [ lookup('template', 'broker_connections.broker.xml.j2') ] }}"
+  when: activemq_broker_connections | length > 0
   loop: "{{ activemq_broker_connections }}"
   loop_control:
     loop_var: broker_connection
@@ -115,6 +118,7 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><broker-connections>{{ validate_broker_connections | default([]) | join(' ') | trim }}</broker-connections></core>"
     validate: yes
     input_type: xml
+  when: activemq_broker_connections | length > 0
   run_once: yes
   delegate_to: localhost
 
