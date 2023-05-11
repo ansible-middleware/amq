@@ -18,6 +18,7 @@
     connectors: []
     address_settings: []
     diverts: []
+    broker_connections: []
     masked_users: []
 
 - name: Validate credentials

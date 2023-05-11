@@ -69,6 +69,10 @@
   ansible.builtin.include_tasks: diverts.yml
   when: activemq_diverts | length > 0
 
+- name: Configure broker connections
+  ansible.builtin.include_tasks: broker_connections.yml
+  when: activemq_broker_connections | length > 0
+
 - name: "Configure jolokia access"
   become: yes
   ansible.builtin.template:
