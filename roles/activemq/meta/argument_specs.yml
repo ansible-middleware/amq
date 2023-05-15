@@ -526,10 +526,14 @@ argument_specs:
                 description: "The base list of rpm dependencies to install"
                 default: "[unzip,iproute,sed,procps-ng,initscripts,libaio,python3-lxml]"
                 type: 'list'
+            activemq_broker_connections:
+                description: "AMQP broker connections configuration; list of `{ name(str),uri(str),operations(list of dicts with type key in [mirror,sender,receiver,peer])) }`"
+                default: "[]"
+                type: "list"
     downstream:
         options:
             amq_broker_version:
-                default: "7.9.4"
+                default: "7.10.2"
                 description: "Red Hat AMQ Broker version"
                 type: "str"
             amq_broker_product_category:

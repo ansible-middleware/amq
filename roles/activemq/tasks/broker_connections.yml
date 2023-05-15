@@ -1,0 +1,34 @@
+---
+- name: Create broker connections configuration string
+  ansible.builtin.set_fact:
+    broker_connections: "{{ broker_connections | default([]) + [ lookup('template', 'broker_connections.broker.xml.j2') ] }}"
+  loop: "{{ activemq_broker_connections }}"
+  loop_control:
+    loop_var: broker_connection
+    label: "{{ broker_connection.name }}"
+
+- name: Ensure broker connections element exists in broker.xml
+  middleware_automation.amq.xml:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
+    xpath: /conf:configuration/core:core/core:broker-connections
+    input_type: xml
+    state: present
+    namespaces:
+      conf: urn:activemq
+      core: urn:activemq:core
+    pretty_print: yes
+  become: yes
+
+- name: Create broker connections configuration in broker.xml
+  middleware_automation.amq.xml:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
+    xpath: /conf:configuration/core:core/core:broker-connections
+    input_type: xml
+    set_children: "{{ broker_connections }}"
+    namespaces:
+      conf: urn:activemq
+      core: urn:activemq:core
+    pretty_print: yes
+  become: yes
+  notify:
+    - restart amq_broker with no config refresh
