@@ -8,6 +8,11 @@ middleware_automation.amq Release Notes
 v1.3.4-devel
 ============
 
+Minor Changes
+-------------
+
+- Provide AMQP broker-connections configuration `#70 <https://github.com/ansible-middleware/amq/pull/70>`_
+
 v1.3.3
 ======
 

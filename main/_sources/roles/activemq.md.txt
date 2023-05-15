@@ -22,6 +22,7 @@ Versions
 
 | AMQ VERSION | Release Date      | Artemis Version | Notes           |
 |:------------|:------------------|:----------------|:----------------|
+| `AMQ 7.11`  | 2023.Q2           | `2.21.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq_broker/7.11/html/release_notes_for_red_hat_amq_broker_7.11/index)|
 | `AMQ 7.10`  | 2021.Q4           | `2.21.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq_broker/7.10/html/release_notes_for_red_hat_amq_broker_7.10/index)|
 | `AMQ 7.9`   | 2021.Q3           | `2.18.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq/2021.q3/html-single/release_notes_for_red_hat_amq_broker_7.9/index)|
 | `AMQ 7.8`   | 2020.Q4           | `2.16.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq/2020.q4/html-single/release_notes_for_red_hat_amq_broker_7.8/index)|
@@ -239,6 +240,43 @@ Sample divert:
 |`activemq_systemd_wait_for_log` | Whether systemd unit should wait for service to be up in logs | `True` when activemq_ha_enabled and activemq_shared_storage are `True` |
 |`activemq_systemd_wait_for_timeout`| How long to wait for service to be alive (seconds) | `60` |
 |`activemq_systemd_wait_for_delay`| Activation delay for service systemd unit | `10` |
+
+
+* Multi-site fault-tolerance (AMQP broker connections)
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`activemq_broker_connections`| AMQP broker connections configuration; list of `{ name(str),uri(str),operations(list of dicts with type key in [mirror,sender,receiver,peer])) }` | `[]` |
+
+Sample of mirroring operation:
+
+```
+activemq_broker_connections:
+  - uri: 'tcp://<hostname>:<port>'
+    name: DC2
+    sync: true
+    operations:
+      - type: mirror
+        parameters:
+          queue-removal: false
+```
+
+Sample for sender-receiver operation:
+
+```
+activemq_broker_connections:
+  - uri: 'tcp://<hostname>:<port>'
+    name: other-server
+    operations:
+      - type: sender
+        parameters:
+          address-match: 'queues.#'
+      - type: receiver
+        parameters:
+          address-match: 'remotequeues.#'
+```
+
+Notice the local queues for `remotequeues.#` need to be created on this broker.
 
 
 * TLS/SSL protocol
