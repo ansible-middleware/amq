@@ -7,9 +7,3 @@ Plugin Index
 
    pbkdf2_hmac
 
-.. toctree::
-   :caption: modules plugins
-   :maxdepth: 0
-
-   xml
-

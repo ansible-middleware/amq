@@ -125,6 +125,8 @@ This describes the input of the filter, the value before ``| middleware_automati
 
         <div class="ansible-option-cell">
 
+      the unencrypted input password
+
 
       .. raw:: html
 
