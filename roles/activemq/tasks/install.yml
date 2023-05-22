@@ -133,20 +133,39 @@
   register: path_to_workdir
   become: yes
 
-- name: "Extract {{ activemq.name }} archive on target"
-  ansible.builtin.unarchive: # noqa no-handler definitely not a candidate for a handler
-    remote_src: yes
-    src: "{{ archive }}"
-    dest: "{{ activemq_dest }}"
-    creates: "{{ activemq.home }}"
-    owner: "{{ activemq_service_user }}"
-    group: "{{ activemq_service_group }}"
-  become: yes
-  register: new_version_extracted
+- name: "Extract zipfile"
   when:
     - new_version_downloaded.changed or not path_to_workdir.stat.exists
-  notify:
-    - restart amq_broker
+  block:
+    - name: "Extract {{ activemq.name }} archive on target"
+      ansible.builtin.unarchive: # noqa no-handler definitely not a candidate for a handler
+        remote_src: yes
+        src: "{{ archive }}"
+        dest: "{{ activemq_dest }}"
+        owner: "{{ activemq_service_user }}"
+        group: "{{ activemq_service_group }}"
+        list_files: yes
+      become: yes
+      register: new_version_extracted
+      when:
+        - new_version_downloaded.changed or not path_to_workdir.stat.exists
+      notify:
+        - restart amq_broker
+
+    - name: "Check target directory: {{ activemq.home }}"
+      ansible.builtin.stat:
+        path: "{{ activemq.home }}"
+      register: path_to_workdir_after_extract
+      become: yes
+
+    - name: Link zipfile directory to wanted directory
+      become: yes
+      ansible.builtin.file:
+        state: link
+        src: "{{ activemq_dest }}/{{ new_version_extracted.files | first }}"
+        dest: "{{ activemq.home }}"
+      when:
+        - not path_to_workdir_after_extract.stat.exists
 
 - name: Inform decompression was not executed
   ansible.builtin.debug: # noqa no-handler definitely not a candidate for a handler
