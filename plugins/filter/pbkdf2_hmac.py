@@ -16,7 +16,7 @@ DOCUMENTATION = '''
   positional: _input
   options:
     _input:
-      description:
+      description: the unencrypted input password
       type: string
       required: true
     hexsalt:
@@ -43,10 +43,6 @@ RETURN = '''
     type: string
 '''
 
-from ansible.errors import AnsibleFilterError
-
-import base64
-import sys
 import hashlib
 
 

@@ -27,6 +27,9 @@ warn_list:
   - name[template]
   - fqcn[keyword]
   - schema[meta]
+  - no-free-form
+  - run-once[task]
+  - var-naming[no-role-prefix]
 
 skip_list:
   - vars_should_not_be_used

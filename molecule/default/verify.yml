@@ -84,8 +84,6 @@
         pretty_print: yes
       register: diverts
 
-    - debug: var=diverts
-
     - name: Check created divert configuration
       ansible.builtin.assert:
         that:

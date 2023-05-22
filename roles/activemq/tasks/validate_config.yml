@@ -21,7 +21,7 @@
     label: "{{ address_setting.match }}"
 
 - name: Validate address settings
-  middleware_automation.amq.xml:
+  middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><address-settings>{{ validate_address_settings | join(' ') | trim }}</address-settings></core>"
     validate: yes
@@ -39,7 +39,7 @@
   no_log: True
 
 - name: Validate acceptors
-  middleware_automation.amq.xml:
+  middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><acceptors>{{ validate_acceptors | join(' ') | trim }}</acceptors></core>"
     validate: yes
@@ -58,7 +58,7 @@
   no_log: True
 
 - name: Validate connectors
-  middleware_automation.amq.xml:
+  middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><connectors>{{ validate_connectors | join(' ') | trim }}</connectors></core>"
     validate: yes
@@ -76,7 +76,7 @@
     label: "{{ address.name }}"
 
 - name: Validate addresses
-  middleware_automation.amq.xml:
+  middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><addresses>{{ validate_addresses | join(' ') | trim }}</addresses></core>"
     validate: yes
@@ -94,7 +94,7 @@
     label: "{{ divert.name }}"
 
 - name: Validate diverts
-  middleware_automation.amq.xml:
+  middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><diverts>{{ validate_diverts | default([]) | join(' ') | trim }}</diverts></core>"
     validate: yes
@@ -113,7 +113,7 @@
     label: "{{ broker_connection.name }} - {{ broker_connection.uri }}"
 
 - name: Validate amqp broker connections
-  middleware_automation.amq.xml:
+  middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><broker-connections>{{ validate_broker_connections | default([]) | join(' ') | trim }}</broker-connections></core>"
     validate: yes
@@ -137,7 +137,7 @@
   loop: "{{ validate_security_settings_matches | dict2items(key_name='match', value_name='permissions') }}"
 
 - name: Validate security settings
-  middleware_automation.amq.xml:
+  middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><security-settings>{{ validate_security_settings | flatten | join(' ') | trim }}</security-settings></core>"
     validate: yes
