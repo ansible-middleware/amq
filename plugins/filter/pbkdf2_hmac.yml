@@ -8,7 +8,7 @@ DOCUMENTATION:
   positional: _input
   options:
     _input:
-      description: 
+      description: the unencrypted input password
       type: string
       required: true
     hexsalt:
