@@ -1,6 +1,6 @@
 ---
 - name: Remove discovery groups
-  middleware_automation.amq.xml:
+  middleware_automation.common.xml:
     path: "{{ activemq.home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:discovery-groups
     state: absent

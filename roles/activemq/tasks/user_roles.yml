@@ -46,7 +46,7 @@
   loop: "{{ security_settings_matches | dict2items(key_name='match', value_name='permissions') }}"
 
 - name: Create messaging roles permissions
-  middleware_automation.amq.xml:
+  middleware_automation.common.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:security-settings
     input_type: xml
@@ -92,7 +92,7 @@
     label: "{{ domain.name }}"
 
 - name: Create management default access configuration
-  middleware_automation.amq.xml:
+  middleware_automation.common.xml:
     path: "{{ activemq.instance_home }}/etc/management.xml"
     xpath: //*[local-name()='default-access']
     input_type: xml
@@ -102,7 +102,7 @@
     - restart amq_broker
 
 - name: Create management access roles configuration
-  middleware_automation.amq.xml:
+  middleware_automation.common.xml:
     path: "{{ activemq.instance_home }}/etc/management.xml"
     xpath: //*[local-name()='role-access']
     input_type: xml

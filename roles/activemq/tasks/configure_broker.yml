@@ -14,7 +14,7 @@
   when: activemq_ha_enabled
   block:
     - name: "Ensure ha-policy element exists"
-      middleware_automation.amq.xml:
+      middleware_automation.common.xml:
         path: "{{ activemq.instance_home }}/etc/broker.xml"
         xpath: /conf:configuration/core:core/core:ha-policy
         state: present
@@ -27,7 +27,7 @@
       notify:
         - restart amq_broker
     - name: "Configure ha-policy"
-      middleware_automation.amq.xml:
+      middleware_automation.common.xml:
         path: "{{ activemq.instance_home }}/etc/broker.xml"
         xpath: /conf:configuration/core:core/core:ha-policy
         set_children: "{{ [ lookup('template', 'ha_policy.xml.j2') ] }}"
@@ -107,7 +107,7 @@
       notify:
         - restart amq_broker
     - name: Configure metrics plugin
-      middleware_automation.amq.xml:
+      middleware_automation.common.xml:
         path: "{{ activemq.instance_home }}/etc/broker.xml"
         xpath: /conf:configuration/core:core/core:metrics/core:plugin
         attribute: class-name
