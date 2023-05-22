@@ -111,7 +111,7 @@ argument_specs:
                 type: "str"
             activemq_java_home:
                 # line 36 of defaults/main.yml
-                required: true
+                required: false
                 description: "JAVA_HOME of installed JRE, leave empty for using specified activemq_jvm_package path"
                 type: "str"
             activemq_java_opts:
@@ -199,12 +199,12 @@ argument_specs:
                 type: "bool"
             activemq_tls_keystore_path:
                 # line 58 of defaults/main.yml
-                default: "identity.ks"
+                required: false
                 description: "Keystore path for TLS connections"
                 type: "str"
             activemq_tls_keystore_password:
                 # line 59 of defaults/main.yml
-                default: "changeme"
+                required: false
                 description: "Keystore password for TLS connections"
                 type: "str"
             activemq_tls_keystore_dest:
@@ -219,12 +219,12 @@ argument_specs:
                 type: "bool"
             activemq_tls_truststore_path:
                 # line 64 of defaults/main.yml
-                default: None
+                required: false
                 description: "Truststore to use for TLS mutual authentication"
                 type: "str"
             activemq_tls_truststore_password:
                 # line 65 of defaults/main.yml
-                default: None
+                required: false
                 description: "Password for truststore"
                 type: "str"
             activemq_tls_truststore_dest:
