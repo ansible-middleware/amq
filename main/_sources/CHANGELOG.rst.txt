@@ -5,6 +5,14 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v1.3.5-devel
+============
+
+Bugfixes
+--------
+
+- Update package name for prometheus plugin class `#74 <https://github.com/ansible-middleware/amq/pull/74>`_
+
 v1.3.4
 ======
 
@@ -18,7 +26,6 @@ Bugfixes
 --------
 
 - Handle case when install zipfile root is not expected `#73 <https://github.com/ansible-middleware/amq/pull/73>`_
-- Update package name for prometheus plugin class `#74 <https://github.com/ansible-middleware/amq/pull/74>`_
 
 v1.3.3
 ======
