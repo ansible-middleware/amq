@@ -5,6 +5,20 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v1.3.4
+======
+
+Minor Changes
+-------------
+
+- Provide AMQP broker-connections configuration `#70 <https://github.com/ansible-middleware/amq/pull/70>`_
+- Use middleware_automation.common xml plugin `#72 <https://github.com/ansible-middleware/amq/pull/72>`_
+
+Bugfixes
+--------
+
+- Handle case when install zipfile root is not expected `#73 <https://github.com/ansible-middleware/amq/pull/73>`_
+
 v1.3.3
 ======
 

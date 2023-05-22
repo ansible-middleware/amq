@@ -216,3 +216,21 @@ releases:
     fragments:
     - 68.yaml
     release_date: '2023-05-08'
+  1.3.4:
+    changes:
+      bugfixes:
+      - 'Handle case when install zipfile root is not expected `#73 <https://github.com/ansible-middleware/amq/pull/73>`_
+
+        '
+      minor_changes:
+      - 'Provide AMQP broker-connections configuration `#70 <https://github.com/ansible-middleware/amq/pull/70>`_
+
+        '
+      - 'Use middleware_automation.common xml plugin `#72 <https://github.com/ansible-middleware/amq/pull/72>`_
+
+        '
+    fragments:
+    - 70.yaml
+    - 72.yaml
+    - 73.yaml
+    release_date: '2023-05-22'
