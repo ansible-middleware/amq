@@ -27,14 +27,14 @@
 
     - name: Check cluster status
       block:
-        - name: master on instance1
+        - name: Check master on instance1
           ansible.builtin.assert:
             that:
               - "'live Message Broker is starting' in slurped_log_instance1.content|b64decode"
               - "'Waiting indefinitely to obtain live lock' in slurped_log_instance1.content|b64decode"
               - "'Server is now live' in slurped_log_instance1.content|b64decode"
             quiet: true
-        - name: slave on instance2
+        - name: Check slave on instance2
           ansible.builtin.assert:
             that:
               - "'backup Message Broker is starting' in slurped_log_instance2.content|b64decode"
