@@ -111,7 +111,7 @@
         path: "{{ activemq.instance_home }}/etc/broker.xml"
         xpath: /conf:configuration/core:core/core:metrics/core:plugin
         attribute: class-name
-        value: org.apache.activemq.artemis.core.server.metrics.plugins.ArtemisPrometheusMetricsPlugin
+        value: "{{ activemq.prometheus_package }}core.server.metrics.plugins.ArtemisPrometheusMetricsPlugin"
         namespaces:
           conf: urn:activemq
           core: urn:activemq:core
