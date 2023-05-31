@@ -5,6 +5,14 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v1.3.5
+======
+
+Bugfixes
+--------
+
+- Update package name for prometheus plugin class `#74 <https://github.com/ansible-middleware/amq/pull/74>`_
+
 v1.3.4
 ======
 

@@ -234,3 +234,12 @@ releases:
     - 72.yaml
     - 73.yaml
     release_date: '2023-05-22'
+  1.3.5:
+    changes:
+      bugfixes:
+      - 'Update package name for prometheus plugin class `#74 <https://github.com/ansible-middleware/amq/pull/74>`_
+
+        '
+    fragments:
+    - 74.yaml
+    release_date: '2023-05-31'
