@@ -530,6 +530,10 @@ argument_specs:
                 description: "AMQP broker connections configuration; list of `{ name(str),uri(str),operations(list of dicts with type key in [mirror,sender,receiver,peer])) }`"
                 default: "[]"
                 type: "list"
+            activemq_logger_config_template:
+                description: "Template to use for logging facility configuration"
+                default: "{{ 'log4j2.properties' if activemq_version is version_compare('2.27.0', '>=')) else 'logging.properties' }}"
+                type: "str"
     downstream:
         options:
             amq_broker_version:
@@ -569,4 +573,8 @@ argument_specs:
             amq_broker_service_name:
                 description: "Systemd unit name"
                 default: "amq_broker"
+                type: "str"
+            amq_broker_logger_config_template:
+                description: "Template to use for logging facility configuration"
+                default: "{{ 'log4j2.properties' if activemq_version is version_compare('7.11.0', '>=')) else 'logging.properties' }}"
                 type: "str"

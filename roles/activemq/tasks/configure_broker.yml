@@ -2,8 +2,8 @@
 - name: "Configure AMQ broker logging"
   become: yes
   ansible.builtin.template:
-    src: logging.properties.j2
-    dest: "{{ activemq.instance_home }}/etc/logging.properties"
+    src: "{{ activemq_logger_config_template }}.j2"
+    dest: "{{ activemq.instance_home }}/etc/{{ activemq_logger_config_template }}"
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
     mode: 0644
