@@ -29,7 +29,6 @@ ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'ta
 ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221034/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
 {% endif %}
 {% endif %}
-ExecStopPost={{ ('usermod --home ' + activemq.home + ' ' + activemq_service_user ) if requires_userhome_update is defined and requires_userhome_update else '/bin/true' }}
 
 
 [Install]

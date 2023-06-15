@@ -8,6 +8,15 @@
   changed_when: False
   register: rpm_java_home
 
+- name: "Ensure systemd unit override directory exists"
+  ansible.builtin.file:
+    path: "/etc/systemd/system/{{ activemq.instance_name }}.d/"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  become: yes
+
 - name: "Configure sysconfig file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
   become: yes
   ansible.builtin.template:
