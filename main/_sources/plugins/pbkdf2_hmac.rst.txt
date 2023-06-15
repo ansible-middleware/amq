@@ -321,7 +321,7 @@ Return Value
 Authors
 ~~~~~~~
 
-- 
+- Guido Grazioli 
 
 
 .. hint::
