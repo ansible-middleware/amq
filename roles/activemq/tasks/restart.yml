@@ -32,7 +32,7 @@
         path: "/etc/systemd/system/{{ activemq.instance_name }}.d/update_home.conf"
         state: absent
       become: yes
-    - name: Daemon reload
+    - name: Ensure daemon reload
       ansible.builtin.systemd:
         daemon_reload: yes
       become: yes
