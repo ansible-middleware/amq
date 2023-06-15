@@ -16,3 +16,4 @@ ARTEMIS_DATA_DIR='{{ activemq_shared_storage_path }}'
 ARTEMIS_DATA_DIR='{{ activemq.instance_home }}/data'
 {% endif %}
 ARTEMIS_ETC_DIR='{{ activemq.instance_home }}/etc'
+ARTEMIS_USER={{ activemq_service_user }}

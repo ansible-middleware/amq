@@ -84,6 +84,13 @@
     - systemdunit is defined
     - systemdunit.changed
 
+- name: Verify file ownership
+  ansible.builtin.command: |
+    chown -R {{ activemq_service_user }}:{{ activemq_service_group }} {{ activemq.instance_home }}
+  register: chown_status
+  changed_when: chown_status.stdout != ""
+  become: yes
+
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
 
