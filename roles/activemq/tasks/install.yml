@@ -23,7 +23,7 @@
       ansible.builtin.user:
         name: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
-        home: "{{ activemq.home | dirname }}"
+        home: "{{ activemq.home }}"
         system: yes
         create_home: no
       register: user_mod
