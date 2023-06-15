@@ -5,13 +5,20 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v1.3.6-devel
+============
+
+Bugfixes
+--------
+
+- Update logging facade config (by activemq version) `#76 <https://github.com/ansible-middleware/amq/pull/76>`_
+
 v1.3.5
 ======
 
 Bugfixes
 --------
 
-- Update logging facade config (by activemq version) `#76 <https://github.com/ansible-middleware/amq/pull/76>`_
 - Update package name for prometheus plugin class `#74 <https://github.com/ansible-middleware/amq/pull/74>`_
 
 v1.3.4
