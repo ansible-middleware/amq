@@ -16,14 +16,25 @@
     name: "{{ activemq_service_group }}"
     system: yes
 
-- name: "Create {{ activemq.service_name }} service user"
-  become: yes
-  ansible.builtin.user:
-    name: "{{ activemq_service_user }}"
-    group: "{{ activemq_service_group }}"
-    home: "{{ activemq.home }}"
-    system: yes
-    create_home: no
+- name: "Create service user"
+  block:
+    - name: "Create {{ activemq.service_name }} service user"
+      become: yes
+      ansible.builtin.user:
+        name: "{{ activemq_service_user }}"
+        group: "{{ activemq_service_group }}"
+        home: "{{ activemq.home | dirname }}"
+        system: yes
+        create_home: no
+      register: user_mod
+  rescue:
+    - name: Display failure
+      ansible.builtin.debug:
+        msg: "Update user home_directory deferred to service restart, error can be ignored"
+    - name: Set update user_mod to restarting handler
+      ansible.builtin.set_fact:
+        requires_userhome_update: True
+      notify: restart amq_broker
 
 - name: "Check {{ activemq.service_name }} install location"
   become: yes

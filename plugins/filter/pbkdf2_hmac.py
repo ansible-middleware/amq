@@ -8,7 +8,8 @@ __metaclass__ = type
 
 DOCUMENTATION = '''
   name: pbkdf2_hmac
-  author: ggraziol@redhat.com
+  author:
+    - Guido Grazioli (ggraziol@redhat.com)
   version_added: '1.1.0'
   short_description: Generate a salted PBKDF2_HMAC password hash
   description:
