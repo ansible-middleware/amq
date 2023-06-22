@@ -5,6 +5,19 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v1.3.6
+======
+
+Minor Changes
+-------------
+
+- Set systemd unit to run with ``activemq_system_user`` user `#78 <https://github.com/ansible-middleware/amq/pull/78>`_
+
+Bugfixes
+--------
+
+- Update logging facade config (by activemq version) `#76 <https://github.com/ansible-middleware/amq/pull/76>`_
+
 v1.3.5
 ======
 

@@ -243,3 +243,17 @@ releases:
     fragments:
     - 74.yaml
     release_date: '2023-05-31'
+  1.3.6:
+    changes:
+      bugfixes:
+      - 'Update logging facade config (by activemq version) `#76 <https://github.com/ansible-middleware/amq/pull/76>`_
+
+        '
+      minor_changes:
+      - 'Set systemd unit to run with ``activemq_system_user`` user `#78 <https://github.com/ansible-middleware/amq/pull/78>`_
+
+        '
+    fragments:
+    - 76.yaml
+    - 78.yaml
+    release_date: '2023-06-22'
