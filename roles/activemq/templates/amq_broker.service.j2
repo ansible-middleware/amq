@@ -7,6 +7,8 @@ RequiresMountsFor={{ activemq_shared_storage_path }}
 {% endif %}
 
 [Service]
+User={{ activemq_service_user }}
+Group={{ activemq_service_group }}
 Type=forking
 EnvironmentFile=-/etc/sysconfig/{{ activemq.instance_name }}
 PIDFile={{ activemq.instance_home }}/{{ activemq_service_pidfile }}
