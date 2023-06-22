@@ -175,6 +175,8 @@
         state: link
         src: "{{ activemq_dest }}/{{ new_version_extracted.files | first }}"
         dest: "{{ activemq.home }}"
+        owner: "{{ activemq_service_user }}"
+        group: "{{ activemq_service_group }}"
       when:
         - not path_to_workdir_after_extract.stat.exists
 
