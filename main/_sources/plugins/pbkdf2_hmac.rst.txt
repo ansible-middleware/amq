@@ -30,10 +30,6 @@
 
 .. Anchors: short name for ansible.builtin
 
-.. Anchors: aliases
-
-
-
 .. Title
 
 pbkdf2_hmac -- Generate a salted PBKDF2\_HMAC password hash
