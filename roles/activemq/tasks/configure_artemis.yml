@@ -1,20 +1,4 @@
 ---
-- name: Create broker cluster node members
-  ansible.builtin.set_fact:
-    activemq_cluster_nodes: >
-      {{ activemq_cluster_nodes | default([]) + [
-           {
-             "name": activemq.instance_name,
-             "address": item,
-             "inventory_host": item,
-             "value": "tcp://" + host_address + ":" + (((activemq_port | int + activemq_ports_offset | int) | abs) | string)
-           }
-         ] }}
-  loop: "{{ ansible_play_batch }}"
-  vars:
-    host_iface: "{{ 'ansible_' + activemq_cluster_iface }}"
-    host_address: "{{ hostvars[item][host_iface]['address'] | default(hostvars[item][host_iface]['ipv4']['address'] | default(activemq.instance_name)) }}"
-
 - name: Prepare broker creation options
   ansible.builtin.set_fact:
     activemq_options:

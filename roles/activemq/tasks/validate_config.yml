@@ -48,10 +48,15 @@
   no_log: True
   delegate_to: localhost
 
+- name: Create final connector list using generated and declared lists
+  ansible.builtin.set_fact:
+    validate_merged_connectors: "{{ activemq_cluster_nodes | default([]) | middleware_automation.amq.lists_mergeby(\
+                          activemq_connectors | default([]), 'name', recursive=True, list_merge='append') }}"
+
 - name: Create connector configuration string
   ansible.builtin.set_fact:
     validate_connectors: "{{ validate_connectors | default([]) + [ lookup('template', 'connectors.broker.xml.j2') ] }}"
-  loop: "{{ activemq_connectors }}"
+  loop: "{{ validate_merged_connectors }}"
   loop_control:
     loop_var: connector
     label: "{{ connector.name }}"

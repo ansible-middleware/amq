@@ -46,7 +46,7 @@ provisioner:
       instance2:
         activemq_ha_role: 'slave'
   env:
-    ANSIBLE_FORCE_COLOR: "true"        
+    ANSIBLE_FORCE_COLOR: "true"
 verifier:
   name: ansible
 scenario:
