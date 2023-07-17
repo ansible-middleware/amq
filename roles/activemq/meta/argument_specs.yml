@@ -17,6 +17,10 @@ argument_specs:
                 default: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
                 description: "Apache Artemis Installation path"
                 type: "str"
+            activemq_service_user_home:
+                default: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
+                description: "Service user home directory, defaults to artemis installation directory"
+                type: "str"
             activemq_dest:
                 default: "/opt/activemq"
                 description: "Root installation directory"

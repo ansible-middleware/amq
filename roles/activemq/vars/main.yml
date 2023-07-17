@@ -5,6 +5,7 @@
 ### internal variables
 activemq:
   home: "{{ activemq_installdir }}"
+  user_home: "{{ activemq_service_user_home }}"
   version: "{{ activemq_version }}"
   download_url: "{{ activemq_download_url }}"
   bundle: "{{ activemq_archive }}"
