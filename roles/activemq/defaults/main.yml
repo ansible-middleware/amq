@@ -13,6 +13,7 @@ activemq_config_xml: amq-broker.xml
 activemq_config_override_template: ''
 activemq_service_user: amq-broker
 activemq_service_group: amq-broker
+activemq_service_user_home: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
 activemq_instance_name: amq-broker
 activemq_instance_username: amq-broker
 activemq_instance_password: amq-broker

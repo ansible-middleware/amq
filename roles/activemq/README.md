@@ -53,6 +53,7 @@ Role Defaults
 |`activemq_service_group`| POSIX group running the service | `amq-broker` |
 |`activemq_service_pidfile`| PID file for service | `data/artemis.pid` |
 |`activemq_service_name`| systemd service unit name | `activemq` |
+|`activemq_service_user_home`| Service user home directory, defaults to artemis installation directory | `{{ activemq_dest }}/apache-artemis-{{ activemq_version }}` |
 
 
 * Common configuration
