@@ -8,6 +8,11 @@ middleware_automation.amq Release Notes
 v1.3.7-devel
 ============
 
+Minor Changes
+-------------
+
+- Allow to set arbitrary service user home_dir `#83 <https://github.com/ansible-middleware/amq/pull/83>`_
+
 Bugfixes
 --------
 
