@@ -5,6 +5,19 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v1.3.7
+======
+
+Minor Changes
+-------------
+
+- Allow to set arbitrary service user home_dir `#83 <https://github.com/ansible-middleware/amq/pull/83>`_
+
+Bugfixes
+--------
+
+- Default java_home path uses alternatives `#82 <https://github.com/ansible-middleware/amq/pull/82>`_
+
 v1.3.6
 ======
 
