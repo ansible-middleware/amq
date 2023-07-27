@@ -9,12 +9,12 @@
     activemq_disable_amqp_protocol: true
     activemq_disable_stomp_protocol: true
     activemq_shared_storage: true
-    activemq_configure_firewalld: false  
+    activemq_configure_firewalld: false
     activemq_tls_enabled: True
     activemq_tls_keystore_path: nfs/identity.ks
-    activemq_tls_keystore_password: changeme
+    activemq_tls_keystore_password: securepass
     activemq_tls_truststore_path: nfs/trust.ks
-    activemq_tls_truststore_password: changeit
+    activemq_tls_truststore_password: securepass
     activemq_acceptors:
       - name: artemis
         bind_address: 0.0.0.0
@@ -35,10 +35,6 @@
         address: "{{ activemq_host }}"
         port: "{{ activemq_port }}"
         parameters:
-          tcpSendBufferSize: 1048576
-          tcpReceiveBufferSize: 1048576
-          protocols: CORE
-          useEpoll: true
           sslEnabled: true
           keyStorePath: "{{ activemq_tls_keystore_dest }}"
           keyStorePassword: "{{ activemq_tls_keystore_password }}"
@@ -47,12 +43,7 @@
           verifyHost: False
       - name: instance1
         address: instance1
-        port: "{{ activemq_port }}"
         parameters:
-          tcpSendBufferSize: 1048576
-          tcpReceiveBufferSize: 1048576
-          protocols: CORE
-          useEpoll: true
           sslEnabled: true
           keyStorePath: "{{ activemq_tls_keystore_dest }}"
           keyStorePassword: "{{ activemq_tls_keystore_password }}"
@@ -61,12 +52,7 @@
           verifyHost: False
       - name: instance2
         address: instance2
-        port: "{{ activemq_port }}"
         parameters:
-          tcpSendBufferSize: 1048576
-          tcpReceiveBufferSize: 1048576
-          protocols: CORE
-          useEpoll: true
           sslEnabled: true
           keyStorePath: "{{ activemq_tls_keystore_dest }}"
           keyStorePassword: "{{ activemq_tls_keystore_password }}"

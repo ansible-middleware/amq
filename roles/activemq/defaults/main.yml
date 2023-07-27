@@ -51,6 +51,7 @@ activemq_cluster_user: amq-cluster-user
 activemq_cluster_pass: amq-cluster-pass
 activemq_cluster_maxhops: 1
 activemq_cluster_lb_policy: ON_DEMAND
+activemq_cluster_iface: default_ipv4
 activemq_replicate: False
 activemq_replicated: False
 # cluster discovery: ['jgroups' for shared file ping, 'multicast' for UDP multicast, 'static' for static declaration]
@@ -236,17 +237,6 @@ activemq_connectors:
   - name: artemis
     address: localhost
     port: "{{ activemq_port }}"
-    parameters:
-      tcpSendBufferSize: 1048576
-      tcpReceiveBufferSize: 1048576
-      protocols: CORE,AMQP,STOMP,HORNETQ,MQTT,OPENWIRE
-      useEpoll: true
-      amqpCredits: 1000
-      amqpLowCredits: 300
-      amqpDuplicateDetection: true
-      amqpMinLargeMessageSize: 102400
-      supportAdvisory: false
-      suppressInternalManagementObjects: false
 
 ### Addresses configuration
 activemq_addresses:

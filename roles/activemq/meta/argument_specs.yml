@@ -186,6 +186,10 @@ argument_specs:
                 default: "static"
                 description: "Cluster discovery: ['jgroups' for shared file ping, 'multicast' for UDP multicast, 'static' for static declaration]"
                 type: "str"
+            activemq_cluster_iface:
+                default: "default_ipv4"
+                description: "The NIC name to be used for cluster IPv4 addresses (ie. 'eth0')."
+                type: "str"
             activemq_replicate:
                 # line 50 of defaults/main.yml
                 default: false

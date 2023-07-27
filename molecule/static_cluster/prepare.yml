@@ -20,3 +20,16 @@
         owner: amq-broker
         group: amq-broker
         mode: 0755
+    - name: Install CA in shared truststore
+      copy:
+        src: "{{ item }}"
+        dest: /usr/share/pki/ca-trust-source/anchors/
+        owner: root
+        group: root
+        mode: 0444
+      become: true
+      loop:
+        - "nfs/server-ca.crt"
+    - name: update_ca_trust
+      command: update-ca-trust
+      become: true

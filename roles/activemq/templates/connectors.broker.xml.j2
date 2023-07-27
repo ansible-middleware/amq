@@ -1,1 +1,1 @@
-         <connector name="{{ connector.name }}">tcp://{{ connector.address }}:{{ connector.port }}?{% for param in lookup('ansible.builtin.dict', connector.parameters, wantlist=True) %}{{ param.key }}={{ param.value }};{% endfor %}</connector>
+         <connector name="{{ connector.name }}">tcp://{{ connector.address }}:{{ connector.port }}?{% for param in lookup('ansible.builtin.dict', connector.parameters | default({}), wantlist=True) %}{{ param.key }}={{ param.value }};{% endfor %}</connector>

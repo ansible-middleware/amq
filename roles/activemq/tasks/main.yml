@@ -4,6 +4,27 @@
   tags:
     - prereqs
 
+- name: Create broker cluster node members
+  ansible.builtin.set_fact:
+    activemq_cluster_nodes: >
+      {{ activemq_cluster_nodes | default([]) + [
+           {
+             "name": item,
+             "address": host_address,
+             "inventory_host": item,
+             "port": host_port,
+             "value": "tcp://" + host_address + ":" + host_port
+           }
+         ] }}
+  loop: "{{ ansible_play_batch }}"
+  vars:
+    host_iface: "{{ 'ansible_' + activemq_cluster_iface }}"
+    host_address: "{{ hostvars[item][host_iface]['address'] | default(hostvars[item][host_iface]['ipv4']['address'] | default(activemq.instance_name)) }}"
+    host_port: "{{ (((activemq_port | int + activemq_ports_offset | int) | abs) | string) }}"
+  when:
+    - activemq_ha_enabled
+    - activemq_cluster_discovery == "static"
+
 - name: Validate broker configuration
   ansible.builtin.include_tasks: validate_config.yml
   tags:
