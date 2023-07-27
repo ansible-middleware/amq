@@ -8,6 +8,11 @@ middleware_automation.amq Release Notes
 v1.3.8-devel
 ============
 
+Minor Changes
+-------------
+
+- Update to connectors config (add parameter for NIC name selection) `#84 <https://github.com/ansible-middleware/amq/pull/84>`_
+
 v1.3.7
 ======
 

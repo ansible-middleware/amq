@@ -237,6 +237,7 @@ Sample divert:
 |`activemq_replicate`| Enables replication | `False` |
 |`activemq_replicated`| Designate instance as replicated node | `False` |
 |`activemq_cluster_discovery` | Cluster discovery: [`jgroups` (shared file ping), `multicast` (UDP), `static` (node list)] | `static` |
+|`activemq_cluster_iface` | The NIC name to be used for cluster IPv4 addresses (ie. 'eth0') | `default_ipv4` |
 |`activemq_systemd_wait_for_port` | Whether systemd unit should wait for activemq port before returning | `True` when activemq_ha_enabled is `True` and activemq_shared_storage is `False` |
 |`activemq_systemd_wait_for_log` | Whether systemd unit should wait for service to be up in logs | `True` when activemq_ha_enabled and activemq_shared_storage are `True` |
 |`activemq_systemd_wait_for_timeout`| How long to wait for service to be alive (seconds) | `60` |

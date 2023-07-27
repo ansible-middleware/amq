@@ -634,19 +634,23 @@
 <td class="text-left"><p>Cluster discovery: [<code class="docutils literal notranslate"><span class="pre">jgroups</span></code> (shared file ping), <code class="docutils literal notranslate"><span class="pre">multicast</span></code> (UDP), <code class="docutils literal notranslate"><span class="pre">static</span></code> (node list)]</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">static</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_iface</span></code></p></td>
+<td class="text-left"><p>The NIC name to be used for cluster IPv4 addresses (ie. ‘eth0’)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">default_ipv4</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port</span></code></p></td>
 <td class="text-left"><p>Whether systemd unit should wait for activemq port before returning</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when activemq_ha_enabled is <code class="docutils literal notranslate"><span class="pre">True</span></code> and activemq_shared_storage is <code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code></p></td>
 <td class="text-left"><p>Whether systemd unit should wait for service to be up in logs</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when activemq_ha_enabled and activemq_shared_storage are <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_timeout</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_timeout</span></code></p></td>
 <td class="text-left"><p>How long to wait for service to be alive (seconds)</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_delay</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_delay</span></code></p></td>
 <td class="text-left"><p>Activation delay for service systemd unit</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
 </tr>
