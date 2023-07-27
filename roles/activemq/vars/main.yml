@@ -25,3 +25,4 @@ activemq_base_package_list:
   - initscripts
   - libaio
   - python3-lxml
+  - tzdata-java
