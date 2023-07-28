@@ -5,6 +5,19 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v1.3.8
+======
+
+Minor Changes
+-------------
+
+- Update to connectors config (add parameter for NIC name selection) `#84 <https://github.com/ansible-middleware/amq/pull/84>`_
+
+Bugfixes
+--------
+
+- Fix incorrectly defined default for ``amq_broker_logger_config_template`` `#86 <https://github.com/ansible-middleware/amq/pull/86>`_
+
 v1.3.7
 ======
 
