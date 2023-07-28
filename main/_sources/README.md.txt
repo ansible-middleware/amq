@@ -2,9 +2,12 @@
 
 <!--start build_status -->
 [![Build Status](https://github.com/ansible-middleware/amq/workflows/CI/badge.svg?branch=main)](https://github.com/ansible-middleware/amq/actions/workflows/ci.yml)
+
+> **_NOTE:_ If you are Red Hat customer, install `redhat.amq_broker` from [Automation Hub](https://console.redhat.com/ansible/ansible-dashboard) as the certified version of this collection.**
 <!--end build_status -->
 
 Collection to install and configure [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis) / [Red Hat AMQ broker](https://www.redhat.com/en/technologies/jboss-middleware/amq).
+
 
 <!--start requires_ansible-->
 ## Ansible version compatibility
