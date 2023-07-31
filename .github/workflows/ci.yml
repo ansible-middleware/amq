@@ -5,6 +5,8 @@ on:
     branches:
       - main
   pull_request:
+  schedule:
+    - cron: '0 6 * * *'
 
 env:
   COLORTERM: 'yes'
@@ -17,6 +19,10 @@ jobs:
     strategy:
       matrix:
         python_version: ["3.11"]
+        molecule_test:
+          - default
+          - static_cluster
+          - amq_upgrade
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -65,7 +71,7 @@ jobs:
         working-directory: ./ansible_collections/middleware_automation/amq
 
       - name: Run molecule test
-        run: molecule test --all
+        run: molecule test -s ${{ matrix.molecule_test }}
         working-directory: ./ansible_collections/middleware_automation/amq
         env:
           PY_COLORS: '1'
