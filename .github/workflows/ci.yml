@@ -71,7 +71,7 @@ jobs:
         working-directory: ./ansible_collections/middleware_automation/amq
 
       - name: Run molecule test
-        run: molecule test -s {{ matrix.molecule_test }}
+        run: molecule test -s ${{ matrix.molecule_test }}
         working-directory: ./ansible_collections/middleware_automation/amq
         env:
           PY_COLORS: '1'
