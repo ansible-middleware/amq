@@ -5,6 +5,8 @@ on:
     branches:
       - main
   pull_request:
+  schedule:
+    - cron: '0 6 * * *'
 
 env:
   COLORTERM: 'yes'
@@ -17,6 +19,10 @@ jobs:
     strategy:
       matrix:
         python_version: ["3.11"]
+        molecule_test:
+          - default
+          - static_cluster
+          - amq_upgrade
     steps:
       - name: Check out code
         uses: actions/checkout@v2
