@@ -102,4 +102,4 @@ jobs:
           token: ${{ secrets.TRIGGERING_PAT }}
           repository: ${{ matrix.repo }}
           event-type: "Dependency released - AMQ v${{ needs.release.outputs.tag_version }}"
-          client-payload: '{ "github": ${{toJson(github)}} }'          
+          client-payload: '{ "github": ${{toJson(github)}} }'
