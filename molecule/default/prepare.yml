@@ -6,4 +6,4 @@
       ansible.builtin.include_tasks: ../prepare.yml
       vars:
         assets:
-          - "{{ assets_server }}/amq/broker/7.9.4/amq-broker-7.9.4-bin.zip"
+          - "{{ assets_server }}/amq/broker/7.10.2/amq-broker-7.10.2-bin.zip"
