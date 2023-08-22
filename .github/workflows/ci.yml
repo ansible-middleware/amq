@@ -47,7 +47,7 @@ jobs:
       - name: Install yamllint, ansible and molecule, dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install yamllint ansible-core==${{ matrix.ansible_version }} flake8 ansible-lint voluptuous
+          pip install yamllint ansible-core==${{ matrix.ansible_version }} flake8 ansible-lint voluptuous pylint
           if [ -f ansible_collections/middleware_automation/amq/requirements.txt ]; then
             pip install -r ansible_collections/middleware_automation/amq/requirements.txt
           fi
@@ -68,7 +68,7 @@ jobs:
         working-directory: ./ansible_collections/middleware_automation/amq
 
       - name: Run sanity tests
-        run: ansible-test sanity -v --color --python ${{ matrix.python_version }} --exclude docs --exclude changelogs/fragments/.gitignore --skip-test symlinks
+        run: ansible-test sanity -v --color --python ${{ matrix.python_version }} --exclude docs/conf.py --exclude changelogs/fragments/.gitignore --skip-test symlinks
         working-directory: ./ansible_collections/middleware_automation/amq
 
   molecule:
