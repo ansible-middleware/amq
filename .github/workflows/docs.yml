@@ -26,7 +26,7 @@ jobs:
       pages: write
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: ansible_collections/middleware_automation/amq
           fetch-depth: 0
@@ -50,7 +50,7 @@ jobs:
       - name: Create default collection path
         run: |
           mkdir -p /home/runner/.ansible/
-          ln -s /home/runner/work/amq/amq /home/runner/.ansible/collections
+          ln -s ${{ github.workspace }} /home/runner/.ansible/collections
 
       - name: Create changelog and documentation
         uses: ansible-middleware/collection-docs-action@main
