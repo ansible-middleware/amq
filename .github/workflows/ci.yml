@@ -18,11 +18,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: ["3.9", "3.11"]
+        python_version: ["3.8", "3.9", "3.11"]
         ansible_version: ["2.11", "2.15"]
         exclude:
+          - python_version: "3.8"
+            ansible_version: "2.15"
           - python_version: "3.9"
             ansible_version: "2.15"
+          - python_version: "3.11"
+            ansible_version: "2.11"
     steps:
       - name: Check out code
         uses: actions/checkout@v3
