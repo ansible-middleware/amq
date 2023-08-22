@@ -30,7 +30,7 @@ provisioner:
       localhost:
         ansible_python_interpreter: "{{ ansible_playbook_python }}"
   env:
-    ANSIBLE_FORCE_COLOR: "true"        
+    ANSIBLE_FORCE_COLOR: "true"
 verifier:
   name: ansible
 scenario:

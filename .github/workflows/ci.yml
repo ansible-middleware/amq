@@ -39,7 +39,6 @@ jobs:
         run: |
           mkdir -p /home/runner/.ansible/
           ln -s ${{ github.workspace }} /home/runner/.ansible/collections
-          ls -l /home/runner/work/amq/amq/ansible_collections/middleware_automation/amq
 
       - name: Install yamllint, ansible and molecule, dependencies
         run: |
@@ -90,16 +89,10 @@ jobs:
           python-version: ${{ matrix.python_version }}
           cache: 'pip'
 
-      - name: Create default collection path
-        run: |
-          mkdir -p /home/runner/.ansible/
-          ln -s ${{ github.workspace }} /home/runner/.ansible/collections
-          ls -l /home/runner/work/amq/amq/ansible_collections/middleware_automation/amq
-
       - name: Install ansible and molecule
         run: |
           python -m pip install --upgrade pip
-          pip install 'molecule>=4.0.4' 'molecule-plugins[docker]>=23.0.0' ansible-core==${{ matrix.ansible_version }}
+          pip install 'molecule>=5.0.1' 'molecule-plugins[docker]>=23.0.0' ansible-core==${{ matrix.ansible_version }}
           if [ -f ansible_collections/middleware_automation/amq/requirements.txt ]; then
             pip install -r ansible_collections/middleware_automation/amq/requirements.txt
           fi
@@ -111,7 +104,9 @@ jobs:
           fi
 
       - name: Run molecule test
-        run: molecule test -s ${{ matrix.molecule_test }}
+        run: |
+          molecule --version
+          molecule test -s ${{ matrix.molecule_test }}
         working-directory: ./ansible_collections/middleware_automation/amq
         env:
           PY_COLORS: '1'
