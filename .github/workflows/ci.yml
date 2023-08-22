@@ -68,7 +68,7 @@ jobs:
         working-directory: ./ansible_collections/middleware_automation/amq
 
       - name: Run sanity tests
-        run: ansible-test sanity -v --color --python ${{ matrix.python_version }} --exclude changelogs/fragments/.gitignore --skip-test symlinks
+        run: ansible-test sanity -v --color --python ${{ matrix.python_version }} --exclude docs --exclude changelogs/fragments/.gitignore --skip-test symlinks
         working-directory: ./ansible_collections/middleware_automation/amq
 
   molecule:
