@@ -39,6 +39,7 @@ jobs:
         run: |
           mkdir -p /home/runner/.ansible/
           ln -s ${{ github.workspace }} /home/runner/.ansible/collections
+          ls -l /home/runner/work/amq/amq/ansible_collections/middleware_automation/amq
 
       - name: Install yamllint, ansible and molecule, dependencies
         run: |
@@ -93,6 +94,7 @@ jobs:
         run: |
           mkdir -p /home/runner/.ansible/
           ln -s ${{ github.workspace }} /home/runner/.ansible/collections
+          ls -l /home/runner/work/amq/amq/ansible_collections/middleware_automation/amq
 
       - name: Install ansible and molecule
         run: |

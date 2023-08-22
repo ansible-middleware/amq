@@ -1,4 +1,4 @@
-# .ansible-lint
+ .ansible-lint
 exclude_paths:
   - .cache/
   - .github/
@@ -16,7 +16,6 @@ enable_list:
   - no-log-password  # opt-in
 
 warn_list:
-  - role_vars_start_with_role_name
   - vars_in_vars_files_have_valid_names
   - experimental
   - ignore-errors
@@ -30,10 +29,12 @@ warn_list:
   - no-free-form
   - run-once[task]
   - var-naming[no-role-prefix]
+  - deprecated-command-syntax
 
 skip_list:
   - vars_should_not_be_used
   - file_is_small_enough
+  - role_vars_start_with_role_name
   - jinja[spacing]
 
 use_default_rules: true
