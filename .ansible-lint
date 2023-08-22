@@ -22,9 +22,7 @@ warn_list:
   - fqcn-builtins
   - no-log-password
   - no-empty-data-files
-  - name[template]
   - fqcn[keyword]
-  - schema[meta]
   - no-free-form
   - run-once[task]
   - var-naming[no-role-prefix]
@@ -35,6 +33,8 @@ skip_list:
   - file_is_small_enough
   - role_vars_start_with_role_name
   - jinja[spacing]
+  - schema[meta]
+  - name[template]
 
 use_default_rules: true
 parseable: true
