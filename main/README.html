@@ -13,11 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -125,7 +125,7 @@
            <div itemprop="articleBody">
              
   <section id="ansible-collection-amq">
-<h1>Ansible Collection - AMQ<a class="headerlink" href="#ansible-collection-amq" title="Permalink to this heading"></a></h1>
+<h1>Ansible Collection - AMQ<a class="headerlink" href="#ansible-collection-amq" title="Link to this heading"></a></h1>
 <!--start build_status -->
 <p><a class="reference external" href="https://github.com/ansible-middleware/amq/actions/workflows/ci.yml"><img alt="Build Status" src="https://github.com/ansible-middleware/amq/workflows/CI/badge.svg?branch=main" /></a></p>
 <blockquote>
@@ -135,37 +135,37 @@
 <p>Collection to install and configure <a class="reference external" href="https://activemq.apache.org/components/artemis">Apache ActiveMQ Artemis</a> / <a class="reference external" href="https://www.redhat.com/en/technologies/jboss-middleware/amq">Red Hat AMQ broker</a>.</p>
 <!--start requires_ansible-->
 <section id="ansible-version-compatibility">
-<h2>Ansible version compatibility<a class="headerlink" href="#ansible-version-compatibility" title="Permalink to this heading"></a></h2>
+<h2>Ansible version compatibility<a class="headerlink" href="#ansible-version-compatibility" title="Link to this heading"></a></h2>
 <p>This collection has been tested against following Ansible versions: <strong>&gt;=2.9.10</strong>.</p>
 <!--end requires_ansible-->
 </section>
 <section id="included-content">
-<h2>Included content<a class="headerlink" href="#included-content" title="Permalink to this heading"></a></h2>
+<h2>Included content<a class="headerlink" href="#included-content" title="Link to this heading"></a></h2>
 <section id="roles">
-<h3>Roles:<a class="headerlink" href="#roles" title="Permalink to this heading"></a></h3>
+<h3>Roles:<a class="headerlink" href="#roles" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/ansible-middleware/amq/tree/main/roles/activemq"><code class="docutils literal notranslate"><span class="pre">activemq</span></code></a>: Perform installation and configuration</p></li>
 </ul>
 </section>
 <section id="plugins">
-<h3>Plugins:<a class="headerlink" href="#plugins" title="Permalink to this heading"></a></h3>
+<h3>Plugins:<a class="headerlink" href="#plugins" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">pbkdf2_hmac</span></code>: filter plugin used internally to generate unidirectional activemq users password hashes</p></li>
 </ul>
 </section>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
 <!--start galaxy_download -->
 <section id="installing-the-collection-from-ansible-galaxy">
-<h3>Installing the Collection from Ansible Galaxy<a class="headerlink" href="#installing-the-collection-from-ansible-galaxy" title="Permalink to this heading"></a></h3>
+<h3>Installing the Collection from Ansible Galaxy<a class="headerlink" href="#installing-the-collection-from-ansible-galaxy" title="Link to this heading"></a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection install middleware_automation.amq
 </pre></div>
 </div>
 <!--end galaxy_download -->
 </section>
 <section id="build-and-install-locally">
-<h3>Build and install locally<a class="headerlink" href="#build-and-install-locally" title="Permalink to this heading"></a></h3>
+<h3>Build and install locally<a class="headerlink" href="#build-and-install-locally" title="Link to this heading"></a></h3>
 <p>Clone the repository, checkout the tag you want to build, or pick the main branch for the development version; then:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection build .
 ansible-galaxy collection install middleware_automation-amq-*.tar.gz
@@ -173,9 +173,9 @@ ansible-galaxy collection install middleware_automation-amq-*.tar.gz
 </div>
 </section>
 <section id="dependencies">
-<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h3>
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h3>
 <section id="ansible-collections">
-<h4>Ansible collections:<a class="headerlink" href="#ansible-collections" title="Permalink to this heading"></a></h4>
+<h4>Ansible collections:<a class="headerlink" href="#ansible-collections" title="Link to this heading"></a></h4>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/ansible-middleware/common">middleware_automation.common</a></p></li>
 <li><p><a class="reference external" href="https://docs.ansible.com/ansible/latest/collections/ansible/posix/index.html">ansible.posix</a></p></li>
@@ -186,7 +186,7 @@ ansible-galaxy collection install middleware_automation-amq-*.tar.gz
 </div>
 </section>
 <section id="python">
-<h4>Python:<a class="headerlink" href="#python" title="Permalink to this heading"></a></h4>
+<h4>Python:<a class="headerlink" href="#python" title="Link to this heading"></a></h4>
 <ul class="simple">
 <li><p>lxml</p></li>
 <li><p>jmespath</p></li>
@@ -199,20 +199,20 @@ ansible-galaxy collection install middleware_automation-amq-*.tar.gz
 </section>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <section id="install-playbook">
-<h3>Install Playbook<a class="headerlink" href="#install-playbook" title="Permalink to this heading"></a></h3>
+<h3>Install Playbook<a class="headerlink" href="#install-playbook" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/ansible-middleware/amq/blob/main/playbooks/activemq.yml"><code class="docutils literal notranslate"><span class="pre">playbooks/activemq.yml</span></code></a> deploys based on the collections defaults.</p></li>
 </ul>
 <p>For full service configuration details, refer to the <a class="reference external" href="https://github.com/ansible-middleware/keycloak/blob/main/roles/keycloak/README.md">activemq role README</a>.</p>
 <section id="install-from-controller-node">
-<h4>Install from controller node<a class="headerlink" href="#install-from-controller-node" title="Permalink to this heading"></a></h4>
+<h4>Install from controller node<a class="headerlink" href="#install-from-controller-node" title="Link to this heading"></a></h4>
 <p>By default the collection will download the desired version of the install zipfile to the ansible controller node, then it will distribute to target nodes.
 The variable <code class="docutils literal notranslate"><span class="pre">activemq_local_archive_repository</span></code> controls the path on the controller where the install zipfiles will be located, and by default will be the playbook working directory.</p>
 </section>
 <section id="offline-from-controller-node">
-<h4>Offline from controller node<a class="headerlink" href="#offline-from-controller-node" title="Permalink to this heading"></a></h4>
+<h4>Offline from controller node<a class="headerlink" href="#offline-from-controller-node" title="Link to this heading"></a></h4>
 <p>Making the install zipfile archive available to the playbook working directory, and setting <code class="docutils literal notranslate"><span class="pre">activemq_offline_install</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>, allows to skip
 the download tasks. The local path for the archive does match the downloaded archive path, so that it is also used as a cache when multiple hosts are provisioned in a cluster.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_offline_install</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
@@ -222,7 +222,7 @@ the download tasks. The local path for the archive does match the downloaded arc
 <!--end rhn_credentials -->
 </section>
 <section id="clustered-high-availability-deployments">
-<h4>Clustered / high availability deployments<a class="headerlink" href="#clustered-high-availability-deployments" title="Permalink to this heading"></a></h4>
+<h4>Clustered / high availability deployments<a class="headerlink" href="#clustered-high-availability-deployments" title="Link to this heading"></a></h4>
 <p>When deploying clustered configurations, all hosts belonging to the cluster must be present in <code class="docutils literal notranslate"><span class="pre">ansible_play_batch</span></code>; ie. they must be targeted by the same ansible-playbook execution.</p>
 <!--start support -->
 <!--end support -->
@@ -230,7 +230,7 @@ the download tasks. The local path for the archive does match the downloaded arc
 </section>
 </section>
 <section id="license">
-<h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
+<h2>License<a class="headerlink" href="#license" title="Link to this heading"></a></h2>
 <p><a class="reference external" href="https://github.com/ansible-middleware/amq/blob/main/LICENSE">Apache License 2.0</a></p>
 </section>
 </section>
