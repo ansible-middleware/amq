@@ -357,6 +357,14 @@
 </tr>
 </thead>
 <tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_global_max_messages</span></code></p></td>
+<td class="text-left"><p>Number of messages before all addresses will enter into their Full Policy configured. It works in conjunction with activemq_global_max_size, being whatever value hits its maximum first.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_global_max_size</span></code></p></td>
+<td class="text-left"><p>Size (in bytes) before all addresses will enter into their Full Policy configured upon messages being produced. Supports byte notation like ‘K’, ‘Mb’, ‘MiB’, ‘GB’, etc.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">'-1'</span></code></p></td>
+</tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_data_directory</span></code></p></td>
 <td class="text-left"><p>The activemq data directory path</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data/</span></code>, or the value of <code class="docutils literal notranslate"><span class="pre">activemq_shared_storage_path</span></code> if activemq_shared_storage is set</p></td>
