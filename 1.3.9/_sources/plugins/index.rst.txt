@@ -1,0 +1,10 @@
+Plugin Index
+============
+
+.. toctree::
+   :caption: filter plugins
+   :maxdepth: 0
+
+   lists_mergeby
+   pbkdf2_hmac
+
