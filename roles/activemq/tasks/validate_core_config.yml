@@ -1,0 +1,20 @@
+---
+- name: Add configuration element only if valid
+  delegate_to: localhost
+  block:
+    - name: Create configuration element
+      middleware_automation.common.xml:
+        xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+        xmlstring: "<core xmlns=\"urn:activemq:core\"><{{ item | replace('_','-') }}>{{ value }}</{{ item | replace('_','-') }}></core>"
+        validate: yes
+        input_type: xml
+      vars:
+        value: "{{ lookup('ansible.builtin.vars', 'activemq_' + item) | to_json | replace('\"','') }}"
+    - name: Add item to valid element list
+      ansible.builtin.set_fact:
+        valid_core_configuration_list: "{{ valid_core_configuration_list | default([]) + [ item ] }}"
+  rescue:
+    - name: Display warning
+      ansible.builtin.debug:
+        msg: "WARNING: {{ item | replace('_','-') }} is not a valid configuration element for version {{ activemq_version }} broker schema"
+      changed_when: True

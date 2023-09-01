@@ -26,3 +26,23 @@ activemq_base_package_list:
   - libaio
   - python3-lxml
   - tzdata-java
+
+activemq_core_configuration_list:
+  - persistence_enabled
+  - persist_id_cache
+  - id_cache_size
+  - journal_type
+  - paging_directory
+  - bindings_directory
+  - journal_directory
+  - large_messages_directory
+  - journal_datasync
+  - journal_min_files
+  - journal_pool_files
+  - journal_device_block_size
+  - journal_file_size
+  - journal_buffer_timeout
+  - journal_max_io
+  - configuration_file_refresh_period
+  - global_max_messages
+  - global_max_size
