@@ -171,6 +171,8 @@ activemq_logger_jetty_level: WARN
 activemq_logger_curator_level: WARN
 activemq_logger_zookeeper_level: ERROR
 activemq_logger_config_template: "{{ 'log4j2.properties' if activemq_version is version_compare('2.27.0', '>=') else 'logging.properties' }}"
+activemq_logger_rollover_files: 5
+activemq_logger_audit_rollover_files: 5
 
 # Metrics
 activemq_jmx_exporter_port: 18080

@@ -550,6 +550,14 @@ argument_specs:
                 description: "Size (in bytes) before all addresses will enter into their Full Policy configured upon messages being produced. Supports byte notation like 'K', 'Mb', 'MiB', 'GB', etc."
                 default: '-1'
                 type: "str"
+            activemq_logger_rollover_files:
+                description: "Number of rollover log files"
+                default: 5
+                type: 'int'
+            activemq_logger_audit_rollover_files:
+                description: "Number of rollover audit log files"
+                default: 5
+                type: 'int'
     downstream:
         options:
             amq_broker_version:
