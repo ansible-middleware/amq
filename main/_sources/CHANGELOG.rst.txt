@@ -8,6 +8,11 @@ middleware_automation.amq Release Notes
 v1.3.9-devel
 ============
 
+Minor Changes
+-------------
+
+- Default version for activemq updated to 2.21 `#93 <https://github.com/ansible-middleware/amq/pull/93>`_
+
 v1.3.8
 ======
 
