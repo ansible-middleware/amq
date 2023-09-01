@@ -11,6 +11,13 @@
     validate_address_settings: []
     validate_diverts: []
     validate_broker_connections: []
+    valid_core_configuration_list: []
+
+- name: Validate configuration/core and journal configuration
+  ansible.builtin.include_tasks: validate_core_config.yml
+  loop: "{{ activemq_core_configuration_list }}"
+  loop_control:
+    label: "{{ item }}"
 
 - name: Create address settings configuration string
   ansible.builtin.set_fact:
