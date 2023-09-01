@@ -286,3 +286,20 @@ releases:
     - 84.yaml
     - 86.yaml
     release_date: '2023-07-28'
+  1.3.9:
+    changes:
+      minor_changes:
+      - 'Add parameters for ``global-max-size`` and ``global-max-messages`` `#92 <https://github.com/ansible-middleware/amq/pull/92>`_
+
+        '
+      - 'Add parameters to configure log4j2 rolling strategy `#94 <https://github.com/ansible-middleware/amq/pull/94>`_
+
+        '
+      - 'Default version for activemq updated to 2.21 `#93 <https://github.com/ansible-middleware/amq/pull/93>`_
+
+        '
+    fragments:
+    - 92.yaml
+    - 93.yaml
+    - 94.yaml
+    release_date: '2023-09-01'

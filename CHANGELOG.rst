@@ -5,6 +5,16 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v1.3.9
+======
+
+Minor Changes
+-------------
+
+- Add parameters for ``global-max-size`` and ``global-max-messages`` `#92 <https://github.com/ansible-middleware/amq/pull/92>`_
+- Add parameters to configure log4j2 rolling strategy `#94 <https://github.com/ansible-middleware/amq/pull/94>`_
+- Default version for activemq updated to 2.21 `#93 <https://github.com/ansible-middleware/amq/pull/93>`_
+
 v1.3.8
 ======
 
