@@ -52,7 +52,23 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">activemq</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#versions">Versions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#role-defaults">Role Defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#role-defaults">Role Defaults</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-options">Install options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#service-configuration">Service configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-configuration">Common configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#journal-configuration">Journal configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acceptors-connectors">Acceptors / connectors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#addresses-configuration">Addresses configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#address-settings">Address settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diverts-configuration">Diverts configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clustering">Clustering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multi-site-fault-tolerance-amqp-broker-connections">Multi-site fault-tolerance (AMQP broker connections)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tls-ssl-protocol">TLS/SSL protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logging">Logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-options">Other options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-role-configuration">User / Role configuration</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#role-variables">Role Variables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example-playbook">Example Playbook</a></li>
 </ul>
@@ -159,9 +175,8 @@
 </section>
 <section id="role-defaults">
 <h2>Role Defaults<a class="headerlink" href="#role-defaults" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Install options</p></li>
-</ul>
+<section id="install-options">
+<h3>Install options<a class="headerlink" href="#install-options" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -200,9 +215,9 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><p>Service configuration</p></li>
-</ul>
+</section>
+<section id="service-configuration">
+<h3>Service configuration<a class="headerlink" href="#service-configuration" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -233,9 +248,9 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><p>Common configuration</p></li>
-</ul>
+</section>
+<section id="common-configuration">
+<h3>Common configuration<a class="headerlink" href="#common-configuration" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -346,9 +361,9 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><p>Journal configuration</p></li>
-</ul>
+</section>
+<section id="journal-configuration">
+<h3>Journal configuration<a class="headerlink" href="#journal-configuration" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -455,9 +470,9 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><p>Acceptors / connectors</p></li>
-</ul>
+</section>
+<section id="acceptors-connectors">
+<h3>Acceptors / connectors<a class="headerlink" href="#acceptors-connectors" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -477,9 +492,9 @@
 </tbody>
 </table>
 <p>Sample acceptor:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqp</span>
-<span class="w">    </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">activemq_host</span> <span class="cp">}}</span>
-<span class="w">    </span><span class="nt">bind_port</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">activemq_port_amqp</span> <span class="cp">}}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqp</span>
+<span class="w">    </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">activemq_host</span><span class="w"> </span><span class="p p-Indicator">}}</span>
+<span class="w">    </span><span class="nt">bind_port</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">activemq_port_amqp</span><span class="w"> </span><span class="p p-Indicator">}}</span>
 <span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">tcpSendBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span>
 <span class="w">      </span><span class="nt">tcpReceiveBufferSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span>
@@ -492,7 +507,7 @@
 </pre></div>
 </div>
 <p>Sample connector with TLS:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqp</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqp</span>
 <span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">172.168.10.43</span>
 <span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">61616</span>
 <span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
@@ -501,16 +516,16 @@
 <span class="w">      </span><span class="nt">protocols</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CORE</span>
 <span class="w">      </span><span class="nt">useEpoll</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">      </span><span class="nt">sslEnabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="w">      </span><span class="nt">keyStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_keystore_dest</span> <span class="cp">}}</span><span class="s">&quot;</span>
-<span class="w">      </span><span class="nt">keyStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_keystore_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
-<span class="w">      </span><span class="nt">trustStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_truststore_dest</span> <span class="cp">}}</span><span class="s">&quot;</span>
-<span class="w">      </span><span class="nt">trustStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_tls_truststore_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">      </span><span class="nt">keyStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">activemq_tls_keystore_dest</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">keyStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">activemq_tls_keystore_password</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">trustStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">activemq_tls_truststore_dest</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">trustStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">activemq_tls_truststore_password</span><span class="nv"> </span><span class="s">}}&quot;</span>
 <span class="w">      </span><span class="nt">verifyHost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Addresses configuration</p></li>
-</ul>
+</section>
+<section id="addresses-configuration">
+<h3>Addresses configuration<a class="headerlink" href="#addresses-configuration" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -526,7 +541,7 @@
 </tbody>
 </table>
 <p>Sample addresses:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpiryQueue</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpiryQueue</span>
 <span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpiryQueue</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Virtual</span>
@@ -537,9 +552,9 @@
 <span class="w">        </span><span class="nt">consumers_before_dispatch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Address settings</p></li>
-</ul>
+</section>
+<section id="address-settings">
+<h3>Address settings<a class="headerlink" href="#address-settings" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -555,7 +570,7 @@
 </tbody>
 </table>
 <p>Sample address settings:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">activemq.management#</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">activemq.management#</span>
 <span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">dead_letter_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DLQ</span>
 <span class="w">      </span><span class="nt">expiry_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpiryQueue</span>
@@ -570,9 +585,9 @@
 </pre></div>
 </div>
 <p>The parameters are snake_cased variants of the artemis configuration schema elements, which are kebab-cased (ie. <code class="docutils literal notranslate"><span class="pre">dead-letter-address</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">dead_letter_address</span></code>).</p>
-<ul class="simple">
-<li><p>Diverts configuration</p></li>
-</ul>
+</section>
+<section id="diverts-configuration">
+<h3>Diverts configuration<a class="headerlink" href="#diverts-configuration" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -588,7 +603,7 @@
 </tbody>
 </table>
 <p>Sample divert:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SAMPLEDIVERT</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SAMPLEDIVERT</span>
 <span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FROMQUEUE</span>
 <span class="w">    </span><span class="nt">forwarding_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TOQUEUE</span>
 <span class="w">    </span><span class="nt">routing_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANYCAST</span>
@@ -596,9 +611,9 @@
 <span class="w">    </span><span class="nt">exclusive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Clustering</p></li>
-</ul>
+</section>
+<section id="clustering">
+<h3>Clustering<a class="headerlink" href="#clustering" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -665,9 +680,9 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><p>Multi-site fault-tolerance (AMQP broker connections)</p></li>
-</ul>
+</section>
+<section id="multi-site-fault-tolerance-amqp-broker-connections">
+<h3>Multi-site fault-tolerance (AMQP broker connections)<a class="headerlink" href="#multi-site-fault-tolerance-amqp-broker-connections" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -683,7 +698,7 @@
 </tbody>
 </table>
 <p>Sample of mirroring operation:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_broker_connections</span><span class="p">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_broker_connections</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;tcp://&lt;hostname&gt;:&lt;port&gt;&#39;</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DC2</span>
 <span class="w">    </span><span class="nt">sync</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -694,7 +709,7 @@
 </pre></div>
 </div>
 <p>Sample for sender-receiver operation:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_broker_connections</span><span class="p">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_broker_connections</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;tcp://&lt;hostname&gt;:&lt;port&gt;&#39;</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">other-server</span>
 <span class="w">    </span><span class="nt">operations</span><span class="p">:</span>
@@ -707,9 +722,9 @@
 </pre></div>
 </div>
 <p>Notice the local queues for <code class="docutils literal notranslate"><span class="pre">remotequeues.#</span></code> need to be created on this broker.</p>
-<ul class="simple">
-<li><p>TLS/SSL protocol</p></li>
-</ul>
+</section>
+<section id="tls-ssl-protocol">
+<h3>TLS/SSL protocol<a class="headerlink" href="#tls-ssl-protocol" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -737,9 +752,9 @@
 </tbody>
 </table>
 <p>See <em>Role Variables</em> below for additional TLS/SSL settings.</p>
-<ul class="simple">
-<li><p>Logging</p></li>
-</ul>
+</section>
+<section id="logging">
+<h3>Logging<a class="headerlink" href="#logging" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -792,11 +807,19 @@
 <td class="text-left"><p>Logging level for org.apache.zookeeper</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ERROR</span></code></p></td>
 </tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_rollover_files</span></code></p></td>
+<td class="text-left"><p>Number of rollover log files</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">5</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_logger_audit_rollover_files</span></code></p></td>
+<td class="text-left"><p>Number of rollover audit log files</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">5</span></code></p></td>
+</tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><p>Other options</p></li>
-</ul>
+</section>
+<section id="other-options">
+<h3>Other options<a class="headerlink" href="#other-options" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -867,9 +890,9 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><p>User / Role configuration</p></li>
-</ul>
+</section>
+<section id="user-role-configuration">
+<h3>User / Role configuration<a class="headerlink" href="#user-role-configuration" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -928,6 +951,7 @@
 <span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">send</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="w"> </span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
+</section>
 </section>
 <section id="role-variables">
 <h2>Role Variables<a class="headerlink" href="#role-variables" title="Link to this heading"></a></h2>

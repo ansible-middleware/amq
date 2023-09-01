@@ -32,7 +32,7 @@ Versions
 Role Defaults
 -------------
 
-* Install options
+#### Install options
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
@@ -45,7 +45,7 @@ Role Defaults
 |`activemq_local_archive_repository`| Path local to controller for offline/download of install archives | `{{ lookup('env', 'PWD') }}` |
 
 
-* Service configuration
+#### Service configuration
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
@@ -56,7 +56,7 @@ Role Defaults
 |`activemq_service_user_home`| Service user home directory, defaults to artemis installation directory | `{{ activemq_dest }}/apache-artemis-{{ activemq_version }}` |
 
 
-* Common configuration
+#### Common configuration
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
@@ -87,7 +87,7 @@ Role Defaults
 |`activemq_configuration_file_refresh_period`| Periodic refresh of configuration in milliseconds; can be disabled by specifying -1 | `5000` |
 
 
-* Journal configuration
+#### Journal configuration
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
@@ -117,7 +117,7 @@ Role Defaults
 |`activemq_db_jdbc_driver_class`| The fully qualified class name of the desired database Driver | `org.apache.derby.jdbc.EmbeddedDriver` |
 
 
-* Acceptors / connectors
+#### Acceptors / connectors
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
@@ -126,7 +126,7 @@ Role Defaults
 
 Sample acceptor:
 
-```
+```yaml
   - name: amqp
     bind_address: {{ activemq_host }}
     bind_port: {{ activemq_port_amqp }}
@@ -143,7 +143,7 @@ Sample acceptor:
 
 Sample connector with TLS:
 
-```
+```yaml
   - name: amqp
     address: 172.168.10.43
     port: 61616
@@ -161,7 +161,7 @@ Sample connector with TLS:
 ```
 
 
-* Addresses configuration
+#### Addresses configuration
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
@@ -169,7 +169,7 @@ Sample connector with TLS:
 
 Sample addresses:
 
-```
+```yaml
   - name: ExpiryQueue
     anycast:
       - name: ExpiryQueue
@@ -182,7 +182,7 @@ Sample addresses:
 ```
 
 
-* Address settings
+#### Address settings
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
@@ -190,7 +190,7 @@ Sample addresses:
 
 Sample address settings:
 
-```
+```yaml
   - match: activemq.management#
     parameters:
       dead_letter_address: DLQ
@@ -208,7 +208,7 @@ Sample address settings:
 The parameters are snake_cased variants of the artemis configuration schema elements, which are kebab-cased (ie. `dead-letter-address` -> `dead_letter_address`).
 
 
-* Diverts configuration
+#### Diverts configuration
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
@@ -216,7 +216,7 @@ The parameters are snake_cased variants of the artemis configuration schema elem
 
 Sample divert:
 
-```
+```yaml
   - name: SAMPLEDIVERT
     address: FROMQUEUE
     forwarding_address: TOQUEUE
@@ -226,7 +226,7 @@ Sample divert:
 ```
 
 
-* Clustering
+#### Clustering
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
@@ -246,7 +246,7 @@ Sample divert:
 |`activemq_systemd_wait_for_delay`| Activation delay for service systemd unit | `10` |
 
 
-* Multi-site fault-tolerance (AMQP broker connections)
+#### Multi-site fault-tolerance (AMQP broker connections)
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
@@ -254,7 +254,7 @@ Sample divert:
 
 Sample of mirroring operation:
 
-```
+```yaml
 activemq_broker_connections:
   - uri: 'tcp://<hostname>:<port>'
     name: DC2
@@ -267,7 +267,7 @@ activemq_broker_connections:
 
 Sample for sender-receiver operation:
 
-```
+```yaml
 activemq_broker_connections:
   - uri: 'tcp://<hostname>:<port>'
     name: other-server
@@ -283,7 +283,7 @@ activemq_broker_connections:
 Notice the local queues for `remotequeues.#` need to be created on this broker.
 
 
-* TLS/SSL protocol
+#### TLS/SSL protocol
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
@@ -295,7 +295,7 @@ Notice the local queues for `remotequeues.#` need to be created on this broker.
 See _Role Variables_ below for additional TLS/SSL settings.
 
 
-* Logging
+#### Logging
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
@@ -310,9 +310,11 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_logger_jetty_level`| Logging level for org.eclipse.jetty | `WARN` |
 |`activemq_logger_curator_level`| Logging level for org.apache.curator | `WARN` |
 |`activemq_logger_zookeeper_level`| Logging level for org.apache.zookeeper | `ERROR` |
+|`activemq_logger_rollover_files`| Number of rollover log files | `5`|
+|`activemq_logger_audit_rollover_files`| Number of rollover audit log files | `5` |
 
 
-* Other options
+#### Other options
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
@@ -333,7 +335,7 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_service_override_template`| Filename of custom systemd unit template to be deployed | `''` |
 
 
-* User / Role configuration
+#### User / Role configuration
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
