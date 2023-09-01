@@ -81,6 +81,9 @@ activemq_journal_device_block_size: 4096
 activemq_journal_file_size: 10M
 activemq_journal_buffer_timeout: "{{ 500000 if activemq_journal_type == 'ASYNCIO' else 3333333 }}"
 activemq_journal_max_io: "{{ 4096 if activemq_journal_type == 'ASYNCIO' else 1 }}"
+# message Full Policy configured
+activemq_global_max_messages: -1
+activemq_global_max_size: '-1'
 # database configuration for JDBC persistence
 activemq_db_enabled: False
 activemq_db_jdbc_url: 'jdbc:derby:target/derby/database-store;create=true'

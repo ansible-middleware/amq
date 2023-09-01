@@ -28,5 +28,7 @@
     - journal_buffer_timeout
     - journal_max_io
     - configuration_file_refresh_period
+    - global_max_messages
+    - global_max_size
   loop_control:
     label: "{{ item }}"

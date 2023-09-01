@@ -91,6 +91,8 @@ Role Defaults
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
+|`activemq_global_max_messages`| Number of messages before all addresses will enter into their Full Policy configured. It works in conjunction with activemq_global_max_size, being whatever value hits its maximum first. | `-1` |
+|`activemq_global_max_size` | Size (in bytes) before all addresses will enter into their Full Policy configured upon messages being produced. Supports byte notation like 'K', 'Mb', 'MiB', 'GB', etc. | `'-1'` |
 |`activemq_data_directory`| The activemq data directory path | `data/`, or the value of `activemq_shared_storage_path` if activemq_shared_storage is set |
 |`activemq_persistence_enabled`| Whether to use the file based journal for persistence | `True` |
 |`activemq_persist_id_cache`| Whether to persist cache IDs to the journal | `True` |
