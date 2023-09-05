@@ -558,6 +558,14 @@ argument_specs:
                 description: "Number of rollover audit log files"
                 default: 5
                 type: 'int'
+            activemq_password_codec:
+                description: "Fully qualified class name and its parameters for the Decoder used to decode the masked password. Ignored if activemq_mask_password is false."
+                default: 'org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec'
+                type: "str"
+            activemq_mask_password:
+                description: "Whether passwords in server configuration need to be masked."
+                default: True
+                type: "bool"
     downstream:
         options:
             amq_broker_version:

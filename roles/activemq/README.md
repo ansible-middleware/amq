@@ -1,5 +1,5 @@
 activemq
-==========
+========
 
 Installs and configures [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis/) services.
 
@@ -85,6 +85,8 @@ Role Defaults
 |`activemq_disable_destination_autocreate`| Disable automatic creation of destination | `True` |
 |`activemq_queues`| Queue names comma separated | `queue.in,queue.out` |
 |`activemq_configuration_file_refresh_period`| Periodic refresh of configuration in milliseconds; can be disabled by specifying -1 | `5000` |
+|`activemq_password_codec`| Fully qualified class name and its parameters for the Decoder used to decode the masked password. Ignored if activemq_mask_password is false. |`org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec` |
+|`activemq_mask_password` | Whether passwords in server configuration need to be masked. | `True` |
 
 
 #### Journal configuration
