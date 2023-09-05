@@ -113,7 +113,7 @@
       ansible.builtin.file:
         src: "{{ item }}"
         dest: "{{ activemq.instance_home }}/lib/"
-        state: present
+        state: file
         owner: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
         mode: 0640
