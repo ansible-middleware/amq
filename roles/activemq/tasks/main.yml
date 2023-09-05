@@ -110,10 +110,9 @@
         mode: 0750
     - name: "Copy additional libs to location"
       become: yes
-      ansible.builtin.file:
+      ansible.builtin.copy:
         src: "{{ item }}"
         dest: "{{ activemq.instance_home }}/lib/"
-        state: file
         owner: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
         mode: 0640
