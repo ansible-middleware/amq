@@ -3,9 +3,12 @@
   hosts: all
   gather_facts: yes
   vars:
+    activemq_version: 2.29.0
     activemq_service_user_home: /home/activemq
     activemq_hawtio_role: admin
-    activemq_password_codec: 'com.ansiblemiddleware.amq.utils.PBKDF2WithHmacCodec'
+    activemq_password_codec: "com.ansiblemiddleware.amq.utils.PBKDF2WithHmacCodec;iterations={{ activemq_mask_password_iterations }};hashname={{ activemq_mask_password_hashname }}"
+    activemq_mask_password_hashname: sha256
+    activemq_mask_password_iterations: 2048
     activemq_additional_libs: [ "amq-utils-1.0.1.jar" ]
     activemq_users:
       - user: amq

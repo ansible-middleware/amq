@@ -566,6 +566,14 @@ argument_specs:
                 description: "Whether passwords in server configuration need to be masked"
                 default: True
                 type: "bool"
+            activemq_mask_password_hashname:
+                description: "Name of algorithm used for masking password, will be passed to custom codec class"
+                default: 'sha256'
+                type: "str"
+            activemq_mask_password_iterations:
+                description: "Number of iterations for masking password, will be passed to custom codec class"
+                default: 2048
+                type: 'int'
             activemq_additional_libs:
                 description: "List of jars to install in activemq classpath, read from playbook files lookup paths"
                 default: []

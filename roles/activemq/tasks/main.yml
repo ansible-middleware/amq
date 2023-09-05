@@ -94,9 +94,6 @@
   tags:
     - keystores
 
-- name: "Generate broker configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
-  ansible.builtin.include_tasks: configure_broker.yml
-
 - name: Set additional classpath libs
   when: activemq_additional_libs | length > 0
   block:
@@ -117,6 +114,9 @@
         group: "{{ activemq_service_group }}"
         mode: 0640
       loop: "{{ activemq_additional_libs }}"
+
+- name: "Generate broker configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
+  ansible.builtin.include_tasks: configure_broker.yml
 
 - name: Reload systemd
   become: yes

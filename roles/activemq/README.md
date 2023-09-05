@@ -88,6 +88,8 @@ Role Defaults
 |`activemq_password_codec`| Fully qualified class name and its parameters for the Decoder used to decode the masked password. Ignored if activemq_mask_password is false. |`org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec` |
 |`activemq_mask_password` | Whether passwords in server configuration need to be masked. | `True` |
 |`activemq_additional_libs`| List of jars to install in activemq classpath, read from playbook files lookup paths | `[]` |
+|`activemq_mask_password_hashname`| Name of algorithm used for masking password, will be passed to custom | `sha1` |
+|`activemq_mask_password_iterations`| Number of iterations for masking password, will be passed to custom codec | `1024` |
 
 
 #### Journal configuration

@@ -65,6 +65,8 @@ activemq_ha_role: live-only
 ### Masked passwords
 activemq_password_codec: 'org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec'
 activemq_mask_password: True
+activemq_mask_password_hashname: sha1
+activemq_mask_password_iterations: 1024
 
 ## Additional classpath
 activemq_additional_libs: []
