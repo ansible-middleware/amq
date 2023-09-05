@@ -97,7 +97,7 @@
 - name: "Generate broker configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
   ansible.builtin.include_tasks: configure_broker.yml
 
-- name: Additional classpath libs
+- name: Set additional classpath libs
   when: activemq_additional_libs | length > 0
   block:
     - name: "Create libs location"
