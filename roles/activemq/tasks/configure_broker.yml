@@ -40,12 +40,6 @@
       notify:
         - restart amq_broker
 
-- name: Create user and roles
-  ansible.builtin.include_tasks: user_roles.yml
-  when: activemq_users | length > 0
-  tags:
-    - users
-
 - name: Configure acceptors
   ansible.builtin.include_tasks: acceptors.yml
   when: activemq_acceptors | length > 0
@@ -60,6 +54,12 @@
 
 - name: Configure journal
   ansible.builtin.include_tasks: journal.yml
+
+- name: Create user and roles
+  ansible.builtin.include_tasks: user_roles.yml
+  when: activemq_users | length > 0
+  tags:
+    - users
 
 - name: Configure address settings
   ansible.builtin.include_tasks: address_settings.yml
