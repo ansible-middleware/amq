@@ -109,7 +109,7 @@ Role Defaults
 |`activemq_large_messages_directory`| The directory to store large messages | `data/largemessages` |
 |`activemq_journal_datasync`| Whether to use msync/fsync on journal operations | `True` |
 |`activemq_journal_min_files`| How many journal files to pre-create | `2` |
-|`activemq_journal_pool_files`| The upper threshold of the journal file pool, -1 means no Limit | `-1` |
+|`activemq_journal_pool_files`| The upper threshold of the journal file pool, -1 means no Limit | `10` |
 |`activemq_journal_device_block_size`| The block size by the device | `4096` |
 |`activemq_journal_file_size`| The size (in bytes) of each journal file | `10M` |
 |`activemq_journal_buffer_timeout`| The Flush timeout for the journal buffer | `500000` if 'ASYNCIO' else `3333333` |

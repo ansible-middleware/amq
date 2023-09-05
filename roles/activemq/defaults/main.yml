@@ -85,7 +85,7 @@ activemq_journal_directory: "{{ activemq_data_directory }}/journal"
 activemq_large_messages_directory: "{{ activemq_data_directory }}/largemessages"
 activemq_journal_datasync: True
 activemq_journal_min_files: 2
-activemq_journal_pool_files: -1
+activemq_journal_pool_files: 10
 activemq_journal_device_block_size: 4096
 activemq_journal_file_size: 10M
 activemq_journal_buffer_timeout: "{{ 500000 if activemq_journal_type == 'ASYNCIO' else 3333333 }}"

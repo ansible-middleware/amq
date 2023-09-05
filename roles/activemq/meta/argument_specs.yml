@@ -464,7 +464,7 @@ argument_specs:
                 type: "int"
             activemq_journal_pool_files:
                 description: 'The upper threshold of the journal file pool, -1 means no Limit'
-                default: -1
+                default: 10
                 type: "int"
             activemq_journal_device_block_size:
                 description: 'The block size by the device'
