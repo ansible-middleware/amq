@@ -1,0 +1,73 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: yes
+  vars:
+    activemq_service_user_home: /home/activemq
+    activemq_hawtio_role: admin
+    activemq_password_codec: 'com.ansiblemiddleware.amq.utils.PBKDF2WithHmacCodec'
+    activemq_additional_libs: [ "amq-utils-1.0.1.jar" ]
+    activemq_users:
+      - user: amq
+        password: amqbrokerpass
+        roles: [ admin ]
+      - user: other
+        password: amqotherpass
+        roles: [ consumer, producer ]
+    activemq_roles:
+      - name: admin
+        permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
+      - name: manager
+        permissions: [ browse, manage ]
+      - name: topicsmanager
+        match: topics.#
+        permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, browse, manage ]
+      - name: consumer
+        match: topics.#
+        permissions: [ consume, browse ]
+      - name: producer
+        match: topics.#
+        permissions: [ send, browse ]
+    activemq_acceptors:
+      - name: artemis
+        bind_address: "{{ activemq_host }}"
+        bind_port: "{{ activemq_port }}"
+        parameters:
+          tcpSendBufferSize: 1048576
+          tcpReceiveBufferSize: 1048576
+          protocols: CORE,MQTT
+          useEpoll: true
+      - name: amqp
+        bind_address: "{{ activemq_host }}"
+        bind_port: "{{ activemq_port_amqp }}"
+        parameters:
+          tcpSendBufferSize: 1048576
+          tcpReceiveBufferSize: 1048576
+          protocols: AMQP
+          useEpoll: true
+          amqpMinLargeMessageSize: 102400
+          amqpCredits: 1000
+          amqpLowCredits: 300
+          amqpDuplicateDetection: true
+    activemq_diverts:
+      - name: TESTDIVERT
+        address: queue.in
+        forwarding_address: queue.out
+        routing_type: ANYCAST
+        filter: "msgType LIKE '%ff%'"
+        exclusive: True
+  collections:
+    - middleware_automation.common
+  roles:
+    - activemq
+  pre_tasks:
+    - name: "Retrieve assets server from env"
+      ansible.builtin.set_fact:
+        assets_server: "{{ lookup('env','MIDDLEWARE_DOWNLOAD_RELEASE_SERVER_URL') }}"
+
+    - name: "Set offline when assets server from env is defined"
+      ansible.builtin.set_fact:
+        amq_broker_offline_install: True
+      when:
+        - assets_server is defined
+        - assets_server | length > 0

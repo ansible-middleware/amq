@@ -559,13 +559,17 @@ argument_specs:
                 default: 5
                 type: 'int'
             activemq_password_codec:
-                description: "Fully qualified class name and its parameters for the Decoder used to decode the masked password. Ignored if activemq_mask_password is false."
+                description: "Fully qualified class name and its parameters for the Decoder used to decode the masked password, ignored if activemq_mask_password is false"
                 default: 'org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec'
                 type: "str"
             activemq_mask_password:
-                description: "Whether passwords in server configuration need to be masked."
+                description: "Whether passwords in server configuration need to be masked"
                 default: True
                 type: "bool"
+            activemq_additional_libs:
+                description: "List of jars to install in activemq classpath, read from playbook files lookup paths"
+                default: []
+                type: "list"
     downstream:
         options:
             amq_broker_version:

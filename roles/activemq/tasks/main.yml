@@ -97,6 +97,28 @@
 - name: "Generate broker configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
   ansible.builtin.include_tasks: configure_broker.yml
 
+- name: Additional classpath libs
+  when: activemq_additional_libs | length > 0
+  block:
+    - name: "Create libs location"
+      become: yes
+      ansible.builtin.file:
+        dest: "{{ activemq.instance_home }}/lib"
+        state: directory
+        owner: "{{ activemq_service_user }}"
+        group: "{{ activemq_service_group }}"
+        mode: 0750
+    - name: "Copy additional libs to location"
+      become: yes
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "{{ activemq.instance_home }}/lib/"
+        state: present
+        owner: "{{ activemq_service_user }}"
+        group: "{{ activemq_service_group }}"
+        mode: 0640
+      loop: "{{ activemq_additional_libs }}"
+
 - name: Reload systemd
   become: yes
   ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler, because of start/flush below

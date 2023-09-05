@@ -66,6 +66,9 @@ activemq_ha_role: live-only
 activemq_password_codec: 'org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec'
 activemq_mask_password: True
 
+## Additional classpath
+activemq_additional_libs: []
+
 ### Enable persistence and persistence options
 activemq_persistence_enabled: True
 activemq_persist_id_cache: True
