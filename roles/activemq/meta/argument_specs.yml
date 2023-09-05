@@ -581,7 +581,7 @@ argument_specs:
     downstream:
         options:
             amq_broker_version:
-                default: "7.10.2"
+                default: "7.11.1"
                 description: "Red Hat AMQ Broker version"
                 type: "str"
             amq_broker_product_category:
