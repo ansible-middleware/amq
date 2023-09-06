@@ -22,6 +22,9 @@ activemq {
        reload=true
        org.apache.activemq.jaas.properties.user="artemis-users.properties"
        org.apache.activemq.jaas.properties.role="artemis-roles.properties"
-{% if activemq_password_codec != '' %}       org.apache.activemq.jaas.properties.password.codec="{{ activemq_password_codec }};iterations={{ activemq_mask_password_iterations }};hashname={{ activemq_mask_password_hashname }}";
+{% if activemq_password_codec != 'org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec' %}
+       org.apache.activemq.jaas.properties.password.codec="{{ activemq_password_codec }};iterations={{ activemq_mask_password_iterations }};hashname={{ activemq_mask_password_hashname }}"
 {% endif %}
+       ;
+
 };
