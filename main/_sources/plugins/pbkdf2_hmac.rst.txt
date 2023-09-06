@@ -152,6 +152,47 @@ example: ``input | middleware_automation.amq.pbkdf2_hmac(key1=value1, key2=value
   * - .. raw:: html
 
         <div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-hashname"></div>
+
+      .. _ansible_collections.middleware_automation.amq.pbkdf2_hmac_filter__parameter-hashname:
+
+      .. rst-class:: ansible-option-title
+
+      **hashname**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-hashname" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`string`
+
+
+
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-cell">
+
+      the hash name, among ['sha1', 'sha224', 'sha256', 'sha384', 'sha512']
+
+
+      .. rst-class:: ansible-option-line
+
+      :ansible-option-default-bold:`Default:` :ansible-option-default:`"sha1"`
+
+      .. raw:: html
+
+        </div>
+
+  * - .. raw:: html
+
+        <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-hexsalt"></div>
 
       .. _ansible_collections.middleware_automation.amq.pbkdf2_hmac_filter__parameter-hexsalt:
@@ -246,6 +287,12 @@ Examples
       ansible.builtin.debug:
         msg: >-
           {{ 'password' | pbkdf2_hmac(hexsalt='7BD6712B68F9BD60B51D77EBD851A21F63E61F2B52301E7CA38DD1602CA662EB' }}
+
+    # generate pbkdf2_hmac hash in hex format for 'password' using 20000 iterations of sha256
+    - name: Generate salted PBKDF2_HMAC password hash
+      ansible.builtin.debug:
+        msg: >-
+          {{ 'password' | pbkdf2_hmac(hashname='sha256', iterations=20000, hexsalt='7BD6712B68F9BD60B51D77EBD851A21F63E61F2B52301E7CA38DD1602CA662EB' }}
 
 
 

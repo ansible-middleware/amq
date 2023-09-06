@@ -167,13 +167,21 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-hashname"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-amq-pbkdf2-hmac-filter-parameter-hashname"><strong>hashname</strong></p>
+<a class="ansibleOptionLink" href="#parameter-hashname" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>the hash name, among [‘sha1’, ‘sha224’, ‘sha256’, ‘sha384’, ‘sha512’]</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;sha1&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-hexsalt"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-amq-pbkdf2-hmac-filter-parameter-hexsalt"><strong>hexsalt</strong></p>
 <a class="ansibleOptionLink" href="#parameter-hexsalt" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>salt for password hashing, in uppercase hexstring format</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-iterations"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-amq-pbkdf2-hmac-filter-parameter-iterations"><strong>iterations</strong></p>
 <a class="ansibleOptionLink" href="#parameter-iterations" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
@@ -190,6 +198,12 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <span class="w">  </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
 <span class="w">      </span><span class="cp">{{</span> <span class="s1">&#39;password&#39;</span> <span class="o">|</span> <span class="nf">pbkdf2_hmac</span><span class="o">(</span><span class="nv">hexsalt</span><span class="o">=</span><span class="s1">&#39;7BD6712B68F9BD60B51D77EBD851A21F63E61F2B52301E7CA38DD1602CA662EB&#39;</span> <span class="cp">}}</span>
+
+<span class="c1"># generate pbkdf2_hmac hash in hex format for &#39;password&#39; using 20000 iterations of sha256</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate salted PBKDF2_HMAC password hash</span>
+<span class="w">  </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">      </span><span class="cp">{{</span> <span class="s1">&#39;password&#39;</span> <span class="o">|</span> <span class="nf">pbkdf2_hmac</span><span class="o">(</span><span class="nv">hashname</span><span class="o">=</span><span class="s1">&#39;sha256&#39;</span><span class="o">,</span> <span class="nv">iterations</span><span class="o">=</span><span class="m">20000</span><span class="o">,</span> <span class="nv">hexsalt</span><span class="o">=</span><span class="s1">&#39;7BD6712B68F9BD60B51D77EBD851A21F63E61F2B52301E7CA38DD1602CA662EB&#39;</span> <span class="cp">}}</span>
 </pre></div>
 </div>
 </section>

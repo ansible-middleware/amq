@@ -359,6 +359,26 @@
 <td class="text-left"><p>Periodic refresh of configuration in milliseconds; can be disabled by specifying -1</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">5000</span></code></p></td>
 </tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_password_codec</span></code></p></td>
+<td class="text-left"><p>Fully qualified class name and its parameters for the Decoder used to decode the masked password. Ignored if activemq_mask_password is false.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_mask_password</span></code></p></td>
+<td class="text-left"><p>Whether passwords in server configuration need to be masked.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_additional_libs</span></code></p></td>
+<td class="text-left"><p>List of jars to install in activemq classpath, read from playbook files lookup paths</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_mask_password_hashname</span></code></p></td>
+<td class="text-left"><p>Name of algorithm used for masking password, will be passed to custom codec</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">sha1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_mask_password_iterations</span></code></p></td>
+<td class="text-left"><p>Number of iterations for masking password, will be passed to custom codec</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1024</span></code></p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -426,7 +446,7 @@
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_pool_files</span></code></p></td>
 <td class="text-left"><p>The upper threshold of the journal file pool, -1 means no Limit</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-1</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_journal_device_block_size</span></code></p></td>
 <td class="text-left"><p>The block size by the device</p></td>

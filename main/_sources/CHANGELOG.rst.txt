@@ -8,6 +8,11 @@ middleware_automation.amq Release Notes
 v1.3.10-devel
 =============
 
+Minor Changes
+-------------
+
+- Add custom codec configurations for masked passwords `#95 <https://github.com/ansible-middleware/amq/pull/95>`_
+
 v1.3.9
 ======
 
