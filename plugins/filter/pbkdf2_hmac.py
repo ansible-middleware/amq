@@ -24,6 +24,11 @@ DOCUMENTATION = '''
       description: salt for password hashing, in uppercase hexstring format
       type: string
       required: true
+    hashname:
+      description: the hash name, among ['sha1', 'sha224', 'sha256', 'sha384', 'sha512']
+      type: string
+      required: false
+      default: 'sha1'
     iterations:
       description: number of iterations, default 1024
       type: int
@@ -36,6 +41,12 @@ EXAMPLES = '''
   ansible.builtin.debug:
     msg: >-
       {{ 'password' | pbkdf2_hmac(hexsalt='7BD6712B68F9BD60B51D77EBD851A21F63E61F2B52301E7CA38DD1602CA662EB' }}
+
+# generate pbkdf2_hmac hash in hex format for 'password' using 20000 iterations of sha256
+- name: Generate salted PBKDF2_HMAC password hash
+  ansible.builtin.debug:
+    msg: >-
+      {{ 'password' | pbkdf2_hmac(hashname='sha256', iterations=20000, hexsalt='7BD6712B68F9BD60B51D77EBD851A21F63E61F2B52301E7CA38DD1602CA662EB' }}
 '''
 
 RETURN = '''
@@ -47,9 +58,9 @@ RETURN = '''
 import hashlib
 
 
-def pbkdf2_hmac(string, hexsalt, iterations=1024):
+def pbkdf2_hmac(string, hexsalt, iterations=1024, hashname='sha1'):
     key = hashlib.pbkdf2_hmac(
-        hash_name='sha1',
+        hash_name=hashname,
         password=str.encode(string),
         salt=bytearray.fromhex(hexsalt),
         iterations=iterations,

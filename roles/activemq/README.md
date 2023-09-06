@@ -1,5 +1,5 @@
 activemq
-==========
+========
 
 Installs and configures [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis/) services.
 
@@ -85,6 +85,11 @@ Role Defaults
 |`activemq_disable_destination_autocreate`| Disable automatic creation of destination | `True` |
 |`activemq_queues`| Queue names comma separated | `queue.in,queue.out` |
 |`activemq_configuration_file_refresh_period`| Periodic refresh of configuration in milliseconds; can be disabled by specifying -1 | `5000` |
+|`activemq_password_codec`| Fully qualified class name and its parameters for the Decoder used to decode the masked password. Ignored if activemq_mask_password is false. |`org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec` |
+|`activemq_mask_password` | Whether passwords in server configuration need to be masked. | `True` |
+|`activemq_additional_libs`| List of jars to install in activemq classpath, read from playbook files lookup paths | `[]` |
+|`activemq_mask_password_hashname`| Name of algorithm used for masking password, will be passed to custom codec | `sha1` |
+|`activemq_mask_password_iterations`| Number of iterations for masking password, will be passed to custom codec | `1024` |
 
 
 #### Journal configuration
@@ -104,7 +109,7 @@ Role Defaults
 |`activemq_large_messages_directory`| The directory to store large messages | `data/largemessages` |
 |`activemq_journal_datasync`| Whether to use msync/fsync on journal operations | `True` |
 |`activemq_journal_min_files`| How many journal files to pre-create | `2` |
-|`activemq_journal_pool_files`| The upper threshold of the journal file pool, -1 means no Limit | `-1` |
+|`activemq_journal_pool_files`| The upper threshold of the journal file pool, -1 means no Limit | `10` |
 |`activemq_journal_device_block_size`| The block size by the device | `4096` |
 |`activemq_journal_file_size`| The size (in bytes) of each journal file | `10M` |
 |`activemq_journal_buffer_timeout`| The Flush timeout for the journal buffer | `500000` if 'ASYNCIO' else `3333333` |

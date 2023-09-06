@@ -10,7 +10,6 @@
   loop: "{{ activemq_users }}"
   loop_control:
     label: "{{ item.user }}"
-  no_log: True
 
 - name: Configure users
   ansible.builtin.template:
@@ -19,7 +18,7 @@
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
     mode: 0640
-  no_log: True
+  no_log: false
   become: yes
 
 - name: Configure roles

@@ -10,7 +10,7 @@
         input_type: xml
       vars:
         value: "{{ lookup('ansible.builtin.vars', 'activemq_' + item) | to_json | replace('\"','') }}"
-    - name: Add item to valid element list
+    - name: "Add item {{ item }} to valid element list"
       ansible.builtin.set_fact:
         valid_core_configuration_list: "{{ valid_core_configuration_list | default([]) + [ item ] }}"
   rescue:

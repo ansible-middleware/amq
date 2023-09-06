@@ -46,3 +46,4 @@ activemq_core_configuration_list:
   - configuration_file_refresh_period
   - global_max_messages
   - global_max_size
+  - password_codec

@@ -464,7 +464,7 @@ argument_specs:
                 type: "int"
             activemq_journal_pool_files:
                 description: 'The upper threshold of the journal file pool, -1 means no Limit'
-                default: -1
+                default: 10
                 type: "int"
             activemq_journal_device_block_size:
                 description: 'The block size by the device'
@@ -558,10 +558,30 @@ argument_specs:
                 description: "Number of rollover audit log files"
                 default: 5
                 type: 'int'
+            activemq_password_codec:
+                description: "Fully qualified class name and its parameters for the Decoder used to decode the masked password, ignored if activemq_mask_password is false"
+                default: 'org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec'
+                type: "str"
+            activemq_mask_password:
+                description: "Whether passwords in server configuration need to be masked"
+                default: True
+                type: "bool"
+            activemq_mask_password_hashname:
+                description: "Name of algorithm used for masking password, will be passed to custom codec class"
+                default: 'sha256'
+                type: "str"
+            activemq_mask_password_iterations:
+                description: "Number of iterations for masking password, will be passed to custom codec class"
+                default: 2048
+                type: 'int'
+            activemq_additional_libs:
+                description: "List of jars to install in activemq classpath, read from playbook files lookup paths"
+                default: []
+                type: "list"
     downstream:
         options:
             amq_broker_version:
-                default: "7.10.2"
+                default: "7.11.1"
                 description: "Red Hat AMQ Broker version"
                 type: "str"
             amq_broker_product_category:
