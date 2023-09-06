@@ -84,6 +84,17 @@
   notify:
     - restart amq_broker
 
+- name: "Configure jaas"
+  become: yes
+  ansible.builtin.template:
+    src: login.config.j2
+    dest: "{{ activemq.instance_home }}/etc/login.config"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
+    mode: 0644
+  notify:
+    - restart amq_broker
+
 - name: "Configure prometheus metrics"
   become: yes
   when: activemq_prometheus_enabled and amq_broker_enable is defined and amq_broker_enable
