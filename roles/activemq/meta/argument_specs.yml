@@ -532,7 +532,11 @@ argument_specs:
                 type: 'str'
             activemq_base_package_list:
                 description: "The base list of rpm dependencies to install"
-                default: "[unzip,iproute,sed,procps-ng,initscripts,libaio,python3-lxml]"
+                default: "['persistence_enabled', 'persist_id_cache', 'id_cache_size', 'journal_type', 'paging_directory', 'bindings_directory', 'journal_directory', 'large_messages_directory', 'journal_datasync', 'journal_min_files', 'journal_pool_files', 'journal_device_block_size', 'journal_file_size', 'journal_buffer_timeout', 'journal_max_io', 'configuration_file_refresh_period', 'global_max_messages', 'global_max_size', 'password_codec']"
+                type: 'list'
+            activemq_core_configuration_list:
+                description: "The base list of top-level config elements to include"
+                default: "[]"
                 type: 'list'
             activemq_broker_connections:
                 description: "AMQP broker connections configuration; list of `{ name(str),uri(str),operations(list of dicts with type key in [mirror,sender,receiver,peer])) }`"
@@ -578,6 +582,66 @@ argument_specs:
                 description: "List of jars to install in activemq classpath, read from playbook files lookup paths"
                 default: []
                 type: "list"
+            activemq_auth_properties_enabled:
+                description: "Whether to enable property based JAAS config"
+                default: True
+                type: "bool"
+            activemq_auth_ldap_enabled:
+                description: "Whether to enable LDAP based JAAS config"
+                default: False
+                type: "bool"
+            activemq_auth_ldap_url:
+                description: "URL for LDAP server connection"
+                default: "ldap://localhost:389"
+                type: "str"
+            activemq_auth_ldap_conn_username:
+                description: "Bind username for LDAP server"
+                default: "uid=admin,ou=system"
+                type: "str"
+            activemq_auth_ldap_conn_password:
+                description: "Bind user password for LDAP server"
+                default: "password"
+                type: "str"
+            activemq_auth_ldap_conn_codec:
+                description: "Optional password codec class for bind user password"
+                default: "{{ activemq_password_codec }}"
+                type: "str"
+            activemq_auth_ldap_conn_protocol:
+                description: "Protocol for LDAP connection"
+                default: "s"
+                type: "str"
+            activemq_auth_ldap_auth:
+                description: "Type of LDAP server authentication"
+                default: "simple"
+                type: "str"
+            activemq_auth_ldap_user_base:
+                description: "Base for user search"
+                default: "ou=Users,dc=example,dc=com"
+                type: "str"
+            activemq_auth_ldap_user_search:
+                description: "User attribute"
+                default: "(uid={0})"
+                type: "str"
+            activemq_auth_ldap_user_search_subtree:
+                description: "Whether to enable subtree user search"
+                default: True
+                type: "bool"
+            activemq_auth_ldap_role_base:
+                description: "Base for role search"
+                default: "ou=Groups,dc=example,dc=com"
+                type: "str"
+            activemq_auth_ldap_role_name:
+                description: "Role attribute"
+                default: "cn"
+                type: "str"
+            activemq_auth_ldap_role_search:
+                description: "Role search attribute"
+                default: "(member={0})"
+                type: "str"
+            activemq_auth_ldap_role_search_subtree:
+                description: "Whether to enable subtree role search"
+                default: False
+                type: "bool"
     downstream:
         options:
             amq_broker_version:
