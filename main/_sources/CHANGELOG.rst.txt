@@ -11,6 +11,7 @@ v1.3.10-devel
 Minor Changes
 -------------
 
+- Add LDAP plugin configuration to JAAS login.config `#96 <https://github.com/ansible-middleware/amq/pull/96>`_
 - Add custom codec configurations for masked passwords `#95 <https://github.com/ansible-middleware/amq/pull/95>`_
 
 v1.3.9
