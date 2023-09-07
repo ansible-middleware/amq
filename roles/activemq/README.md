@@ -92,6 +92,27 @@ Role Defaults
 |`activemq_mask_password_iterations`| Number of iterations for masking password, will be passed to custom codec | `1024` |
 
 
+#### LDAP authN/authZ
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`activemq_auth_properties_enabled`| Whether to enable property based JAAS config | `True` |
+|`activemq_auth_ldap_enabled` | Whether to enable LDAP based JAAS config" | `False` |
+|`activemq_auth_ldap_url` | URL for LDAP server connection" | `ldap://localhost:389` |
+|`activemq_auth_ldap_conn_username` | Bind username for LDAP server" | `uid=admin,ou=system` |
+|`activemq_auth_ldap_conn_password` | Bind user password for LDAP server" | `password` |
+|`activemq_auth_ldap_conn_codec` | Optional password codec class for bind user password" | `{{ activemq_password_codec }}` |
+|`activemq_auth_ldap_conn_protocol` | Protocol for LDAP connection" | `s` |
+|`activemq_auth_ldap_auth` | Type of LDAP server authentication" | `simple` |
+|`activemq_auth_ldap_user_base` | Base for user search | `ou=Users,dc=example,dc=com` |
+|`activemq_auth_ldap_user_search` | User attribute | `(uid={0})` |
+|`activemq_auth_ldap_user_search_subtree` | Whether to enable subtree user search | `True` |
+|`activemq_auth_ldap_role_base` | Base for role search | `ou=Groups,dc=example,dc=com` |
+|`activemq_auth_ldap_role_name` | Role attribute | `cn` |
+|`activemq_auth_ldap_role_search` | Role search attribute | `(member={0})` |
+|`activemq_auth_ldap_role_search_subtree` | Whether to enable subtree role search | `False` |
+
+
 #### Journal configuration
 
 | Variable | Description | Default |
