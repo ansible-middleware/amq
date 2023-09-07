@@ -40,11 +40,20 @@
       changed_when: False
       register: user_roles
 
-    - name: Retrieve users and roles from cli
-      ansible.builtin.debug:
-        var: user_roles
-
     - name: Verify users and roles
+      ansible.builtin.assert:
+        that:
+          - "'\"other\"()' in user_roles.stdout"
+          - "'\"amq\"(admin)' in user_roles.stdout"
+        quiet: true
+        fail_msg: "Failed to retrieve configured users"
+
+    - name: Retrieve users and roles from cli with ldap account
+      ansible.builtin.command: "/opt/amq/amq-broker/bin/artemis user list --user tesla --password password"
+      changed_when: False
+      register: user_roles
+
+    - name: Verify users and roles with ldap account
       ansible.builtin.assert:
         that:
           - "'\"other\"()' in user_roles.stdout"
