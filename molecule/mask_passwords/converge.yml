@@ -5,11 +5,23 @@
   vars:
     activemq_version: 2.29.0
     activemq_service_user_home: /home/activemq
-    activemq_hawtio_role: admin
+    activemq_hawtio_role: Scientists
     activemq_password_codec: "com.ansiblemiddleware.amq.utils.PBKDF2WithHmacCodec;iterations={{ activemq_mask_password_iterations }};hashname={{ activemq_mask_password_hashname }}"
     activemq_mask_password_hashname: sha256
     activemq_mask_password_iterations: 2048
     activemq_additional_libs: [ "amq-utils-1.0.1.jar" ]
+    activemq_auth_ldap_enabled: True
+    activemq_auth_ldap_url: ldap://ldap.forumsys.com:389
+    activemq_auth_ldap_conn_username: uid=tesla,dc=example,dc=com
+    activemq_auth_ldap_conn_password: password
+    activemq_auth_ldap_user_base: dc=example,dc=com
+    activemq_auth_ldap_user_search: '(uid={0})'
+    activemq_auth_ldap_role_base: dc=example,dc=com
+    activemq_auth_ldap_role_name: cn
+    activemq_auth_ldap_role_search: '(uniqueMember={0})'
+    activemq_auth_ldap_role_search_subtree: True
+    activemq_global_max_size: 128MB
+    activemq_cors_strict_checking: False
     activemq_users:
       - user: amq
         password: amqbrokerpass
@@ -20,17 +32,8 @@
     activemq_roles:
       - name: admin
         permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
-      - name: manager
-        permissions: [ browse, manage ]
-      - name: topicsmanager
-        match: topics.#
-        permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, browse, manage ]
-      - name: consumer
-        match: topics.#
-        permissions: [ consume, browse ]
-      - name: producer
-        match: topics.#
-        permissions: [ send, browse ]
+      - name: Scientists
+        permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
     activemq_acceptors:
       - name: artemis
         bind_address: "{{ activemq_host }}"
@@ -40,29 +43,8 @@
           tcpReceiveBufferSize: 1048576
           protocols: CORE,MQTT
           useEpoll: true
-      - name: amqp
-        bind_address: "{{ activemq_host }}"
-        bind_port: "{{ activemq_port_amqp }}"
-        parameters:
-          tcpSendBufferSize: 1048576
-          tcpReceiveBufferSize: 1048576
-          protocols: AMQP
-          useEpoll: true
-          amqpMinLargeMessageSize: 102400
-          amqpCredits: 1000
-          amqpLowCredits: 300
-          amqpDuplicateDetection: true
-    activemq_diverts:
-      - name: TESTDIVERT
-        address: queue.in
-        forwarding_address: queue.out
-        routing_type: ANYCAST
-        filter: "msgType LIKE '%ff%'"
-        exclusive: True
-  collections:
-    - middleware_automation.common
   roles:
-    - activemq
+    - middleware_automation.amq.activemq
   pre_tasks:
     - name: "Retrieve assets server from env"
       ansible.builtin.set_fact:

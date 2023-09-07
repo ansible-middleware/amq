@@ -17,14 +17,38 @@
  */
 
 activemq {
-   org.apache.activemq.artemis.spi.core.security.jaas.PropertiesLoginModule required
+{% if activemq_auth_properties_enabled %}
+    org.apache.activemq.artemis.spi.core.security.jaas.PropertiesLoginModule {{ 'sufficient' if activemq_auth_ldap_enabled else 'required' }}
        debug=false
        reload=true
        org.apache.activemq.jaas.properties.user="artemis-users.properties"
        org.apache.activemq.jaas.properties.role="artemis-roles.properties"
 {% if activemq_password_codec != 'org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec' %}
-       org.apache.activemq.jaas.properties.password.codec="{{ activemq_password_codec }};iterations={{ activemq_mask_password_iterations }};hashname={{ activemq_mask_password_hashname }}"
+       org.apache.activemq.jaas.properties.password.codec="{{ activemq_password_codec }}"
 {% endif %}
-       ;
+    ;
+{% endif %}
 
+{% if activemq_auth_ldap_enabled %}
+    org.apache.activemq.artemis.spi.core.security.jaas.LDAPLoginModule required
+        debug=false
+        initialContextFactory=com.sun.jndi.ldap.LdapCtxFactory
+        connectionURL="{{ activemq_auth_ldap_url }}"
+        connectionUsername="{{ activemq_auth_ldap_conn_username }}"
+        connectionPassword={{ activemq_auth_ldap_conn_password }}
+        connectionProtocol={{ activemq_auth_ldap_conn_protocol }}
+{% if activemq_password_codec != 'org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec' %}
+        passwordCodec="{{ activemq_password_codec }}"
+{% endif %}
+        authentication={{ activemq_auth_ldap_auth }}
+        userBase="{{ activemq_auth_ldap_user_base }}"
+        userSearchMatching="{{ activemq_auth_ldap_user_search }}"
+        userSearchSubtree={{ activemq_auth_ldap_user_search_subtree }}
+        roleBase="{{ activemq_auth_ldap_role_base }}"
+        roleName={{ activemq_auth_ldap_role_name}}
+        roleSearchMatching="{{ activemq_auth_ldap_role_search }}"
+        roleSearchSubtree={{ activemq_auth_ldap_role_search_subtree }}
+        reload=true
+    ;
+{% endif %}
 };
