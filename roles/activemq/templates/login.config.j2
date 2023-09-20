@@ -32,20 +32,20 @@ activemq {
 {% if activemq_auth_ldap_enabled %}
     org.apache.activemq.artemis.spi.core.security.jaas.LDAPLoginModule required
         debug=false
-        initialContextFactory=com.sun.jndi.ldap.LdapCtxFactory
+        initialContextFactory="com.sun.jndi.ldap.LdapCtxFactory"
         connectionURL="{{ activemq_auth_ldap_url }}"
         connectionUsername="{{ activemq_auth_ldap_conn_username }}"
-        connectionPassword={{ activemq_auth_ldap_conn_password }}
-        connectionProtocol={{ activemq_auth_ldap_conn_protocol }}
+        connectionPassword="{{ activemq_auth_ldap_conn_password }}"
+        connectionProtocol="{{ activemq_auth_ldap_conn_protocol }}"
 {% if activemq_password_codec != 'org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec' %}
         passwordCodec="{{ activemq_password_codec }}"
 {% endif %}
-        authentication={{ activemq_auth_ldap_auth }}
+        authentication="{{ activemq_auth_ldap_auth }}"
         userBase="{{ activemq_auth_ldap_user_base }}"
         userSearchMatching="{{ activemq_auth_ldap_user_search }}"
         userSearchSubtree={{ activemq_auth_ldap_user_search_subtree }}
         roleBase="{{ activemq_auth_ldap_role_base }}"
-        roleName={{ activemq_auth_ldap_role_name}}
+        roleName="{{ activemq_auth_ldap_role_name}}"
         roleSearchMatching="{{ activemq_auth_ldap_role_search }}"
         roleSearchSubtree={{ activemq_auth_ldap_role_search_subtree }}
         reload=true
