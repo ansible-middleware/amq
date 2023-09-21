@@ -198,6 +198,24 @@ releases:
     fragments:
     - 65.yaml
     release_date: '2023-04-18'
+  1.3.10:
+    changes:
+      bugfixes:
+      - 'Ignore unwanted output from ``artemis mask`` command `#98 <https://github.com/ansible-middleware/amq/pull/98>`_
+
+        '
+      minor_changes:
+      - 'Add LDAP plugin configuration to JAAS login.config `#96 <https://github.com/ansible-middleware/amq/pull/96>`_
+
+        '
+      - 'Add custom codec configurations for masked passwords `#95 <https://github.com/ansible-middleware/amq/pull/95>`_
+
+        '
+    fragments:
+    - 95.yaml
+    - 96.yaml
+    - 98.yaml
+    release_date: '2023-09-21'
   1.3.2:
     changes:
       minor_changes:
