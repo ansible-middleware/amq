@@ -5,8 +5,11 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
-v1.3.10-devel
+v1.3.11-devel
 =============
+
+v1.3.10
+=======
 
 Minor Changes
 -------------
