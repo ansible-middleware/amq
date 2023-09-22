@@ -23,6 +23,8 @@ Welcome to AMQ Collection documentation
    :maxdepth: 2
    :caption: General
 
+   HA setup active/standby <static_cluster>
+   Encypted passwords <masked_passwords>
    Changelog <CHANGELOG>
    License <LICENSE>
 
