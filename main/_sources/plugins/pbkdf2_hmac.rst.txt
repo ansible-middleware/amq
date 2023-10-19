@@ -7,7 +7,7 @@
     :trim:
 
 .. meta::
-  :antsibull-docs: 2.4.0
+  :antsibull-docs: 2.5.0
 
 .. Anchors
 
@@ -23,7 +23,7 @@ pbkdf2_hmac -- Generate a salted PBKDF2\_HMAC password hash
 .. Collection note
 
 .. note::
-    This filter plugin is part of the `middleware_automation.amq collection <https://galaxy.ansible.com/middleware_automation/amq>`_.
+    This filter plugin is part of the `middleware_automation.amq collection <https://galaxy.ansible.com/ui/repo/published/middleware_automation/amq/>`_.
 
     It is not included in ``ansible-core``.
     To check whether it is installed, run :code:`ansible-galaxy collection list`.
