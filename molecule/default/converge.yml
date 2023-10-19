@@ -54,10 +54,8 @@
         routing_type: ANYCAST
         filter: "msgType LIKE '%ff%'"
         exclusive: True
-  collections:
-    - middleware_automation.common
   roles:
-    - activemq
+    - middleware_automation.amq.activemq
   pre_tasks:
     - name: "Retrieve assets server from env"
       ansible.builtin.set_fact:

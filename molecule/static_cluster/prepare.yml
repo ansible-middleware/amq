@@ -4,9 +4,6 @@
   tasks:
     - name: "Run preparation common to all scenario"
       ansible.builtin.include_tasks: ../prepare.yml
-      vars:
-        assets:
-          - "{{ assets_server }}/amq/broker/7.9.4/amq-broker-7.9.4-bin.zip"
     - name: "Create {{ activemq.service_name }} service user"
       become: yes
       ansible.builtin.user:
@@ -15,13 +12,13 @@
         system: yes
         create_home: no
     - name: Set ownership on nfs mounted parent
-      file:
+      ansible.builtin.file:
         path: /opt/amq/amq-broker/
         owner: amq-broker
         group: amq-broker
         mode: 0755
     - name: Install CA in shared truststore
-      copy:
+      ansible.builtin.copy:
         src: "{{ item }}"
         dest: /usr/share/pki/ca-trust-source/anchors/
         owner: root
@@ -31,5 +28,5 @@
       loop:
         - "nfs/server-ca.crt"
     - name: update_ca_trust
-      command: update-ca-trust
+      ansible.builtin.command: update-ca-trust
       become: true
