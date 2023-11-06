@@ -6,6 +6,7 @@ exclude_paths:
   - .yamllint
   - meta/
   - playbooks/roles/
+  - plugins/filter/tmp*.py.yaml
 
 rulesdir:
    - ../../../ansible-lint-custom-rules/rules/
