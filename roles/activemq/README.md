@@ -100,7 +100,8 @@ Role Defaults
 | Variable | Description | Default |
 |:---------|:------------|:--------|
 |`activemq_auth_properties_enabled`| Whether to enable property based JAAS config | `True` |
-|`activemq_auth_ldap_enabled` | Whether to enable LDAP based JAAS config" | `False` |
+|`activemq_auth_template` | Location of JAAS login.config template; by default use template provided with role | `login.config.j2` |
+|`activemq_auth_ldap_enabled` | Whether to enable LDAP based JAAS config | `False` |
 |`activemq_auth_ldap_url` | URL for LDAP server connection" | `ldap://localhost:389` |
 |`activemq_auth_ldap_conn_username` | Bind username for LDAP server" | `uid=admin,ou=system` |
 |`activemq_auth_ldap_conn_password` | Bind user password for LDAP server" | `password` |
@@ -114,6 +115,7 @@ Role Defaults
 |`activemq_auth_ldap_role_name` | Role attribute | `cn` |
 |`activemq_auth_ldap_role_search` | Role search attribute | `(member={0})` |
 |`activemq_auth_ldap_role_search_subtree` | Whether to enable subtree role search | `False` |
+|`activemq_auth_ldap_referral` | Specify how to handle referrals; valid values: ignore, follow, throw | `ignore` |
 
 
 #### Journal configuration

@@ -87,7 +87,7 @@
 - name: "Configure jaas"
   become: yes
   ansible.builtin.template:
-    src: login.config.j2
+    src: "{{ activemq_auth_template }}"
     dest: "{{ activemq.instance_home }}/etc/login.config"
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
