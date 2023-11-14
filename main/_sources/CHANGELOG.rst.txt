@@ -8,6 +8,11 @@ middleware_automation.amq Release Notes
 v2.0.0-devel
 ============
 
+Minor Changes
+-------------
+
+- Add referrer to ldap plugin, allow custom login.config `#110 <https://github.com/ansible-middleware/amq/pull/110>`_
+
 Breaking Changes / Porting Guide
 --------------------------------
 

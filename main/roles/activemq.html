@@ -400,61 +400,69 @@
 <td class="text-left"><p>Whether to enable property based JAAS config</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_enabled</span></code></p></td>
-<td class="text-left"><p>Whether to enable LDAP based JAAS config”</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_template</span></code></p></td>
+<td class="text-left"><p>Location of JAAS login.config template; by default use template provided with role</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">login.config.j2</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_enabled</span></code></p></td>
+<td class="text-left"><p>Whether to enable LDAP based JAAS config</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_url</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_url</span></code></p></td>
 <td class="text-left"><p>URL for LDAP server connection”</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ldap://localhost:389</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_conn_username</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_conn_username</span></code></p></td>
 <td class="text-left"><p>Bind username for LDAP server”</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">uid=admin,ou=system</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_conn_password</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_conn_password</span></code></p></td>
 <td class="text-left"><p>Bind user password for LDAP server”</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">password</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_conn_codec</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_conn_codec</span></code></p></td>
 <td class="text-left"><p>Optional password codec class for bind user password”</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_password_codec</span> <span class="pre">}}</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_conn_protocol</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_conn_protocol</span></code></p></td>
 <td class="text-left"><p>Protocol for LDAP connection”</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_auth</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_auth</span></code></p></td>
 <td class="text-left"><p>Type of LDAP server authentication”</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">simple</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_user_base</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_user_base</span></code></p></td>
 <td class="text-left"><p>Base for user search</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ou=Users,dc=example,dc=com</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_user_search</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_user_search</span></code></p></td>
 <td class="text-left"><p>User attribute</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(uid={0})</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_user_search_subtree</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_user_search_subtree</span></code></p></td>
 <td class="text-left"><p>Whether to enable subtree user search</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_role_base</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_role_base</span></code></p></td>
 <td class="text-left"><p>Base for role search</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ou=Groups,dc=example,dc=com</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_role_name</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_role_name</span></code></p></td>
 <td class="text-left"><p>Role attribute</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">cn</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_role_search</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_role_search</span></code></p></td>
 <td class="text-left"><p>Role search attribute</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(member={0})</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_role_search_subtree</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_role_search_subtree</span></code></p></td>
 <td class="text-left"><p>Whether to enable subtree role search</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_auth_ldap_referral</span></code></p></td>
+<td class="text-left"><p>Specify how to handle referrals; valid values: ignore, follow, throw</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ignore</span></code></p></td>
 </tr>
 </tbody>
 </table>
