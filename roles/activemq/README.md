@@ -1,7 +1,7 @@
 activemq
 ========
 
-Installs and configures [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis/) services.
+Installs and configures [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis/) / [Red Hat AMQ broker](https://access.redhat.com/documentation/en-us/red_hat_amq_broker) services.
 
 
 Dependencies
@@ -26,6 +26,9 @@ Versions
 | `AMQ 7.10`  | 2021.Q4           | `2.21.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq_broker/7.10/html/release_notes_for_red_hat_amq_broker_7.10/index)|
 | `AMQ 7.9`   | 2021.Q3           | `2.18.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq/2021.q3/html-single/release_notes_for_red_hat_amq_broker_7.9/index)|
 | `AMQ 7.8`   | 2020.Q4           | `2.16.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq/2020.q4/html-single/release_notes_for_red_hat_amq_broker_7.8/index)|
+
+
+AMQ 7 Broker and Clients LTS Support Policy: https://access.redhat.com/articles/7009946
 
 
 <!--start argument_specs-->
