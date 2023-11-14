@@ -83,3 +83,15 @@
       failed_when:
         - this.value is true
         - this.status is 200
+
+    - name: Read content of login.config
+      ansible.builtin.slurp:
+        src: /opt/amq/amq-broker/etc/login.config
+      register: slurped_conf
+
+    - name: Check custom login.config
+      ansible.builtin.assert:
+        that:
+          - "'/* TEST' in slurped_conf.content|b64decode"
+        quiet: true
+        fail_msg: "Custom login.config template not loaded correctly"

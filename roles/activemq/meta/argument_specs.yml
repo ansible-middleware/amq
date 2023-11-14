@@ -642,6 +642,14 @@ argument_specs:
                 description: "Whether to enable subtree role search"
                 default: False
                 type: "bool"
+            activemq_auth_ldap_referral:
+                description: "Specify how to handle referrals; valid values: ignore, follow, throw"
+                default: "ignore"
+                type: "str"
+            activemq_auth_template:
+                description: "Location of JAAS login.config template; by default use template provided with activemq_hawtio_role"
+                default: "login.config.j2"
+                type: "str"
     downstream:
         options:
             amq_broker_version:
