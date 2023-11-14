@@ -92,6 +92,6 @@
     - name: Check custom login.config
       ansible.builtin.assert:
         that:
-          - "'/* TEST' in slurped_log.content|b64decode"
+          - "'/* TEST' in slurped_conf.content|b64decode"
         quiet: true
         fail_msg: "Custom login.config template not loaded correctly"
