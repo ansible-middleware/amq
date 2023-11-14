@@ -65,7 +65,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#install-playbook">Install Playbook</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#install-from-controller-node">Install from controller node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controller-node-install-zipfile-path">Controller node install zipfile path</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#offline-from-controller-node">Offline from controller node</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#clustered-high-availability-deployments">Clustered / high availability deployments</a></li>
 </ul>
@@ -134,11 +134,11 @@
 <div><p><strong><em>NOTE:</em> If you are Red Hat customer, install <code class="docutils literal notranslate"><span class="pre">redhat.amq_broker</span></code> from <a class="reference external" href="https://console.redhat.com/ansible/ansible-dashboard">Automation Hub</a> as the certified version of this collection.</strong></p>
 </div></blockquote>
 <!--end build_status -->
-<p>Collection to install and configure <a class="reference external" href="https://activemq.apache.org/components/artemis">Apache ActiveMQ Artemis</a> / <a class="reference external" href="https://www.redhat.com/en/technologies/jboss-middleware/amq">Red Hat AMQ broker</a>.</p>
+<p>Collection to install and configure <a class="reference external" href="https://activemq.apache.org/components/artemis">Apache ActiveMQ Artemis</a> / <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_amq_broker">Red Hat AMQ broker</a>.</p>
 <!--start requires_ansible-->
 <section id="ansible-version-compatibility">
 <h2>Ansible version compatibility<a class="headerlink" href="#ansible-version-compatibility" title="Link to this heading"></a></h2>
-<p>This collection has been tested against following Ansible versions: <strong>&gt;=2.13.0</strong>.</p>
+<p>This collection has been tested against following Ansible versions: <strong>&gt;=2.14.0</strong>.</p>
 <!--end requires_ansible-->
 </section>
 <section id="included-content">
@@ -209,9 +209,8 @@ ansible-galaxy collection install middleware_automation-amq-*.tar.gz
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/ansible-middleware/amq/blob/main/playbooks/activemq.yml"><code class="docutils literal notranslate"><span class="pre">playbooks/activemq.yml</span></code></a> deploys based on the collections defaults.</p></li>
 </ul>
-<p>For full service configuration details, refer to the <a class="reference external" href="https://github.com/ansible-middleware/keycloak/blob/main/roles/keycloak/README.md">activemq role README</a>.</p>
-<section id="install-from-controller-node">
-<h4>Install from controller node<a class="headerlink" href="#install-from-controller-node" title="Link to this heading"></a></h4>
+<section id="controller-node-install-zipfile-path">
+<h4>Controller node install zipfile path<a class="headerlink" href="#controller-node-install-zipfile-path" title="Link to this heading"></a></h4>
 <p>By default the collection will download the desired version of the install zipfile to the ansible controller node, then it will distribute to target nodes.
 The variable <code class="docutils literal notranslate"><span class="pre">activemq_local_archive_repository</span></code> controls the path on the controller where the install zipfiles will be located, and by default will be the playbook working directory.</p>
 </section>
