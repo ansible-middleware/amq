@@ -94,4 +94,4 @@
         that:
           - "'/* TEST' in slurped_log.content|b64decode"
         quiet: true
-        fail_msg: "Custom login.config template not loaded correctly""
+        fail_msg: "Custom login.config template not loaded correctly"
