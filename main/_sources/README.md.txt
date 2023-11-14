@@ -18,9 +18,11 @@ This collection has been tested against following Ansible versions: **>=2.13.0**
 
 ## Included content
 
+<!--start roles_paths -->
 ### Roles:
 
 * [`activemq`](https://github.com/ansible-middleware/amq/tree/main/roles/activemq): Perform installation and configuration
+<!--end roles_paths -->
 
 ### Plugins:
 

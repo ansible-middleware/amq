@@ -8,11 +8,6 @@ middleware_automation.amq Release Notes
 v2.0.0-devel
 ============
 
-Breaking Changes / Porting Guide
---------------------------------
-
-- Set Ansible required version to >= 2.13 `#103 <https://github.com/ansible-middleware/amq/pull/103>`_
-
 New Plugins
 -----------
 

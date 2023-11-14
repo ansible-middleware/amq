@@ -141,100 +141,141 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <section id="synopsis">
 <h2><a class="toc-backref" href="#id1" role="doc-backlink">Synopsis</a><a class="headerlink" href="#synopsis" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Merge two or more lists by attribute <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-middleware-automation-amq-lists-mergeby-filter-parameter-index"><span class="std std-ref"><span class="pre">index</span></span></a></strong></code>. Optional parameters <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-middleware-automation-amq-lists-mergeby-filter-parameter-recursive"><span class="std std-ref"><span class="pre">recursive</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-middleware-automation-amq-lists-mergeby-filter-parameter-list-merge"><span class="std std-ref"><span class="pre">list_merge</span></span></a></strong></code> control the merging of the lists in values. The function merge_hash from ansible.utils.vars is used. To learn details on how to use the parameters <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-middleware-automation-amq-lists-mergeby-filter-parameter-recursive"><span class="std std-ref"><span class="pre">recursive</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-middleware-automation-amq-lists-mergeby-filter-parameter-list-merge"><span class="std std-ref"><span class="pre">list_merge</span></span></a></strong></code> see Ansible User’s Guide chapter “Using filters to manipulate data” section “Combining hashes/dictionaries”.</p></li>
+<li><p>Merge two or more lists by attribute <code class="ansible-option docutils literal notranslate"><strong><span><span class="pre">index</span></span></strong></code>. Optional parameters <code class="ansible-option docutils literal notranslate"><strong><span><span class="pre">recursive</span></span></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><span><span class="pre">list_merge</span></span></strong></code> control the merging of the lists in values. The function merge_hash from ansible.utils.vars is used. To learn details on how to use the parameters <code class="ansible-option docutils literal notranslate"><strong><span><span class="pre">recursive</span></span></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><span><span class="pre">list_merge</span></span></strong></code> see Ansible User’s Guide chapter “Using filters to manipulate data” section “Combining hashes/dictionaries”.</p></li>
 </ul>
 </section>
 <section id="input">
 <h2><a class="toc-backref" href="#id2" role="doc-backlink">Input</a><a class="headerlink" href="#input" title="Link to this heading"></a></h2>
 <p>This describes the input of the filter, the value before <code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">middleware_automation.amq.lists_mergeby</span></code>.</p>
-<table class="longtable ansible-option-table docutils align-default" style="width: 100%">
+<table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
 <thead>
-<tr class="row-odd"><th class="head"><p>Parameter</p></th>
-<th class="head"><p>Comments</p></th>
+<tr class="row-odd">
+  <th class="head"><p>Parameter</p></th>
+  <th class="head"><p>Comments</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-_input"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-amq-lists-mergeby-filter-parameter-input"><strong>Input</strong></p>
-<a class="ansibleOptionLink" href="#parameter-_input" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span> / <span class="ansible-option-required">required</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>A list of dictionaries.</p>
-</div></td>
+<tr class="row-even">
+  <td><div class="ansible-option-cell">
+    <div class="ansibleOptionAnchor" id="parameter-_input"></div>
+    <p class="ansible-option-title"><strong>Input</strong></p>
+    <a class="ansibleOptionLink" href="#parameter-_input" title="Permalink to this option"></a>
+    <p class="ansible-option-type-line">
+      <span class="ansible-option-type">list</span>
+      / <span class="ansible-option-elements">elements=dictionary</span>
+      / <span class="ansible-option-required">required</span>
+    </p>
+
+  </div></td>
+  <td><div class="ansible-option-cell">
+    <p>A list of dictionaries.</p>
+  </div></td>
 </tr>
 </tbody>
-</table>
-</section>
+</table></section>
 <section id="positional-parameters">
 <h2><a class="toc-backref" href="#id3" role="doc-backlink">Positional parameters</a><a class="headerlink" href="#positional-parameters" title="Link to this heading"></a></h2>
 <p>This describes positional parameters of the filter. These are the values <code class="docutils literal notranslate"><span class="pre">positional1</span></code>, <code class="docutils literal notranslate"><span class="pre">positional2</span></code> and so on in the following
 example: <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">|</span> <span class="pre">middleware_automation.amq.lists_mergeby(positional1,</span> <span class="pre">positional2,</span> <span class="pre">...)</span></code></p>
-<table class="longtable ansible-option-table docutils align-default" style="width: 100%">
+<table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
 <thead>
-<tr class="row-odd"><th class="head"><p>Parameter</p></th>
-<th class="head"><p>Comments</p></th>
+<tr class="row-odd">
+  <th class="head"><p>Parameter</p></th>
+  <th class="head"><p>Comments</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-another_list"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-amq-lists-mergeby-filter-parameter-another-list"><strong>another_list</strong></p>
-<a class="ansibleOptionLink" href="#parameter-another_list" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Another list of dictionaries. This parameter can be specified multiple times.</p>
-</div></td>
+<tr class="row-even">
+  <td><div class="ansible-option-cell">
+    <div class="ansibleOptionAnchor" id="parameter-another_list"></div>
+    <p class="ansible-option-title"><strong>another_list</strong></p>
+    <a class="ansibleOptionLink" href="#parameter-another_list" title="Permalink to this option"></a>
+    <p class="ansible-option-type-line">
+      <span class="ansible-option-type">list</span>
+      / <span class="ansible-option-elements">elements=dictionary</span>
+    </p>
+
+  </div></td>
+  <td><div class="ansible-option-cell">
+    <p>Another list of dictionaries. This parameter can be specified multiple times.</p>
+  </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-index"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-amq-lists-mergeby-filter-parameter-index"><strong>index</strong></p>
-<a class="ansibleOptionLink" href="#parameter-index" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>The dictionary key that must be present in every dictionary in every list that is used to merge the lists.</p>
-</div></td>
+<tr class="row-odd">
+  <td><div class="ansible-option-cell">
+    <div class="ansibleOptionAnchor" id="parameter-index"></div>
+    <p class="ansible-option-title"><strong>index</strong></p>
+    <a class="ansibleOptionLink" href="#parameter-index" title="Permalink to this option"></a>
+    <p class="ansible-option-type-line">
+      <span class="ansible-option-type">string</span>
+      / <span class="ansible-option-required">required</span>
+    </p>
+
+  </div></td>
+  <td><div class="ansible-option-cell">
+    <p>The dictionary key that must be present in every dictionary in every list that is used to merge the lists.</p>
+  </div></td>
 </tr>
 </tbody>
-</table>
-</section>
+</table></section>
 <section id="keyword-parameters">
 <h2><a class="toc-backref" href="#id4" role="doc-backlink">Keyword parameters</a><a class="headerlink" href="#keyword-parameters" title="Link to this heading"></a></h2>
 <p>This describes keyword parameters of the filter. These are the values <code class="docutils literal notranslate"><span class="pre">key1=value1</span></code>, <code class="docutils literal notranslate"><span class="pre">key2=value2</span></code> and so on in the following
 example: <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">|</span> <span class="pre">middleware_automation.amq.lists_mergeby(key1=value1,</span> <span class="pre">key2=value2,</span> <span class="pre">...)</span></code></p>
-<table class="longtable ansible-option-table docutils align-default" style="width: 100%">
+<table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
 <thead>
-<tr class="row-odd"><th class="head"><p>Parameter</p></th>
-<th class="head"><p>Comments</p></th>
+<tr class="row-odd">
+  <th class="head"><p>Parameter</p></th>
+  <th class="head"><p>Comments</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-list_merge"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-amq-lists-mergeby-filter-parameter-list-merge"><strong>list_merge</strong></p>
-<a class="ansibleOptionLink" href="#parameter-list_merge" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Modifies the behaviour when the dictionaries (hashes) to merge contain arrays/lists.</p>
-<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
-<ul class="simple">
-<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">&quot;replace&quot;</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;keep&quot;</span></code></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;append&quot;</span></code></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;prepend&quot;</span></code></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;append_rp&quot;</span></code></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;prepend_rp&quot;</span></code></p></li>
-</ul>
-</div></td>
+<tr class="row-even">
+  <td><div class="ansible-option-cell">
+    <div class="ansibleOptionAnchor" id="parameter-list_merge"></div>
+    <p class="ansible-option-title"><strong>list_merge</strong></p>
+    <a class="ansibleOptionLink" href="#parameter-list_merge" title="Permalink to this option"></a>
+    <p class="ansible-option-type-line">
+      <span class="ansible-option-type">string</span>
+    </p>
+
+  </div></td>
+  <td><div class="ansible-option-cell">
+    <p>Modifies the behaviour when the dictionaries (hashes) to merge contain arrays/lists.</p>
+    <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+    <ul class="simple">
+      <li><p><code class="ansible-value literal notranslate ansible-option-default-bold"><strong>&#34;replace&#34;</strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+      <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;keep&#34;</code></p></li>
+      <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;append&#34;</code></p></li>
+      <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;prepend&#34;</code></p></li>
+      <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;append_rp&#34;</code></p></li>
+      <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;prepend_rp&#34;</code></p></li>
+    </ul>
+
+  </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-recursive"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-amq-lists-mergeby-filter-parameter-recursive"><strong>recursive</strong></p>
-<a class="ansibleOptionLink" href="#parameter-recursive" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Should the combine recursively merge nested dictionaries (hashes).</p>
-<p><strong>Note:</strong> It does not depend on the value of the <code class="docutils literal notranslate"><span class="pre">hash_behaviour</span></code> setting in <code class="docutils literal notranslate"><span class="pre">ansible.cfg</span></code>.</p>
-<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
-<ul class="simple">
-<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
-</ul>
-</div></td>
+<tr class="row-odd">
+  <td><div class="ansible-option-cell">
+    <div class="ansibleOptionAnchor" id="parameter-recursive"></div>
+    <p class="ansible-option-title"><strong>recursive</strong></p>
+    <a class="ansibleOptionLink" href="#parameter-recursive" title="Permalink to this option"></a>
+    <p class="ansible-option-type-line">
+      <span class="ansible-option-type">boolean</span>
+    </p>
+
+  </div></td>
+  <td><div class="ansible-option-cell">
+    <p>Should the combine recursively merge nested dictionaries (hashes).</p>
+    <p><b>Note:</b> It does not depend on the value of the <code class='docutils literal notranslate'>hash_behaviour</code> setting in <code class='docutils literal notranslate'>ansible.cfg</code>.</p>
+    <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+    <ul class="simple">
+      <li><p><code class="ansible-value literal notranslate ansible-option-default-bold"><strong>false</strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+      <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
+    </ul>
+
+  </div></td>
 </tr>
 </tbody>
-</table>
-</section>
+</table></section>
 <section id="notes">
 <h2><a class="toc-backref" href="#id5" role="doc-backlink">Notes</a><a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
 <div class="admonition note">
@@ -286,24 +327,31 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 </section>
 <section id="return-value">
 <h2><a class="toc-backref" href="#id7" role="doc-backlink">Return Value</a><a class="headerlink" href="#return-value" title="Link to this heading"></a></h2>
-<table class="longtable ansible-option-table docutils align-default" style="width: 100%">
+<table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
 <thead>
-<tr class="row-odd"><th class="head"><p>Key</p></th>
-<th class="head"><p>Description</p></th>
+<tr class="row-odd">
+  <th class="head"><p>Key</p></th>
+  <th class="head"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-_value"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-amq-lists-mergeby-filter-return-value"><strong>Return value</strong></p>
-<a class="ansibleOptionLink" href="#return-_value" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>The merged list.</p>
-<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
-</div></td>
+<tr class="row-even">
+  <td><div class="ansible-option-cell">
+    <div class="ansibleOptionAnchor" id="return-_value"></div>
+    <p class="ansible-option-title"><strong>Return value</strong></p>
+    <a class="ansibleOptionLink" href="#return-_value" title="Permalink to this return value"></a>
+    <p class="ansible-option-type-line">
+      <span class="ansible-option-type">list</span>
+      / <span class="ansible-option-elements">elements=dictionary</span>
+    </p>
+  </div></td>
+  <td><div class="ansible-option-cell">
+    <p>The merged list.</p>
+    <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+  </div></td>
 </tr>
 </tbody>
-</table>
-<section id="authors">
+</table><section id="authors">
 <h3>Authors<a class="headerlink" href="#authors" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Vladimir Botka (&#64;vbotka)</p></li>

@@ -69,53 +69,35 @@ Input
 
 This describes the input of the filter, the value before ``| middleware_automation.amq.lists_mergeby``.
 
-.. tabularcolumns:: \X{1}{3}\X{2}{3}
+.. raw:: html
 
-.. list-table::
-  :width: 100%
-  :widths: auto
-  :header-rows: 1
-  :class: longtable ansible-option-table
+  <table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
+  <thead>
+  <tr class="row-odd">
+    <th class="head"><p>Parameter</p></th>
+    <th class="head"><p>Comments</p></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="row-even">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="parameter-_input"></div>
+      <p class="ansible-option-title"><strong>Input</strong></p>
+      <a class="ansibleOptionLink" href="#parameter-_input" title="Permalink to this option"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">list</span>
+        / <span class="ansible-option-elements">elements=dictionary</span>
+        / <span class="ansible-option-required">required</span>
+      </p>
 
-  * - Parameter
-    - Comments
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>A list of dictionaries.</p>
+    </div></td>
+  </tr>
+  </tbody>
+  </table>
 
-  * - .. raw:: html
-
-        <div class="ansible-option-cell">
-        <div class="ansibleOptionAnchor" id="parameter-_input"></div>
-
-      .. _ansible_collections.middleware_automation.amq.lists_mergeby_filter__parameter-_input:
-
-      .. rst-class:: ansible-option-title
-
-      **Input**
-
-      .. raw:: html
-
-        <a class="ansibleOptionLink" href="#parameter-_input" title="Permalink to this option"></a>
-
-      .. ansible-option-type-line::
-
-        :ansible-option-type:`list` / :ansible-option-elements:`elements=dictionary` / :ansible-option-required:`required`
-
-
-
-
-      .. raw:: html
-
-        </div>
-
-    - .. raw:: html
-
-        <div class="ansible-option-cell">
-
-      A list of dictionaries.
-
-
-      .. raw:: html
-
-        </div>
 
 
 
@@ -128,90 +110,49 @@ Positional parameters
 This describes positional parameters of the filter. These are the values ``positional1``, ``positional2`` and so on in the following
 example: ``input | middleware_automation.amq.lists_mergeby(positional1, positional2, ...)``
 
-.. tabularcolumns:: \X{1}{3}\X{2}{3}
+.. raw:: html
 
-.. list-table::
-  :width: 100%
-  :widths: auto
-  :header-rows: 1
-  :class: longtable ansible-option-table
+  <table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
+  <thead>
+  <tr class="row-odd">
+    <th class="head"><p>Parameter</p></th>
+    <th class="head"><p>Comments</p></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="row-even">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="parameter-another_list"></div>
+      <p class="ansible-option-title"><strong>another_list</strong></p>
+      <a class="ansibleOptionLink" href="#parameter-another_list" title="Permalink to this option"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">list</span>
+        / <span class="ansible-option-elements">elements=dictionary</span>
+      </p>
 
-  * - Parameter
-    - Comments
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>Another list of dictionaries. This parameter can be specified multiple times.</p>
+    </div></td>
+  </tr>
+  <tr class="row-odd">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="parameter-index"></div>
+      <p class="ansible-option-title"><strong>index</strong></p>
+      <a class="ansibleOptionLink" href="#parameter-index" title="Permalink to this option"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+        / <span class="ansible-option-required">required</span>
+      </p>
 
-  * - .. raw:: html
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>The dictionary key that must be present in every dictionary in every list that is used to merge the lists.</p>
+    </div></td>
+  </tr>
+  </tbody>
+  </table>
 
-        <div class="ansible-option-cell">
-        <div class="ansibleOptionAnchor" id="parameter-another_list"></div>
-
-      .. _ansible_collections.middleware_automation.amq.lists_mergeby_filter__parameter-another_list:
-
-      .. rst-class:: ansible-option-title
-
-      **another_list**
-
-      .. raw:: html
-
-        <a class="ansibleOptionLink" href="#parameter-another_list" title="Permalink to this option"></a>
-
-      .. ansible-option-type-line::
-
-        :ansible-option-type:`list` / :ansible-option-elements:`elements=dictionary`
-
-
-
-
-      .. raw:: html
-
-        </div>
-
-    - .. raw:: html
-
-        <div class="ansible-option-cell">
-
-      Another list of dictionaries. This parameter can be specified multiple times.
-
-
-      .. raw:: html
-
-        </div>
-
-  * - .. raw:: html
-
-        <div class="ansible-option-cell">
-        <div class="ansibleOptionAnchor" id="parameter-index"></div>
-
-      .. _ansible_collections.middleware_automation.amq.lists_mergeby_filter__parameter-index:
-
-      .. rst-class:: ansible-option-title
-
-      **index**
-
-      .. raw:: html
-
-        <a class="ansibleOptionLink" href="#parameter-index" title="Permalink to this option"></a>
-
-      .. ansible-option-type-line::
-
-        :ansible-option-type:`string` / :ansible-option-required:`required`
-
-
-
-
-      .. raw:: html
-
-        </div>
-
-    - .. raw:: html
-
-        <div class="ansible-option-cell">
-
-      The dictionary key that must be present in every dictionary in every list that is used to merge the lists.
-
-
-      .. raw:: html
-
-        </div>
 
 
 
@@ -223,112 +164,64 @@ Keyword parameters
 This describes keyword parameters of the filter. These are the values ``key1=value1``, ``key2=value2`` and so on in the following
 example: ``input | middleware_automation.amq.lists_mergeby(key1=value1, key2=value2, ...)``
 
-.. tabularcolumns:: \X{1}{3}\X{2}{3}
+.. raw:: html
 
-.. list-table::
-  :width: 100%
-  :widths: auto
-  :header-rows: 1
-  :class: longtable ansible-option-table
+  <table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
+  <thead>
+  <tr class="row-odd">
+    <th class="head"><p>Parameter</p></th>
+    <th class="head"><p>Comments</p></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="row-even">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="parameter-list_merge"></div>
+      <p class="ansible-option-title"><strong>list_merge</strong></p>
+      <a class="ansibleOptionLink" href="#parameter-list_merge" title="Permalink to this option"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
 
-  * - Parameter
-    - Comments
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>Modifies the behaviour when the dictionaries (hashes) to merge contain arrays/lists.</p>
+      <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+      <ul class="simple">
+        <li><p><code class="ansible-value literal notranslate ansible-option-default-bold"><strong>&#34;replace&#34;</strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;keep&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;append&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;prepend&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;append_rp&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;prepend_rp&#34;</code></p></li>
+      </ul>
 
-  * - .. raw:: html
+    </div></td>
+  </tr>
+  <tr class="row-odd">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="parameter-recursive"></div>
+      <p class="ansible-option-title"><strong>recursive</strong></p>
+      <a class="ansibleOptionLink" href="#parameter-recursive" title="Permalink to this option"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">boolean</span>
+      </p>
 
-        <div class="ansible-option-cell">
-        <div class="ansibleOptionAnchor" id="parameter-list_merge"></div>
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>Should the combine recursively merge nested dictionaries (hashes).</p>
+      <p><b>Note:</b> It does not depend on the value of the <code class='docutils literal notranslate'>hash_behaviour</code> setting in <code class='docutils literal notranslate'>ansible.cfg</code>.</p>
+      <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+      <ul class="simple">
+        <li><p><code class="ansible-value literal notranslate ansible-option-default-bold"><strong>false</strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
+      </ul>
 
-      .. _ansible_collections.middleware_automation.amq.lists_mergeby_filter__parameter-list_merge:
+    </div></td>
+  </tr>
+  </tbody>
+  </table>
 
-      .. rst-class:: ansible-option-title
-
-      **list_merge**
-
-      .. raw:: html
-
-        <a class="ansibleOptionLink" href="#parameter-list_merge" title="Permalink to this option"></a>
-
-      .. ansible-option-type-line::
-
-        :ansible-option-type:`string`
-
-
-
-
-      .. raw:: html
-
-        </div>
-
-    - .. raw:: html
-
-        <div class="ansible-option-cell">
-
-      Modifies the behaviour when the dictionaries (hashes) to merge contain arrays/lists.
-
-
-      .. rst-class:: ansible-option-line
-
-      :ansible-option-choices:`Choices:`
-
-      - :ansible-option-choices-entry-default:`"replace"` :ansible-option-choices-default-mark:`← (default)`
-      - :ansible-option-choices-entry:`"keep"`
-      - :ansible-option-choices-entry:`"append"`
-      - :ansible-option-choices-entry:`"prepend"`
-      - :ansible-option-choices-entry:`"append\_rp"`
-      - :ansible-option-choices-entry:`"prepend\_rp"`
-
-
-      .. raw:: html
-
-        </div>
-
-  * - .. raw:: html
-
-        <div class="ansible-option-cell">
-        <div class="ansibleOptionAnchor" id="parameter-recursive"></div>
-
-      .. _ansible_collections.middleware_automation.amq.lists_mergeby_filter__parameter-recursive:
-
-      .. rst-class:: ansible-option-title
-
-      **recursive**
-
-      .. raw:: html
-
-        <a class="ansibleOptionLink" href="#parameter-recursive" title="Permalink to this option"></a>
-
-      .. ansible-option-type-line::
-
-        :ansible-option-type:`boolean`
-
-
-
-
-      .. raw:: html
-
-        </div>
-
-    - .. raw:: html
-
-        <div class="ansible-option-cell">
-
-      Should the combine recursively merge nested dictionaries (hashes).
-
-      \ :strong:`Note:`\  It does not depend on the value of the \ :literal:`hash\_behaviour`\  setting in \ :literal:`ansible.cfg`\ .
-
-
-      .. rst-class:: ansible-option-line
-
-      :ansible-option-choices:`Choices:`
-
-      - :ansible-option-choices-entry-default:`false` :ansible-option-choices-default-mark:`← (default)`
-      - :ansible-option-choices-entry:`true`
-
-
-      .. raw:: html
-
-        </div>
 
 
 .. Attributes
@@ -400,55 +293,33 @@ Examples
 Return Value
 ------------
 
-.. tabularcolumns:: \X{1}{3}\X{2}{3}
+.. raw:: html
 
-.. list-table::
-  :width: 100%
-  :widths: auto
-  :header-rows: 1
-  :class: longtable ansible-option-table
-
-  * - Key
-    - Description
-
-  * - .. raw:: html
-
-        <div class="ansible-option-cell">
-        <div class="ansibleOptionAnchor" id="return-_value"></div>
-
-      .. _ansible_collections.middleware_automation.amq.lists_mergeby_filter__return-_value:
-
-      .. rst-class:: ansible-option-title
-
-      **Return value**
-
-      .. raw:: html
-
-        <a class="ansibleOptionLink" href="#return-_value" title="Permalink to this return value"></a>
-
-      .. ansible-option-type-line::
-
-        :ansible-option-type:`list` / :ansible-option-elements:`elements=dictionary`
-
-      .. raw:: html
-
-        </div>
-
-    - .. raw:: html
-
-        <div class="ansible-option-cell">
-
-      The merged list.
-
-
-      .. rst-class:: ansible-option-line
-
-      :ansible-option-returned-bold:`Returned:` success
-
-
-      .. raw:: html
-
-        </div>
+  <table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
+  <thead>
+  <tr class="row-odd">
+    <th class="head"><p>Key</p></th>
+    <th class="head"><p>Description</p></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="row-even">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-_value"></div>
+      <p class="ansible-option-title"><strong>Return value</strong></p>
+      <a class="ansibleOptionLink" href="#return-_value" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">list</span>
+        / <span class="ansible-option-elements">elements=dictionary</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>The merged list.</p>
+      <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+    </div></td>
+  </tr>
+  </tbody>
+  </table>
 
 
 
