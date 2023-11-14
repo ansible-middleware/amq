@@ -6,13 +6,13 @@
 > **_NOTE:_ If you are Red Hat customer, install `redhat.amq_broker` from [Automation Hub](https://console.redhat.com/ansible/ansible-dashboard) as the certified version of this collection.**
 <!--end build_status -->
 
-Collection to install and configure [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis) / [Red Hat AMQ broker](https://www.redhat.com/en/technologies/jboss-middleware/amq).
+Collection to install and configure [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis) / [Red Hat AMQ broker](https://access.redhat.com/documentation/en-us/red_hat_amq_broker).
 
 
 <!--start requires_ansible-->
 ## Ansible version compatibility
 
-This collection has been tested against following Ansible versions: **>=2.13.0**.
+This collection has been tested against following Ansible versions: **>=2.14.0**.
 <!--end requires_ansible-->
 
 
@@ -74,10 +74,8 @@ To install all the dependencies:
 
 * [`playbooks/activemq.yml`](https://github.com/ansible-middleware/amq/blob/main/playbooks/activemq.yml) deploys based on the collections defaults.
 
-For full service configuration details, refer to the [activemq role README](https://github.com/ansible-middleware/keycloak/blob/main/roles/keycloak/README.md).
 
-
-#### Install from controller node
+#### Controller node install zipfile path
 
 By default the collection will download the desired version of the install zipfile to the ansible controller node, then it will distribute to target nodes.
 The variable `activemq_local_archive_repository` controls the path on the controller where the install zipfiles will be located, and by default will be the playbook working directory.
