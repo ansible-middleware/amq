@@ -95,7 +95,7 @@
         client_id: "{{ rhn_username }}"
         client_secret: "{{ rhn_password }}"
         product_type: DISTRIBUTION
-        product_version: "{{ amq_broker_version }}"
+        product_version: "{{ amq_broker_version | regex_replace('7[.]([89])[.]', '7.0\\1.') }}"
         product_category: "{{ amq_broker_product_category }}"
       register: rhn_products
       delegate_to: localhost
