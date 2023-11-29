@@ -5,6 +5,28 @@ middleware_automation.amq Release Notes
 .. contents:: Topics
 
 
+v2.0.0
+======
+
+Minor Changes
+-------------
+
+- Add referrer to ldap plugin, allow custom login.config `#110 <https://github.com/ansible-middleware/amq/pull/110>`_
+- Update activemq default version to 2.28 `#111 <https://github.com/ansible-middleware/amq/pull/111>`_
+
+Breaking Changes / Porting Guide
+--------------------------------
+
+- Set Ansible required version to >= 2.14 `#108 <https://github.com/ansible-middleware/amq/pull/108>`_
+
+New Plugins
+-----------
+
+Filter
+~~~~~~
+
+- middleware_automation.amq.lists_mergeby - Merge two or more lists of dictionaries by a given attribute
+
 v1.3.10
 =======
 
