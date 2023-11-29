@@ -2,7 +2,7 @@ argument_specs:
     main:
         options:
             activemq_version:
-                default: "2.21.0"
+                default: "2.28.0"
                 description: "Apache Artemis version"
                 type: "str"
             activemq_archive:
