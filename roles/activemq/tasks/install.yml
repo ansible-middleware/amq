@@ -149,6 +149,7 @@
     - new_version_downloaded.changed or not path_to_workdir.stat.exists
   block:
     - name: "Extract {{ activemq.name }} archive on target"
+      become: "{{ activemq_install_extract_require_privilegeescalation }}"
       ansible.builtin.unarchive: # noqa no-handler definitely not a candidate for a handler
         remote_src: yes
         src: "{{ archive }}"

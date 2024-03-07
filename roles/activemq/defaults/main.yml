@@ -4,6 +4,7 @@ activemq_version: 2.28.0
 activemq_archive: "apache-artemis-{{ activemq_version }}-bin.zip"
 activemq_download_url: "https://archive.apache.org/dist/activemq/activemq-artemis/{{ activemq_version }}/{{ activemq_archive }}"
 activemq_installdir: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
+activemq_install_extract_require_privilege_escalation: yes
 
 ### Install location and service settings
 activemq_dest: /opt/amq

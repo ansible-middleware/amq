@@ -1,6 +1,7 @@
 ---
 - name: Verify
   hosts: all
+  become: yes
   tasks:
     - name: Populate service facts
       ansible.builtin.service_facts:
