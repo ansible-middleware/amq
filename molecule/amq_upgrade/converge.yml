@@ -10,6 +10,6 @@
   tasks:
     - name: Include role for broker upgrade
       ansible.builtin.include_role:
-        name: middleware_automation.common.activemq
+        name: middleware_automation.amq.activemq
       vars:
         activemq_version: "{{ '7.10.1' if amq_broker_enable is defined and amq_broker_enable else '2.21.0' }}"
