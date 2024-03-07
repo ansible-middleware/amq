@@ -2,7 +2,7 @@
 ### Version settings
 activemq_version: 2.28.0
 activemq_archive: "apache-artemis-{{ activemq_version }}-bin.zip"
-activemq_download_url: "https://archive.apache.org/dist/activemq/activemq-artemis/{{ activemq_version }}/{{ activemq_archive }}"  
+activemq_download_url: "https://archive.apache.org/dist/activemq/activemq-artemis/{{ activemq_version }}/{{ activemq_archive }}"
 activemq_installdir: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
 
 ### Install location and service settings
@@ -31,11 +31,17 @@ activemq_configuration_file_refresh_period: 5000
 activemq_jvm_package: java-11-openjdk-headless
 activemq_java_home:
 activemq_java_opts: "{{ [
-   '-Xms512M -Xmx2G',
-   '-XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication',
-   '-Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal',
-   '-Djolokia.policyLocation=file:' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml'
+   activemq_java_opts_mem,
+   activemq_java_opts_gc,
+   activemq_java_opts_hawtio,
+   '-Djolokia.policyLocation=file:' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml',
+   '-Dlog4j.configurationFile=' + activemq_logger_config_template if activemq_logger_config_template != 'log4j2.properties' and activemq_logger_config_template != 'logging.properties' else '',
+   activemq_java_opts_extra | default('')
  ] | join(' ') }}"
+activemq_java_opts_extra: ''
+activemq_java_opts_mem: '-Xms512M -Xmx2G'
+activemq_java_opts_gc: '-XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication'
+activemq_java_opts_hawtio: '-Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal'
 activemq_port: 61616        # for protocols [CORE,MQTT,AMQP,STOMP,HORNETQ,OPENWIRE]
 activemq_port_hornetq: 5445 # for protocols [HORNETQ,STOMP]
 activemq_port_amqp: 5672    # for protocols [AMQP]

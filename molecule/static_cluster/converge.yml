@@ -61,7 +61,3 @@
           verifyHost: False
   roles:
     - middleware_automation.amq.activemq
-  pre_tasks:
-    - name: "Retrieve assets server from env"
-      ansible.builtin.set_fact:
-        assets_server: "{{ lookup('env','MIDDLEWARE_DOWNLOAD_RELEASE_SERVER_URL') }}"

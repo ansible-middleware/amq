@@ -120,8 +120,11 @@ argument_specs:
                 type: "str"
             activemq_java_opts:
                 # line 37 of defaults/main.yml
-                default: "-Xms512M -Xmx2G -XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication -Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal -Djolokia.policyLocation=${ARTEMIS_INSTANCE_ETC_URI}jolokia-access.xml "
-                description: "Additional JVM options for the service"
+                default: "{{ [ activemq_java_opts_mem, activemq_java_opts_gc, activemq_java_opts_hawtio,
+                             '-Djolokia.policyLocation=file:' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml',
+                             '-Dlog4j.configurationFile=' + activemq_logger_config_template if activemq_logger_config_template != 'log4j2.properties' and activemq_logger_config_template != 'logging.properties' else '',
+                             activemq_java_opts_extra | default('')  ] | join(' ') }}"
+                description: "Arguments for the service JVM; you can override this parameter that will take precedence, or otherwise use the activemq_java_opts_* parameters"
                 type: "str"
             activemq_port:
                 # line 38 of defaults/main.yml
@@ -649,6 +652,22 @@ argument_specs:
             activemq_auth_template:
                 description: "Location of JAAS login.config template; by default use template provided with activemq_hawtio_role"
                 default: "login.config.j2"
+                type: "str"
+            activemq_java_opts_extra:
+                description: "Arbitrary extra arguments for the JVM"
+                default: ""
+                type: "str"
+            activemq_java_opts_mem:
+                description: "Memory arguments for the JVM"
+                default: "-Xms512M -Xmx2G"
+                type: "str"
+            activemq_java_opts_gc:
+                description: "Garbage collection arguments for the JVM"
+                default: "-XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication"
+                type: "str"
+            activemq_java_opts_hawtio:
+                description: "Arbitrary extra arguments for the JVM"
+                default: "-Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal"
                 type: "str"
     downstream:
         options:
