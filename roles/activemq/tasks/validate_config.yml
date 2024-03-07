@@ -33,7 +33,7 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><address-settings>{{ validate_address_settings | join(' ') | trim }}</address-settings></core>"
     validate: yes
     input_type: xml
-  run_once: yes
+  run_once: True
   delegate_to: localhost
 
 - name: Create acceptor configuration string
@@ -51,7 +51,7 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><acceptors>{{ validate_acceptors | join(' ') | trim }}</acceptors></core>"
     validate: yes
     input_type: xml
-  run_once: yes
+  run_once: True
   no_log: True
   delegate_to: localhost
 
@@ -75,7 +75,7 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><connectors>{{ validate_connectors | join(' ') | trim }}</connectors></core>"
     validate: yes
     input_type: xml
-  run_once: yes
+  run_once: True
   no_log: True
   delegate_to: localhost
 
@@ -93,7 +93,7 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><addresses>{{ validate_addresses | join(' ') | trim }}</addresses></core>"
     validate: yes
     input_type: xml
-  run_once: yes
+  run_once: True
   delegate_to: localhost
 
 - name: Create diverts configuration string
@@ -112,7 +112,7 @@
     validate: yes
     input_type: xml
   when: activemq_diverts | length > 0
-  run_once: yes
+  run_once: True
   delegate_to: localhost
 
 - name: Create amqp broker connections configuration string
@@ -131,7 +131,7 @@
     validate: yes
     input_type: xml
   when: activemq_broker_connections | length > 0
-  run_once: yes
+  run_once: True
   delegate_to: localhost
 
 - name: Create security settings matches
@@ -154,5 +154,5 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><security-settings>{{ validate_security_settings | flatten | join(' ') | trim }}</security-settings></core>"
     validate: yes
     input_type: xml
-  run_once: yes
+  run_once: True
   delegate_to: localhost

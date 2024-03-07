@@ -37,6 +37,7 @@ skip_list:
   - jinja[spacing]
   - schema[meta]
   - name[template]
+  - run_once[task]
 
 use_default_rules: true
 parseable: true

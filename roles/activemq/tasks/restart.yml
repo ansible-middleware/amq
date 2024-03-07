@@ -5,7 +5,7 @@
     name: "{{ activemq.instance_name }}"
     enabled: yes
     state: restarted
-  become: yes
+  become: True
   when: requires_userhome_update is not defined
 
 - name: "Restart and enable instance {{ activemq.instance_name }} for {{ activemq.service_name }} service"
@@ -18,7 +18,7 @@
         owner: root
         group: root
         mode: 0644
-      become: yes
+      become: True
     - name: Restart service
       throttle: 1
       ansible.builtin.systemd:
@@ -26,13 +26,13 @@
         enabled: yes
         state: restarted
         daemon_reload: yes
-      become: yes
+      become: True
     - name: "Delete systemd unit override"
       ansible.builtin.file:
         path: "/etc/systemd/system/{{ activemq.instance_name }}.d/update_home.conf"
         state: absent
-      become: yes
+      become: True
     - name: Ensure daemon reload
       ansible.builtin.systemd:
         daemon_reload: yes
-      become: yes
+      become: True
