@@ -7,15 +7,9 @@
     - user: amq
       password: amqbrokerpass
       roles: [ amq ]
-  collections:
-    - middleware_automation.common
   tasks:
     - name: Include role for broker upgrade
       ansible.builtin.include_role:
-        name: activemq
+        name: middleware_automation.common.activemq
       vars:
         activemq_version: "{{ '7.10.1' if amq_broker_enable is defined and amq_broker_enable else '2.21.0' }}"
-  pre_tasks:
-    - name: "Retrieve assets server from env"
-      ansible.builtin.set_fact:
-        assets_server: "{{ lookup('env','MIDDLEWARE_DOWNLOAD_RELEASE_SERVER_URL') }}"

@@ -28,6 +28,7 @@
       become: true
       loop:
         - "nfs/server-ca.crt"
-    - name: update_ca_trust
+    - name: Run update_ca_trust
       ansible.builtin.command: update-ca-trust
+      changed_when: False
       become: true
