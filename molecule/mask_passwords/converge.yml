@@ -11,7 +11,7 @@
     activemq_mask_password_iterations: 2048
     activemq_additional_libs: [ "amq-utils-1.0.1.jar" ]
     activemq_auth_template: custom.login.j2
-    activemq_logger_config_template: custom.log4j2.properties
+    activemq_logger_config_template: logging/custom.log4j2.properties
     activemq_auth_ldap_enabled: True
     activemq_auth_ldap_url: ldap://ldap.forumsys.com:389
     activemq_auth_ldap_conn_username: uid=tesla,dc=example,dc=com
