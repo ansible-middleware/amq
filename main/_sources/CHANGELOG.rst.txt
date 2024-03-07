@@ -1,12 +1,19 @@
-=======================================
-middleware_automation.amq Release Notes
-=======================================
+========================================
+middleware\_automation.amq Release Notes
+========================================
 
 .. contents:: Topics
 
-
-v2.0.0-devel
+v2.0.1-devel
 ============
+
+Minor Changes
+-------------
+
+- rework molecule's prepare to works with sudo user on targets `#115 <https://github.com/ansible-middleware/amq/pull/115>`_
+
+v2.0.0
+======
 
 Minor Changes
 -------------
