@@ -11,7 +11,7 @@
     quiet: true
 
 - name: "Create {{ activemq.service_name }} service group"
-  become: yes
+  become: True
   ansible.builtin.group:
     name: "{{ activemq_service_group }}"
     system: yes
@@ -19,7 +19,7 @@
 - name: "Create service user"
   block:
     - name: "Create {{ activemq.service_name }} service user"
-      become: yes
+      become: True
       ansible.builtin.user:
         name: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
@@ -37,13 +37,13 @@
       notify: restart amq_broker
 
 - name: "Check {{ activemq.service_name }} install location"
-  become: yes
+  become: True
   ansible.builtin.stat:
     path: "{{ activemq_dest }}"
   register: install_location
 
 - name: "Create {{ activemq.service_name }} install location"
-  become: yes
+  become: True
   ansible.builtin.file:
     dest: "{{ activemq_dest }}"
     state: directory
@@ -59,7 +59,7 @@
     archive: "{{ activemq_dest }}/{{ activemq.bundle }}"
 
 - name: Check download archive path
-  become: yes
+  become: True
   ansible.builtin.stat:
     path: "{{ archive }}"
   register: archive_path
@@ -71,7 +71,7 @@
     dest: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
     mode: 0640
   delegate_to: localhost
-  run_once: yes
+  run_once: True
   when:
     - archive_path is defined
     - archive_path.stat is defined
@@ -81,7 +81,7 @@
 
 - name: Download AMQ broker from RHN using JBoss Network API
   delegate_to: localhost
-  run_once: yes
+  run_once: True
   when:
     - archive_path is defined
     - archive_path.stat is defined
@@ -99,13 +99,13 @@
         product_category: "{{ amq_broker_product_category }}"
       register: rhn_products
       delegate_to: localhost
-      run_once: yes
+      run_once: True
 
     - name: Determine install zipfile from search results
       ansible.builtin.set_fact:
         rhn_filtered_products: "{{ rhn_products.results | selectattr('file_path', 'match', '.*/amq-broker-' + amq_broker_version + '-bin.zip') }}"
       delegate_to: localhost
-      run_once: yes
+      run_once: True
 
     - name: Download AMQ Broker
       middleware_automation.common.product_download:
@@ -115,7 +115,7 @@
         dest: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
       no_log: "{{ omit_rhn_output | default(true) }}"
       delegate_to: localhost
-      run_once: yes
+      run_once: True
 
 - name: Check downloaded archive
   ansible.builtin.stat:
@@ -136,13 +136,13 @@
     - not archive_path.stat.exists
     - local_archive_path.stat is defined
     - local_archive_path.stat.exists
-  become: yes
+  become: True
 
 - name: "Check target directory: {{ activemq.home }}"
   ansible.builtin.stat:
     path: "{{ activemq.home }}"
   register: path_to_workdir
-  become: yes
+  become: True
 
 - name: "Extract zipfile"
   when:
@@ -157,7 +157,7 @@
         owner: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
         list_files: yes
-      become: yes
+      become: True
       register: new_version_extracted
       when:
         - new_version_downloaded.changed or not path_to_workdir.stat.exists
@@ -168,10 +168,10 @@
       ansible.builtin.stat:
         path: "{{ activemq.home }}"
       register: path_to_workdir_after_extract
-      become: yes
+      become: True
 
     - name: Link zipfile directory to wanted directory
-      become: yes
+      become: True
       ansible.builtin.file:
         state: link
         src: "{{ activemq_dest }}/{{ new_version_extracted.files | first }}"

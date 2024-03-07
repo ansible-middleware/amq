@@ -6,14 +6,14 @@
       - firewalld
 
 - name: Enable and start the firewalld service
-  become: yes
+  become: True
   ansible.builtin.systemd:
     name: firewalld
     enabled: yes
     state: started
 
 - name: "Configure firewall for {{ activemq.service_name }} ports"
-  become: yes
+  become: True
   ansible.posix.firewalld:
     port: "{{ item }}"
     permanent: true
@@ -28,7 +28,7 @@
     - "{{ activemq_port_stomp }}/tcp"
 
 - name: "Configure firewall for JMX exporter port"
-  become: yes
+  become: True
   ansible.posix.firewalld:
     port: "{{ activemq_jmx_exporter_port }}/tcp"
     permanent: true

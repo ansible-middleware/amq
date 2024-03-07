@@ -10,10 +10,10 @@
     owner: root
     group: root
     mode: 0755
-  become: yes
+  become: True
 
 - name: "Configure sysconfig file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
-  become: yes
+  become: True
   ansible.builtin.template:
     src: amq_broker.sysconfig.j2
     dest: "/etc/sysconfig/{{ activemq.instance_name }}"
@@ -32,7 +32,7 @@
     owner: root
     group: root
     mode: 0644
-  become: yes
+  become: True
   register: systemdunit
   notify:
     - restart amq_broker
@@ -41,7 +41,7 @@
   ansible.builtin.stat:
     path: "{{ activemq_dest }}/{{ activemq.instance_name }}/bin"
   register: instance_directory
-  become: yes
+  become: True
 
 - name: "Generate artemis configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
   ansible.builtin.include_tasks: configure_artemis.yml
@@ -52,7 +52,7 @@
   ansible.builtin.command:
     cmd: "{{ activemq.home }}/bin/artemis create {{ activemq.instance_home }} {{ activemq_options }}"
     creates: "{{ activemq.instance_home }}/bin/artemis-service"
-  become: yes
+  become: True
   become_user: "{{ activemq_service_user }}"
   register: broker_created
   when:
