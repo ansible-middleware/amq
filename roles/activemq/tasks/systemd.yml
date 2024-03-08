@@ -22,6 +22,10 @@
     mode: 0644
   vars:
     activemq_rpm_java_home: "{{ rpm_java_home }}"
+    activemq_logger_opts: "{{ '-Dlog4j.configurationFile=' + activemq_logger_config_template | basename | regex_replace('[.]j2$', '')\
+                              if activemq_logger_config_keep_name and activemq_logger_config_template != 'log4j2.properties.j2' }}"
+    activemq_jmx_opts: "{{ '-javaagent:/usr/share/java/prometheus-jmx-exporter/jmx_prometheus_javaagent.jar=0.0.0.0:' + \
+                           activemq_jmx_exporter_port + ':' + activemq_jmx_exporter_config_path if activemq_jmx_exporter_enabled else '' }}"
   notify:
     - restart amq_broker
 

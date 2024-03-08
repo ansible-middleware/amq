@@ -557,6 +557,10 @@ argument_specs:
                 description: "Optional subdirectory of any playbook template lookup directories for the logging facility configuration"
                 default: ''
                 type: "str"
+            activemq_logger_config_keep_name:
+                description: "Whether to keep the custom template filename or use the default"
+                default: False
+                type: "bool"
             activemq_global_max_messages:
                 description: "Number of messages before all addresses will enter into their Full Policy configured. It works in conjunction with global-activemq_global_max_size-size, being whatever value hits its maximum first."
                 default: -1
