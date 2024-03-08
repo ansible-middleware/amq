@@ -36,7 +36,7 @@ activemq_java_opts: "{{ [
    activemq_java_opts_gc,
    activemq_java_opts_hawtio,
    '-Djolokia.policyLocation=file:' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml',
-   '-Dlog4j.configurationFile=' + activemq_logger_config_template if activemq_logger_config_template != 'log4j2.properties' and activemq_logger_config_template != 'logging.properties' else '',
+   '-Dlog4j.configurationFile=' + activemq_logger_config_template | basename | regex_replace('[.]j2$', '') if activemq_logger_config_template != 'log4j2.properties' and activemq_logger_config_template != 'logging.properties' else '',
    activemq_java_opts_extra | default('')
  ] | join(' ') }}"
 activemq_java_opts_extra: ''
@@ -206,7 +206,7 @@ activemq_logger_integration_bootstrap_level: INFO
 activemq_logger_jetty_level: WARN
 activemq_logger_curator_level: WARN
 activemq_logger_zookeeper_level: ERROR
-activemq_logger_config_template: "{{ 'log4j2.properties' if activemq_version is version_compare('2.27.0', '>=') else 'logging.properties' }}"
+activemq_logger_config_template: "{{ 'log4j2.properties' if activemq_version is version_compare('2.27.0', '>=') else 'logging.properties' }}.j2"
 activemq_logger_rollover_files: 5
 activemq_logger_audit_rollover_files: 5
 
