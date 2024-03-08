@@ -7,10 +7,10 @@ middleware\_automation.amq Release Notes
 v2.0.1-devel
 ============
 
-Minor Changes
+Major Changes
 -------------
 
-- rework molecule's prepare to works with sudo user on targets `#115 <https://github.com/ansible-middleware/amq/pull/115>`_
+- Parameter ``activemq_logger_config_template`` allows relative paths `#116 <https://github.com/ansible-middleware/amq/pull/116>`_
 
 v2.0.0
 ======
