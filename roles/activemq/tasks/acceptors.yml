@@ -18,7 +18,7 @@
       conf: urn:activemq
       core: urn:activemq:core
     pretty_print: yes
-  become: yes
+  become: True
   no_log: True
   notify:
     - restart amq_broker

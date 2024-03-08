@@ -50,13 +50,13 @@
   ansible.builtin.stat:
     path: "{{ activemq_dest }}/{{ activemq.instance_name }}/bin"
   register: instance_directory
-  become: yes
+  become: True
 
 - name: "Check target directory profile version"
   when:
     - instance_directory is defined
     - instance_directory.stat.exists
-  become: yes
+  become: True
   block:
     - name: Reset upgrade flag
       ansible.builtin.set_fact:
@@ -98,7 +98,7 @@
   when: activemq_additional_libs | length > 0
   block:
     - name: "Create libs location"
-      become: yes
+      become: True
       ansible.builtin.file:
         dest: "{{ activemq.instance_home }}/lib"
         state: directory
@@ -106,7 +106,7 @@
         group: "{{ activemq_service_group }}"
         mode: 0750
     - name: "Copy additional libs to location"
-      become: yes
+      become: True
       ansible.builtin.copy:
         src: "{{ item }}"
         dest: "{{ activemq.instance_home }}/lib/"
@@ -119,9 +119,9 @@
   ansible.builtin.include_tasks: configure_broker.yml
 
 - name: Reload systemd
-  become: yes
+  become: True
   ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler, because of start/flush below
-    daemon_reload: yes
+    daemon_reload: True
   when:
     - systemdunit is defined
     - systemdunit.changed
@@ -131,7 +131,7 @@
     chown -R {{ activemq_service_user }}:{{ activemq_service_group }} {{ activemq.instance_home }}
   register: chown_status
   changed_when: chown_status.stdout != ""
-  become: yes
+  become: True
 
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
@@ -142,7 +142,7 @@
     - name: Check service status
       ansible.builtin.command: "systemctl status {{ activemq.instance_name }}"
       register: activemq_service_status
-      become: yes
+      become: True
       changed_when: False
       delay: 5
     - name: Verify service status
@@ -153,10 +153,10 @@
   rescue:
     - name: "Start and wait for {{ activemq.service_name }} service"
       ansible.builtin.include_tasks: start.yml
-      run_once: yes
+      run_once: True
 
 - name: Create default logs directory
-  become: yes
+  become: True
   ansible.builtin.file:
     state: directory
     dest: "/var/log/{{ activemq.service_name }}"
@@ -165,7 +165,7 @@
     mode: 0750
 
 - name: Link default logs directory
-  become: yes
+  become: True
   ansible.builtin.file:
     state: link
     src: "{{ activemq.instance_home }}/log"

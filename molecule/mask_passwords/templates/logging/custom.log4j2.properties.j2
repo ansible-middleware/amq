@@ -1,0 +1,104 @@
+# {{ ansible_managed }}
+# Hello, I am custom
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Log4J 2 configuration
+
+# Monitor config file every X seconds for updates
+monitorInterval = 5
+
+rootLogger = {{ activemq_logger_level }}, console, log_file
+
+logger.activemq.name=org.apache.activemq
+logger.activemq.level=INFO
+
+logger.artemis_server.name=org.apache.activemq.artemis.core.server
+logger.artemis_server.level={{ activemq_logger_core_server_level }}
+
+logger.artemis_journal.name=org.apache.activemq.artemis.journal
+logger.artemis_journal.level={{ activemq_logger_journal_level }}
+
+logger.artemis_utils.name=org.apache.activemq.artemis.utils
+logger.artemis_utils.level={{ activemq_logger_utils_level }}
+
+# CriticalAnalyzer: If you have issues with the CriticalAnalyzer, setting this to TRACE would give
+# you extra troubleshooting info, but do not use TRACE regularly as it would incur extra CPU usage.
+logger.critical_analyzer.name=org.apache.activemq.artemis.utils.critical
+logger.critical_analyzer.level={{ activemq_logger_utils_critical_level }}
+
+logger.artemis_jms.name=org.apache.activemq.artemis.jms
+logger.artemis_jms.level={{ activemq_logger_jms_level }}
+
+logger.artemis_integration_bootstrap.name=org.apache.activemq.artemis.integration.bootstrap
+logger.artemis_integration_bootstrap.level={{ activemq_logger_integration_bootstrap_level }}
+
+# Audit loggers: to enable change levels from OFF to INFO
+logger.audit_base = {{ 'INFO' if activemq_enable_audit else 'OFF' }}, audit_log_file
+logger.audit_base.name = org.apache.activemq.audit.base
+logger.audit_base.additivity = false
+
+logger.audit_resource = {{ 'INFO' if activemq_enable_audit else 'OFF' }}, audit_log_file
+logger.audit_resource.name = org.apache.activemq.audit.resource
+logger.audit_resource.additivity = false
+
+logger.audit_message = {{ 'INFO' if activemq_enable_audit else 'OFF' }}, audit_log_file
+logger.audit_message.name = org.apache.activemq.audit.message
+logger.audit_message.additivity = false
+
+# Jetty logger levels
+logger.jetty.name=org.eclipse.jetty
+logger.jetty.level={{ activemq_logger_jetty_level }}
+
+# Quorum related logger levels
+logger.curator.name=org.apache.curator
+logger.curator.level={{ activemq_logger_curator_level }}
+logger.zookeeper.name=org.apache.zookeeper
+logger.zookeeper.level={{ activemq_logger_zookeeper_level }}
+
+
+# Console appender
+appender.console.type=Console
+appender.console.name=console
+appender.console.layout.type=PatternLayout
+appender.console.layout.pattern=%d %-5level [%logger] %msg%n
+
+# Log file appender
+appender.log_file.type = RollingFile
+appender.log_file.name = log_file
+appender.log_file.fileName = ${sys:artemis.instance}/log/artemis.log
+appender.log_file.filePattern = ${sys:artemis.instance}/log/artemis.log.%d{yyyy-MM-dd}
+appender.log_file.layout.type = PatternLayout
+appender.log_file.layout.pattern = %d %-5level [%logger] %msg%n
+appender.log_file.policies.type = Policies
+appender.log_file.policies.cron.type = CronTriggeringPolicy
+appender.log_file.policies.cron.schedule = 0 0 0 * * ?
+appender.log_file.policies.cron.evaluateOnStartup = true
+appender.log_file.strategy.type=DefaultRolloverStrategy
+appender.log_file.strategy.max={{ activemq_logger_rollover_files }}
+
+# Audit log file appender
+appender.audit_log_file.type = RollingFile
+appender.audit_log_file.name = audit_log_file
+appender.audit_log_file.fileName = ${sys:artemis.instance}/log/audit.log
+appender.audit_log_file.filePattern = ${sys:artemis.instance}/log/audit.log.%d{yyyy-MM-dd}
+appender.audit_log_file.layout.type = PatternLayout
+appender.audit_log_file.layout.pattern = %d [AUDIT](%t) %msg%n
+appender.audit_log_file.policies.type = Policies
+appender.audit_log_file.policies.cron.type = CronTriggeringPolicy
+appender.audit_log_file.policies.cron.schedule = 0 0 0 * * ?
+appender.audit_log_file.policies.cron.evaluateOnStartup = true
+appender.audit_log_file.strategy.type=DefaultRolloverStrategy
+appender.audit_log_file.strategy.max={{ activemq_logger_audit_rollover_files }}

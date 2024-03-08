@@ -32,11 +32,16 @@ activemq_configuration_file_refresh_period: 5000
 activemq_jvm_package: java-11-openjdk-headless
 activemq_java_home:
 activemq_java_opts: "{{ [
-   '-Xms512M -Xmx2G',
-   '-XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication',
-   '-Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal',
-   '-Djolokia.policyLocation=file:' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml'
+   activemq_java_opts_mem,
+   activemq_java_opts_gc,
+   activemq_java_opts_hawtio,
+   '-Djolokia.policyLocation=file:' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml',
+   activemq_java_opts_extra | default('')
  ] | join(' ') }}"
+activemq_java_opts_extra: ''
+activemq_java_opts_mem: '-Xms512M -Xmx2G'
+activemq_java_opts_gc: '-XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication'
+activemq_java_opts_hawtio: '-Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal'
 activemq_port: 61616        # for protocols [CORE,MQTT,AMQP,STOMP,HORNETQ,OPENWIRE]
 activemq_port_hornetq: 5445 # for protocols [HORNETQ,STOMP]
 activemq_port_amqp: 5672    # for protocols [AMQP]
@@ -200,7 +205,9 @@ activemq_logger_integration_bootstrap_level: INFO
 activemq_logger_jetty_level: WARN
 activemq_logger_curator_level: WARN
 activemq_logger_zookeeper_level: ERROR
-activemq_logger_config_template: "{{ 'log4j2.properties' if activemq_version is version_compare('2.27.0', '>=') else 'logging.properties' }}"
+activemq_logger_config_template: "{{ 'log4j2.properties' if activemq_version is version_compare('2.27.0', '>=') else 'logging.properties' }}.j2"
+activemq_logger_config_template_path: ''
+activemq_logger_config_keep_name: False
 activemq_logger_rollover_files: 5
 activemq_logger_audit_rollover_files: 5
 
