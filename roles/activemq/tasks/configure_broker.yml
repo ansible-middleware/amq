@@ -2,7 +2,7 @@
 - name: "Configure AMQ broker logging"
   become: True
   ansible.builtin.template:
-    src: "{{ activemq_logger_config_template }}"
+    src: "{{ activemq_logger_config_template_path }}{{ activemq_logger_config_template }}"
     dest: "{{ activemq.instance_home }}/etc/{{ activemq_logger_config_template | basename | regex_replace('[.]j2$', '') }}"
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"

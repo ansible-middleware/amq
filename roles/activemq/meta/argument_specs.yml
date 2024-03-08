@@ -553,6 +553,10 @@ argument_specs:
                 description: "Template to use for logging facility configuration"
                 default: "{{ 'log4j2.properties' if activemq_version is version_compare('2.27.0', '>=') else 'logging.properties' }}"
                 type: "str"
+            activemq_logger_config_template_path:
+                description: "Optional subdirectory of any playbook template lookup directories for the logging facility configuration"
+                default: ''
+                type: "str"
             activemq_global_max_messages:
                 description: "Number of messages before all addresses will enter into their Full Policy configured. It works in conjunction with global-activemq_global_max_size-size, being whatever value hits its maximum first."
                 default: -1
