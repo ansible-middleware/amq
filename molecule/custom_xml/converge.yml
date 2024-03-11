@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: yes
+  vars:
+    activemq_config_override_template: 'broker.xml.j2'
+  roles:
+    - middleware_automation.amq.activemq
