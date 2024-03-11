@@ -27,6 +27,7 @@
 
 - name: Validate broker configuration
   ansible.builtin.include_tasks: validate_config.yml
+  when: activemq_config_override_template == ''
   tags:
     - validation
 
@@ -117,6 +118,7 @@
 
 - name: "Generate broker configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
   ansible.builtin.include_tasks: configure_broker.yml
+  when: activemq_config_override_template == ''
 
 - name: Reload systemd
   become: True
