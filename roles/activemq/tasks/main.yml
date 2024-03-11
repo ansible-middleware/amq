@@ -31,6 +31,16 @@
   tags:
     - validation
 
+- name: Validate custom broker.xml configuration
+  middleware_automation.common.xml:
+    xsd_path: "{{ local_path.stat.path }}/artemis-server.xsd"
+    xmlstring: "{{ lookup('ansible.builtin.template', activemq_config_override_template) }}"
+    validate: yes
+    input_type: xml
+  when: activemq_config_override_template != ''
+  run_once: True
+  delegate_to: localhost
+
 - name: Include firewall config tasks
   ansible.builtin.include_tasks: firewalld.yml
   when: activemq_configure_firewalld

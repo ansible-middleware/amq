@@ -91,6 +91,14 @@
       delegate_to: localhost
       run_once: True
       changed_when: False  # it does not change targets, validation is on controller
+    - name: Make collection xsd available for validation
+      ansible.builtin.copy: # noqa risky-file-permissions delegated, uses controller host user
+        src: "artemis-server.xsd"
+        dest: "{{ local_path.stat.path }}/artemis-server.xsd"
+        mode: 0644
+      delegate_to: localhost
+      run_once: True
+      changed_when: False  # it does not change targets, validation is on controller
     - name: Make collection xml.xsd available for validation
       ansible.builtin.copy: # noqa risky-file-permissions delegated, uses controller host user
         src: "xml.xsd"
@@ -112,6 +120,7 @@
       delay: 5
       loop:
         - "{{ activemq.config_xsd }}"
+        - "{{ activemq.server_xsd }}"
         - https://www.w3.org/2001/03/xml.xsd
 
 - name: Ensure required packages are installed

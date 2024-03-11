@@ -14,6 +14,7 @@ activemq:
   instance_name: "{{ activemq_instance_name }}"
   instance_home: "{{ activemq_dest }}/{{ activemq_instance_name }}"
   config_xsd: "https://github.com/apache/activemq-artemis/raw/{{ activemq_version }}/artemis-server/src/main/resources/schema/artemis-configuration.xsd"
+  server_xsd: "https://github.com/apache/activemq-artemis/raw/{{ activemq_version }}/artemis-server/src/main/resources/schema/artemis-server.xsd"
   package_list: "{{ activemq_base_package_list + [activemq_jvm_package] + ([activemq_jmx_exporter_package] if activemq_jmx_exporter_enabled else []) }}"
   prometheus_package: "{{ 'com.redhat.amq.broker.' if amq_broker_enable is defined and amq_broker_enable and activemq_version.split('.')[1] | int >= 11 else 'org.apache.activemq.artemis.' }}"
 
