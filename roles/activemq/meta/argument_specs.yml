@@ -551,7 +551,7 @@ argument_specs:
                 type: "list"
             activemq_logger_config_template:
                 description: "Template to use for logging facility configuration"
-                default: "{{ 'log4j2.properties' if activemq_version is version_compare('2.27.0', '>=') else 'logging.properties' }}"
+                default: "{{ 'log4j2.properties' if activemq_version is version_compare('2.27.0', '>=') else 'logging.properties' }}.j2"
                 type: "str"
             activemq_logger_config_template_path:
                 description: "Optional subdirectory of any playbook template lookup directories for the logging facility configuration"
@@ -723,5 +723,5 @@ argument_specs:
                 type: "str"
             amq_broker_logger_config_template:
                 description: "Template to use for logging facility configuration"
-                default: "{{ 'log4j2.properties' if amq_broker_version is version_compare('7.11.0', '>=') else 'logging.properties' }}"
+                default: "{{ 'log4j2.properties' if amq_broker_version is version_compare('7.11.0', '>=') else 'logging.properties' }}.j2"
                 type: "str"
