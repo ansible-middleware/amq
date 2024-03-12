@@ -2,7 +2,7 @@ argument_specs:
     main:
         options:
             activemq_version:
-                default: "2.28.0"
+                default: "2.32.0"
                 description: "Apache Artemis version"
                 type: "str"
             activemq_archive:
@@ -684,7 +684,7 @@ argument_specs:
     downstream:
         options:
             amq_broker_version:
-                default: "7.11.1"
+                default: "7.11.6"
                 description: "Red Hat AMQ Broker version"
                 type: "str"
             amq_broker_product_category:
