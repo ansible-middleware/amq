@@ -10,6 +10,7 @@
 - name: "Ensure {{ sudo_pkg_name }} is installed (if user is root)."
   ansible.builtin.yum:
     name: "{{ sudo_pkg_name }}"
+  retries: 3
   when:
     - ansible_user_id == 'root'
 
