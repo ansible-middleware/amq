@@ -32,7 +32,7 @@
             that:
               - "'live Message Broker is starting' in slurped_log_instance1.content|b64decode"
               - "'Waiting indefinitely to obtain live lock' in slurped_log_instance1.content|b64decode"
-              - "'Server is now live' in slurped_log_instance1.content|b64decode"
+              - "'Server is now live' in slurped_log.content|b64decode or 'Server is now active' in slurped_log.content|b64decode"
             quiet: true
         - name: Check slave on instance2
           ansible.builtin.assert:

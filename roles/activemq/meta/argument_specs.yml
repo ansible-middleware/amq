@@ -127,7 +127,7 @@ argument_specs:
                 default: "{{ [ activemq_java_opts_mem, activemq_java_opts_gc, activemq_java_opts_hawtio,
                              '-Djolokia.policyLocation=file:' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml',
                              '-Dlog4j.configurationFile=' + activemq_logger_config_template if activemq_logger_config_template != 'log4j2.properties' and activemq_logger_config_template != 'logging.properties' else '',
-                             activemq_java_opts_extra | default('')  ] | join(' ') }}"
+                             activemq_java_opts_extra | default('') ] | join(' ') }}"
                 description: "Arguments for the service JVM; you can override this parameter that will take precedence, or otherwise use the activemq_java_opts_* parameters"
                 type: "str"
             activemq_port:
