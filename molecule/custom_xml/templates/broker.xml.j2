@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configuration xmlns="urn:activemq" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xsi:schemaLocation="urn:activemq /schema/artemis-configuration.xsd">
+  <core xmlns="urn:activemq:core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:activemq:core ">
+    <name>amq-broker</name>
+    <persistence-enabled>true</persistence-enabled>
+    <journal-type>ASYNCIO</journal-type>
+    <paging-directory>/opt/amq/amq-broker/data/paging</paging-directory>
+    <bindings-directory>/opt/amq/amq-broker/data/bindings</bindings-directory>
+    <journal-directory>/opt/amq/amq-broker/data/journal</journal-directory>
+    <large-messages-directory>/opt/amq/amq-broker/data/largemessages</large-messages-directory>
+    <journal-datasync>true</journal-datasync>
+    <journal-min-files>2</journal-min-files>
+    <journal-pool-files>10</journal-pool-files>
+    <journal-device-block-size>4096</journal-device-block-size>
+    <journal-file-size>10M</journal-file-size>
+    <journal-buffer-timeout>500000</journal-buffer-timeout>
+    <journal-max-io>4096</journal-max-io>
+    <disk-scan-period>5000</disk-scan-period>
+    <max-disk-usage>90</max-disk-usage>
+    <critical-analyzer>true</critical-analyzer>
+    <critical-analyzer-timeout>120000</critical-analyzer-timeout>
+    <critical-analyzer-check-period>60000</critical-analyzer-check-period>
+    <critical-analyzer-policy>HALT</critical-analyzer-policy>
+    <page-sync-timeout>1112000</page-sync-timeout>
+    <global-max-messages>-1</global-max-messages>
+    <acceptors>
+      <acceptor name="artemis">tcp://localhost:61616?tcpSendBufferSize=1048576;tcpReceiveBufferSize=1048576;protocols=CORE,MQTT;useEpoll=True;</acceptor>
+    </acceptors>
+    <security-settings>
+      <security-setting match="#">
+        <permission type="createNonDurableQueue" roles="admin"/>
+        <permission type="deleteNonDurableQueue" roles="admin"/>
+        <permission type="createDurableQueue" roles="admin"/>
+        <permission type="deleteDurableQueue" roles="admin"/>
+        <permission type="createAddress" roles="admin"/>
+        <permission type="deleteAddress" roles="admin"/>
+        <permission type="consume" roles="admin"/>
+        <permission type="browse" roles="admin"/>
+        <permission type="send" roles="admin"/>
+        <permission type="manage" roles="admin"/>
+      </security-setting>
+    </security-settings>
+    <address-settings>
+      <address-setting match="activemq.management#">
+            <dead-letter-address>DLQ</dead-letter-address>
+            <expiry-address>ExpiryQueue</expiry-address>
+            <redelivery-delay>0</redelivery-delay>
+            <max-size-bytes>-1</max-size-bytes>
+            <message-counter-history-day-limit>10</message-counter-history-day-limit>
+            <address-full-policy>PAGE</address-full-policy>
+            <auto-create-queues>true</auto-create-queues>
+            <auto-create-addresses>true</auto-create-addresses>
+            <auto-create-jms-queues>true</auto-create-jms-queues>
+            <auto-create-jms-topics>true</auto-create-jms-topics>
+         </address-setting>
+      <address-setting match="#">
+            <dead-letter-address>DLQ</dead-letter-address>
+            <expiry-address>ExpiryQueue</expiry-address>
+            <redelivery-delay>0</redelivery-delay>
+            <max-size-bytes>-1</max-size-bytes>
+            <message-counter-history-day-limit>10</message-counter-history-day-limit>
+            <address-full-policy>PAGE</address-full-policy>
+            <auto-create-queues>false</auto-create-queues>
+            <auto-create-addresses>false</auto-create-addresses>
+            <auto-create-jms-queues>false</auto-create-jms-queues>
+            <auto-create-jms-topics>false</auto-create-jms-topics>
+            <auto-delete-queues>false</auto-delete-queues>
+            <auto-delete-addresses>false</auto-delete-addresses>
+         </address-setting>
+    </address-settings>
+    <addresses>
+      <address name="queue.in">
+        <anycast>
+          <queue name="queue.in" max-consumers="-1" exclusive="false" consumers-before-dispatch="0" delay-before-dispatch="-1">
+            <durable>true</durable>
+          </queue>
+        </anycast>
+      </address>
+      <address name="queue.out">
+        <anycast>
+          <queue name="queue.out" max-consumers="-1" exclusive="false" consumers-before-dispatch="0" delay-before-dispatch="-1">
+            <durable>true</durable>
+          </queue>
+        </anycast>
+      </address>
+      <address name="DLQ">
+        <anycast>
+          <queue name="DLQ" max-consumers="-1" exclusive="false" consumers-before-dispatch="0" delay-before-dispatch="-1">
+            <durable>true</durable>
+          </queue>
+        </anycast>
+      </address>
+      <address name="ExpiryQueue">
+        <anycast>
+          <queue name="ExpiryQueue" max-consumers="-1" exclusive="false" consumers-before-dispatch="0" delay-before-dispatch="-1">
+            <durable>true</durable>
+          </queue>
+        </anycast>
+      </address>
+    </addresses>
+    <!-- Uncomment the following if you want to use the Standard LoggingActiveMQServerPlugin pluging to log in events
+      <broker-plugins>
+         <broker-plugin class-name="org.apache.activemq.artemis.core.server.plugin.impl.LoggingActiveMQServerPlugin">
+            <property key="LOG_ALL_EVENTS" value="true"/>
+            <property key="LOG_CONNECTION_EVENTS" value="true"/>
+            <property key="LOG_SESSION_EVENTS" value="true"/>
+            <property key="LOG_CONSUMER_EVENTS" value="true"/>
+            <property key="LOG_DELIVERING_EVENTS" value="true"/>
+            <property key="LOG_SENDING_EVENTS" value="true"/>
+            <property key="LOG_INTERNAL_EVENTS" value="true"/>
+         </broker-plugin>
+      </broker-plugins>
+      -->
+    <persist-id-cache>true</persist-id-cache>
+    <id-cache-size>20000</id-cache-size>
+    <configuration-file-refresh-period>5000</configuration-file-refresh-period>
+    <global-max-size>128MB</global-max-size>
+  </core>
+</configuration>

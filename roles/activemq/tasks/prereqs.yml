@@ -64,12 +64,37 @@
     fail_msg: "Defined controller path for downloading resource is incorrect: {{ activemq_local_archive_repository }}"
     success_msg: "Will download resource to controller path: {{ local_path.stat.path }}"
 
+- name: Validate local custom template
+  ansible.builtin.assert:
+    that:
+      - lookup('ansible.builtin.template', activemq_logger_config_template)
+    quiet: True
+    fail_msg: "Template not found or not readable for logging: {{ activemq_logger_config_template }}"
+    success_msg: "Will use custom logging template: {{ activemq_logger_config_template }}"
+
+- name: Validate broker custom template
+  ansible.builtin.assert:
+    that:
+      - lookup('ansible.builtin.template', activemq_config_override_template)
+    quiet: True
+    fail_msg: "Template not found or not readable for broker.xml: {{ activemq_config_override_template }}"
+    success_msg: "Will use custom template: {{ activemq_config_override_template }}"
+  when: activemq_config_override_template | length > 0
+
 - name: Retrieve xsd schemas
   block:
     - name: Make collection xsd available for validation
       ansible.builtin.copy: # noqa risky-file-permissions delegated, uses controller host user
         src: "artemis-configuration-{{ activemq_version.split('.')[:2] | join('.') }}.xsd"
         dest: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+        mode: 0644
+      delegate_to: localhost
+      run_once: True
+      changed_when: False  # it does not change targets, validation is on controller
+    - name: Make collection xsd available for validation
+      ansible.builtin.copy: # noqa risky-file-permissions delegated, uses controller host user
+        src: "artemis-server.xsd"
+        dest: "{{ local_path.stat.path }}/artemis-server.xsd"
         mode: 0644
       delegate_to: localhost
       run_once: True
@@ -95,6 +120,7 @@
       delay: 5
       loop:
         - "{{ activemq.config_xsd }}"
+        - "{{ activemq.server_xsd }}"
         - https://www.w3.org/2001/03/xml.xsd
 
 - name: Ensure required packages are installed
