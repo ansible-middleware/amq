@@ -39,7 +39,7 @@ Role Defaults
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
-|`activemq_version`| Apache Artemis version | `2.21.0` |
+|`activemq_version`| Apache Artemis version | `2.32.0` |
 |`activemq_archive`| Apache Artemis install archive filename | `apache-artemis-{{ activemq_version }}-bin.zip` |
 |`activemq_download_url`| Apache Artemis download URL | `https://archive.apache.org/dist/activemq/activemq-artemis/{{ activemq_version }}/{{ activemq_archive }}` |
 |`activemq_installdir`| Apache Artemis Installation path | `{{ activemq_dest }}/apache-artemis-{{ activemq_version }}` |
@@ -88,7 +88,7 @@ Role Defaults
 |`activemq_disable_destination_autocreate`| Disable automatic creation of destination | `True` |
 |`activemq_queues`| Queue names comma separated | `queue.in,queue.out` |
 |`activemq_configuration_file_refresh_period`| Periodic refresh of configuration in milliseconds; can be disabled by specifying -1 | `5000` |
-|`activemq_password_codec`| Fully qualified class name and its parameters for the Decoder used to decode the masked password. Ignored if activemq_mask_password is false. |`org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec` |
+|`activemq_password_codec`| Fully qualified class name and its parameters for the Decoder used to decode the masked password. Ignored if `activemq_mask_password` is false. |`org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec` |
 |`activemq_mask_password` | Whether passwords in server configuration need to be masked. | `True` |
 |`activemq_additional_libs`| List of jars to install in activemq classpath, read from playbook files lookup paths | `[]` |
 |`activemq_mask_password_hashname`| Name of algorithm used for masking password, will be passed to custom codec | `sha1` |
@@ -122,9 +122,9 @@ Role Defaults
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
-|`activemq_global_max_messages`| Number of messages before all addresses will enter into their Full Policy configured. It works in conjunction with activemq_global_max_size, being whatever value hits its maximum first. | `-1` |
+|`activemq_global_max_messages`| Number of messages before all addresses will enter into their Full Policy configured. It works in conjunction with `activemq_global_max_size`, being whatever value hits its maximum first. | `-1` |
 |`activemq_global_max_size` | Size (in bytes) before all addresses will enter into their Full Policy configured upon messages being produced. Supports byte notation like 'K', 'Mb', 'MiB', 'GB', etc. | `'-1'` |
-|`activemq_data_directory`| The activemq data directory path | `data/`, or the value of `activemq_shared_storage_path` if activemq_shared_storage is set |
+|`activemq_data_directory`| The activemq data directory path | `data/`, or the value of `activemq_shared_storage_path` if `activemq_shared_storage` is true |
 |`activemq_persistence_enabled`| Whether to use the file based journal for persistence | `True` |
 |`activemq_persist_id_cache`| Whether to persist cache IDs to the journal | `True` |
 |`activemq_id_cache_size`| The duplicate detection circular cache size | `20000` |
@@ -236,7 +236,7 @@ Sample address settings:
       auto_create_jms_topics: true
 ```
 
-The parameters are snake_cased variants of the artemis configuration schema elements, which are kebab-cased (ie. `dead-letter-address` -> `dead_letter_address`).
+The parameters are `snake_cased` variants of the artemis configuration schema elements, which are `kebab-cased` (ie. `dead-letter-address` -> `dead_letter_address`).
 
 
 #### Diverts configuration
@@ -271,8 +271,8 @@ Sample divert:
 |`activemq_replicated`| Designate instance as replicated node | `False` |
 |`activemq_cluster_discovery` | Cluster discovery: [`jgroups` (shared file ping), `multicast` (UDP), `static` (node list)] | `static` |
 |`activemq_cluster_iface` | The NIC name to be used for cluster IPv4 addresses (ie. 'eth0') | `default_ipv4` |
-|`activemq_systemd_wait_for_port` | Whether systemd unit should wait for activemq port before returning | `True` when activemq_ha_enabled is `True` and activemq_shared_storage is `False` |
-|`activemq_systemd_wait_for_log` | Whether systemd unit should wait for service to be up in logs | `True` when activemq_ha_enabled and activemq_shared_storage are `True` |
+|`activemq_systemd_wait_for_port` | Whether systemd unit should wait for activemq port before returning | `True` when `activemq_ha_enabled` is `True` and `activemq_shared_storage` is `False` |
+|`activemq_systemd_wait_for_log` | Whether systemd unit should wait for service to be up in logs | `True` when `activemq_ha_enabled` and `activemq_shared_storage` are both `True` |
 |`activemq_systemd_wait_for_timeout`| How long to wait for service to be alive (seconds) | `60` |
 |`activemq_systemd_wait_for_delay`| Activation delay for service systemd unit | `10` |
 

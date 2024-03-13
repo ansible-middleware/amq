@@ -20,7 +20,7 @@
     - name: Check status
       ansible.builtin.assert:
         that:
-          - "'Server is now live' in slurped_log.content|b64decode"
+          - "'Server is now live' in slurped_log.content|b64decode or 'Server is now active' in slurped_log.content|b64decode"
         quiet: true
         fail_msg: "Service failed to start correctly"
 
