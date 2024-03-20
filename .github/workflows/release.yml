@@ -8,8 +8,10 @@ jobs:
     uses: ansible-middleware/github-actions/.github/workflows/release.yml@main
     with:
       collection_fqcn: 'middleware_automation.amq'
+      downstream_name: 'amq_broker'
     secrets:
       galaxy_token: ${{ secrets.ANSIBLE_GALAXY_API_KEY }}
+      jira_webhook: ${{ secrets.JIRA_WEBHOOK_CREATE_VERSION }}
 
   dispatch:
     needs: release
