@@ -344,3 +344,23 @@ releases:
         name: lists_mergeby
         namespace: null
     release_date: '2023-11-29'
+  2.0.1:
+    changes:
+      bugfixes:
+      - '``activemq_config_override_template`` allows to use custom broker.xml templates
+        `#117 <https://github.com/ansible-middleware/amq/pull/117>`_
+
+        '
+      minor_changes:
+      - 'Parameter ``activemq_logger_config_template`` allows relative paths `#116
+        <https://github.com/ansible-middleware/amq/pull/116>`_
+
+        '
+      - 'Update activemq default to 2.32 / amq_broker to 7.11.6 `#118 <https://github.com/ansible-middleware/amq/pull/118>`_
+
+        '
+    fragments:
+    - 116.yaml
+    - 117.yaml
+    - 118.yaml
+    release_date: '2024-04-29'

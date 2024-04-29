@@ -1,9 +1,22 @@
-=======================================
-middleware_automation.amq Release Notes
-=======================================
+========================================
+middleware\_automation.amq Release Notes
+========================================
 
 .. contents:: Topics
 
+v2.0.1
+======
+
+Minor Changes
+-------------
+
+- Parameter ``activemq_logger_config_template`` allows relative paths `#116 <https://github.com/ansible-middleware/amq/pull/116>`_
+- Update activemq default to 2.32 / amq_broker to 7.11.6 `#118 <https://github.com/ansible-middleware/amq/pull/118>`_
+
+Bugfixes
+--------
+
+- ``activemq_config_override_template`` allows to use custom broker.xml templates `#117 <https://github.com/ansible-middleware/amq/pull/117>`_
 
 v2.0.0
 ======
