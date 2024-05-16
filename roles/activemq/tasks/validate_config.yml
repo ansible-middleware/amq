@@ -31,9 +31,9 @@
   middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><address-settings>{{ validate_address_settings | join(' ') | trim }}</address-settings></core>"
-    validate: yes
+    validate: true
     input_type: xml
-  run_once: True
+  run_once: true
   delegate_to: localhost
 
 - name: Create acceptor configuration string
@@ -43,22 +43,22 @@
   loop_control:
     loop_var: acceptor
     label: "{{ acceptor.name }}"
-  no_log: True
+  no_log: true
 
 - name: Validate acceptors
   middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><acceptors>{{ validate_acceptors | join(' ') | trim }}</acceptors></core>"
-    validate: yes
+    validate: true
     input_type: xml
-  run_once: True
-  no_log: True
+  run_once: true
+  no_log: true
   delegate_to: localhost
 
 - name: Create final connector list using generated and declared lists
   ansible.builtin.set_fact:
     validate_merged_connectors: "{{ activemq_cluster_nodes | default([]) | middleware_automation.amq.lists_mergeby(\
-                          activemq_connectors | default([]), 'name', recursive=True, list_merge='append') }}"
+                          activemq_connectors | default([]), 'name', recursive=true, list_merge='append') }}"
 
 - name: Create connector configuration string
   ansible.builtin.set_fact:
@@ -67,16 +67,16 @@
   loop_control:
     loop_var: connector
     label: "{{ connector.name }}"
-  no_log: True
+  no_log: true
 
 - name: Validate connectors
   middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><connectors>{{ validate_connectors | join(' ') | trim }}</connectors></core>"
-    validate: yes
+    validate: true
     input_type: xml
-  run_once: True
-  no_log: True
+  run_once: true
+  no_log: true
   delegate_to: localhost
 
 - name: Create addresses string
@@ -91,9 +91,9 @@
   middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><addresses>{{ validate_addresses | join(' ') | trim }}</addresses></core>"
-    validate: yes
+    validate: true
     input_type: xml
-  run_once: True
+  run_once: true
   delegate_to: localhost
 
 - name: Create diverts configuration string
@@ -109,7 +109,7 @@
   middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><diverts>{{ validate_diverts | default([]) | join(' ') | trim }}</diverts></core>"
-    validate: yes
+    validate: true
     input_type: xml
   when: activemq_diverts | length > 0
   run_once: True
@@ -128,15 +128,15 @@
   middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><broker-connections>{{ validate_broker_connections | default([]) | join(' ') | trim }}</broker-connections></core>"
-    validate: yes
+    validate: true
     input_type: xml
   when: activemq_broker_connections | length > 0
-  run_once: True
+  run_once: true
   delegate_to: localhost
 
 - name: Create security settings matches
   ansible.builtin.set_fact:
-    validate_security_settings_matches: "{{ validate_security_settings_matches | default({}) | combine( { match: { item.1: [ item.0.name ] }  }, recursive=True, list_merge='append' ) }}"
+    validate_security_settings_matches: "{{ validate_security_settings_matches | default({}) | combine( { match: { item.1: [ item.0.name ] }  }, recursive=true, list_merge='append' ) }}"
   vars:
     match: "{{ item.0.match | default('#') }}"
   loop: "{{ activemq_roles | subelements('permissions') }}"
@@ -145,14 +145,14 @@
 
 - name: Create security settings
   ansible.builtin.set_fact:
-    validate_security_settings: "{{ validate_security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2', wantlist=True) ] }}"
+    validate_security_settings: "{{ validate_security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2', wantlist=true) ] }}"
   loop: "{{ validate_security_settings_matches | dict2items(key_name='match', value_name='permissions') }}"
 
 - name: Validate security settings
   middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><security-settings>{{ validate_security_settings | flatten | join(' ') | trim }}</security-settings></core>"
-    validate: yes
+    validate: true
     input_type: xml
   run_once: True
   delegate_to: localhost

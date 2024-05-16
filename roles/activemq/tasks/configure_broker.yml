@@ -6,7 +6,7 @@
     dest: "{{ activemq.instance_home }}/etc/{{ activemq_logger_config_template | basename | regex_replace('[.]j2$', '') }}"
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
-    mode: 0644
+    mode: '0644'
   notify:
     - restart amq_broker
 
@@ -80,7 +80,7 @@
     dest: "{{ activemq.instance_home }}/etc/jolokia-access.xml"
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
-    mode: 0644
+    mode: '0644'
   notify:
     - restart amq_broker
 
@@ -91,7 +91,7 @@
     dest: "{{ activemq.instance_home }}/etc/login.config"
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
-    mode: 0644
+    mode: '0644'
   notify:
     - restart amq_broker
 
@@ -114,7 +114,7 @@
         remote_src: yes
         owner: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
-        mode: 0644
+        mode: '0644'
       notify:
         - restart amq_broker
     - name: Configure metrics plugin

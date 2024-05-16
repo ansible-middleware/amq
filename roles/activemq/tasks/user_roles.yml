@@ -3,7 +3,7 @@
   ansible.builtin.slurp:
     src: "{{ activemq.instance_home }}/etc/artemis-users.properties"
   register: existing_users
-  become: True
+  become: true
 
 - name: Set masked user passwords
   ansible.builtin.include_tasks: mask_password.yml
@@ -17,9 +17,9 @@
     dest: "{{ activemq.instance_home }}/etc/artemis-users.properties"
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
-    mode: 0640
+    mode: '0640'
   no_log: false
-  become: True
+  become: true
 
 - name: Configure roles
   ansible.builtin.template:
@@ -27,12 +27,12 @@
     dest: "{{ activemq.instance_home }}/etc/artemis-roles.properties"
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
-    mode: 0640
-  become: True
+    mode: '0640'
+  become: true
 
 - name: Create security settings matches
   ansible.builtin.set_fact:
-    security_settings_matches: "{{ security_settings_matches | default({}) | combine( { match: { item.1: [ item.0.name ] }  }, recursive=True, list_merge='append' ) }}"
+    security_settings_matches: "{{ security_settings_matches | default({}) | combine( { match: { item.1: [ item.0.name ] }  }, recursive=true, list_merge='append' ) }}"
   vars:
     match: "{{ item.0.match | default('#') }}"
   loop: "{{ activemq_roles | subelements('permissions') }}"
@@ -41,7 +41,7 @@
 
 - name: Create security settings
   ansible.builtin.set_fact:
-    security_settings: "{{ security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2', wantlist=True) ] }}"
+    security_settings: "{{ security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2', wantlist=true) ] }}"
   loop: "{{ security_settings_matches | dict2items(key_name='match', value_name='permissions') }}"
 
 - name: Create messaging roles permissions
@@ -53,8 +53,8 @@
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
-    pretty_print: yes
-  become: True
+    pretty_print: true
+  become: true
   notify:
     - restart amq_broker with no config refresh
 
@@ -63,7 +63,7 @@
     path: "{{ activemq.instance_home }}/etc/artemis.profile"
     regexp: '^HAWTIO_ROLE=.*'
     line: "HAWTIO_ROLE='{{ activemq_hawtio_role }}'"
-  become: True
+  become: true
   notify:
     - restart amq_broker
 
@@ -72,7 +72,7 @@
     path: "{{ activemq.instance_home }}/etc/management.xml"
     regexp: '<!--[\s\S]*?-->'
     replace: ''
-  become: True
+  become: true
 
 - name: Create management access default
   ansible.builtin.set_fact:
@@ -96,7 +96,7 @@
     xpath: //*[local-name()='default-access']
     input_type: xml
     set_children: "{{ management_access_default }}"
-  become: True
+  become: true
   notify:
     - restart amq_broker
 
@@ -106,6 +106,6 @@
     xpath: //*[local-name()='role-access']
     input_type: xml
     set_children: "{{ management_access_domains }}"
-  become: True
+  become: true
   notify:
     - restart amq_broker
