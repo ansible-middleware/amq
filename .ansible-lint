@@ -28,6 +28,7 @@ warn_list:
   - run-once[task]
   - var-naming[no-role-prefix]
   - deprecated-command-syntax
+  - nname[casing]
 
 skip_list:
   - vars_should_not_be_used
