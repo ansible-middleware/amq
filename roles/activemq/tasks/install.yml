@@ -11,10 +11,10 @@
     quiet: true
 
 - name: "Create {{ activemq.service_name }} service group"
-  become: True
+  become: true
   ansible.builtin.group:
     name: "{{ activemq_service_group }}"
-    system: yes
+    system: true
 
 - name: "Create service user"
   block:
@@ -24,8 +24,8 @@
         name: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
         home: "{{ activemq.user_home }}"
-        system: yes
-        create_home: no
+        system: true
+        create_home: false
       register: user_mod
   rescue:
     - name: Display failure
@@ -33,23 +33,23 @@
         msg: "Update user home_directory deferred to service restart, error can be ignored"
     - name: Set update user_mod to restarting handler
       ansible.builtin.set_fact:
-        requires_userhome_update: True
+        requires_userhome_update: true
       notify: restart amq_broker
 
 - name: "Check {{ activemq.service_name }} install location"
-  become: True
+  become: true
   ansible.builtin.stat:
     path: "{{ activemq_dest }}"
   register: install_location
 
 - name: "Create {{ activemq.service_name }} install location"
-  become: True
+  become: true
   ansible.builtin.file:
     dest: "{{ activemq_dest }}"
     state: directory
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
-    mode: 0750
+    mode: '0750'
   when:
     - not install_location.stat.exists
 
@@ -69,9 +69,9 @@
   ansible.builtin.get_url: # noqa risky-file-permissions delegated, uses controller host user
     url: "{{ activemq.download_url }}"
     dest: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
-    mode: 0640
+    mode: '0640'
   delegate_to: localhost
-  run_once: True
+  run_once: true
   when:
     - archive_path is defined
     - archive_path.stat is defined
@@ -81,7 +81,7 @@
 
 - name: Download AMQ broker from RHN using JBoss Network API
   delegate_to: localhost
-  run_once: True
+  run_once: true
   when:
     - archive_path is defined
     - archive_path.stat is defined
@@ -99,13 +99,13 @@
         product_category: "{{ amq_broker_product_category }}"
       register: rhn_products
       delegate_to: localhost
-      run_once: True
+      run_once: true
 
     - name: Determine install zipfile from search results
       ansible.builtin.set_fact:
         rhn_filtered_products: "{{ rhn_products.results | selectattr('file_path', 'match', '.*/amq-broker-' + amq_broker_version + '-bin.zip') }}"
       delegate_to: localhost
-      run_once: True
+      run_once: true
 
     - name: Download AMQ Broker
       middleware_automation.common.product_download:
@@ -115,7 +115,7 @@
         dest: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
       no_log: "{{ omit_rhn_output | default(true) }}"
       delegate_to: localhost
-      run_once: True
+      run_once: true
 
 - name: Check downloaded archive
   ansible.builtin.stat:
@@ -130,19 +130,19 @@
     dest: "{{ archive }}"
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
-    mode: 0750
+    mode: '0750'
   register: new_version_downloaded
   when:
     - not archive_path.stat.exists
     - local_archive_path.stat is defined
     - local_archive_path.stat.exists
-  become: True
+  become: true
 
 - name: "Check target directory: {{ activemq.home }}"
   ansible.builtin.stat:
     path: "{{ activemq.home }}"
   register: path_to_workdir
-  become: True
+  become: true
 
 - name: "Extract zipfile"
   when:
@@ -150,13 +150,13 @@
   block:
     - name: "Extract {{ activemq.name }} archive on target"
       ansible.builtin.unarchive: # noqa no-handler definitely not a candidate for a handler
-        remote_src: yes
+        remote_src: true
         src: "{{ archive }}"
         dest: "{{ activemq_dest }}"
         owner: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
-        list_files: yes
-      become: True
+        list_files: true
+      become: true
       register: new_version_extracted
       when:
         - new_version_downloaded.changed or not path_to_workdir.stat.exists
@@ -167,10 +167,10 @@
       ansible.builtin.stat:
         path: "{{ activemq.home }}"
       register: path_to_workdir_after_extract
-      become: True
+      become: true
 
     - name: Link zipfile directory to wanted directory
-      become: True
+      become: true
       ansible.builtin.file:
         state: link
         src: "{{ activemq_dest }}/{{ new_version_extracted.files | first }}"

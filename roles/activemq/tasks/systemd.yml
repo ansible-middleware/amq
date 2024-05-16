@@ -9,17 +9,17 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
-  become: True
+    mode: '0755'
+  become: true
 
 - name: "Configure sysconfig file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
-  become: True
+  become: true
   ansible.builtin.template:
     src: amq_broker.sysconfig.j2
     dest: "/etc/sysconfig/{{ activemq.instance_name }}"
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   vars:
     activemq_rpm_java_home: "{{ rpm_java_home }}"
     activemq_logger_opts: "{{ '-Dlog4j.configurationFile=' + activemq_logger_config_template | basename | regex_replace('[.]j2$', '')\
@@ -35,8 +35,8 @@
     dest: "/etc/systemd/system/{{ activemq.instance_name }}.service"
     owner: root
     group: root
-    mode: 0644
-  become: True
+    mode: '0644'
+  become: true
   register: systemdunit
   notify:
     - restart amq_broker
@@ -45,7 +45,7 @@
   ansible.builtin.stat:
     path: "{{ activemq_dest }}/{{ activemq.instance_name }}/bin"
   register: instance_directory
-  become: True
+  become: true
 
 - name: "Generate artemis configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
   ansible.builtin.include_tasks: configure_artemis.yml
@@ -56,7 +56,7 @@
   ansible.builtin.command:
     cmd: "{{ activemq.home }}/bin/artemis create {{ activemq.instance_home }} {{ activemq_options }}"
     creates: "{{ activemq.instance_home }}/bin/artemis-service"
-  become: True
+  become: true
   become_user: "{{ activemq_service_user }}"
   register: broker_created
   when:
@@ -68,8 +68,8 @@
     dest: "{{ activemq.instance_home }}/etc/broker.xml"
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
-    mode: 0644
+    mode: '0644'
   when: activemq_config_override_template != ''
-  become: True
+  become: true
   notify:
     - restart amq_broker

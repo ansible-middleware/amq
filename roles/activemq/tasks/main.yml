@@ -35,10 +35,10 @@
   middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-server.xsd"
     xmlstring: "{{ lookup('ansible.builtin.template', activemq_config_override_template) }}"
-    validate: yes
+    validate: true
     input_type: xml
   when: activemq_config_override_template != ''
-  run_once: True
+  run_once: true
   delegate_to: localhost
 
 - name: Include firewall config tasks
@@ -61,17 +61,17 @@
   ansible.builtin.stat:
     path: "{{ activemq_dest }}/{{ activemq.instance_name }}/bin"
   register: instance_directory
-  become: True
+  become: true
 
 - name: "Check target directory profile version"
   when:
     - instance_directory is defined
     - instance_directory.stat.exists
-  become: True
+  become: true
   block:
     - name: Reset upgrade flag
       ansible.builtin.set_fact:
-        needs_upgrade: no
+        needs_upgrade: false
     - name: Read profile file
       ansible.builtin.slurp:
         src: "{{ activemq.instance_home }}/etc/artemis.profile"
@@ -81,7 +81,7 @@
         msg: "Requested version: {{ activemq_version }} / current profile: {{ profile_file.content | b64decode | regex_search(\"ARTEMIS_HOME='?.*'?\", multiline=True) }}"
     - name: Set upgrade flag
       ansible.builtin.set_fact:
-        needs_upgrade: yes
+        needs_upgrade: true
       when: (profile_file.content | b64decode | regex_search("ARTEMIS_HOME='?" + activemq_installdir + "'?", multiline=True)) == None
 
 - name: Include post upgrade tasks
@@ -109,21 +109,21 @@
   when: activemq_additional_libs | length > 0
   block:
     - name: "Create libs location"
-      become: True
+      become: true
       ansible.builtin.file:
         dest: "{{ activemq.instance_home }}/lib"
         state: directory
         owner: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
-        mode: 0750
+        mode: '0750'
     - name: "Copy additional libs to location"
-      become: True
+      become: true
       ansible.builtin.copy:
         src: "{{ item }}"
         dest: "{{ activemq.instance_home }}/lib/"
         owner: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
-        mode: 0640
+        mode: '0640'
       loop: "{{ activemq_additional_libs }}"
 
 - name: "Generate broker configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
@@ -131,9 +131,9 @@
   when: activemq_config_override_template == ''
 
 - name: Reload systemd
-  become: True
+  become: true
   ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler, because of start/flush below
-    daemon_reload: True
+    daemon_reload: true
   when:
     - systemdunit is defined
     - systemdunit.changed
@@ -154,8 +154,8 @@
     - name: Check service status
       ansible.builtin.command: "systemctl status {{ activemq.instance_name }}"
       register: activemq_service_status
-      become: True
-      changed_when: False
+      become: true
+      changed_when: false
       delay: 5
     - name: Verify service status
       ansible.builtin.assert:
@@ -165,19 +165,19 @@
   rescue:
     - name: "Start and wait for {{ activemq.service_name }} service"
       ansible.builtin.include_tasks: start.yml
-      run_once: True
+      run_once: true
 
 - name: Create default logs directory
-  become: True
+  become: true
   ansible.builtin.file:
     state: directory
     dest: "/var/log/{{ activemq.service_name }}"
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
-    mode: 0750
+    mode: '0750'
 
 - name: Link default logs directory
-  become: True
+  become: true
   ansible.builtin.file:
     state: link
     src: "{{ activemq.instance_home }}/log"
