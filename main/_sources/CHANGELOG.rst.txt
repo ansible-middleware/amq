@@ -4,8 +4,16 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
-v2.0.1-devel
+v2.0.2-devel
 ============
+
+Release Summary
+---------------
+
+Internal release, documentation or test changes only.
+
+v2.0.1
+======
 
 Minor Changes
 -------------
