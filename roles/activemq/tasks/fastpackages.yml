@@ -5,13 +5,13 @@
   changed_when: False
   failed_when: False
 
-- name: "Add missing packages to the yum install list"
+- name: "Add missing packages to the install list"
   ansible.builtin.set_fact:
     packages_to_install: "{{ packages_to_install | default([]) + rpm_info.stdout_lines | map('regex_findall', 'package (.+) is not installed$') | default([]) | flatten }}"
 
 - name: "Install packages: {{ packages_to_install }}"
-  become: True
-  ansible.builtin.yum:
+  become: true
+  ansible.builtin.dnf:
     name: "{{ packages_to_install }}"
     state: present
   when: packages_to_install | default([]) | length > 0

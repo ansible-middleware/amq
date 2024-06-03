@@ -11,7 +11,7 @@
   loop_control:
     loop_var: connector
     label: "{{ connector.name }}"
-  no_log: True
+  no_log: true
 
 - name: Create connector configuration in broker.xml
   middleware_automation.common.xml:
@@ -22,9 +22,9 @@
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
-    pretty_print: yes
-  become: True
-  no_log: True
+    pretty_print: true
+  become: true
+  no_log: true
   notify:
     - restart amq_broker
 
@@ -46,7 +46,7 @@
         namespaces:
           conf: urn:activemq
           core: urn:activemq:core
-        pretty_print: yes
-      become: True
+        pretty_print: true
+      become: true
       notify:
         - restart amq_broker

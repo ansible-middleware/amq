@@ -112,7 +112,7 @@
     validate: true
     input_type: xml
   when: activemq_diverts | length > 0
-  run_once: True
+  run_once: true
   delegate_to: localhost
 
 - name: Create amqp broker connections configuration string
@@ -154,5 +154,5 @@
     xmlstring: "<core xmlns=\"urn:activemq:core\"><security-settings>{{ validate_security_settings | flatten | join(' ') | trim }}</security-settings></core>"
     validate: true
     input_type: xml
-  run_once: True
+  run_once: true
   delegate_to: localhost

@@ -19,7 +19,7 @@
 - name: "Create service user"
   block:
     - name: "Create {{ activemq.service_name }} service user"
-      become: True
+      become: true
       ansible.builtin.user:
         name: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
@@ -59,7 +59,7 @@
     archive: "{{ activemq_dest }}/{{ activemq.bundle }}"
 
 - name: Check download archive path
-  become: True
+  become: true
   ansible.builtin.stat:
     path: "{{ archive }}"
   register: archive_path

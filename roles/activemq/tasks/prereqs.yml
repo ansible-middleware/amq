@@ -1,12 +1,4 @@
 ---
-# - name: Validate password strength
-#   ansible.builtin.assert:
-#     that:
-#       - activemq_admin_password | length > 12
-#     quiet: True
-#     fail_msg: "The password is empty, invalid, or too weak. Please set the variable to a 16+ char long string"
-#     success_msg: "Password OK: {{ item }}"
-
 - name: Clear internal templating variables
   ansible.builtin.set_fact:
     security_settings: []
@@ -23,11 +15,14 @@
 
 - name: Validate credentials
   ansible.builtin.assert:
-    that:
-      - (rhn_username is defined and amq_broker_enable is defined and amq_broker_enable) or amq_broker_enable is not defined or not amq_broker_enable or activemq_offline_install
-      - (rhn_password is defined and amq_broker_enable is defined and amq_broker_enable) or amq_broker_enable is not defined or not amq_broker_enable or activemq_offline_install
+    that: >
+      ((rhn_username is defined and amq_broker_enable is defined and amq_broker_enable) or
+        amq_broker_enable is not defined or not amq_broker_enable or activemq_offline_install) and
+      ((rhn_password is defined and amq_broker_enable is defined and amq_broker_enable) or
+        amq_broker_enable is not defined or not amq_broker_enable or activemq_offline_install)
     quiet: true
-    fail_msg: "Cannot install Red Hat AMQ Broker without RHN credentials. Check rhn_username and rhn_password are defined or use offline installation"
+    fail_msg: >
+      Cannot install Red Hat AMQ Broker without RHN credentials. Check rhn_username and rhn_password are defined or use offline installation
     success_msg: "{{ 'Installing ' + activemq.service_name }}"
 
 - name: Validate TLS config
@@ -55,14 +50,39 @@
   register: local_path
   delegate_to: localhost
   run_once: true
+  become: false
 
 - name: Validate local download path
   ansible.builtin.assert:
     that:
       - local_path.stat.exists
+      - local_path.stat.readable
+      - activemq_offline_install or local_path.stat.writeable
     quiet: true
     fail_msg: "Defined controller path for downloading resource is incorrect: {{ activemq_local_archive_repository }}"
     success_msg: "Will download resource to controller path: {{ local_path.stat.path }}"
+  delegate_to: localhost
+  run_once: true
+
+- name: Check downloaded archive if offline
+  ansible.builtin.stat:
+    path: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
+  when: activemq_offline_install
+  register: local_archive_path_check
+  delegate_to: localhost
+  run_once: true
+
+- name: Validate local downloaded archive if offline
+  ansible.builtin.assert:
+    that:
+      - local_archive_path_check.stat.exists
+      - local_archive_path_check.stat.readable
+    quiet: true
+    fail_msg: "Configured for offline install but install archive not found at: {{ local_archive_path_check.stat.path }}"
+    success_msg: "Will install offline with expected archive: {{ local_archive_path_check.stat.path }}"
+  when: activemq_offline_install
+  delegate_to: localhost
+  run_once: true
 
 - name: Validate local custom template
   ansible.builtin.assert:

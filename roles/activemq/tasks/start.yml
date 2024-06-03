@@ -3,6 +3,6 @@
   throttle: 1
   ansible.builtin.systemd:
     name: "{{ activemq.instance_name }}"
-    enabled: yes
+    enabled: true
     state: started
   become: True
