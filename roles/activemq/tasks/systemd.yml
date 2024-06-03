@@ -56,6 +56,9 @@
   ansible.builtin.command:
     cmd: "{{ activemq.home }}/bin/artemis create {{ activemq.instance_home }} {{ activemq_options }}"
     creates: "{{ activemq.instance_home }}/bin/artemis-service"
+  environment:
+    PATH: "{{ rpm_java_home | default(activemq_rpm_java_home, true) }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    JAVA_HOME: "{{ rpm_java_home }}"
   become: true
   become_user: "{{ activemq_service_user }}"
   register: broker_created
