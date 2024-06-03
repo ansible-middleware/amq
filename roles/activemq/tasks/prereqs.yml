@@ -15,13 +15,14 @@
 
 - name: Validate credentials
   ansible.builtin.assert:
-    that:
-      - (rhn_username is defined and amq_broker_enable is defined and amq_broker_enable) or \
-        amq_broker_enable is not defined or not amq_broker_enable or activemq_offline_install
-      - (rhn_password is defined and amq_broker_enable is defined and amq_broker_enable) or \
-        amq_broker_enable is not defined or not amq_broker_enable or activemq_offline_install
+    that: >
+      ((rhn_username is defined and amq_broker_enable is defined and amq_broker_enable) or
+        amq_broker_enable is not defined or not amq_broker_enable or activemq_offline_install) and
+      ((rhn_password is defined and amq_broker_enable is defined and amq_broker_enable) or
+        amq_broker_enable is not defined or not amq_broker_enable or activemq_offline_install)
     quiet: true
-    fail_msg: "Cannot install Red Hat AMQ Broker without RHN credentials. Check rhn_username and rhn_password are defined or use offline installation"
+    fail_msg: >
+      Cannot install Red Hat AMQ Broker without RHN credentials. Check rhn_username and rhn_password are defined or use offline installation
     success_msg: "{{ 'Installing ' + activemq.service_name }}"
 
 - name: Validate TLS config
