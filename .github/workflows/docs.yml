@@ -15,3 +15,4 @@ jobs:
     with:
       fqcn: 'middleware_automation/amq'
       collection_fqcn: 'middleware_automation.amq'
+      historical_docs: 'false'
