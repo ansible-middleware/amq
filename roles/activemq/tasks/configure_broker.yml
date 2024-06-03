@@ -1,6 +1,6 @@
 ---
 - name: "Configure AMQ broker logging"
-  become: True
+  become: true
   ansible.builtin.template:
     src: "{{ activemq_logger_config_template_path }}{{ activemq_logger_config_template }}"
     dest: "{{ activemq.instance_home }}/etc/{{ activemq_logger_config_template | basename | regex_replace('[.]j2$', '') }}"
@@ -22,8 +22,8 @@
         namespaces:
           conf: urn:activemq
           core: urn:activemq:core
-        pretty_print: yes
-      become: True
+        pretty_print: true
+      become: true
       notify:
         - restart amq_broker
     - name: "Configure ha-policy"
@@ -35,8 +35,8 @@
         namespaces:
           conf: urn:activemq
           core: urn:activemq:core
-        pretty_print: yes
-      become: True
+        pretty_print: true
+      become: true
       notify:
         - restart amq_broker
 
@@ -74,7 +74,7 @@
   when: activemq_broker_connections | length > 0
 
 - name: "Configure jolokia access"
-  become: True
+  become: true
   ansible.builtin.template:
     src: jolokia-access.xml.j2
     dest: "{{ activemq.instance_home }}/etc/jolokia-access.xml"
@@ -85,7 +85,7 @@
     - restart amq_broker
 
 - name: "Configure jaas"
-  become: True
+  become: true
   ansible.builtin.template:
     src: "{{ activemq_auth_template }}"
     dest: "{{ activemq.instance_home }}/etc/login.config"
@@ -96,22 +96,22 @@
     - restart amq_broker
 
 - name: "Configure prometheus metrics"
-  become: True
+  become: true
   when: activemq_prometheus_enabled and amq_broker_enable is defined and amq_broker_enable
   block:
     - name: Find available library path from installation
       ansible.builtin.find:
         paths: "{{ activemq.home }}/lib/"
         file_type: file
-        use_regex: yes
-        recurse: yes
+        use_regex: true
+        recurse: true
         patterns: [ 'artemis-prometheus-metrics-plugin-([0-9]+[.]){3}redhat-[0-9]+.jar$' ]
       register: prometheus_filename
     - name: Ensure lib is available to instance
       ansible.builtin.copy:
         src: "{{ prometheus_filename.files[0].path }}"
         dest: "{{ activemq.instance_home }}/lib/"
-        remote_src: yes
+        remote_src: true
         owner: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
         mode: '0644'

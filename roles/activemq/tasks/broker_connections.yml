@@ -16,8 +16,8 @@
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
-    pretty_print: yes
-  become: True
+    pretty_print: true
+  become: true
 
 - name: Create broker connections configuration in broker.xml
   middleware_automation.common.xml:
@@ -28,7 +28,7 @@
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
-    pretty_print: yes
-  become: True
+    pretty_print: true
+  become: true
   notify:
     - restart amq_broker with no config refresh
