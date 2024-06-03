@@ -10,6 +10,7 @@ v2.0.2-devel
 Bugfixes
 --------
 
+- Artemis command to create broker instance uses correct JAVA_HOME `#125 <https://github.com/ansible-middleware/amq/pull/125>`_
 - Improve validations for offline installs `#124 <https://github.com/ansible-middleware/amq/pull/124>`_
 
 v2.0.1
