@@ -812,23 +812,26 @@
 <span class="w">    </span><span class="nt">operations</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mirror</span>
 <span class="w">        </span><span class="nt">parameters</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">queue-removal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">          </span><span class="nt">queue_removal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </pre></div>
 </div>
 <p>Sample for sender-receiver operation:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_broker_connections</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;tcp://&lt;hostname&gt;:&lt;port&gt;&#39;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;tcp://&lt;hostname&gt;:&lt;port&gt;?&lt;options&gt;&#39;</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">other-server</span>
+<span class="w">    </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
 <span class="w">    </span><span class="nt">operations</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sender</span>
 <span class="w">        </span><span class="nt">parameters</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">address-match</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;queues.#&#39;</span>
+<span class="w">          </span><span class="nt">address_match</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;queues.#&#39;</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">receiver</span>
 <span class="w">        </span><span class="nt">parameters</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">address-match</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;remotequeues.#&#39;</span>
+<span class="w">          </span><span class="nt">address_match</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;remotequeues.#&#39;</span>
 </pre></div>
 </div>
-<p>Notice the local queues for <code class="docutils literal notranslate"><span class="pre">remotequeues.#</span></code> need to be created on this broker.</p>
+<p>Note: operations parameters keys are using underscore (<code class="docutils literal notranslate"><span class="pre">address_match:</span></code>) instead of dash (<code class="docutils literal notranslate"><span class="pre">address-match:</span></code>). Dash works only if using single quotes (ie. <code class="docutils literal notranslate"><span class="pre">'address-match':</span></code>)</p>
+<p>Note: the local queues for <code class="docutils literal notranslate"><span class="pre">remotequeues.#</span></code> need to be created on this broker.</p>
 </section>
 <section id="tls-ssl-protocol">
 <h3>TLS/SSL protocol<a class="headerlink" href="#tls-ssl-protocol" title="Link to this heading"></a></h3>
