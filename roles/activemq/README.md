@@ -300,8 +300,10 @@ Sample for sender-receiver operation:
 
 ```yaml
 activemq_broker_connections:
-  - uri: 'tcp://<hostname>:<port>'
+  - uri: 'tcp://<hostname>:<port>?<options>'
     name: other-server
+    user: user
+    password: password
     operations:
       - type: sender
         parameters:
@@ -311,7 +313,7 @@ activemq_broker_connections:
           address_match: 'remotequeues.#'
 ```
 
-Note: notice how operations parameters keys are using underscore (`address_match:`) instead of dash (`address-match:`). Dash works only if using single quotes (ie. `'address-match':`)
+Note: operations parameters keys are using underscore (`address_match:`) instead of dash (`address-match:`). Dash works only if using single quotes (ie. `'address-match':`)
 
 Note: the local queues for `remotequeues.#` need to be created on this broker.
 
