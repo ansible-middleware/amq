@@ -73,7 +73,7 @@ Role Defaults
 |`activemq_http_port`| Service http port serving console and REST api | `8161` |
 |`activemq_jolokia_url`| URL for jolokia REST api | `http://{{ activemq_host }}:{{ activemq_http_port }}/console/jolokia` |
 |`activemq_console_url`| URL for console service | `http://{{ activemq_host }}:{{ activemq_http_port }}/console/` |
-|`activemq_jvm_package`| RPM package to install for the service | `java-11-openjdk-headless` |
+|`activemq_jvm_package`| RPM package to install for the service | `java-17-openjdk-headless` |
 |`activemq_java_opts`| Additional JVM options for the service | `-Xms512M -Xmx2G [...]` |
 |`activemq_port`| Main port for the broker instance | `61616` |
 |`activemq_port_hornetq`| hornetq port for the broker instance | `5445` |
