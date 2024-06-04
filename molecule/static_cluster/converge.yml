@@ -22,7 +22,7 @@
         parameters:
           tcpSendBufferSize: 1048576
           tcpReceiveBufferSize: 1048576
-          protocols: CORE
+          protocols: CORE,AMQP
           useEpoll: true
           sslEnabled: true
           keyStorePath: "{{ activemq_tls_keystore_dest }}"
@@ -59,15 +59,24 @@
           trustStorePath: "{{ activemq_tls_truststore_dest }}"
           trustStorePassword: "{{ activemq_tls_truststore_password }}"
           verifyHost: False
-    activemq_broker_connections:
-      - uri: vm://0
-        name: brokerA-2-brokerB
-        operations:
-          - type: sender
-            parameters:
-              address_match: 'b.#'
-          - type: receiver
-            parameters:
-              address_match: 'a.#'
+    activemq_addresses:
+      - name: queue.in
+        anycast:
+          - name: queue.in
+      - name: queue.out
+        anycast:
+          - name: queue.out
+      - name: DLQ
+        anycast:
+          - name: DLQ
+      - name: ExpiryQueue
+        anycast:
+          - name: ExpiryQueue
+      - name: a.test
+        anycast:
+          - name: a.test
+      - name: b.test
+        anycast:
+          - name: b.test
   roles:
     - middleware_automation.amq.activemq
