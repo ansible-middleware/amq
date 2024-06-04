@@ -7,6 +7,11 @@ middleware\_automation.amq Release Notes
 v2.0.2-devel
 ============
 
+Minor Changes
+-------------
+
+- Set minimum ansible-core version to >=2.15 `#127 <https://github.com/ansible-middleware/amq/pull/127>`_
+
 Bugfixes
 --------
 
