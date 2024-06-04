@@ -42,9 +42,21 @@ provisioner:
       localhost:
         ansible_python_interpreter: "{{ ansible_playbook_python }}"
       instance1:
-        activemq_ha_role: 'master'
+        activemq_ha_role: 'primary'
+        activemq_broker_connections:
+          - uri: 'tcp://instance1:61616?sslEnabled=True;keyStorePath=/opt/amq/amq-broker/etc/identity.ks;keyStorePassword=securepass;trustStorePath=/opt/amq/amq-broker/etc/trust.ks;trustStorePassword=securepass;verifyHost=False'
+            name: brokerA-2-brokerA
+            user: amq-broker
+            password: amq-broker
+            operations:
+              - type: sender
+                parameters:
+                  address_match: 'b.#'
+              - type: receiver
+                parameters:
+                  address_match: 'a.#'
       instance2:
-        activemq_ha_role: 'slave'
+        activemq_ha_role: 'backup'
   env:
     ANSIBLE_FORCE_COLOR: "true"
 verifier:

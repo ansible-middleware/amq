@@ -293,25 +293,29 @@ activemq_broker_connections:
     operations:
       - type: mirror
         parameters:
-          queue-removal: false
+          queue_removal: false
 ```
 
 Sample for sender-receiver operation:
 
 ```yaml
 activemq_broker_connections:
-  - uri: 'tcp://<hostname>:<port>'
+  - uri: 'tcp://<hostname>:<port>?<options>'
     name: other-server
+    user: user
+    password: password
     operations:
       - type: sender
         parameters:
-          address-match: 'queues.#'
+          address_match: 'queues.#'
       - type: receiver
         parameters:
-          address-match: 'remotequeues.#'
+          address_match: 'remotequeues.#'
 ```
 
-Notice the local queues for `remotequeues.#` need to be created on this broker.
+Note: operations parameters keys are using underscore (`address_match:`) instead of dash (`address-match:`). Dash works only if using single quotes (ie. `'address-match':`)
+
+Note: the local queues for `remotequeues.#` need to be created on this broker.
 
 
 #### TLS/SSL protocol

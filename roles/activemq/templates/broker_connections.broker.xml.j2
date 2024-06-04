@@ -1,5 +1,5 @@
-        <amqp-connection uri="{{ broker_connection.uri }}" name="{{ broker_connection.name }}">
-{% for operation in broker_connection.operation, wantlist=True) %}
-            <{{ operation.type }} {% for param in lookup('ansible.builtin.dict', broker_connection.parameters, wantlist=True) %}{{ param.key | replace('_','-') }}="{{ param.value }}" {% endfor %}/>
+        <amqp-connection uri="{{ broker_connection.uri }}" name="{{ broker_connection.name }}" {% if broker_connection['user'] is defined %} user="{{ broker_connection.user }}" password="{{ broker_connection.password | default(activemq_instance_password) }}"{% endif %}>
+{% for operation in broker_connection.operations | default([]) %}
+            <{{ operation.type }} {% for param in lookup('ansible.builtin.dict', operation.parameters, wantlist=True) | default([]) %}{{ param.key | replace('_','-') }}="{{ param.value }}" {% endfor %}/>
 {% endfor %}
-        </amqp-connection>
+      </amqp-connection>
