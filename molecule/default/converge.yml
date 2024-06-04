@@ -54,5 +54,23 @@
         routing_type: ANYCAST
         filter: "msgType LIKE '%ff%'"
         exclusive: True
+    activemq_addresses:
+      - name: queue.in
+        anycast:
+          - name: queue.in
+      - name: queue.out
+        anycast:
+          - name: queue.out
+      - name: DLQ
+        anycast:
+          - name: DLQ
+      - name: ExpiryQueue
+        anycast:
+          - name: ExpiryQueue
+      - name: importantTopic
+        multicast:
+      - name: client123.pubsub
+        multicast:
+          - name: client123.pubsub.foo
   roles:
     - middleware_automation.amq.activemq
