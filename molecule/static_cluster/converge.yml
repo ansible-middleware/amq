@@ -59,5 +59,15 @@
           trustStorePath: "{{ activemq_tls_truststore_dest }}"
           trustStorePassword: "{{ activemq_tls_truststore_password }}"
           verifyHost: False
+    activemq_broker_connections:
+      - uri: vm://0
+        name: brokerA-2-brokerB
+        operations:
+          - type: sender
+            parameters:
+              address_match: 'b.#'
+          - type: receiver
+            parameters:
+              address_match: 'a.#'
   roles:
     - middleware_automation.amq.activemq
