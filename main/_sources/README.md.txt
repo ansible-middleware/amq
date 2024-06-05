@@ -3,7 +3,7 @@
 <!--start build_status -->
 [![Build Status](https://github.com/ansible-middleware/amq/workflows/CI/badge.svg?branch=main)](https://github.com/ansible-middleware/amq/actions/workflows/ci.yml)
 
-> **_NOTE:_ If you are Red Hat customer, install `redhat.amq_broker` from [Automation Hub](https://console.redhat.com/ansible/ansible-dashboard) as the certified version of this collection.**
+> **_NOTE:_ If you are Red Hat customer, install `redhat.amq_broker` from [Automation Hub](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/amq_broker/) as the certified version of this collection.**
 <!--end build_status -->
 
 Collection to install and configure [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis) / [Red Hat AMQ broker](https://access.redhat.com/documentation/en-us/red_hat_amq_broker).
@@ -15,18 +15,17 @@ Collection to install and configure [Apache ActiveMQ Artemis](https://activemq.a
 This collection has been tested against following Ansible versions: **>=2.15.0**.
 <!--end requires_ansible-->
 
-
+<!--start roles_paths -->
 ## Included content
 
-<!--start roles_paths -->
 ### Roles:
 
 * [`activemq`](https://github.com/ansible-middleware/amq/tree/main/roles/activemq): Perform installation and configuration
-<!--end roles_paths -->
 
 ### Plugins:
 
 * `pbkdf2_hmac`: filter plugin used internally to generate unidirectional activemq users password hashes
+<!--end roles_paths -->
 
 
 ## Installation
