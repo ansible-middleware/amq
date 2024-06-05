@@ -4,8 +4,16 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
-v2.0.2-devel
+v2.0.3-devel
 ============
+
+Major Changes
+-------------
+
+- Update default jdk11 to jdk17 `#132 <https://github.com/ansible-middleware/amq/pull/132>`_
+
+v2.0.2
+======
 
 Minor Changes
 -------------
