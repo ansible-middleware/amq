@@ -4,6 +4,22 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.0.2
+======
+
+Minor Changes
+-------------
+
+- Set minimum ansible-core version to >=2.15 `#127 <https://github.com/ansible-middleware/amq/pull/127>`_
+
+Bugfixes
+--------
+
+- Artemis command to create broker instance uses correct JAVA_HOME `#125 <https://github.com/ansible-middleware/amq/pull/125>`_
+- Fix ``broker-connections`` templating error, add missing parameters `#133 <https://github.com/ansible-middleware/amq/pull/133>`_
+- Fix configuration of multicast addresses/queues `#131 <https://github.com/ansible-middleware/amq/pull/131>`_
+- Improve validations for offline installs `#124 <https://github.com/ansible-middleware/amq/pull/124>`_
+
 v2.0.1
 ======
 
