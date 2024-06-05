@@ -114,7 +114,7 @@ argument_specs:
                 type: "str"
             activemq_jvm_package:
                 # line 35 of defaults/main.yml
-                default: "java-11-openjdk-headless"
+                default: "java-17-openjdk-headless"
                 description: "RPM package to install for the service"
                 type: "str"
             activemq_java_home:

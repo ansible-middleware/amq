@@ -29,7 +29,7 @@ activemq_http_port: 8161
 activemq_jolokia_url: "http://{{ activemq_host }}:{{ activemq_http_port }}/console/jolokia"
 activemq_console_url: "http://{{ activemq_host }}:{{ activemq_http_port }}/console/"
 activemq_configuration_file_refresh_period: 5000
-activemq_jvm_package: java-11-openjdk-headless
+activemq_jvm_package: java-17-openjdk-headless
 activemq_java_home:
 activemq_java_opts: "{{ [
    activemq_java_opts_mem,
