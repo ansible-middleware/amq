@@ -20,14 +20,6 @@ To install, from the collection root directory, run:
 Versions
 --------
 
-| AMQ VERSION | Release Date      | Artemis Version | Notes           |
-|:------------|:------------------|:----------------|:----------------|
-| `AMQ 7.11`  | 2023.Q2           | `2.28.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq_broker/7.11/html/release_notes_for_red_hat_amq_broker_7.11/index)|
-| `AMQ 7.10`  | 2021.Q4           | `2.21.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq_broker/7.10/html/release_notes_for_red_hat_amq_broker_7.10/index)|
-| `AMQ 7.9`   | 2021.Q3           | `2.18.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq/2021.q3/html-single/release_notes_for_red_hat_amq_broker_7.9/index)|
-| `AMQ 7.8`   | 2020.Q4           | `2.16.0`        |[Release Notes](https://access.redhat.com/documentation/en-us/red_hat_amq/2020.q4/html-single/release_notes_for_red_hat_amq_broker_7.8/index)|
-
-
 AMQ 7 Broker and Clients LTS Support Policy: https://access.redhat.com/articles/7009946
 
 
@@ -39,7 +31,7 @@ Role Defaults
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
-|`activemq_version`| Apache Artemis version | `2.32.0` |
+|`activemq_version`| Apache Artemis version | `2.34.0` |
 |`activemq_archive`| Apache Artemis install archive filename | `apache-artemis-{{ activemq_version }}-bin.zip` |
 |`activemq_download_url`| Apache Artemis download URL | `https://archive.apache.org/dist/activemq/activemq-artemis/{{ activemq_version }}/{{ activemq_archive }}` |
 |`activemq_installdir`| Apache Artemis Installation path | `{{ activemq_dest }}/apache-artemis-{{ activemq_version }}` |
