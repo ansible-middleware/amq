@@ -26,18 +26,19 @@
       run_once: true
 
     - name: Check cluster status
+      run_once: true
       block:
         - name: Check master on instance1
           ansible.builtin.assert:
             that:
-              - "'live Message Broker is starting' in slurped_log_instance1.content|b64decode or 'primary Message Broker is starting' in slurped_log_instance1.content|b64decode"
+              - "'live Message Broker is starting' in slurped_log_instance1.content|b64decode or 'Primary message broker is starting' in slurped_log_instance1.content|b64decode"
               - "'Waiting indefinitely to obtain live lock' in slurped_log_instance1.content|b64decode or 'Waiting indefinitely to obtain primary lock' in slurped_log_instance1.content|b64decode"
               - "'Server is now live' in slurped_log_instance1.content|b64decode or 'Server is now active' in slurped_log_instance1.content|b64decode"
             quiet: true
         - name: Check slave on instance2
           ansible.builtin.assert:
             that:
-              - "'backup Message Broker is starting' in slurped_log_instance2.content|b64decode"
+              - "'Backup message broker is starting' in slurped_log_instance2.content|b64decode"
               - "'Waiting to become backup node' in slurped_log_instance2.content|b64decode"
               - "'got backup lock' in slurped_log_instance2.content|b64decode"
               - "'waiting live to fail before it gets active' in slurped_log_instance2.content|b64decode or 'waiting for primary to fail before activating' in slurped_log_instance2.content|b64decode"
