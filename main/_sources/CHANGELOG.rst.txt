@@ -12,6 +12,11 @@ Major Changes
 
 - Update default jdk11 to jdk17 `#132 <https://github.com/ansible-middleware/amq/pull/132>`_
 
+Minor Changes
+-------------
+
+- Add config for in-vm acceptors/connectors `#135 <https://github.com/ansible-middleware/amq/pull/135>`_
+
 v2.0.2
 ======
 
