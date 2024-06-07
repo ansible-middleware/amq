@@ -16,6 +16,7 @@ Minor Changes
 -------------
 
 - Add config for in-vm acceptors/connectors `#135 <https://github.com/ansible-middleware/amq/pull/135>`_
+- Update to artemis 2.34.0 / amq_broker 7.12 `#136 <https://github.com/ansible-middleware/amq/pull/136>`_
 
 v2.0.2
 ======
