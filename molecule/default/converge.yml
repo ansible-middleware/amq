@@ -36,6 +36,7 @@
           protocols: CORE,MQTT
           useEpoll: true
       - name: amqp
+        scheme: tcp
         bind_address: "{{ activemq_host }}"
         bind_port: "{{ activemq_port_amqp }}"
         parameters:
@@ -47,6 +48,8 @@
           amqpCredits: 1000
           amqpLowCredits: 300
           amqpDuplicateDetection: true
+      - name: invm
+        scheme: vm
     activemq_diverts:
       - name: TESTDIVERT
         address: queue.in

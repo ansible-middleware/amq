@@ -408,11 +408,11 @@ argument_specs:
                 default: "Access for java.lang and org.apache.artemis.activemq"
                 type: "list"
             activemq_acceptors:
-                description: "Acceptors configuration; list of `{ name, bind_address, bind_port, parameters(dict) }`"
+                description: "Acceptors configuration; list of `{ name, scheme, bind_address, bind_port, parameters(dict) }`"
                 default: "Generate same configuration as `artemis create`"
                 type: "list"
             activemq_connectors:
-                description: "Connectors configuration; list of `{ name, address, port, parameters(dict) }`"
+                description: "Connectors configuration; list of `{ name, scheme, address, port, parameters(dict) }`"
                 default: "Generate same configuration as `artemis create`"
                 type: "list"
             activemq_address_settings:
