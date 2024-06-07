@@ -224,6 +224,7 @@ activemq_local_archive_repository: "{{ lookup('env', 'PWD') }}"
 ### Acceptors configuration
 activemq_acceptors:
   - name: artemis
+    scheme: tcp
     bind_address: "{{ activemq_host }}"
     bind_port: "{{ activemq_port }}"
     parameters:
@@ -238,6 +239,7 @@ activemq_acceptors:
       supportAdvisory: false
       suppressInternalManagementObjects: false
   - name: amqp
+    scheme: tcp
     bind_address: "{{ activemq_host }}"
     bind_port: "{{ activemq_port_amqp }}"
     parameters:
@@ -250,6 +252,7 @@ activemq_acceptors:
       amqpLowCredits: 300
       amqpDuplicateDetection: true
   - name: stomp
+    scheme: tcp
     bind_address: "{{ activemq_host }}"
     bind_port: "{{ activemq_port_stomp }}"
     parameters:
@@ -258,6 +261,7 @@ activemq_acceptors:
       protocols: STOMP
       useEpoll: true
   - name: hornetq
+    scheme: tcp
     bind_address: "{{ activemq_host }}"
     bind_port: "{{ activemq_port_hornetq }}"
     parameters:
@@ -266,6 +270,7 @@ activemq_acceptors:
       protocols: HORNETQ,STOMP
       useEpoll: true
   - name: mqtt
+    scheme: tcp
     bind_address: "{{ activemq_host }}"
     bind_port: "{{ activemq_port_mqtt }}"
     parameters:
@@ -277,6 +282,7 @@ activemq_acceptors:
 ### Connectors configuration
 activemq_connectors:
   - name: artemis
+    scheme: tcp
     address: localhost
     port: "{{ activemq_port }}"
 

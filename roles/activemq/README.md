@@ -152,13 +152,14 @@ Role Defaults
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
-|`activemq_acceptors`| Acceptors configuration; list of `{ name(str), bind_address(str), bind_port(int), parameters(dict) }` | Generate same configuration as `artemis create` |
-|`activemq_connectors`| Connectors configuration; list of `{ name(str), address(str), port(int), parameters(dict) }` | Generate same configuration as `artemis create` |
+|`activemq_acceptors`| Acceptors configuration; list of `{ name(str), scheme(str), bind_address(str), bind_port(int), parameters(dict) }` | Generate same configuration as `artemis create` |
+|`activemq_connectors`| Connectors configuration; list of `{ name(str), scheme(str), address(str), port(int), parameters(dict) }` | Generate same configuration as `artemis create` |
 
 Sample acceptor:
 
 ```yaml
   - name: amqp
+    scheme: tcp
     bind_address: {{ activemq_host }}
     bind_port: {{ activemq_port_amqp }}
     parameters:
@@ -176,6 +177,7 @@ Sample connector with TLS:
 
 ```yaml
   - name: amqp
+    scheme: tcp
     address: 172.168.10.43
     port: 61616
     parameters:
@@ -189,6 +191,14 @@ Sample connector with TLS:
       trustStorePath: "{{ activemq_tls_truststore_dest }}"
       trustStorePassword: "{{ activemq_tls_truststore_password }}"
       verifyHost: False
+```
+
+
+Sample in-vm acceptor:
+
+```yaml
+  - name: in_vm
+    scheme: vm
 ```
 
 
