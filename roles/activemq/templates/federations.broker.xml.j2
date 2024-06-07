@@ -1,0 +1,68 @@
+
+   
+      <federation name="{{ federation.name }}" {% if federation["user"] %}user="{{ federation["user"] }}"{% endif %} {% if federation["password"] is defined %}password="{{ federation["password"] }}"{% endif %}>
+        <!-- Upstream -->
+        {% if federation["upstreams"] is defined and federation["upstreams"] |length > 0 %}{% for upstream in federation["upstreams"] %}
+        <upstream name="{{ upstream.name }}">
+            {% if upstream["discovery_group"] is defined %}
+            <discovery_group>"{{ upstream.discovery_group }}"</discovery_group>
+            {% endif %}
+            {% if upstream["static_connectors"] |length > 0 %}
+            <static-connectors>
+                {% for connector_ref in  upstream["static_connectors"] %}
+                    <connector-ref>"{{ connector_ref }}"</connector-ref>
+                {% endfor %}
+            </static-connectors>
+            {% endif %}
+            {% if upstream["policies"] |length > 0 %}{% for policy in upstream["policies"] %}
+            <policy ref="{{ policy }}"/>
+            {% endfor %}{% endif %}
+            {% for param in lookup('ansible.builtin.dict', upstream.parameters, wantlist=True) %}
+            <{{ param.key | replace('_','-') }}>{{ param.value }}</{{ param.key | replace('_','-') }}>
+            {% endfor %}
+        </upstream>
+        {% endfor %}{% endif %}
+        <!-- Downstream-->
+        {% if federation["downstreams"] |length > 0 %}{% for downstream in federation["downstreams"] %}
+        <downstream name="{{ downstream.name }}">
+            {% if downstream["discovery_group"] is defined %}
+            <discovery_group>"{{ downstream.discovery_group }}"</discovery_group>
+            {% endif %}
+            {% if downstream["static_connectors"] |length > 0 %}
+            <static-connectors>
+                {% for connector_ref in  downstream["static_connectors"] %}
+                    <connector-ref>"{{ connector_ref }}"</connector-ref>
+                {% endfor %}
+            </static-connectors>
+            {% endif %}
+            {% if downstream["policies"] |length > 0 %}{% for policy in downstream["policies"] %}
+            <policy ref="{{ policy }}"/>
+            {% endfor %}{% endif %}
+            {% for param in lookup('ansible.builtin.dict', downstream.parameters, wantlist=True) %}
+            <{{ param.key | replace('_','-') }}>{{ param.value }}</{{ param.key | replace('_','-') }}>
+            {% endfor %}
+        </downstream>
+        {% endfor %}{% endif %}
+        <!-- policy-set-->
+        {% if federation["policy_sets"] is defined and federation["policy_sets"] |length > 0 %}
+        {% for policy_set in federation["policy_sets"] %}
+        <policy-sets name="{{ policy_set.name }}">
+            {% for policy in policy_set["policies"] %}
+                <policy ref="{{ policy }}"/>
+            {% endfor %}
+        </policy-sets>
+        {% endfor %}{% endif %}
+        <!-- queue-policy-->
+        {% if federation["queue_policies"] is defined and federation["queue_policies"] |length > 0 %}
+        {% for policy in federation["queue_policies"] %}
+        <queue-policy name="{{ policy.name }}">
+            {% if policy.type == "exclude" %} 
+            <exlude queue-match="{{policy.queueMatch}}" address-match="{{policy.addressMatch}}"/>
+            {% elif  policy.type == "include" %}
+            <include queue-match="{{policy.queueMatch}}" address-match="{{policy.addressMatch}}"/>
+            {% endif %}
+        </queue-policy>
+        <!-- address-policy -->
+        {% endfor %}{% endif %}
+
+      </federation>
