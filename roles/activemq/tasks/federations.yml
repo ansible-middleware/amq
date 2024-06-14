@@ -8,8 +8,8 @@
     label: "{{ federation.name }}"
 
 - name: Ensure federations element exists in broker.xml
-  redhat.runtimes_common.xml:
-    path: "files/broker.xml"
+  middleware_automation.common.xml:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:federations
     input_type: xml
     state: present
@@ -17,10 +17,12 @@
       conf: urn:activemq
       core: urn:activemq:core
     pretty_print: yes
+  become: true
+
 
 - name: Create federations configuration in broker.xml
-  redhat.runtimes_common.xml:
-    path: "files/broker.xml"
+  middleware_automation.common.xml:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:federations
     input_type: xml
     set_children: "{{ federations }}"
@@ -28,3 +30,6 @@
       conf: urn:activemq
       core: urn:activemq:core
     pretty_print: yes
+    become: true
+    notify:
+      - restart amq_broker with no config refresh
