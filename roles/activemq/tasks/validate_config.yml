@@ -12,6 +12,7 @@
     validate_diverts: []
     validate_broker_connections: []
     valid_core_configuration_list: []
+    validate_federations: []
 
 - name: Validate configuration/core and journal configuration
   ansible.builtin.include_tasks: validate_core_config.yml
@@ -155,4 +156,22 @@
     validate: true
     input_type: xml
   run_once: true
+  delegate_to: localhost
+
+- name: Create federations configuration string
+  ansible.builtin.set_fact:
+    validate_federations: "{{ validate_federations | default([]) + [ lookup('template', 'federations.broker.xml.j2') ] }}"
+  loop: "{{ activemq_federations }}"
+  loop_control:
+    loop_var: federation
+    label: "{{ federation.name }}"
+
+- name: Validate federations
+  middleware_automation.common.xml:
+    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><federations>{{ validate_federations | join(' ') | trim }}</federations></core>"
+    validate: yes
+    input_type: xml
+  run_once: True
+  no_log: false
   delegate_to: localhost

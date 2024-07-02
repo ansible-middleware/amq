@@ -427,6 +427,10 @@ argument_specs:
                 description: "Diverts configuration; list of `{ name with parameters }`"
                 default: "[]"
                 type: "list"
+            activemq_federations:
+                description: "Federation configuration; list of `{ name with parameters }`"
+                default: "[]"
+                type: "list"
             activemq_service_override_template:
                 description: "Filename of custom systemd unit template to be deployed"
                 default: ""
