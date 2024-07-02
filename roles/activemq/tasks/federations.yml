@@ -2,7 +2,7 @@
 - name: Create federations configuration string
   ansible.builtin.set_fact:
     federations: "{{ federations | default([]) + [ lookup('template', 'federations.broker.xml.j2') ] }}"
-  loop: "{{ amq_broker_federations }}"
+  loop: "{{ activemq_federations }}"
   loop_control:
     loop_var: federation
     label: "{{ federation.name }}"
