@@ -4,6 +4,21 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.1.0
+======
+
+Major Changes
+-------------
+
+- Update default jdk11 to jdk17 `#132 <https://github.com/ansible-middleware/amq/pull/132>`_
+
+Minor Changes
+-------------
+
+- Add config for in-vm acceptors/connectors `#135 <https://github.com/ansible-middleware/amq/pull/135>`_
+- Federated addressing `#137 <https://github.com/ansible-middleware/amq/pull/137>`_
+- Update to artemis 2.34.0 / amq_broker 7.12 `#136 <https://github.com/ansible-middleware/amq/pull/136>`_
+
 v2.0.2
 ======
 
