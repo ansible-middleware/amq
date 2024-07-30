@@ -143,7 +143,7 @@
     chown -R {{ activemq_service_user }}:{{ activemq_service_group }} {{ activemq.instance_home }}
   register: chown_status
   changed_when: chown_status.stdout != ""
-  become: True
+  become: true
 
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers

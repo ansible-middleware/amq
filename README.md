@@ -18,13 +18,16 @@ This collection has been tested against following Ansible versions: **>=2.15.0**
 <!--start roles_paths -->
 ## Included content
 
+
 ### Roles:
 
-* [`activemq`](https://github.com/ansible-middleware/amq/tree/main/roles/activemq): Perform installation and configuration
+* `activemq`: perform installation and configuration
+* `activemq_uninstall`: uninstallation of a deploment made by the collection
+
 
 ### Plugins:
 
-* `pbkdf2_hmac`: filter plugin used internally to generate unidirectional activemq users password hashes
+* `pbkdf2_hmac`: filter plugin used internally to generate unidirectional account password hashes
 <!--end roles_paths -->
 
 
@@ -36,14 +39,6 @@ This collection has been tested against following Ansible versions: **>=2.15.0**
     ansible-galaxy collection install middleware_automation.amq
 
 <!--end galaxy_download -->
-
-
-### Build and install locally
-
-Clone the repository, checkout the tag you want to build, or pick the main branch for the development version; then:
-
-    ansible-galaxy collection build .
-    ansible-galaxy collection install middleware_automation-amq-*.tar.gz
 
 
 ### Dependencies
