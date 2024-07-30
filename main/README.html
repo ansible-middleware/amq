@@ -57,7 +57,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#installing-the-collection-from-ansible-galaxy">Installing the Collection from Ansible Galaxy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#build-and-install-locally">Build and install locally</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#ansible-collections">Ansible collections:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#python">Python:</a></li>
@@ -79,18 +78,18 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="plugins/index.html">Plugin Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="roles/index.html">Role Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="developing.html">Contributor’s Guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="releasing.html">Collection Versioning Strategy</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">General</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usage guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="static_cluster.html">HA setup active/standby</a></li>
 <li class="toctree-l1"><a class="reference internal" href="masked_passwords.html">Encypted passwords</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developing.html">Developing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releasing.html">Releasing</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
 <ul>
@@ -100,7 +99,6 @@
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
 </ul>
 
@@ -149,13 +147,14 @@
 <section id="roles">
 <h3>Roles:<a class="headerlink" href="#roles" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/ansible-middleware/amq/tree/main/roles/activemq"><code class="docutils literal notranslate"><span class="pre">activemq</span></code></a>: Perform installation and configuration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">activemq</span></code>: perform installation and configuration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">activemq_uninstall</span></code>: uninstallation of a deploment made by the collection</p></li>
 </ul>
 </section>
 <section id="plugins">
 <h3>Plugins:<a class="headerlink" href="#plugins" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">pbkdf2_hmac</span></code>: filter plugin used internally to generate unidirectional activemq users password hashes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pbkdf2_hmac</span></code>: filter plugin used internally to generate unidirectional account password hashes</p></li>
 </ul>
 <!--end roles_paths -->
 </section>
@@ -169,14 +168,6 @@
 </pre></div>
 </div>
 <!--end galaxy_download -->
-</section>
-<section id="build-and-install-locally">
-<h3>Build and install locally<a class="headerlink" href="#build-and-install-locally" title="Link to this heading"></a></h3>
-<p>Clone the repository, checkout the tag you want to build, or pick the main branch for the development version; then:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection build .
-ansible-galaxy collection install middleware_automation-amq-*.tar.gz
-</pre></div>
-</div>
 </section>
 <section id="dependencies">
 <h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h3>

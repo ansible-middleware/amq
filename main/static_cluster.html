@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Using custom encypted passwords" href="masked_passwords.html" />
-    <link rel="prev" title="Collection Versioning Strategy" href="releasing.html" /> 
+    <link rel="prev" title="middleware_automation.amq Release Notes" href="CHANGELOG.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,24 +51,31 @@
 <li class="toctree-l1"><a class="reference internal" href="README.html">Ansible Collection - AMQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins/index.html">Plugin Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="roles/index.html">Role Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="developing.html">Contributor’s Guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="releasing.html">Collection Versioning Strategy</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">General</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usage guides</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">HA setup active/standby</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#prepare-a-base-installation-of-activemq">Prepare a base installation of activemq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prepare-the-instances">Prepare the instances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prepare-a-shared-file-system">Prepare a shared file-system</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#create-an-inventory-with-two-nodes">Create an inventory with two nodes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configuration-points-for-ha">Configuration points for ha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-points-for-ha">Configuration points for HA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-installation-of-activemq">Run installation of activemq</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#deployment-and-validation">Deployment and validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#futher-reading">Futher reading</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="masked_passwords.html">Encypted passwords</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developing.html">Developing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releasing.html">Releasing</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
 <ul>
@@ -78,7 +85,6 @@
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
 </ul>
 
@@ -108,18 +114,127 @@
              
   <section id="ha-configuration-with-active-standby-nodes">
 <h1>Ha configuration with active/standby nodes<a class="headerlink" href="#ha-configuration-with-active-standby-nodes" title="Link to this heading"></a></h1>
-<p>TODO pick the corresponding molecule test and write down the guide</p>
-<section id="prepare-a-base-installation-of-activemq">
-<h2>Prepare a base installation of activemq<a class="headerlink" href="#prepare-a-base-installation-of-activemq" title="Link to this heading"></a></h2>
+<p>This guide will show how to deploy activemq on two nodes, configured with active/standby high availability.
+In this setup, the two instances act as a single messaging node, with the ‘primary’ (active) instance brokering
+all messages, and the ‘backup’ instance standing-by on a lock, ready to pick up the ‘active’ work as soon
+as the ‘primary’ instance terminates, or fails.</p>
+<p>The guide will rely on podman containers, but it can easily be adapted to other virtual machine or cloud providers,
+or even bare-metal.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<section id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h3>
+<p>On the machine running this guide, you’ll need RHEL 9.2+, or in detail:</p>
+<ul class="simple">
+<li><p>python 3.11+</p></li>
+<li><p>ansible-core &gt;= 2.16</p></li>
+<li><p>podman 5.1+</p></li>
+</ul>
+<p>Then install the collections:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>containers.podman
+<span class="w">    </span>ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>middleware_automation.amq
+</pre></div>
+</div>
+<p>And python deps, for instance via pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>lxml<span class="w"> </span>jmespath
+</pre></div>
+</div>
+</section>
+<section id="prepare-the-instances">
+<h3>Prepare the instances<a class="headerlink" href="#prepare-the-instances" title="Link to this heading"></a></h3>
+<p>We will create two podman containers using the ubi-init image, sharing the same network.</p>
+<p>Lets create the network first:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>amq
+</pre></div>
+</div>
+<p>We will create the containes inside the network like the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>podman<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>amq<span class="w"> </span>-d<span class="w"> </span>--name<span class="o">=</span>amq1<span class="w"> </span>ubi9/ubi-init:latest
+</pre></div>
+</div>
+</section>
+<section id="prepare-a-shared-file-system">
+<h3>Prepare a shared file-system<a class="headerlink" href="#prepare-a-shared-file-system" title="Link to this heading"></a></h3>
+<p>Artemis acivemq supports a set of shared filesystem services with different characteristics. For keeping it simple in this guide,
+and thanks to fact we are using containers, we will rely on a shared directory on the containerization host, mounted on both containers.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>sharedfs
+podman<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>amq<span class="w"> </span>--privileged<span class="w"> </span>-d<span class="w"> </span>--name<span class="o">=</span>amq1<span class="w"> </span>--volume<span class="w"> </span>sharedfs:/opt/amq/amq-broker/data/shared:rw,z<span class="w"> </span>ubi9/ubi-init:latest
+podman<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>amq<span class="w"> </span>--privileged<span class="w"> </span>-d<span class="w"> </span>--name<span class="o">=</span>amq2<span class="w"> </span>--volume<span class="w"> </span>sharedfs:/opt/amq/amq-broker/data/shared:rw,z<span class="w"> </span>ubi9/ubi-init:latest
+</pre></div>
+</div>
+</section>
 </section>
 <section id="create-an-inventory-with-two-nodes">
 <h2>Create an inventory with two nodes<a class="headerlink" href="#create-an-inventory-with-two-nodes" title="Link to this heading"></a></h2>
+<p>Now lets prepare the inventory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>inventory<span class="w"> </span>inventory/group_vars<span class="w"> </span>inventory/host_vars
+cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; inventory/hosts</span>
+<span class="s">[amq]</span>
+<span class="s">amq1 connection=podman</span>
+<span class="s">amq2 connection=podman</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
 </section>
 <section id="configuration-points-for-ha">
-<h2>Configuration points for ha<a class="headerlink" href="#configuration-points-for-ha" title="Link to this heading"></a></h2>
+<h2>Configuration points for HA<a class="headerlink" href="#configuration-points-for-ha" title="Link to this heading"></a></h2>
+<p>To tell the collection we wnat to deploy an HA node pair in active/standby, we need to set some parameters.
+Those parameters will be relevant to all amq nodes, so we write them in the group_vars/amq.yml file</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># enable the ha configuration</span>
+<span class="nt">activemq_ha_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="c1"># enable using the shared filesystem</span>
+<span class="nt">activemq_shared_storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="c1"># disable firewalld configuration (not available on containers)</span>
+<span class="nt">activemq_configure_firewalld</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+<p>We will let the amq collection use all other defaults.</p>
+<p>Now we need to pick which instance will be initially the primary node (and thus which is the backup). In the inventory/host_vars/amq1.yml file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_ha_role</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;primary&#39;</span>
+</pre></div>
+</div>
+<p>And (optionally, since it’s default) in inventory/host_vars/amq2.yml:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_ha_role</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;backup&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="run-installation-of-activemq">
+<h2>Run installation of activemq<a class="headerlink" href="#run-installation-of-activemq" title="Link to this heading"></a></h2>
+<p>Now that we have our inventory ready with all configuration, we can create a playbook and execute the deployment, with the commnad:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory/<span class="w"> </span>deploy.yml
+</pre></div>
+</div>
+<p>The playbook itself needs nothing else than the collection role invocation, except in this case we need the <code class="docutils literal notranslate"><span class="pre">sudo</span></code> package which is not installed by default in the ubi-init images:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prepare instance</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">install sudo</span>
+<span class="w">     </span><span class="nt">package</span><span class="p">:</span>
+<span class="w">       </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sudo</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Playbook for ActiveMQ Artemis</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">roles</span><span class="p">:</span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">middleware_automation.amq.activemq</span>
+</pre></div>
+</div>
 </section>
 <section id="deployment-and-validation">
 <h2>Deployment and validation<a class="headerlink" href="#deployment-and-validation" title="Link to this heading"></a></h2>
+<p>Hopefully the execution will end successfully, returning the following output at the end:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">PLAY RECAP *******************************************************************************************************</span>
+<span class="l l-Scalar l-Scalar-Plain">amq1</span><span class="w">                       </span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ok=173  changed=29   unreachable=0    failed=0    skipped=48   rescued=0    ignored=0</span>
+<span class="nt">amq2                       </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ok=162  changed=29   unreachable=0    failed=0    skipped=40   rescued=0    ignored=0</span>
+</pre></div>
+</div>
+<p>We can now inspect if the desired configuration was applied correctly.</p>
+</section>
+<section id="futher-reading">
+<h2>Futher reading<a class="headerlink" href="#futher-reading" title="Link to this heading"></a></h2>
+<p>You can find a more guides in asciinema format at this links:</p>
+<ul class="simple">
+<li><p>https://asciinema.org/a/668257</p></li>
+<li><p>https://asciinema.org/a/668258</p></li>
+<li><p>https://asciinema.org/a/668260</p></li>
+</ul>
 </section>
 </section>
 
@@ -127,7 +242,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="releasing.html" class="btn btn-neutral float-left" title="Collection Versioning Strategy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CHANGELOG.html" class="btn btn-neutral float-left" title="middleware_automation.amq Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="masked_passwords.html" class="btn btn-neutral float-right" title="Using custom encypted passwords" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

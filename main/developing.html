@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contributor’s Guidelines &mdash; AMQ Ansible Collection  documentation</title>
+  <title>Developing &mdash; AMQ Ansible Collection  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5707b69d" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
@@ -23,8 +23,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Collection Versioning Strategy" href="releasing.html" />
-    <link rel="prev" title="Testing" href="testing.html" /> 
+    <link rel="next" title="Testing" href="testing.html" />
+    <link rel="prev" title="Using custom encypted passwords" href="masked_passwords.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,18 +51,23 @@
 <li class="toctree-l1"><a class="reference internal" href="README.html">Ansible Collection - AMQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins/index.html">Plugin Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="roles/index.html">Role Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributor’s Guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="releasing.html">Collection Versioning Strategy</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">General</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usage guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="static_cluster.html">HA setup active/standby</a></li>
 <li class="toctree-l1"><a class="reference internal" href="masked_passwords.html">Encypted passwords</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#build-and-install-locally">Build and install locally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-environment">Development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributor-s-guidelines">Contributor’s Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releasing.html">Releasing</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
 <ul>
@@ -72,7 +77,6 @@
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
 </ul>
 
@@ -90,7 +94,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Contributor’s Guidelines</li>
+      <li class="breadcrumb-item active">Developing</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/developing.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -100,8 +104,42 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="contributor-s-guidelines">
-<h1>Contributor’s Guidelines<a class="headerlink" href="#contributor-s-guidelines" title="Link to this heading"></a></h1>
+  <section id="developing">
+<h1>Developing<a class="headerlink" href="#developing" title="Link to this heading"></a></h1>
+<section id="build-and-install-locally">
+<h2>Build and install locally<a class="headerlink" href="#build-and-install-locally" title="Link to this heading"></a></h2>
+<p>Clone the repository, checkout the tag you want to build, or pick the main branch for the development version; then:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection build .
+ansible-galaxy collection install middleware_automation-amq-*.tar.gz
+</pre></div>
+</div>
+</section>
+<section id="development-environment">
+<h2>Development environment<a class="headerlink" href="#development-environment" title="Link to this heading"></a></h2>
+<p>Make sure your development machine has avilable:</p>
+<ul class="simple">
+<li><p>python 3.11+</p></li>
+<li><p>virtualenv</p></li>
+<li><p>docker (or podman)</p></li>
+</ul>
+<p>In order to run setup the development environment and run the molecule tests locally, after cloning the repository:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="c1"># create new virtualenv using python 3</span>
+<span class="l l-Scalar l-Scalar-Plain">virtualenv $PATH_TO_DEV_VIRTUALENV</span>
+<span class="l l-Scalar l-Scalar-Plain"># activate the virtual env</span>
+<span class="l l-Scalar l-Scalar-Plain">source $PATH_TO_DEV_VIRTUALENV/bin/activate</span>
+<span class="l l-Scalar l-Scalar-Plain"># install ansible and tools onto the virtualenv</span>
+<span class="l l-Scalar l-Scalar-Plain">pip install yamllint &#39;molecule&gt;=6.0&#39; &#39;molecule-plugins[docker]&#39; &#39;ansible-core&gt;=2.15&#39; ansible-lint</span>
+<span class="l l-Scalar l-Scalar-Plain"># install collection dependencies</span>
+<span class="l l-Scalar l-Scalar-Plain">ansible-galaxy collection install -r requirements.yml</span>
+<span class="l l-Scalar l-Scalar-Plain"># install python dependencies</span>
+<span class="l l-Scalar l-Scalar-Plain">pip install -r requirements.txt molecule/requirements.txt</span>
+<span class="l l-Scalar l-Scalar-Plain"># execute the tests (replace --all with -s subdirectory to run a single test)</span>
+<span class="l l-Scalar l-Scalar-Plain">molecule test --all</span>
+</pre></div>
+</div>
+</section>
+<section id="contributor-s-guidelines">
+<h2>Contributor’s Guidelines<a class="headerlink" href="#contributor-s-guidelines" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>All YAML files named with <code class="docutils literal notranslate"><span class="pre">.yml</span></code> extension</p></li>
 <li><p>Use spaces around jinja variables. <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">var</span> <span class="pre">}}</span></code> over <code class="docutils literal notranslate"><span class="pre">{{var}}</span></code></p></li>
@@ -116,13 +154,14 @@
 <li><p>All playbooks/roles should be focused on compatibility with Ansible Automation Platform</p></li>
 </ul>
 </section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="testing.html" class="btn btn-neutral float-left" title="Testing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="releasing.html" class="btn btn-neutral float-right" title="Collection Versioning Strategy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="masked_passwords.html" class="btn btn-neutral float-left" title="Using custom encypted passwords" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="testing.html" class="btn btn-neutral float-right" title="Testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

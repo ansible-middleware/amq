@@ -1,5 +1,41 @@
+## Developing
 
-## Contributor's Guidelines
+
+### Build and install locally
+
+Clone the repository, checkout the tag you want to build, or pick the main branch for the development version; then:
+
+    ansible-galaxy collection build .
+    ansible-galaxy collection install middleware_automation-amq-*.tar.gz
+
+
+### Development environment
+
+Make sure your development machine has avilable:
+
+* python 3.11+
+* virtualenv
+* docker (or podman)
+
+In order to run setup the development environment and run the molecule tests locally, after cloning the repository:
+
+```
+# create new virtualenv using python 3
+virtualenv $PATH_TO_DEV_VIRTUALENV
+# activate the virtual env
+source $PATH_TO_DEV_VIRTUALENV/bin/activate
+# install ansible and tools onto the virtualenv
+pip install yamllint 'molecule>=6.0' 'molecule-plugins[docker]' 'ansible-core>=2.15' ansible-lint
+# install collection dependencies
+ansible-galaxy collection install -r requirements.yml
+# install python dependencies
+pip install -r requirements.txt molecule/requirements.txt
+# execute the tests (replace --all with -s subdirectory to run a single test)
+molecule test --all
+```
+
+
+### Contributor's Guidelines
 
 - All YAML files named with `.yml` extension
 - Use spaces around jinja variables. `{{ var }}` over `{{var}}`

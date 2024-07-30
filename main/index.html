@@ -50,18 +50,18 @@
 <li class="toctree-l1"><a class="reference internal" href="README.html">Ansible Collection - AMQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins/index.html">Plugin Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="roles/index.html">Role Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="developing.html">Contributor’s Guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="releasing.html">Collection Versioning Strategy</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">General</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usage guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="static_cluster.html">HA setup active/standby</a></li>
 <li class="toctree-l1"><a class="reference internal" href="masked_passwords.html">Encypted passwords</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developing.html">Developing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releasing.html">Releasing</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
 <ul>
@@ -71,7 +71,6 @@
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
 </ul>
 
@@ -121,49 +120,9 @@
 <li class="toctree-l2"><a class="reference internal" href="roles/activemq.html">activemq</a></li>
 </ul>
 </li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="testing.html#continuous-integration">Continuous integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="testing.html#test-playbooks">Test playbooks</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="developing.html">Contributor’s Guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="releasing.html">Collection Versioning Strategy</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="releasing.html#new-content-is-added-to-an-existing-collection">New content is added to an existing collection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releasing.html#new-feature-to-existing-plugin-or-role-within-a-collection-backwards-compatible">New feature to existing plugin or role within a collection (backwards compatible)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releasing.html#bug-fix-or-security-fix-to-existing-content-within-a-collection">Bug fix or security fix to existing content within a collection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releasing.html#breaking-change-to-any-content-within-a-collection">Breaking change to any content within a collection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releasing.html#content-removed-from-a-collection">Content removed from a collection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releasing.html#a-typographical-error-was-fixed-in-the-documentation-for-a-collection">A typographical error was fixed in the documentation for a collection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releasing.html#documentation-added-removed-modified-within-a-collection">Documentation added/removed/modified within a collection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releasing.html#release-automation">Release automation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">General</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="static_cluster.html">HA setup active/standby</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="static_cluster.html#prepare-a-base-installation-of-activemq">Prepare a base installation of activemq</a></li>
-<li class="toctree-l2"><a class="reference internal" href="static_cluster.html#create-an-inventory-with-two-nodes">Create an inventory with two nodes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="static_cluster.html#configuration-points-for-ha">Configuration points for ha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="static_cluster.html#deployment-and-validation">Deployment and validation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="masked_passwords.html">Encypted passwords</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="masked_passwords.html#prepare-a-basic-single-node-installation">Prepare a basic single node installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="masked_passwords.html#turn-masked-passwords-on">Turn masked passwords on</a></li>
-<li class="toctree-l2"><a class="reference internal" href="masked_passwords.html#configure-a-custom-password-codec-class">Configure a custom password codec class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="masked_passwords.html#verify-deployment">Verify deployment</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#v2-1-0-devel">v2.1.0-devel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#v2-1-1-devel">v2.1.1-devel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#v2-1-0">v2.1.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#v2-0-2">v2.0.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#v2-0-1">v2.0.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#v2-0-0">v2.0.0</a></li>
@@ -190,6 +149,54 @@
 </ul>
 </div>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Usage guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="static_cluster.html">HA setup active/standby</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="static_cluster.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="static_cluster.html#create-an-inventory-with-two-nodes">Create an inventory with two nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="static_cluster.html#configuration-points-for-ha">Configuration points for HA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="static_cluster.html#run-installation-of-activemq">Run installation of activemq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="static_cluster.html#deployment-and-validation">Deployment and validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="static_cluster.html#futher-reading">Futher reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="masked_passwords.html">Encypted passwords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="masked_passwords.html#prepare-a-basic-single-node-installation">Prepare a basic single node installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="masked_passwords.html#turn-masked-passwords-on">Turn masked passwords on</a></li>
+<li class="toctree-l2"><a class="reference internal" href="masked_passwords.html#configure-a-custom-password-codec-class">Configure a custom password codec class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="masked_passwords.html#verify-deployment">Verify deployment</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developing.html">Developing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developing.html#build-and-install-locally">Build and install locally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developing.html#development-environment">Development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developing.html#contributor-s-guidelines">Contributor’s Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#continuous-integration">Continuous integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#test-playbooks">Test playbooks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="releasing.html">Releasing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="releasing.html#new-content-is-added-to-an-existing-collection">New content is added to an existing collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releasing.html#new-feature-to-existing-plugin-or-role-within-a-collection-backwards-compatible">New feature to existing plugin or role within a collection (backwards compatible)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releasing.html#bug-fix-or-security-fix-to-existing-content-within-a-collection">Bug fix or security fix to existing content within a collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releasing.html#breaking-change-to-any-content-within-a-collection">Breaking change to any content within a collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releasing.html#content-removed-from-a-collection">Content removed from a collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releasing.html#a-typographical-error-was-fixed-in-the-documentation-for-a-collection">A typographical error was fixed in the documentation for a collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releasing.html#documentation-added-removed-modified-within-a-collection">Documentation added/removed/modified within a collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releasing.html#release-automation">Release automation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
@@ -198,7 +205,6 @@
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
 </ul>
 </div>
