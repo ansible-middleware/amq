@@ -73,6 +73,10 @@ amq2 connection=podman
 EOF
 ```
 
+As you can see, we listed the two instance by name, setting for each the Ansible connection driver to `podman`.
+We could alternatively set it in `ansible.cfg`.
+
+
 ## Configuration points for HA
 
 To tell the collection we wnat to deploy an HA node pair in active/standby, we need to set some parameters.
@@ -136,6 +140,21 @@ amq2                       : ok=162  changed=29   unreachable=0    failed=0    s
 ```
 
 We can now inspect if the desired configuration was applied correctly.
+
+```bash
+podman exec -ti amq1 tail -n 3 /var/log/activemq/amq-broker/artemis.log
+2024-07-30 16:00:25,453 INFO  [org.apache.activemq.artemis] AMQ241001: HTTP Server started at http://0.0.0.0:8161
+2024-07-30 16:00:25,455 INFO  [org.apache.activemq.artemis] AMQ241002: Artemis Jolokia REST API available at http://0.0.0.0:8161/console/jolokia
+2024-07-30 16:00:25,455 INFO  [org.apache.activemq.artemis] AMQ241004: Artemis Console available at http://0.0.0.0:8161/console
+```
+
+amq1 is definitely the active nodes here, let's check amq2 too:
+
+
+```bash
+podman exec -ti amq2 tail -n 3 /var/log/activemq/amq-broker/artemis.log
+2024-07-30 16:00:36,801 INFO  [org.apache.activemq.artemis.core.server] AMQ221034: Waiting indefinitely to obtain primary lock
+```
 
 
 
