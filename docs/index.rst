@@ -17,8 +17,10 @@ Welcome to AMQ Collection documentation
    :maxdepth: 2
    :caption: Usage guides
 
+   Base deployment <base_deployment>
+   LDAP authentication <ldap_auth>
    HA setup active/standby <static_cluster>
-   Encypted passwords <masked_passwords>
+   Encrypted passwords <masked_passwords>
 
 .. toctree::
    :maxdepth: 2
@@ -32,10 +34,10 @@ Welcome to AMQ Collection documentation
    :maxdepth: 2
    :caption: Middleware collections
 
-   Infinispan / Red Hat Data Grid <https://ansible-middleware.github.io/infinispan/>
+   ActiveMQ / Red Hat AMQ Broker <https://ansible-middleware.github.io/amq/>
    Keycloak / Red Hat Single Sign-On <https://ansible-middleware.github.io/keycloak/>
    Wildfly / Red Hat JBoss EAP <https://ansible-middleware.github.io/wildfly/>
+   Infinispan / Red Hat Data Grid <https://ansible-middleware.github.io/infinispan/>
    Tomcat / Red Hat JWS <https://ansible-middleware.github.io/jws/>
-   ActiveMQ / Red Hat AMQ <https://ansible-middleware.github.io/amq/>
    Kafka / Red Hat AMQ Streams <https://ansible-middleware.github.io/amq_streams/>
    JCliff <https://ansible-middleware.github.io/ansible_collections_jcliff/>

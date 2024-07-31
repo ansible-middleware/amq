@@ -167,5 +167,5 @@ You can find an asciinema recording of this [guide here](https://asciinema.org/a
 More guides are available in asciinema format at this links:
 
 * https://asciinema.org/a/668257
-* https://asciinema.org/a/668258
+* https://asciinema.org/a/670220
 * https://asciinema.org/a/668260
