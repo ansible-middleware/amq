@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Base deployment &mdash; AMQ Ansible Collection  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5707b69d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
+      <link rel="stylesheet" type="text/css" href="_static/ansible-basic-sphinx-ext.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ha configuration with active/standby nodes" href="static_cluster.html" />
+    <link rel="prev" title="middleware_automation.amq Release Notes" href="CHANGELOG.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            AMQ Ansible Collection
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Ansible Collection - AMQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins/index.html">Plugin Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roles/index.html">Role Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage guides</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Base deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prepare-the-instances">Prepare the instances</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#create-the-inventory">Create the inventory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#all-defaults-configuration">All defaults configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-installation-of-activemq">Run installation of activemq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deployment-and-validation">Deployment and validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#futher-reading">Futher reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#make-some-configuration-changes">Make some configuration changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#version-update">Version (update)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#queues-and-topics">Queues and topics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="static_cluster.html">HA setup active/standby</a></li>
+<li class="toctree-l1"><a class="reference internal" href="masked_passwords.html">Encrypted passwords</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developing.html">Developing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releasing.html">Releasing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ Broker</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/keycloak/">Keycloak / Red Hat Single Sign-On</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AMQ Ansible Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Base deployment</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/base_deployment.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="base-deployment">
+<h1>Base deployment<a class="headerlink" href="#base-deployment" title="Link to this heading"></a></h1>
+<p>In its most basic form, the collection will download the installation zipfile, and execute
+the installation of the software including its operative dependencies, and configuration of
+the service and its systemd controlling unit.
+The guide will rely on podman containers, but it can easily be adapted to other virtual machine
+or cloud providers, or even bare-metal.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<section id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h3>
+<p>On the machine running this guide, you’ll need RHEL 9.2+, or in detail:</p>
+<ul class="simple">
+<li><p>python 3.11+</p></li>
+<li><p>ansible-core &gt;= 2.16</p></li>
+<li><p>podman 5.1+</p></li>
+</ul>
+<p>Then install the collections:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>containers.podman
+ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>middleware_automation.amq
+</pre></div>
+</div>
+<p>And python deps, for instance via pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>lxml<span class="w"> </span>jmespath
+</pre></div>
+</div>
+</section>
+<section id="prepare-the-instances">
+<h3>Prepare the instances<a class="headerlink" href="#prepare-the-instances" title="Link to this heading"></a></h3>
+<p>We will create a podman container using the ubi-init image.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>run<span class="w"> </span>--privileged<span class="w"> </span>-d<span class="w"> </span>--name<span class="o">=</span>amq1<span class="w"> </span>ubi9/ubi-init:latest
+</pre></div>
+</div>
+</section>
+</section>
+<section id="create-the-inventory">
+<h2>Create the inventory<a class="headerlink" href="#create-the-inventory" title="Link to this heading"></a></h2>
+<p>Now let’s prepare the inventory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>inventory<span class="w"> </span>inventory/group_vars<span class="w"> </span>inventory/host_vars
+cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; inventory/hosts</span>
+<span class="s">[amq]</span>
+<span class="s">amq1 connection=podman</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p>As you can see, we just listed the instance by name, setting the Ansible connection driver to <code class="docutils literal notranslate"><span class="pre">podman</span></code>.
+We could alternatively set it in <code class="docutils literal notranslate"><span class="pre">ansible.cfg</span></code>.</p>
+</section>
+<section id="all-defaults-configuration">
+<h2>All defaults configuration<a class="headerlink" href="#all-defaults-configuration" title="Link to this heading"></a></h2>
+<p>We will let the amq collection use all defaults.</p>
+<p>The playbook itself needs nothing else than the collection role invocation, except in this case we need the <code class="docutils literal notranslate"><span class="pre">sudo</span></code> package which is not installed by default in the ubi-init images:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prepare instance</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">install sudo</span>
+<span class="w">     </span><span class="nt">package</span><span class="p">:</span>
+<span class="w">       </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sudo</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Playbook for ActiveMQ Artemis</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">activemq_firewalld_enable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">roles</span><span class="p">:</span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">middleware_automation.amq.activemq</span>
+</pre></div>
+</div>
+</section>
+<section id="run-installation-of-activemq">
+<h2>Run installation of activemq<a class="headerlink" href="#run-installation-of-activemq" title="Link to this heading"></a></h2>
+<p>Now that we have our inventory ready with all configuration, we can create a playbook and execute the deployment, with the commnad:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory/<span class="w"> </span>deploy.yml
+</pre></div>
+</div>
+</section>
+<section id="deployment-and-validation">
+<h2>Deployment and validation<a class="headerlink" href="#deployment-and-validation" title="Link to this heading"></a></h2>
+<p>Hopefully the execution will end successfully, returning the following output at the end:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">PLAY RECAP *******************************************************************************************************</span>
+<span class="l l-Scalar l-Scalar-Plain">amq1</span><span class="w">                       </span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ok=173  changed=29   unreachable=0    failed=0    skipped=48   rescued=0    ignored=0</span>
+</pre></div>
+</div>
+<p>We can now inspect if the desired configuration was applied correctly.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-ti<span class="w"> </span>amq1<span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">3</span><span class="w"> </span>/var/log/activemq/amq-broker/artemis.log
+<span class="m">2024</span>-07-30<span class="w"> </span><span class="m">16</span>:00:25,453<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>org.apache.activemq.artemis<span class="o">]</span><span class="w"> </span>AMQ241001:<span class="w"> </span>HTTP<span class="w"> </span>Server<span class="w"> </span>started<span class="w"> </span>at<span class="w"> </span>http://0.0.0.0:8161
+<span class="m">2024</span>-07-30<span class="w"> </span><span class="m">16</span>:00:25,455<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>org.apache.activemq.artemis<span class="o">]</span><span class="w"> </span>AMQ241002:<span class="w"> </span>Artemis<span class="w"> </span>Jolokia<span class="w"> </span>REST<span class="w"> </span>API<span class="w"> </span>available<span class="w"> </span>at<span class="w"> </span>http://0.0.0.0:8161/console/jolokia
+<span class="m">2024</span>-07-30<span class="w"> </span><span class="m">16</span>:00:25,455<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>org.apache.activemq.artemis<span class="o">]</span><span class="w"> </span>AMQ241004:<span class="w"> </span>Artemis<span class="w"> </span>Console<span class="w"> </span>available<span class="w"> </span>at<span class="w"> </span>http://0.0.0.0:8161/console
+</pre></div>
+</div>
+</section>
+<section id="futher-reading">
+<h2>Futher reading<a class="headerlink" href="#futher-reading" title="Link to this heading"></a></h2>
+<p>You can find this guide in asciinema format at <a class="reference external" href="https://asciinema.org/a/670220">this link</a>.</p>
+</section>
+</section>
+<section id="make-some-configuration-changes">
+<h1>Make some configuration changes<a class="headerlink" href="#make-some-configuration-changes" title="Link to this heading"></a></h1>
+<p>Now that we have a container with a working deployment of amq, we can start applying changes to
+our configuration, and run ansible-playbook to iteratively update our installation.</p>
+<section id="version-update">
+<h2>Version (update)<a class="headerlink" href="#version-update" title="Link to this heading"></a></h2>
+<p>The installed activemq version is specified using the <code class="docutils literal notranslate"><span class="pre">activemq_version</span></code> parameter for the <code class="docutils literal notranslate"><span class="pre">activemq</span></code> role.
+The collection default will change over time, using the most recent available version that has been tested.</p>
+<p>However, it is sometimes unwanted to operate updates without changing the underlying configuration, so the
+installed version can be pinned (2.34.0 is the collection default at the time of writing):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.34.0</span>
+</pre></div>
+</div>
+<p>Let’s update <code class="docutils literal notranslate"><span class="pre">inventory/group_vars/amq.yml</span></code> file with the line above, so that all hosts in the <code class="docutils literal notranslate"><span class="pre">amq</span></code> group
+will be covered.</p>
+<p>If we now launch ansible-playbook, we will have a plain execution with no changes (since nothing changed
+when we pinned the version to the already installed one).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory/<span class="w"> </span>deploy.yml
+
+<span class="o">[</span>...<span class="o">]</span>
+
+PLAY<span class="w"> </span>RECAP<span class="w"> </span>******************************************************************************************************
+amq1<span class="w">                       </span>:<span class="w"> </span><span class="nv">ok</span><span class="o">=</span><span class="m">149</span><span class="w">  </span><span class="nv">changed</span><span class="o">=</span><span class="m">0</span><span class="w">   </span><span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">failed</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">skipped</span><span class="o">=</span><span class="m">43</span><span class="w">   </span><span class="nv">rescued</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">ignored</span><span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+<p>Now, we want to update to 2.36, so in <code class="docutils literal notranslate"><span class="pre">inventory/group_vars/amq.yml</span></code> we set:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.36.0</span>
+</pre></div>
+</div>
+<p>and we run again:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory/<span class="w"> </span>deploy.yml
+
+<span class="o">[</span>...<span class="o">]</span>
+
+RUNNING<span class="w"> </span>HANDLER<span class="w"> </span><span class="o">[</span>middleware_automation.amq.activemq<span class="w"> </span>:<span class="w"> </span>Restart<span class="w"> </span>and<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>instance<span class="w"> </span>amq-broker<span class="w"> </span><span class="k">for</span><span class="w"> </span>activemq<span class="w"> </span>service<span class="o">]</span><span class="w"> </span>**********************************************************
+changed:<span class="w"> </span><span class="o">[</span>amq1<span class="o">]</span>
+
+PLAY<span class="w"> </span>RECAP<span class="w"> </span>******************************************************************************************************
+amq1<span class="w">                      </span>:<span class="w"> </span><span class="nv">ok</span><span class="o">=</span><span class="m">155</span><span class="w">  </span><span class="nv">changed</span><span class="o">=</span><span class="m">4</span><span class="w">    </span><span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">failed</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">skipped</span><span class="o">=</span><span class="m">45</span><span class="w">   </span><span class="nv">rescued</span><span class="o">=</span><span class="m">1</span><span class="w">    </span><span class="nv">ignored</span><span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+<p>You will notice many changes were done to apply the update, and at the end of the play the service was restarted;
+that is not always the case, because activemq polls its configuration and will automatically reload, without restarting,
+if some of those changes is done to its configuration. Let’s try that in the next paragraph.</p>
+</section>
+<section id="queues-and-topics">
+<h2>Queues and topics<a class="headerlink" href="#queues-and-topics" title="Link to this heading"></a></h2>
+<p>The default configuration applied by the collection is the same as what the <code class="docutils literal notranslate"><span class="pre">artemis</span> <span class="pre">create</span></code> command would generate.
+In yaml, is looks like so:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_addresses</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue.in</span>
+<span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue.in</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue.out</span>
+<span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue.out</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DLQ</span>
+<span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DLQ</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpiryQueue</span>
+<span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpiryQueue</span>
+</pre></div>
+</div>
+<p>Let’s say we want to create an additional multicast topic, so we take the yaml above and copy to <code class="docutils literal notranslate"><span class="pre">inventory/group_vars/amq.yml</span></code>, adding the new config at the end (watch indentation, it’s important!):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.36.0</span>
+<span class="nt">activemq_addresses</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue.in</span>
+<span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue.in</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue.out</span>
+<span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue.out</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DLQ</span>
+<span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DLQ</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpiryQueue</span>
+<span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExpiryQueue</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">importantTopic.pubsub</span>
+<span class="w">    </span><span class="nt">multicast</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">importantTopic.pubsub.name</span>
+</pre></div>
+</div>
+<p>and we iterate:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory/<span class="w"> </span>deploy.yml
+
+<span class="o">[</span>...<span class="o">]</span>
+
+RUNNING<span class="w"> </span>HANDLER<span class="w"> </span><span class="o">[</span>middleware_automation.amq.activemq<span class="w"> </span>:<span class="w"> </span>Restart<span class="w"> </span>handler<span class="o">]</span><span class="w"> </span>******************************************************************************************************
+skipping:<span class="w"> </span><span class="o">[</span>amq1<span class="o">]</span>
+
+
+PLAY<span class="w"> </span>RECAP<span class="w"> </span>******************************************************************************************************
+amq1<span class="w">                      </span>:<span class="w"> </span><span class="nv">ok</span><span class="o">=</span><span class="m">147</span><span class="w">  </span><span class="nv">changed</span><span class="o">=</span><span class="m">1</span><span class="w">    </span><span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">failed</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">skipped</span><span class="o">=</span><span class="m">45</span><span class="w">   </span><span class="nv">rescued</span><span class="o">=</span><span class="m">1</span><span class="w">    </span><span class="nv">ignored</span><span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+<p>This time, the restart handler was not trigger, but we can still verify the topic configuration has been picked up by
+the service by looking at the logs:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-ti<span class="w"> </span>amq1<span class="w"> </span>tail<span class="w"> </span>/var/log/activemq/amq-broker/artemis.log
+
+<span class="o">(</span><span class="m">2</span>.16<span class="o">)</span><span class="w"> </span>~/Development/amq<span class="w"> </span><span class="o">(</span>property_file<span class="w"> </span>*<span class="o">)</span>$<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-ti<span class="w"> </span>amq1<span class="w"> </span>tail<span class="w"> </span>/var/log/activemq/amq-broker/artemis.log
+<span class="o">[</span>...<span class="o">]</span>
+<span class="m">2024</span>-07-31<span class="w"> </span><span class="m">09</span>:29:12,994<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>org.apache.activemq.artemis.core.server<span class="o">]</span><span class="w"> </span>AMQ221003:<span class="w"> </span>Deploying<span class="w"> </span>ANYCAST<span class="w"> </span>queue<span class="w"> </span>ExpiryQueue<span class="w"> </span>on<span class="w"> </span>address<span class="w"> </span>ExpiryQueue
+<span class="m">2024</span>-07-31<span class="w"> </span><span class="m">09</span>:29:12,995<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>org.apache.activemq.artemis.core.server<span class="o">]</span><span class="w"> </span>AMQ221080:<span class="w"> </span>Deploying<span class="w"> </span>address<span class="w"> </span>importantTopic.pubsub<span class="w"> </span>supporting<span class="w"> </span><span class="o">[</span>MULTICAST<span class="o">]</span>
+<span class="m">2024</span>-07-31<span class="w"> </span><span class="m">09</span>:29:13,000<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>org.apache.activemq.artemis.core.server<span class="o">]</span><span class="w"> </span>AMQ221003:<span class="w"> </span>Deploying<span class="w"> </span>MULTICAST<span class="w"> </span>queue<span class="w"> </span>importantTopic.pubsub.name<span class="w"> </span>on<span class="w"> </span>address<span class="w"> </span>importantTopic.pubsub
+<span class="m">2024</span>-07-31<span class="w"> </span><span class="m">09</span>:29:13,035<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>org.apache.activemq.artemis.core.server<span class="o">]</span><span class="w"> </span>AMQ221056:<span class="w"> </span>Reloading<span class="w"> </span>configuration:<span class="w"> </span>bridges
+</pre></div>
+</div>
+<p>Many configurations can changed <a class="reference external" href="https://activemq.apache.org/components/artemis/documentation/2.32.0/config-reload.html">this way</a>, and way many more are possible with a restart.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CHANGELOG.html" class="btn btn-neutral float-left" title="middleware_automation.amq Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="static_cluster.html" class="btn btn-neutral float-right" title="Ha configuration with active/standby nodes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Red Hat, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
