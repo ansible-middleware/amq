@@ -35,3 +35,16 @@
           - "broker_bin.stat.pw_name == 'amq-broker'"
         quiet: true
         fail_msg: "Wrong ownership of instance directories"
+
+    - name: Check all port numbers are accessible from the current host
+      wait_for:
+        host: localhost
+        port: "{{ item }}"
+        state: started
+        delay: 0
+        timeout: 10
+      ignore_errors: yes
+      loop:
+        - 8161
+        - 61616
+        - 62626

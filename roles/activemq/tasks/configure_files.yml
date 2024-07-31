@@ -1,0 +1,45 @@
+---
+- name: "Configure AMQ broker logging"
+  become: true
+  ansible.builtin.template:
+    src: "{{ activemq_logger_config_template_path }}{{ activemq_logger_config_template }}"
+    dest: "{{ activemq.instance_home }}/etc/{{ activemq_logger_config_template | basename | regex_replace('[.]j2$', '') }}"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
+    mode: '0644'
+  notify:
+    - restart amq_broker
+
+- name: "Configure jolokia access"
+  become: true
+  ansible.builtin.template:
+    src: jolokia-access.xml.j2
+    dest: "{{ activemq.instance_home }}/etc/jolokia-access.xml"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
+    mode: '0644'
+  notify:
+    - restart amq_broker
+
+- name: "Configure jaas"
+  become: true
+  ansible.builtin.template:
+    src: "{{ activemq_auth_template }}"
+    dest: "{{ activemq.instance_home }}/etc/login.config"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
+    mode: '0644'
+  notify:
+    - restart amq_broker
+
+- name: "Configure using properties file"
+  become: true
+  ansible.builtin.template:
+    src: "{{ activemq_properties_file }}"
+    dest: "{{ activemq.instance_home }}/etc/{{ activemq_properties_file | basename }}"
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
+    mode: '0644'
+  notify:
+    - restart amq_broker
+  when: activemq_properties_file != ''

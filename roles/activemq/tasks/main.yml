@@ -126,9 +126,12 @@
         mode: '0640'
       loop: "{{ activemq_additional_libs }}"
 
-- name: "Generate broker configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
+- name: "Generate broker.xml configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
   ansible.builtin.include_tasks: configure_broker.yml
   when: activemq_config_override_template == ''
+
+- name: "Generate broker config files for: {{ activemq_dest }}/{{ activemq.instance_name }}"
+  ansible.builtin.include_tasks: configure_files.yml
 
 - name: Reload systemd
   become: true

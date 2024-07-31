@@ -695,6 +695,10 @@ argument_specs:
                 description: "Arbitrary extra arguments for the JVM"
                 default: "-Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal"
                 type: "str"
+            activemq_properties_file:
+                description: "Properties file to allow updates and additions to the broker configuration after any xml has been parsed"
+                default: ""
+                type: "str"
     downstream:
         options:
             amq_broker_version:
