@@ -20,8 +20,8 @@ On the machine running this guide, you'll need RHEL 9.2+, or in detail:
 Then install the collections:
 
 ```bash
-    ansible-galaxy collection install containers.podman
-    ansible-galaxy collection install middleware_automation.amq
+ansible-galaxy collection install containers.podman
+ansible-galaxy collection install middleware_automation.amq
 ```
 
 And python deps, for instance via pip:
@@ -35,7 +35,7 @@ pip install lxml jmespath
 We will create a podman container using the ubi-init image.
 
 ```bash
-    podman run --privileged -d --name=amq1 ubi9/ubi-init:latest
+podman run --privileged -d --name=amq1 ubi9/ubi-init:latest
 ```
 
 
