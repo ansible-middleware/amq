@@ -114,7 +114,7 @@
              
   <section id="ha-configuration-with-active-standby-nodes">
 <h1>Ha configuration with active/standby nodes<a class="headerlink" href="#ha-configuration-with-active-standby-nodes" title="Link to this heading"></a></h1>
-<p>This guide will show how to deploy activemq on two nodes, configured with active/standby high availability.
+<p>This guide will show how to deploy activemq on two nodes, configured with active/standby <a class="reference external" href="https://activemq.apache.org/components/artemis/documentation/latest/ha.html#terminology">high availability</a>.
 In this setup, the two instances act as a single messaging node, with the ‘primary’ (active) instance brokering
 all messages, and the ‘backup’ instance standing-by on a lock, ready to pick up the ‘active’ work as soon
 as the ‘primary’ instance terminates, or fails.</p>
@@ -131,8 +131,8 @@ or even bare-metal.</p>
 <li><p>podman 5.1+</p></li>
 </ul>
 <p>Then install the collections:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>containers.podman
-<span class="w">    </span>ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>middleware_automation.amq
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>containers.podman
+ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>middleware_automation.amq
 </pre></div>
 </div>
 <p>And python deps, for instance via pip:</p>
@@ -142,25 +142,26 @@ or even bare-metal.</p>
 </section>
 <section id="prepare-the-instances">
 <h3>Prepare the instances<a class="headerlink" href="#prepare-the-instances" title="Link to this heading"></a></h3>
-<p>We will create two podman containers using the ubi-init image, sharing the same network.</p>
+<p>We will create two podman containers using the <a class="reference external" href="https://catalog.redhat.com/software/containers/ubi8/ubi-init/5c359b97d70cc534b3a378c8">ubi-init image</a>, sharing the same network.</p>
 <p>Lets create the network first:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>amq
 </pre></div>
 </div>
-<p>We will create the containes inside the network like the following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>podman<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>amq<span class="w"> </span>-d<span class="w"> </span>--name<span class="o">=</span>amq1<span class="w"> </span>ubi9/ubi-init:latest
+<p>We will create the containers inside the network like the following command, but hold on and skip to the next paragraph:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>amq<span class="w"> </span>-d<span class="w"> </span>--name<span class="o">=</span>amq1<span class="w"> </span>ubi9/ubi-init:latest
 </pre></div>
 </div>
 </section>
 <section id="prepare-a-shared-file-system">
 <h3>Prepare a shared file-system<a class="headerlink" href="#prepare-a-shared-file-system" title="Link to this heading"></a></h3>
-<p>Artemis acivemq supports a set of shared filesystem services with different characteristics. For keeping it simple in this guide,
-and thanks to fact we are using containers, we will rely on a shared directory on the containerization host, mounted on both containers.</p>
+<p>Artemis activemq supports a set of <a class="reference external" href="https://activemq.apache.org/components/artemis/documentation/latest/ha.html#shared-store">shared store filesystems</a> with different characteristics.
+For the sake of keeping it simple, in this guide, and thanks to fact we are using containers, we will rely on a shared directory on the containerization host, mounted on both containers.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>sharedfs
 podman<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>amq<span class="w"> </span>--privileged<span class="w"> </span>-d<span class="w"> </span>--name<span class="o">=</span>amq1<span class="w"> </span>--volume<span class="w"> </span>sharedfs:/opt/amq/amq-broker/data/shared:rw,z<span class="w"> </span>ubi9/ubi-init:latest
 podman<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>amq<span class="w"> </span>--privileged<span class="w"> </span>-d<span class="w"> </span>--name<span class="o">=</span>amq2<span class="w"> </span>--volume<span class="w"> </span>sharedfs:/opt/amq/amq-broker/data/shared:rw,z<span class="w"> </span>ubi9/ubi-init:latest
 </pre></div>
 </div>
+<p>Note that in the mounted path above <code class="docutils literal notranslate"><span class="pre">/opt/amq/</span></code> is the default installation root directory, and <code class="docutils literal notranslate"><span class="pre">/opt/amq/amq-broker/</span></code> is the default amq instance directory.</p>
 </section>
 </section>
 <section id="create-an-inventory-with-two-nodes">
@@ -169,8 +170,8 @@ podman<span class="w"> </span>run<span class="w"> </span>--network<span class="o
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>inventory<span class="w"> </span>inventory/group_vars<span class="w"> </span>inventory/host_vars
 cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; inventory/hosts</span>
 <span class="s">[amq]</span>
-<span class="s">amq1 connection=podman</span>
-<span class="s">amq2 connection=podman</span>
+<span class="s">amq1 ansible_connection=podman</span>
+<span class="s">amq2 ansible_connection=podman</span>
 <span class="s">EOF</span>
 </pre></div>
 </div>
@@ -181,11 +182,11 @@ We could alternatively set it in <code class="docutils literal notranslate"><spa
 <h2>Configuration points for HA<a class="headerlink" href="#configuration-points-for-ha" title="Link to this heading"></a></h2>
 <p>To tell the collection we wnat to deploy an HA node pair in active/standby, we need to set some parameters.
 Those parameters will be relevant to all amq nodes, so we write them in the group_vars/amq.yml file</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># enable the ha configuration</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># enable the ha configuration (default is primary/backup)</span>
 <span class="nt">activemq_ha_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="c1"># enable using the shared filesystem</span>
+<span class="c1"># enable using the shared filesystem (we do not need to set path, because we are mounting at the default location)</span>
 <span class="nt">activemq_shared_storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="c1"># disable firewalld configuration (not available on containers)</span>
+<span class="c1"># disable firewall configuration (firewalld not available on ubi containers)</span>
 <span class="nt">activemq_configure_firewalld</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </pre></div>
 </div>
@@ -201,7 +202,7 @@ Those parameters will be relevant to all amq nodes, so we write them in the grou
 </section>
 <section id="run-installation-of-activemq">
 <h2>Run installation of activemq<a class="headerlink" href="#run-installation-of-activemq" title="Link to this heading"></a></h2>
-<p>Now that we have our inventory ready with all configuration, we can create a playbook and execute the deployment, with the commnad:</p>
+<p>Now that we have our inventory ready with all configuration, we can create a playbook <code class="docutils literal notranslate"><span class="pre">deploy.yml</span></code> and execute the deployment, with the command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory/<span class="w"> </span>deploy.yml
 </pre></div>
 </div>
@@ -242,7 +243,8 @@ Those parameters will be relevant to all amq nodes, so we write them in the grou
 </section>
 <section id="futher-reading">
 <h2>Futher reading<a class="headerlink" href="#futher-reading" title="Link to this heading"></a></h2>
-<p>You can find a more guides in asciinema format at this links:</p>
+<p>You can find an asciinema recording of this <a class="reference external" href="https://asciinema.org/a/670215">guide here</a></p>
+<p>More guides are available in asciinema format at this links:</p>
 <ul class="simple">
 <li><p>https://asciinema.org/a/668257</p></li>
 <li><p>https://asciinema.org/a/668258</p></li>
