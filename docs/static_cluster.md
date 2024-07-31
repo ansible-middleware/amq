@@ -163,5 +163,5 @@ podman exec -ti amq2 tail -n 3 /var/log/activemq/amq-broker/artemis.log
 You can find a more guides in asciinema format at this links:
 
 * https://asciinema.org/a/668257
-* https://asciinema.org/a/668258
+* https://asciinema.org/a/670220
 * https://asciinema.org/a/668260
