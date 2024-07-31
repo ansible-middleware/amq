@@ -26,6 +26,7 @@
                               if activemq_logger_config_keep_name and activemq_logger_config_template != 'log4j2.properties.j2' }}"
     activemq_jmx_opts: "{{ '-javaagent:/usr/share/java/prometheus-jmx-exporter/jmx_prometheus_javaagent.jar=0.0.0.0:' + \
                            activemq_jmx_exporter_port + ':' + activemq_jmx_exporter_config_path if activemq_jmx_exporter_enabled else '' }}"
+    activemq_properties_opts: "{{ ('-Dbroker.properties=' +  activemq.instance_home + '/etc/' + activemq_properties_file) if activemq_properties_file != '' else '' }}"
   notify:
     - restart amq_broker
 

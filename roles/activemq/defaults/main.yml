@@ -337,3 +337,7 @@ activemq_diverts: []
 activemq_broker_connections: []
 
 activemq_federations: []
+
+### property file name, in playbook lookup paths
+# see: https://activemq.apache.org/components/artemis/documentation/latest/configuration-index.html#broker-properties
+activemq_properties_file: ''
