@@ -26,8 +26,8 @@ attributes:
         support: none
     facts:
         support: full
-    platforms:
-        support: posix
+    platform:
+        support: N/A
 options:
     base_url:
         description:
