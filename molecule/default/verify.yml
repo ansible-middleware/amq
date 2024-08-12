@@ -101,3 +101,16 @@
           - diverts.count == 1
         quiet: true
         fail_msg: "Failed to retrieve generated divert"
+
+    - name: Check divert configuration via jolokia
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.activemq.DivertNames | length > 0
+          - ansible_facts.activemq.DivertNames | first == "TESTDIVERT"
+
+    - name: Check queue configuration via jolokia
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.activemq.AddressNames | length > 0
+          - "client123.pubsub" in ansible_facts.activemq.AddressNames
+          - "importantTopic" in ansible_facts.activemq.AddressNames
