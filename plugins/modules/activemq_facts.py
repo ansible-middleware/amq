@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 # Copyright (c) 2024, Red Hat Inc.
 # Copyright (c) 2024, Guido Grazioli <ggraziol@redhat.com>
 # Apache License, Version 2.0 (see LICENSE or https://www.apache.org/licenses/LICENSE-2.0)
@@ -31,12 +33,16 @@ options:
         type: str
         required: false
         default: http://localhost:8161
+        aliases:
+          - url
     broker_name:
         description:
             - Name of the broker instance
         type: str
         required: false
         default: 'amq-broker'
+        aliases:
+          - broker
     auth_username:
         description:
             - Username to authenticate for API access with.
@@ -102,6 +108,7 @@ from ansible.module_utils.common.text.converters import to_native, to_text
 
 URL_JOLOKIA_INFO = "{url}/console/jolokia/read/org.apache.activemq.artemis:broker=!%22{broker}!%22"
 
+
 class JolokiaService(object):
 
     def __init__(self, module):
@@ -147,7 +154,6 @@ class JolokiaService(object):
             self.module.fail_json(msg='General error calling jolokia api %s' % (str(e)),
                                   exception=traceback.format_exc())
 
-        return services
 
 def amq_argument_spec():
     """

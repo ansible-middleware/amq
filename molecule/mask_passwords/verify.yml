@@ -7,7 +7,7 @@
       ansible.builtin.service_facts:
 
     - name: Populate activemq facts
-      ansible.builtin.activemq_facts:
+      middleware_automation.amq.activemq_facts:
         auth_username: amq
         auth_password: amqbrokerpass
         validate_certs: false
