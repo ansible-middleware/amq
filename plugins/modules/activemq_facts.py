@@ -27,7 +27,7 @@ attributes:
     facts:
         support: full
     platform:
-        support: N/A
+        platforms: all
 options:
     base_url:
         description:
