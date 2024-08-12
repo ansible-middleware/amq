@@ -13,8 +13,8 @@ DOCUMENTATION = r'''
 module: activemq_facts
 short_description: Return activemq configuration as fact data
 description:
-     - Return artemis activemq configuration and runtime information from the jolokia endpoint as fact data.
-version_added: 2.1
+  - Return artemis activemq configuration and runtime information from the jolokia endpoint as fact data.
+version_added: "2.1.0"
 requirements: ["A running instance of activemq with the jolokia port open"]
 extends_documentation_fragment:
   -  action_common_attributes
