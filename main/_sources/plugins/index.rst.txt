@@ -8,3 +8,9 @@ Plugin Index
    lists_mergeby
    pbkdf2_hmac
 
+.. toctree::
+   :caption: modules plugins
+   :maxdepth: 0
+
+   activemq_facts
+

@@ -27,6 +27,7 @@ This collection has been tested against following Ansible versions: **>=2.15.0**
 
 ### Plugins:
 
+* `activemq_facts`: return activemq configuration as ansible fact data
 * `pbkdf2_hmac`: filter plugin used internally to generate unidirectional account password hashes
 <!--end roles_paths -->
 

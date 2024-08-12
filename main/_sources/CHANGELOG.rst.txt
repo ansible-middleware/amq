@@ -10,6 +10,7 @@ v2.1.1-devel
 Minor Changes
 -------------
 
+- Add fact gathering module for amq `#145 <https://github.com/ansible-middleware/amq/pull/145>`_
 - Allow to configure broker properties with properties file `#143 <https://github.com/ansible-middleware/amq/pull/143>`_
 
 v2.1.0
