@@ -1,24 +1,10 @@
 # Copyright (c) 2024, Red Hat Inc.
 # Copyright (c) 2024, Guido Grazioli <ggraziol@redhat.com>
 # Apache License, Version 2.0 (see LICENSE or https://www.apache.org/licenses/LICENSE-2.0)
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
-from __future__ import absolute_import, annotations, division, print_function
-
+from __future__ import absolute_import, division, print_function
 __metaclass__ = type
-
-import json
-import traceback
-import os
-import platform
-import re
-
-from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.common.locale import get_best_parsable_locale
-from ansible.module_utils.urls import open_url, basic_auth_header
-from ansible.module_utils.six.moves.urllib.parse import urlencode, quote
-from ansible.module_utils.six.moves.urllib.error import HTTPError
-from ansible.module_utils.common.text.converters import to_native, to_text
-
 
 DOCUMENTATION = r'''
 ---
@@ -101,6 +87,19 @@ ansible_facts:
       contains:
 '''
 
+import json
+import traceback
+import os
+import platform
+import re
+
+from ansible.module_utils.basic import AnsibleModule
+from ansible.module_utils.urls import open_url, basic_auth_header
+from ansible.module_utils.six.moves.urllib.parse import urlencode, quote
+from ansible.module_utils.six.moves.urllib.error import HTTPError
+from ansible.module_utils.common.text.converters import to_native, to_text
+
+
 URL_JOLOKIA_INFO = "{url}/console/jolokia/read/org.apache.activemq.artemis:broker=!%22{broker}!%22"
 
 class JolokiaService(object):
@@ -169,8 +168,6 @@ def amq_argument_spec():
 def main():
     module = AnsibleModule(argument_spec=amq_argument_spec(), supports_check_mode=True,
                            required_together=([['auth_username', 'auth_password']]))
-    locale = get_best_parsable_locale(module)
-    module.run_command_environ_update = dict(LANG=locale, LC_ALL=locale)
     mod = JolokiaService(module)
     svc = mod.gather_facts()
     if len(svc) == 0:
