@@ -89,7 +89,7 @@ ansible_facts:
   type: complex
   contains:
     activemq:
-      description: THe factual representation of an activemq instance configuration
+      description: The factual representation of an activemq instance configuration.
       returned: always
       type: dict
 '''
