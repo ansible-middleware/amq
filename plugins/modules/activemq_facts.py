@@ -26,6 +26,8 @@ attributes:
         support: none
     facts:
         support: full
+    platforms:
+        support: posix
 options:
     base_url:
         description:
@@ -87,23 +89,18 @@ ansible_facts:
   type: complex
   contains:
     activemq:
-      description:
+      description: THe factual representation of an activemq instance configuration
       returned: always
       type: dict
-      contains:
 '''
 
 import json
 import traceback
-import os
-import platform
-import re
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.urls import open_url, basic_auth_header
-from ansible.module_utils.six.moves.urllib.parse import urlencode, quote
 from ansible.module_utils.six.moves.urllib.error import HTTPError
-from ansible.module_utils.common.text.converters import to_native, to_text
+from ansible.module_utils.common.text.converters import to_native
 
 
 URL_JOLOKIA_INFO = "{url}/console/jolokia/read/org.apache.activemq.artemis:broker=!%22{broker}!%22"
