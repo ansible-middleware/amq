@@ -173,10 +173,10 @@ def main():
                            required_together=([['auth_username', 'auth_password']]))
     mod = JolokiaService(module)
     svc = mod.gather_facts()
-    if not svc or not "value" in svc:
+    if not svc or "value" not in svc:
         results = dict(skipped=True, msg="Failed to find info. This can be due to privileges or some other configuration issue.")
     else:
-        results = dict(ansible_facts=dict(activemq=svc.value))
+        results = dict(ansible_facts=dict(activemq=svc["value"]))
     module.exit_json(**results)
 
 

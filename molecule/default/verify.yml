@@ -112,5 +112,5 @@
       ansible.builtin.assert:
         that:
           - ansible_facts.activemq.AddressNames | length > 0
-          - "client123.pubsub" in ansible_facts.activemq.AddressNames
-          - "importantTopic" in ansible_facts.activemq.AddressNames
+          - "'client123.pubsub' in ansible_facts.activemq.AddressNames"
+          - "'importantTopic' in ansible_facts.activemq.AddressNames"
