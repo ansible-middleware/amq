@@ -130,7 +130,7 @@ class JolokiaService(object):
 
         restheaders = {}
         restheaders["Authorization"] = basic_auth_header(self.auth_username, self.auth_password)
-        restheaders['Origin'] = self.baseurl
+        restheaders['Origin'] = self.baseurl if 'localhost' not in self.baseurl else 'https://0.0.0.0'
 
         try:
             return json.loads(to_native(open_url(jolokia_url, method='GET',
