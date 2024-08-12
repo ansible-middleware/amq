@@ -6,6 +6,12 @@
     - name: Populate service facts
       ansible.builtin.service_facts:
 
+    - name: Populate activemq facts
+      ansible.builtin.activemq_facts:
+        auth_username: amq
+        auth_password: amqbrokerpass
+        validate_certs: false
+
     - name: Check if amq-broker service is started
       ansible.builtin.assert:
         that:
