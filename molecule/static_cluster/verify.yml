@@ -5,6 +5,13 @@
     - name: Populate service facts
       ansible.builtin.service_facts:
 
+    - name: Populate activemq facts
+      middleware_automation.amq.activemq_facts:
+        base_url: https://localhost:8161
+        auth_username: amq
+        auth_password: amqbrokerpass
+        validate_certs: false
+
     - name: Check if amq-broker service is started
       ansible.builtin.assert:
         that:
@@ -43,3 +50,20 @@
               - "'got backup lock' in slurped_log_instance2.content|b64decode"
               - "'waiting live to fail before it gets active' in slurped_log_instance2.content|b64decode or 'waiting for primary to fail before activating' in slurped_log_instance2.content|b64decode"
             quiet: true
+
+    - name: Check cluster status via jolokia facts (master)
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.activemq.Active == true
+          - ansible_facts.activemq.Backup == false
+          - ansible_facts.activemq.SharedStore == true
+          - ansible_facts.activemq.HAPolicy == "Shared Store Primary"
+      when: inventory_hostname == 'instance1'
+
+    - name: Check cluster status via jolokia facts (backup)
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.activemq.Active == false
+          - ansible_facts.activemq.Backup == true
+          - ansible_facts.activemq.SharedStore == true
+      when: inventory_hostname == 'instance2'
