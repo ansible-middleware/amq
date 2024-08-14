@@ -36,8 +36,8 @@
   become: true
   middleware_automation.common.xml:
     path: "{{ activemq.instance_home }}/etc/bootstrap.xml"
-    xpath: /b:broker/b:web/b:binding
-    attribute: uri
+    xpath: "{{ '/b:broker/b:web/b:binding' if amq_broker_enable is defined else '/b:broker/b:web' }}"
+    attribute: "{{ 'uri' if amq_broker_enable is defined else 'bind' }}"
     value: "http{{ 's' if activemq_tls_enabled else '' }}://{{ activemq_host }}:{{ activemq_http_port }}"
     namespaces:
       b: http://activemq.apache.org/schema
