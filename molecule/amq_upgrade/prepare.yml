@@ -9,4 +9,4 @@
       ansible.builtin.include_role:
         name: middleware_automation.amq.activemq
       vars:
-        activemq_version: "{{ '7.9.4' if amq_broker_enable is defined and amq_broker_enable else '2.18.0' }}"
+        activemq_version: "{{ '7.10.1' if amq_broker_enable is defined and amq_broker_enable else '2.34.0' }}"
