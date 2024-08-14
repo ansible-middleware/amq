@@ -4,6 +4,21 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.1.1
+======
+
+Minor Changes
+-------------
+
+- Add fact gathering module for amq `#145 <https://github.com/ansible-middleware/amq/pull/145>`_
+- Add ha with replication policy `#147 <https://github.com/ansible-middleware/amq/pull/147>`_
+- Allow to configure broker properties with properties file `#143 <https://github.com/ansible-middleware/amq/pull/143>`_
+
+Bugfixes
+--------
+
+- Update jolokia access when bind host and port are changed `#146 <https://github.com/ansible-middleware/amq/pull/146>`_
+
 v2.1.0
 ======
 

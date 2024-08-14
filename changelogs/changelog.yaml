@@ -413,3 +413,25 @@ releases:
     - 136.yaml
     - 137.yaml
     release_date: '2024-07-30'
+  2.1.1:
+    changes:
+      bugfixes:
+      - 'Update jolokia access when bind host and port are changed `#146 <https://github.com/ansible-middleware/amq/pull/146>`_
+
+        '
+      minor_changes:
+      - 'Add fact gathering module for amq `#145 <https://github.com/ansible-middleware/amq/pull/145>`_
+
+        '
+      - 'Add ha with replication policy `#147 <https://github.com/ansible-middleware/amq/pull/147>`_
+
+        '
+      - 'Allow to configure broker properties with properties file `#143 <https://github.com/ansible-middleware/amq/pull/143>`_
+
+        '
+    fragments:
+    - 143.yaml
+    - 145.yaml
+    - 146.yaml
+    - 147.yaml
+    release_date: '2024-08-14'
