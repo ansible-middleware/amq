@@ -199,7 +199,7 @@ argument_specs:
                 default: "default_ipv4"
                 description: "The NIC name to be used for cluster IPv4 addresses (ie. 'eth0')."
                 type: "str"
-            activemq_replicate:
+            activemq_replication:
                 # line 50 of defaults/main.yml
                 default: false
                 description: "Enables replication"
