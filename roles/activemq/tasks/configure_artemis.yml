@@ -84,14 +84,14 @@
     activemq_options:
       - "{{ activemq_options | join(' ') }}"
       - "--slave"
-  when: activemq_replicate
+  when: activemq_replicated
 
 - name: Enable replication
   ansible.builtin.set_fact:
     activemq_options:
       - "{{ activemq_options | join(' ') }}"
       - "--replicated"
-  when: activemq_replicated
+  when: activemq_replication
 
 - name: Enable shared storage
   ansible.builtin.set_fact:

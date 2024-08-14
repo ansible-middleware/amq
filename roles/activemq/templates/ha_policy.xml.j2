@@ -1,4 +1,4 @@
-{% if activemq_ha_enabled and not activemq_replicate and not activemq_shared_storage %}
+{% if activemq_ha_enabled and not activemq_replication and not activemq_shared_storage %}
         <live-only>
             <scale-down>
 {% for param in activemq_connectors %}
@@ -12,13 +12,26 @@
 {% if activemq_ha_enabled and activemq_shared_storage %}
         <shared-store>
 {% if activemq_ha_role == 'slave' or activemq_ha_role == 'backup' %}
-          <slave>
+          <{{ activemq_ha_role }}>
             <allow-failback>true</allow-failback>
-          </slave>
+          </{{ activemq_ha_role }}>
 {% else %}
           <master>
             <failover-on-shutdown>true</failover-on-shutdown>
           </master>
 {% endif %}
         </shared-store>
+{% endif %}
+{% if activemq_ha_enabled and activemq_replication %}
+        <replication>
+{% if activemq_ha_role == 'slave' or activemq_ha_role == 'backup' or amq_broker_replicated %}
+          <{{ activemq_ha_role }}>
+            <allow-failback>true</allow-failback>
+          </{{ activemq_ha_role }}>
+{% else %}
+          <master>
+            <check-for-live-server>true</check-for-live-server>
+          </master>
+{% endif %}
+        </replication>
 {% endif %}
