@@ -32,6 +32,18 @@
   notify:
     - restart amq_broker
 
+- name: "Configure console binding"
+  become: true
+  middleware_automation.common.xml:
+    path: "{{ activemq.instance_home }}/etc/bootstrap.xml"
+    xpath: '/b:broker/b:web/b:binding'
+    attribute: uri
+    value: "http{{ 's' if activemq_tls_enabled else '' }}://{{ activemq_host }}:{{ activemq_http_port }}"
+    namespaces:
+      b: http://activemq.apache.org/schema
+  notify:
+    - restart amq_broker
+
 - name: "Configure using properties file"
   become: true
   ansible.builtin.template:
