@@ -32,8 +32,8 @@
         password: amqotherpass
         roles: [ consumer, producer ]
       - user: otherencoded
-        password: ENC(2048:58F146E05CDA33049D107C920466AC74E5F4240AB61FA7194F2A108A87395D05:CA9E69CAFB02D86792888B32ECB00CBAD964CF66F1A77E08392E6E1DBAF7A64B6EB1ABAE5F6B77E96089BE67AD9733FFD7B04EF92B7860909B576F5E13DFD9EE)
-        roles: [ consumer, producer ]
+        password: ENC(2048:A403CF9448176AA4B4F2115755A0EE5F0BCCCC2E30DC435A1DDC6C65B2D41019:EC39BB29552E97F9EAEF68FC7799D0A67AA93E1834582007133AF65BA3AACD5B8454ACFD0531CCBA670E0A327A33572717997C6844A11607FD262C5CFAFED800)
+        roles: [ admin ]
     activemq_roles:
       - name: admin
         permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
