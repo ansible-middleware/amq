@@ -16,7 +16,7 @@
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
-    pretty_print: yes
+    pretty_print: true
   become: true
 
 
@@ -29,7 +29,7 @@
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
-    pretty_print: yes
+    pretty_print: true
   become: true
   notify:
     - restart amq_broker with no config refresh

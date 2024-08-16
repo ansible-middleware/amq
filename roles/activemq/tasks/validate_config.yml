@@ -170,8 +170,8 @@
   middleware_automation.common.xml:
     xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
     xmlstring: "<core xmlns=\"urn:activemq:core\"><federations>{{ validate_federations | join(' ') | trim }}</federations></core>"
-    validate: yes
+    validate: true
     input_type: xml
-  run_once: True
+  run_once: true
   no_log: false
   delegate_to: localhost

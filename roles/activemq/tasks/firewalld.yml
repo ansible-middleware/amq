@@ -9,7 +9,7 @@
   become: true
   ansible.builtin.systemd:
     name: firewalld
-    enabled: yes
+    enabled: true
     state: started
 
 - name: "Configure firewall for {{ activemq.service_name }} ports"
@@ -18,7 +18,7 @@
     port: "{{ item }}"
     permanent: true
     state: enabled
-    immediate: yes
+    immediate: true
   loop:
     - "{{ activemq_http_port }}/tcp"
     - "{{ activemq_port }}/tcp"

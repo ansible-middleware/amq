@@ -5,4 +5,4 @@
     name: "{{ activemq.instance_name }}"
     enabled: true
     state: started
-  become: True
+  become: true

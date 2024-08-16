@@ -4,11 +4,11 @@ activemq_version: 2.34.0
 activemq_archive: "apache-artemis-{{ activemq_version }}-bin.zip"
 activemq_download_url: "https://archive.apache.org/dist/activemq/activemq-artemis/{{ activemq_version }}/{{ activemq_archive }}"
 activemq_installdir: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
-activemq_install_extract_require_privilege_escalation: yes
+activemq_install_extract_require_privilege_escalation: true
 
 ### Install location and service settings
 activemq_dest: /opt/amq
-activemq_offline_install: False
+activemq_offline_install: false
 activemq_config_dir: "conf"
 activemq_config_xml: amq-broker.xml
 activemq_config_override_template: ''
@@ -18,9 +18,9 @@ activemq_service_user_home: "{{ activemq_dest }}/apache-artemis-{{ activemq_vers
 activemq_instance_name: amq-broker
 activemq_instance_username: amq-broker
 activemq_instance_password: amq-broker
-activemq_instance_anonymous: False
+activemq_instance_anonymous: false
 activemq_service_pidfile: data/artemis.pid
-activemq_configure_firewalld: False
+activemq_configure_firewalld: false
 
 ### Common configuration settings
 activemq_bind_address: 0.0.0.0
@@ -52,14 +52,14 @@ activemq_service_name: activemq
 activemq_service_override_template: ''
 
 ### Enable configuration for high availability
-activemq_ha_enabled: False
+activemq_ha_enabled: false
 activemq_cluster_user: amq-cluster-user
 activemq_cluster_pass: amq-cluster-pass
 activemq_cluster_maxhops: 1
 activemq_cluster_lb_policy: ON_DEMAND
 activemq_cluster_iface: default_ipv4
-activemq_replication: False
-activemq_replicated: False
+activemq_replication: false
+activemq_replicated: false
 # cluster discovery: ['jgroups' for shared file ping, 'multicast' for UDP multicast, 'static' for static declaration]
 activemq_cluster_discovery: static
 activemq_systemd_wait_for_port: "{{ activemq_ha_enabled and not activemq_shared_storage }}"
@@ -70,15 +70,15 @@ activemq_ha_role: live-only
 
 ### Masked passwords
 activemq_password_codec: 'org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec'
-activemq_mask_password: True
+activemq_mask_password: true
 activemq_mask_password_hashname: sha1
 activemq_mask_password_iterations: 1024
 
 ### JAAS
-activemq_auth_properties_enabled: True
+activemq_auth_properties_enabled: true
 activemq_auth_template: login.config.j2
 ### LDAP authn
-activemq_auth_ldap_enabled: False
+activemq_auth_ldap_enabled: false
 activemq_auth_ldap_url: ldap://localhost:389
 activemq_auth_ldap_conn_username: uid=admin,ou=system
 activemq_auth_ldap_conn_password: password
@@ -87,19 +87,19 @@ activemq_auth_ldap_conn_protocol: s
 activemq_auth_ldap_auth: simple
 activemq_auth_ldap_user_base: ou=Users,dc=example,dc=com
 activemq_auth_ldap_user_search: '(uid={0})'
-activemq_auth_ldap_user_search_subtree: True
+activemq_auth_ldap_user_search_subtree: true
 activemq_auth_ldap_role_base: ou=Groups,dc=example,dc=com
 activemq_auth_ldap_role_name: cn
 activemq_auth_ldap_role_search: '(member={0})'
-activemq_auth_ldap_role_search_subtree: False
+activemq_auth_ldap_role_search_subtree: false
 activemq_auth_ldap_referral: ignore
 
 ## Additional classpath
 activemq_additional_libs: []
 
 ### Enable persistence and persistence options
-activemq_persistence_enabled: True
-activemq_persist_id_cache: True
+activemq_persistence_enabled: true
+activemq_persist_id_cache: true
 activemq_id_cache_size: 20000
 # file journal configuration
 # journal type, valid values are [ ASYNCIO: libaio, MAPPED: mmap files, NIO: Plain Java Files  ]
@@ -109,7 +109,7 @@ activemq_paging_directory: "{{ activemq_data_directory }}/paging"
 activemq_bindings_directory: "{{ activemq_data_directory }}/bindings"
 activemq_journal_directory: "{{ activemq_data_directory }}/journal"
 activemq_large_messages_directory: "{{ activemq_data_directory }}/largemessages"
-activemq_journal_datasync: True
+activemq_journal_datasync: true
 activemq_journal_min_files: 2
 activemq_journal_pool_files: 10
 activemq_journal_device_block_size: 4096
@@ -120,7 +120,7 @@ activemq_journal_max_io: "{{ 4096 if activemq_journal_type == 'ASYNCIO' else 1 }
 activemq_global_max_messages: -1
 activemq_global_max_size: '-1'
 # database configuration for JDBC persistence
-activemq_db_enabled: False
+activemq_db_enabled: false
 activemq_db_jdbc_url: 'jdbc:derby:target/derby/database-store;create=true'
 activemq_db_bindings_table: BINDINGS_TABLE
 activemq_db_message_table: MESSAGE_TABLE
@@ -128,13 +128,13 @@ activemq_db_large_message_table: LARGE_MESSAGES_TABLE
 activemq_db_jdbc_driver_class: org.apache.derby.jdbc.EmbeddedDriver
 
 ### Enable TLS
-activemq_tls_enabled: False
+activemq_tls_enabled: false
 activemq_tls_keystore_path:
 activemq_tls_keystore_password:
 activemq_tls_keystore_dest: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/identity.ks"
 
 # Mutual authentication (requires TLS)
-activemq_tls_mutual_authentication: False
+activemq_tls_mutual_authentication: false
 activemq_tls_truststore_path:
 activemq_tls_truststore_password:
 activemq_tls_truststore_dest: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/trust.ks"
@@ -169,32 +169,32 @@ activemq_management_access_domains:
 # Jolokia
 activemq_hawtio_role: amq
 activemq_cors_allow_origin: [ '*://0.0.0.0*' ]
-activemq_cors_strict_checking: True
+activemq_cors_strict_checking: true
 
 # NIO option
-activemq_nio_enabled: False
+activemq_nio_enabled: false
 
 ## Shared Storage
-activemq_shared_storage: False
-activemq_shared_storage_mounted: True
+activemq_shared_storage: false
+activemq_shared_storage_mounted: true
 activemq_shared_storage_path: "{{ activemq_dest }}/{{ activemq_instance_name }}/data/shared"
 
 ## Ports
-activemq_ports_offset_enabled: False
+activemq_ports_offset_enabled: false
 activemq_ports_offset: 0
 
 # Queues
-activemq_disable_destination_autocreate: True
+activemq_disable_destination_autocreate: true
 activemq_queues: queue.in,queue.out
 
 # Protocol disablement
-activemq_disable_amqp_protocol: False
-activemq_disable_hornetq_protocol: False
-activemq_disable_mqtt_protocol: False
-activemq_disable_stomp_protocol: False
+activemq_disable_amqp_protocol: false
+activemq_disable_hornetq_protocol: false
+activemq_disable_mqtt_protocol: false
+activemq_disable_stomp_protocol: false
 
 # Logging
-activemq_enable_audit: False
+activemq_enable_audit: false
 activemq_logger_level: INFO
 activemq_logger_core_server_level: INFO
 activemq_logger_journal_level: INFO
@@ -207,16 +207,16 @@ activemq_logger_curator_level: WARN
 activemq_logger_zookeeper_level: ERROR
 activemq_logger_config_template: "{{ 'log4j2.properties' if activemq_version is version_compare('2.27.0', '>=') else 'logging.properties' }}.j2"
 activemq_logger_config_template_path: ''
-activemq_logger_config_keep_name: False
+activemq_logger_config_keep_name: false
 activemq_logger_rollover_files: 5
 activemq_logger_audit_rollover_files: 5
 
 # Metrics
 activemq_jmx_exporter_port: 18080
 activemq_jmx_exporter_config_path: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/jmx_exporter.yml"
-activemq_jmx_exporter_enabled: False
+activemq_jmx_exporter_enabled: false
 activemq_jmx_exporter_package: prometheus-jmx-exporter-openjdk11
-activemq_prometheus_enabled: False
+activemq_prometheus_enabled: false
 
 ### Contoller defaults
 activemq_local_archive_repository: "{{ lookup('env', 'PWD') }}"

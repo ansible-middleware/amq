@@ -1,5 +1,5 @@
          <address-setting match="{{ address_setting.match }}">
-{% for param in lookup('ansible.builtin.dict', address_setting.parameters, wantlist=True) %}
+{% for param in lookup('ansible.builtin.dict', address_setting.parameters, wantlist=true) %}
             <{{ param.key | replace('_','-') }}>{% if param.value is number %}{{ param.value | string | lower }}{% else %}{{ param.value }}{% endif %}</{{ param.key | replace('_','-') }}>
 {% endfor %}
          </address-setting>

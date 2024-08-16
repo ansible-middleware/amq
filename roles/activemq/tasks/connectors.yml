@@ -2,7 +2,7 @@
 - name: Create final connector list using generated and declared lists
   ansible.builtin.set_fact:
     merged_connectors: "{{ activemq_cluster_nodes | default([]) | middleware_automation.amq.lists_mergeby(\
-                          activemq_connectors | default([]), 'name', recursive=True, list_merge='append') }}"
+                          activemq_connectors | default([]), 'name', recursive=true, list_merge='append') }}"
 
 - name: Create connector configuration string
   ansible.builtin.set_fact:

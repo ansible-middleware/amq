@@ -78,11 +78,11 @@
       register: profile_file
     - name: Display versions
       ansible.builtin.debug:
-        msg: "Requested version: {{ activemq_version }} / current profile: {{ profile_file.content | b64decode | regex_search(\"ARTEMIS_HOME='?.*'?\", multiline=True) }}"
+        msg: "Requested version: {{ activemq_version }} / current profile: {{ profile_file.content | b64decode | regex_search(\"ARTEMIS_HOME='?.*'?\", multiline=true) }}"
     - name: Set upgrade flag
       ansible.builtin.set_fact:
         needs_upgrade: true
-      when: (profile_file.content | b64decode | regex_search("ARTEMIS_HOME='?" + activemq_installdir + "'?", multiline=True)) == None
+      when: (profile_file.content | b64decode | regex_search("ARTEMIS_HOME='?" + activemq_installdir + "'?", multiline=true)) == None
 
 - name: Include post upgrade tasks
   ansible.builtin.include_tasks: upgrade.yml
