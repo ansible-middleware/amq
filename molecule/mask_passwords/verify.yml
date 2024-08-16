@@ -50,6 +50,7 @@
     - name: Verify users and roles
       ansible.builtin.assert:
         that:
+          - "'\"otherencoded\"()' in user_roles.stdout"
           - "'\"other\"()' in user_roles.stdout"
           - "'\"amq\"(admin)' in user_roles.stdout"
         quiet: true
@@ -63,6 +64,7 @@
     - name: Verify users and roles with ldap account
       ansible.builtin.assert:
         that:
+          - "'\"otherencoded\"()' in user_roles.stdout"
           - "'\"other\"()' in user_roles.stdout"
           - "'\"amq\"(admin)' in user_roles.stdout"
         quiet: true
