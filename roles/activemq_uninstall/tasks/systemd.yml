@@ -8,7 +8,7 @@
     name: "{{ activemq.instance_name }}"
     enabled: false
     state: stopped
-  when: 'activemq.service_name + ".service" in ansible_facts.services'
+  when: 'activemq.instance_name + ".service" in ansible_facts.services'
 
 - name: "Delete sysconfig file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
   become: true
