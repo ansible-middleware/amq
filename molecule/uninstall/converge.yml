@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: yes
+  vars:
+    activemq_service_user_home: /home/activemq
+  roles:
+    - middleware_automation.amq.activemq_uninstall
