@@ -1,0 +1,69 @@
+---
+- name: "Delete service user"
+  become: true
+  ansible.builtin.user:
+    state: absent
+    name: "{{ activemq_service_user }}"
+  when: not activemq_uninstall_skip_user
+
+- name: "Delete service group"
+  become: true
+  ansible.builtin.group:
+    name: "{{ activemq_service_group }}"
+    state: absent
+  when: not activemq_uninstall_skip_user
+
+- name: "Delete {{ activemq.service_name }} install location"
+  become: true
+  ansible.builtin.file:
+    dest: "{{ activemq_dest }}"
+    state: absent
+
+- name: Set download archive path
+  ansible.builtin.set_fact:
+    archive: "{{ activemq_dest }}/{{ activemq.bundle }}"
+
+- name: Check download archive path
+  become: true
+  ansible.builtin.stat:
+    path: "{{ archive }}"
+  register: archive_path
+
+- name: Delete archive from target nodes
+  become: true
+  ansible.builtin.file:
+    dest: "{{ archive }}"
+    state: absent
+  when: not activemq_uninstall_skip_zipfile
+
+- name: "Check target directory: {{ activemq.home }}"
+  become: true
+  ansible.builtin.stat:
+    path: "{{ activemq.home }}"
+  register: path_to_workdir
+
+- name: "Delete artemis installation directory"
+  become: true
+  ansible.builtin.file:
+    dest: "{{ activemq.home }}"
+    state: absent
+  when: not activemq_uninstall_skip_artemis
+
+- name: Link zipfile directory to wanted directory
+  become: true
+  ansible.builtin.file:
+    state: absent
+    dest: "{{ activemq.home }}"
+  when: not activemq_uninstall_skip_artemis
+
+- name: Link default logs directory
+  become: true
+  ansible.builtin.file:
+    state: absent
+    dest: "/var/log/{{ activemq.service_name }}/{{ activemq.instance_name }}"
+
+- name: Create default logs directory
+  become: true
+  ansible.builtin.file:
+    state: absent
+    dest: "/var/log/{{ activemq.service_name }}"

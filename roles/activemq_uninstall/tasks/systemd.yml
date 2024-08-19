@@ -1,0 +1,36 @@
+---
+- name: Check systemd service
+  ansible.builtin.service_facts:
+
+- name: "Disable and stop instance {{ activemq.instance_name }} for {{ activemq.service_name }} service"
+  become: true
+  ansible.builtin.systemd:
+    name: "{{ activemq.instance_name }}"
+    enabled: false
+    state: stopped
+  when: 'activemq.instance_name + ".service" in ansible_facts.services'
+
+- name: "Delete sysconfig file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
+  become: true
+  ansible.builtin.file:
+    state: absent
+    dest: "/etc/sysconfig/{{ activemq.instance_name }}"
+
+- name: "Delete systemd unit file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
+  become: true
+  ansible.builtin.file:
+    state: absent
+    dest: "/etc/systemd/system/{{ activemq.instance_name }}.service"
+  register: systemdunit
+
+- name: Reload systemd
+  become: true
+  ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler
+    daemon_reload: true
+  changed_when: systemdunit.changed
+
+- name: Delete instance directory
+  become: true
+  ansible.builtin.file:
+    state: absent
+    dest: "{{ activemq.instance_home }}"

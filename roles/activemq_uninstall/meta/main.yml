@@ -1,0 +1,31 @@
+---
+collections:
+  - middleware_automation.common
+  - ansible.posix
+
+galaxy_info:
+  role_name: activemq_uninstall
+  namespace: middleware_automation
+  author: Guido Grazioli
+  description: Uninstalls an ActiveMQ service installed by the activemq role.
+  company: Red Hat, Inc.
+
+  license: Apache License 2.0
+
+  min_ansible_version: "2.15"
+
+  platforms:
+   - name: EL
+     versions:
+       - "8"
+       - "9"
+
+  galaxy_tags:
+    - activemq
+    - broker
+    - redhat
+    - rhel
+    - server
+    - messaging
+    - messagebus
+    - infrastructure

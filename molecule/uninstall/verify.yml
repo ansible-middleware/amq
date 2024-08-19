@@ -1,0 +1,35 @@
+---
+- name: Verify
+  hosts: all
+  become: yes
+  tasks:
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+
+    - name: Check if amq-broker service is started
+      ansible.builtin.assert:
+        that:
+          - '"amq-broker.service" not in ansible_facts.services'
+
+    - name: Check install dir
+      ansible.builtin.stat:
+        path: /opt/amq/amq-broker/
+      register: broker_bin
+
+    - name: Check install dir
+      ansible.builtin.stat:
+        path: /opt/amq/
+      register: broker_artemis
+
+    - name: Check user homedir
+      ansible.builtin.stat:
+        path: /home/activemq
+      register: broker_user
+
+    - name: Verify uninstall
+      ansible.builtin.assert:
+        that:
+          - not broker_user.stat.exists or activemq_uninstall_skip_user
+          - not broker_artemis.stat.exists or activemq_uninstall_skip_artemis
+          - not broker_bin.stat.exists
+        quiet: true

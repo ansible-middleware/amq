@@ -1,0 +1,129 @@
+argument_specs:
+    main:
+        options:
+            activemq_version:
+                default: "2.34.0"
+                description: "Apache Artemis version"
+                type: "str"
+            activemq_archive:
+                default: "apache-artemis-{{ activemq_version }}-bin.zip"
+                description: "Apache Artemis install archive filename"
+                type: "str"
+            activemq_installdir:
+                default: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
+                description: "Apache Artemis Installation path"
+                type: "str"
+            activemq_service_user_home:
+                default: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
+                description: "Service user home directory, defaults to artemis installation directory"
+                type: "str"
+            activemq_dest:
+                default: "/opt/activemq"
+                description: "Root installation directory"
+                type: "str"
+            activemq_service_user:
+                default: "amq-broker"
+                description: "POSIX user running the service"
+                type: "str"
+            activemq_service_group:
+                default: "amq-broker"
+                description: "POSIX group running the service"
+                type: "str"
+            activemq_instance_name:
+                default: "amq-broker"
+                description: "Name of broker instance to deploy"
+                type: "str"
+            activemq_service_pidfile:
+                default: "data/artemis.pid"
+                description: "PID file for service"
+                type: "str"
+            activemq_configure_firewalld:
+                default: false
+                description: "Whether to install and configure firewalld"
+                type: "bool"
+            activemq_shared_storage:
+                default: false
+                description: "Use shared filesystem directory for storage"
+                type: "bool"
+            activemq_shared_storage_path:
+                default: "{{ activemq_dest }}/{{ activemq_instance_name }}/data/shared"
+                description: "Absolute path of shared directory"
+                type: "str"
+            activemq_shared_storage_mounted:
+                default: true
+                description: "Whether the systemd unit must require a mounted path (only when using shared storage)"
+                type: "bool"
+            activemq_name:
+                description: 'Human friendly name for service'
+                default: "Apache ActiveMQ"
+                type: "str"
+            activemq_service_name:
+                description: "Systemd unit name"
+                default: "activemq"
+                type: "str"
+            activemq_paging_directory:
+                description: 'The directory to store paged messages in'
+                default: 'data/paging'
+                type: "str"
+            activemq_bindings_directory:
+                description: 'The folder in use for the bindings folder'
+                default: 'data/bindings'
+                type: "str"
+            activemq_journal_directory:
+                description: 'The directory to store the journal files in'
+                default: 'data/journal'
+                type: "str"
+            activemq_large_messages_directory:
+                description: 'The directory to store large messages'
+                default: 'data/largemessages'
+                type: "str"
+            activemq_journal_datasync:
+                description: 'Whether to use msync/fsync on journal operations'
+                default: true
+                type: 'bool'
+            activemq_data_directory:
+                description: "The activemq data directory path"
+                default: "{{ activemq_shared_storage_path if activemq_shared_storage else activemq_dest + '/' + activemq_instance_name  + '/data' }}"
+                type: 'str'
+            activemq_uninstall_skip_user:
+                description: 'Whether to skip user/group account deletion'
+                default: false
+                type: 'bool'
+            activemq_uninstall_skip_zipfile:
+                description: 'Whether to skip installation zipfile deletion'
+                default: false
+                type: 'bool'
+            activemq_uninstall_skip_artemis:
+                description: 'Whether to skip artemis directory deletion'
+                default: false
+                type: 'bool'
+    downstream:
+        options:
+            amq_broker_version:
+                default: "7.12.0"
+                description: "Red Hat AMQ Broker version"
+                type: "str"
+            amq_broker_enable:
+                default: true
+                description: "Enable installation of Red Hat AMQ Broker"
+                type: "bool"
+            amq_broker_archive:
+                default: "amq-broker-{{ amq_broker_version }}-bin.zip"
+                description: "Red Hat AMQ Broker install archive filename"
+                type: "str"
+            amq_broker_installdir:
+                default: "{{ amq_broker_dest }}/amq-broker-{{ amq_broker_version }}"
+                description: "Red Hat AMQ Broker installation path"
+                type: "str"
+            amq_broker_dest:
+                default: "/opt/amq"
+                description: "Root installation directory"
+                type: "str"
+            amq_broker_name:
+                description: "Human friendly name for service"
+                default: "Red Hat AMQ Broker"
+                type: "str"
+            amq_broker_service_name:
+                description: "Systemd unit name"
+                default: "amq_broker"
+                type: "str"

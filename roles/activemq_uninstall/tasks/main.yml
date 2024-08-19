@@ -1,0 +1,10 @@
+---
+- name: Include systemd tasks
+  ansible.builtin.include_tasks: systemd.yml
+  tags:
+    - systemd
+
+- name: Include uninstall tasks
+  ansible.builtin.include_tasks: uninstall.yml
+  tags:
+    - uninstall
