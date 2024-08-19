@@ -7,10 +7,10 @@ middleware\_automation.amq Release Notes
 v2.1.2-devel
 ============
 
-Release Summary
----------------
+Bugfixes
+--------
 
-Internal release, documentation or test changes only.
+- Allow mixing masked and unmasked passwords `#149 <https://github.com/ansible-middleware/amq/pull/149>`_
 
 v2.1.1
 ======
