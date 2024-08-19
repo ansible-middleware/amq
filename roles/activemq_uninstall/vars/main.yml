@@ -1,0 +1,11 @@
+---
+### internal variables
+activemq:  # noqa var-naming false positive
+  home: "{{ activemq_installdir }}"
+  user_home: "{{ activemq_service_user_home }}"
+  version: "{{ activemq_version }}"
+  bundle: "{{ activemq_archive }}"
+  name: "{{ activemq_name }}"
+  service_name: "{{ activemq_service_name }}"
+  instance_name: "{{ activemq_instance_name }}"
+  instance_home: "{{ activemq_dest }}/{{ activemq_instance_name }}"

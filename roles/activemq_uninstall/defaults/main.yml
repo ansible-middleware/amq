@@ -1,0 +1,30 @@
+---
+### Parameters as used with activemq role
+activemq_version: 2.34.0
+activemq_archive: "apache-artemis-{{ activemq_version }}-bin.zip"
+activemq_installdir: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
+activemq_dest: /opt/amq
+activemq_service_user: amq-broker
+activemq_service_group: amq-broker
+activemq_service_user_home: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
+activemq_instance_name: amq-broker
+activemq_service_pidfile: data/artemis.pid
+activemq_configure_firewalld: false
+activemq_name: 'Apache ActiveMQ'
+activemq_service_name: activemq
+activemq_data_directory: "{{ activemq_shared_storage_path if activemq_shared_storage else activemq_dest + '/' + activemq_instance_name  + '/data' }}"
+activemq_paging_directory: "{{ activemq_data_directory }}/paging"
+activemq_bindings_directory: "{{ activemq_data_directory }}/bindings"
+activemq_journal_directory: "{{ activemq_data_directory }}/journal"
+activemq_large_messages_directory: "{{ activemq_data_directory }}/largemessages"
+activemq_shared_storage: false
+activemq_shared_storage_mounted: true
+activemq_shared_storage_path: "{{ activemq_dest }}/{{ activemq_instance_name }}/data/shared"
+
+### Parameters specific to uninstall role
+# skip user/group deletion
+activemq_uninstall_skip_user: false
+# skip install zipfile deletion
+activemq_uninstall_skip_zipfile: false
+# skip artemis install deletion
+activemq_uninstall_skip_artemis: false
