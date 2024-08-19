@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Base deployment" href="base_deployment.html" />
-    <link rel="prev" title="activemq" href="roles/activemq.html" /> 
+    <link rel="prev" title="activemq_uninstall" href="roles/activemq_uninstall.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,32 +52,33 @@
 <li class="toctree-l1"><a class="reference internal" href="plugins/index.html">Plugin Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="roles/index.html">Role Index</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#v2-1-2-devel">v2.1.2-devel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v2-2-0-devel">v2.2.0-devel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#major-changes">Major Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bugfixes">Bugfixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v2-1-1">v2.1.1</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#minor-changes">Minor Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Bugfixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v2-1-0">v2.1.0</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#major-changes">Major Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Major Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Minor Changes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v2-0-2">v2.0.2</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id12">Minor Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">Bugfixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v2-0-1">v2.0.1</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id19">Minor Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id22">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id24">Bugfixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v2-0-0">v2.0.0</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id24">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">Minor Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#breaking-changes-porting-guide">Breaking Changes / Porting Guide</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#new-plugins">New Plugins</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#filter">Filter</a></li>
@@ -86,86 +87,86 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-3-10">v1.3.10</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id28">Minor Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id31">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id30">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id33">Bugfixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-3-9">v1.3.9</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id33">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id35">Minor Changes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-3-8">v1.3.8</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id37">Minor Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id39">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id39">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id41">Bugfixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-3-7">v1.3.7</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id41">Minor Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id43">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id43">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id45">Bugfixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-3-6">v1.3.6</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id45">Minor Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id47">Bugfixes</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#v1-3-5">v1.3.5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id47">Minor Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id49">Bugfixes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#v1-3-4">v1.3.4</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id51">Minor Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id54">Bugfixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-3-5">v1.3.5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id51">Bugfixes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#v1-3-3">v1.3.3</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v1-3-4">v1.3.4</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id53">Minor Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id56">Bugfixes</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-3-3">v1.3.3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id58">Bugfixes</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-3-2">v1.3.2</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id58">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id60">Minor Changes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-3-1">v1.3.1</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id60">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id62">Bugfixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-3-0">v1.3.0</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id62">Major Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id64">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id64">Major Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id66">Minor Changes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-2-0">v1.2.0</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id67">Major Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id69">Minor Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id76">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id69">Major Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id71">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id78">Bugfixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-1-1">v1.1.1</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id80">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id82">Bugfixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-1-0">v1.1.0</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id82">Major Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id85">Minor Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id90">Breaking Changes / Porting Guide</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id93">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id84">Major Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id87">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id92">Breaking Changes / Porting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id95">Bugfixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-0-0">v1.0.0</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id98">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id100">Minor Changes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-0-3">v0.0.3</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id101">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id103">Minor Changes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-0-2">v0.0.2</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id105">Major Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id107">Major Changes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-0-1">v0.0.1</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id107">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id109">Minor Changes</a></li>
 </ul>
 </li>
 </ul>
@@ -220,193 +221,200 @@
            <div itemprop="articleBody">
              
   <section id="middleware-automation-amq-release-notes">
-<h1><a class="toc-backref" href="#id109" role="doc-backlink">middleware_automation.amq Release Notes</a><a class="headerlink" href="#middleware-automation-amq-release-notes" title="Link to this heading"></a></h1>
+<h1><a class="toc-backref" href="#id111" role="doc-backlink">middleware_automation.amq Release Notes</a><a class="headerlink" href="#middleware-automation-amq-release-notes" title="Link to this heading"></a></h1>
 <nav class="contents" id="topics">
 <p class="topic-title">Topics</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#middleware-automation-amq-release-notes" id="id109">middleware_automation.amq Release Notes</a></p>
+<li><p><a class="reference internal" href="#middleware-automation-amq-release-notes" id="id111">middleware_automation.amq Release Notes</a></p>
 <ul>
-<li><p><a class="reference internal" href="#v2-1-2-devel" id="id110">v2.1.2-devel</a></p>
+<li><p><a class="reference internal" href="#v2-2-0-devel" id="id112">v2.2.0-devel</a></p>
 <ul>
-<li><p><a class="reference internal" href="#bugfixes" id="id111">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#major-changes" id="id113">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#bugfixes" id="id114">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v2-1-1" id="id112">v2.1.1</a></p>
+<li><p><a class="reference internal" href="#v2-1-1" id="id115">v2.1.1</a></p>
 <ul>
-<li><p><a class="reference internal" href="#minor-changes" id="id113">Minor Changes</a></p></li>
-<li><p><a class="reference internal" href="#id5" id="id114">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#minor-changes" id="id116">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id117">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v2-1-0" id="id115">v2.1.0</a></p>
+<li><p><a class="reference internal" href="#v2-1-0" id="id118">v2.1.0</a></p>
 <ul>
-<li><p><a class="reference internal" href="#major-changes" id="id116">Major Changes</a></p></li>
-<li><p><a class="reference internal" href="#id8" id="id117">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id8" id="id119">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#id10" id="id120">Minor Changes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v2-0-2" id="id118">v2.0.2</a></p>
+<li><p><a class="reference internal" href="#v2-0-2" id="id121">v2.0.2</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id12" id="id119">Minor Changes</a></p></li>
-<li><p><a class="reference internal" href="#id14" id="id120">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id14" id="id122">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id16" id="id123">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v2-0-1" id="id121">v2.0.1</a></p>
+<li><p><a class="reference internal" href="#v2-0-1" id="id124">v2.0.1</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id19" id="id122">Minor Changes</a></p></li>
-<li><p><a class="reference internal" href="#id22" id="id123">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id21" id="id125">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id24" id="id126">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v2-0-0" id="id124">v2.0.0</a></p>
+<li><p><a class="reference internal" href="#v2-0-0" id="id127">v2.0.0</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id24" id="id125">Minor Changes</a></p></li>
-<li><p><a class="reference internal" href="#breaking-changes-porting-guide" id="id126">Breaking Changes / Porting Guide</a></p></li>
-<li><p><a class="reference internal" href="#new-plugins" id="id127">New Plugins</a></p>
+<li><p><a class="reference internal" href="#id26" id="id128">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#breaking-changes-porting-guide" id="id129">Breaking Changes / Porting Guide</a></p></li>
+<li><p><a class="reference internal" href="#new-plugins" id="id130">New Plugins</a></p>
 <ul>
-<li><p><a class="reference internal" href="#filter" id="id128">Filter</a></p></li>
+<li><p><a class="reference internal" href="#filter" id="id131">Filter</a></p></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-3-10" id="id129">v1.3.10</a></p>
+<li><p><a class="reference internal" href="#v1-3-10" id="id132">v1.3.10</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id28" id="id130">Minor Changes</a></p></li>
-<li><p><a class="reference internal" href="#id31" id="id131">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id30" id="id133">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id33" id="id134">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-3-9" id="id132">v1.3.9</a></p>
+<li><p><a class="reference internal" href="#v1-3-9" id="id135">v1.3.9</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id33" id="id133">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id35" id="id136">Minor Changes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-3-8" id="id134">v1.3.8</a></p>
+<li><p><a class="reference internal" href="#v1-3-8" id="id137">v1.3.8</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id37" id="id135">Minor Changes</a></p></li>
-<li><p><a class="reference internal" href="#id39" id="id136">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id39" id="id138">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id41" id="id139">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-3-7" id="id137">v1.3.7</a></p>
+<li><p><a class="reference internal" href="#v1-3-7" id="id140">v1.3.7</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id41" id="id138">Minor Changes</a></p></li>
-<li><p><a class="reference internal" href="#id43" id="id139">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id43" id="id141">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id45" id="id142">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-3-6" id="id140">v1.3.6</a></p>
+<li><p><a class="reference internal" href="#v1-3-6" id="id143">v1.3.6</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id45" id="id141">Minor Changes</a></p></li>
-<li><p><a class="reference internal" href="#id47" id="id142">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id47" id="id144">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id49" id="id145">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-3-5" id="id143">v1.3.5</a></p>
+<li><p><a class="reference internal" href="#v1-3-5" id="id146">v1.3.5</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id49" id="id144">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id51" id="id147">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-3-4" id="id145">v1.3.4</a></p>
+<li><p><a class="reference internal" href="#v1-3-4" id="id148">v1.3.4</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id51" id="id146">Minor Changes</a></p></li>
-<li><p><a class="reference internal" href="#id54" id="id147">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id53" id="id149">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id56" id="id150">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-3-3" id="id148">v1.3.3</a></p>
+<li><p><a class="reference internal" href="#v1-3-3" id="id151">v1.3.3</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id56" id="id149">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id58" id="id152">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-3-2" id="id150">v1.3.2</a></p>
+<li><p><a class="reference internal" href="#v1-3-2" id="id153">v1.3.2</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id58" id="id151">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id60" id="id154">Minor Changes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-3-1" id="id152">v1.3.1</a></p>
+<li><p><a class="reference internal" href="#v1-3-1" id="id155">v1.3.1</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id60" id="id153">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id62" id="id156">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-3-0" id="id154">v1.3.0</a></p>
+<li><p><a class="reference internal" href="#v1-3-0" id="id157">v1.3.0</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id62" id="id155">Major Changes</a></p></li>
-<li><p><a class="reference internal" href="#id64" id="id156">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id64" id="id158">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#id66" id="id159">Minor Changes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-2-0" id="id157">v1.2.0</a></p>
+<li><p><a class="reference internal" href="#v1-2-0" id="id160">v1.2.0</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id67" id="id158">Major Changes</a></p></li>
-<li><p><a class="reference internal" href="#id69" id="id159">Minor Changes</a></p></li>
-<li><p><a class="reference internal" href="#id76" id="id160">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id69" id="id161">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#id71" id="id162">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id78" id="id163">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-1-1" id="id161">v1.1.1</a></p>
+<li><p><a class="reference internal" href="#v1-1-1" id="id164">v1.1.1</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id80" id="id162">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id82" id="id165">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-1-0" id="id163">v1.1.0</a></p>
+<li><p><a class="reference internal" href="#v1-1-0" id="id166">v1.1.0</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id82" id="id164">Major Changes</a></p></li>
-<li><p><a class="reference internal" href="#id85" id="id165">Minor Changes</a></p></li>
-<li><p><a class="reference internal" href="#id90" id="id166">Breaking Changes / Porting Guide</a></p></li>
-<li><p><a class="reference internal" href="#id93" id="id167">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id84" id="id167">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#id87" id="id168">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id92" id="id169">Breaking Changes / Porting Guide</a></p></li>
+<li><p><a class="reference internal" href="#id95" id="id170">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v1-0-0" id="id168">v1.0.0</a></p>
+<li><p><a class="reference internal" href="#v1-0-0" id="id171">v1.0.0</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id98" id="id169">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id100" id="id172">Minor Changes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v0-0-3" id="id170">v0.0.3</a></p>
+<li><p><a class="reference internal" href="#v0-0-3" id="id173">v0.0.3</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id101" id="id171">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id103" id="id174">Minor Changes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v0-0-2" id="id172">v0.0.2</a></p>
+<li><p><a class="reference internal" href="#v0-0-2" id="id175">v0.0.2</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id105" id="id173">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#id107" id="id176">Major Changes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v0-0-1" id="id174">v0.0.1</a></p>
+<li><p><a class="reference internal" href="#v0-0-1" id="id177">v0.0.1</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id107" id="id175">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id109" id="id178">Minor Changes</a></p></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </nav>
-<section id="v2-1-2-devel">
-<h2><a class="toc-backref" href="#id110" role="doc-backlink">v2.1.2-devel</a><a class="headerlink" href="#v2-1-2-devel" title="Link to this heading"></a></h2>
+<section id="v2-2-0-devel">
+<h2><a class="toc-backref" href="#id112" role="doc-backlink">v2.2.0-devel</a><a class="headerlink" href="#v2-2-0-devel" title="Link to this heading"></a></h2>
+<section id="major-changes">
+<h3><a class="toc-backref" href="#id113" role="doc-backlink">Major Changes</a><a class="headerlink" href="#major-changes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>New activemq_uninstall role <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/150">#150</a></p></li>
+</ul>
+</section>
 <section id="bugfixes">
-<h3><a class="toc-backref" href="#id111" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#bugfixes" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id114" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#bugfixes" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Allow mixing masked and unmasked passwords <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/149">#149</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v2-1-1">
-<h2><a class="toc-backref" href="#id112" role="doc-backlink">v2.1.1</a><a class="headerlink" href="#v2-1-1" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id115" role="doc-backlink">v2.1.1</a><a class="headerlink" href="#v2-1-1" title="Link to this heading"></a></h2>
 <section id="minor-changes">
-<h3><a class="toc-backref" href="#id113" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#minor-changes" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id116" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#minor-changes" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add fact gathering module for amq <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/145">#145</a></p></li>
 <li><p>Add ha with replication policy <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/147">#147</a></p></li>
 <li><p>Allow to configure broker properties with properties file <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/143">#143</a></p></li>
 </ul>
 </section>
-<section id="id5">
-<h3><a class="toc-backref" href="#id114" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="id6">
+<h3><a class="toc-backref" href="#id117" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Update jolokia access when bind host and port are changed <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/146">#146</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v2-1-0">
-<h2><a class="toc-backref" href="#id115" role="doc-backlink">v2.1.0</a><a class="headerlink" href="#v2-1-0" title="Link to this heading"></a></h2>
-<section id="major-changes">
-<h3><a class="toc-backref" href="#id116" role="doc-backlink">Major Changes</a><a class="headerlink" href="#major-changes" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id118" role="doc-backlink">v2.1.0</a><a class="headerlink" href="#v2-1-0" title="Link to this heading"></a></h2>
+<section id="id8">
+<h3><a class="toc-backref" href="#id119" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Update default jdk11 to jdk17 <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/132">#132</a></p></li>
 </ul>
 </section>
-<section id="id8">
-<h3><a class="toc-backref" href="#id117" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<section id="id10">
+<h3><a class="toc-backref" href="#id120" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add config for in-vm acceptors/connectors <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/135">#135</a></p></li>
 <li><p>Federated addressing <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/137">#137</a></p></li>
@@ -415,15 +423,15 @@
 </section>
 </section>
 <section id="v2-0-2">
-<h2><a class="toc-backref" href="#id118" role="doc-backlink">v2.0.2</a><a class="headerlink" href="#v2-0-2" title="Link to this heading"></a></h2>
-<section id="id12">
-<h3><a class="toc-backref" href="#id119" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id121" role="doc-backlink">v2.0.2</a><a class="headerlink" href="#v2-0-2" title="Link to this heading"></a></h2>
+<section id="id14">
+<h3><a class="toc-backref" href="#id122" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Set minimum ansible-core version to &gt;=2.15 <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/127">#127</a></p></li>
 </ul>
 </section>
-<section id="id14">
-<h3><a class="toc-backref" href="#id120" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<section id="id16">
+<h3><a class="toc-backref" href="#id123" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Artemis command to create broker instance uses correct JAVA_HOME <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/125">#125</a></p></li>
 <li><p>Fix <code class="docutils literal notranslate"><span class="pre">broker-connections</span></code> templating error, add missing parameters <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/133">#133</a></p></li>
@@ -433,40 +441,40 @@
 </section>
 </section>
 <section id="v2-0-1">
-<h2><a class="toc-backref" href="#id121" role="doc-backlink">v2.0.1</a><a class="headerlink" href="#v2-0-1" title="Link to this heading"></a></h2>
-<section id="id19">
-<h3><a class="toc-backref" href="#id122" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id124" role="doc-backlink">v2.0.1</a><a class="headerlink" href="#v2-0-1" title="Link to this heading"></a></h2>
+<section id="id21">
+<h3><a class="toc-backref" href="#id125" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Parameter <code class="docutils literal notranslate"><span class="pre">activemq_logger_config_template</span></code> allows relative paths <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/116">#116</a></p></li>
 <li><p>Update activemq default to 2.32 / amq_broker to 7.11.6 <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/118">#118</a></p></li>
 </ul>
 </section>
-<section id="id22">
-<h3><a class="toc-backref" href="#id123" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<section id="id24">
+<h3><a class="toc-backref" href="#id126" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">activemq_config_override_template</span></code> allows to use custom broker.xml templates <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/117">#117</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v2-0-0">
-<h2><a class="toc-backref" href="#id124" role="doc-backlink">v2.0.0</a><a class="headerlink" href="#v2-0-0" title="Link to this heading"></a></h2>
-<section id="id24">
-<h3><a class="toc-backref" href="#id125" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id127" role="doc-backlink">v2.0.0</a><a class="headerlink" href="#v2-0-0" title="Link to this heading"></a></h2>
+<section id="id26">
+<h3><a class="toc-backref" href="#id128" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add referrer to ldap plugin, allow custom login.config <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/110">#110</a></p></li>
 <li><p>Update activemq default version to 2.28 <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/111">#111</a></p></li>
 </ul>
 </section>
 <section id="breaking-changes-porting-guide">
-<h3><a class="toc-backref" href="#id126" role="doc-backlink">Breaking Changes / Porting Guide</a><a class="headerlink" href="#breaking-changes-porting-guide" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id129" role="doc-backlink">Breaking Changes / Porting Guide</a><a class="headerlink" href="#breaking-changes-porting-guide" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Set Ansible required version to &gt;= 2.14 <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/108">#108</a></p></li>
 </ul>
 </section>
 <section id="new-plugins">
-<h3><a class="toc-backref" href="#id127" role="doc-backlink">New Plugins</a><a class="headerlink" href="#new-plugins" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id130" role="doc-backlink">New Plugins</a><a class="headerlink" href="#new-plugins" title="Link to this heading"></a></h3>
 <section id="filter">
-<h4><a class="toc-backref" href="#id128" role="doc-backlink">Filter</a><a class="headerlink" href="#filter" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id131" role="doc-backlink">Filter</a><a class="headerlink" href="#filter" title="Link to this heading"></a></h4>
 <ul class="simple">
 <li><p>middleware_automation.amq.lists_mergeby - Merge two or more lists of dictionaries by a given attribute</p></li>
 </ul>
@@ -474,25 +482,25 @@
 </section>
 </section>
 <section id="v1-3-10">
-<h2><a class="toc-backref" href="#id129" role="doc-backlink">v1.3.10</a><a class="headerlink" href="#v1-3-10" title="Link to this heading"></a></h2>
-<section id="id28">
-<h3><a class="toc-backref" href="#id130" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id132" role="doc-backlink">v1.3.10</a><a class="headerlink" href="#v1-3-10" title="Link to this heading"></a></h2>
+<section id="id30">
+<h3><a class="toc-backref" href="#id133" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id30" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add LDAP plugin configuration to JAAS login.config <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/96">#96</a></p></li>
 <li><p>Add custom codec configurations for masked passwords <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/95">#95</a></p></li>
 </ul>
 </section>
-<section id="id31">
-<h3><a class="toc-backref" href="#id131" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<section id="id33">
+<h3><a class="toc-backref" href="#id134" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id33" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Ignore unwanted output from <code class="docutils literal notranslate"><span class="pre">artemis</span> <span class="pre">mask</span></code> command <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/98">#98</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v1-3-9">
-<h2><a class="toc-backref" href="#id132" role="doc-backlink">v1.3.9</a><a class="headerlink" href="#v1-3-9" title="Link to this heading"></a></h2>
-<section id="id33">
-<h3><a class="toc-backref" href="#id133" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id33" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id135" role="doc-backlink">v1.3.9</a><a class="headerlink" href="#v1-3-9" title="Link to this heading"></a></h2>
+<section id="id35">
+<h3><a class="toc-backref" href="#id136" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id35" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add parameters for <code class="docutils literal notranslate"><span class="pre">global-max-size</span></code> and <code class="docutils literal notranslate"><span class="pre">global-max-messages</span></code> <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/92">#92</a></p></li>
 <li><p>Add parameters to configure log4j2 rolling strategy <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/94">#94</a></p></li>
@@ -501,112 +509,112 @@
 </section>
 </section>
 <section id="v1-3-8">
-<h2><a class="toc-backref" href="#id134" role="doc-backlink">v1.3.8</a><a class="headerlink" href="#v1-3-8" title="Link to this heading"></a></h2>
-<section id="id37">
-<h3><a class="toc-backref" href="#id135" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id37" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id137" role="doc-backlink">v1.3.8</a><a class="headerlink" href="#v1-3-8" title="Link to this heading"></a></h2>
+<section id="id39">
+<h3><a class="toc-backref" href="#id138" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Update to connectors config (add parameter for NIC name selection) <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/84">#84</a></p></li>
 </ul>
 </section>
-<section id="id39">
-<h3><a class="toc-backref" href="#id136" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
+<section id="id41">
+<h3><a class="toc-backref" href="#id139" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Fix incorrectly defined default for <code class="docutils literal notranslate"><span class="pre">amq_broker_logger_config_template</span></code> <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/86">#86</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v1-3-7">
-<h2><a class="toc-backref" href="#id137" role="doc-backlink">v1.3.7</a><a class="headerlink" href="#v1-3-7" title="Link to this heading"></a></h2>
-<section id="id41">
-<h3><a class="toc-backref" href="#id138" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id140" role="doc-backlink">v1.3.7</a><a class="headerlink" href="#v1-3-7" title="Link to this heading"></a></h2>
+<section id="id43">
+<h3><a class="toc-backref" href="#id141" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id43" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Allow to set arbitrary service user home_dir <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/83">#83</a></p></li>
 </ul>
 </section>
-<section id="id43">
-<h3><a class="toc-backref" href="#id139" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id43" title="Link to this heading"></a></h3>
+<section id="id45">
+<h3><a class="toc-backref" href="#id142" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id45" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Default java_home path uses alternatives <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/82">#82</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v1-3-6">
-<h2><a class="toc-backref" href="#id140" role="doc-backlink">v1.3.6</a><a class="headerlink" href="#v1-3-6" title="Link to this heading"></a></h2>
-<section id="id45">
-<h3><a class="toc-backref" href="#id141" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id45" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id143" role="doc-backlink">v1.3.6</a><a class="headerlink" href="#v1-3-6" title="Link to this heading"></a></h2>
+<section id="id47">
+<h3><a class="toc-backref" href="#id144" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id47" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Set systemd unit to run with <code class="docutils literal notranslate"><span class="pre">activemq_system_user</span></code> user <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/78">#78</a></p></li>
 </ul>
 </section>
-<section id="id47">
-<h3><a class="toc-backref" href="#id142" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id47" title="Link to this heading"></a></h3>
+<section id="id49">
+<h3><a class="toc-backref" href="#id145" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id49" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Update logging facade config (by activemq version) <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/76">#76</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v1-3-5">
-<h2><a class="toc-backref" href="#id143" role="doc-backlink">v1.3.5</a><a class="headerlink" href="#v1-3-5" title="Link to this heading"></a></h2>
-<section id="id49">
-<h3><a class="toc-backref" href="#id144" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id49" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id146" role="doc-backlink">v1.3.5</a><a class="headerlink" href="#v1-3-5" title="Link to this heading"></a></h2>
+<section id="id51">
+<h3><a class="toc-backref" href="#id147" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id51" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Update package name for prometheus plugin class <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/74">#74</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v1-3-4">
-<h2><a class="toc-backref" href="#id145" role="doc-backlink">v1.3.4</a><a class="headerlink" href="#v1-3-4" title="Link to this heading"></a></h2>
-<section id="id51">
-<h3><a class="toc-backref" href="#id146" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id51" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id148" role="doc-backlink">v1.3.4</a><a class="headerlink" href="#v1-3-4" title="Link to this heading"></a></h2>
+<section id="id53">
+<h3><a class="toc-backref" href="#id149" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id53" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Provide AMQP broker-connections configuration <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/70">#70</a></p></li>
 <li><p>Use middleware_automation.common xml plugin <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/72">#72</a></p></li>
 </ul>
 </section>
-<section id="id54">
-<h3><a class="toc-backref" href="#id147" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id54" title="Link to this heading"></a></h3>
+<section id="id56">
+<h3><a class="toc-backref" href="#id150" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id56" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Handle case when install zipfile root is not expected <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/73">#73</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v1-3-3">
-<h2><a class="toc-backref" href="#id148" role="doc-backlink">v1.3.3</a><a class="headerlink" href="#v1-3-3" title="Link to this heading"></a></h2>
-<section id="id56">
-<h3><a class="toc-backref" href="#id149" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id56" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id151" role="doc-backlink">v1.3.3</a><a class="headerlink" href="#v1-3-3" title="Link to this heading"></a></h2>
+<section id="id58">
+<h3><a class="toc-backref" href="#id152" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id58" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Restore wait_for_log string in live-only ha <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/68">#68</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v1-3-2">
-<h2><a class="toc-backref" href="#id150" role="doc-backlink">v1.3.2</a><a class="headerlink" href="#v1-3-2" title="Link to this heading"></a></h2>
-<section id="id58">
-<h3><a class="toc-backref" href="#id151" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id58" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id153" role="doc-backlink">v1.3.2</a><a class="headerlink" href="#v1-3-2" title="Link to this heading"></a></h2>
+<section id="id60">
+<h3><a class="toc-backref" href="#id154" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id60" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Provide ha-policy implementation <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/66">#66</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v1-3-1">
-<h2><a class="toc-backref" href="#id152" role="doc-backlink">v1.3.1</a><a class="headerlink" href="#v1-3-1" title="Link to this heading"></a></h2>
-<section id="id60">
-<h3><a class="toc-backref" href="#id153" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id60" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id155" role="doc-backlink">v1.3.1</a><a class="headerlink" href="#v1-3-1" title="Link to this heading"></a></h2>
+<section id="id62">
+<h3><a class="toc-backref" href="#id156" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id62" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Avoid generating duplicated security-settings match elements <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/65">#65</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v1-3-0">
-<h2><a class="toc-backref" href="#id154" role="doc-backlink">v1.3.0</a><a class="headerlink" href="#v1-3-0" title="Link to this heading"></a></h2>
-<section id="id62">
-<h3><a class="toc-backref" href="#id155" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id62" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id157" role="doc-backlink">v1.3.0</a><a class="headerlink" href="#v1-3-0" title="Link to this heading"></a></h2>
+<section id="id64">
+<h3><a class="toc-backref" href="#id158" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id64" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Configuration pre-install validation against schema <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/58">#58</a></p></li>
 </ul>
 </section>
-<section id="id64">
-<h3><a class="toc-backref" href="#id156" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id64" title="Link to this heading"></a></h3>
+<section id="id66">
+<h3><a class="toc-backref" href="#id159" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id66" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Remove dependency on community.general collection <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/59">#59</a></p></li>
 <li><p>Switch middleware_automation.redhat_csp_download for middleware_automation.common <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/60">#60</a></p></li>
@@ -614,15 +622,15 @@
 </section>
 </section>
 <section id="v1-2-0">
-<h2><a class="toc-backref" href="#id157" role="doc-backlink">v1.2.0</a><a class="headerlink" href="#v1-2-0" title="Link to this heading"></a></h2>
-<section id="id67">
-<h3><a class="toc-backref" href="#id158" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id67" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id160" role="doc-backlink">v1.2.0</a><a class="headerlink" href="#v1-2-0" title="Link to this heading"></a></h2>
+<section id="id69">
+<h3><a class="toc-backref" href="#id161" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id69" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Type for <code class="docutils literal notranslate"><span class="pre">activemq_cors_allow_origin</span></code> changed from string to list of strings <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/53">#53</a></p></li>
 </ul>
 </section>
-<section id="id69">
-<h3><a class="toc-backref" href="#id159" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id69" title="Link to this heading"></a></h3>
+<section id="id71">
+<h3><a class="toc-backref" href="#id162" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id71" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add address/queue configuration <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/51">#51</a></p></li>
 <li><p>Add configuration parameters for journal <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/43">#43</a></p></li>
@@ -632,8 +640,8 @@
 <li><p>New flags make systemd unit wait for activemq ports or logs <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/50">#50</a></p></li>
 </ul>
 </section>
-<section id="id76">
-<h3><a class="toc-backref" href="#id160" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id76" title="Link to this heading"></a></h3>
+<section id="id78">
+<h3><a class="toc-backref" href="#id163" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id78" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add <code class="docutils literal notranslate"><span class="pre">activemq_data_directory</span></code> variable <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/57">#57</a></p></li>
 <li><p>Fix templating error when acceptors or connectors have a single parameter <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/47">#47</a></p></li>
@@ -642,9 +650,9 @@
 </section>
 </section>
 <section id="v1-1-1">
-<h2><a class="toc-backref" href="#id161" role="doc-backlink">v1.1.1</a><a class="headerlink" href="#v1-1-1" title="Link to this heading"></a></h2>
-<section id="id80">
-<h3><a class="toc-backref" href="#id162" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id80" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id164" role="doc-backlink">v1.1.1</a><a class="headerlink" href="#v1-1-1" title="Link to this heading"></a></h2>
+<section id="id82">
+<h3><a class="toc-backref" href="#id165" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id82" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add systemd RequiresMountsFor and unit custom template <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/36">#36</a></p></li>
 <li><p>Stop using ansible.builtin.command module arguments incompatible with ansible 2.14</p></li>
@@ -652,16 +660,16 @@
 </section>
 </section>
 <section id="v1-1-0">
-<h2><a class="toc-backref" href="#id163" role="doc-backlink">v1.1.0</a><a class="headerlink" href="#v1-1-0" title="Link to this heading"></a></h2>
-<section id="id82">
-<h3><a class="toc-backref" href="#id164" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id82" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id166" role="doc-backlink">v1.1.0</a><a class="headerlink" href="#v1-1-0" title="Link to this heading"></a></h2>
+<section id="id84">
+<h3><a class="toc-backref" href="#id167" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id84" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Allow for listing roles for users. Specify security setting match address <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/19">#19</a></p></li>
 <li><p>Make variable <code class="docutils literal notranslate"><span class="pre">activemq_shared_storage_path</span></code> represent an absolute path <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/21">#21</a></p></li>
 </ul>
 </section>
-<section id="id85">
-<h3><a class="toc-backref" href="#id165" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id85" title="Link to this heading"></a></h3>
+<section id="id87">
+<h3><a class="toc-backref" href="#id168" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id87" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Arbitrary acceptors configuration via <code class="docutils literal notranslate"><span class="pre">activemq_acceptors</span></code> variable <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/30">#30</a></p></li>
 <li><p>Arbitrary connectors configuration via <code class="docutils literal notranslate"><span class="pre">activemq_connectors</span></code> variable <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/31">#31</a></p></li>
@@ -669,15 +677,15 @@
 <li><p>Variable to config controller download/offline directory <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/18">#18</a></p></li>
 </ul>
 </section>
-<section id="id90">
-<h3><a class="toc-backref" href="#id166" role="doc-backlink">Breaking Changes / Porting Guide</a><a class="headerlink" href="#id90" title="Link to this heading"></a></h3>
+<section id="id92">
+<h3><a class="toc-backref" href="#id169" role="doc-backlink">Breaking Changes / Porting Guide</a><a class="headerlink" href="#id92" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Rename role <code class="docutils literal notranslate"><span class="pre">amq_broker</span></code> to <code class="docutils literal notranslate"><span class="pre">activemq</span></code> <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/26">#26</a></p></li>
 <li><p>Rename variables prefix to <code class="docutils literal notranslate"><span class="pre">activemq_</span></code> <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/11">#11</a></p></li>
 </ul>
 </section>
-<section id="id93">
-<h3><a class="toc-backref" href="#id167" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id93" title="Link to this heading"></a></h3>
+<section id="id95">
+<h3><a class="toc-backref" href="#id170" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id95" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add <code class="docutils literal notranslate"><span class="pre">become_user</span></code> to artemis commands <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/17">#17</a></p></li>
 <li><p>Correctly set etc path and allow cors config for jolokia <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/24">#24</a></p></li>
@@ -687,9 +695,9 @@
 </section>
 </section>
 <section id="v1-0-0">
-<h2><a class="toc-backref" href="#id168" role="doc-backlink">v1.0.0</a><a class="headerlink" href="#v1-0-0" title="Link to this heading"></a></h2>
-<section id="id98">
-<h3><a class="toc-backref" href="#id169" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id98" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id171" role="doc-backlink">v1.0.0</a><a class="headerlink" href="#v1-0-0" title="Link to this heading"></a></h2>
+<section id="id100">
+<h3><a class="toc-backref" href="#id172" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id100" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Configuration for users and roles <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/7">#7</a></p></li>
 <li><p>Perform artemis post-upgrade operations on existing instances <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/8">#8</a></p></li>
@@ -697,9 +705,9 @@
 </section>
 </section>
 <section id="v0-0-3">
-<h2><a class="toc-backref" href="#id170" role="doc-backlink">v0.0.3</a><a class="headerlink" href="#v0-0-3" title="Link to this heading"></a></h2>
-<section id="id101">
-<h3><a class="toc-backref" href="#id171" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id101" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id173" role="doc-backlink">v0.0.3</a><a class="headerlink" href="#v0-0-3" title="Link to this heading"></a></h2>
+<section id="id103">
+<h3><a class="toc-backref" href="#id174" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id103" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add prometheus metrics export plugin <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/6">#6</a></p></li>
 <li><p>Add vars and template for logging configuration <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/4">#4</a></p></li>
@@ -708,18 +716,18 @@
 </section>
 </section>
 <section id="v0-0-2">
-<h2><a class="toc-backref" href="#id172" role="doc-backlink">v0.0.2</a><a class="headerlink" href="#v0-0-2" title="Link to this heading"></a></h2>
-<section id="id105">
-<h3><a class="toc-backref" href="#id173" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id105" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id175" role="doc-backlink">v0.0.2</a><a class="headerlink" href="#v0-0-2" title="Link to this heading"></a></h2>
+<section id="id107">
+<h3><a class="toc-backref" href="#id176" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id107" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>amq_broker: configuration of static cluster <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/3">#3</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v0-0-1">
-<h2><a class="toc-backref" href="#id174" role="doc-backlink">v0.0.1</a><a class="headerlink" href="#v0-0-1" title="Link to this heading"></a></h2>
-<section id="id107">
-<h3><a class="toc-backref" href="#id175" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id107" title="Link to this heading"></a></h3>
+<h2><a class="toc-backref" href="#id177" role="doc-backlink">v0.0.1</a><a class="headerlink" href="#v0-0-1" title="Link to this heading"></a></h2>
+<section id="id109">
+<h3><a class="toc-backref" href="#id178" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id109" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Import artemis create configuration tasks <a class="reference external" href="https://github.com/ansible-middleware/amq/pull/1">#1</a></p></li>
 </ul>
@@ -731,7 +739,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="roles/activemq.html" class="btn btn-neutral float-left" title="activemq" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="roles/activemq_uninstall.html" class="btn btn-neutral float-left" title="activemq_uninstall" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="base_deployment.html" class="btn btn-neutral float-right" title="Base deployment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

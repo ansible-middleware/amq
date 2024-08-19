@@ -4,8 +4,13 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
-v2.1.2-devel
+v2.2.0-devel
 ============
+
+Major Changes
+-------------
+
+- New activemq_uninstall role `#150 <https://github.com/ansible-middleware/amq/pull/150>`_
 
 Bugfixes
 --------
