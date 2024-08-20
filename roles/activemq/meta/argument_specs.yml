@@ -663,10 +663,6 @@ argument_specs:
                 default: "2.34.0"
                 description: "Apache Artemis version"
                 type: "str"
-            activemq_jvm_package:
-                default: "java-17-openjdk-headless"
-                description: "RPM package to install for the service"
-                type: "str"
             activemq_installdir:
                 default: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
                 description: "Apache Artemis Installation path"
