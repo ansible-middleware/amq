@@ -38,92 +38,74 @@ argument_specs:
                 description: "Broker instance configuration directory"
                 type: "str"
             activemq_config_xml:
-                # line 18 of defaults/main.yml
                 default: "amq-broker.xml"
                 description: "Broker instance configuration file"
                 type: "str"
             activemq_config_override_template:
-                # line 19 of defaults/main.yml
                 default: ""
                 description: "Filename of custom broker xml configuration file to be deployed"
                 type: "str"
             activemq_service_user:
-                # line 20 of defaults/main.yml
                 default: "amq-broker"
                 description: "POSIX user running the service"
                 type: "str"
             activemq_service_group:
-                # line 21 of defaults/main.yml
                 default: "amq-broker"
                 description: "POSIX group running the service"
                 type: "str"
             activemq_instance_name:
-                # line 22 of defaults/main.yml
                 default: "amq-broker"
                 description: "Name of broker instance to deploy"
                 type: "str"
             activemq_instance_username:
-                # line 23 of defaults/main.yml
                 default: "amq-broker"
                 description: "Username for accessing the broker instance"
                 type: "str"
             activemq_instance_password:
-                # line 24 of defaults/main.yml
                 default: "amq-broker"
                 description: "Password for accessing the broker instance"
                 type: "str"
             activemq_instance_anonymous:
-                # line 25 of defaults/main.yml
                 default: false
                 description: "Whether to allow anonymous logins to the instance"
                 type: "bool"
             activemq_service_pidfile:
-                # line 26 of defaults/main.yml
                 default: "data/artemis.pid"
                 description: "PID file for service"
                 type: "str"
             activemq_configure_firewalld:
-                # line 27 of defaults/main.yml
                 default: false
                 description: "Whether to install and configure firewalld"
                 type: "bool"
             activemq_bind_address:
-                # line 30 of defaults/main.yml
                 default: "0.0.0.0"
                 description: "Service bind address"
                 type: "str"
             activemq_host:
-                # line 31 of defaults/main.yml
                 default: "localhost"
                 description: "Service hostname"
                 type: "str"
             activemq_http_port:
-                # line 32 of defaults/main.yml
                 default: 8161
                 description: "Service http port serving console and REST api"
                 type: "int"
             activemq_jolokia_url:
-                # line 33 of defaults/main.yml
                 default: "http://{{ activemq_host }}:{{ activemq_http_port }}/console/jolokia"
                 description: "URL for jolokia REST api"
                 type: "str"
             activemq_console_url:
-                # line 34 of defaults/main.yml
                 default: "http://{{ activemq_host }}:{{ activemq_http_port }}/console/"
                 description: "URL for console service"
                 type: "str"
             activemq_jvm_package:
-                # line 35 of defaults/main.yml
                 default: "java-17-openjdk-headless"
                 description: "RPM package to install for the service"
                 type: "str"
             activemq_java_home:
-                # line 36 of defaults/main.yml
                 required: false
                 description: "JAVA_HOME of installed JRE, leave empty for using specified activemq_jvm_package path"
                 type: "str"
             activemq_java_opts:
-                # line 37 of defaults/main.yml
                 default: "{{ [ activemq_java_opts_mem, activemq_java_opts_gc, activemq_java_opts_hawtio,
                              '-Djolokia.policyLocation=file:' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml',
                              '-Dlog4j.configurationFile=' + activemq_logger_config_template if activemq_logger_config_template != 'log4j2.properties' and activemq_logger_config_template != 'logging.properties' else '',
@@ -133,32 +115,26 @@ argument_specs:
                   otherwise use the activemq_java_opts_* parameters
                 type: "str"
             activemq_port:
-                # line 38 of defaults/main.yml
                 default: 61616
                 description: "Main port for the broker instance"
                 type: "int"
             activemq_port_hornetq:
-                # line 39 of defaults/main.yml
                 default: 5445
                 description: "hornetq port for the broker instance"
                 type: "int"
             activemq_port_amqp:
-                # line 40 of defaults/main.yml
                 default: 5672
                 description: "AMQP port for the broker instance"
                 type: "int"
             activemq_port_mqtt:
-                # line 41 of defaults/main.yml
                 default: 1883
                 description: "MQTT port for the broker instance"
                 type: "int"
             activemq_port_stomp:
-                # line 42 of defaults/main.yml
                 default: 61613
                 description: "STOMP port for the broker instance"
                 type: "int"
             activemq_ha_enabled:
-                # line 45 of defaults/main.yml
                 default: false
                 description: "Whether to enable clustering"
                 type: "bool"
@@ -167,27 +143,22 @@ argument_specs:
                 type: "str"
                 description: "Instance role for high availability"
             activemq_db_enabled:
-                # line 54 of defaults/main.yml
                 default: false
                 description: "Whether to enable JDBC persistence"
                 type: "bool"
             activemq_cluster_user:
-                # line 46 of defaults/main.yml
                 default: "amq-cluster-user"
                 description: "Cluster username"
                 type: "str"
             activemq_cluster_pass:
-                # line 47 of defaults/main.yml
                 default: "amq-cluster-pass"
                 description: "Cluster user password"
                 type: "str"
             activemq_cluster_maxhops:
-                # line 48 of defaults/main.yml
                 default: 1
                 description: "Cluster max hops"
                 type: "int"
             activemq_cluster_lb_policy:
-                # line 49 of defaults/main.yml
                 default: "ON_DEMAND"
                 description: "Policy for cluster load balancing"
                 type: "str"
@@ -200,62 +171,50 @@ argument_specs:
                 description: "The NIC name to be used for cluster IPv4 addresses (ie. 'eth0')."
                 type: "str"
             activemq_replication:
-                # line 50 of defaults/main.yml
                 default: false
                 description: "Enables replication"
                 type: "bool"
             activemq_replicated:
-                # line 51 of defaults/main.yml
                 default: false
                 description: "Designate instance as replicated node"
                 type: "bool"
             activemq_tls_enabled:
-                # line 57 of defaults/main.yml
                 default: false
                 description: "Whether to enable TLS"
                 type: "bool"
             activemq_tls_keystore_path:
-                # line 58 of defaults/main.yml
                 required: false
                 description: "Keystore path for TLS connections"
                 type: "str"
             activemq_tls_keystore_password:
-                # line 59 of defaults/main.yml
                 required: false
                 description: "Keystore password for TLS connections"
                 type: "str"
             activemq_tls_keystore_dest:
-                # line 60 of defaults/main.yml
                 default: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/identity.ks"
                 description: "Path for installation of truststore"
                 type: "str"
             activemq_tls_mutual_authentication:
-                # line 63 of defaults/main.yml
                 default: false
                 description: "Whether to enable TLS mutual auth, requires TLS enabled"
                 type: "bool"
             activemq_tls_truststore_path:
-                # line 64 of defaults/main.yml
                 required: false
                 description: "Truststore to use for TLS mutual authentication"
                 type: "str"
             activemq_tls_truststore_password:
-                # line 65 of defaults/main.yml
                 required: false
                 description: "Password for truststore"
                 type: "str"
             activemq_tls_truststore_dest:
-                # line 66 of defaults/main.yml
                 default: "{{ activemq_dest }}/{{ activemq_instance_name }}/etc/trust.ks"
                 description: "Path for installation of truststore"
                 type: "str"
             activemq_nio_enabled:
-                # line 69 of defaults/main.yml
                 default: false
                 description: "Enable Native IO using libaio"
                 type: "bool"
             activemq_shared_storage:
-                # line 72 of defaults/main.yml
                 default: false
                 description: "Use shared filesystem directory for storage"
                 type: "bool"
@@ -268,7 +227,6 @@ argument_specs:
                 description: "Whether the systemd unit must require a mounted path (only when using shared storage)"
                 type: "bool"
             activemq_ports_offset_enabled:
-                # line 75 of defaults/main.yml
                 default: false
                 description: "Whether to enable port offset"
                 type: "bool"
@@ -698,6 +656,85 @@ argument_specs:
             activemq_properties_file:
                 description: "Properties file to allow updates and additions to the broker configuration after any xml has been parsed"
                 default: ""
+                type: "str"
+    systemd:
+        options:
+            activemq_version:
+                default: "2.34.0"
+                description: "Apache Artemis version"
+                type: "str"
+            activemq_installdir:
+                default: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
+                description: "Apache Artemis Installation path"
+                type: "str"
+            activemq_dest:
+                default: "/opt/activemq"
+                description: "Root installation directory"
+                type: "str"
+            activemq_instance_name:
+                default: "amq-broker"
+                description: "Name of broker instance to deploy"
+                type: "str"
+            activemq_service_user:
+                default: "amq-broker"
+                description: "POSIX user running the service"
+                type: "str"
+            activemq_service_group:
+                default: "amq-broker"
+                description: "POSIX group running the service"
+                type: "str"
+            activemq_jvm_package:
+                default: "java-17-openjdk-headless"
+                description: "RPM package to install for the service"
+                type: "str"
+            activemq_java_home:
+                required: false
+                description: "JAVA_HOME of installed JRE, leave empty for using specified activemq_jvm_package path"
+                type: "str"
+            activemq_java_opts:
+                default: "{{ [ activemq_java_opts_mem, activemq_java_opts_gc, activemq_java_opts_hawtio,
+                             '-Djolokia.policyLocation=file:' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml',
+                             '-Dlog4j.configurationFile=' + activemq_logger_config_template if activemq_logger_config_template != 'log4j2.properties' and activemq_logger_config_template != 'logging.properties' else '',
+                             activemq_java_opts_extra | default('') ] | join(' ') }}"
+                description: >
+                  Arguments for the service JVM; you can override this parameter that will take precedence, or
+                  otherwise use the activemq_java_opts_* parameters
+                type: "str"
+            activemq_java_opts_extra:
+                description: "Arbitrary extra arguments for the JVM"
+                default: ""
+                type: "str"
+            activemq_java_opts_mem:
+                description: "Memory arguments for the JVM"
+                default: "-Xms512M -Xmx2G"
+                type: "str"
+            activemq_java_opts_gc:
+                description: "Garbage collection arguments for the JVM"
+                default: "-XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication"
+                type: "str"
+            activemq_java_opts_hawtio:
+                description: "Arbitrary extra arguments for the JVM"
+                default: "-Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal"
+                type: "str"
+            activemq_systemd_wait_for_port:
+                description: 'Whether systemd unit should wait for activemq port before returning'
+                default: "{{ activemq_ha_enabled and not activemq_shared_storage }}"
+                type: 'bool'
+            activemq_systemd_wait_for_log:
+                description: 'Whether systemd unit should wait for service to be up in logs'
+                default: "{{ activemq_ha_enabled and activemq_shared_storage }}"
+                type: 'bool'
+            activemq_systemd_wait_for_timeout:
+                description: "How long to wait for service to be alive (seconds)"
+                default: 60
+                type: 'int'
+            activemq_systemd_wait_for_delay:
+                description: "Activation delay for service systemd unit"
+                default: 10
+                type: 'int'
+            activemq_hawtio_role:
+                description: "Artemis role for hawtio console access"
+                default: "amq"
                 type: "str"
     downstream:
         options:

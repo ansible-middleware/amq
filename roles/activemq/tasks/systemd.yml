@@ -42,38 +42,8 @@
   notify:
     - restart amq_broker
 
-- name: "Check instance directory: {{ activemq_dest }}/{{ activemq.instance_name }}"
-  ansible.builtin.stat:
-    path: "{{ activemq_dest }}/{{ activemq.instance_name }}/bin"
-  register: instance_directory
+- name: Reload systemd
   become: true
-
-- name: "Generate artemis configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
-  ansible.builtin.include_tasks: configure_artemis.yml
-  when:
-    - not instance_directory.stat.exists
-
-- name: "Create instance {{ activemq.instance_name }} of {{ activemq.service_name }}"
-  ansible.builtin.command:
-    cmd: "{{ activemq.home }}/bin/artemis create {{ activemq.instance_home }} {{ activemq_options }}"
-    creates: "{{ activemq.instance_home }}/bin/artemis-service"
-  environment:
-    PATH: "{{ rpm_java_home | default(activemq_rpm_java_home, true) }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-    JAVA_HOME: "{{ rpm_java_home }}"
-  become: true
-  become_user: "{{ activemq_service_user }}"
-  register: broker_created
-  when:
-    - not instance_directory.stat.exists
-
-- name: "Configure custom broker.xml file for {{ activemq.instance_name }}"
-  ansible.builtin.template:
-    src: "{{ activemq_config_override_template }}"
-    dest: "{{ activemq.instance_home }}/etc/broker.xml"
-    owner: "{{ activemq_service_user }}"
-    group: "{{ activemq_service_group }}"
-    mode: '0644'
-  when: activemq_config_override_template != ''
-  become: true
-  notify:
-    - restart amq_broker
+  ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler, because of start/flush below
+    daemon_reload: true
+  changed_when: systemdunit.changed
