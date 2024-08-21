@@ -338,6 +338,16 @@ activemq_broker_connections: []
 
 activemq_federations: []
 
-### property file name, in playbook lookup paths
+### Property file name, in playbook lookup paths
 # see: https://activemq.apache.org/components/artemis/documentation/latest/configuration-index.html#broker-properties
 activemq_properties_file: ''
+
+### Pinging the network
+# see: https://activemq.apache.org/components/artemis/documentation/latest/network-isolation.html#pinging-the-network
+activemq_network_check_enabled: false
+activemq_network_check_period: 10000
+activemq_network_check_timeout: 1000
+activemq_network_check_list: '' # this is comma separated list, no spaces, just DNS or IPs
+activemq_network_check_NIC: '' # noqa var-naming[pattern] # the network card to use for network checking
+activemq_network_check_ping_command: ''
+activemq_network_check_ping6_command: ''

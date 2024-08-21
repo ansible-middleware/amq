@@ -44,6 +44,10 @@
 - name: Configure journal
   ansible.builtin.include_tasks: journal.yml
 
+- name: Configure network check
+  ansible.builtin.include_tasks: network_check.yml
+  when: activemq_network_check_enabled
+
 - name: Create user and roles
   ansible.builtin.include_tasks: user_roles.yml
   when: activemq_users | length > 0
@@ -61,7 +65,7 @@
 - name: Configure federations
   ansible.builtin.include_tasks: federations.yml
   when: activemq_federations | length > 0
-  
+
 - name: Configure broker connections
   ansible.builtin.include_tasks: broker_connections.yml
   when: activemq_broker_connections | length > 0

@@ -1,19 +1,20 @@
 ---
-- name: Add configuration element only if valid
+- name: Add configuration element only if valid and non-empty
   delegate_to: localhost
   run_once: true
   block:
     - name: Create configuration element
       middleware_automation.common.xml:
         xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
-        xmlstring: "<core xmlns=\"urn:activemq:core\"><{{ item | replace('_', '-') }}>{{ value }}</{{ item | replace('_', '-') }}></core>"
+        xmlstring: "<core xmlns=\"urn:activemq:core\"><network-check-{{ item | replace('_', '-') }}>{{ value }}</network-check-{{ item | replace('_', '-') }}></core>"
         validate: true
         input_type: xml
       vars:
-        value: "{{ lookup('ansible.builtin.vars', 'activemq_' + item) | to_json | replace('\"', '') }}"
+        value: "{{ lookup('ansible.builtin.vars', 'activemq_network_check_' + item) | to_json | replace('\"', '') }}"
     - name: "Add item {{ item }} to valid element list"
       ansible.builtin.set_fact:
-        valid_core_configuration_list: "{{ valid_core_configuration_list | default([]) + [ item ] }}"
+        valid_nc_configuration_list: "{{ valid_nc_configuration_list | default([]) + [ item ] }}"
+      when: lookup('ansible.builtin.vars', 'activemq_network_check_' + item) != ''
   rescue:
     - name: Display warning
       ansible.builtin.debug:

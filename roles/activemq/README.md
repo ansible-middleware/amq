@@ -321,6 +321,19 @@ Note: operations parameters keys are using underscore (`address_match:`) instead
 Note: the local queues for `remotequeues.#` need to be created on this broker.
 
 
+#### Network check
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`activemq_network_check_enabled`| Whether to enable network check | `false` |
+|`activemq_network_check_period`| How often to check network reachability (ms) | `10000` |
+|`activemq_network_check_timeout`| Connection timeout for network checks (ms) | `1000` |
+|`activemq_network_check_list`| The addresses to use for checking; comma separated list, no spaces, just DNS or IPs | `''` |
+|`activemq_network_check_NIC`| The network card to use for network checking | `''` |
+|`activemq_network_check_ping_command`| The ping command to network check IPv4 | `''` |
+|`activemq_network_check_ping6_command`|The ping command to network check IPv6 | `''` |
+
+
 #### TLS/SSL protocol
 
 | Variable | Description | Default |
