@@ -21,7 +21,7 @@
   loop_control:
     label: "{{ item }}"
 
-- name: Validate network chek configuration
+- name: Validate network check configuration
   ansible.builtin.include_tasks: validate_network_check.yml
   when: activemq_network_check_enabled
   loop:

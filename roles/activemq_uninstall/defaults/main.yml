@@ -1,25 +1,25 @@
 ---
 ### Parameters as used with activemq role
-activemq_version: 2.34.0
-activemq_archive: "apache-artemis-{{ activemq_version }}-bin.zip"
-activemq_installdir: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
-activemq_dest: /opt/amq
-activemq_service_user: amq-broker
-activemq_service_group: amq-broker
-activemq_service_user_home: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
-activemq_instance_name: amq-broker
-activemq_service_pidfile: data/artemis.pid
-activemq_configure_firewalld: false
-activemq_name: 'Apache ActiveMQ'
-activemq_service_name: activemq
-activemq_data_directory: "{{ activemq_shared_storage_path if activemq_shared_storage else activemq_dest + '/' + activemq_instance_name  + '/data' }}"
-activemq_paging_directory: "{{ activemq_data_directory }}/paging"
-activemq_bindings_directory: "{{ activemq_data_directory }}/bindings"
-activemq_journal_directory: "{{ activemq_data_directory }}/journal"
-activemq_large_messages_directory: "{{ activemq_data_directory }}/largemessages"
-activemq_shared_storage: false
-activemq_shared_storage_mounted: true
-activemq_shared_storage_path: "{{ activemq_dest }}/{{ activemq_instance_name }}/data/shared"
+activemq_version: 2.34.0 # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_archive: "apache-artemis-{{ activemq_version }}-bin.zip" # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_installdir: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}" # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_dest: /opt/amq # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_service_user: amq-broker # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_service_group: amq-broker # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_service_user_home: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}" # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_instance_name: amq-broker # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_service_pidfile: data/artemis.pid # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_configure_firewalld: false # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_name: 'Apache ActiveMQ' # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_service_name: activemq # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_data_directory: "{{ activemq_shared_storage_path if activemq_shared_storage else activemq_dest + '/' + activemq_instance_name  + '/data' }}" # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_paging_directory: "{{ activemq_data_directory }}/paging" # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_bindings_directory: "{{ activemq_data_directory }}/bindings" # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_journal_directory: "{{ activemq_data_directory }}/journal" # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_large_messages_directory: "{{ activemq_data_directory }}/largemessages" # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_shared_storage: false # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_shared_storage_mounted: true # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_shared_storage_path: "{{ activemq_dest }}/{{ activemq_instance_name }}/data/shared" # noqa var-naming[no-role-prefix] used as is in activemq role
 
 ### Parameters specific to uninstall role
 # skip user/group deletion

@@ -1,5 +1,5 @@
 ---
-- name: Add configuration element only if valid
+- name: Add configuration element only if valid and non-empty
   delegate_to: localhost
   run_once: true
   block:
