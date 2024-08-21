@@ -657,6 +657,34 @@ argument_specs:
                 description: "Properties file to allow updates and additions to the broker configuration after any xml has been parsed"
                 default: ""
                 type: "str"
+            activemq_network_check_enabled:
+                default: false
+                type: "bool"
+                description: "Whether to enable network check"
+            activemq_network_check_period:
+                default: 10000
+                type: int
+                description: 'How often to check network reachability (ms)'
+            activemq_network_check_timeout:
+                default: 1000
+                type: int
+                description: 'Connection timeout for network checks (ms)'
+            activemq_network_check_list:
+                default: ''
+                type: "str"
+                description: 'The addresses to use for checking; comma separated list, no spaces, just DNS or IPs'
+            activemq_network_check_NIC:
+                default: ''
+                type: "str"
+                description: 'The network card to use for network checking'
+            activemq_network_check_ping_command:
+                default: ''
+                type: "str"
+                description: 'The ping command to network check IPv4'
+            activemq_network_check_ping6_command:
+                default: ''
+                type: "str"
+                description: 'The ping command to network check IPv6'
     systemd:
         options:
             activemq_version:
