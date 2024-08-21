@@ -66,6 +66,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#diverts-configuration">Diverts configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#clustering">Clustering</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#multi-site-fault-tolerance-amqp-broker-connections">Multi-site fault-tolerance (AMQP broker connections)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#network-check">Network check</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tls-ssl-protocol">TLS/SSL protocol</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#logging">Logging</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#other-options">Other options</a></li>
@@ -814,6 +815,47 @@
 </div>
 <p>Note: operations parameters keys are using underscore (<code class="docutils literal notranslate"><span class="pre">address_match:</span></code>) instead of dash (<code class="docutils literal notranslate"><span class="pre">address-match:</span></code>). Dash works only if using single quotes (ie. <code class="docutils literal notranslate"><span class="pre">'address-match':</span></code>)</p>
 <p>Note: the local queues for <code class="docutils literal notranslate"><span class="pre">remotequeues.#</span></code> need to be created on this broker.</p>
+</section>
+<section id="network-check">
+<h3>Network check<a class="headerlink" href="#network-check" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_network_check_enabled</span></code></p></td>
+<td class="text-left"><p>Whether to enable network check</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_network_check_period</span></code></p></td>
+<td class="text-left"><p>How often to check network reachability (ms)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">10000</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_network_check_timeout</span></code></p></td>
+<td class="text-left"><p>Connection timeout for network checks (ms)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1000</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_network_check_list</span></code></p></td>
+<td class="text-left"><p>The addresses to use for checking; comma separated list, no spaces, just DNS or IPs</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_network_check_NIC</span></code></p></td>
+<td class="text-left"><p>The network card to use for network checking</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_network_check_ping_command</span></code></p></td>
+<td class="text-left"><p>The ping command to network check IPv4</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_network_check_ping6_command</span></code></p></td>
+<td class="text-left"><p>The ping command to network check IPv6</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="tls-ssl-protocol">
 <h3>TLS/SSL protocol<a class="headerlink" href="#tls-ssl-protocol" title="Link to this heading"></a></h3>
