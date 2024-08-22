@@ -16,6 +16,7 @@ Minor Changes
 -------------
 
 - Add network check parameters `#152 <https://github.com/ansible-middleware/amq/pull/152>`_
+- Allow to configure message counters `#153 <https://github.com/ansible-middleware/amq/pull/153>`_
 - Define systemd entrypoint `#151 <https://github.com/ansible-middleware/amq/pull/151>`_
 
 Bugfixes

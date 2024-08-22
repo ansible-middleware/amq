@@ -386,6 +386,9 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_config_xml`| Broker instance configuration file | `amq-broker.xml` |
 |`activemq_config_override_template`| Filename of custom broker xml configuration file to be deployed | `''` |
 |`activemq_service_override_template`| Filename of custom systemd unit template to be deployed | `''` |
+|`activemq_message_counter_enabled`| Whether to enable the message counters | `false` |
+|`activemq_message_counter_sample_period`| The sample period (in ms) to use for message counters| `10000` |
+|`activemq_message_counter_max_day_history`| How many days to keep message counter history| `10` |
 
 
 #### User / Role configuration
