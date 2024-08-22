@@ -685,6 +685,18 @@ argument_specs:
                 default: ''
                 type: "str"
                 description: 'The ping command to network check IPv6'
+            activemq_message_counter_enabled:
+                default: false
+                type: "bool"
+                description: "Whether to enable the message counters"
+            activemq_message_counter_sample_period:
+                default: 10000
+                type: int
+                description: "The sample period (in ms) to use for message counters"
+            activemq_message_counter_max_day_history:
+                default: 10
+                type: int
+                description: "How many days to keep message counter history"
     systemd:
         options:
             activemq_version:

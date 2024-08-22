@@ -50,3 +50,6 @@ activemq_core_configuration_list:
   - global_max_messages
   - global_max_size
   - password_codec
+  - message_counter_enabled
+  - message_counter_sample_period
+  - message_counter_max_day_history

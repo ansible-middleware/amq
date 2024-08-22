@@ -351,3 +351,8 @@ activemq_network_check_list: '' # this is comma separated list, no spaces, just 
 activemq_network_check_NIC: '' # noqa var-naming[pattern] # the network card to use for network checking
 activemq_network_check_ping_command: ''
 activemq_network_check_ping6_command: ''
+
+### Message counter
+activemq_message_counter_enabled: false
+activemq_message_counter_sample_period: 10000
+activemq_message_counter_max_day_history: 10
