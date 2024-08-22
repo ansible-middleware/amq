@@ -13,12 +13,13 @@
         <shared-store>
 {% if activemq_ha_role == 'slave' or activemq_ha_role == 'backup' %}
           <{{ activemq_ha_role }}>
-            <allow-failback>true</allow-failback>
+            <allow-failback>{{ activemq_ha_allow_failback }}</allow-failback>
+            <restart-backup>{{ activemq_ha_restart_backup }}</restart-backup>
           </{{ activemq_ha_role }}>
-{% else %}
-          <master>
-            <failover-on-shutdown>true</failover-on-shutdown>
-          </master>
+{% elif activemq_ha_role == 'master' or activemq_ha_role == 'primary' %}
+          <{{ activemq_ha_role }}>
+            <failover-on-shutdown>{{ activemq_ha_failover_on_shutdown }}</failover-on-shutdown>
+          </{{ activemq_ha_role }}>
 {% endif %}
         </shared-store>
 {% endif %}
@@ -26,12 +27,17 @@
         <replication>
 {% if activemq_ha_role == 'slave' or activemq_ha_role == 'backup' or amq_broker_replicated %}
           <{{ activemq_ha_role }}>
-            <allow-failback>true</allow-failback>
+            <allow-failback>{{ activemq_ha_allow_failback }}</allow-failback>
+            <restart-backup>{{ activemq_ha_restart_backup }}</restart-backup>
+            <cluster-name>{{ activemq_ha_replication_cluster_name }}</cluster-name>
+            <group-name>{{ activemq_ha_replication_group_name }}</group-name>
           </{{ activemq_ha_role }}>
-{% else %}
-          <master>
-            <check-for-live-server>true</check-for-live-server>
-          </master>
+{% elif activemq_ha_role == 'master' or activemq_ha_role == 'primary' %}
+          <{{ activemq_ha_role }}>
+            <check-for-active-server>{{ activemq_ha_check_for_active_server }}</check-for-active-server>
+            <cluster-name>{{ activemq_ha_replication_cluster_name }}</cluster-name>
+            <group-name>{{ activemq_ha_replication_group_name }}</group-name>
+          </{{ activemq_ha_role }}>
 {% endif %}
         </replication>
 {% endif %}
