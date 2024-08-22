@@ -67,6 +67,13 @@ activemq_systemd_wait_for_log: "{{ activemq_ha_enabled and activemq_shared_stora
 activemq_systemd_wait_for_timeout: 60
 activemq_systemd_wait_for_delay: 10
 activemq_ha_role: live-only
+activemq_ha_allow_failback: true
+activemq_ha_failover_on_shutdown: true
+activemq_ha_restart_backup: false
+activemq_ha_check_for_active_server: "{{ activemq_replication }}"
+activemq_ha_replication_cluster_name: ''
+activemq_ha_replication_group_name: ''
+
 
 ### Masked passwords
 activemq_password_codec: 'org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec'

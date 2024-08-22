@@ -691,12 +691,50 @@ argument_specs:
                 description: "Whether to enable the message counters"
             activemq_message_counter_sample_period:
                 default: 10000
-                type: int
+                type: "int"
                 description: "The sample period (in ms) to use for message counters"
             activemq_message_counter_max_day_history:
                 default: 10
-                type: int
+                type: "int"
                 description: "How many days to keep message counter history"
+            activemq_ha_allow_failback:
+                default: true
+                type: "bool"
+                description: >
+                  Whether a server will automatically stop when a another places a request to take over
+                  its place. The use case is when a regular server stops and its backup takes over its
+                  duties, later the main server restarts and requests the server (the former backup) to
+                  stop operating
+            activemq_ha_failover_on_shutdown:
+                default: true
+                type: "bool"
+                description: "Will this backup server become active on a normal server shutdown"
+            activemq_ha_restart_backup:
+                default: false
+                type: "bool"
+                description: >
+                  Will this server, if a backup, restart once it has been stopped because of failback or
+                  scaling down
+            activemq_ha_check_for_active_server:
+                default: "{{ activemq_replication }}"
+                type: "bool"
+                description: >
+                  Whether to check the cluster for a (live) server using our own server ID when starting
+                  up. This option is only necessary for performing 'fail-back' on replicating
+                  servers.
+            activemq_ha_replication_cluster_name:
+                default: ""
+                type: "str"
+                description: >
+                  Name of the cluster configuration to use for replication. This setting is only necessary in
+                  case you configure multiple cluster connections. It is used by a replicating backups and by
+                  primary servers that may attempt fail-back
+            activemq_ha_replication_group_name:
+                default: ""
+                type: "str"
+                description: >
+                  With replication, if set, remote backup servers will only pair with primary servers with
+                  matching group-name
     systemd:
         options:
             activemq_version:
