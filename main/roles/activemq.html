@@ -770,6 +770,30 @@
 <td class="text-left"><p>Activation delay for service systemd unit</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
 </tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ha_allow_failback</span></code></p></td>
+<td class="text-left"><p>Whether a server will automatically stop when another places a request to take over its place</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ha_failover_on_shutdown</span></code></p></td>
+<td class="text-left"><p>Will this backup server become active on a normal server shutdown</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ha_restart_backup</span></code></p></td>
+<td class="text-left"><p>Will this server, if a backup, restart once it has been stopped because of failback or scaling down</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ha_check_for_active_server</span></code></p></td>
+<td class="text-left"><p>Whether to check the cluster for a live server using our own server ID when starting up. This option is only necessary for performing ‘fail-back’ on replicating servers</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ha_replication_cluster_name</span></code></p></td>
+<td class="text-left"><p>Name of the cluster configuration to use for replication. This setting is only necessary in case you configure multiple cluster connections</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ha_replication_group_name</span></code></p></td>
+<td class="text-left"><p>With replication, if set, remote backup servers will only pair with primary servers with matching group-name</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
+</tr>
 </tbody>
 </table>
 </section>

@@ -278,6 +278,12 @@ Sample divert:
 |`activemq_systemd_wait_for_log` | Whether systemd unit should wait for service to be up in logs | `True` when `activemq_ha_enabled` and `activemq_shared_storage` are both `True` |
 |`activemq_systemd_wait_for_timeout`| How long to wait for service to be alive (seconds) | `60` |
 |`activemq_systemd_wait_for_delay`| Activation delay for service systemd unit | `10` |
+|`activemq_ha_allow_failback`| Whether a server will automatically stop when another places a request to take over its place |`true` |
+|`activemq_ha_failover_on_shutdown`| Will this backup server become active on a normal server shutdown  | `true` |
+|`activemq_ha_restart_backup`| Will this server, if a backup, restart once it has been stopped because of failback or scaling down | `false` |
+|`activemq_ha_check_for_active_server`| Whether to check the cluster for a live server using our own server ID when starting up. This option is only necessary for performing 'fail-back' on replicating servers | `false` |
+|`activemq_ha_replication_cluster_name`| Name of the cluster configuration to use for replication. This setting is only necessary in case you configure multiple cluster connections | `""` |
+|`activemq_ha_replication_group_name`| With replication, if set, remote backup servers will only pair with primary servers with matching group-name | `""` |
 
 
 #### Multi-site fault-tolerance (AMQP broker connections)
