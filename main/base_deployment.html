@@ -23,7 +23,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Ha configuration with active/standby nodes" href="static_cluster.html" />
+    <link rel="next" title="Service configuration with systemd" href="systemd.html" />
     <link rel="prev" title="middleware_automation.amq Release Notes" href="CHANGELOG.html" /> 
 </head>
 
@@ -68,11 +68,13 @@
 <li class="toctree-l2"><a class="reference internal" href="#futher-reading">Futher reading</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#make-some-configuration-changes">Make some configuration changes</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="#base-configuration">Base configuration</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#version-update">Version (update)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#queues-and-topics">Queues and topics</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="systemd.html">Systemd configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap_auth.html">LDAP authentication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="static_cluster.html">HA setup active/standby</a></li>
 <li class="toctree-l1"><a class="reference internal" href="masked_passwords.html">Encrypted passwords</a></li>
 </ul>
@@ -211,8 +213,8 @@ We could alternatively set it in <code class="docutils literal notranslate"><spa
 <p>You can find this guide in asciinema format at <a class="reference external" href="https://asciinema.org/a/670220">this link</a>.</p>
 </section>
 </section>
-<section id="make-some-configuration-changes">
-<h1>Make some configuration changes<a class="headerlink" href="#make-some-configuration-changes" title="Link to this heading"></a></h1>
+<section id="base-configuration">
+<h1>Base configuration<a class="headerlink" href="#base-configuration" title="Link to this heading"></a></h1>
 <p>Now that we have a container with a working deployment of amq, we can start applying changes to
 our configuration, and run ansible-playbook to iteratively update our installation.</p>
 <section id="version-update">
@@ -254,7 +256,7 @@ amq1<span class="w">                      </span>:<span class="w"> </span><span 
 </div>
 <p>You will notice many changes were done to apply the update, and at the end of the play the service was restarted;
 that is not always the case, because activemq polls its configuration and will automatically reload, without restarting,
-if some of those changes is done to its configuration. Let’s try that in the next paragraph.</p>
+if some of those changes are applied to its configuration. Let’s try that in the next paragraph.</p>
 </section>
 <section id="queues-and-topics">
 <h2>Queues and topics<a class="headerlink" href="#queues-and-topics" title="Link to this heading"></a></h2>
@@ -308,7 +310,7 @@ PLAY<span class="w"> </span>RECAP<span class="w"> </span>***********************
 amq1<span class="w">                      </span>:<span class="w"> </span><span class="nv">ok</span><span class="o">=</span><span class="m">147</span><span class="w">  </span><span class="nv">changed</span><span class="o">=</span><span class="m">1</span><span class="w">    </span><span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">failed</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">skipped</span><span class="o">=</span><span class="m">45</span><span class="w">   </span><span class="nv">rescued</span><span class="o">=</span><span class="m">1</span><span class="w">    </span><span class="nv">ignored</span><span class="o">=</span><span class="m">0</span>
 </pre></div>
 </div>
-<p>This time, the restart handler was not trigger, but we can still verify the topic configuration has been picked up by
+<p>This time, the restart handler was not triggered, but we can still verify the topic configuration has been picked up by
 the service by looking at the logs:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-ti<span class="w"> </span>amq1<span class="w"> </span>tail<span class="w"> </span>/var/log/activemq/amq-broker/artemis.log
 
@@ -329,7 +331,7 @@ the service by looking at the logs:</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="CHANGELOG.html" class="btn btn-neutral float-left" title="middleware_automation.amq Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="static_cluster.html" class="btn btn-neutral float-right" title="Ha configuration with active/standby nodes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="systemd.html" class="btn btn-neutral float-right" title="Service configuration with systemd" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

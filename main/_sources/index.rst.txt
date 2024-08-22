@@ -18,6 +18,7 @@ Welcome to AMQ Collection documentation
    :caption: Usage guides
 
    Base deployment <base_deployment>
+   Systemd configuration <systemd>
    LDAP authentication <ldap_auth>
    HA setup active/standby <static_cluster>
    Encrypted passwords <masked_passwords>
