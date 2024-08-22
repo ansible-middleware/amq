@@ -1,7 +1,7 @@
 # Base deployment
 
-In its most basic form, the collection will download the installation zipfile, and execute 
-the installation of the software including its operative dependencies, and configuration of 
+In its most basic form, the collection will download the installation zipfile, and execute
+the installation of the software including its operative dependencies, and configuration of
 the service and its systemd controlling unit.
 The guide will rely on podman containers, but it can easily be adapted to other virtual machine
 or cloud providers, or even bare-metal.
@@ -110,9 +110,9 @@ podman exec -ti amq1 tail -n 3 /var/log/activemq/amq-broker/artemis.log
 You can find this guide in asciinema format at [this link](https://asciinema.org/a/670220).
 
 
-# Make some configuration changes
+# Base configuration
 
-Now that we have a container with a working deployment of amq, we can start applying changes to 
+Now that we have a container with a working deployment of amq, we can start applying changes to
 our configuration, and run ansible-playbook to iteratively update our installation.
 
 
@@ -166,7 +166,7 @@ amq1                      : ok=155  changed=4    unreachable=0    failed=0    sk
 
 You will notice many changes were done to apply the update, and at the end of the play the service was restarted;
 that is not always the case, because activemq polls its configuration and will automatically reload, without restarting,
-if some of those changes is done to its configuration. Let's try that in the next paragraph. 
+if some of those changes are applied to its configuration. Let's try that in the next paragraph.
 
 ## Queues and topics
 
@@ -226,7 +226,7 @@ PLAY RECAP *********************************************************************
 amq1                      : ok=147  changed=1    unreachable=0    failed=0    skipped=45   rescued=1    ignored=0
 ```
 
-This time, the restart handler was not trigger, but we can still verify the topic configuration has been picked up by 
+This time, the restart handler was not triggered, but we can still verify the topic configuration has been picked up by
 the service by looking at the logs:
 
 ```bash
