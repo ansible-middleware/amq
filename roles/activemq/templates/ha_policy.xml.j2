@@ -29,14 +29,22 @@
           <{{ activemq_ha_role }}>
             <allow-failback>{{ activemq_ha_allow_failback }}</allow-failback>
             <restart-backup>{{ activemq_ha_restart_backup }}</restart-backup>
+{% if activemq_ha_replication_cluster_name | length > 0 %}
             <cluster-name>{{ activemq_ha_replication_cluster_name }}</cluster-name>
+{% endif %}
+{% if activemq_ha_replication_group_name | length > 0 %}
             <group-name>{{ activemq_ha_replication_group_name }}</group-name>
+{% endif %}
           </{{ activemq_ha_role }}>
 {% elif activemq_ha_role == 'master' or activemq_ha_role == 'primary' %}
           <{{ activemq_ha_role }}>
             <check-for-active-server>{{ activemq_ha_check_for_active_server }}</check-for-active-server>
+{% if activemq_ha_replication_cluster_name | length > 0 %}
             <cluster-name>{{ activemq_ha_replication_cluster_name }}</cluster-name>
+{% endif %}
+{% if activemq_ha_replication_group_name | length > 0 %}
             <group-name>{{ activemq_ha_replication_group_name }}</group-name>
+{% endif %}
           </{{ activemq_ha_role }}>
 {% endif %}
         </replication>
