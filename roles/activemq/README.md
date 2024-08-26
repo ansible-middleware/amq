@@ -278,6 +278,9 @@ Sample divert:
 |`activemq_systemd_wait_for_log` | Whether systemd unit should wait for service to be up in logs | `True` when `activemq_ha_enabled` and `activemq_shared_storage` are both `True` |
 |`activemq_systemd_wait_for_timeout`| How long to wait for service to be alive (seconds) | `60` |
 |`activemq_systemd_wait_for_delay`| Activation delay for service systemd unit | `10` |
+|`activemq_systemd_wait_for_log_ha_string` | The string to match in the logs when `activemq_systemd_wait_for_log` is true and HA is enabled | `AMQ221109\|AMQ221001` |
+|`activemq_systemd_wait_for_log_string` | The string to match in the logs when `activemq_systemd_wait_for_log` is true and HA is not enabled | `AMQ221034` |
+|`activemq_systemd_wait_for_port_number`| The port number to wait for when `activemq_systemd_wait_for_port` is true | `{{ activemq_port }}` |
 |`activemq_ha_allow_failback`| Whether a server will automatically stop when another places a request to take over its place |`true` |
 |`activemq_ha_failover_on_shutdown`| Will this backup server become active on a normal server shutdown  | `true` |
 |`activemq_ha_restart_backup`| Will this server, if a backup, restart once it has been stopped because of failback or scaling down | `false` |

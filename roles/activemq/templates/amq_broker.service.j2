@@ -20,15 +20,13 @@ Restart = on-failure
 LimitNOFILE=102642
 TimeoutSec=600
 {% if activemq_systemd_wait_for_port %}
-ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'while ! ss -H -t -l -n sport = :{{ activemq_port }} | grep -q "^LISTEN.*:{{ activemq_port }}"; do sleep 1; done && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
+ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'while ! ss -H -t -l -n sport = :{{ activemq_systemd_wait_for_port_number }} | grep -q "^LISTEN.*:{{ activemq_systemd_wait_for_port_number }}"; do sleep 1; done && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
 {% endif %}
 {% if activemq_systemd_wait_for_log %}
-{% if activemq_ha_enabled and (activemq_ha_role == 'slave' or activemq_ha_role == 'backup') %}
-ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221109/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
-{% elif activemq_ha_enabled and (activemq_ha_role == 'master' or activemq_ha_role == 'primary') %}
-ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221001/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
+{% if activemq_ha_enabled %}
+ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -f {{ activemq.instance_home }}/log/artemis.log | sed "/{{ activemq_systemd_wait_for_log_ha_string }}/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
 {% else %}
-ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221034/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
+ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -f {{ activemq.instance_home }}/log/artemis.log | sed "/{{ activemq_systemd_wait_for_log_string }}/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
 {% endif %}
 {% endif %}
 
