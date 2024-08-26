@@ -142,10 +142,8 @@ as a systemd unit.</p>
 <span class="l l-Scalar l-Scalar-Plain">ExecStartPost=/usr/bin/timeout </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_timeout</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain"> sh -c &#39;while ! ss -H -t -l -n sport =</span><span class="w"> </span><span class="p p-Indicator">:</span><span class="cp">{{</span> <span class="nv">activemq_port</span> <span class="cp">}}</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="err"> grep -q &quot;^LISTEN.*:</span><span class="cp">{{</span> <span class="nv">activemq_port</span> <span class="cp">}}</span><span class="err">&quot;; do sleep 1; done &amp;&amp; /bin/sleep </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_delay</span> <span class="cp">}}</span><span class="err">&#39;</span>
 <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">if</span> <span class="nv">activemq_systemd_wait_for_log</span> <span class="cp">%}</span>
-<span class="cp">{%</span> <span class="k">if</span> <span class="nv">activemq_ha_enabled</span> <span class="k">and</span> <span class="o">(</span><span class="nv">activemq_ha_role</span> <span class="o">==</span> <span class="s1">&#39;slave&#39;</span> <span class="k">or</span> <span class="nv">activemq_ha_role</span> <span class="o">==</span> <span class="s1">&#39;backup&#39;</span><span class="o">)</span> <span class="cp">%}</span>
-<span class="l l-Scalar l-Scalar-Plain">ExecStartPost=/usr/bin/timeout </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_timeout</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain"> sh -c &#39;tail -n 15 -f </span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/log/artemis.log | sed &quot;/AMQ221109/ q&quot; &amp;&amp; /bin/sleep </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_delay</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">&#39;</span>
-<span class="cp">{%</span> <span class="k">elif</span> <span class="nv">activemq_ha_enabled</span> <span class="k">and</span> <span class="o">(</span><span class="nv">activemq_ha_role</span> <span class="o">==</span> <span class="s1">&#39;master&#39;</span> <span class="k">or</span> <span class="nv">activemq_ha_role</span> <span class="o">==</span> <span class="s1">&#39;primary&#39;</span><span class="o">)</span> <span class="cp">%}</span>
-<span class="l l-Scalar l-Scalar-Plain">ExecStartPost=/usr/bin/timeout </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_timeout</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain"> sh -c &#39;tail -n 15 -f </span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/log/artemis.log | sed &quot;/AMQ221001/ q&quot; &amp;&amp; /bin/sleep </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_delay</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">&#39;</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">activemq_ha_enabled</span> <span class="cp">%}</span>
+<span class="l l-Scalar l-Scalar-Plain">ExecStartPost=/usr/bin/timeout </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_timeout</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain"> sh -c &#39;tail -n 15 -f </span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/log/artemis.log | sed &quot;/AMQ221109|AMQ221001/ q&quot; &amp;&amp; /bin/sleep </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_delay</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">&#39;</span>
 <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
 <span class="l l-Scalar l-Scalar-Plain">ExecStartPost=/usr/bin/timeout </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_timeout</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain"> sh -c &#39;tail -n 15 -f </span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/log/artemis.log | sed &quot;/AMQ221034/ q&quot; &amp;&amp; /bin/sleep </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_delay</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">&#39;</span>
 <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
@@ -205,6 +203,18 @@ to the systemd unit, so that service start/restart commands return only after ce
 <td class="text-left"><p>Activation delay for service systemd unit (seconds)</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
 </tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log_ha_string</span></code></p></td>
+<td class="text-left"><p>The string to match in the logs when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code> is true and HA is enabled</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ221109|AMQ221001</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log_string</span></code></p></td>
+<td class="text-left"><p>The string to match in the logs when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code> is true and HA is not enabled</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ221034</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port_number</span></code></p></td>
+<td class="text-left"><p>The port number to wait for when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port</span></code> is true</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_port</span> <span class="pre">}}</span></code></p></td>
+</tr>
 </tbody>
 </table>
 <p>By default, the wait_for_port is used for replication HA, while wait_for_log for shared store HA, however, they can be individually or both together
@@ -222,85 +232,67 @@ used along with any other configuration.</p>
 <p>That allows to configure systemd on existing installation of activemq, requiring a subset of the parameters
 needed by the full execution of the <code class="docutils literal notranslate"><span class="pre">activemq</span></code> role.</p>
 <p>Here’s the list of what you may need to configure to fit your environment, with the default value:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_version</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2.34.0&quot;</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Apache</span><span class="nv"> </span><span class="s">Artemis</span><span class="nv"> </span><span class="s">version&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-<span class="nt">activemq_installdir</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">activemq_dest</span><span class="nv"> </span><span class="s">}}/apache-artemis-{{</span><span class="nv"> </span><span class="s">activemq_version</span><span class="nv"> </span><span class="s">}}&quot;</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Apache</span><span class="nv"> </span><span class="s">Artemis</span><span class="nv"> </span><span class="s">Installation</span><span class="nv"> </span><span class="s">path&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-<span class="nt">activemq_dest</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/opt/activemq&quot;</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Root</span><span class="nv"> </span><span class="s">installation</span><span class="nv"> </span><span class="s">directory&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-<span class="nt">activemq_instance_name</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;amq-broker&quot;</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">broker</span><span class="nv"> </span><span class="s">instance</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">deploy&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-<span class="nt">activemq_service_user</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;amq-broker&quot;</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;POSIX</span><span class="nv"> </span><span class="s">user</span><span class="nv"> </span><span class="s">running</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">service&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-<span class="nt">activemq_service_group</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;amq-broker&quot;</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;POSIX</span><span class="nv"> </span><span class="s">group</span><span class="nv"> </span><span class="s">running</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">service&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-<span class="nt">activemq_jvm_package</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;java-17-openjdk-headless&quot;</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;RPM</span><span class="nv"> </span><span class="s">package</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">service&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-<span class="nt">activemq_java_home</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;JAVA_HOME</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">installed</span><span class="nv"> </span><span class="s">JRE,</span><span class="nv"> </span><span class="s">leave</span><span class="nv"> </span><span class="s">empty</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">specified</span><span class="nv"> </span><span class="s">activemq_jvm_package</span><span class="nv"> </span><span class="s">path&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-<span class="nt">activemq_java_opts</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">[</span><span class="nv"> </span><span class="s">activemq_java_opts_mem,</span><span class="nv"> </span><span class="s">activemq_java_opts_gc,</span><span class="nv"> </span><span class="s">activemq_java_opts_hawtio,</span>
-<span class="w">                    </span><span class="s">&#39;-Djolokia.policyLocation=file:&#39;</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">activemq_dest</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">&#39;/&#39;</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">activemq_instance_name</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">&#39;/etc/jolokia-access.xml&#39;,</span>
-<span class="w">                    </span><span class="s">&#39;-Dlog4j.configurationFile=&#39;</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">activemq_logger_config_template</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">activemq_logger_config_template</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">&#39;log4j2.properties&#39;</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">activemq_logger_config_template</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">&#39;logging.properties&#39;</span><span class="nv"> </span><span class="s">else</span><span class="nv"> </span><span class="s">&#39;&#39;,</span>
-<span class="w">                    </span><span class="s">activemq_java_opts_extra</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">default(&#39;&#39;)</span><span class="nv"> </span><span class="s">]</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">join(&#39;</span><span class="nv"> </span><span class="s">&#39;)</span><span class="nv"> </span><span class="s">}}&quot;</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
-<span class="w">        </span><span class="no">Arguments for the service JVM; you can override this parameter that will take precedence, or</span>
-<span class="w">        </span><span class="no">otherwise use the activemq_java_opts_* parameters</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-<span class="nt">activemq_java_opts_extra</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Arbitrary</span><span class="nv"> </span><span class="s">extra</span><span class="nv"> </span><span class="s">arguments</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">JVM&quot;</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-<span class="nt">activemq_java_opts_mem</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Memory</span><span class="nv"> </span><span class="s">arguments</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">JVM&quot;</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;-Xms512M</span><span class="nv"> </span><span class="s">-Xmx2G&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-<span class="nt">activemq_java_opts_gc</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Garbage</span><span class="nv"> </span><span class="s">collection</span><span class="nv"> </span><span class="s">arguments</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">JVM&quot;</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;-XX:+PrintClassHistogram</span><span class="nv"> </span><span class="s">-XX:+UseG1GC</span><span class="nv"> </span><span class="s">-XX:+UseStringDeduplication&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-<span class="nt">activemq_java_opts_hawtio</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Arbitrary</span><span class="nv"> </span><span class="s">extra</span><span class="nv"> </span><span class="s">arguments</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">JVM&quot;</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;-Dhawtio.disableProxy=true</span><span class="nv"> </span><span class="s">-Dhawtio.realm=activemq</span><span class="nv"> </span><span class="s">-Dhawtio.offline=true</span><span class="nv"> </span><span class="s">-Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-<span class="nt">activemq_systemd_wait_for_port</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Whether</span><span class="nv"> </span><span class="s">systemd</span><span class="nv"> </span><span class="s">unit</span><span class="nv"> </span><span class="s">should</span><span class="nv"> </span><span class="s">wait</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">activemq</span><span class="nv"> </span><span class="s">port</span><span class="nv"> </span><span class="s">before</span><span class="nv"> </span><span class="s">returning&#39;</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">activemq_ha_enabled</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">activemq_shared_storage</span><span class="nv"> </span><span class="s">}}&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;bool&#39;</span>
-<span class="nt">activemq_systemd_wait_for_log</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Whether</span><span class="nv"> </span><span class="s">systemd</span><span class="nv"> </span><span class="s">unit</span><span class="nv"> </span><span class="s">should</span><span class="nv"> </span><span class="s">wait</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">service</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">up</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">logs&#39;</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">activemq_ha_enabled</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">activemq_shared_storage</span><span class="nv"> </span><span class="s">}}&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;bool&#39;</span>
-<span class="nt">activemq_systemd_wait_for_timeout</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;How</span><span class="nv"> </span><span class="s">long</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">wait</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">service</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">alive</span><span class="nv"> </span><span class="s">(seconds)&quot;</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;int&#39;</span>
-<span class="nt">activemq_systemd_wait_for_delay</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Activation</span><span class="nv"> </span><span class="s">delay</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">service</span><span class="nv"> </span><span class="s">systemd</span><span class="nv"> </span><span class="s">unit&quot;</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;int&#39;</span>
-<span class="nt">activemq_hawtio_role</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Artemis</span><span class="nv"> </span><span class="s">role</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">hawtio</span><span class="nv"> </span><span class="s">console</span><span class="nv"> </span><span class="s">access&quot;</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;amq&quot;</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
-</pre></div>
-</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_version</span></code></p></td>
+<td class="text-left"><p>Apache Artemis version</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.34.0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_installdir</span></code></p></td>
+<td class="text-left"><p>Apache Artemis Installation path</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/apache-artemis-{{</span> <span class="pre">activemq_version</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_dest</span></code></p></td>
+<td class="text-left"><p>Root installation directory</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt/amq</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_user</span></code></p></td>
+<td class="text-left"><p>POSIX user running the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_group</span></code></p></td>
+<td class="text-left"><p>POSIX group running the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_name</span></code></p></td>
+<td class="text-left"><p>systemd service unit name</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_name</span></code></p></td>
+<td class="text-left"><p>Name of broker instance to deploy</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_java_opts</span></code></p></td>
+<td class="text-left"><p>Additional JVM options for the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-Xms512M</span> <span class="pre">-Xmx2G</span> <span class="pre">[...]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jvm_package</span></code></p></td>
+<td class="text-left"><p>RPM package to install for the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">java-17-openjdk-headless</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_java_home</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code> of installed JRE, leave empty for using specified <code class="docutils literal notranslate"><span class="pre">activemq_jvm_package</span></code> path</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">no</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_hawtio_role</span></code></p></td>
+<td class="text-left"><p>Artemis role for hawtio console access</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port</span></code> | Whether or not systemd unit should wait for <code class="docutils literal notranslate"><span class="pre">activemq_port</span></code> before returning | <code class="docutils literal notranslate"><span class="pre">true</span></code> when activemq_ha_enabled is <code class="docutils literal notranslate"><span class="pre">true</span></code> and activemq_shared_storage is <code class="docutils literal notranslate"><span class="pre">false</span></code> |
+|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code> | Whether or not systemd unit should wait for service to be up in logs | <code class="docutils literal notranslate"><span class="pre">true</span></code> when activemq_ha_enabled and activemq_shared_storage are <code class="docutils literal notranslate"><span class="pre">true</span></code> |
+|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_timeout</span></code>| How long to wait for service to be alive (seconds)  |<code class="docutils literal notranslate"><span class="pre">60</span></code>|
+|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_delay</span></code>| Activation delay for service systemd unit (seconds)  |<code class="docutils literal notranslate"><span class="pre">10</span></code>|
+|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log_ha_string</span></code> | The string to match in the logs when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code> is true and HA is enabled | <code class="docutils literal notranslate"><span class="pre">AMQ221109\|AMQ221001</span></code> |
+|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log_string</span></code> | The string to match in the logs when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code> is true and HA is not enabled | <code class="docutils literal notranslate"><span class="pre">AMQ221034</span></code> |
+|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port_number</span></code>| The port number to wait for when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port</span></code> is true | <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_port</span> <span class="pre">}}</span></code> |</p>
 </section>
 <section id="verify-deployment">
 <h2>Verify deployment<a class="headerlink" href="#verify-deployment" title="Link to this heading"></a></h2>

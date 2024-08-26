@@ -17,6 +17,7 @@ Minor Changes
 
 - Add additional ha-policy parameters `#155 <https://github.com/ansible-middleware/amq/pull/155>`_
 - Add network check parameters `#152 <https://github.com/ansible-middleware/amq/pull/152>`_
+- Add wait_for configuration `#156 <https://github.com/ansible-middleware/amq/pull/156>`_
 - Allow to configure message counters `#153 <https://github.com/ansible-middleware/amq/pull/153>`_
 - Define systemd entrypoint `#151 <https://github.com/ansible-middleware/amq/pull/151>`_
 

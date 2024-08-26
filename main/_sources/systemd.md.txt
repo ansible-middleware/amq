@@ -35,10 +35,8 @@ TimeoutSec=600
 ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'while ! ss -H -t -l -n sport = :{{ activemq_port }} | grep -q "^LISTEN.*:{{ activemq_port }}"; do sleep 1; done && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
 {% endif %}
 {% if activemq_systemd_wait_for_log %}
-{% if activemq_ha_enabled and (activemq_ha_role == 'slave' or activemq_ha_role == 'backup') %}
-ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221109/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
-{% elif activemq_ha_enabled and (activemq_ha_role == 'master' or activemq_ha_role == 'primary') %}
-ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221001/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
+{% if activemq_ha_enabled %}
+ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221109|AMQ221001/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
 {% else %}
 ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -f {{ activemq.instance_home }}/log/artemis.log | sed "/AMQ221034/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
 {% endif %}
@@ -85,6 +83,9 @@ to the systemd unit, so that service start/restart commands return only after ce
 |`activemq_systemd_wait_for_log` | Whether or not systemd unit should wait for service to be up in logs | `true` when activemq_ha_enabled and activemq_shared_storage are `true` |
 |`activemq_systemd_wait_for_timeout`| How long to wait for service to be alive (seconds)  |`60`|
 |`activemq_systemd_wait_for_delay`| Activation delay for service systemd unit (seconds)  |`10`|
+|`activemq_systemd_wait_for_log_ha_string` | The string to match in the logs when `activemq_systemd_wait_for_log` is true and HA is enabled | `AMQ221109\|AMQ221001` |
+|`activemq_systemd_wait_for_log_string` | The string to match in the logs when `activemq_systemd_wait_for_log` is true and HA is not enabled | `AMQ221034` |
+|`activemq_systemd_wait_for_port_number`| The port number to wait for when `activemq_systemd_wait_for_port` is true | `{{ activemq_port }}` |
 
 By default, the wait_for_port is used for replication HA, while wait_for_log for shared store HA, however, they can be individually or both together
 used along with any other configuration.
@@ -106,85 +107,29 @@ needed by the full execution of the `activemq` role.
 
 Here's the list of what you may need to configure to fit your environment, with the default value:
 
-```yaml
-activemq_version:
-    default: "2.34.0"
-    description: "Apache Artemis version"
-    type: "str"
-activemq_installdir:
-    default: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
-    description: "Apache Artemis Installation path"
-    type: "str"
-activemq_dest:
-    default: "/opt/activemq"
-    description: "Root installation directory"
-    type: "str"
-activemq_instance_name:
-    default: "amq-broker"
-    description: "Name of broker instance to deploy"
-    type: "str"
-activemq_service_user:
-    default: "amq-broker"
-    description: "POSIX user running the service"
-    type: "str"
-activemq_service_group:
-    default: "amq-broker"
-    description: "POSIX group running the service"
-    type: "str"
-activemq_jvm_package:
-    default: "java-17-openjdk-headless"
-    description: "RPM package to install for the service"
-    type: "str"
-activemq_java_home:
-    required: false
-    description: "JAVA_HOME of installed JRE, leave empty for using specified activemq_jvm_package path"
-    type: "str"
-activemq_java_opts:
-    default: "{{ [ activemq_java_opts_mem, activemq_java_opts_gc, activemq_java_opts_hawtio,
-                    '-Djolokia.policyLocation=file:' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml',
-                    '-Dlog4j.configurationFile=' + activemq_logger_config_template if activemq_logger_config_template != 'log4j2.properties' and activemq_logger_config_template != 'logging.properties' else '',
-                    activemq_java_opts_extra | default('') ] | join(' ') }}"
-    description: >
-        Arguments for the service JVM; you can override this parameter that will take precedence, or
-        otherwise use the activemq_java_opts_* parameters
-    type: "str"
-activemq_java_opts_extra:
-    description: "Arbitrary extra arguments for the JVM"
-    default: ""
-    type: "str"
-activemq_java_opts_mem:
-    description: "Memory arguments for the JVM"
-    default: "-Xms512M -Xmx2G"
-    type: "str"
-activemq_java_opts_gc:
-    description: "Garbage collection arguments for the JVM"
-    default: "-XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication"
-    type: "str"
-activemq_java_opts_hawtio:
-    description: "Arbitrary extra arguments for the JVM"
-    default: "-Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal"
-    type: "str"
-activemq_systemd_wait_for_port:
-    description: 'Whether systemd unit should wait for activemq port before returning'
-    default: "{{ activemq_ha_enabled and not activemq_shared_storage }}"
-    type: 'bool'
-activemq_systemd_wait_for_log:
-    description: 'Whether systemd unit should wait for service to be up in logs'
-    default: "{{ activemq_ha_enabled and activemq_shared_storage }}"
-    type: 'bool'
-activemq_systemd_wait_for_timeout:
-    description: "How long to wait for service to be alive (seconds)"
-    default: 60
-    type: 'int'
-activemq_systemd_wait_for_delay:
-    description: "Activation delay for service systemd unit"
-    default: 10
-    type: 'int'
-activemq_hawtio_role:
-    description: "Artemis role for hawtio console access"
-    default: "amq"
-    type: "str"
-```
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`activemq_version`| Apache Artemis version | `2.34.0` |
+|`activemq_installdir`| Apache Artemis Installation path | `{{ activemq_dest }}/apache-artemis-{{ activemq_version }}` |
+|`activemq_dest`| Root installation directory | `/opt/amq` |
+|`activemq_service_user`| POSIX user running the service | `amq-broker` |
+|`activemq_service_group`| POSIX group running the service | `amq-broker` |
+|`activemq_service_name`| systemd service unit name | `activemq` |
+|`activemq_instance_name`| Name of broker instance to deploy | `amq-broker` |
+|`activemq_java_opts`| Additional JVM options for the service | `-Xms512M -Xmx2G [...]` |
+|`activemq_jvm_package`| RPM package to install for the service | `java-17-openjdk-headless` |
+|`activemq_java_home`| `JAVA_HOME` of installed JRE, leave empty for using specified `activemq_jvm_package` path | `no` |
+|`activemq_hawtio_role`| Artemis role for hawtio console access | `amq` |
+
+|`activemq_systemd_wait_for_port` | Whether or not systemd unit should wait for `activemq_port` before returning | `true` when activemq_ha_enabled is `true` and activemq_shared_storage is `false` |
+|`activemq_systemd_wait_for_log` | Whether or not systemd unit should wait for service to be up in logs | `true` when activemq_ha_enabled and activemq_shared_storage are `true` |
+|`activemq_systemd_wait_for_timeout`| How long to wait for service to be alive (seconds)  |`60`|
+|`activemq_systemd_wait_for_delay`| Activation delay for service systemd unit (seconds)  |`10`|
+|`activemq_systemd_wait_for_log_ha_string` | The string to match in the logs when `activemq_systemd_wait_for_log` is true and HA is enabled | `AMQ221109\|AMQ221001` |
+|`activemq_systemd_wait_for_log_string` | The string to match in the logs when `activemq_systemd_wait_for_log` is true and HA is not enabled | `AMQ221034` |
+|`activemq_systemd_wait_for_port_number`| The port number to wait for when `activemq_systemd_wait_for_port` is true | `{{ activemq_port }}` |
+
 
 
 ## Verify deployment

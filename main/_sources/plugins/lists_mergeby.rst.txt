@@ -1,4 +1,3 @@
-
 .. Document meta
 
 :orphan:
@@ -7,7 +6,7 @@
     :trim:
 
 .. meta::
-  :antsibull-docs: 2.12.0
+  :antsibull-docs: 2.13.1
 
 .. Anchors
 
@@ -50,7 +49,7 @@ Synopsis
 
 .. Description
 
-- Merge two or more lists by attribute \ :ansopt:`middleware\_automation.amq.lists\_mergeby#filter:index`\ . Optional parameters \ :ansopt:`middleware\_automation.amq.lists\_mergeby#filter:recursive`\  and \ :ansopt:`middleware\_automation.amq.lists\_mergeby#filter:list\_merge`\  control the merging of the lists in values. The function merge\_hash from ansible.utils.vars is used. To learn details on how to use the parameters \ :ansopt:`middleware\_automation.amq.lists\_mergeby#filter:recursive`\  and \ :ansopt:`middleware\_automation.amq.lists\_mergeby#filter:list\_merge`\  see Ansible User's Guide chapter "Using filters to manipulate data" section "Combining hashes/dictionaries".
+- Merge two or more lists by attribute :ansopt:`middleware\_automation.amq.lists\_mergeby#filter:index`. Optional parameters :ansopt:`middleware\_automation.amq.lists\_mergeby#filter:recursive` and :ansopt:`middleware\_automation.amq.lists\_mergeby#filter:list\_merge` control the merging of the lists in values. The function merge\_hash from ansible.utils.vars is used. To learn details on how to use the parameters :ansopt:`middleware\_automation.amq.lists\_mergeby#filter:recursive` and :ansopt:`middleware\_automation.amq.lists\_mergeby#filter:list\_merge` see Ansible User's Guide chapter "Using filters to manipulate data" section "Combining hashes/dictionaries".
 
 
 .. Aliases
@@ -246,7 +245,6 @@ Examples
 
 .. code-block:: yaml+jinja
 
-    
     - name: Merge two lists
       ansible.builtin.debug:
         msg: >-
@@ -281,7 +279,6 @@ Examples
       #     "index": "c",
       #     "foo": "baz"
       #   }
-
 
 
 
@@ -341,4 +338,3 @@ Authors
 
 
 .. Parsing errors
-

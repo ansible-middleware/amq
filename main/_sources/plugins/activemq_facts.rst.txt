@@ -1,4 +1,3 @@
-
 .. Document meta
 
 :orphan:
@@ -7,7 +6,7 @@
     :trim:
 
 .. meta::
-  :antsibull-docs: 2.12.0
+  :antsibull-docs: 2.13.1
 
 .. Anchors
 
@@ -326,7 +325,7 @@ Attributes
 
         <div class="ansible-option-cell">
 
-      Action returns an \ :literal:`ansible\_facts`\  dictionary that will update existing host facts
+      Action returns an :literal:`ansible\_facts` dictionary that will update existing host facts
 
 
       .. raw:: html
@@ -390,14 +389,12 @@ Examples
 
 .. code-block:: yaml+jinja
 
-    
     - name: Populate activemq facts
       middleware_automation.amq.activemq_facts:
 
     - name: Print activemq service facts
       ansible.builtin.debug:
         var: ansible_facts.activemq
-
 
 
 
@@ -455,4 +452,3 @@ Authors
 
 
 .. Parsing errors
-

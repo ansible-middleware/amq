@@ -1,4 +1,3 @@
-
 .. Document meta
 
 :orphan:
@@ -7,7 +6,7 @@
     :trim:
 
 .. meta::
-  :antsibull-docs: 2.12.0
+  :antsibull-docs: 2.13.1
 
 .. Anchors
 
@@ -184,7 +183,6 @@ Examples
 
 .. code-block:: yaml+jinja
 
-    
     # generate pbkdf2_hmac hash in hex format for 'password' with given salt
     - name: Generate salted PBKDF2_HMAC password hash
       ansible.builtin.debug:
@@ -196,7 +194,6 @@ Examples
       ansible.builtin.debug:
         msg: >-
           {{ 'password' | pbkdf2_hmac(hashname='sha256', iterations=20000, hexsalt='7BD6712B68F9BD60B51D77EBD851A21F63E61F2B52301E7CA38DD1602CA662EB' }}
-
 
 
 
@@ -245,7 +242,7 @@ Return Value
 Authors
 ~~~~~~~
 
-- Guido Grazioli 
+- Guido Grazioli
 
 
 .. hint::
@@ -255,4 +252,3 @@ Authors
 
 
 .. Parsing errors
-
