@@ -86,6 +86,7 @@ Role Defaults
 |`activemq_mask_password_hashname`| Name of algorithm used for masking password, will be passed to custom codec | `sha1` |
 |`activemq_mask_password_iterations`| Number of iterations for masking password, will be passed to custom codec | `1024` |
 |`activemq_properties_file`| Properties file to allow updates and additions to the broker configuration after any xml has been parsed | `""` |
+|`activemq_modular_configuration`| Whether or not to enable XInclude modular configuration of broker.xml | `false` |
 
 
 #### LDAP authN/authZ

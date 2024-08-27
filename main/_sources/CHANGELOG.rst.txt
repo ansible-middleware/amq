@@ -10,6 +10,7 @@ v2.2.0-devel
 Major Changes
 -------------
 
+- Broker modular configuration with XInclude `#159 <https://github.com/ansible-middleware/amq/pull/159>`_
 - New activemq_uninstall role `#150 <https://github.com/ansible-middleware/amq/pull/150>`_
 
 Minor Changes
