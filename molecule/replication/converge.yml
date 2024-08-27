@@ -14,6 +14,8 @@
     activemq_configure_firewalld: false
     activemq_modular_configuration: true
     activemq_ha_check_for_active_server: true
+    activemq_systemd_wait_for_log: true
+    activemq_systemd_wait_for_port_number: 8161
     activemq_users:
     - user: amq
       password: amqbrokerpass
@@ -27,12 +29,7 @@
           tcpReceiveBufferSize: 1048576
           protocols: CORE,AMQP
           useEpoll: true
-          sslEnabled: true
-          keyStorePath: "{{ activemq_tls_keystore_dest }}"
-          keyStorePassword: "{{ activemq_tls_keystore_password }}"
-          trustStorePath: "{{ activemq_tls_truststore_dest }}"
-          trustStorePassword: "{{ activemq_tls_truststore_password }}"
-          verifyHost: False
+          sslEnabled: false
     activemq_connectors:
       - name: artemis
         address: "{{ activemq_host }}"
