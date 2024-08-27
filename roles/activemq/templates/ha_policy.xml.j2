@@ -25,7 +25,7 @@
 {% endif %}
 {% if activemq_ha_enabled and activemq_replication %}
         <replication>
-{% if activemq_ha_role == 'slave' or activemq_ha_role == 'backup' or amq_broker_replicated %}
+{% if activemq_ha_role == 'slave' or activemq_ha_role == 'backup' or activemq_replicated %}
           <{{ activemq_ha_role }}>
             <allow-failback>{{ activemq_ha_allow_failback | lower }}</allow-failback>
             <restart-backup>{{ activemq_ha_restart_backup | lower }}</restart-backup>

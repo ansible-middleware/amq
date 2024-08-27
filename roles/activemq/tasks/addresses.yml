@@ -29,10 +29,10 @@
   when: activemq_modular_configuration
   become: true
   block:
-    - name: Remove address-settings element from broker.xml
-      redhat.runtimes_common.xml:
+    - name: Remove addresses element from broker.xml
+      middleware_automation.common.xml:
         path: "{{ activemq.instance_home }}/etc/broker.xml"
-        xpath: /conf:configuration/core:core/core:address-settings
+        xpath: /conf:configuration/core:core/core:addresses
         state: absent
         namespaces:
           conf: urn:activemq
