@@ -747,6 +747,10 @@ argument_specs:
                 default: "{{ activemq_port }}"
                 type: 'int'
                 description: "The port number to wait for when activemq_systemd_wait_for_port is true"
+            activemq_modular_configuration:
+                default: false
+                type: 'bool'
+                description: "Whether or not to enable XInclude modular configuration of broker.xml"
     systemd:
         options:
             activemq_version:

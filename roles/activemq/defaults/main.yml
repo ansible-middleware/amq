@@ -50,6 +50,7 @@ activemq_port_stomp: 61613  # for protocols [STOMP]
 activemq_name: 'Apache ActiveMQ'
 activemq_service_name: activemq
 activemq_service_override_template: ''
+activemq_modular_configuration: false
 
 ### Enable configuration for high availability
 activemq_ha_enabled: false

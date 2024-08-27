@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<address-settings xmlns="urn:activemq:core">
+{% for address_setting in activemq_address_settings %}
+    <address-setting match="{{ address_setting.match }}">
+{% for param in lookup('ansible.builtin.dict', address_setting.parameters, wantlist=true) %}
+        <{{ param.key | replace('_','-') }}>{% if param.value is number %}{{ param.value | string | lower }}{% else %}{{ param.value }}{% endif %}</{{ param.key | replace('_','-') }}>
+{% endfor %}
+    </address-setting>
+{% endfor %}
+</address-settings>
