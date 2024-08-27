@@ -25,6 +25,7 @@ Bugfixes
 --------
 
 - Allow mixing masked and unmasked passwords `#149 <https://github.com/ansible-middleware/amq/pull/149>`_
+- Use bind_address instead of hostname for console binding `#158 <https://github.com/ansible-middleware/amq/pull/158>`_
 
 v2.1.1
 ======
