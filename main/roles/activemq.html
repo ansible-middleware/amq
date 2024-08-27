@@ -69,6 +69,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#network-check">Network check</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tls-ssl-protocol">TLS/SSL protocol</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#logging">Logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#broker-plugins">Broker plugins</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#other-options">Other options</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#user-role-configuration">User / Role configuration</a></li>
 </ul>
@@ -1001,6 +1002,34 @@
 </tr>
 </tbody>
 </table>
+</section>
+<section id="broker-plugins">
+<h3>Broker plugins<a class="headerlink" href="#broker-plugins" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_broker_plugins</span></code></p></td>
+<td class="text-left"><p>The list of broker-plugins configurations (dict: { class_name, properties(dict) })</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Sample:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_broker_plugins</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.activemq.artemis.core.server.plugin.impl.LoggingActiveMQServerPlugin</span>
+<span class="w">    </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">LOG_DELIVERING_EVENTS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">LOG_SENDING_EVENTS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.activemq.artemis.core.server.plugin.impl.NotificationActiveMQServerPlugin</span>
+<span class="w">    </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">SEND_SESSION_NOTIFICATIONS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
 </section>
 <section id="other-options">
 <h3>Other options<a class="headerlink" href="#other-options" title="Link to this heading"></a></h3>
