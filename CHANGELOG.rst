@@ -4,6 +4,31 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.2.0
+======
+
+Major Changes
+-------------
+
+- Broker modular configuration with XInclude `#159 <https://github.com/ansible-middleware/amq/pull/159>`_
+- New activemq_uninstall role `#150 <https://github.com/ansible-middleware/amq/pull/150>`_
+
+Minor Changes
+-------------
+
+- Add additional ha-policy parameters `#155 <https://github.com/ansible-middleware/amq/pull/155>`_
+- Add network check parameters `#152 <https://github.com/ansible-middleware/amq/pull/152>`_
+- Add wait_for configuration `#156 <https://github.com/ansible-middleware/amq/pull/156>`_
+- Allow to configure message counters `#153 <https://github.com/ansible-middleware/amq/pull/153>`_
+- Broker plugins support `#160 <https://github.com/ansible-middleware/amq/pull/160>`_
+- Define systemd entrypoint `#151 <https://github.com/ansible-middleware/amq/pull/151>`_
+
+Bugfixes
+--------
+
+- Allow mixing masked and unmasked passwords `#149 <https://github.com/ansible-middleware/amq/pull/149>`_
+- Use bind_address instead of hostname for console binding `#158 <https://github.com/ansible-middleware/amq/pull/158>`_
+
 v2.1.1
 ======
 
