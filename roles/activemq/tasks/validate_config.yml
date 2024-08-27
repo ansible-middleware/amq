@@ -14,6 +14,7 @@
     valid_core_configuration_list: []
     valid_nc_configuration_list: []
     validate_federations: []
+    validate_plugins: []
 
 - name: Validate configuration/core and journal configuration
   ansible.builtin.include_tasks: validate_core_config.yml
@@ -127,6 +128,25 @@
     validate: true
     input_type: xml
   when: activemq_diverts | length > 0
+  run_once: true
+  delegate_to: localhost
+
+- name: Create plugins configuration string
+  ansible.builtin.set_fact:
+    validate_plugins: "{{ validate_plugins | default([]) + [ lookup('template', 'broker_plugins.broker.xml.j2') ] }}"
+  when: activemq_broker_plugins | length > 0
+  loop: "{{ activemq_broker_plugins }}"
+  loop_control:
+    loop_var: plugin
+    label: "{{ plugin.class_name }}"
+
+- name: Validate plugins
+  middleware_automation.common.xml:
+    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><broker-plugins>{{ validate_plugins | default([]) | join(' ') | trim }}</broker-plugins></core>"
+    validate: true
+    input_type: xml
+  when: activemq_broker_plugins | length > 0
   run_once: true
   delegate_to: localhost
 
