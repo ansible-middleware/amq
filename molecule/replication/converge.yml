@@ -10,8 +10,10 @@
     activemq_disable_stomp_protocol: true
     activemq_shared_storage: false
     activemq_replication: true
+    activemq_ha_allow_failback: true
     activemq_configure_firewalld: false
     activemq_modular_configuration: true
+    activemq_ha_check_for_active_server: true
     activemq_users:
     - user: amq
       password: amqbrokerpass

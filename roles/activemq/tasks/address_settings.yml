@@ -42,7 +42,7 @@
 
     - name: Create address-settings file
       ansible.builtin.template:
-        src: modular/address-settings.xml.j2
+        src: modular/address_settings.xml.j2
         dest: "{{ activemq.instance_home }}/etc/address-settings.xml"
         owner: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
