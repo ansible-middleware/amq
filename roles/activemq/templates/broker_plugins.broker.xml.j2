@@ -1,0 +1,5 @@
+        <broker-plugin class-name="{{ plugin.class_name }}">
+{% for property in lookup('ansible.builtin.dict', plugin.properties, wantlist=true) | default([]) %}
+            <property key="{{ property.key }}" value="{{ property.value | string | lower }}" />
+{% endfor %}
+      </broker-plugin>

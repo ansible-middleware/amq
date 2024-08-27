@@ -78,5 +78,13 @@
       - name: client123.pubsub
         multicast:
           - name: client123.pubsub.foo
+    activemq_broker_plugins:
+      - class_name: org.apache.activemq.artemis.core.server.plugin.impl.LoggingActiveMQServerPlugin
+        properties:
+          LOG_DELIVERING_EVENTS: true
+          LOG_SENDING_EVENTS: true
+      - class_name: org.apache.activemq.artemis.core.server.plugin.impl.NotificationActiveMQServerPlugin
+        properties:
+          SEND_SESSION_NOTIFICATIONS: true
   roles:
     - middleware_automation.amq.activemq

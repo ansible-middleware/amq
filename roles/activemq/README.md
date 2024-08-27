@@ -377,6 +377,26 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_logger_config_keep_name` | Whether to keep the custom template filename or use the default | `False` |
 
 
+#### Broker plugins
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+|`activemq_broker_plugins`| The list of broker-plugins configurations (dict: { class_name, properties(dict) }) | `[]` |
+
+Sample:
+
+```yaml
+activemq_broker_plugins:
+  - class_name: org.apache.activemq.artemis.core.server.plugin.impl.LoggingActiveMQServerPlugin
+    properties:
+      LOG_DELIVERING_EVENTS: true
+      LOG_SENDING_EVENTS: true
+  - class_name: org.apache.activemq.artemis.core.server.plugin.impl.NotificationActiveMQServerPlugin
+    properties:
+      SEND_SESSION_NOTIFICATIONS: true
+```
+
+
 #### Other options
 
 | Variable | Description | Default |

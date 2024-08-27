@@ -367,3 +367,8 @@ activemq_network_check_ping6_command: ''
 activemq_message_counter_enabled: false
 activemq_message_counter_sample_period: 10000
 activemq_message_counter_max_day_history: 10
+
+### Broker Plugins
+# see: https://activemq.apache.org/components/artemis/documentation/latest/broker-plugins.html
+# list of dicts: { class_name, properties(dict) }
+activemq_broker_plugins: []
