@@ -738,11 +738,11 @@ argument_specs:
             activemq_systemd_wait_for_log_ha_string:
                 default: 'AMQ221109\\\\|AMQ221001'
                 type: "str"
-                description: "The string to match in the logs when ctivemq_systemd_wait_for_log is true and HA is enabled"
+                description: "The string to match in the logs when activemq_systemd_wait_for_log is true and HA is enabled"
             activemq_systemd_wait_for_log_string:
                 default: 'AMQ221034'
                 type: "str"
-                description: "The string to match in the logs when ctivemq_systemd_wait_for_log is true and HA is not enabled"
+                description: "The string to match in the logs when activemq_systemd_wait_for_log is true and HA is not enabled"
             activemq_systemd_wait_for_port_number:
                 default: "{{ activemq_port }}"
                 type: 'int'
@@ -751,6 +751,10 @@ argument_specs:
                 default: false
                 type: 'bool'
                 description: "Whether or not to enable XInclude modular configuration of broker.xml"
+            activemq_broker_plugins:
+                default: []
+                type: 'list'
+                description: "The list of broker-plugins configurations (dict: { class_name, properties(dict) })"
     systemd:
         options:
             activemq_version:
