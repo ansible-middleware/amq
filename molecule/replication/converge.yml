@@ -1,0 +1,68 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: yes
+  vars:
+    activemq_ha_enabled: true
+    activemq_disable_hornetq_protocol: true
+    activemq_disable_mqtt_protocol: true
+    activemq_disable_amqp_protocol: true
+    activemq_disable_stomp_protocol: true
+    activemq_shared_storage: false
+    activemq_replication: true
+    activemq_ha_allow_failback: true
+    activemq_configure_firewalld: false
+    activemq_modular_configuration: true
+    activemq_ha_check_for_active_server: true
+    activemq_systemd_wait_for_log: true
+    activemq_systemd_wait_for_port_number: 8161
+    activemq_users:
+    - user: amq
+      password: amqbrokerpass
+      roles: [ amq ]
+    activemq_acceptors:
+      - name: artemis
+        bind_address: 0.0.0.0
+        bind_port: "{{ activemq_port }}"
+        parameters:
+          tcpSendBufferSize: 1048576
+          tcpReceiveBufferSize: 1048576
+          protocols: CORE,AMQP
+          useEpoll: true
+          sslEnabled: false
+    activemq_connectors:
+      - name: artemis
+        address: "{{ activemq_host }}"
+        port: "{{ activemq_port }}"
+      - name: instance1
+        address: instance1
+      - name: instance2
+        address: instance2
+    activemq_addresses:
+      - name: queue.in
+        anycast:
+          - name: queue.in
+      - name: queue.out
+        anycast:
+          - name: queue.out
+      - name: DLQ
+        anycast:
+          - name: DLQ
+      - name: ExpiryQueue
+        anycast:
+          - name: ExpiryQueue
+      - name: a.test
+        anycast:
+          - name: a.test
+      - name: b.test
+        anycast:
+          - name: b.test
+    activemq_diverts:
+      - name: TESTDIVERT
+        address: queue.in
+        forwarding_address: queue.out
+        routing_type: ANYCAST
+        filter: "msgType LIKE '%ff%'"
+        exclusive: True
+  roles:
+    - middleware_automation.amq.activemq

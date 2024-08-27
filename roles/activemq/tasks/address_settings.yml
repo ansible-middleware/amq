@@ -1,22 +1,67 @@
 ---
-- name: Create address settings configuration string
-  ansible.builtin.set_fact:
-    address_settings: "{{ address_settings | default([]) + [ lookup('template', 'address_settings.broker.xml.j2') ] }}"
-  loop: "{{ activemq_address_settings }}"
-  loop_control:
-    loop_var: address_setting
-    label: "{{ address_setting.match }}"
-
-- name: Create address settings configuration in broker.xml
-  middleware_automation.common.xml:
-    path: "{{ activemq.instance_home }}/etc/broker.xml"
-    xpath: /conf:configuration/core:core/core:address-settings
-    input_type: xml
-    set_children: "{{ address_settings }}"
-    namespaces:
-      conf: urn:activemq
-      core: urn:activemq:core
-    pretty_print: true
+- name: Create address settings in broker.xml
+  when: not activemq_modular_configuration
   become: true
-  notify:
-    - restart amq_broker with no config refresh
+  block:
+    - name: Create address settings configuration string
+      ansible.builtin.set_fact:
+        address_settings: "{{ address_settings | default([]) + [ lookup('template', 'address_settings.broker.xml.j2') ] }}"
+      loop: "{{ activemq_address_settings }}"
+      loop_control:
+        loop_var: address_setting
+        label: "{{ address_setting.match }}"
+
+    - name: Create address settings configuration in broker.xml
+      middleware_automation.common.xml:
+        path: "{{ activemq.instance_home }}/etc/broker.xml"
+        xpath: /conf:configuration/core:core/core:address-settings
+        input_type: xml
+        set_children: "{{ address_settings }}"
+        namespaces:
+          conf: urn:activemq
+          core: urn:activemq:core
+        pretty_print: true
+      become: true
+      notify:
+        - restart amq_broker with no config refresh
+
+- name: Create modular address-settings configuration
+  when: activemq_modular_configuration
+  become: true
+  block:
+    - name: Remove address-settings element from broker.xml
+      middleware_automation.common.xml:
+        path: "{{ activemq.instance_home }}/etc/broker.xml"
+        xpath: /conf:configuration/core:core/core:address-settings
+        state: absent
+        namespaces:
+          conf: urn:activemq
+          core: urn:activemq:core
+      notify:
+        - restart amq_broker with no config refresh
+
+    - name: Create address-settings file
+      ansible.builtin.template:
+        src: modular/address_settings.xml.j2
+        dest: "{{ activemq.instance_home }}/etc/address-settings.xml"
+        owner: "{{ activemq_service_user }}"
+        group: "{{ activemq_service_group }}"
+        mode: '0644'
+      notify:
+        - touch broker.xml
+        - restart amq_broker with no config refresh
+
+    - name: Include address-settings module in broker.xml
+      middleware_automation.common.xml:
+        path: "{{ activemq.instance_home }}/etc/broker.xml"
+        xpath: /conf:configuration/core:core/xi:include[@href='{{ activemq.instance_home }}/etc/address-settings.xml']
+        state: present
+        input_type: xml
+        namespaces:
+          conf: urn:activemq
+          core: urn:activemq:core
+          xi: http://www.w3.org/2001/XInclude
+        pretty_print: true
+      notify:
+        - touch broker.xml
+        - restart amq_broker

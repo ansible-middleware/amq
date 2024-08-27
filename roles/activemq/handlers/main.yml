@@ -7,3 +7,12 @@
   ansible.builtin.include_tasks: restart.yml
   when: activemq_configuration_file_refresh_period < 1
   listen: "restart amq_broker with no config refresh"
+
+- name: "Restart handler"
+  ansible.builtin.file:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
+    state: touch
+    owner: "{{ activemq_service_user }}"
+    group: "{{ activemq_service_group }}"
+    mode: '0644'
+  listen: "touch broker.xml"
