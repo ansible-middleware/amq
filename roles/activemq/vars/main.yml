@@ -46,6 +46,9 @@ activemq_core_configuration_list:
   - journal_file_size
   - journal_buffer_timeout
   - journal_max_io
+  - journal_buffer_size
+  - disk_scan_period
+  - max_disk_usage
   - configuration_file_refresh_period
   - global_max_messages
   - global_max_size

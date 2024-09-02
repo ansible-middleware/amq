@@ -126,6 +126,9 @@ activemq_journal_pool_files: 10
 activemq_journal_device_block_size: 4096
 activemq_journal_file_size: 10M
 activemq_journal_buffer_timeout: "{{ 500000 if activemq_journal_type == 'ASYNCIO' else 3333333 }}"
+activemq_journal_buffer_size: '490KiB'
+activemq_disk_scan_period: 5000
+activemq_max_disk_usage: 96
 activemq_journal_max_io: "{{ 4096 if activemq_journal_type == 'ASYNCIO' else 1 }}"
 # message Full Policy configured
 activemq_global_max_messages: -1
