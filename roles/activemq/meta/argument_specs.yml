@@ -781,7 +781,7 @@ argument_specs:
                 type: 'int'
             activemq_critical_analyzer_policy:
                 description: "Should the server log, be halted or shutdown upon failures (one of LOG, HALT, SHUTDOWN)"
-                default: 'HALT'
+                default: 'LOG'
                 type: 'str'
     systemd:
         options:
