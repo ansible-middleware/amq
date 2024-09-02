@@ -140,6 +140,11 @@ activemq_db_bindings_table: BINDINGS_TABLE
 activemq_db_message_table: MESSAGE_TABLE
 activemq_db_large_message_table: LARGE_MESSAGES_TABLE
 activemq_db_jdbc_driver_class: org.apache.derby.jdbc.EmbeddedDriver
+# critical analyzer
+activemq_critical_analyzer: true
+activemq_critical_analyzer_timeout: 120000
+activemq_critical_analyzer_check_period: 60000
+activemq_critical_analyzer_policy: LOG
 
 ### Enable TLS
 activemq_tls_enabled: false

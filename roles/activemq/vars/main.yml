@@ -56,3 +56,7 @@ activemq_core_configuration_list:
   - message_counter_enabled
   - message_counter_sample_period
   - message_counter_max_day_history
+  - critical_analyzer
+  - critical_analyzer_timeout
+  - critical_analyzer_check_period
+  - critical_analyzer_policy
