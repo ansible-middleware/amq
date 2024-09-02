@@ -767,6 +767,22 @@ argument_specs:
                 description: "The max percentage of data we should use from disks. The System will block while the disk is full."
                 default: 96
                 type: 'int'
+            activemq_critical_analyzer:
+                description: "Should the broker detect dead locks and other issues"
+                default: true
+                type: 'bool'
+            activemq_critical_analyzer_timeout:
+                description: "Timeout used to do the critical analysis (milliseconds)"
+                default: 120000
+                type: 'int'
+            activemq_critical_analyzer_check_period:
+                description: "Time used to check the response times (milliseconds)"
+                default: 60000
+                type: 'int'
+            activemq_critical_analyzer_policy:
+                description: "Should the server log, be halted or shutdown upon failures (one of LOG, HALT, SHUTDOWN)"
+                default: 'HALT'
+                type: 'str'
     systemd:
         options:
             activemq_version:
