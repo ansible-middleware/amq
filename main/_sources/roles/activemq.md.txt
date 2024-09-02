@@ -134,6 +134,9 @@ Role Defaults
 |`activemq_journal_file_size`| The size (in bytes) of each journal file | `10M` |
 |`activemq_journal_buffer_timeout`| The Flush timeout for the journal buffer | `500000` if 'ASYNCIO' else `3333333` |
 |`activemq_journal_max_io`| The maximum number of write requests that can be in the ASYNCIO queue at any one time | `4096` if 'ASYNCIO' else `1` |
+|`activemq_journal_buffer_size`| The size of the internal buffer on the journal in KB  | `490KiB` |
+|`activemq_disk_scan_period`| The interval where the disk is scanned for percentual usage | `5000` |
+|`activemq_max_disk_usage`| The max percentage of data we should use from disks. The System will block while the disk is full | `96` |
 |`activemq_db_enabled`| Whether to enable JDBC persistence | `False` |
 |`activemq_db_jdbc_url`| The full JDBC connection URL for your database server | `jdbc:derby:target/derby/database-store;create=true` |
 |`activemq_db_bindings_table`| The name of the table in which bindings data will be persisted | `BINDINGS_TABLE` |

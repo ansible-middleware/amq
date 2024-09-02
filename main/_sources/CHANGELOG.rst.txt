@@ -7,10 +7,10 @@ middleware\_automation.amq Release Notes
 v2.2.1-devel
 ============
 
-Release Summary
----------------
+Minor Changes
+-------------
 
-Internal release, documentation or test changes only.
+- Add more journal configs `#161 <https://github.com/ansible-middleware/amq/pull/161>`_
 
 v2.2.0
 ======
