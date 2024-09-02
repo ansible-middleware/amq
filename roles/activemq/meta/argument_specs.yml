@@ -755,6 +755,18 @@ argument_specs:
                 default: []
                 type: 'list'
                 description: "The list of broker-plugins configurations (dict: { class_name, properties(dict) })"
+            activemq_journal_buffer_size:
+                description: "The size of the internal buffer on the journal in KB"
+                default: '490KiB'
+                type: 'str'
+            activemq_disk_scan_period:
+                description: "The interval where the disk is scanned for percentual usage."
+                default: 5000
+                type: 'int'
+            activemq_max_disk_usage:
+                description: "The max percentage of data we should use from disks. The System will block while the disk is full."
+                default: 96
+                type: 'int'
     systemd:
         options:
             activemq_version:
