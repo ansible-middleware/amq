@@ -60,6 +60,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#common-configuration">Common configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ldap-authn-authz">LDAP authN/authZ</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#journal-configuration">Journal configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#critical-analyzer">Critical Analyzer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#acceptors-connectors">Acceptors / connectors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#addresses-configuration">Addresses configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#address-settings">Address settings</a></li>
@@ -569,6 +570,35 @@
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_db_jdbc_driver_class</span></code></p></td>
 <td class="text-left"><p>The fully qualified class name of the desired database Driver</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">org.apache.derby.jdbc.EmbeddedDriver</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="critical-analyzer">
+<h3>Critical Analyzer<a class="headerlink" href="#critical-analyzer" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_critical_analyzer</span></code></p></td>
+<td class="text-left"><p>Should the broker detect dead locks and other issues</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_critical_analyzer_timeout</span></code></p></td>
+<td class="text-left"><p>Timeout used to do the critical analysis (milliseconds)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">120000</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_critical_analyzer_check_period</span></code></p></td>
+<td class="text-left"><p>Time used to check the response times (milliseconds)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">60000</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_critical_analyzer_policy</span></code></p></td>
+<td class="text-left"><p>Should the server log, be halted or shutdown upon failures (one of LOG, HALT, SHUTDOWN)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">HALT</span></code></p></td>
 </tr>
 </tbody>
 </table>
