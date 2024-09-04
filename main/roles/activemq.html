@@ -275,11 +275,11 @@
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jolokia_url</span></code></p></td>
 <td class="text-left"><p>URL for jolokia REST api</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">http://{{</span> <span class="pre">activemq_host</span> <span class="pre">}}:{{</span> <span class="pre">activemq_http_port</span> <span class="pre">}}/console/jolokia</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_console_url</span> <span class="pre">}}/jolokia</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_console_url</span></code></p></td>
 <td class="text-left"><p>URL for console service</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">http://{{</span> <span class="pre">activemq_host</span> <span class="pre">}}:{{</span> <span class="pre">activemq_http_port</span> <span class="pre">}}/console/</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_console_bind_url</span> <span class="pre">}}/console/</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jvm_package</span></code></p></td>
 <td class="text-left"><p>RPM package to install for the service</p></td>
@@ -368,6 +368,10 @@
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_modular_configuration</span></code></p></td>
 <td class="text-left"><p>Whether or not to enable XInclude modular configuration of broker.xml</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_console_bind_url</span></code></p></td>
+<td class="text-left"><p>The value to use in bootstrap.xml for web console binding</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">http{{</span> <span class="pre">'s'</span> <span class="pre">if</span> <span class="pre">activemq_tls_enabled</span> <span class="pre">else</span> <span class="pre">''</span> <span class="pre">}}://{{</span> <span class="pre">activemq_bind_address</span> <span class="pre">}}:{{</span> <span class="pre">activemq_http_port</span> <span class="pre">}}</span></code></p></td>
 </tr>
 </tbody>
 </table>
