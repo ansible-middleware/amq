@@ -10,15 +10,16 @@ v2.2.1-devel
 Minor Changes
 -------------
 
-- Add ``activemq_systemd_expand_environment`` parameter `#165 <https://github.com/ansible-middleware/amq/pull/165>`_
 - Add critical analyzer configuration `#162 <https://github.com/ansible-middleware/amq/pull/162>`_
 - Add more journal configs `#161 <https://github.com/ansible-middleware/amq/pull/161>`_
 - New ``activemq_console_bind_url`` parameter `#164 <https://github.com/ansible-middleware/amq/pull/164>`_
+- New ``activemq_systemd_expand_environment`` parameter `#165 <https://github.com/ansible-middleware/amq/pull/165>`_
 
 Bugfixes
 --------
 
 - Fix condition for transferring key/trust store `#163 <https://github.com/ansible-middleware/amq/pull/163>`_
+- Fix scenarios where duplicate XInclude can be present `#166 <https://github.com/ansible-middleware/amq/pull/166>`_
 
 v2.2.0
 ======
