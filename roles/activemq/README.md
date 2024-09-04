@@ -302,6 +302,7 @@ Sample divert:
 |`activemq_ha_check_for_active_server`| Whether to check the cluster for a live server using our own server ID when starting up. This option is only necessary for performing 'fail-back' on replicating servers | `false` |
 |`activemq_ha_replication_cluster_name`| Name of the cluster configuration to use for replication. This setting is only necessary in case you configure multiple cluster connections | `""` |
 |`activemq_ha_replication_group_name`| With replication, if set, remote backup servers will only pair with primary servers with matching group-name | `""` |
+|`activemq_systemd_expand_environment` | Whether or not to expand the environment in the sysconfig file. If true, environment file is sourced and the activemq process is started in a shell | `false` |
 
 
 #### Multi-site fault-tolerance (AMQP broker connections)

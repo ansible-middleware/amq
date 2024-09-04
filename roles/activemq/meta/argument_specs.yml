@@ -787,6 +787,12 @@ argument_specs:
                 description: "The value to use in bootstrap.xml for web console binding"
                 default: "http{{ 's' if activemq_tls_enabled else '' }}://{{ activemq_bind_address }}:{{ activemq_http_port }}"
                 type: 'str'
+            activemq_systemd_expand_environment:
+                default: false
+                description: >
+                  Whether or not to expand the environment in the sysconfig file. If true, environment file is sourced and the \
+                  activemq process is started in a shell
+                type: 'str'
     systemd:
         options:
             activemq_version:

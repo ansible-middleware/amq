@@ -12,7 +12,11 @@ Group={{ activemq_service_group }}
 Type=forking
 EnvironmentFile=-/etc/sysconfig/{{ activemq.instance_name }}
 PIDFile={{ activemq.instance_home }}/{{ activemq_service_pidfile }}
+{% if activemq_systemd_expand_environment %}
+ExecStart=/bin/bash -ac '. /etc/sysconfig/{{ activemq.instance_name }} ; exec {{ activemq.instance_home }}/bin/artemis-service start'
+{% else %}
 ExecStart={{ activemq.instance_home }}/bin/artemis-service start
+{% endif %}
 ExecStop={{ activemq.instance_home }}/bin/artemis-service stop
 SuccessExitStatus = 0 143
 RestartSec = 120
