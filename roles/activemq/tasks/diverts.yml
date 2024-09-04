@@ -63,6 +63,18 @@
         - touch broker.xml
         - restart amq_broker with no config refresh
 
+    - name: Search diverts module in broker.xml
+      ansible.builtin.find:
+        paths: "{{ activemq.instance_home }}/etc/"
+        patterns: broker.xml
+        contains: '<xi:include.*/etc/diverts.xml'
+        file_type: file
+        use_regex: false
+        read_whole_file: true
+      changed_when: false
+      check_mode: true
+      register: module_presence
+
     - name: Include diverts module in broker.xml
       middleware_automation.common.xml:
         path: "{{ activemq.instance_home }}/etc/broker.xml"
@@ -74,6 +86,6 @@
           core: urn:activemq:core
           xi: http://www.w3.org/2001/XInclude
         pretty_print: true
+      when: module_presence.matched == 0
       notify:
-        - touch broker.xml
         - restart amq_broker
