@@ -38,7 +38,7 @@
     path: "{{ activemq.instance_home }}/etc/bootstrap.xml"
     xpath: '/b:broker/b:web/b:binding'
     attribute: uri
-    value: "http{{ 's' if activemq_tls_enabled else '' }}://{{ activemq_bind_address }}:{{ activemq_http_port }}"
+    value: "{{ activemq_console_bind_url }}"
     namespaces:
       b: http://activemq.apache.org/schema
   notify:

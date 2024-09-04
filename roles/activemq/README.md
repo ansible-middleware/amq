@@ -63,8 +63,8 @@ Role Defaults
 |`activemq_bind_address`| Service bind address | `0.0.0.0` |
 |`activemq_host`| Service hostname | `localhost` |
 |`activemq_http_port`| Service http port serving console and REST api | `8161` |
-|`activemq_jolokia_url`| URL for jolokia REST api | `http://{{ activemq_host }}:{{ activemq_http_port }}/console/jolokia` |
-|`activemq_console_url`| URL for console service | `http://{{ activemq_host }}:{{ activemq_http_port }}/console/` |
+|`activemq_jolokia_url`| URL for jolokia REST api | `{{ activemq_console_url }}/jolokia` |
+|`activemq_console_url`| URL for console service | `{{ activemq_console_bind_url }}/console/` |
 |`activemq_jvm_package`| RPM package to install for the service | `java-17-openjdk-headless` |
 |`activemq_java_opts`| Additional JVM options for the service | `-Xms512M -Xmx2G [...]` |
 |`activemq_port`| Main port for the broker instance | `61616` |
@@ -87,6 +87,7 @@ Role Defaults
 |`activemq_mask_password_iterations`| Number of iterations for masking password, will be passed to custom codec | `1024` |
 |`activemq_properties_file`| Properties file to allow updates and additions to the broker configuration after any xml has been parsed | `""` |
 |`activemq_modular_configuration`| Whether or not to enable XInclude modular configuration of broker.xml | `false` |
+|`activemq_console_bind_url`| The value to use in bootstrap.xml for web console binding | `http{{ 's' if activemq_tls_enabled else '' }}://{{ activemq_bind_address }}:{{ activemq_http_port }}` |
 
 
 #### LDAP authN/authZ
