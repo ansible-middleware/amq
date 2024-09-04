@@ -13,6 +13,11 @@ Minor Changes
 - Add critical analyzer configuration `#162 <https://github.com/ansible-middleware/amq/pull/162>`_
 - Add more journal configs `#161 <https://github.com/ansible-middleware/amq/pull/161>`_
 
+Bugfixes
+--------
+
+- Fix condition for transferring key/trust store `#163 <https://github.com/ansible-middleware/amq/pull/163>`_
+
 v2.2.0
 ======
 

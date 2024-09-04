@@ -152,7 +152,7 @@ Role Defaults
 |`activemq_critical_analyzer`| Should the broker detect dead locks and other issues | `true` |
 |`activemq_critical_analyzer_timeout`| Timeout used to do the critical analysis (milliseconds) | `120000` |
 |`activemq_critical_analyzer_check_period`| Time used to check the response times (milliseconds) | `60000` |
-|`activemq_critical_analyzer_policy`| Should the server log, be halted or shutdown upon failures (one of LOG, HALT, SHUTDOWN) | `HALT` |
+|`activemq_critical_analyzer_policy`| Should the server log, be halted or shutdown upon failures (one of LOG, HALT, SHUTDOWN) | `LOG` |
 
 
 #### Acceptors / connectors
