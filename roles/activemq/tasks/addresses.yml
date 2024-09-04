@@ -51,7 +51,7 @@
         - touch broker.xml
         - restart amq_broker with no config refresh
 
-    - name: Search addresses module in broker.xml
+    - name: Look up addresses module in broker.xml
       ansible.builtin.find:
         paths: "{{ activemq.instance_home }}/etc/"
         patterns: broker.xml
