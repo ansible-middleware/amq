@@ -783,6 +783,10 @@ argument_specs:
                 description: "Should the server log, be halted or shutdown upon failures (one of LOG, HALT, SHUTDOWN)"
                 default: 'LOG'
                 type: 'str'
+            activemq_console_bind_url:
+                description: "The value to use in bootstrap.xml for web console binding"
+                default: "http{{ 's' if activemq_tls_enabled else '' }}://{{ activemq_bind_address }}:{{ activemq_http_port }}"
+                type: 'str'
     systemd:
         options:
             activemq_version:
