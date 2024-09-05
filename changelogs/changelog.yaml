@@ -482,3 +482,37 @@ releases:
     - 159.yaml
     - 160.yaml
     release_date: '2024-08-27'
+  2.2.1:
+    changes:
+      bugfixes:
+      - 'Fix condition for transferring key/trust store `#163 <https://github.com/ansible-middleware/amq/pull/163>`_
+
+        '
+      - 'Fix scenarios where duplicate XInclude can be present `#166 <https://github.com/ansible-middleware/amq/pull/166>`_
+
+        '
+      minor_changes:
+      - 'Add ``web_origin`` parameter to ``activemq_facts`` module `#167 <https://github.com/ansible-middleware/amq/pull/167>`_
+
+        '
+      - 'Add critical analyzer configuration `#162 <https://github.com/ansible-middleware/amq/pull/162>`_
+
+        '
+      - 'Add more journal configs `#161 <https://github.com/ansible-middleware/amq/pull/161>`_
+
+        '
+      - 'New ``activemq_console_bind_url`` parameter `#164 <https://github.com/ansible-middleware/amq/pull/164>`_
+
+        '
+      - 'New ``activemq_systemd_expand_environment`` parameter `#165 <https://github.com/ansible-middleware/amq/pull/165>`_
+
+        '
+    fragments:
+    - 161.yaml
+    - 162.yaml
+    - 163.yaml
+    - 164.yaml
+    - 165.yaml
+    - 166.yaml
+    - 167.yaml
+    release_date: '2024-09-05'
