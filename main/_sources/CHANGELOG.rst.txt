@@ -10,6 +10,7 @@ v2.2.1-devel
 Minor Changes
 -------------
 
+- Add ``web_origin`` parameter to ``activemq_facts`` module `#167 <https://github.com/ansible-middleware/amq/pull/167>`_
 - Add critical analyzer configuration `#162 <https://github.com/ansible-middleware/amq/pull/162>`_
 - Add more journal configs `#161 <https://github.com/ansible-middleware/amq/pull/161>`_
 - New ``activemq_console_bind_url`` parameter `#164 <https://github.com/ansible-middleware/amq/pull/164>`_

@@ -184,6 +184,20 @@ Parameters
 
     </div></td>
   </tr>
+  <tr class="row-even">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="parameter-web_origin"></div>
+      <p class="ansible-option-title"><strong>web_origin</strong></p>
+      <a class="ansibleOptionLink" href="#parameter-web_origin" title="Permalink to this option"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>The value to use in the Origin header for the http request</p>
+      <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-value literal notranslate ansible-option-default">&#34;http://0.0.0.0&#34;</code></p>
+    </div></td>
+  </tr>
   </tbody>
   </table>
 
