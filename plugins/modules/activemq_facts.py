@@ -64,6 +64,12 @@ options:
             - Verify TLS certificates when using https.
         type: bool
         default: true
+    web_origin:
+        description:
+            - The value to use in the Origin header for the http request
+        type: str
+        required: false
+        default: http://0.0.0.0
     connection_timeout:
         description:
             - Controls the HTTP connections timeout period in seconds to jolokia API.
@@ -113,6 +119,7 @@ class JolokiaService(object):
         self.baseurl = self.module.params.get('base_url')
         self.broker = self.module.params.get('broker_name')
         self.validate_certs = self.module.params.get('validate_certs')
+        self.web_origin = self.module.params.get('web_origin')
         self.connection_timeout = self.module.params.get('connection_timeout')
         self.auth_username = self.module.params.get('auth_username')
         self.auth_password = self.module.params.get('auth_password')
@@ -130,7 +137,7 @@ class JolokiaService(object):
 
         restheaders = {}
         restheaders["Authorization"] = basic_auth_header(self.auth_username, self.auth_password)
-        restheaders['Origin'] = self.baseurl if 'localhost' not in self.baseurl else 'https://0.0.0.0'
+        restheaders["Origin"] = self.web_origin
 
         try:
             return json.loads(to_native(open_url(jolokia_url, method='GET',
@@ -164,6 +171,7 @@ def amq_argument_spec():
         auth_username=dict(type='str', aliases=['username'], required=True),
         auth_password=dict(type='str', aliases=['password'], required=True, no_log=True),
         validate_certs=dict(type='bool', default=True),
+        web_origin=dict(type='str', required=False, default="http://0.0.0.0", no_log=False),
         connection_timeout=dict(type='int', default=10)
     )
 
