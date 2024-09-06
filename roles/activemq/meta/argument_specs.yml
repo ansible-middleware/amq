@@ -164,8 +164,12 @@ argument_specs:
                 type: "str"
             activemq_cluster_discovery:
                 default: "static"
-                description: "Cluster discovery: ['jgroups' for shared file ping, 'multicast' for UDP multicast, 'static' for static declaration]"
+                description: "Cluster discovery: ['jgroups' for shared file ping, 'multicast' for UDP multicast, 'static' for static declaration, 'provided']"
                 type: "str"
+            activemq_cluster_connections:
+                description: "The list of cluster connection names from the connectors list, when activemq_cluster_discovery = provided"
+                default: []
+                type: "list"
             activemq_cluster_iface:
                 default: "default_ipv4"
                 description: "The NIC name to be used for cluster IPv4 addresses (ie. 'eth0')."
@@ -735,6 +739,14 @@ argument_specs:
                 description: >
                   With replication, if set, remote backup servers will only pair with primary servers with
                   matching group-name
+            activemq_ha_vote_on_replication_failure:
+                description: "Whether this broker should vote to remain active if replication is lost. Only valid for quorum voting."
+                default: false
+                type: 'bool'
+            activemq_ha_quorum_size:
+                description: "The quorum size used for voting after replication loss, -1 means use the current cluster size. Only valid for quorum voting"
+                default: -1
+                type: 'int'
             activemq_systemd_wait_for_log_ha_string:
                 default: 'AMQ221109\\\\|AMQ221001'
                 type: "str"

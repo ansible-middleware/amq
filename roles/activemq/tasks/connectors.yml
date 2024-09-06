@@ -30,12 +30,14 @@
 
 - name: Configure static cluster
   when:
-    - activemq_cluster_discovery == 'static'
+    - activemq_cluster_discovery == 'static' or activemq_cluster_discovery == 'provided'
     - activemq_ha_enabled
   block:
     - name: Create cluster connections configuration string
       ansible.builtin.set_fact:
         cluster_connections: "{{ lookup('template', 'cluster_connections.broker.xml.j2') }}"
+      vars:
+        connector_names: "{{ activemq_acceptors | default([]) | map(attribute='name') }}"
 
     - name: Create cluster connections in broker.xml
       middleware_automation.common.xml:

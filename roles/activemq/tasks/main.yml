@@ -25,6 +25,13 @@
     - activemq_ha_enabled
     - activemq_cluster_discovery == "static"
 
+- name: Create broker cluster node members
+  ansible.builtin.set_fact:
+    activemq_cluster_nodes: "{{ activemq_cluster_connections }}"
+  when:
+    - activemq_ha_enabled
+    - activemq_cluster_discovery == "provided"
+
 - name: Validate broker configuration
   ansible.builtin.include_tasks: validate_config.yml
   when: activemq_config_override_template == ''
