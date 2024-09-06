@@ -798,40 +798,48 @@
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_discovery</span></code></p></td>
-<td class="text-left"><p>Cluster discovery: [<code class="docutils literal notranslate"><span class="pre">jgroups</span></code> (shared file ping), <code class="docutils literal notranslate"><span class="pre">multicast</span></code> (UDP), <code class="docutils literal notranslate"><span class="pre">static</span></code> (node list)]</p></td>
+<td class="text-left"><p>Cluster discovery: [<code class="docutils literal notranslate"><span class="pre">jgroups</span></code> (shared file ping), <code class="docutils literal notranslate"><span class="pre">multicast</span></code> (UDP), <code class="docutils literal notranslate"><span class="pre">static</span></code> (node list), <code class="docutils literal notranslate"><span class="pre">provided</span></code> (use <code class="docutils literal notranslate"><span class="pre">activemq_cluster_connections</span></code>)]</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">static</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_iface</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_connections</span></code></p></td>
+<td class="text-left"><p>The list of cluster connection names from the connectors list, when <code class="docutils literal notranslate"><span class="pre">activemq_cluster_discovery</span></code> = provided</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cluster_iface</span></code></p></td>
 <td class="text-left"><p>The NIC name to be used for cluster IPv4 addresses (ie. ‘eth0’)</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">default_ipv4</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port</span></code></p></td>
 <td class="text-left"><p>Whether systemd unit should wait for activemq port before returning</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when <code class="docutils literal notranslate"><span class="pre">activemq_ha_enabled</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">activemq_shared_storage</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code></p></td>
 <td class="text-left"><p>Whether systemd unit should wait for service to be up in logs</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when <code class="docutils literal notranslate"><span class="pre">activemq_ha_enabled</span></code> and <code class="docutils literal notranslate"><span class="pre">activemq_shared_storage</span></code> are both <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_timeout</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_timeout</span></code></p></td>
 <td class="text-left"><p>How long to wait for service to be alive (seconds)</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_delay</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_delay</span></code></p></td>
 <td class="text-left"><p>Activation delay for service systemd unit</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log_ha_string</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log_ha_string</span></code></p></td>
 <td class="text-left"><p>The string to match in the logs when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code> is true and HA is enabled</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ221109|AMQ221001</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log_string</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log_string</span></code></p></td>
 <td class="text-left"><p>The string to match in the logs when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code> is true and HA is not enabled</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ221034</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port_number</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port_number</span></code></p></td>
 <td class="text-left"><p>The port number to wait for when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port</span></code> is true</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_port</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_expand_environment</span></code></p></td>
+<td class="text-left"><p>Whether or not to expand the environment in the sysconfig file. If true, environment file is sourced and the activemq process is started in a shell</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ha_allow_failback</span></code></p></td>
 <td class="text-left"><p>Whether a server will automatically stop when another places a request to take over its place</p></td>
@@ -857,9 +865,13 @@
 <td class="text-left"><p>With replication, if set, remote backup servers will only pair with primary servers with matching group-name</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_expand_environment</span></code></p></td>
-<td class="text-left"><p>Whether or not to expand the environment in the sysconfig file. If true, environment file is sourced and the activemq process is started in a shell</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ha_vote_on_replication_failure</span></code></p></td>
+<td class="text-left"><p>Whether this broker should vote to remain active if replication is lost. Only valid for quorum voting.</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_ha_quorum_size</span></code></p></td>
+<td class="text-left"><p>The quorum size used for voting after replication loss, -1 means use the current cluster size. Only valid for quorum voting</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-1</span></code></p></td>
 </tr>
 </tbody>
 </table>

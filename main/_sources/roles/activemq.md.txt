@@ -287,7 +287,8 @@ Sample divert:
 |`activemq_ha_role` | Instance role for high availability | `live-only` |
 |`activemq_replication`| Enables replication | `False` |
 |`activemq_replicated`| Designate instance as replicated node | `False` |
-|`activemq_cluster_discovery` | Cluster discovery: [`jgroups` (shared file ping), `multicast` (UDP), `static` (node list)] | `static` |
+|`activemq_cluster_discovery` | Cluster discovery: [`jgroups` (shared file ping), `multicast` (UDP), `static` (node list), `provided` (use `activemq_cluster_connections`)] | `static` |
+|`activemq_cluster_connections`| The list of cluster connection names from the connectors list, when `activemq_cluster_discovery` = provided | `[]` |
 |`activemq_cluster_iface` | The NIC name to be used for cluster IPv4 addresses (ie. 'eth0') | `default_ipv4` |
 |`activemq_systemd_wait_for_port` | Whether systemd unit should wait for activemq port before returning | `True` when `activemq_ha_enabled` is `True` and `activemq_shared_storage` is `False` |
 |`activemq_systemd_wait_for_log` | Whether systemd unit should wait for service to be up in logs | `True` when `activemq_ha_enabled` and `activemq_shared_storage` are both `True` |
@@ -296,13 +297,15 @@ Sample divert:
 |`activemq_systemd_wait_for_log_ha_string` | The string to match in the logs when `activemq_systemd_wait_for_log` is true and HA is enabled | `AMQ221109\|AMQ221001` |
 |`activemq_systemd_wait_for_log_string` | The string to match in the logs when `activemq_systemd_wait_for_log` is true and HA is not enabled | `AMQ221034` |
 |`activemq_systemd_wait_for_port_number`| The port number to wait for when `activemq_systemd_wait_for_port` is true | `{{ activemq_port }}` |
+|`activemq_systemd_expand_environment` | Whether or not to expand the environment in the sysconfig file. If true, environment file is sourced and the activemq process is started in a shell | `false` |
 |`activemq_ha_allow_failback`| Whether a server will automatically stop when another places a request to take over its place |`true` |
 |`activemq_ha_failover_on_shutdown`| Will this backup server become active on a normal server shutdown  | `true` |
 |`activemq_ha_restart_backup`| Will this server, if a backup, restart once it has been stopped because of failback or scaling down | `false` |
 |`activemq_ha_check_for_active_server`| Whether to check the cluster for a live server using our own server ID when starting up. This option is only necessary for performing 'fail-back' on replicating servers | `false` |
 |`activemq_ha_replication_cluster_name`| Name of the cluster configuration to use for replication. This setting is only necessary in case you configure multiple cluster connections | `""` |
 |`activemq_ha_replication_group_name`| With replication, if set, remote backup servers will only pair with primary servers with matching group-name | `""` |
-|`activemq_systemd_expand_environment` | Whether or not to expand the environment in the sysconfig file. If true, environment file is sourced and the activemq process is started in a shell | `false` |
+|`activemq_ha_vote_on_replication_failure`| Whether this broker should vote to remain active if replication is lost. Only valid for quorum voting. | `false` |
+|`activemq_ha_quorum_size`| The quorum size used for voting after replication loss, -1 means use the current cluster size. Only valid for quorum voting | `-1` |
 
 
 #### Multi-site fault-tolerance (AMQP broker connections)
