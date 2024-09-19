@@ -12,6 +12,11 @@ Minor Changes
 
 - New parameter value to explicitly list ``cluster-connections`` `#168 <https://github.com/ansible-middleware/amq/pull/168>`_
 
+Bugfixes
+--------
+
+- Prevent some configs to generate non-unique ``connector-ref`` in ``cluster-connections`` `#170 <https://github.com/ansible-middleware/amq/pull/170>`_
+
 v2.2.1
 ======
 
