@@ -45,6 +45,8 @@
       - name: DLQ
         anycast:
           - name: DLQ
+            parameters:
+              durable: True
       - name: ExpiryQueue
         anycast:
           - name: ExpiryQueue
@@ -54,6 +56,9 @@
       - name: b.test
         anycast:
           - name: b.test
+            parameters:
+              max_consumers: 1
+              delay_before_dispatch: 3
     activemq_diverts:
       - name: TESTDIVERT
         address: queue.in
