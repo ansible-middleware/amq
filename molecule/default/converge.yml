@@ -70,6 +70,8 @@
       - name: DLQ
         anycast:
           - name: DLQ
+            parameters:
+              durable: True
       - name: ExpiryQueue
         anycast:
           - name: ExpiryQueue
@@ -78,6 +80,9 @@
       - name: client123.pubsub
         multicast:
           - name: client123.pubsub.foo
+            parameters:
+              max_consumers: 1
+              delay_before_dispatch: 3
     activemq_broker_plugins:
       - class_name: org.apache.activemq.artemis.core.server.plugin.impl.LoggingActiveMQServerPlugin
         properties:
