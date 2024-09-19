@@ -1,18 +1,16 @@
          <cluster-connection name="CL{{ activemq_instance_name }}">
-{% if activemq_cluster_discovery == 'static' %}
-            <connector-ref>{% for param in activemq_connectors %}{% if param.address == 'localhost' %}{{ param.name }}{% endif %}{% endfor %}</connector-ref>
-{% elif activemq_cluster_discovery == 'provided' %}
-{% for param in merged_connectors %}
-{% if param.name in connector_names %}
-            <connector-ref>{{ param.name }}</connector-ref>
+{% if activemq_cluster_discovery == 'static' or activemq_cluster_discovery == 'provided' %}
+{% if merged_connector_names | intersect(acceptor_names) | default([]) | length > 0 %}
+            <connector-ref>{{ merged_connector_names | intersect(acceptor_names) | first }}</connector-ref>
+{% elif activemq_cluster_discovery == 'static' %}
+            <connector-ref>{{ (merged_connectors | first).name }}</connector-ref>
 {% endif %}
-{% endfor %}
 {% endif %}
             <message-load-balancing>{{ activemq_cluster_lb_policy }}</message-load-balancing>
             <max-hops>{{ activemq_cluster_maxhops }}</max-hops>
             <static-connectors>
 {% for param in merged_connectors %}
-{% if param.address != 'localhost' and not param.name in connector_names %}
+{% if param.address != 'localhost' and not param.name in acceptor_names %}
                <connector-ref>{{ param.name }}</connector-ref>
 {% endif %}
 {% endfor %}

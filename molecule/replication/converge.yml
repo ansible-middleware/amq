@@ -21,7 +21,7 @@
       password: amqbrokerpass
       roles: [ amq ]
     activemq_acceptors:
-      - name: artemis
+      - name: "{{ inventory_hostname }}"
         bind_address: 0.0.0.0
         bind_port: "{{ activemq_port }}"
         parameters:
@@ -31,9 +31,6 @@
           useEpoll: true
           sslEnabled: false
     activemq_connectors:
-      - name: artemis
-        address: "{{ activemq_host }}"
-        port: "{{ activemq_port }}"
       - name: instance1
         address: instance1
       - name: instance2
