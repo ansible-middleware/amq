@@ -9,7 +9,6 @@
 {% if not default_connector | default(false) and activemq_cluster_discovery == 'static' %}
 {% set param = merged_connectors | first %}
             <connector-ref>{{ param.name }}</connector-ref>
-{% endfor %}
 {% endif %}
 {% endif %}
             <message-load-balancing>{{ activemq_cluster_lb_policy }}</message-load-balancing>
