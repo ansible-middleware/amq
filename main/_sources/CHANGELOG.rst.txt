@@ -11,6 +11,7 @@ Minor Changes
 -------------
 
 - New parameter value to explicitly list ``cluster-connections`` `#168 <https://github.com/ansible-middleware/amq/pull/168>`_
+- Parameters for ``activemq_addresses`` as a dictionary `#171 <https://github.com/ansible-middleware/amq/pull/171>`_
 
 Bugfixes
 --------
