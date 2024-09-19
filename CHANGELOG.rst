@@ -4,6 +4,20 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.2.2
+======
+
+Minor Changes
+-------------
+
+- New parameter value to explicitly list ``cluster-connections`` `#168 <https://github.com/ansible-middleware/amq/pull/168>`_
+- Parameters for ``activemq_addresses`` as a dictionary `#171 <https://github.com/ansible-middleware/amq/pull/171>`_
+
+Bugfixes
+--------
+
+- Prevent some configs to generate non-unique ``connector-ref`` in ``cluster-connections`` `#170 <https://github.com/ansible-middleware/amq/pull/170>`_
+
 v2.2.1
 ======
 

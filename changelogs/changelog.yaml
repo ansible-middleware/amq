@@ -516,3 +516,22 @@ releases:
     - 166.yaml
     - 167.yaml
     release_date: '2024-09-05'
+  2.2.2:
+    changes:
+      bugfixes:
+      - 'Prevent some configs to generate non-unique ``connector-ref`` in ``cluster-connections``
+        `#170 <https://github.com/ansible-middleware/amq/pull/170>`_
+
+        '
+      minor_changes:
+      - 'New parameter value to explicitly list ``cluster-connections`` `#168 <https://github.com/ansible-middleware/amq/pull/168>`_
+
+        '
+      - 'Parameters for ``activemq_addresses`` as a dictionary `#171 <https://github.com/ansible-middleware/amq/pull/171>`_
+
+        '
+    fragments:
+    - 168.yaml
+    - 170.yaml
+    - 171.yaml
+    release_date: '2024-09-19'
