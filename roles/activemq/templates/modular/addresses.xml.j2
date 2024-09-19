@@ -2,21 +2,25 @@
 <addresses xmlns="urn:activemq:core">
 {% for address in activemq_addresses %}
     <address name="{{ address.name }}">
-{% if address['anycast'] is defined %}         <anycast>
+{% if address['anycast'] is defined %}
+        <anycast>
 {% for queue in address['anycast'] %}
-        <queue name="{{ queue.name }}"
-{% for param in lookup('ansible.builtin.dict', address.parameters, wantlist=true) %}
+          <queue name="{{ queue.name }}"
+{% for param in lookup('ansible.builtin.dict', queue.parameters, wantlist=true) %}
 {% if param.key not in ['durable','filter'] %}
             {{ param.key | replace('_','-') }}="{% if param.value is number %}{{ param.value | string | lower }}{% else %}{{ param.value }}{% endif %} }}"
 {% endif %}
 {% endfor %}
 {% if queue['filter'] is defined %}           <filter string="{{ queue['filter'] }}"/>{% endif %}
 {% if queue['durable'] is defined %}           <durable>{{ queue['durable'] | lower }}</durable>{% endif %}
-        </queue>
-{% endfor %}         </anycast>
+          </queue>
+{% endfor %}
+        </anycast>
 {% endif %}
 {% if address['multicast'] is defined and address['multicast'] %}
         <multicast>
+{% for queue in address['multicast'] %}
+          <queue name="{{ queue.name }}"
 {% for param in lookup('ansible.builtin.dict', address.parameters, wantlist=true) %}
 {% if param.key not in ['durable','filter'] %}
             {{ param.key | replace('_','-') }}="{% if param.value is number %}{{ param.value | string | lower }}{% else %}{{ param.value }}{% endif %} }}"
@@ -24,8 +28,9 @@
 {% endfor %}
 {% if queue['filter'] is defined %}           <filter string="{{ queue['filter'] }}"/>{% endif %}
 {% if queue['durable'] is defined %}           <durable>{{ queue['durable'] | lower }}</durable>{% endif %}
-        </queue>
-{% endfor %}         </multicast>
+          </queue>
+{% endfor %}
+        </multicast>
 {% elif address['multicast'] is defined %}
         <multicast />
 {% endif %}

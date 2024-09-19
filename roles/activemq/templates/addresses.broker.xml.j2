@@ -3,7 +3,7 @@
          <anycast>
 {% for queue in address['anycast'] %}
            <queue name="{{ queue.name }}"
-{% for param in lookup('ansible.builtin.dict', address.parameters, wantlist=true) %}
+{% for param in lookup('ansible.builtin.dict', queue.parameters, wantlist=true) %}
 {% if param.key not in ['durable','filter'] %}
             {{ param.key | replace('_','-') }}="{% if param.value is number %}{{ param.value | string | lower }}{% else %}{{ param.value }}{% endif %} }}"
 {% endif %}
@@ -18,7 +18,7 @@
          <multicast>
 {% for queue in address['multicast'] %}
            <queue name="{{ queue.name }}"
-{% for param in lookup('ansible.builtin.dict', address.parameters, wantlist=true) %}
+{% for param in lookup('ansible.builtin.dict', queue.parameters, wantlist=true) %}
 {% if param.key not in ['durable','filter'] %}
             {{ param.key | replace('_','-') }}="{% if param.value is number %}{{ param.value | string | lower }}{% else %}{{ param.value }}{% endif %} }}"
 {% endif %}
