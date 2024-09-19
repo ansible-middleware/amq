@@ -1,28 +1,35 @@
        <address name="{{ address.name }}">
-{% if address['anycast'] is defined %}         <anycast>
+{% if address['anycast'] is defined %}
+         <anycast>
 {% for queue in address['anycast'] %}
-         <queue name="{{ queue.name }}"
-                max-consumers="{{ queue['max_consumers'] | default('-1') }}"
-                exclusive="{{ queue['exclusive'] | default('false') | lower }}"
-                consumers-before-dispatch="{{ queue['consumers_before_dispatch'] | default('0') }}"
-                delay-before-dispatch="{{ queue['delay_before_dispatch'] | default('-1') }}">
+           <queue name="{{ queue.name }}"
+{% for param in lookup('ansible.builtin.dict', queue.parameters | d({}), wantlist=true) %}
+{% if param.key not in ['durable','filter'] %}
+            {{ param.key | replace('_','-') }}="{% if param.value is number %}{{ param.value | string | lower }}{% else %}{{ param.value }}{% endif %}"
+{% endif %}
+{% endfor %}
+           >
 {% if queue['filter'] is defined %}           <filter string="{{ queue['filter'] }}"/>{% endif %}
-           <durable>{{ queue['durable'] | default('true') | lower }}</durable>
-         </queue>
-{% endfor %}         </anycast>
+{% if queue['durable'] is defined %}           <durable>{{ queue['durable'] | lower }}</durable>{% endif %}
+           </queue>
+{% endfor %}
+         </anycast>
 {% endif %}
 {% if address['multicast'] is defined and address['multicast'] %}
          <multicast>
 {% for queue in address['multicast'] %}
-         <queue name="{{ queue.name }}"
-                max-consumers="{{ queue['max_consumers'] | default('-1') }}"
-                exclusive="{{ queue['exclusive'] | default('false') | lower }}"
-                consumers-before-dispatch="{{ queue['consumers_before_dispatch'] | default('0') }}"
-                delay-before-dispatch="{{ queue['delay_before_dispatch'] | default('-1') }}">
+           <queue name="{{ queue.name }}"
+{% for param in lookup('ansible.builtin.dict', queue.parameters | d({}), wantlist=true) %}
+{% if param.key not in ['durable','filter'] %}
+            {{ param.key | replace('_','-') }}="{% if param.value is number %}{{ param.value | string | lower }}{% else %}{{ param.value }}{% endif %}"
+{% endif %}
+{% endfor %}
+           >
 {% if queue['filter'] is defined %}           <filter string="{{ queue['filter'] }}"/>{% endif %}
-           <durable>{{ queue['durable'] | default('true') | lower }}</durable>
-         </queue>
-{% endfor %}         </multicast>
+{% if queue['durable'] is defined %}           <durable>{{ queue['durable'] | lower }}</durable>{% endif %}
+           </queue>
+{% endfor %}
+         </multicast>
 {% elif address['multicast'] is defined %}
          <multicast />
 {% endif %}
