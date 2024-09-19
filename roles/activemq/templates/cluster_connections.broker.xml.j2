@@ -1,14 +1,9 @@
          <cluster-connection name="CL{{ activemq_instance_name }}">
 {% if activemq_cluster_discovery == 'static' or activemq_cluster_discovery == 'provided' %}
-{% for param in merged_connectors %}
-{% if param.name in acceptor_names %}
-{% set default_connector = true %}
-            <connector-ref>{{ param.name }}</connector-ref>
-{% endif %}
-{% endfor %}
-{% if not default_connector | default(false) and activemq_cluster_discovery == 'static' %}
-{% set param = merged_connectors | first %}
-            <connector-ref>{{ param.name }}</connector-ref>
+{% if merged_connector_names | intersect(acceptor_names) | default([]) | length > 0 %}
+            <connector-ref>{{ merged_connector_names | intersect(acceptor_names) | first }}</connector-ref>
+{% elif activemq_cluster_discovery == 'static' %}
+            <connector-ref>{{ (merged_connectors | first).name }}</connector-ref>
 {% endif %}
 {% endif %}
             <message-load-balancing>{{ activemq_cluster_lb_policy }}</message-load-balancing>
