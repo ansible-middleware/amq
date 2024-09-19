@@ -6,11 +6,12 @@
         <anycast>
 {% for queue in address['anycast'] %}
           <queue name="{{ queue.name }}"
-{% for param in lookup('ansible.builtin.dict', queue.parameters, wantlist=true) %}
+{% for param in lookup('ansible.builtin.dict', queue.parameters | d({}), wantlist=true) %}
 {% if param.key not in ['durable','filter'] %}
-            {{ param.key | replace('_','-') }}="{% if param.value is number %}{{ param.value | string | lower }}{% else %}{{ param.value }}{% endif %} }}"
+            {{ param.key | replace('_','-') }}="{% if param.value is number %}{{ param.value | string | lower }}{% else %}{{ param.value }}{% endif %}"
 {% endif %}
 {% endfor %}
+           >
 {% if queue['filter'] is defined %}           <filter string="{{ queue['filter'] }}"/>{% endif %}
 {% if queue['durable'] is defined %}           <durable>{{ queue['durable'] | lower }}</durable>{% endif %}
           </queue>
@@ -21,11 +22,12 @@
         <multicast>
 {% for queue in address['multicast'] %}
           <queue name="{{ queue.name }}"
-{% for param in lookup('ansible.builtin.dict', address.parameters, wantlist=true) %}
+{% for param in lookup('ansible.builtin.dict', address.parameters | d({}), wantlist=true) %}
 {% if param.key not in ['durable','filter'] %}
-            {{ param.key | replace('_','-') }}="{% if param.value is number %}{{ param.value | string | lower }}{% else %}{{ param.value }}{% endif %} }}"
+            {{ param.key | replace('_','-') }}="{% if param.value is number %}{{ param.value | string | lower }}{% else %}{{ param.value }}{% endif %}"
 {% endif %}
 {% endfor %}
+           >
 {% if queue['filter'] is defined %}           <filter string="{{ queue['filter'] }}"/>{% endif %}
 {% if queue['durable'] is defined %}           <durable>{{ queue['durable'] | lower }}</durable>{% endif %}
           </queue>
