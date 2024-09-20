@@ -535,3 +535,13 @@ releases:
     - 170.yaml
     - 171.yaml
     release_date: '2024-09-19'
+  2.2.3:
+    changes:
+      bugfixes:
+      - 'Check broadcast/discovery groups absent with ``provided`` discovery `#174
+        <https://github.com/ansible-middleware/amq/pull/174>`_
+
+        '
+    fragments:
+    - 174.yaml
+    release_date: '2024-09-20'

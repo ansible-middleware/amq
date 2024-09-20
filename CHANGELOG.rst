@@ -4,6 +4,14 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.2.3
+======
+
+Bugfixes
+--------
+
+- Check broadcast/discovery groups absent with ``provided`` discovery `#174 <https://github.com/ansible-middleware/amq/pull/174>`_
+
 v2.2.2
 ======
 
