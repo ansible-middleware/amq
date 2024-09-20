@@ -13,6 +13,15 @@
     broker_connections: []
     masked_users: []
 
+- name: "Ensure target OS is supported."
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family == "RedHat"
+    quiet: True
+    fail_msg: "This collection only supports OS from the RedHat family"
+  when:
+    - ansible_os_family is defined
+
 - name: Validate credentials
   ansible.builtin.assert:
     that: >
