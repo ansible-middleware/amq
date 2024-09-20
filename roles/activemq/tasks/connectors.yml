@@ -29,6 +29,7 @@
     - restart amq_broker
 
 - name: Configure cluster connections
+  become: true
   when:
     - activemq_cluster_discovery == 'static' or activemq_cluster_discovery == 'provided'
     - activemq_ha_enabled

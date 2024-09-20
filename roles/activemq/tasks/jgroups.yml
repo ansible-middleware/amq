@@ -7,6 +7,7 @@
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
+  become: true
 
 - name: Remove broadcast groups
   middleware_automation.common.xml:
@@ -16,3 +17,4 @@
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
+  become: true
