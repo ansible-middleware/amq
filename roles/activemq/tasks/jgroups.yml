@@ -1,8 +1,17 @@
 ---
 - name: Remove discovery groups
   middleware_automation.common.xml:
-    path: "{{ activemq.home }}/etc/broker.xml"
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:discovery-groups
+    state: absent
+    namespaces:
+      conf: urn:activemq
+      core: urn:activemq:core
+
+- name: Remove broadcast groups
+  middleware_automation.common.xml:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
+    xpath: /conf:configuration/core:core/core:broadcast-groups
     state: absent
     namespaces:
       conf: urn:activemq
