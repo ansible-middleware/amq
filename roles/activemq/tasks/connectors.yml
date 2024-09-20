@@ -33,6 +33,24 @@
     - activemq_cluster_discovery == 'static' or activemq_cluster_discovery == 'provided'
     - activemq_ha_enabled
   block:
+    - name: Remove discovery groups
+      middleware_automation.common.xml:
+        path: "{{ activemq.home }}/etc/broker.xml"
+        xpath: /conf:configuration/core:core/core:discovery-groups
+        state: absent
+        namespaces:
+          conf: urn:activemq
+          core: urn:activemq:core
+
+    - name: Remove broadcast groups
+      middleware_automation.common.xml:
+        path: "{{ activemq.home }}/etc/broker.xml"
+        xpath: /conf:configuration/core:core/core:broadcast-groups
+        state: absent
+        namespaces:
+          conf: urn:activemq
+          core: urn:activemq:core
+
     - name: Create cluster connections configuration string
       ansible.builtin.set_fact:
         cluster_connections: "{{ lookup('template', 'cluster_connections.broker.xml.j2') }}"
