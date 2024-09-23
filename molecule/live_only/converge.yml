@@ -12,8 +12,8 @@
     activemq_replication: false
     activemq_scale_down_enabled: true
     activemq_configure_firewalld: false
-    activemq_systemd_wait_for_log: true
-    activemq_systemd_wait_for_port_number: 8161
+    activemq_systemd_wait_for_log: false
+    activemq_systemd_wait_for_port: true
     activemq_users:
     - user: amq
       password: amqbrokerpass

@@ -14,7 +14,7 @@
       - "--max-hops {{ activemq_cluster_maxhops }}"
       - "--message-load-balancing {{ activemq_cluster_lb_policy }}"
       - "--failover-on-shutdown"
-  when: activemq_ha_enabled
+  when: activemq_ha_enabled or activemq_cluster_enabled
   no_log: true
 
 - name: Enable static clustering
@@ -23,7 +23,7 @@
       - "{{ activemq_options | join(' ') }}"
       - "--staticCluster {{ activemq_cluster_nodes | map(attribute='value') | join(',') }}"
   when:
-    - activemq_ha_enabled
+    - activemq_ha_enabled or activemq_cluster_enabled
     - activemq_cluster_discovery in ["static", "provided"]
 
 - name: Enable security
