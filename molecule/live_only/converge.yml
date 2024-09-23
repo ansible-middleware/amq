@@ -34,7 +34,7 @@
         address: instance1
       - name: instance2
         address: instance2
-    activemq_cluster_connectors:
+    activemq_cluster_connections:
       - name: instance1
       - name: instance2
     activemq_addresses:

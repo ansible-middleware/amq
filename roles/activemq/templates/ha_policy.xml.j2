@@ -2,11 +2,15 @@
         <live-only>
             <scale-down>
                 <enabled>{{ activemq_scale_down_enabled | lower }}</enabled>
+{%  if activemq_connectors | length > 0 %}
+                <connectors>
 {% for param in activemq_connectors %}
 {% if param.name != 'artemis' %}
-            <connector-ref>{{ param.name }}</connector-ref>
+                    <connector-ref>{{ param.name }}</connector-ref>
 {% endif %}
 {% endfor %}
+                </connectors>
+{% endif %}
             </scale-down>
         </live-only>
 {% endif %}

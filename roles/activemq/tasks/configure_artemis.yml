@@ -24,7 +24,8 @@
       - "--staticCluster {{ activemq_cluster_nodes | map(attribute='value') | join(',') }}"
   when:
     - activemq_ha_enabled or activemq_cluster_enabled
-    - activemq_cluster_discovery in ["static", "provided"]
+    - activemq_cluster_discovery in ["static"]
+    - activemq_cluster_nodes | length > 0
 
 - name: Enable security
   ansible.builtin.set_fact:
