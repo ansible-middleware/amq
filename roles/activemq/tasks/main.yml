@@ -29,7 +29,7 @@
   ansible.builtin.set_fact:
     activemq_cluster_nodes: "{{ activemq_cluster_connections }}"
   when:
-    - activemq_ha_enabled
+    - activemq_ha_enabled or activemq_cluster_enabled
     - activemq_cluster_discovery == "provided"
 
 - name: Validate broker configuration

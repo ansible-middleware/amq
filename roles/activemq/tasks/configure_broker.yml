@@ -1,6 +1,6 @@
 ---
 - name: Configure ha policy
-  when: activemq_ha_enabled
+  when: activemq_ha_enabled or activemq_cluster_enabled
   block:
     - name: "Ensure ha-policy element exists"
       middleware_automation.common.xml:
