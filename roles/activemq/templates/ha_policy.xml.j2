@@ -1,6 +1,7 @@
-{% if activemq_ha_enabled and not activemq_replication and not activemq_shared_storage %}
+{% if (activemq_ha_enabled or activemq_cluster_enabled) and not activemq_replication and not activemq_shared_storage %}
         <live-only>
             <scale-down>
+                <enabled>{{ activemq_scale_down_enabled | lower %}</enabled>
 {% for param in activemq_connectors %}
 {% if param.name != 'artemis' %}
             <connector-ref>{{ param.name }}</connector-ref>

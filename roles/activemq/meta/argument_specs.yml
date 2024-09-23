@@ -805,6 +805,14 @@ argument_specs:
                   Whether or not to expand the environment in the sysconfig file. If true, environment file is sourced and the \
                   activemq process is started in a shell
                 type: 'str'
+            activemq_scale_down_enabled:
+                description: "Whether or not clustering supports scale-down"
+                default: false
+                type: 'bool'
+            activemq_cluster_enabled:
+                description: "Whether or not to enable clustering (cluster-connections)"
+                default: "{{ activemq_ha_enabled }}"
+                type: 'bool'
     systemd:
         options:
             activemq_version:
