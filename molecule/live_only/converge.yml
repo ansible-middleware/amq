@@ -14,6 +14,7 @@
     activemq_configure_firewalld: false
     activemq_systemd_wait_for_log: false
     activemq_systemd_wait_for_port: true
+    activemq_cluster_discovery: "provided"
     activemq_users:
     - user: amq
       password: amqbrokerpass
@@ -33,6 +34,9 @@
         address: instance1
       - name: instance2
         address: instance2
+    activemq_cluster_connectors:
+      - name: instance1
+      - name: instance2
     activemq_addresses:
       - name: queue.in
         anycast:
