@@ -65,7 +65,8 @@ activemq_replication: false
 activemq_replicated: false
 ## cluster discovery: >
 # 'jgroups' for shared file ping, 'multicast' for UDP multicast
-# 'static' for static declaration + ansible_play_hosts, 'provided' for using activemq_cluster_connections only
+# 'static' for static declaration + ansible_play_hosts
+# 'provided' for using activemq_cluster_connections only (for federation keep the list empty)
 activemq_cluster_discovery: static
 activemq_cluster_connections: []
 activemq_scale_down_enabled: false
