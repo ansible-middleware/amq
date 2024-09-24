@@ -280,10 +280,12 @@ Sample divert:
 | Variable | Description | Default |
 |:---------|:------------|:--------|
 |`activemq_ha_enabled`| Whether to enable clustering | `False` |
+|`activemq_cluster_enabled`| Whether or not to enable clustering (cluster-connections) | `{{ activemq_ha_enabled }}` |
 |`activemq_cluster_user`| Cluster username | `amq-cluster-user` |
 |`activemq_cluster_pass`| Cluster user password | `amq-cluster-pass` |
 |`activemq_cluster_maxhops`| Cluster max hops | `1` |
 |`activemq_cluster_lb_policy`| Policy for cluster load balancing | `ON_DEMAND` |
+|`activemq_scale_down_enabled` | Whether or not clustering supports scale-down" | `false` |
 |`activemq_ha_role` | Instance role for high availability | `live-only` |
 |`activemq_replication`| Enables replication | `False` |
 |`activemq_replicated`| Designate instance as replicated node | `False` |
