@@ -53,8 +53,9 @@ activemq_service_name: activemq
 activemq_service_override_template: ''
 activemq_modular_configuration: false
 
-### Enable configuration for high availability
+### Enable configuration for clustering / high availability
 activemq_ha_enabled: false
+activemq_cluster_enabled: "{{ activemq_ha_enabled }}"
 activemq_cluster_user: amq-cluster-user
 activemq_cluster_pass: amq-cluster-pass
 activemq_cluster_maxhops: 1
@@ -67,6 +68,7 @@ activemq_replicated: false
 # 'static' for static declaration + ansible_play_hosts, 'provided' for using activemq_cluster_connections only
 activemq_cluster_discovery: static
 activemq_cluster_connections: []
+activemq_scale_down_enabled: false
 activemq_systemd_wait_for_port: "{{ activemq_ha_enabled and not activemq_shared_storage }}"
 activemq_systemd_wait_for_log: "{{ activemq_ha_enabled and activemq_shared_storage }}"
 activemq_systemd_wait_for_timeout: 60

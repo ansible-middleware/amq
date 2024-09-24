@@ -32,7 +32,7 @@
   become: true
   when:
     - activemq_cluster_discovery == 'static' or activemq_cluster_discovery == 'provided'
-    - activemq_ha_enabled
+    - activemq_ha_enabled or activemq_cluster_enabled
   block:
     - name: Remove discovery groups
       middleware_automation.common.xml:

@@ -22,14 +22,14 @@
     host_address: "{{ hostvars[item][host_iface]['address'] | default(hostvars[item][host_iface]['ipv4']['address'] | default(activemq.instance_name)) }}"
     host_port: "{{ (((activemq_port | int + activemq_ports_offset | int) | abs) | string) }}"
   when:
-    - activemq_ha_enabled
+    - activemq_ha_enabled or activemq_cluster_enabled
     - activemq_cluster_discovery == "static"
 
 - name: Create broker cluster node members
   ansible.builtin.set_fact:
     activemq_cluster_nodes: "{{ activemq_cluster_connections }}"
   when:
-    - activemq_ha_enabled
+    - activemq_ha_enabled or activemq_cluster_enabled
     - activemq_cluster_discovery == "provided"
 
 - name: Validate broker configuration
