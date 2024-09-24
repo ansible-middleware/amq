@@ -4,8 +4,16 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
-v2.2.4-devel
+v2.2.5-devel
 ============
+
+Bugfixes
+--------
+
+- Fix invalid ``broker-connections`` when boolean options are used `#179 <https://github.com/ansible-middleware/amq/pull/179>`_
+
+v2.2.4
+======
 
 Bugfixes
 --------
