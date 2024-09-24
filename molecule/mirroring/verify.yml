@@ -1,0 +1,71 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+
+    - name: Populate activemq facts
+      middleware_automation.amq.activemq_facts:
+        base_url: http://localhost:8161
+        auth_username: amq-broker
+        auth_password: amq-broker
+        validate_certs: false
+
+    - name: Check if amq-broker service is started
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.services["amq-broker.service"]["state"] == "running"
+          - ansible_facts.services["amq-broker.service"]["status"] == "enabled"
+
+    - name: Read content of instance1 logs
+      ansible.builtin.slurp:
+        src: /var/log/activemq/amq-broker/artemis.log
+      register: slurped_log_instance1
+      delegate_to: instance1
+      run_once: true
+      no_log: true
+
+    - name: Read content of instance2 logs
+      ansible.builtin.slurp:
+        src: /var/log/activemq/amq-broker/artemis.log
+      register: slurped_log_instance2
+      delegate_to: instance2
+      run_once: true
+      no_log: true
+
+    - name: Check cluster status
+      run_once: true
+      block:
+        - name: Check live-only on instance1
+          ansible.builtin.assert:
+            that:
+              - "'live Message Broker is starting' in slurped_log_instance1.content|b64decode or 'Primary message broker is starting' in slurped_log_instance1.content|b64decode"
+              - "'Connected on Server AMQP Connection DC2 on instance2:61616' in slurped_log_instance1.content|b64decode"
+            quiet: true
+        - name: Check live-only on instance2
+          ansible.builtin.assert:
+            that:
+              - "'live message broker is starting' in slurped_log_instance2.content|b64decode or 'Primary message broker is starting' in slurped_log_instance2.content|b64decode"
+              - "'Connected on Server AMQP Connection DC1 on instance1:61616' in slurped_log_instance2.content|b64decode"
+            quiet: true
+
+    - name: Check cluster status via jolokia facts (master)
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.activemq.Active == true
+          - ansible_facts.activemq.Backup == false
+          - ansible_facts.activemq.Clustered == false
+          - ansible_facts.activemq.SharedStore == false
+          - ansible_facts.activemq.HAPolicy == "Primary Only"
+      when: inventory_hostname == 'instance1'
+
+    - name: Check cluster status via jolokia facts
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.activemq.Active == true
+          - ansible_facts.activemq.Backup == false
+          - ansible_facts.activemq.Clustered == false
+          - ansible_facts.activemq.SharedStore == false
+          - ansible_facts.activemq.HAPolicy == "Primary Only"
+      when: inventory_hostname == 'instance2'
