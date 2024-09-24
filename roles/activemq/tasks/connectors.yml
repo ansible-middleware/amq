@@ -11,7 +11,19 @@
   loop_control:
     loop_var: connector
     label: "{{ connector.name }}"
-  no_log: true
+  no_log: false
+
+- name: Ensure connectors element exists in broker.xml
+  middleware_automation.common.xml:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
+    xpath: /conf:configuration/core:core/core:connectors
+    input_type: xml
+    state: present
+    namespaces:
+      conf: urn:activemq
+      core: urn:activemq:core
+    pretty_print: true
+  become: true
 
 - name: Create connector configuration in broker.xml
   middleware_automation.common.xml:
@@ -24,7 +36,7 @@
       core: urn:activemq:core
     pretty_print: true
   become: true
-  no_log: true
+  no_log: false
   notify:
     - restart amq_broker
 

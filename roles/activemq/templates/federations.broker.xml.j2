@@ -15,10 +15,10 @@
             {% if upstream.parameters.check_period is defined %}<check-period>{{ upstream.parameters.check_period }}</check-period>{% endif %}
             {% if upstream.parameters.call_failover_timeout is defined %}<call-failover-timeout>{{ upstream.parameters.call_failover_timeout }}</call-failover-timeout>{% endif %}
             {% endif %}
-            {% if upstream["static_connectors"] is defined and upstream["static_connectors"] |length > 0 %}
+            {% if upstream["static_connectors"] is defined and upstream["static_connectors"] | length > 0 %}
             <static-connectors>
                 {% for connector_ref in  upstream["static_connectors"] %}
-                <connector-ref>"{{ connector_ref }}"</connector-ref>
+                <connector-ref>{{ connector_ref }}</connector-ref>
                 {% endfor %}
             </static-connectors>
             {% endif %}
@@ -52,7 +52,7 @@
             {% if downstream["static_connectors"] is defined and downstream["static_connectors"] |length > 0 %}
             <static-connectors>
                 {% for connector_ref in  downstream["static_connectors"] %}
-                    <connector-ref>"{{ connector_ref }}"</connector-ref>
+                    <connector-ref>{{ connector_ref }}</connector-ref>
                 {% endfor %}
             </static-connectors>
             {% endif %}
@@ -73,10 +73,10 @@
         {% if federation["queue_policies"] is defined and federation["queue_policies"] |length > 0 %}
         {% for policy in federation["queue_policies"] %}
         <queue-policy name="{{ policy.name }}" {% if policy.parameters is defined %}{% for param in lookup('ansible.builtin.dict', policy.parameters, wantlist=true) %} {{ param.key | replace('_','-') }}="{{ param.value }}"{% endfor %}{% endif %}>
-            {% if policy.includes is defined and policy.includes |length > 0 %}{% for include in policy.includes  %}
+            {% if policy.includes is defined and policy.includes | length > 0 %}{% for include in policy.includes  %}
             <include queue-match="{{include.queue_match}}" address-match="{{include.address_match}}"/>
             {% endfor %}{% endif %}
-            {% if policy.excludes is defined and policy.excludes |length > 0 %}{% for exclude in policy.excludes  %}
+            {% if policy.excludes is defined and policy.excludes | length > 0 %}{% for exclude in policy.excludes  %}
             <exclude queue-match="{{exclude.queue_match}}" address-match="{{exclude.address_match}}"/>
             {% endfor %}{% endif %}
         </queue-policy>
@@ -84,15 +84,15 @@
         {% if federation["address_policies"] is defined and federation["address_policies"] |length > 0 %}
         {% for policy in federation["address_policies"] %}
         <address-policy name="{{ policy.name }}" {% if policy.parameters is defined %}{% for param in lookup('ansible.builtin.dict', policy.parameters, wantlist=true) %} {{ param.key | replace('_','-') }}="{{ param.value }}"{% endfor %}{% endif %}>
-            {% if policy.includes is defined and policy.includes |length > 0 %}{% for include in policy.includes  %}
+            {% if policy.includes is defined and policy.includes | length > 0 %}{% for include in policy.includes  %}
             <include address-match="{{include}}"/>
             {% endfor %}{% endif %}
-            {% if policy.excludes is defined and policy.excludes |length > 0 %}{% for exclude in policy.excludes %}
+            {% if policy.excludes is defined and policy.excludes | length > 0 %}{% for exclude in policy.excludes %}
             <exclude address-match="{{exclude}}"/>
             {% endfor %}{% endif %}
         </address-policy>
         {% endfor %}{% endif %}
-        {% if federation["transformers"] is defined and federation["transformers"] |length > 0 %}
+        {% if federation["transformers"] is defined and federation["transformers"] | length > 0 %}
         {% for transformer in federation["transformers"] %}
         <transformer name="{{ transformer.name }}">
             <class-name>{{transformer.class_name}}</class-name>
@@ -103,4 +103,4 @@
             {% endif %}
         </transformer>
         {% endfor %}{% endif %}
-      </federation>
+    </federation>

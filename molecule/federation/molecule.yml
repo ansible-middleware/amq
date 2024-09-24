@@ -38,8 +38,8 @@ provisioner:
       localhost:
         ansible_python_interpreter: "{{ ansible_playbook_python }}"
       instance1:
-        amq_broker_federations:
-          - name: amq1-federation
+        activemq_federations:
+          - name: amq-federation
             upstreams:
               - name: instance2
                 user: amq-broker
@@ -52,8 +52,8 @@ provisioner:
                   - queue_match: TEST
                     address_match: TEST
       instance2:
-        amq_broker_federations:
-          - name: amq2-federation
+        activemq_federations:
+          - name: amq-federation
             upstreams:
               - name: instance1
                 user: amq-broker
