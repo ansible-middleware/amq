@@ -19,7 +19,6 @@
     pretty_print: true
   become: true
 
-
 - name: Create federations configuration in broker.xml
   middleware_automation.common.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"

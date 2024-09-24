@@ -11,7 +11,19 @@
   loop_control:
     loop_var: connector
     label: "{{ connector.name }}"
-  no_log: true
+  no_log: false
+
+- name: Ensure connectors element exists in broker.xml
+  middleware_automation.common.xml:
+    path: "{{ activemq.instance_home }}/etc/broker.xml"
+    xpath: /conf:configuration/core:core/core:connectors
+    input_type: xml
+    state: present
+    namespaces:
+      conf: urn:activemq
+      core: urn:activemq:core
+    pretty_print: true
+  become: true
 
 - name: Create connector configuration in broker.xml
   middleware_automation.common.xml:
@@ -24,15 +36,14 @@
       core: urn:activemq:core
     pretty_print: true
   become: true
-  no_log: true
+  no_log: false
   notify:
     - restart amq_broker
 
-- name: Configure cluster connections
+- name: Configure discovery/broadcast groups
   become: true
   when:
     - activemq_cluster_discovery == 'static' or activemq_cluster_discovery == 'provided'
-    - activemq_ha_enabled or activemq_cluster_enabled
   block:
     - name: Remove discovery groups
       middleware_automation.common.xml:
@@ -52,6 +63,12 @@
           conf: urn:activemq
           core: urn:activemq:core
 
+- name: Configure cluster connections
+  become: true
+  when:
+    - activemq_cluster_discovery == 'static' or activemq_cluster_discovery == 'provided'
+    - activemq_ha_enabled or activemq_cluster_enabled
+  block:
     - name: Create cluster connections configuration string
       ansible.builtin.set_fact:
         cluster_connections: "{{ lookup('template', 'cluster_connections.broker.xml.j2') }}"

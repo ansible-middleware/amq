@@ -1,0 +1,83 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: instance1
+    image: registry.access.redhat.com/ubi9/ubi-init:latest
+    pre_build_image: true
+    privileged: true
+    command: "/usr/sbin/init"
+    networks:
+      - name: amq
+    tmpfs:
+      - /run
+      - /tmp
+  - name: instance2
+    image: registry.access.redhat.com/ubi9/ubi-init:latest
+    pre_build_image: true
+    privileged: true
+    command: "/usr/sbin/init"
+    networks:
+      - name: amq
+    tmpfs:
+      - /run
+      - /tmp
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      interpreter_python: auto_silent
+    ssh_connection:
+      pipelining: false
+  playbooks:
+    prepare: prepare.yml
+    converge: converge.yml
+    verify: verify.yml
+  inventory:
+    host_vars:
+      localhost:
+        ansible_python_interpreter: "{{ ansible_playbook_python }}"
+      instance1:
+        activemq_federations:
+          - name: amq-federation
+            upstreams:
+              - name: instance2
+                user: amq-broker
+                password: amq-broker
+                static_connectors:
+                  - instance2
+            queue_policies:
+              - name: TEST
+                includes:
+                  - queue_match: TEST
+                    address_match: TEST
+      instance2:
+        activemq_federations:
+          - name: amq-federation
+            upstreams:
+              - name: instance1
+                user: amq-broker
+                password: amq-broker
+                static_connectors:
+                  - instance1
+            queue_policies:
+              - name: TEST
+                includes:
+                  - queue_match: TEST
+                    address_match: TEST
+  env:
+    ANSIBLE_FORCE_COLOR: "true"
+verifier:
+  name: ansible
+scenario:
+  test_sequence:
+    - cleanup
+    - destroy
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - side_effect
+    - verify
+    - cleanup
+    - destroy

@@ -16,4 +16,4 @@ jobs:
     with:
       fqcn: 'middleware_automation/amq'
       molecule_tests: >-
-        [ "default", "static_cluster", "replication", "live_only", "amq_upgrade", "mask_passwords", "custom_xml", "uninstall" ]
+        [ "default", "static_cluster", "replication", "live_only", "federation", "amq_upgrade", "mask_passwords", "custom_xml", "uninstall" ]

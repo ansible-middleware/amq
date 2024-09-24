@@ -1,0 +1,58 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: yes
+  vars:
+    activemq_cluster_enabled: false
+    activemq_ha_enabled: false
+    activemq_shared_storage: false
+    activemq_replication: false
+    activemq_scale_down_enabled: false
+    activemq_configure_firewalld: false
+    activemq_systemd_wait_for_log: false
+    activemq_systemd_wait_for_port: true
+    activemq_cluster_discovery: "provided"
+    activemq_nio_enabled: true
+    activemq_cors_strict_checking: false
+    activemq_prometheus_enabled: false
+    activemq_acceptors:
+      - name: "{{ inventory_hostname }}"
+        bind_address: 0.0.0.0
+        bind_port: "{{ activemq_port }}"
+        parameters:
+          tcpSendBufferSize: 1048576
+          tcpReceiveBufferSize: 1048576
+          protocols: CORE,AMQP
+          useEpoll: true
+          sslEnabled: false
+    activemq_connectors:
+      - name: instance1
+        address: instance1
+      - name: instance2
+        address: instance2
+    activemq_addresses:
+      - name: queue.in
+        anycast:
+          - name: queue.in
+      - name: queue.out
+        anycast:
+          - name: queue.out
+      - name: DLQ
+        anycast:
+          - name: DLQ
+            parameters:
+              durable: True
+      - name: ExpiryQueue
+        anycast:
+          - name: ExpiryQueue
+      - name: a.test
+        anycast:
+          - name: a.test
+      - name: b.test
+        anycast:
+          - name: b.test
+            parameters:
+              max_consumers: 1
+              delay_before_dispatch: 3
+  roles:
+    - middleware_automation.amq.activemq
