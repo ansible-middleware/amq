@@ -4,6 +4,15 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.2.4
+======
+
+Bugfixes
+--------
+
+- Fix broker.xml connector and connector-ref when using federation `#178 <https://github.com/ansible-middleware/amq/pull/178>`_
+- New parameter to configure clustering without HA `#175 <https://github.com/ansible-middleware/amq/pull/175>`_
+
 v2.2.3
 ======
 

@@ -545,3 +545,16 @@ releases:
     fragments:
     - 174.yaml
     release_date: '2024-09-20'
+  2.2.4:
+    changes:
+      bugfixes:
+      - 'Fix broker.xml connector and connector-ref when using federation `#178 <https://github.com/ansible-middleware/amq/pull/178>`_
+
+        '
+      - 'New parameter to configure clustering without HA `#175 <https://github.com/ansible-middleware/amq/pull/175>`_
+
+        '
+    fragments:
+    - 175.yaml
+    - 178.yaml
+    release_date: '2024-09-24'
