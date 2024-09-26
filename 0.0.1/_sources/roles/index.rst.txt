@@ -1,5 +1,0 @@
-Role Index
-==========
-
-.. toctree::
-    amq_broker

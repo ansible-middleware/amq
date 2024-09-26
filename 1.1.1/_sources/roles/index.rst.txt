@@ -1,5 +1,0 @@
-Role Index
-==========
-
-.. toctree::
-    activemq
