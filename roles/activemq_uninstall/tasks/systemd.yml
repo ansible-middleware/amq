@@ -10,13 +10,13 @@
     state: stopped
   when: 'activemq.instance_name + ".service" in ansible_facts.services'
 
-- name: "Delete sysconfig file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
+- name: "Delete sysconfig file /etc/sysconfig/{{ activemq.instance_name }}"
   become: true
   ansible.builtin.file:
     state: absent
     dest: "/etc/sysconfig/{{ activemq.instance_name }}"
 
-- name: "Delete systemd unit file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
+- name: "Delete systemd unit file for /etc/systemd/system/{{ activemq.instance_name }}.service"
   become: true
   ansible.builtin.file:
     state: absent
@@ -29,7 +29,7 @@
     daemon_reload: true
   changed_when: systemdunit.changed
 
-- name: Delete instance directory
+- name: "Delete instance directory {{ activemq.instance_home }}"
   become: true
   ansible.builtin.file:
     state: absent
