@@ -74,7 +74,7 @@ activemq_systemd_wait_for_port: "{{ activemq_ha_enabled and not activemq_shared_
 activemq_systemd_wait_for_log: "{{ activemq_ha_enabled and activemq_shared_storage }}"
 activemq_systemd_wait_for_timeout: 60
 activemq_systemd_wait_for_delay: 10
-activemq_systemd_wait_for_log_ha_string: 'AMQ221109\\\\|AMQ221001'
+activemq_systemd_wait_for_log_ha_string: 'AMQ221109\\\\|AMQ221001\\\\|AMQ221034'
 activemq_systemd_wait_for_log_string: 'AMQ221034'
 activemq_systemd_wait_for_port_number: "{{ activemq_port }}"
 activemq_systemd_expand_environment: false
