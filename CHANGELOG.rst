@@ -4,6 +4,15 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.2.5
+======
+
+Bugfixes
+--------
+
+- Fix invalid ``broker-connections`` when boolean options are used `#179 <https://github.com/ansible-middleware/amq/pull/179>`_
+- Update default for ``activemq_systemd_wait_for_log_ha_string`` `#186 <https://github.com/ansible-middleware/amq/pull/186>`_
+
 v2.2.4
 ======
 

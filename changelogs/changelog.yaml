@@ -558,3 +558,16 @@ releases:
     - 175.yaml
     - 178.yaml
     release_date: '2024-09-24'
+  2.2.5:
+    changes:
+      bugfixes:
+      - 'Fix invalid ``broker-connections`` when boolean options are used `#179 <https://github.com/ansible-middleware/amq/pull/179>`_
+
+        '
+      - 'Update default for ``activemq_systemd_wait_for_log_ha_string`` `#186 <https://github.com/ansible-middleware/amq/pull/186>`_
+
+        '
+    fragments:
+    - 179.yaml
+    - 186.yaml
+    release_date: '2024-09-30'
