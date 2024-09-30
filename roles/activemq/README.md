@@ -296,7 +296,7 @@ Sample divert:
 |`activemq_systemd_wait_for_log` | Whether systemd unit should wait for service to be up in logs | `True` when `activemq_ha_enabled` and `activemq_shared_storage` are both `True` |
 |`activemq_systemd_wait_for_timeout`| How long to wait for service to be alive (seconds) | `60` |
 |`activemq_systemd_wait_for_delay`| Activation delay for service systemd unit | `10` |
-|`activemq_systemd_wait_for_log_ha_string` | The string to match in the logs when `activemq_systemd_wait_for_log` is true and HA is enabled | `AMQ221109\|AMQ221001` |
+|`activemq_systemd_wait_for_log_ha_string` | The string to match in the logs when `activemq_systemd_wait_for_log` is true and HA is enabled | `AMQ221109\|AMQ221001\|AMQ221034` |
 |`activemq_systemd_wait_for_log_string` | The string to match in the logs when `activemq_systemd_wait_for_log` is true and HA is not enabled | `AMQ221034` |
 |`activemq_systemd_wait_for_port_number`| The port number to wait for when `activemq_systemd_wait_for_port` is true | `{{ activemq_port }}` |
 |`activemq_systemd_expand_environment` | Whether or not to expand the environment in the sysconfig file. If true, environment file is sourced and the activemq process is started in a shell | `false` |
