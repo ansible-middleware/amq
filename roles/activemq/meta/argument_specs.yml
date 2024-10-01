@@ -813,6 +813,10 @@ argument_specs:
                 description: "Whether or not to enable clustering (cluster-connections)"
                 default: "{{ activemq_ha_enabled }}"
                 type: 'bool'
+            activemq_logger_filepath:
+                description: "Path for main logfile relative to instance directory."
+                default: "/log/artemis.log"
+                type: 'str'
     systemd:
         options:
             activemq_version:

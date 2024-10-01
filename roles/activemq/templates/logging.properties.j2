@@ -52,7 +52,7 @@ handler.FILE.properties=suffix,append,autoFlush,fileName
 handler.FILE.suffix=.yyyy-MM-dd
 handler.FILE.append=true
 handler.FILE.autoFlush=true
-handler.FILE.fileName=${artemis.instance}/log/artemis.log
+handler.FILE.fileName=${artemis.instance}{{ activemq_logger_filepath }}
 handler.FILE.formatter=PATTERN
 
 # Formatter pattern configuration

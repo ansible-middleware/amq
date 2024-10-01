@@ -395,6 +395,7 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_logger_audit_rollover_files`| Number of rollover audit log files | `5` | `'log4j2.properties' if activemq_version is version_compare('2.27.0', '>=') else 'logging.properties'` |
 |`activemq_logger_config_template_path` | Optional subdirectory of any playbook template lookup directories for the logging facility configuration | `''` |
 |`activemq_logger_config_keep_name` | Whether to keep the custom template filename or use the default | `False` |
+|`activemq_logger_filepath` | Path for main logfile relative to instance directory | `/log/artemis.log` |
 
 
 #### Broker plugins
