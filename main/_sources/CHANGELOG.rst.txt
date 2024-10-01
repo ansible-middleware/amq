@@ -7,10 +7,10 @@ middleware\_automation.amq Release Notes
 v2.2.6-devel
 ============
 
-Release Summary
----------------
+Minor Changes
+-------------
 
-Internal release, documentation or test changes only.
+- Add parameter ``activemq_logger_filepath`` to configure logfile path `#187 <https://github.com/ansible-middleware/amq/pull/187>`_
 
 v2.2.5
 ======
