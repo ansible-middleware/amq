@@ -3,6 +3,9 @@
   hosts: all
   become: yes
   tasks:
+    - wait_for:
+        timeout: 666666
+
     - name: Populate service facts
       ansible.builtin.service_facts:
 
