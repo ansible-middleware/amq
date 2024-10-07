@@ -6,7 +6,7 @@
     activemq_service_user_home: /home/activemq
     activemq_network_check_enabled: true
     activemq_message_counter_enabled: true
-    activemq_network_check_list: '127.0.0.1,8.8.8.8,{{ ansible_nodename }}'
+    activemq_network_check_list: '127.0.0.1,8.8.8.8,{{ inventory_hostname }}'
     activemq_hawtio_role: admin
     activemq_users:
       - user: amq
