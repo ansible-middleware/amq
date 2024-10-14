@@ -12,6 +12,11 @@ Minor Changes
 
 - Add parameter ``activemq_logger_filepath`` to configure logfile path `#187 <https://github.com/ansible-middleware/amq/pull/187>`_
 
+Bugfixes
+--------
+
+- Force ``activemq_configuration_file_refresh_period`` integer type in handler `#191 <https://github.com/ansible-middleware/amq/pull/191>`_
+
 v2.2.5
 ======
 

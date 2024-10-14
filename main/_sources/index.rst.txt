@@ -41,4 +41,5 @@ Welcome to AMQ Collection documentation
    Infinispan / Red Hat Data Grid <https://ansible-middleware.github.io/infinispan/>
    Tomcat / Red Hat JWS <https://ansible-middleware.github.io/jws/>
    Kafka / Red Hat AMQ Streams <https://ansible-middleware.github.io/amq_streams/>
+   Ansible Middleware utilities <https://ansible-middleware.github.io/common/main/>
    JCliff <https://ansible-middleware.github.io/ansible_collections_jcliff/>
