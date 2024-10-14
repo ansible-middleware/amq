@@ -1,6 +1,6 @@
-========================================
-middleware\_automation.amq Release Notes
-========================================
+=============
+Release Notes
+=============
 
 .. contents:: Topics
 
