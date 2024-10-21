@@ -11,6 +11,7 @@ Minor Changes
 -------------
 
 - Add parameter ``activemq_logger_filepath`` to configure logfile path `#187 <https://github.com/ansible-middleware/amq/pull/187>`_
+- Add role expansion parameters for ldap/AD configuration `#193 <https://github.com/ansible-middleware/amq/pull/193>`_
 
 Bugfixes
 --------
