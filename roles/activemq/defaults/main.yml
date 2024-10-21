@@ -113,6 +113,8 @@ activemq_auth_ldap_role_name: cn
 activemq_auth_ldap_role_search: '(member={0})'
 activemq_auth_ldap_role_search_subtree: false
 activemq_auth_ldap_referral: ignore
+activemq_auth_ldap_expand_roles: false
+activemq_auth_ldap_expand_roles_matching: '(member={0})'
 
 ## Additional classpath
 activemq_additional_libs: []

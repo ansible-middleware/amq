@@ -111,6 +111,8 @@ Role Defaults
 |`activemq_auth_ldap_role_search` | Role search attribute | `(member={0})` |
 |`activemq_auth_ldap_role_search_subtree` | Whether to enable subtree role search | `False` |
 |`activemq_auth_ldap_referral` | Specify how to handle referrals; valid values: ignore, follow, throw | `ignore` |
+|`activemq_auth_ldap_expand_roles` | Whether to enable role expansion functionality; if enabled, then roles within roles will be found | `false` |
+|`activemq_auth_ldap_expand_roles_matching` | An LDAP search filter which is applied to the subtree selected by roleBase | `(member={0})` |
 
 
 #### Journal configuration
