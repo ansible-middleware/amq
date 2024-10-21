@@ -49,6 +49,8 @@ activemq {
         roleSearchMatching="{{ activemq_auth_ldap_role_search }}"
         roleSearchSubtree={{ activemq_auth_ldap_role_search_subtree }}
         referral="{{ activemq_auth_ldap_referral }}"
+        expandRoles="{{ activemq_auth_ldap_expand_roles }}"
+        expandRolesMatching="{{ activemq_auth_ldap_expand_roles_matching }}"
         reload=true
     ;
 {% endif %}

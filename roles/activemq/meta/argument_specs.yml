@@ -637,6 +637,14 @@ argument_specs:
                 description: "Specify how to handle referrals; valid values: ignore, follow, throw"
                 default: "ignore"
                 type: "str"
+            activemq_auth_ldap_expand_roles:
+                description: "Whether to enable role expansion functionality or not. If enabled, then roles within roles will be found."
+                default: false
+                type: 'bool'
+            activemq_auth_ldap_expand_roles_matching:
+                description: "An LDAP search filter which is applied to the subtree selected by roleBase"
+                default: '(member={0})'
+                type: "str"
             activemq_auth_template:
                 description: "Location of JAAS login.config template; by default use template provided with activemq_hawtio_role"
                 default: "login.config.j2"
