@@ -17,6 +17,7 @@ Bugfixes
 --------
 
 - Force ``activemq_configuration_file_refresh_period`` integer type in handler `#191 <https://github.com/ansible-middleware/amq/pull/191>`_
+- Improve execution time for masked passwords `#194 <https://github.com/ansible-middleware/amq/pull/194>`_
 
 v2.2.5
 ======
