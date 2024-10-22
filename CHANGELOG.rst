@@ -1,8 +1,23 @@
-=============
-Release Notes
-=============
+========================================
+middleware\_automation.amq Release Notes
+========================================
 
 .. contents:: Topics
+
+v2.2.6
+======
+
+Minor Changes
+-------------
+
+- Add parameter ``activemq_logger_filepath`` to configure logfile path `#187 <https://github.com/ansible-middleware/amq/pull/187>`_
+- Add role expansion parameters for ldap/AD configuration `#193 <https://github.com/ansible-middleware/amq/pull/193>`_
+
+Bugfixes
+--------
+
+- Force ``activemq_configuration_file_refresh_period`` integer type in handler `#191 <https://github.com/ansible-middleware/amq/pull/191>`_
+- Improve execution time for masked passwords `#194 <https://github.com/ansible-middleware/amq/pull/194>`_
 
 v2.2.5
 ======

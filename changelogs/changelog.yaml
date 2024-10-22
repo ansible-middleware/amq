@@ -571,3 +571,27 @@ releases:
     - 179.yaml
     - 186.yaml
     release_date: '2024-09-30'
+  2.2.6:
+    changes:
+      bugfixes:
+      - 'Force ``activemq_configuration_file_refresh_period`` integer type in handler
+        `#191 <https://github.com/ansible-middleware/amq/pull/191>`_
+
+        '
+      - 'Improve execution time for masked passwords `#194 <https://github.com/ansible-middleware/amq/pull/194>`_
+
+        '
+      minor_changes:
+      - 'Add parameter ``activemq_logger_filepath`` to configure logfile path `#187
+        <https://github.com/ansible-middleware/amq/pull/187>`_
+
+        '
+      - 'Add role expansion parameters for ldap/AD configuration `#193 <https://github.com/ansible-middleware/amq/pull/193>`_
+
+        '
+    fragments:
+    - 187.yaml
+    - 191.yaml
+    - 193.yaml
+    - 194.yaml
+    release_date: '2024-10-22'
