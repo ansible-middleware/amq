@@ -6,6 +6,10 @@ on:
       - main
   pull_request:
   workflow_dispatch:
+    inputs:
+      debug_verbosity:
+        description: 'ANSIBLE_VERBOSITY envvar value'
+        required: false
   schedule:
     - cron: '0 6 * * *'
 
@@ -15,5 +19,6 @@ jobs:
     secrets: inherit
     with:
       fqcn: 'middleware_automation/amq'
+      debug_verbosity: "${{ github.event.inputs.debug_verbosity }}"
       molecule_tests: >-
         [ "default", "static_cluster", "replication", "live_only", "mirroring", "federation", "amq_upgrade", "mask_passwords", "custom_xml", "uninstall" ]
