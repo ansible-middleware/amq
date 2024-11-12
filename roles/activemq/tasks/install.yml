@@ -92,11 +92,12 @@
       retries: 3
       delay: 20
   rescue:
-    - name: Recover from failed download using curl
-      ansible.builtin.command: |
+    - name: Download recovery from failed get_url module
+      ansible.builtin.command: |  # noqa command-instead-of-module get_url fails sometimes with no IPv6 support
         curl '{{ activemq.download_url }}' -4 --output "{{ local_path.stat.path }}/{{ activemq.bundle }}"
       delegate_to: localhost
       run_once: true
+      changed_when: true
 
 - name: Download AMQ broker from RHN using JBoss Network API
   delegate_to: localhost
