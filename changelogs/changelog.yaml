@@ -595,3 +595,12 @@ releases:
     - 193.yaml
     - 194.yaml
     release_date: '2024-10-22'
+  2.2.7:
+    changes:
+      bugfixes:
+      - 'Fix password masking JAVA_HOME and undefined variable error `#198 <https://github.com/ansible-middleware/amq/pull/198>`_
+
+        '
+    fragments:
+    - 198.yaml
+    release_date: '2024-11-20'

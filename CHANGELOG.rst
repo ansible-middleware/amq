@@ -4,6 +4,14 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.2.7
+======
+
+Bugfixes
+--------
+
+- Fix password masking JAVA_HOME and undefined variable error `#198 <https://github.com/ansible-middleware/amq/pull/198>`_
+
 v2.2.6
 ======
 
