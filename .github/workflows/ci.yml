@@ -15,7 +15,7 @@ on:
 
 jobs:
   ci:
-    uses: ansible-middleware/github-actions/.github/workflows/cish.yml@main
+    uses: ansible-middleware/github-actions/.github/workflows/ci.yml@main
     secrets: inherit
     with:
       fqcn: 'middleware_automation/amq'
