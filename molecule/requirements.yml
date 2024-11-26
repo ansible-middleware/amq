@@ -3,3 +3,4 @@ collections:
   - name: community.general
   - name: community.docker
     version: ">=1.9.1"
+  - name: containers.podman
