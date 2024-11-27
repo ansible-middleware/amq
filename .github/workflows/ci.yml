@@ -21,4 +21,8 @@ jobs:
       fqcn: 'middleware_automation/amq'
       debug_verbosity: "${{ github.event.inputs.debug_verbosity }}"
       molecule_tests: >-
-        [ "default", "static_cluster", "replication", "live_only", "mirroring", "federation", "amq_upgrade", "mask_passwords", "custom_xml", "uninstall" ]
+        [ "static_cluster", "replication", "live_only", "mirroring", "federation", "amq_upgrade", "mask_passwords" ]
+      podman_tests_current: >-
+        [ "default", "custom_xml", "uninstall" ]
+      podman_tests_next: >-
+        [ "default", "custom_xml", "uninstall" ]
