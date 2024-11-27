@@ -1,15 +1,12 @@
 ---
 driver:
-  name: docker
+  name: podman
 platforms:
-  - name: instance
+  - name: amq_upgrade
     image: registry.access.redhat.com/ubi8/ubi-init:latest
     pre_build_image: true
     privileged: true
     command: "/usr/sbin/init"
-    tmpfs:
-      - /run
-      - /tmp
 provisioner:
   name: ansible
   config_options:

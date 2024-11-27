@@ -37,7 +37,7 @@
         fail_msg: "Wrong ownership of instance directories"
 
     - name: Check all port numbers are accessible from the current host
-      wait_for:
+      ansible.builtin.wait_for:
         host: localhost
         port: "{{ item }}"
         state: started
