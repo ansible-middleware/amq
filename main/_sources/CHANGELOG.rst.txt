@@ -7,11 +7,6 @@ middleware\_automation.amq Release Notes
 v2.2.7
 ======
 
-Release Summary
----------------
-
-Internal release, documentation or test changes only.
-
 Bugfixes
 --------
 
