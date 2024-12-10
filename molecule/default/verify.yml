@@ -8,9 +8,9 @@
 
     - name: Populate activemq facts
       middleware_automation.amq.activemq_facts:
-        base_url: http://0.0.0.0:8161
         auth_username: amq
         auth_password: amqbrokerpass
+        validate_certs: false
 
     - name: Print activemq gathered facts
       ansible.builtin.debug:
