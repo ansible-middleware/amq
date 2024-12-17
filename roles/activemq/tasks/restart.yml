@@ -1,15 +1,16 @@
 ---
 - name: "Restart and enable instance {{ activemq.instance_name }} for {{ activemq.service_name }} service"
+  when: requires_userhome_update is not defined
+  become: true
   throttle: 1
   ansible.builtin.systemd:
     name: "{{ activemq.instance_name }}"
     enabled: true
     state: restarted
-  become: true
-  when: requires_userhome_update is not defined
 
 - name: "Restart and enable instance {{ activemq.instance_name }} for {{ activemq.service_name }} service"
   when: requires_userhome_update is defined and requires_userhome_update
+  become: true
   block:
     - name: "Configure systemd unit override"
       ansible.builtin.template:
@@ -18,7 +19,6 @@
         owner: root
         group: root
         mode: '0644'
-      become: true
     - name: Restart service
       throttle: 1
       ansible.builtin.systemd:
@@ -26,13 +26,10 @@
         enabled: true
         state: restarted
         daemon_reload: true
-      become: true
     - name: "Delete systemd unit override"
       ansible.builtin.file:
         path: "/etc/systemd/system/{{ activemq.instance_name }}.d/update_home.conf"
         state: absent
-      become: true
     - name: Ensure daemon reload
       ansible.builtin.systemd:
         daemon_reload: true
-      become: true

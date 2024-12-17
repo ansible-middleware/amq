@@ -19,10 +19,10 @@ jobs:
     secrets: inherit
     with:
       fqcn: 'middleware_automation/amq'
-      debug_verbosity: 5
+      debug_verbosity: "${{ github.event.inputs.debug_verbosity }}"
       molecule_tests: >-
-        [ "static_cluster", "replication", "live_only", "mirroring", "federation" ]
+        [ "static_cluster", "replication", "live_only", "mirroring" ]
       podman_tests_current: >-
-        [ "default", "amq_upgrade", "custom_xml", "mask_passwords", "uninstall" ]
+        [ "default", "amq_upgrade", "custom_xml", "federation", "mask_passwords", "uninstall" ]
       podman_tests_next: >-
-        [ "default", "amq_upgrade", "custom_xml", "mask_passwords", "uninstall" ]
+        [ "default", "amq_upgrade", "custom_xml", "federation", "mask_passwords", "uninstall" ]

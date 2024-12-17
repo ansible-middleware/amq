@@ -27,9 +27,9 @@
           sslEnabled: false
     activemq_connectors:
       - name: instance1
-        address: instance1
+        address: amq_federation_instance1
       - name: instance2
-        address: instance2
+        address: amq_federation_instance2
     activemq_addresses:
       - name: queue.in
         anycast:
