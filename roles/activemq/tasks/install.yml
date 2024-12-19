@@ -81,25 +81,14 @@
     - not archive_path.stat.exists
     - not amq_broker_enable is defined or not amq_broker_enable
     - not activemq_offline_install
-  block:
-    - name: Download activemq archive
-      ansible.builtin.get_url: # noqa risky-file-permissions delegated, uses controller host user
-        url: "{{ activemq.download_url }}"
-        dest: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
-        mode: '0640'
-      delegate_to: localhost
-      run_once: true
-      retries: 3
-      delay: 20
-  rescue:
-    - name: Download recovery from failed get_url module
-      ansible.builtin.command: |  # noqa command-instead-of-module get_url fails sometimes with no IPv6 support
-        curl '{{ activemq.download_url }}' -v -4 --output "{{ local_path.stat.path }}/{{ activemq.bundle }}"
-      delegate_to: localhost
-      run_once: true
-      changed_when: true
-      retries: 3
-      delay: 20
+  ansible.builtin.get_url: # noqa risky-file-permissions delegated, uses controller host user
+    url: "{{ activemq.download_url }}"
+    dest: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
+    mode: '0640'
+  delegate_to: localhost
+  run_once: true
+  retries: 3
+  delay: 20
 
 - name: Download AMQ broker from RHN using JBoss Network API
   delegate_to: localhost
