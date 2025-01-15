@@ -26,6 +26,8 @@
     activemq_cors_strict_checking: False
     activemq_audit_log_absolute_path: "/var/log/amq/audit.log"
     activemq_main_log_absolute_path: "/var/log/amq/artemis.log"
+    activemq_logger_max_file_size: 104857600  # 100MB in bytes
+    activemq_logger_audit_max_file_size: 52428800  # 50MB in bytes
     activemq_users:
       - user: amq
         password: amqbrokerpass
