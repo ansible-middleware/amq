@@ -9,9 +9,6 @@ platforms:
     command: "/usr/sbin/init"
     networks:
       - name: amq
-    tmpfs:
-      - /run
-      - /tmp
   - name: instance2
     image: registry.access.redhat.com/ubi9/ubi-init:latest
     pre_build_image: true
@@ -19,9 +16,6 @@ platforms:
     command: "/usr/sbin/init"
     networks:
       - name: amq
-    tmpfs:
-      - /run
-      - /tmp
 provisioner:
   name: ansible
   config_options:
