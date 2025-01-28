@@ -2,7 +2,7 @@
 driver:
   name: podman
 platforms:
-  - name: amq_default
+  - name: instance
     image: registry.access.redhat.com/ubi9/ubi-init:latest
     pre_build_image: true
     privileged: true
