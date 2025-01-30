@@ -4,7 +4,7 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
-v2.3.0-devel
+v2.2.8-devel
 ============
 
 Bugfixes
