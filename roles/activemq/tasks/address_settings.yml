@@ -1,7 +1,7 @@
 ---
 - name: Create address settings in broker.xml
   when: not activemq_modular_configuration
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   block:
     - name: Create address settings configuration string
       ansible.builtin.set_fact:
@@ -21,13 +21,13 @@
           conf: urn:activemq
           core: urn:activemq:core
         pretty_print: true
-      become: true
+      become: "{{ activemq_install_requires_become | default(true) }}"
       notify:
         - restart amq_broker with no config refresh
 
 - name: Create modular address-settings configuration
   when: activemq_modular_configuration
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   block:
     - name: Remove address-settings element from broker.xml
       middleware_automation.common.xml:

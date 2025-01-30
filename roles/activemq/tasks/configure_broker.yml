@@ -1,6 +1,7 @@
 ---
 - name: Configure ha policy
   when: activemq_ha_enabled or activemq_cluster_enabled
+  become: "{{ activemq_install_requires_become | default(true) }}"
   block:
     - name: "Ensure ha-policy element exists"
       middleware_automation.common.xml:
@@ -12,7 +13,6 @@
           conf: urn:activemq
           core: urn:activemq:core
         pretty_print: true
-      become: true
       notify:
         - restart amq_broker
     - name: "Configure ha-policy"
@@ -25,7 +25,6 @@
           conf: urn:activemq
           core: urn:activemq:core
         pretty_print: true
-      become: true
       notify:
         - restart amq_broker
 

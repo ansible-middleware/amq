@@ -15,5 +15,5 @@
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
     mode: '0644'
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   listen: "touch broker.xml"

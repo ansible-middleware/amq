@@ -8,7 +8,7 @@
       conf: urn:activemq
       core: urn:activemq:core
     pretty_print: true
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   notify:
     - restart amq_broker
   loop: "{{ valid_nc_configuration_list }}"
