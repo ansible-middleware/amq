@@ -3,47 +3,46 @@
   ansible.builtin.set_fact:
     rpm_java_home: "/etc/alternatives/jre_{{ activemq_jvm_package | regex_search('(?<=java-)[0-9.]+') }}"
 
-- name: "Ensure systemd unit override directory exists"
-  ansible.builtin.file:
-    path: "/etc/systemd/system/{{ activemq.instance_name }}.d/"
-    state: directory
-    owner: root
-    group: root
-    mode: '0755'
-  become: true
+- name: "Ensure privilege is adequate to tasks execution"
+  become: "{{ activemq_install_requires_become | default(true) }}"
+  block:
+    - name: "Ensure systemd unit override directory exists"
+      ansible.builtin.file:
+        path: "/etc/systemd/system/{{ activemq.instance_name }}.d/"
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
 
-- name: "Configure sysconfig file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
-  become: true
-  ansible.builtin.template:
-    src: amq_broker.sysconfig.j2
-    dest: "/etc/sysconfig/{{ activemq.instance_name }}"
-    owner: root
-    group: root
-    mode: '0644'
-  vars:
-    activemq_rpm_java_home: "{{ rpm_java_home }}"
-    activemq_logger_opts: "{{ '-Dlog4j.configurationFile=' + activemq_logger_config_template | basename | regex_replace('[.]j2$', '')\
-                              if activemq_logger_config_keep_name and activemq_logger_config_template != 'log4j2.properties.j2' }}"
-    activemq_jmx_opts: "{{ '-javaagent:/usr/share/java/prometheus-jmx-exporter/jmx_prometheus_javaagent.jar=0.0.0.0:' + \
-                           activemq_jmx_exporter_port + ':' + activemq_jmx_exporter_config_path if activemq_jmx_exporter_enabled else '' }}"
-    activemq_properties_opts: "{{ ('-Dbroker.properties=' +  activemq.instance_home + '/etc/' + activemq_properties_file) if activemq_properties_file != '' else '' }}"
-  notify:
-    - restart amq_broker
+    - name: "Configure sysconfig file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
+      ansible.builtin.template:
+        src: amq_broker.sysconfig.j2
+        dest: "/etc/sysconfig/{{ activemq.instance_name }}"
+        owner: root
+        group: root
+        mode: '0644'
+      vars:
+        activemq_rpm_java_home: "{{ rpm_java_home }}"
+        activemq_logger_opts: "{{ '-Dlog4j.configurationFile=' + activemq_logger_config_template | basename | regex_replace('[.]j2$', '')\
+                                  if activemq_logger_config_keep_name and activemq_logger_config_template != 'log4j2.properties.j2' }}"
+        activemq_jmx_opts: "{{ '-javaagent:/usr/share/java/prometheus-jmx-exporter/jmx_prometheus_javaagent.jar=0.0.0.0:' + \
+                               activemq_jmx_exporter_port + ':' + activemq_jmx_exporter_config_path if activemq_jmx_exporter_enabled else '' }}"
+        activemq_properties_opts: "{{ ('-Dbroker.properties=' +  activemq.instance_home + '/etc/' + activemq_properties_file) if activemq_properties_file != '' else '' }}"
+      notify:
+        - restart amq_broker
 
-- name: "Configure systemd unit file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
-  ansible.builtin.template:
-    src: "{{ activemq_service_override_template | default('amq_broker.service.j2', true) }}"
-    dest: "/etc/systemd/system/{{ activemq.instance_name }}.service"
-    owner: root
-    group: root
-    mode: '0644'
-  become: true
-  register: systemdunit
-  notify:
-    - restart amq_broker
+    - name: "Configure systemd unit file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
+      ansible.builtin.template:
+        src: "{{ activemq_service_override_template | default('amq_broker.service.j2', true) }}"
+        dest: "/etc/systemd/system/{{ activemq.instance_name }}.service"
+        owner: root
+        group: root
+        mode: '0644'
+      register: systemdunit
+      notify:
+        - restart amq_broker
 
-- name: Reload systemd
-  become: true
-  ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler, because of start/flush below
-    daemon_reload: true
-  changed_when: systemdunit.changed
+    - name: Reload systemd
+      ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler, because of start/flush below
+        daemon_reload: true
+      changed_when: systemdunit.changed

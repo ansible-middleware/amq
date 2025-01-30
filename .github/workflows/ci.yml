@@ -15,11 +15,12 @@ on:
 
 jobs:
   ci:
-    uses: ansible-middleware/github-actions/.github/workflows/cish.yml@main
+    uses: ansible-middleware/github-actions/.github/workflows/cish.yml@rootperm
     secrets: inherit
     with:
       fqcn: 'middleware_automation/amq'
       debug_verbosity: "${{ github.event.inputs.debug_verbosity }}"
+      root_permission_varname: activemq_install_requires_become
       molecule_tests: >-
         [ "static_cluster", "replication", "live_only", "mirroring" ]
       podman_tests_current: >-

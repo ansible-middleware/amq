@@ -1,7 +1,7 @@
 ---
 - name: "Restart and enable instance {{ activemq.instance_name }} for {{ activemq.service_name }} service"
   when: requires_userhome_update is not defined
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   throttle: 1
   ansible.builtin.systemd:
     name: "{{ activemq.instance_name }}"
@@ -10,7 +10,7 @@
 
 - name: "Restart and enable instance {{ activemq.instance_name }} for {{ activemq.service_name }} service"
   when: requires_userhome_update is defined and requires_userhome_update
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   block:
     - name: "Configure systemd unit override"
       ansible.builtin.template:

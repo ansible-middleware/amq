@@ -23,7 +23,7 @@
       conf: urn:activemq
       core: urn:activemq:core
     pretty_print: true
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
 
 - name: Create connector configuration in broker.xml
   middleware_automation.common.xml:
@@ -35,13 +35,13 @@
       conf: urn:activemq
       core: urn:activemq:core
     pretty_print: true
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   no_log: false
   notify:
     - restart amq_broker
 
 - name: Configure discovery/broadcast groups
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   when:
     - activemq_cluster_discovery == 'static' or activemq_cluster_discovery == 'provided'
   block:
@@ -64,7 +64,7 @@
           core: urn:activemq:core
 
 - name: Configure cluster connections
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   when:
     - activemq_cluster_discovery == 'static' or activemq_cluster_discovery == 'provided'
     - activemq_ha_enabled or activemq_cluster_enabled
@@ -86,6 +86,6 @@
           conf: urn:activemq
           core: urn:activemq:core
         pretty_print: true
-      become: true
+      become: "{{ activemq_install_requires_become | default(true) }}"
       notify:
         - restart amq_broker

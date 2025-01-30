@@ -68,7 +68,7 @@
   ansible.builtin.stat:
     path: "{{ activemq_dest }}/{{ activemq.instance_name }}/bin"
   register: instance_directory
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
 
 - name: "Generate artemis configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
   ansible.builtin.include_tasks: configure_artemis.yml
@@ -82,7 +82,7 @@
   environment:
     PATH: "{{ rpm_java_home | default(activemq_rpm_java_home, true) }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
     JAVA_HOME: "{{ rpm_java_home }}"
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   become_user: "{{ activemq_service_user }}"
   register: broker_created
   when:
@@ -96,7 +96,7 @@
     group: "{{ activemq_service_group }}"
     mode: '0644'
   when: activemq_config_override_template != ''
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   notify:
     - restart amq_broker
 
@@ -104,13 +104,13 @@
   ansible.builtin.stat:
     path: "{{ activemq_dest }}/{{ activemq.instance_name }}/bin"
   register: instance_directory
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
 
 - name: "Check target directory profile version"
   when:
     - instance_directory is defined
     - instance_directory.stat.exists
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   block:
     - name: Reset upgrade flag
       ansible.builtin.set_fact:
@@ -152,7 +152,7 @@
   when: activemq_additional_libs | length > 0
   block:
     - name: "Create libs location"
-      become: true
+      become: "{{ activemq_install_requires_become | default(true) }}"
       ansible.builtin.file:
         dest: "{{ activemq.instance_home }}/lib"
         state: directory
@@ -160,7 +160,7 @@
         group: "{{ activemq_service_group }}"
         mode: '0750'
     - name: "Copy additional libs to location"
-      become: true
+      become: "{{ activemq_install_requires_become | default(true) }}"
       ansible.builtin.copy:
         src: "{{ item }}"
         dest: "{{ activemq.instance_home }}/lib/"
@@ -181,7 +181,7 @@
     chown -R {{ activemq_service_user }}:{{ activemq_service_group }} {{ activemq.instance_home }}
   register: chown_status
   changed_when: chown_status.stdout != ""
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
 
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
@@ -192,7 +192,7 @@
     - name: Check service status
       ansible.builtin.command: "systemctl status {{ activemq.instance_name }}"
       register: activemq_service_status
-      become: true
+      become: "{{ activemq_install_requires_become | default(true) }}"
       changed_when: false
       delay: 5
     - name: Verify service status
@@ -206,7 +206,7 @@
       run_once: true
 
 - name: Create default logs directory
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   ansible.builtin.file:
     state: directory
     dest: "/var/log/{{ activemq.service_name }}"
@@ -215,7 +215,7 @@
     mode: '0750'
 
 - name: Link default logs directory
-  become: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   ansible.builtin.file:
     state: link
     src: "{{ activemq.instance_home }}/log"

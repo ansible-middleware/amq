@@ -2,5 +2,9 @@
 - name: Prepare
   hosts: all
   tasks:
+    - name: "Display value of activemq_install_requires_become"
+      ansible.builtin.debug:
+        var: activemq_install_requires_become
+
     - name: "Run preparation common to all scenario"
       ansible.builtin.include_tasks: ../prepare.yml
