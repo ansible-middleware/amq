@@ -4,6 +4,14 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.2.8
+======
+
+Bugfixes
+--------
+
+- Add missing index to log4j2 filePattern `#202 <https://github.com/ansible-middleware/amq/pull/202>`_
+
 v2.2.7
 ======
 
