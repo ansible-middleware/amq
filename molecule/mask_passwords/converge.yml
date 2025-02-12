@@ -24,6 +24,8 @@
     activemq_auth_ldap_role_search_subtree: True
     activemq_global_max_size: 128MB
     activemq_cors_strict_checking: False
+    activemq_audit_log_absolute_path: "/var/log/amq/audit.log"
+    activemq_main_log_absolute_path: "/var/log/amq/artemis.log"
     activemq_users:
       - user: amq
         password: amqbrokerpass
