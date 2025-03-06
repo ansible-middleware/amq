@@ -16,6 +16,7 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-{% for role in activemq_roles %}
-{{ role.name }}={{ activemq_users | selectattr('roles','issuperset',[ role.name ]) | list | map(attribute='user') | list | join(',') }}
+{% set unique_roles = activemq_roles | map(attribute='name') | unique | list %}
+{% for role in unique_roles %}
+{{ role }}={{ activemq_users | selectattr('roles', 'contains', role) | map(attribute='user') | join(',') }}
 {% endfor %}
