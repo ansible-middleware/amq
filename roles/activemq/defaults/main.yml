@@ -241,6 +241,8 @@ activemq_logger_config_keep_name: false
 activemq_logger_rollover_files: 5
 activemq_logger_audit_rollover_files: 5
 activemq_logger_filepath: /log/artemis.log
+activemq_logger_max_file_size: 104857600  # 100MB in bytes
+activemq_logger_audit_max_file_size: 52428800  # 50MB in bytes
 
 # Metrics
 activemq_jmx_exporter_port: 18080

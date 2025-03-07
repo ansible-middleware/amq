@@ -29,6 +29,7 @@ warn_list:
   - var-naming[no-role-prefix]
   - deprecated-command-syntax
   - name[casing]
+  - no_unspecified_argument
 
 skip_list:
   - vars_should_not_be_used
