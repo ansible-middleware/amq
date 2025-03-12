@@ -7,7 +7,7 @@
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
-  become: true
+  become: "{{ activeamq_install_requires_become | default(true) }}"
 
 - name: Remove broadcast groups
   middleware_automation.common.xml:
@@ -17,4 +17,4 @@
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
-  become: true
+  become: "{{ activeamq_install_requires_become | default(true) }}"
