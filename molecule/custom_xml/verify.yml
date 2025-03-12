@@ -1,7 +1,7 @@
 ---
 - name: Verify
   hosts: all
-  become: yes
+  become: "{{ activeamq_install_requires_become | default(true) }}"
   tasks:
     - name: Populate service facts
       ansible.builtin.service_facts:

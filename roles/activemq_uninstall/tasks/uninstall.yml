@@ -1,20 +1,20 @@
 ---
 - name: "Delete service user {{ activemq_service_user }}"
-  become: true
+  become: "{{ activeamq_install_requires_become | default(true) }}"
   ansible.builtin.user:
     state: absent
     name: "{{ activemq_service_user }}"
   when: not activemq_uninstall_skip_user
 
 - name: "Delete service group {{ activemq_service_group }}"
-  become: true
+  become: "{{ activeamq_install_requires_become | default(true) }}"
   ansible.builtin.group:
     name: "{{ activemq_service_group }}"
     state: absent
   when: not activemq_uninstall_skip_user
 
 - name: "Delete install location {{ activemq_dest }}"
-  become: true
+  become: "{{ activeamq_install_requires_become | default(true) }}"
   ansible.builtin.file:
     dest: "{{ activemq_dest }}"
     state: absent
@@ -24,33 +24,33 @@
     archive: "{{ activemq_dest }}/{{ activemq.bundle }}"
 
 - name: Check download archive path
-  become: true
+  become: "{{ activeamq_install_requires_become | default(true) }}"
   ansible.builtin.stat:
     path: "{{ archive }}"
   register: archive_path
 
 - name: "Delete archive from target nodes {{ archive }}"
-  become: true
+  become: "{{ activeamq_install_requires_become | default(true) }}"
   ansible.builtin.file:
     dest: "{{ archive }}"
     state: absent
   when: not activemq_uninstall_skip_zipfile
 
 - name: "Check target directory: {{ activemq.home }}"
-  become: true
+  become: "{{ activeamq_install_requires_become | default(true) }}"
   ansible.builtin.stat:
     path: "{{ activemq.home }}"
   register: path_to_workdir
 
 - name: "Delete artemis installation directory {{ activemq.home }}"
-  become: true
+  become: "{{ activeamq_install_requires_become | default(true) }}"
   ansible.builtin.file:
     dest: "{{ activemq.home }}"
     state: absent
   when: not activemq_uninstall_skip_artemis
 
 - name: "Delete logs directory symlink /var/log/{{ activemq.service_name }}/{{ activemq.instance_name }}"
-  become: true
+  become: "{{ activeamq_install_requires_become | default(true) }}"
   ansible.builtin.file:
     state: absent
     dest: "/var/log/{{ activemq.service_name }}/{{ activemq.instance_name }}"
