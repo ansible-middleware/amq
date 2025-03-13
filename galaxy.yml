@@ -1,7 +1,7 @@
 ---
 namespace: middleware_automation
 name: amq
-version: "2.2.9"
+version: "2.2.10"
 readme: README.md
 authors:
   - Guido Grazioli <ggraziol@redhat.com>
