@@ -1,0 +1,8 @@
+---
+- name: "Stop {{ activemq.instance_name }} for {{ activemq.service_name }} service"
+  throttle: 1
+  ansible.builtin.systemd:
+    name: "{{ activemq.instance_name }}"
+    enabled: true
+    state: stopped
+  become: "{{ activemq_install_requires_become | default(true) }}"
