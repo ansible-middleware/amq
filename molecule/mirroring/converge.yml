@@ -15,7 +15,6 @@
     activemq_nio_enabled: true
     activemq_cors_strict_checking: false
     activemq_prometheus_enabled: false
-    activemq_install_requires_become: false
     activemq_acceptors:
       - name: "{{ inventory_hostname }}"
         bind_address: 0.0.0.0

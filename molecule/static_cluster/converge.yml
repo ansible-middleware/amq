@@ -15,7 +15,6 @@
     activemq_tls_keystore_password: securepass
     activemq_tls_truststore_path: nfs/trust.ks
     activemq_tls_truststore_password: securepass
-    activemq_install_requires_become: false
     activemq_users:
     - user: amq
       password: amqbrokerpass

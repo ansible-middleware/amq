@@ -15,7 +15,6 @@
     activemq_systemd_wait_for_log: false
     activemq_systemd_wait_for_port: true
     activemq_cluster_discovery: "provided"
-    activemq_install_requires_become: false
     activemq_users:
     - user: amq
       password: amqbrokerpass

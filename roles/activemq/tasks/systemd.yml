@@ -21,7 +21,7 @@
         owner: root
         group: root
         mode: '0755'
-      become: "{{ activeamq_install_requires_become | default(true) }}"
+      become: "{{ activemq_install_requires_become | default(true) }}"
       when: activemq_audit_log_absolute_path | default('') | length > 0
 
     - name: "Configure sysconfig file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
