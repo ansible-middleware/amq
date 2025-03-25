@@ -1,6 +1,9 @@
 ---
 - name: Verify
   hosts: all
+  vars:
+    activemq_instance_home: /opt/amq/amq-broker
+    activemq_tls_keystore_password: securepass
   tasks:
     - name: Populate service facts
       ansible.builtin.service_facts:
@@ -67,3 +70,14 @@
           - ansible_facts.activemq.Backup == true
           - ansible_facts.activemq.SharedStore == true
       when: inventory_hostname == 'instance2'
+
+    - name: "Check if bootstrap.xml contains the updated keystore password"
+      ansible.builtin.command: sed -n 's/.*keyStorePassword="\([^"]*\)".*/\1/p' "{{ activemq_instance_home }}/etc/bootstrap.xml"
+      register: bootstrap_keystore_password
+      changed_when: false
+      failed_when: bootstrap_keystore_password.rc != 0
+
+    - name: "Fail if bootstrap.xml does not have the updated keystore password"
+      ansible.builtin.fail:
+        msg: "Keystore password in bootstrap.xml is not updated! Expected: {{ activemq_tls_keystore_password }}, Found: {{ bootstrap_keystore_password.stdout }}"
+      when: bootstrap_keystore_password.stdout != "securepass"
