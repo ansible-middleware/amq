@@ -1,1 +1,11 @@
-         <access method="{{ method }}" roles="{{ activemq_hawtio_role }}"/>
+{% set accesses = [] %}
+{% for method in default_access.methods %}
+  {% set rolesInput=default_access.roles| join(',') | union(activemq_hawtio_role.split(',') | uniq | sort %}
+  {% if rolesInput %}
+    {% set rolesInput=rolesInput + ',' %}
+  {% endif %}
+  {% set accessElem = { 'method': method, 'roles': rolesInput } %}
+  {% set _ = accesses.append( { 'access': accessElem } ) %}
+{% endfor %}
+
+{{ accesses }}

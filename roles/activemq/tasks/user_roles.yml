@@ -62,7 +62,10 @@
   ansible.builtin.lineinfile:
     path: "{{ activemq.instance_home }}/etc/artemis.profile"
     regexp: '^HAWTIO_ROLE=.*'
-    line: "HAWTIO_ROLE='{{ activemq_hawtio_role }}'"
+    line: "HAWTIO_ROLE='{{ activemq_hawtio_role + unique_default_managmement_roles | union(unique_managmement_roles) | sort | join(',') }}'"
+  vars:
+    unique_default_managmement_roles: "{{ activemq_management_access_default | map(attribute='roles') | flatten | unique | sort }}"
+    unique_managmement_roles: "{{ activemq_management_access_domains | map(attribute='accesses') | flatten | map(attribute='roles') | flatten | unique | sort }}"
   become: "{{ activemq_install_requires_become | default(true) }}"
   notify:
     - restart amq_broker
@@ -76,25 +79,25 @@
 
 - name: Create management access default
   ansible.builtin.set_fact:
-    management_access_default: "{{ management_access_default | default([]) + [ lookup('template', 'default_access.management.xml.j2') ] }}"
+    management_access_default: "{{ management_access_default | default([]) + lookup('template', 'default_access.management.xml.j2') | from_yaml }}"
   loop: "{{ activemq_management_access_default }}"
   loop_control:
-    loop_var: method
-    label: "{{ method }}"
+    loop_var: default_access
+    label: "{{ default_access.roles|join(',') }}: {{ default_access.methods|join(',') }}"
 
 - name: Create management access domains
   ansible.builtin.set_fact:
-    management_access_domains: "{{ management_access_domains | default([]) + [ lookup('template', 'role_access.management.xml.j2') ] }}"
+    management_access_domains: "{{ management_access_domains | default([]) + lookup('template', 'role_access.management.xml.j2') | from_yaml }}"
   loop: "{{ activemq_management_access_domains }}"
   loop_control:
-    loop_var: domain
-    label: "{{ domain.name }}"
+    loop_var: access_domains
+    label: "key: {{ access_domains.key | default('') }}, name: {{ access_domains.name | default('') }}"
 
 - name: Create management default access configuration
   middleware_automation.common.xml:
     path: "{{ activemq.instance_home }}/etc/management.xml"
     xpath: //*[local-name()='default-access']
-    input_type: xml
+    input_type: yaml
     set_children: "{{ management_access_default }}"
   become: "{{ activemq_install_requires_become | default(true) }}"
   notify:
@@ -104,7 +107,7 @@
   middleware_automation.common.xml:
     path: "{{ activemq.instance_home }}/etc/management.xml"
     xpath: //*[local-name()='role-access']
-    input_type: xml
+    input_type: yaml
     set_children: "{{ management_access_domains }}"
   become: "{{ activemq_install_requires_become | default(true) }}"
   notify:

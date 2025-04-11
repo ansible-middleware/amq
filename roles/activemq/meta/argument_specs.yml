@@ -350,7 +350,7 @@ argument_specs:
                 default: "{{ lookup('env', 'PWD') }}"
                 type: "str"
             activemq_hawtio_role:
-                description: "Artemis role for hawtio console access"
+                description: "Access Artemis role for hawtio console access that will be added everywhere"
                 default: "amq"
                 type: "str"
             activemq_cors_allow_origin:
@@ -362,11 +362,11 @@ argument_specs:
                 default: true
                 type: "bool"
             activemq_management_access_default:
-                description: "management console access methods for roles activemq_hawtio_role"
+                description: "fine grained management console accesses methods and roles, `activemq_hawtio_role` roles will be added to each access"
                 default: "[ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]"
                 type: "list"
             activemq_management_access_domains:
-                description: "Management console access methods per domain for roles activemq_hawtio_role"
+                description: "fine grained management console accesses methods and roles per domain and key, `activemq_hawtio_role` will be added to each domain access"
                 default: "Access for java.lang and org.apache.artemis.activemq"
                 type: "list"
             activemq_acceptors:

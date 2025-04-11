@@ -1,5 +1,21 @@
-            <match domain="{{ domain.name }}">
-{% for method in domain.methods %}
-                <access method="{{ method }}" roles="{{ activemq_hawtio_role }}"/>
+{% set accesses = [] %}
+{% set match = { 'match': {} } %}
+{% if 'key' in access_domains %}
+  {% set firstLevel = dict(domain=access_domains.name | default('org.apache.activemq.artemis'), key=access_domains.key, _=[]) %}
+{% else %}
+  {% set firstLevel = dict(domain=access_domains.name | default('org.apache.activemq.artemis'), _=[]) %}
+{% endif %}
+{% set _ = match.update( {'match': firstLevel } ) %}
+{% for access in access_domains.accesses %}
+  {% for method in access.methods %}
+    {% set rolesInput=access.roles| join(',') | union(activemq_hawtio_role.split(',') | uniq | sort %}
+    {% if rolesInput %}
+      {% set rolesInput=rolesInput + ',' %}
+    {% endif %}
+    {% set accessElem = { 'method': method, 'roles': rolesInput } %}
+    {% set _ = match['match']['_'].append( { 'access': accessElem } ) %}
+  {% endfor %}
 {% endfor %}
-            </match>
+
+{% set _ = accesses.append( match ) %}
+{{ accesses }}
