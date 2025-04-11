@@ -99,6 +99,7 @@
     xpath: //*[local-name()='default-access']
     input_type: yaml
     set_children: "{{ management_access_default }}"
+    pretty_print: yes
   become: "{{ activemq_install_requires_become | default(true) }}"
   notify:
     - restart amq_broker
@@ -109,6 +110,7 @@
     xpath: //*[local-name()='role-access']
     input_type: yaml
     set_children: "{{ management_access_domains }}"
+    pretty_print: yes
   become: "{{ activemq_install_requires_become | default(true) }}"
   notify:
     - restart amq_broker
