@@ -351,7 +351,7 @@ argument_specs:
                 type: "str"
             activemq_hawtio_role:
                 description: "Access Artemis role for hawtio console access that will be added everywhere"
-                default: "amq"
+                default: "[ 'amq' ]"
                 type: "str"
             activemq_cors_allow_origin:
                 description: "List of CORS allow origin setting for jolokia"
@@ -910,7 +910,7 @@ argument_specs:
                 type: 'int'
             activemq_hawtio_role:
                 description: "Artemis role for hawtio console access"
-                default: "amq"
+                default: "[ 'amq' ]"
                 type: "str"
             activemq_systemd_wait_for_log_ha_string:
                 default: 'AMQ221109|AMQ221001'

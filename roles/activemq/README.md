@@ -450,7 +450,7 @@ activemq_broker_plugins:
 |:---------|:------------|:--------|
 |`activemq_users`| List of users the create with role; user is not created if password empty. List of (user,password,role) dicts | `{{ activemq_instance_username }}/{{ activemq_instance_password }}/amq` |
 |`activemq_roles`| List of roles to create. List of (role,permissions) dicts where permissions is a list of amq broker permissions | `amq` |
-|`activemq_hawtio_role`| Artemis role for hawtio console access that will be added everywhere | `amq` |
+|`activemq_hawtio_role`| Artemis roles for hawtio console access that will be added everywhere | `[ 'amq' ]` |
 |`activemq_management_access_default`| Fine grained management console accesses methods and roles, `activemq_hawtio_role` roles will be added to each access | `[ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]` |
 |`activemq_management_access_domains`| Fine grained management console accesses methods and roles per domain and key, `activemq_hawtio_role` will be added to each domain access | `java.lang`, `org.apache.artemis.activemq` |
 |`activemq_cors_allow_origin`| List of CORS allow origin setting for jolokia | `[ *://0.0.0.0* ]` |
@@ -459,7 +459,7 @@ activemq_broker_plugins:
 Sample user/role configuration with one admin, a consumer and a producer:
 
 ```
-    activemq_hawtio_role: admin
+    activemq_hawtio_role: [ 'admin' ]
     activemq_users:
       - user: amq
         password: amqbrokerpass

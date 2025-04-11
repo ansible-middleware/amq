@@ -62,7 +62,7 @@
   ansible.builtin.lineinfile:
     path: "{{ activemq.instance_home }}/etc/artemis.profile"
     regexp: '^HAWTIO_ROLE=.*'
-    line: "HAWTIO_ROLE='{{ activemq_hawtio_role + unique_default_managmement_roles | union(unique_managmement_roles) | sort | join(',') }}'"
+    line: "HAWTIO_ROLE='{{ activemq_hawtio_role | union(unique_default_managmement_roles) | union(unique_managmement_roles) | sort | join(',') }}'"
   vars:
     unique_default_managmement_roles: "{{ activemq_management_access_default | map(attribute='roles') | flatten | unique | sort }}"
     unique_managmement_roles: "{{ activemq_management_access_domains | map(attribute='accesses') | flatten | map(attribute='roles') | flatten | unique | sort }}"

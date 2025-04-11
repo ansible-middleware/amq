@@ -1,9 +1,6 @@
 {% set accesses = [] %}
 {% for method in default_access.methods %}
-  {% set rolesInput=default_access.roles| join(',') | union(activemq_hawtio_role.split(',') | uniq | sort %}
-  {% if rolesInput %}
-    {% set rolesInput=rolesInput + ',' %}
-  {% endif %}
+  {% set rolesInput=default_access.roles | union(activemq_hawtio_role) | unique | sort | join(',') %}
   {% set accessElem = { 'method': method, 'roles': rolesInput } %}
   {% set _ = accesses.append( { 'access': accessElem } ) %}
 {% endfor %}
