@@ -489,18 +489,18 @@ Sample user/role configuration with one admin, a consumer and a producer:
         accesses:
           - methods: [ 'list*', 'get*', 'is*', 'set*', '*' ]
             # activemq_hawtio_role roles will be added resulting in: 'user_a,' + activemq_hawtio_role.join(',')
-            roles: [ 'user_a' ]
+            roles: [ 'monitoring' ]
       # The 'name' field is not specified, it will default to domain='org.apache.activemq.artemis'.
-      # If activemq_hawtio_role has the default value of [ 'admin' ] then the entry here below will result in:
+      # If activemq_hawtio_role has the value [ 'admin', 'monitoring' ] then the entry here below will result in:
       #
       # <match domain='org.apache.activemq.artemis' key='address=topic.stock.*'>
-      #   <access method="list*" roles="admin, consumer, producer"/>
-      #   <access method="get*" roles="admin, consumer, producer"/>
-      #   <access method="browse*" roles="admin, consumer, producer/>
-      #   <access method="count*" roles="admin, consumer, producer"/>
-      #   <access method="is*" roles="admin, producer"/>
-      #   <access method="set*" roles="admin, producer"/>
-      #   <access method="*" roles="admin, producer"/>
+      #   <access method="list*" roles="admin, consumer, monitoring, producer"/>
+      #   <access method="get*" roles="admin, consumer, monitoring, producer"/>
+      #   <access method="browse*" roles="admin, consumer, monitoring, producer/>
+      #   <access method="count*" roles="admin, consumer, monitoring, producer"/>
+      #   <access method="is*" roles="admin, monitoring, producer"/>
+      #   <access method="set*" roles="admin, monitoring, producer"/>
+      #   <access method="*" roles="admin, monitoring, producer"/>
       # </match>
       - key: 'address=topic.stock.*'
         accesses:
