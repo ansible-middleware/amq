@@ -1,0 +1,116 @@
+---
+- name: Verify
+  hosts: all
+  become: "{{ activeamq_install_requires_become | default(true) }}"
+  tasks:
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+
+    - name: Populate activemq facts
+      middleware_automation.amq.activemq_facts:
+        auth_username: amq
+        auth_password: amqbrokerpass
+        validate_certs: false
+
+    - name: Print activemq gathered facts
+      ansible.builtin.debug:
+        var: ansible_facts.activemq
+
+    - name: Check if amq-broker service is started
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.services["amq-broker.service"]["state"] == "running"
+          - ansible_facts.services["amq-broker.service"]["status"] == "enabled"
+
+    - name: Read content of logs
+      ansible.builtin.slurp:
+        src: /var/log/activemq/amq-broker/artemis.log
+      register: slurped_log
+
+    - name: Check status
+      ansible.builtin.assert:
+        that:
+          - "'Server is now live' in slurped_log.content|b64decode or 'Server is now active' in slurped_log.content|b64decode"
+        quiet: true
+        fail_msg: "Service failed to start correctly"
+
+    - name: Check ownership
+      ansible.builtin.stat:
+        path: /opt/amq/amq-broker/bin/
+      register: broker_bin
+
+    - name: Check ownership
+      ansible.builtin.assert:
+        that:
+          - "broker_bin.stat.pw_name == 'amq-broker'"
+        quiet: true
+        fail_msg: "Wrong ownership of instance directories"
+
+    - name: Retrieve users and roles from cli
+      ansible.builtin.command: "/opt/amq/amq-broker/bin/artemis user list --user amq --password amqbrokerpass"
+      changed_when: False
+      register: user_roles
+
+    - name: Verify users and roles
+      ansible.builtin.assert:
+        that:
+          - "'\"other\"(producer,consumer)' in user_roles.stdout"
+          - "'\"amq\"(admin)' in user_roles.stdout"
+        quiet: true
+        fail_msg: "Failed to retrieve configured users"
+
+    - name: Check console redirect to login page
+      ansible.builtin.uri:
+        url: http://0.0.0.0:8161/console/
+        follow_redirects: none
+        status_code: 302
+        headers:
+          Origin: http://0.0.0.0
+
+    - name: Check jolokia authenticated api call
+      ansible.builtin.uri:
+        url: 'http://0.0.0.0:8161/console/jolokia/read/org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=acceptors,name=!%22artemis!%22/Started'
+        user: amq
+        password: amqbrokerpass
+        force_basic_auth: yes
+        status_code: 200
+        headers:
+          Origin: http://0.0.0.0
+      register: this
+      no_log: True
+      failed_when:
+        - this.value is true
+        - this.status is 200
+
+    - name: Check diverts element exists in broker.xml
+      community.general.xml:
+        path: "/opt/amq/amq-broker/etc/broker.xml"
+        xpath: /conf:configuration/core:core/core:diverts/core:divert
+        input_type: xml
+        state: present
+        content: attribute
+        namespaces:
+          conf: urn:activemq
+          core: urn:activemq:core
+        pretty_print: yes
+      register: diverts
+
+    - name: Check created divert configuration
+      ansible.builtin.assert:
+        that:
+          - diverts.count == 1
+        quiet: true
+        fail_msg: "Failed to retrieve generated divert"
+
+    - name: Check divert configuration via jolokia
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.activemq.DivertNames | length > 0
+          - ansible_facts.activemq.DivertNames | first == "TESTDIVERT"
+
+    - name: Check queue configuration via jolokia
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.activemq.AddressNames | length > 0
+          - "'client123.pubsub' in ansible_facts.activemq.AddressNames"
+          - "'importantTopic' in ansible_facts.activemq.AddressNames"

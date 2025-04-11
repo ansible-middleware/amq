@@ -1,0 +1,116 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: yes
+  vars:
+    activemq_service_user_home: /home/activemq
+    activemq_network_check_enabled: true
+    activemq_message_counter_enabled: true
+    activemq_network_check_list: "127.0.0.1,8.8.8.8,{{ inventory_hostname }},{{ ansible_all_ipv4_addresses | join(',') }}"
+    activemq_hawtio_role: [ 'admin', 'monitoring' ]
+    activemq_users:
+      - user: amq
+        password: amqbrokerpass
+        roles: [ admin ]
+      - user: operator
+        password: amqoperatorpass
+        roles: [ operate ]
+      - user: other
+        password: amqotherpass
+        roles: [ consumer, producer, monitoring ]
+      - user: business
+        password: amqbusinesspass
+        roles: [ specific ]
+    activemq_roles:
+      - name: admin
+        permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
+      - name: manager
+        permissions: [ browse, manage ]
+      - name: topicsmanager
+        match: topics.#
+        permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, browse, manage ]
+      - name: consumer
+        match: topics.#
+        permissions: [ consume, browse ]
+      - name: producer
+        match: topics.#
+        permissions: [ send, browse ]
+    activemq_management_access_default:
+      - methods: [ 'list*', 'get*', 'is*', 'browse*', 'count*' ]
+        roles: [ 'operate' ]
+      - methods: [ 'set*', '*' ]
+        roles: [ ]
+    activemq_management_access_domains:
+      - accesses:
+          - methods: [ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]
+            roles: [ ]
+      - key: 'address=queue.*'
+        accesses:
+          - methods: [ 'list*', 'get*', 'is*', 'browse*', 'count*' ]
+            roles: [ 'specific' ]
+          - methods: [ 'set*', '*' ]
+            roles: [ ]
+    activemq_acceptors:
+      - name: artemis
+        bind_address: "{{ activemq_host }}"
+        bind_port: "{{ activemq_port }}"
+        parameters:
+          tcpSendBufferSize: 1048576
+          tcpReceiveBufferSize: 1048576
+          protocols: CORE,MQTT
+          useEpoll: true
+      - name: amqp
+        scheme: tcp
+        bind_address: "{{ activemq_host }}"
+        bind_port: "{{ activemq_port_amqp }}"
+        parameters:
+          tcpSendBufferSize: 1048576
+          tcpReceiveBufferSize: 1048576
+          protocols: AMQP
+          useEpoll: true
+          amqpMinLargeMessageSize: 102400
+          amqpCredits: 1000
+          amqpLowCredits: 300
+          amqpDuplicateDetection: true
+      - name: invm
+        scheme: vm
+    activemq_diverts:
+      - name: TESTDIVERT
+        address: queue.in
+        forwarding_address: queue.out
+        routing_type: ANYCAST
+        filter: "msgType LIKE '%ff%'"
+        exclusive: True
+    activemq_addresses:
+      - name: queue.in
+        anycast:
+          - name: queue.in
+      - name: queue.out
+        anycast:
+          - name: queue.out
+      - name: DLQ
+        anycast:
+          - name: DLQ
+            parameters:
+              durable: True
+      - name: ExpiryQueue
+        anycast:
+          - name: ExpiryQueue
+      - name: importantTopic
+        multicast:
+      - name: client123.pubsub
+        multicast:
+          - name: client123.pubsub.foo
+            parameters:
+              max_consumers: 1
+              delay_before_dispatch: 3
+    activemq_broker_plugins:
+      - class_name: org.apache.activemq.artemis.core.server.plugin.impl.LoggingActiveMQServerPlugin
+        properties:
+          LOG_DELIVERING_EVENTS: true
+          LOG_SENDING_EVENTS: true
+      - class_name: org.apache.activemq.artemis.core.server.plugin.impl.NotificationActiveMQServerPlugin
+        properties:
+          SEND_SESSION_NOTIFICATIONS: true
+  roles:
+    - middleware_automation.amq.activemq
