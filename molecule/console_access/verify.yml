@@ -54,8 +54,10 @@
     - name: Verify users and roles
       ansible.builtin.assert:
         that:
-          - "'\"other\"(producer,consumer)' in user_roles.stdout"
+          - "'\"other\"(producer,monitoring,consumer)' in user_roles.stdout"
           - "'\"amq\"(admin)' in user_roles.stdout"
+          - "'\"business\"(specific)' in user_roles.stdout"
+          - "'\"operator\"(operate)' in user_roles.stdout"
         quiet: true
         fail_msg: "Failed to retrieve configured users"
 
@@ -81,6 +83,103 @@
       failed_when:
         - this.value is true
         - this.status is 200
+
+    - name: Check jolokia fine grained authentorization access
+      ansible.builtin.uri:
+        url: "{{ 'http://0.0.0.0:8161/console/jolokia/exec/' + operation.mbean }}"
+        user: "{{ operation.user }}"
+        password: "{{ operation.password }}"
+        force_basic_auth: yes
+        status_code: 200
+        return_content: yes
+        headers:
+          Origin: http://0.0.0.0
+      register: jolokia
+      loop:
+        - mbean: 'org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=addresses,address=!%22queue.in!%22,subcomponent=queues,routing-type=!%22anycast!%22,queue=!%22queue.in!%22/browse()'
+          user: amq
+          password: amqbrokerpass
+          result: 200
+        - mbean: 'org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=addresses,address=!%22queue.in!%22,subcomponent=queues,routing-type=!%22anycast!%22,queue=!%22queue.in!%22/browse()'
+          user: other
+          password: amqotherpass
+          result: 200
+        - mbean: 'org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=addresses,address=!%22queue.in!%22,subcomponent=queues,routing-type=!%22anycast!%22,queue=!%22queue.in!%22/browse()'
+          user: operator
+          password: amqoperatorpass
+          result: 403
+        - mbean: 'org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=addresses,address=!%22queue.in!%22,subcomponent=queues,routing-type=!%22anycast!%22,queue=!%22queue.in!%22/browse()'
+          user: business
+          password: amqbusinesspass
+          result: 200
+        - mbean: 'org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=addresses,address=!%22other.queue.out!%22,subcomponent=queues,routing-type=!%22anycast!%22,queue=!%22other.queue.out!%22/browse()'
+          user: amq
+          password: amqbrokerpass
+          result: 200
+        - mbean: 'org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=addresses,address=!%22other.queue.out!%22,subcomponent=queues,routing-type=!%22anycast!%22,queue=!%22other.queue.out!%22/browse()'
+          user: other
+          password: amqotherpass
+          result: 200
+        - mbean: 'org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=addresses,address=!%22other.queue.out!%22,subcomponent=queues,routing-type=!%22anycast!%22,queue=!%22other.queue.out!%22/browse()'
+          user: operator 
+          password: amqoperatorpass
+          result: 403
+        - mbean: 'org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=addresses,address=!%22other.queue.out!%22,subcomponent=queues,routing-type=!%22anycast!%22,queue=!%22other.queue.out!%22/browse()'
+          user: business
+          password: amqbusinesspass
+          result: 403
+        - mbean: 'org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=addresses,address=!%22queue.in!%22,subcomponent=queues,routing-type=!%22anycast!%22,queue=!%22queue.in!%22/flushExecutor()'
+          user: amq
+          password: amqbrokerpass
+          result: 200
+        - mbean: 'org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=addresses,address=!%22queue.in!%22,subcomponent=queues,routing-type=!%22anycast!%22,queue=!%22queue.in!%22/flushExecutor()'
+          user: other
+          password: amqotherpass
+          result: 200
+        - mbean: 'org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=addresses,address=!%22queue.in!%22,subcomponent=queues,routing-type=!%22anycast!%22,queue=!%22queue.in!%22/flushExecutor()'
+          user: operator 
+          password: amqoperatorpass
+          result: 403
+        - mbean: 'org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=addresses,address=!%22queue.in!%22,subcomponent=queues,routing-type=!%22anycast!%22,queue=!%22queue.in!%22/flushExecutor()'
+          user: business
+          password: amqbusinesspass
+          result: 403
+        - mbean: 'java.lang:type=Threading/getThreadCpuTime(%5BJ)/1'
+          user: amq
+          password: amqbrokerpass
+          result: 200
+        - mbean: 'java.lang:type=Threading/getThreadCpuTime(%5BJ)/1'
+          user: other
+          password: amqotherpass
+          result: 200
+        - mbean: 'java.lang:type=Threading/getThreadCpuTime(%5BJ)/1'
+          user: operator 
+          password: amqoperatorpass
+          result: 200
+        - mbean: 'java.lang:type=Threading/getThreadCpuTime(%5BJ)/1'
+          user: business
+          password: amqbusinesspass
+          result: 403
+      loop_control:
+        loop_var: operation
+        label: "{{ 'user \"' + operation.user + '\" form mBean \"' + operation.mbean + '\"'}}"
+      failed_when: >
+        ((jolokia.content | from_json).status | int) != (operation.result | int)
+      no_log: true
+
+    - name: Read content of artemis.profile
+      ansible.builtin.slurp:
+        src: /opt/amq/amq-broker/etc/artemis.profile
+      register: slurped_artemis_profile
+
+    - name: Check HAWTIO_ROLES
+      ansible.builtin.assert:
+        that:
+          - >
+            "HAWTIO_ROLE='admin,monitoring,operate,specific'" in slurped_artemis_profile.content|b64decode
+        quiet: true
+        fail_msg: "HAWTIO_ROLES not calculated correctly"
+
 
     - name: Check diverts element exists in broker.xml
       community.general.xml:

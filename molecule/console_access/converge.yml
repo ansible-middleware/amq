@@ -88,6 +88,9 @@
       - name: queue.out
         anycast:
           - name: queue.out
+      - name: other.queue.out
+        anycast:
+          - name: other.queue.out
       - name: DLQ
         anycast:
           - name: DLQ
