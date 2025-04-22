@@ -7,10 +7,10 @@ middleware\_automation.amq Release Notes
 v2.2.11-devel
 =============
 
-Release Summary
----------------
+Minor Changes
+-------------
 
-Internal release, documentation or test changes only.
+- Add ``continue_on_error`` parameter to activemq_facts module `#223 <https://github.com/ansible-middleware/amq/pull/223>`_
 
 v2.2.10
 =======
