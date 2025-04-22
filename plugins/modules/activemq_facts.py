@@ -75,6 +75,11 @@ options:
             - Controls the HTTP connections timeout period in seconds to jolokia API.
         type: int
         default: 10
+    continue_on_error:
+        description:
+            - Stop execution or continue in case of connection error
+        type: bool
+        default: false
 author:
   - Guido Grazioli (@guidograzioli)
 '''
@@ -123,6 +128,7 @@ class JolokiaService(object):
         self.connection_timeout = self.module.params.get('connection_timeout')
         self.auth_username = self.module.params.get('auth_username')
         self.auth_password = self.module.params.get('auth_password')
+        self.continue_on_error = self.module.params.get('continue_on_error')
 
     def gather_facts(self):
         """ Obtain configuration from jolokia API
@@ -140,14 +146,23 @@ class JolokiaService(object):
         restheaders["Origin"] = self.web_origin
 
         try:
-            return json.loads(to_native(open_url(jolokia_url, method='GET',
-                                                 headers=restheaders,
-                                                 timeout=self.connection_timeout,
-                                                 validate_certs=self.validate_certs).read()))
+            value = json.loads(to_native(open_url(jolokia_url, method='GET',
+                                                  headers=restheaders,
+                                                  timeout=self.connection_timeout,
+                                                  validate_certs=self.validate_certs).read()))
+
+            if not value or "value" not in value:
+                if self.continue_on_error:
+                    self.module.exit_json(changed=False, skipped=True)
+                else:
+                    self.module.fail_json(msg="Failed to find info. Check configuration (credentials, url, cors, ...)")
+
+            return value["value"]
 
         except HTTPError as e:
             if e.code == 404:
-                return None
+                self.module.fail_json(msg='HTTP 404 error, check your jolokia configuration: %s' % (str(e)),
+                                      exception=traceback.format_exc())
             else:
                 self.module.fail_json(msg='HTTP error calling jolokia api: %s' % (str(e)),
                                       exception=traceback.format_exc())
@@ -172,7 +187,8 @@ def amq_argument_spec():
         auth_password=dict(type='str', aliases=['password'], required=True, no_log=True),
         validate_certs=dict(type='bool', default=True),
         web_origin=dict(type='str', required=False, default="http://0.0.0.0", no_log=False),
-        connection_timeout=dict(type='int', default=10)
+        connection_timeout=dict(type='int', default=10),
+        continue_on_error=dict(type='bool', default=False)
     )
 
 
@@ -181,10 +197,7 @@ def main():
                            required_together=([['auth_username', 'auth_password']]))
     mod = JolokiaService(module)
     svc = mod.gather_facts()
-    if not svc or "value" not in svc:
-        results = dict(skipped=True, msg="Failed to find info. This can be due to privileges or some other configuration issue.")
-    else:
-        results = dict(ansible_facts=dict(activemq=svc["value"]))
+    results = dict(ansible_facts=dict(activemq=svc))
     module.exit_json(**results)
 
 
