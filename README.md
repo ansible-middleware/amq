@@ -12,7 +12,7 @@ Collection to install and configure [Apache ActiveMQ Artemis](https://activemq.a
 <!--start requires_ansible-->
 ## Ansible version compatibility
 
-This collection has been tested against following Ansible versions: **>=2.15.0**.
+This collection has been tested against following Ansible versions: **>=2.16.0**.
 <!--end requires_ansible-->
 
 <!--start roles_paths -->
