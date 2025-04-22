@@ -21,19 +21,19 @@
   no_log: false
   become: "{{ activemq_install_requires_become | default(true) }}"
 
-- name: Unique security settings roles
+- name: Set unique security settings roles
   ansible.builtin.set_fact:
     unique_security_settings_roles: "{{ activemq_roles | map(attribute='name') | list | unique | sort }}"
 
-- name: Unique default management roles
+- name: Set unique default management roles
   ansible.builtin.set_fact:
     unique_default_managmement_roles:  "{{ activemq_management_access_default | map(attribute='roles') | flatten | unique | sort }}"
 
-- name: Unique management roles
+- name: Set unique management roles
   ansible.builtin.set_fact:
     unique_managmement_roles: "{{ activemq_management_access_domains | map(attribute='accesses') | flatten | map(attribute='roles') | flatten | unique | sort }}"
 
-- name: All activemq roles
+- name: Collect all activemq roles
   ansible.builtin.set_fact:
     all_roles: "{{ activemq_hawtio_role | unique | union(unique_security_settings_roles) | union(unique_default_managmement_roles) | union(unique_managmement_roles) | sort }}"
 
