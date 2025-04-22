@@ -16,7 +16,6 @@
     activemq_ha_check_for_active_server: true
     activemq_systemd_wait_for_log: true
     activemq_systemd_wait_for_port_number: 8161
-    activemq_install_requires_become: false
     activemq_users:
     - user: amq
       password: amqbrokerpass

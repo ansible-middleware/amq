@@ -1,13 +1,14 @@
 ---
+- name: "Stop ActiveMQ broker before upgrading"
+  ansible.builtin.include_tasks: stop.yml
+
 - name: "Update profile for instance {{ activemq.instance_name }} with new artemis version"
   ansible.builtin.lineinfile:
     path: "{{ activemq.instance_home }}/etc/artemis.profile"
     regexp: '^ARTEMIS_HOME=.*'
     line: "ARTEMIS_HOME='{{ activemq.home }}'"
-  become: "{{ activeamq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_requires_become | default(true) }}"
   register: broker_updated
-  notify:
-    - restart amq_broker
 
 - name: "Check artemis {{ activemq.home }} activemq schema"
   middleware_automation.common.xml:
@@ -17,18 +18,21 @@
     namespaces:
       xs: http://www.w3.org/2001/XMLSchema
   register: activemq_xsd
-  become: "{{ activeamq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_requires_become | default(true) }}"
 
 - name: "Ensure bootstrap xsd namespace {{ activemq_xsd.matches[0]['{http://www.w3.org/2001/XMLSchema}schema'].targetNamespace }} is correct for instance {{ activemq.instance_name }}"
   ansible.builtin.replace:
     path: "{{ activemq.instance_home }}/etc/bootstrap.xml"
     regexp: '(?<=<broker )xmlns=".*?"'
     replace: "xmlns=\"{{ activemq_xsd.matches[0]['{http://www.w3.org/2001/XMLSchema}schema'].targetNamespace }}\""
-  become: "{{ activeamq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_requires_become | default(true) }}"
 
 - name: "Ensure mgmt context xsd namespace {{ activemq_xsd.matches[0]['{http://www.w3.org/2001/XMLSchema}schema'].targetNamespace }} is correct for instance {{ activemq.instance_name }}"
   ansible.builtin.lineinfile:
     path: "{{ activemq.instance_home }}/etc/management.xml"
     regexp: '<management-context xmlns=".*">'
     line: "<management-context xmlns=\"{{ activemq_xsd.matches[0]['{http://www.w3.org/2001/XMLSchema}schema'].targetNamespace }}\">"
-  become: "{{ activeamq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_requires_become | default(true) }}"
+
+- name: "Start ActiveMQ broker after upgrading"
+  ansible.builtin.include_tasks: start.yml
