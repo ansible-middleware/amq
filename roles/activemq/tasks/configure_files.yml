@@ -44,6 +44,19 @@
   notify:
     - restart amq_broker
 
+- name: "Update keystore password in all bindings inside bootstrap.xml"
+  become: "{{ activemq_install_requires_become | default(true) }}"
+  middleware_automation.common.xml:
+    path: "{{ activemq.instance_home }}/etc/bootstrap.xml"
+    xpath: '//b:binding'
+    attribute: keyStorePassword
+    value: "{{ activemq_tls_keystore_password }}"
+    namespaces:
+      b: http://activemq.apache.org/schema
+  notify:
+    - restart amq_broker
+  when: activemq_tls_enabled
+
 - name: "Configure using properties file"
   become: "{{ activemq_install_requires_become | default(true) }}"
   ansible.builtin.template:
