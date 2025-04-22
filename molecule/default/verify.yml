@@ -6,6 +6,23 @@
     - name: Populate service facts
       ansible.builtin.service_facts:
 
+    - name: Test module continue_on_error
+      block:
+        - name: Populate activemq facts
+          middleware_automation.amq.activemq_facts:
+            auth_username: amq
+            auth_password: amqbrokerpass
+            validate_certs: false
+            web_origin: 'not what was intended'
+      rescue:
+        - name: Populate activemq facts
+          middleware_automation.amq.activemq_facts:
+            auth_username: amq
+            auth_password: amqbrokerpass
+            validate_certs: false
+            web_origin: 'not what was intended'
+            continue_on_error: true
+
     - name: Populate activemq facts
       middleware_automation.amq.activemq_facts:
         auth_username: amq
