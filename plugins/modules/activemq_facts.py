@@ -153,7 +153,7 @@ class JolokiaService(object):
 
             if not value or "value" not in value:
                 if self.continue_on_error:
-                    self.module.exit_json(changed=False, skipped=True)
+                    self.module.exit_json(changed=False, skipped=True, msg="Ignoring failure to find info. Check configuration.")
                 else:
                     self.module.fail_json(msg="Failed to find info. Check configuration (credentials, url, cors, ...)")
 
