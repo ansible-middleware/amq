@@ -4,8 +4,13 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
-v2.2.11-devel
-=============
+v2.3.0-devel
+============
+
+Major Changes
+-------------
+
+- Bump major and ansible-core version `#224 <https://github.com/ansible-middleware/amq/pull/224>`_
 
 Minor Changes
 -------------
