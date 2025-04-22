@@ -825,6 +825,14 @@ argument_specs:
                 description: "Path for main logfile relative to instance directory."
                 default: "/log/artemis.log"
                 type: 'str'
+            activemq_logger_max_file_size:
+                description: "Maximum size of each regular log file before rollover"
+                default: 104857600  # 100MB in bytes
+                type: 'int'
+            activemq_logger_audit_max_file_size:
+                description: "Maximum size of each audit log file before rollover"
+                default: 52428800  # 50MB in bytes
+                type: 'int'
     systemd:
         options:
             activemq_version:
@@ -916,14 +924,6 @@ argument_specs:
                 default: "{{ activemq_port }}"
                 type: 'int'
                 description: "The port number to wait for when activemq_systemd_wait_for_port is true"
-            activemq_logger_max_file_size:
-                description: "Maximum size of each regular log file before rollover"
-                default: 104857600  # 100MB in bytes
-                type: 'int'
-            activemq_logger_audit_max_file_size:
-                description: "Maximum size of each audit log file before rollover"
-                default: 52428800  # 50MB in bytes
-                type: 'int'
     downstream:
         options:
             amq_broker_version:
