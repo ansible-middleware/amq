@@ -7,6 +7,11 @@ middleware\_automation.amq Release Notes
 v2.2.10-devel
 =============
 
+Bugfixes
+--------
+
+- Fix keystore password not updated in bootstrap.xml `#221 <https://github.com/ansible-middleware/amq/pull/221>`_
+
 v2.2.9
 ======
 
