@@ -29,11 +29,11 @@
   ansible.builtin.set_fact:
     unique_default_managmement_roles:  "{{ activemq_management_access_default | map(attribute='roles') | flatten | unique | sort }}"
 
-- name: unique management roles
+- name: Unique management roles
   ansible.builtin.set_fact:
     unique_managmement_roles: "{{ activemq_management_access_domains | map(attribute='accesses') | flatten | map(attribute='roles') | flatten | unique | sort }}"
 
-- name: all activemq roles
+- name: All activemq roles
   ansible.builtin.set_fact:
     all_roles: "{{ activemq_hawtio_role | unique | union(unique_security_settings_roles) | union(unique_default_managmement_roles) | union(unique_managmement_roles) | sort }}"
 
