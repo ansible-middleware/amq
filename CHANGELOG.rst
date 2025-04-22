@@ -10,7 +10,7 @@ v2.2.9
 Minor Changes
 -------------
 
-- AMW-369 In amq collection user roles have to be unique `#217 <https://github.com/ansible-middleware/amq/pull/217>`_
+- User roles have to be unique in artemis-roles.properties `#217 <https://github.com/ansible-middleware/amq/pull/217>`_
 - Add a size based roll over of artemis and audit log files `#210 <https://github.com/ansible-middleware/amq/pull/210>`_
 
 v2.2.8
