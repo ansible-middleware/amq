@@ -516,6 +516,15 @@ releases:
     - 166.yaml
     - 167.yaml
     release_date: '2024-09-05'
+  2.2.10:
+    changes:
+      bugfixes:
+      - 'Fix keystore password not updated in bootstrap.xml `#221 <https://github.com/ansible-middleware/amq/pull/221>`_
+
+        '
+    fragments:
+    - 221.yaml
+    release_date: '2025-04-22'
   2.2.2:
     changes:
       bugfixes:
@@ -616,10 +625,10 @@ releases:
   2.2.9:
     changes:
       minor_changes:
-      - 'User roles have to be unique in artemis-roles.properties `#217 <https://github.com/ansible-middleware/amq/pull/217>`_
+      - 'Add a size based roll over of artemis and audit log files `#210 <https://github.com/ansible-middleware/amq/pull/210>`_
 
         '
-      - 'Add a size based roll over of artemis and audit log files `#210 <https://github.com/ansible-middleware/amq/pull/210>`_
+      - 'User roles have to be unique in artemis-roles.properties `#217 <https://github.com/ansible-middleware/amq/pull/217>`_
 
         '
     fragments:

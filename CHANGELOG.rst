@@ -4,14 +4,22 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.2.10
+=======
+
+Bugfixes
+--------
+
+- Fix keystore password not updated in bootstrap.xml `#221 <https://github.com/ansible-middleware/amq/pull/221>`_
+
 v2.2.9
 ======
 
 Minor Changes
 -------------
 
-- User roles have to be unique in artemis-roles.properties `#217 <https://github.com/ansible-middleware/amq/pull/217>`_
 - Add a size based roll over of artemis and audit log files `#210 <https://github.com/ansible-middleware/amq/pull/210>`_
+- User roles have to be unique in artemis-roles.properties `#217 <https://github.com/ansible-middleware/amq/pull/217>`_
 
 v2.2.8
 ======
@@ -190,16 +198,16 @@ Bugfixes
 v2.0.0
 ======
 
+Breaking Changes / Porting Guide
+--------------------------------
+
+- Set Ansible required version to >= 2.14 `#108 <https://github.com/ansible-middleware/amq/pull/108>`_
+
 Minor Changes
 -------------
 
 - Add referrer to ldap plugin, allow custom login.config `#110 <https://github.com/ansible-middleware/amq/pull/110>`_
 - Update activemq default version to 2.28 `#111 <https://github.com/ansible-middleware/amq/pull/111>`_
-
-Breaking Changes / Porting Guide
---------------------------------
-
-- Set Ansible required version to >= 2.14 `#108 <https://github.com/ansible-middleware/amq/pull/108>`_
 
 New Plugins
 -----------
@@ -369,6 +377,12 @@ Bugfixes
 v1.1.0
 ======
 
+Breaking Changes / Porting Guide
+--------------------------------
+
+- Rename role ``amq_broker`` to ``activemq`` `#26 <https://github.com/ansible-middleware/amq/pull/26>`_
+- Rename variables prefix to ``activemq_`` `#11 <https://github.com/ansible-middleware/amq/pull/11>`_
+
 Major Changes
 -------------
 
@@ -382,12 +396,6 @@ Minor Changes
 - Arbitrary connectors configuration via ``activemq_connectors`` variable `#31 <https://github.com/ansible-middleware/amq/pull/31>`_
 - Configuration for management role access `#29 <https://github.com/ansible-middleware/amq/pull/29>`_
 - Variable to config controller download/offline directory `#18 <https://github.com/ansible-middleware/amq/pull/18>`_
-
-Breaking Changes / Porting Guide
---------------------------------
-
-- Rename role ``amq_broker`` to ``activemq`` `#26 <https://github.com/ansible-middleware/amq/pull/26>`_
-- Rename variables prefix to ``activemq_`` `#11 <https://github.com/ansible-middleware/amq/pull/11>`_
 
 Bugfixes
 --------
