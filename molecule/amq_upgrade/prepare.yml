@@ -1,6 +1,10 @@
 ---
 - name: Prepare
   hosts: all
+  environment:
+    http_proxy: "{{ lookup('env', 'http_proxy') }}"
+    https_proxy: "{{ lookup('env', 'https_proxy') }}"
+    no_proxy: "{{ lookup('env', 'no_proxy') }}"
   pre_tasks:
     - name: "Run preparation common to all scenario"
       ansible.builtin.include_tasks: ../prepare.yml
