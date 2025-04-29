@@ -3,9 +3,9 @@
   hosts: all
   gather_facts: yes
   environment:
-    http_proxy: "{{ lookup('env', 'http_proxy') }}"
-    https_proxy: "{{ lookup('env', 'https_proxy') }}"
-    no_proxy: "{{ lookup('env', 'no_proxy') }}"
+    http_proxy: "{{ lookup('env', 'PROXY') }}"
+    https_proxy: "{{ lookup('env', 'PROXY') }}"
+    no_proxy: "{{ lookup('env', 'NO_PROXY') }}"
   vars:
     activemq_users:
     - user: amq
