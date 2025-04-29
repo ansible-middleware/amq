@@ -21,21 +21,16 @@
   no_log: false
   become: "{{ activemq_install_requires_become | default(true) }}"
 
-- name: Set unique security settings roles
+- name: Set unique role lists
   ansible.builtin.set_fact:
     unique_security_settings_roles: "{{ activemq_roles | map(attribute='name') | list | unique | sort }}"
-
-- name: Set unique default management roles
-  ansible.builtin.set_fact:
-    unique_default_managmement_roles:  "{{ activemq_management_access_default | map(attribute='roles') | flatten | unique | sort }}"
-
-- name: Set unique management roles
-  ansible.builtin.set_fact:
+    unique_default_managmement_roles: "{{ activemq_management_access_default | map(attribute='roles') | flatten | unique | sort }}"
     unique_managmement_roles: "{{ activemq_management_access_domains | map(attribute='accesses') | flatten | map(attribute='roles') | flatten | unique | sort }}"
 
 - name: Collect all activemq roles
   ansible.builtin.set_fact:
-    all_roles: "{{ activemq_hawtio_roles | unique | union(unique_security_settings_roles) | union(unique_default_managmement_roles) | union(unique_managmement_roles) | sort }}"
+    all_roles: "{{ activemq_hawtio_roles | unique | union(unique_security_settings_roles) | \
+                   union(unique_default_managmement_roles) | union(unique_managmement_roles) | sort }}"
 
 - name: Configure roles
   ansible.builtin.template:
@@ -48,7 +43,8 @@
 
 - name: Create security settings matches
   ansible.builtin.set_fact:
-    security_settings_matches: "{{ security_settings_matches | default({}) | combine( { match: { item.1: [ item.0.name ] }  }, recursive=true, list_merge='append' ) }}"
+    security_settings_matches: "{{ security_settings_matches | default({}) | \
+                                   combine( { match: { item.1: [ item.0.name ] }  }, recursive=true, list_merge='append' ) }}"
   vars:
     match: "{{ item.0.match | default('#') }}"
   loop: "{{ activemq_roles | subelements('permissions') }}"
@@ -78,7 +74,8 @@
   ansible.builtin.lineinfile:
     path: "{{ activemq.instance_home }}/etc/artemis.profile"
     regexp: '^HAWTIO_ROLE=.*'
-    line: "HAWTIO_ROLE='{{ activemq_hawtio_roles | unique | union(unique_default_managmement_roles) | union(unique_managmement_roles) | sort | join(',') }}'"
+    line: "HAWTIO_ROLE='{{ activemq_hawtio_roles | unique | union(unique_default_managmement_roles) | \
+                           union(unique_managmement_roles) | sort | join(',') }}'"
   become: "{{ activemq_install_requires_become | default(true) }}"
   notify:
     - restart amq_broker
@@ -92,7 +89,8 @@
 
 - name: Create management access default
   ansible.builtin.set_fact:
-    management_access_default: "{{ management_access_default | default([]) + lookup('template', 'default_access.management.xml.j2') | from_yaml }}"
+    management_access_default: "{{ management_access_default | default([]) + \
+                                   lookup('template', 'default_access.management.xml.j2') | from_yaml }}"
   loop: "{{ activemq_management_access_default }}"
   loop_control:
     loop_var: default_access
@@ -100,7 +98,8 @@
 
 - name: Create management access domains
   ansible.builtin.set_fact:
-    management_access_domains: "{{ management_access_domains | default([]) + lookup('template', 'role_access.management.xml.j2') | from_yaml }}"
+    management_access_domains: "{{ management_access_domains | default([]) + \
+                                   lookup('template', 'role_access.management.xml.j2') | from_yaml }}"
   loop: "{{ activemq_management_access_domains }}"
   loop_control:
     loop_var: access_domains
@@ -112,7 +111,7 @@
     xpath: //*[local-name()='default-access']
     input_type: yaml
     set_children: "{{ management_access_default }}"
-    pretty_print: yes
+    pretty_print: true
   become: "{{ activemq_install_requires_become | default(true) }}"
   notify:
     - restart amq_broker
@@ -123,7 +122,31 @@
     xpath: //*[local-name()='role-access']
     input_type: yaml
     set_children: "{{ management_access_domains }}"
-    pretty_print: yes
+    pretty_print: true
   become: "{{ activemq_install_requires_become | default(true) }}"
   notify:
     - restart amq_broker
+
+- name: Make collection other xsd available for validation
+  ansible.builtin.copy:
+    src: "{{ activemq_installdir }}/schema/activemq.xsd"
+    dest: "{{ activemq_installdir }}/schema/activemq_fix.xsd"
+    mode: '0644'
+    remote_src: true
+  changed_when: false  # it does not change targets, needed for validation only
+
+# the following workaround bypasses an issue in lxml finding the xsd ambiguous
+- name: Make collection other xsd available for validation (workaround)
+  ansible.builtin.lineinfile:
+    path: "{{ activemq_installdir }}/schema/activemq_fix.xsd"
+    search_string: '<xs:element name="broker" type="tns:brokerDTO"/>'
+    state: absent
+  changed_when: false  # it does not change targets, needed for validation only
+
+- name: Validate access configuration
+  middleware_automation.common.xml:
+    xsd_path: "{{ activemq_installdir }}/schema/activemq_fix.xsd"
+    path: "{{ activemq.instance_home }}/etc/management.xml"
+    validate: true
+    input_type: xml
+  no_log: false

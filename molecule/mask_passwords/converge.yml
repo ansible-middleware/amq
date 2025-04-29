@@ -12,7 +12,7 @@
   vars:
     activemq_version: 2.29.0
     activemq_service_user_home: /home/activemq
-    activemq_hawtio_role: [ 'Scientists' ]
+    activemq_hawtio_roles: [ 'Scientists' ]
     activemq_password_codec: "com.ansiblemiddleware.amq.utils.PBKDF2WithHmacCodec;iterations={{ activemq_mask_password_iterations }};hashname={{ activemq_mask_password_hashname }}"
     activemq_mask_password_hashname: sha256
     activemq_mask_password_iterations: 2048
