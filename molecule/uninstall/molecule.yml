@@ -28,7 +28,8 @@ provisioner:
   env:
     ANSIBLE_FORCE_COLOR: "true"
     PROXY: "${PROXY}"
-    NO_PROXY: "${NO_PROXY}"verifier:
+    NO_PROXY: "${NO_PROXY}"
+verifier:
   name: ansible
 scenario:
   test_sequence:
