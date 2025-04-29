@@ -450,7 +450,8 @@ activemq_broker_plugins:
 |:---------|:------------|:--------|
 |`activemq_users`| List of users the create with role; user is not created if password empty. List of (user,password,role) dicts | `{{ activemq_instance_username }}/{{ activemq_instance_password }}/amq` |
 |`activemq_roles`| List of roles to create. List of (role,permissions) dicts where permissions is a list of amq broker permissions | `amq` |
-|`activemq_hawtio_role`| Artemis roles for hawtio console access that will be added on each default and domain management access | `[ 'amq' ]` |
+|`activemq_hawtio_role`| DEPRECATED, use `activemq_hawtio_roles` instead | `amq` |
+|`activemq_hawtio_roles`| Artemis roles for hawtio console access that will be added on each default and domain management access | `[ 'amq' ]` |
 |`activemq_management_access_default`| Fine grained management console accesses methods and roles, `activemq_hawtio_role` roles will be added to each access | `[ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]` |
 |`activemq_management_access_domains`| Fine grained management console accesses methods and roles per domain and key, `activemq_hawtio_role` will be added to each domain access | `java.lang`, `org.apache.artemis.activemq` |
 |`activemq_cors_allow_origin`| List of CORS allow origin setting for jolokia | `[ *://0.0.0.0* ]` |
@@ -458,8 +459,8 @@ activemq_broker_plugins:
 
 Sample user/role configuration with one admin, a consumer and a producer:
 
-```
-    activemq_hawtio_role: [ 'admin' ]
+```yaml
+    activemq_hawtio_roles: [ 'admin' ]
     activemq_users:
       - user: amq
         password: amqbrokerpass
@@ -483,15 +484,15 @@ Sample user/role configuration with one admin, a consumer and a producer:
       - name: org.apache.activemq.artemis
         accesses:
           - methods: [ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]
-            # will default to the roles in activemq_hawtio_role
+            # will default to the roles in activemq_hawtio_roles
             roles: [ ]
       - name: java.lang
         accesses:
           - methods: [ 'list*', 'get*', 'is*', 'set*', '*' ]
-            # activemq_hawtio_role roles will be added resulting in: 'user_a,' + activemq_hawtio_role.join(',')
+            # activemq_hawtio_roles roles will be added resulting in: 'user_a,' + activemq_hawtio_roles.join(',')
             roles: [ 'monitoring' ]
       # The 'name' field is not specified, it will default to domain='org.apache.activemq.artemis'.
-      # If activemq_hawtio_role has the value [ 'admin', 'monitoring' ] then the entry here below will result in:
+      # If activemq_hawtio_roles has the value [ 'admin', 'monitoring' ] then the entry here below will result in:
       #
       # <match domain='org.apache.activemq.artemis' key='address=topic.stock.*'>
       #   <access method="list*" roles="admin, consumer, monitoring, producer"/>

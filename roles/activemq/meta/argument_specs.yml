@@ -350,9 +350,13 @@ argument_specs:
                 default: "{{ lookup('env', 'PWD') }}"
                 type: "str"
             activemq_hawtio_role:
-                description: "Access Artemis role for hawtio console access that will be added everywhere"
-                default: "[ 'amq' ]"
+                description: "DEPRECATED, use activemq_hawtio_roles"
+                default: "amq"
                 type: "str"
+            activemq_hawtio_roles:
+                description: "Access Artemis roles for hawtio console access that will be added everywhere"
+                default: "[ 'amq' ]"
+                type: "list"
             activemq_cors_allow_origin:
                 description: "List of CORS allow origin setting for jolokia"
                 default: "[ *://0.0.0.0* ]"
@@ -362,11 +366,11 @@ argument_specs:
                 default: true
                 type: "bool"
             activemq_management_access_default:
-                description: "fine grained management console accesses methods and roles, `activemq_hawtio_role` roles will be added to each access"
+                description: "fine grained management console accesses methods and roles, `activemq_hawtio_roles` roles will be added to each access"
                 default: "[ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]"
                 type: "list"
             activemq_management_access_domains:
-                description: "fine grained management console accesses methods and roles per domain and key, `activemq_hawtio_role` will be added to each domain access"
+                description: "fine grained management console accesses methods and roles per domain and key, `activemq_hawtio_roles` will be added to each domain access"
                 default: "Access for java.lang and org.apache.artemis.activemq"
                 type: "list"
             activemq_acceptors:

@@ -35,7 +35,7 @@
 
 - name: Collect all activemq roles
   ansible.builtin.set_fact:
-    all_roles: "{{ activemq_hawtio_role | unique | union(unique_security_settings_roles) | union(unique_default_managmement_roles) | union(unique_managmement_roles) | sort }}"
+    all_roles: "{{ activemq_hawtio_roles | unique | union(unique_security_settings_roles) | union(unique_default_managmement_roles) | union(unique_managmement_roles) | sort }}"
 
 - name: Configure roles
   ansible.builtin.template:
@@ -78,7 +78,7 @@
   ansible.builtin.lineinfile:
     path: "{{ activemq.instance_home }}/etc/artemis.profile"
     regexp: '^HAWTIO_ROLE=.*'
-    line: "HAWTIO_ROLE='{{ activemq_hawtio_role | unique | union(unique_default_managmement_roles) | union(unique_managmement_roles) | sort | join(',') }}'"
+    line: "HAWTIO_ROLE='{{ activemq_hawtio_roles | unique | union(unique_default_managmement_roles) | union(unique_managmement_roles) | sort | join(',') }}'"
   become: "{{ activemq_install_requires_become | default(true) }}"
   notify:
     - restart amq_broker
