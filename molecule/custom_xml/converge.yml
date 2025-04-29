@@ -5,6 +5,7 @@
   environment:
     http_proxy: "{{ lookup('env', 'PROXY') }}"
     https_proxy: "{{ lookup('env', 'PROXY') }}"
+    no_proxy: "{{ lookup('env', 'NO_PROXY') }}"
   vars:
     activemq_config_override_template: 'broker.xml.j2'
     activemq_jvm_package: java-11-openjdk-headless
