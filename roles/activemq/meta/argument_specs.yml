@@ -650,7 +650,7 @@ argument_specs:
                 default: '(member={0})'
                 type: "str"
             activemq_auth_template:
-                description: "Location of JAAS login.config template; by default use template provided with activemq_hawtio_role"
+                description: "Location of JAAS login.config template; by default use template provided with role"
                 default: "login.config.j2"
                 type: "str"
             activemq_java_opts_extra:
