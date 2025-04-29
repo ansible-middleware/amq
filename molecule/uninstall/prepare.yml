@@ -8,6 +8,13 @@
 - name: Install
   hosts: all
   gather_facts: yes
+  environment:
+    http_proxy: "{{ lookup('env', 'PROXY') }}"
+    https_proxy: "{{ lookup('env', 'PROXY') }}"
+    no_proxy: "{{ lookup('env', 'NO_PROXY') }}"
+  module_defaults:
+    ansible.builtin.get_url:
+      validate_certs: "{{ not lookup('env', 'PROXY') != '' }}"
   vars:
     activemq_service_user_home: /home/activemq
     activemq_hawtio_role: admin

@@ -59,7 +59,8 @@ provisioner:
         activemq_ha_role: 'backup'
   env:
     ANSIBLE_FORCE_COLOR: "true"
-verifier:
+    PROXY: "${PROXY}"
+    NO_PROXY: "${NO_PROXY}"verifier:
   name: ansible
 scenario:
   test_sequence:

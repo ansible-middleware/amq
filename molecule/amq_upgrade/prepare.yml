@@ -5,6 +5,9 @@
     http_proxy: "{{ lookup('env', 'PROXY') }}"
     https_proxy: "{{ lookup('env', 'PROXY') }}"
     no_proxy: "{{ lookup('env', 'NO_PROXY') }}"
+  module_defaults:
+    ansible.builtin.get_url:
+      validate_certs: "{{ not lookup('env', 'PROXY') != '' }}"
   pre_tasks:
     - name: "Run preparation common to all scenario"
       ansible.builtin.include_tasks: ../prepare.yml

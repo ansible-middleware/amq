@@ -3,9 +3,12 @@
   hosts: all
   gather_facts: yes
   environment:
-    http_proxy: "{{ lookup('env', 'http_proxy') }}"
-    https_proxy: "{{ lookup('env', 'https_proxy') }}"
-    no_proxy: "{{ lookup('env', 'no_proxy') }}"
+    http_proxy: "{{ lookup('env', 'PROXY') }}"
+    https_proxy: "{{ lookup('env', 'PROXY') }}"
+    no_proxy: "{{ lookup('env', 'NO_PROXY') }}"
+  module_defaults:
+    ansible.builtin.get_url:
+      validate_certs: "{{ not lookup('env', 'PROXY') != '' }}"
   vars:
     activemq_version: 2.29.0
     activemq_service_user_home: /home/activemq
