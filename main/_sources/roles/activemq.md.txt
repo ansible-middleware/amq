@@ -398,6 +398,8 @@ See _Role Variables_ below for additional TLS/SSL settings.
 |`activemq_logger_config_template_path` | Optional subdirectory of any playbook template lookup directories for the logging facility configuration | `''` |
 |`activemq_logger_config_keep_name` | Whether to keep the custom template filename or use the default | `False` |
 |`activemq_logger_filepath` | Path for main logfile relative to instance directory | `/log/artemis.log` |
+|`activemq_logger_cron_eval_on_startup`| Evaluate cron log rotation when starting service up | `true` |
+|`activemq_logger_audit_cron_eval_on_startup`| Evaluate audit cron log rotation when starting service up | `true` |
 
 
 #### Broker plugins

@@ -17,6 +17,7 @@ Minor Changes
 -------------
 
 - Add ``continue_on_error`` parameter to activemq_facts module `#223 <https://github.com/ansible-middleware/amq/pull/223>`_
+- wait_for_log: tail follows logfile with retry `#225 <https://github.com/ansible-middleware/amq/pull/225>`_
 
 v2.2.10
 =======
