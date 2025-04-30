@@ -635,3 +635,29 @@ releases:
     - 210.yaml
     - 217.yaml
     release_date: '2025-03-13'
+  2.3.0:
+    changes:
+      major_changes:
+      - 'Bump major and ansible-core version `#224 <https://github.com/ansible-middleware/amq/pull/224>`_
+
+        '
+      - 'Fine-Grained Role Configuration for Console Access (hawtio) `#222 <https://github.com/ansible-middleware/amq/pull/222>`_
+
+        '
+      minor_changes:
+      - 'Add ``activemq_ha_backup_failover_on_shutdown`` role parameter `#226 <https://github.com/ansible-middleware/amq/pull/226>`_
+
+        '
+      - 'Add ``continue_on_error`` parameter to activemq_facts module `#223 <https://github.com/ansible-middleware/amq/pull/223>`_
+
+        '
+      - 'wait_for_log: tail follows logfile with retry `#225 <https://github.com/ansible-middleware/amq/pull/225>`_
+
+        '
+    fragments:
+    - 222.yaml
+    - 223.yaml
+    - 224.yaml
+    - 225.yaml
+    - 226.yaml
+    release_date: '2025-04-30'

@@ -4,6 +4,22 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.3.0
+======
+
+Major Changes
+-------------
+
+- Bump major and ansible-core version `#224 <https://github.com/ansible-middleware/amq/pull/224>`_
+- Fine-Grained Role Configuration for Console Access (hawtio) `#222 <https://github.com/ansible-middleware/amq/pull/222>`_
+
+Minor Changes
+-------------
+
+- Add ``activemq_ha_backup_failover_on_shutdown`` role parameter `#226 <https://github.com/ansible-middleware/amq/pull/226>`_
+- Add ``continue_on_error`` parameter to activemq_facts module `#223 <https://github.com/ansible-middleware/amq/pull/223>`_
+- wait_for_log: tail follows logfile with retry `#225 <https://github.com/ansible-middleware/amq/pull/225>`_
+
 v2.2.10
 =======
 
