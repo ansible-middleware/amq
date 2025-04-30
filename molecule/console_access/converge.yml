@@ -14,14 +14,20 @@
     activemq_network_check_enabled: true
     activemq_message_counter_enabled: true
     activemq_network_check_list: "127.0.0.1,8.8.8.8,{{ inventory_hostname }},{{ ansible_all_ipv4_addresses | join(',') }}"
-    activemq_hawtio_roles: [ 'admin' ]
+    activemq_hawtio_roles: [ 'admin', 'monitoring' ]
     activemq_users:
       - user: amq
         password: amqbrokerpass
         roles: [ admin ]
+      - user: operator
+        password: amqoperatorpass
+        roles: [ operate ]
       - user: other
         password: amqotherpass
-        roles: [ consumer, producer ]
+        roles: [ consumer, producer, monitoring ]
+      - user: business
+        password: amqbusinesspass
+        roles: [ specific ]
     activemq_roles:
       - name: admin
         permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
@@ -36,6 +42,21 @@
       - name: producer
         match: topics.#
         permissions: [ send, browse ]
+    activemq_management_access_default:
+      - methods: [ 'list*', 'get*', 'is*', 'browse*', 'count*' ]
+        roles: [ 'operate' ]
+      - methods: [ 'set*', '*' ]
+        roles: [ ]
+    activemq_management_access_domains:
+      - accesses:
+          - methods: [ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]
+            roles: [ ]
+      - key: 'address=queue.*'
+        accesses:
+          - methods: [ 'list*', 'get*', 'is*', 'browse*', 'count*' ]
+            roles: [ 'specific' ]
+          - methods: [ 'set*', '*' ]
+            roles: [ ]
     activemq_acceptors:
       - name: artemis
         bind_address: "{{ activemq_host }}"
@@ -74,6 +95,9 @@
       - name: queue.out
         anycast:
           - name: queue.out
+      - name: other.queue.out
+        anycast:
+          - name: other.queue.out
       - name: DLQ
         anycast:
           - name: DLQ

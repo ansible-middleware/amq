@@ -185,19 +185,26 @@ activemq_roles:
     match: '#'
     permissions: [ createNonDurableQueue, deleteNonDurableQueue, createDurableQueue, deleteDurableQueue, createAddress, deleteAddress, consume, browse, send, manage ]
 
-# management console access methods for roles activemq_hawtio_role
-activemq_management_access_default: [ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]
+# fine grained management console accesses methods and roles, `activemq_hawtio_roles` roles will be added to each access
+activemq_management_access_default:
+  - methods: [ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]
+    roles: "{{ activemq_hawtio_roles }}"
 
-# management console access methods per domain for roles activemq_hawtio_role
+
+# fine grained management console accesses methods and roles per domain and key, `activemq_hawtio_roles` will be added to each domain access
 activemq_management_access_domains:
   - name: org.apache.activemq.artemis
-    methods: [ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]
+    accesses:
+      - methods: [ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]
+        roles: "{{ activemq_hawtio_roles }}"
   - name: java.lang
-    methods: [ 'list*', 'get*', 'is*', 'set*', '*' ]
-
+    accesses:
+      - methods: [ 'list*', 'get*', 'is*', 'set*', '*' ]
+        roles: "{{ activemq_hawtio_roles }}"
 
 # Jolokia
-activemq_hawtio_role: amq
+activemq_hawtio_role: amq  ## DEPRECATED, use activemq_hawtio_roles
+activemq_hawtio_roles: "{{ activemq_hawtio_role.split(',') }}"
 activemq_cors_allow_origin: [ '*://0.0.0.0*' ]
 activemq_cors_strict_checking: true
 

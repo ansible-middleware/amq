@@ -16,7 +16,6 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-{% set unique_roles = activemq_roles | map(attribute='name') | unique | list %}
-{% for role in unique_roles %}
+{% for role in all_roles %}
 {{ role }}={{ activemq_users | selectattr('roles', 'contains', role) | map(attribute='user') | join(',') }}
 {% endfor %}

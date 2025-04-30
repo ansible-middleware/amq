@@ -23,6 +23,6 @@ jobs:
       molecule_tests: >-
         [ "static_cluster", "replication", "live_only", "mirroring" ]
       podman_tests_current: >-
-        [ "default", "amq_upgrade", "custom_xml", "federation", "mask_passwords", "uninstall" ]
+        [ "default", "amq_upgrade", "custom_xml", "federation", "mask_passwords", "uninstall", "console_access" ]
       podman_tests_next: >-
-        [ "default", "amq_upgrade", "custom_xml", "federation", "mask_passwords", "uninstall" ]
+        [ "default", "amq_upgrade", "custom_xml", "federation", "mask_passwords", "uninstall", "console_access" ]
