@@ -555,6 +555,14 @@ argument_specs:
                 description: "Number of rollover audit log files"
                 default: 5
                 type: 'int'
+            activemq_logger_cron_eval_on_startup:
+                description: "Evaluate cron log rotation when starting service up"
+                default: true
+                type: 'bool'
+            activemq_logger_audit_cron_eval_on_startup:
+                description: "Evaluate audit cron log rotation when starting service up"
+                default: true
+                type: 'bool'
             activemq_password_codec:
                 description: >
                   Fully qualified class name and its parameters for the Decoder used to decode the masked password,
@@ -932,6 +940,14 @@ argument_specs:
                 default: "{{ activemq_port }}"
                 type: 'int'
                 description: "The port number to wait for when activemq_systemd_wait_for_port is true"
+            activemq_logger_cron_eval_on_startup:
+                description: "Evaluate cron log rotation when starting service up"
+                default: true
+                type: 'bool'
+            activemq_logger_audit_cron_eval_on_startup:
+                description: "Evaluate audit cron log rotation when starting service up"
+                default: true
+                type: 'bool'
     downstream:
         options:
             amq_broker_version:

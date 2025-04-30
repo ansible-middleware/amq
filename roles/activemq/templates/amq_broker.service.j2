@@ -28,9 +28,9 @@ ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'wh
 {% endif %}
 {% if activemq_systemd_wait_for_log %}
 {% if activemq_ha_enabled %}
-ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -f {{ activemq.instance_home }}/log/artemis.log | sed "/{{ activemq_systemd_wait_for_log_ha_string }}/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
+ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -F {{ activemq.instance_home }}/log/artemis.log | sed "/{{ activemq_systemd_wait_for_log_ha_string }}/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
 {% else %}
-ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -f {{ activemq.instance_home }}/log/artemis.log | sed "/{{ activemq_systemd_wait_for_log_string }}/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
+ExecStartPost=/usr/bin/timeout {{ activemq_systemd_wait_for_timeout }} sh -c 'tail -n 15 -F {{ activemq.instance_home }}/log/artemis.log | sed "/{{ activemq_systemd_wait_for_log_string }}/ q" && /bin/sleep {{ activemq_systemd_wait_for_delay }}'
 {% endif %}
 {% endif %}
 
