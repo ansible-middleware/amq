@@ -11,6 +11,7 @@ Major Changes
 -------------
 
 - Bump major and ansible-core version `#224 <https://github.com/ansible-middleware/amq/pull/224>`_
+- Fine-Grained Role Configuration for Console Access (hawtio) `#222 <https://github.com/ansible-middleware/amq/pull/222>`_
 
 Minor Changes
 -------------

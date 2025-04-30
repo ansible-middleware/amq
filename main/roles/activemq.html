@@ -1216,29 +1216,33 @@
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_hawtio_role</span></code></p></td>
-<td class="text-left"><p>Artemis role for hawtio console access</p></td>
+<td class="text-left"><p>DEPRECATED, use <code class="docutils literal notranslate"><span class="pre">activemq_hawtio_roles</span></code> instead</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_management_access_default</span></code></p></td>
-<td class="text-left"><p>Management console access methods for roles in <code class="docutils literal notranslate"><span class="pre">activemq_hawtio_role</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_hawtio_roles</span></code></p></td>
+<td class="text-left"><p>Artemis roles for hawtio console access that will be added on each default and domain management access</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">'amq'</span> <span class="pre">]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_management_access_default</span></code></p></td>
+<td class="text-left"><p>Fine grained management console accesses methods and roles, <code class="docutils literal notranslate"><span class="pre">activemq_hawtio_roles</span></code> roles will be added to each access</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">'list*',</span> <span class="pre">'get*',</span> <span class="pre">'is*',</span> <span class="pre">'set*',</span> <span class="pre">'browse*',</span> <span class="pre">'count*',</span> <span class="pre">'*'</span> <span class="pre">]</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_management_access_domains</span></code></p></td>
-<td class="text-left"><p>Management console access methods per domain for roles in <code class="docutils literal notranslate"><span class="pre">activemq_hawtio_role</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_management_access_domains</span></code></p></td>
+<td class="text-left"><p>Fine grained management console accesses methods and roles per domain and key, <code class="docutils literal notranslate"><span class="pre">activemq_hawtio_roles</span></code> will be added to each domain access</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">java.lang</span></code>, <code class="docutils literal notranslate"><span class="pre">org.apache.artemis.activemq</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cors_allow_origin</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cors_allow_origin</span></code></p></td>
 <td class="text-left"><p>List of CORS allow origin setting for jolokia</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">*://0.0.0.0*</span> <span class="pre">]</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cors_strict_checking</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_cors_strict_checking</span></code></p></td>
 <td class="text-left"><p>Whether to enforce strict checking for CORS</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
 </tr>
 </tbody>
 </table>
 <p>Sample user/role configuration with one admin, a consumer and a producer:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">activemq_hawtio_role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">activemq_hawtio_roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;admin&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">activemq_users</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq</span>
 <span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqbrokerpass</span>
@@ -1255,6 +1259,47 @@
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">producer</span>
 <span class="w">        </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topics.#</span>
 <span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">send</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">activemq_management_access_default</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># the list of default accesses. Each entry defines the list of &#39;methods&#39; and &#39;roles&#39; to  apply.</span>
+<span class="w">      </span><span class="c1"># * methods: non empty list of allowed methods</span>
+<span class="w">      </span><span class="c1"># * roles: list of roles to apply. It will be supplemented with the activemq_hawtio_roles. An empty list is equal to the value of activemq_hawtio_roles</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;list*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;get*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;is*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;set*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;browse*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;count*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;monitoring_user&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">activemq_management_access_domains</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Each entry accepts the following keys: &#39;name&#39;, &#39;key&#39; and &#39;accesses&#39;.</span>
+<span class="w">      </span><span class="c1"># * name: optional, the domain to use, default to &#39;org.apache.activemq.artemis&#39;</span>
+<span class="w">      </span><span class="c1"># * key: optional, the value of the key attribute</span>
+<span class="w">      </span><span class="c1"># * accesses: the list of accesses. Each entry defines the list of &#39;methods&#39; and &#39;roles&#39; to  apply.</span>
+<span class="w">      </span><span class="c1">#   + methods: non empty list of allowed methods</span>
+<span class="w">      </span><span class="c1">#   + roles: list of roles to apply. It will be supplemented with the activemq_hawtio_roles. An empty list is equal to the value of activemq_hawtio_roles</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.activemq.artemis</span>
+<span class="w">        </span><span class="nt">accesses</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;list*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;get*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;is*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;set*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;browse*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;count*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">            </span><span class="c1"># will default to the roles in activemq_hawtio_roles</span>
+<span class="w">            </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">java.lang</span>
+<span class="w">        </span><span class="nt">accesses</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;list*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;get*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;is*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;set*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">            </span><span class="c1"># activemq_hawtio_roles roles will be added resulting in: &#39;monitoring,&#39; + activemq_hawtio_roles.join(&#39;,&#39;)</span>
+<span class="w">            </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;monitoring&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="c1"># The &#39;name&#39; field is not specified, it will default to domain=&#39;org.apache.activemq.artemis&#39;.</span>
+<span class="w">      </span><span class="c1"># If activemq_hawtio_roles has the value [ &#39;admin&#39;, &#39;monitoring&#39; ] then the entry here below will result in:</span>
+<span class="w">      </span><span class="c1">#</span>
+<span class="w">      </span><span class="c1"># &lt;match domain=&#39;org.apache.activemq.artemis&#39; key=&#39;address=topic.stock.*&#39;&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method=&quot;list*&quot; roles=&quot;admin, consumer, monitoring, producer&quot;/&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method=&quot;get*&quot; roles=&quot;admin, consumer, monitoring, producer&quot;/&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method=&quot;browse*&quot; roles=&quot;admin, consumer, monitoring, producer/&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method=&quot;count*&quot; roles=&quot;admin, consumer, monitoring, producer&quot;/&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method=&quot;is*&quot; roles=&quot;admin, monitoring, producer&quot;/&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method=&quot;set*&quot; roles=&quot;admin, monitoring, producer&quot;/&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method=&quot;*&quot; roles=&quot;admin, monitoring, producer&quot;/&gt;</span>
+<span class="w">      </span><span class="c1"># &lt;/match&gt;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;address=topic.stock.*&#39;</span>
+<span class="w">        </span><span class="nt">accesses</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;list*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;get*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;browse*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;count*&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">            </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;consumer&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;producer&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;is*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;set*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">            </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;producer&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </section>
