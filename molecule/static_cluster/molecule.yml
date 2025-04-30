@@ -57,6 +57,7 @@ provisioner:
                   address_match: 'a.#'
       instance2:
         activemq_ha_role: 'backup'
+        activemq_ha_backup_failover_on_shutdown: true
   env:
     ANSIBLE_FORCE_COLOR: "true"
     PROXY: "${PROXY}"

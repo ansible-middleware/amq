@@ -732,7 +732,13 @@ argument_specs:
             activemq_ha_failover_on_shutdown:
                 default: true
                 type: "bool"
-                description: "Will this backup server become active on a normal server shutdown"
+                description: >
+                  For a master broker, determines whether to fail over to a slave if it is shut down.
+            activemq_ha_backup_failover_on_shutdown:
+                description: >
+                  For a slave broker, this element determines whether it becomes the master in case the master is shut down.
+                default: false
+                type: 'bool'
             activemq_ha_restart_backup:
                 default: false
                 type: "bool"

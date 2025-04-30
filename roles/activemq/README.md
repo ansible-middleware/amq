@@ -303,7 +303,8 @@ Sample divert:
 |`activemq_systemd_wait_for_port_number`| The port number to wait for when `activemq_systemd_wait_for_port` is true | `{{ activemq_port }}` |
 |`activemq_systemd_expand_environment` | Whether or not to expand the environment in the sysconfig file. If true, environment file is sourced and the activemq process is started in a shell | `false` |
 |`activemq_ha_allow_failback`| Whether a server will automatically stop when another places a request to take over its place |`true` |
-|`activemq_ha_failover_on_shutdown`| Will this backup server become active on a normal server shutdown  | `true` |
+|`activemq_ha_failover_on_shutdown`| For a master broker, determines whether to fail over to a slave if it is shut down | `true` |
+|`activemq_ha_backup_failover_on_shutdown`| For a slave broker, this element determines whether it becomes the master in case the master is shut down | `false` |
 |`activemq_ha_restart_backup`| Will this server, if a backup, restart once it has been stopped because of failback or scaling down | `false` |
 |`activemq_ha_check_for_active_server`| Whether to check the cluster for a live server using our own server ID when starting up. This option is only necessary for performing 'fail-back' on replicating servers | `false` |
 |`activemq_ha_replication_cluster_name`| Name of the cluster configuration to use for replication. This setting is only necessary in case you configure multiple cluster connections | `""` |

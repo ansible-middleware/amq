@@ -81,6 +81,7 @@ activemq_systemd_expand_environment: false
 activemq_ha_role: live-only
 activemq_ha_allow_failback: true
 activemq_ha_failover_on_shutdown: true
+activemq_ha_backup_failover_on_shutdown: false
 activemq_ha_restart_backup: false
 activemq_ha_check_for_active_server: "{{ activemq_replication }}"
 activemq_ha_replication_cluster_name: ''
