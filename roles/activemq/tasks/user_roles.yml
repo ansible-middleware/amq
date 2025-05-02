@@ -133,6 +133,7 @@
     dest: "{{ activemq_installdir }}/schema/activemq_fix.xsd"
     mode: '0644'
     remote_src: true
+  become: "{{ activemq_install_requires_become | default(true) }}"
   changed_when: false  # it does not change targets, needed for validation only
 
 # the following workaround bypasses an issue in lxml finding the xsd ambiguous
@@ -141,6 +142,7 @@
     path: "{{ activemq_installdir }}/schema/activemq_fix.xsd"
     search_string: '<xs:element name="broker" type="tns:brokerDTO"/>'
     state: absent
+  become: "{{ activemq_install_requires_become | default(true) }}"
   changed_when: false  # it does not change targets, needed for validation only
 
 - name: Validate access configuration
