@@ -7,10 +7,10 @@ middleware\_automation.amq Release Notes
 v2.3.1-devel
 ============
 
-Release Summary
----------------
+Bugfixes
+--------
 
-Internal release, documentation or test changes only.
+- fix amq-broker installer schema directory not writable `#227 <https://github.com/ansible-middleware/amq/pull/227>`_
 
 v2.3.0
 ======
