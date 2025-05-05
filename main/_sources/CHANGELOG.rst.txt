@@ -4,13 +4,21 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
-v2.3.1-devel
+v2.3.2-devel
 ============
+
+Release Summary
+---------------
+
+Internal release, documentation or test changes only.
+
+v2.3.1
+======
 
 Bugfixes
 --------
 
-- fix amq-broker installer schema directory not writable `#227 <https://github.com/ansible-middleware/amq/pull/227>`_
+- Fix missing become in xsd schema validation `#227 <https://github.com/ansible-middleware/amq/pull/227>`_
 
 v2.3.0
 ======
