@@ -4,6 +4,14 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.3.1
+======
+
+Bugfixes
+--------
+
+- Fix missing become in xsd schema validation `#227 <https://github.com/ansible-middleware/amq/pull/227>`_
+
 v2.3.0
 ======
 

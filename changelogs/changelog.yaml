@@ -661,3 +661,12 @@ releases:
     - 225.yaml
     - 226.yaml
     release_date: '2025-04-30'
+  2.3.1:
+    changes:
+      bugfixes:
+      - 'Fix missing become in xsd schema validation `#227 <https://github.com/ansible-middleware/amq/pull/227>`_
+
+        '
+    fragments:
+    - 227.yaml
+    release_date: '2025-05-05'
