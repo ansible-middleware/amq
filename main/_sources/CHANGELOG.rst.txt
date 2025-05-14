@@ -7,10 +7,10 @@ middleware\_automation.amq Release Notes
 v2.3.2-devel
 ============
 
-Release Summary
----------------
+Bugfixes
+--------
 
-Internal release, documentation or test changes only.
+- Fix systemd configuration when absolute logfile paths are used `#233 <https://github.com/ansible-middleware/amq/pull/233>`_
 
 v2.3.1
 ======
