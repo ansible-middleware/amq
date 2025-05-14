@@ -1,18 +1,6 @@
 ---
 - name: Prepare
   hosts: all
-  vars:
-    activemq_audit_log_absolute_path: "/var/log/amq/audit.log"
-    activemq_main_log_absolute_path: "/var/log/amq/artemis.log"
   tasks:
-    - name: Ensure the audit log directory exists
-      ansible.builtin.file:
-        path: "{{ activemq_main_log_absolute_path }}"
-        state: directory
-        owner: root
-        group: root
-        mode: '0755'
-      when: activemq_main_log_absolute_path | default('') | length > 0
-
     - name: "Run preparation common to all scenario"
       ansible.builtin.include_tasks: ../prepare.yml
