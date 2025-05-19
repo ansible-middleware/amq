@@ -15,7 +15,7 @@
       - "--message-load-balancing {{ activemq_cluster_lb_policy }}"
       - "--failover-on-shutdown"
   when: activemq_ha_enabled or activemq_cluster_enabled
-  no_log: true
+  no_log: "{{ not ansible_check_mode }}"
 
 - name: Enable static clustering
   ansible.builtin.set_fact:
@@ -35,7 +35,7 @@
       - "--user {{ activemq_instance_username }}"
       - "--password {{ activemq_instance_password }}"
   when: not activemq_instance_anonymous
-  no_log: true
+  no_log: "{{ not ansible_check_mode }}"
 
 - name: Disable security
   ansible.builtin.set_fact:
@@ -45,7 +45,7 @@
       - "--user {{ activemq_instance_username }}"
       - "--password {{ activemq_instance_password }}"
   when: activemq_instance_anonymous
-  no_log: true
+  no_log: "{{ not ansible_check_mode }}"
 
 - name: Set address broker accepts connections on
   ansible.builtin.set_fact:
@@ -151,7 +151,7 @@
       - "--ssl-key {{ activemq_tls_keystore_dest }}"
       - "--ssl-key-password {{ activemq_tls_keystore_password }}"
   when: activemq_tls_enabled and activemq_tls_keystore_path and activemq_tls_keystore_password
-  no_log: true
+  no_log: "{{ not ansible_check_mode }}"
 
 - name: Enable TLS client authentication for web UI
   ansible.builtin.set_fact:
@@ -161,7 +161,7 @@
       - "--ssl-trust-password {{ activemq_tls_truststore_password }}"
       - "--use-client-auth"
   when: activemq_tls_enabled and activemq_tls_mutual_authentication and activemq_tls_truststore_path and activemq_tls_truststore_password
-  no_log: true
+  no_log: "{{ not ansible_check_mode }}"
 
 - name: Create final broker creation options
   ansible.builtin.set_fact:
