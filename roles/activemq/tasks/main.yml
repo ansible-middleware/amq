@@ -49,18 +49,30 @@
   delegate_to: localhost
 
 - name: Include firewall config tasks
-  ansible.builtin.include_tasks: firewalld.yml
+  ansible.builtin.include_tasks:
+    file: firewalld.yml
+    apply:
+      tags:
+        - firewall
   when: activemq_configure_firewalld
   tags:
     - firewall
 
 - name: Include install tasks
-  ansible.builtin.include_tasks: install.yml
+  ansible.builtin.include_tasks:
+    file: install.yml
+    apply:
+      tags:
+        - install
   tags:
     - install
 
 - name: Include systemd tasks
-  ansible.builtin.include_tasks: systemd.yml
+  ansible.builtin.include_tasks:
+    file: systemd.yml
+    apply:
+      tags:
+        - systemd
   tags:
     - systemd
 

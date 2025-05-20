@@ -48,7 +48,11 @@
   when: activemq_network_check_enabled
 
 - name: Create user and roles
-  ansible.builtin.include_tasks: user_roles.yml
+  ansible.builtin.include_tasks:
+    file: user_roles.yml
+    apply:
+      tags:
+        - users
   when: activemq_users | length > 0
   tags:
     - users
