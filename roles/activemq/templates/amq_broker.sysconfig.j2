@@ -1,7 +1,12 @@
 # {{ ansible_managed }}
 JAVA_ARGS="{{ activemq_java_opts }} {{ activemq_logger_opts }} {{ activemq_jmx_opts }} {{ activemq_properties_opts }}"
 JAVA_HOME={{ activemq_java_home  | default(activemq_rpm_java_home, true) }}
+{% if (not amq_broker_enable | default(false) and activemq_version is version_compare('2.40.0', '<'))
+   or (amq_broker_enable | default(false) and activemq_version is version_compare('7.13.0', '<')) %}
 HAWTIO_ROLE='{{ activemq_hawtio_roles | join(",") }}'
+{% else %}
+HAWTIO_ROLES='{{ activemq_hawtio_roles | join(",") }}'
+{% endif %}
 ARTEMIS_INSTANCE_URI='file:{{ activemq.instance_home }}/'
 ARTEMIS_INSTANCE_ETC_URI='file:{{ activemq.instance_home }}/etc/'
 ARTEMIS_HOME='{{ activemq.home }}'
