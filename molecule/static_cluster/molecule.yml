@@ -1,6 +1,6 @@
 ---
 driver:
-  name: docker
+  name: podman
 platforms:
   - name: instance1
     image: registry.access.redhat.com/ubi9/ubi-init:latest
@@ -9,9 +9,6 @@ platforms:
     command: "/usr/sbin/init"
     networks:
       - name: amq
-    tmpfs:
-      - /run
-      - /tmp
     volumes:
       - nfs:/opt/amq/amq-broker/data/shared
   - name: instance2
@@ -21,9 +18,6 @@ platforms:
     command: "/usr/sbin/init"
     networks:
       - name: amq
-    tmpfs:
-      - /run
-      - /tmp
     volumes:
       - nfs:/opt/amq/amq-broker/data/shared
 provisioner:
