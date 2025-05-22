@@ -74,12 +74,12 @@
   ansible.builtin.lineinfile:
     path: "{{ activemq.instance_home }}/etc/artemis.profile"
     regexp: '^HAWTIO_ROLES?=.*'
-    line: "HAWTIO_ROLE{{ S }}='{{ activemq_hawtio_roles | unique | union(unique_default_managmement_roles) | \
-                           union(unique_managmement_roles) | sort | join(',') }}'"
+    line: "HAWTIO_ROLE{{ hawtio_roles }}='{{ activemq_hawtio_roles | unique | union(unique_default_managmement_roles) | \
+                                      union(unique_managmement_roles) | sort | join(',') }}'"
   become: "{{ activemq_install_requires_become | default(true) }}"
   vars:
-    S: "{{ '' if (not amq_broker_enable | default(false) and activemq_version is version_compare('2.40.0', '<')) \
-        or (amq_broker_enable | default(false) and activemq_version is version_compare('7.13.0', '<')) else 'S' }}"
+    hawtio_roles: "{{ '' if (not amq_broker_enable | default(false) and activemq_version is version_compare('2.40.0', '<')) \
+                      or (amq_broker_enable | default(false) and activemq_version is version_compare('7.13.0', '<')) else 'S' }}"
   notify:
     - restart amq_broker
 

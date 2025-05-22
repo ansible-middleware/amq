@@ -2,6 +2,19 @@
 - name: "Stop ActiveMQ broker before upgrading"
   ansible.builtin.include_tasks: stop.yml
 
+- name: "Update instance {{ activemq.instance_name }} of {{ activemq.service_name }}"
+  ansible.builtin.command:
+    cmd: "{{ activemq.home }}/bin/artemis upgrade {{ activemq.instance_home }}"
+  environment:
+    PATH: "{{ rpm_java_home | default(activemq_rpm_java_home, true) }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    JAVA_HOME: "{{ rpm_java_home }}"
+  become: "{{ activemq_install_requires_become | default(true) }}"
+  become_user: "{{ activemq_service_user }}"
+  changed_when: true
+  register: broker_updated
+  when:
+    - not instance_directory.stat.exists
+
 - name: "Update profile for instance {{ activemq.instance_name }} with new artemis version"
   ansible.builtin.lineinfile:
     path: "{{ activemq.instance_home }}/etc/artemis.profile"
