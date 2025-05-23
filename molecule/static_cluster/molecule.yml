@@ -1,17 +1,13 @@
 ---
 driver:
-  name: docker
+  name: podman
 platforms:
   - name: instance1
     image: registry.access.redhat.com/ubi9/ubi-init:latest
     pre_build_image: true
     privileged: true
     command: "/usr/sbin/init"
-    networks:
-      - name: amq
-    tmpfs:
-      - /run
-      - /tmp
+    network: amq
     volumes:
       - nfs:/opt/amq/amq-broker/data/shared
   - name: instance2
@@ -19,11 +15,7 @@ platforms:
     pre_build_image: true
     privileged: true
     command: "/usr/sbin/init"
-    networks:
-      - name: amq
-    tmpfs:
-      - /run
-      - /tmp
+    network: amq
     volumes:
       - nfs:/opt/amq/amq-broker/data/shared
 provisioner:

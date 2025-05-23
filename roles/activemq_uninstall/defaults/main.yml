@@ -1,6 +1,6 @@
 ---
 ### Parameters as used with activemq role
-activemq_version: 2.34.0 # noqa var-naming[no-role-prefix] used as is in activemq role
+activemq_version: 2.40.0 # noqa var-naming[no-role-prefix] used as is in activemq role
 activemq_archive: "apache-artemis-{{ activemq_version }}-bin.zip" # noqa var-naming[no-role-prefix] used as is in activemq role
 activemq_installdir: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}" # noqa var-naming[no-role-prefix] used as is in activemq role
 activemq_dest: /opt/amq # noqa var-naming[no-role-prefix] used as is in activemq role

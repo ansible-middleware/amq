@@ -172,14 +172,23 @@
         src: /opt/amq/amq-broker/etc/artemis.profile
       register: slurped_artemis_profile
 
-    - name: Check HAWTIO_ROLES
-      ansible.builtin.assert:
-        that:
-          - >
-            "HAWTIO_ROLE='admin,monitoring,operate,specific'" in slurped_artemis_profile.content|b64decode
-        quiet: true
-        fail_msg: "HAWTIO_ROLES not calculated correctly"
-
+    - name: Check HAWTIO_ROLES or HAWTIO_ROLE
+      block:
+        - name: Check HAWTIO_ROLES (>= 2.40.0)
+          ansible.builtin.assert:
+            that:
+              - >
+                "HAWTIO_ROLES='admin,monitoring,operate,specific'" in slurped_artemis_profile.content | b64decode
+            quiet: true
+            fail_msg: "HAWTIO_ROLES not calculated correctly"
+      rescue:
+        - name: Check HAWTIO_ROLE (< 2.40.0)
+          ansible.builtin.assert:
+            that:
+              - >
+                "HAWTIO_ROLE='admin,monitoring,operate,specific'" in slurped_artemis_profile.content | b64decode
+            quiet: true
+            fail_msg: "HAWTIO_ROLE not calculated correctly"
 
     - name: Check diverts element exists in broker.xml
       community.general.xml:

@@ -1,6 +1,6 @@
 ---
 ### Version settings
-activemq_version: 2.34.0
+activemq_version: 2.40.0
 activemq_archive: "apache-artemis-{{ activemq_version }}-bin.zip"
 activemq_download_url: "https://archive.apache.org/dist/activemq/activemq-artemis/{{ activemq_version }}/{{ activemq_archive }}"
 activemq_installdir: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
@@ -42,7 +42,7 @@ activemq_java_opts: "{{ [
 activemq_java_opts_extra: ''
 activemq_java_opts_mem: '-Xms512M -Xmx2G'
 activemq_java_opts_gc: '-XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication'
-activemq_java_opts_hawtio: '-Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal'
+activemq_java_opts_hawtio: '-Dhawtio.disableProxy=true -Dhawtio.authenticationThrottled=false -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal'
 activemq_port: 61616        # for protocols [CORE,MQTT,AMQP,STOMP,HORNETQ,OPENWIRE]
 activemq_port_hornetq: 5445 # for protocols [HORNETQ,STOMP]
 activemq_port_amqp: 5672    # for protocols [AMQP]
