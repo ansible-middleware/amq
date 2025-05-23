@@ -59,7 +59,7 @@
   loop_control:
     loop_var: acceptor
     label: "{{ acceptor.name }}"
-  no_log: true
+  no_log: "{{ not ansible_check_mode }}"
 
 - name: Validate acceptors
   middleware_automation.common.xml:
@@ -68,7 +68,7 @@
     validate: true
     input_type: xml
   run_once: true
-  no_log: true
+  no_log: "{{ not ansible_check_mode }}"
   delegate_to: localhost
 
 - name: Create final connector list using generated and declared lists
@@ -83,7 +83,7 @@
   loop_control:
     loop_var: connector
     label: "{{ connector.name }}"
-  no_log: true
+  no_log: "{{ not ansible_check_mode }}"
 
 - name: Validate connectors
   middleware_automation.common.xml:
@@ -92,7 +92,7 @@
     validate: true
     input_type: xml
   run_once: true
-  no_log: true
+  no_log: "{{ not ansible_check_mode }}"
   delegate_to: localhost
 
 - name: Create addresses string
