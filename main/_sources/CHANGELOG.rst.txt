@@ -10,6 +10,7 @@ v2.3.2-devel
 Minor Changes
 -------------
 
+- Update to activemq 2.40 / amq_broker 7.13 `#236 <https://github.com/ansible-middleware/amq/pull/236>`_
 - Use tags to decorate the role workflow `#234 <https://github.com/ansible-middleware/amq/pull/234>`_
 
 Bugfixes
