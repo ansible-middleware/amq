@@ -6,7 +6,7 @@
   loop_control:
     loop_var: acceptor
     label: "{{ acceptor.name }}"
-  no_log: true
+  no_log: "{{ not ansible_check_mode }}"
 
 - name: Create acceptor configuration in broker.xml
   middleware_automation.common.xml:
@@ -19,6 +19,6 @@
       core: urn:activemq:core
     pretty_print: true
   become: "{{ activemq_install_requires_become | default(true) }}"
-  no_log: true
+  no_log: "{{ not ansible_check_mode }}"
   notify:
     - restart amq_broker
