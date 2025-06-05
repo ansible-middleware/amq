@@ -670,3 +670,21 @@ releases:
     fragments:
     - 227.yaml
     release_date: '2025-05-05'
+  2.3.2:
+    changes:
+      bugfixes:
+      - 'Fix systemd configuration when absolute logfile paths are used `#233 <https://github.com/ansible-middleware/amq/pull/233>`_
+
+        '
+      minor_changes:
+      - 'Update to activemq 2.40 / amq_broker 7.13 `#236 <https://github.com/ansible-middleware/amq/pull/236>`_
+
+        '
+      - 'Use tags to decorate the role workflow `#234 <https://github.com/ansible-middleware/amq/pull/234>`_
+
+        '
+    fragments:
+    - 233.yaml
+    - 234.yaml
+    - 236.yaml
+    release_date: '2025-06-05'

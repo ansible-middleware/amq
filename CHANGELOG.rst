@@ -4,6 +4,20 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.3.2
+======
+
+Minor Changes
+-------------
+
+- Update to activemq 2.40 / amq_broker 7.13 `#236 <https://github.com/ansible-middleware/amq/pull/236>`_
+- Use tags to decorate the role workflow `#234 <https://github.com/ansible-middleware/amq/pull/234>`_
+
+Bugfixes
+--------
+
+- Fix systemd configuration when absolute logfile paths are used `#233 <https://github.com/ansible-middleware/amq/pull/233>`_
+
 v2.3.1
 ======
 
