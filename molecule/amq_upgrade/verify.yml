@@ -2,6 +2,8 @@
 - name: Verify
   hosts: all
   become: "{{ activemq_install_requires_become | default(true) }}"
+  vars:
+    activemq_instance_home: /opt/amq/amq-broker
   tasks:
     - name: Populate service facts
       ansible.builtin.service_facts:
@@ -23,3 +25,12 @@
           - "'Server is now live' in slurped_log.content|b64decode or 'Server is now active' in slurped_log.content|b64decode"
         quiet: true
         fail_msg: "Service failed to start correctly"
+
+    - name: Read bootstrap.xml from ActiveMQ instance
+      ansible.builtin.slurp:
+        src: "{{ activemq_instance_home }}/etc/bootstrap.xml"
+      register: bootstrap_xml_content
+
+    - name: Show decoded content of bootstrap.xml
+      ansible.builtin.debug:
+        msg: "{{ bootstrap_xml_content['content'] | b64decode }}"

@@ -3,14 +3,6 @@
   ansible.builtin.debug:
     msg: "Ansible version is  {{ ansible_version.full }}"
 
-- name: Gather ip address
-  ansible.builtin.command: curl ifconfig.me
-  register: ip_public
-
-- name: Display IP
-  ansible.builtin.debug:
-    msg: "IP Address is  {{ ip_public }}"
-
 - name: "Set package name for sudo"
   ansible.builtin.set_fact:
     sudo_pkg_name: 'sudo'
@@ -30,7 +22,3 @@
   ansible.builtin.assert:
     that:
       - sudo_pkg_name in ansible_facts.packages
-
-- name: "Retrieve assets server from env"
-  ansible.builtin.set_fact:
-    assets_server: "{{ lookup('env','MIDDLEWARE_DOWNLOAD_RELEASE_SERVER_URL') }}"
