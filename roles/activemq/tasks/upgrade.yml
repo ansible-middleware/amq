@@ -11,9 +11,6 @@
   become: "{{ activemq_install_requires_become | default(true) }}"
   become_user: "{{ activemq_service_user }}"
   changed_when: true
-  register: broker_updated
-  when:
-    - not instance_directory.stat.exists
 
 - name: "Update profile for instance {{ activemq.instance_name }} with new artemis version"
   ansible.builtin.lineinfile:
