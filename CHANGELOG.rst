@@ -4,6 +4,14 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.3.3
+======
+
+Bugfixes
+--------
+
+- Fix skipped execution of ``artemis upgrade`` when upgrading `#239 <https://github.com/ansible-middleware/amq/pull/239>`_
+
 v2.3.2
 ======
 

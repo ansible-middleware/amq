@@ -688,3 +688,12 @@ releases:
     - 234.yaml
     - 236.yaml
     release_date: '2025-06-05'
+  2.3.3:
+    changes:
+      bugfixes:
+      - 'Fix skipped execution of ``artemis upgrade`` when upgrading `#239 <https://github.com/ansible-middleware/amq/pull/239>`_
+
+        '
+    fragments:
+    - 239.yaml
+    release_date: '2025-07-17'
