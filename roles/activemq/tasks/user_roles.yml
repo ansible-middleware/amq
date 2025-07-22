@@ -92,8 +92,7 @@
 
 - name: Create management access default
   ansible.builtin.set_fact:
-    management_access_default: "{{ management_access_default | default([]) + \
-                                   lookup('template', 'default_access.management.xml.j2') | from_yaml }}"
+    management_access_default: "{{ management_access_default | default([]) | union(lookup('template', 'default_access.management.xml.j2') | from_yaml | default([])) }}"
   loop: "{{ activemq_management_access_default }}"
   loop_control:
     loop_var: default_access
@@ -101,8 +100,7 @@
 
 - name: Create management access domains
   ansible.builtin.set_fact:
-    management_access_domains: "{{ management_access_domains | default([]) + \
-                                   lookup('template', 'role_access.management.xml.j2') | from_yaml }}"
+    management_access_domains: "{{ management_access_domains | default([]) | union(lookup('template', 'role_access.management.xml.j2') | from_yaml | default([])) }}"
   loop: "{{ activemq_management_access_domains }}"
   loop_control:
     loop_var: access_domains
