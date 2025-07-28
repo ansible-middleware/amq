@@ -6,7 +6,7 @@
     :trim:
 
 .. meta::
-  :antsibull-docs: 2.18.0
+  :antsibull-docs: 2.20.0
 
 .. Anchors
 
@@ -478,7 +478,6 @@ Authors
 ~~~~~~~
 
 - Guido Grazioli (@guidograzioli)
-
 
 
 .. Extra links
