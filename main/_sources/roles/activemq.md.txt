@@ -228,8 +228,9 @@ Sample addresses:
     anycast:
       - name: Virtual
         filter: "discard='true'"
-        max_consumers: 5
-        consumers_before_dispatch: 1
+        parameters:
+          max_consumers: 5
+          consumers_before_dispatch: 1
 ```
 
 
