@@ -128,27 +128,35 @@
   notify:
     - restart amq_broker
 
-- name: Make collection other xsd available for validation
+- name: Create a corrected XSD for validation
   ansible.builtin.copy:
     src: "{{ activemq_installdir }}/schema/activemq.xsd"
-    dest: "{{ activemq_installdir }}/schema/activemq_fix.xsd"
+    dest: "{{ activemq.instance_home }}/etc/activemq_fix.xsd"
     mode: '0644'
     remote_src: true
   become: "{{ activemq_install_requires_become | default(true) }}"
-  changed_when: false  # it does not change targets, needed for validation only
+  changed_when: false
 
-# the following workaround bypasses an issue in lxml finding the xsd ambiguous
-- name: Make collection other xsd available for validation (workaround)
-  ansible.builtin.lineinfile:
-    path: "{{ activemq_installdir }}/schema/activemq_fix.xsd"
-    search_string: '<xs:element name="broker" type="tns:brokerDTO"/>'
-    state: absent
+- name: Create correct non-deterministic model in XSD
+  ansible.builtin.replace:
+    path: "{{ activemq.instance_home }}/etc/activemq_fix.xsd"
+    # This regex finds the ambiguous choice and wraps it to make it deterministic
+    regexp: '(<xs:element ref="tns:ha-policy"/>\s*<xs:choice minOccurs="0">)\s*(<xs:element ref="tns:journal-directory"/>)'
+    replace: '\1<xs:sequence>\2</xs:sequence>'
   become: "{{ activemq_install_requires_become | default(true) }}"
-  changed_when: false  # it does not change targets, needed for validation only
+  changed_when: false
+
+- name: Validate the corrected XSD file
+  ansible.builtin.command:
+    cmd: "xmllint --noout {{ activemq.instance_home }}/etc/activemq_fix.xsd"
+  become: "{{ activemq_install_requires_become | default(true) }}"
+  changed_when: false
+  register: xsd_check_result
+  failed_when: "'validates' not in xsd_check_result.stderr and xsd_check_result.rc != 0"
 
 - name: Validate access configuration
   middleware_automation.common.xml:
-    xsd_path: "{{ activemq_installdir }}/schema/activemq_fix.xsd"
+    xsd_path: "{{ activemq.instance_home }}/etc/activemq_fix.xsd"
     path: "{{ activemq.instance_home }}/etc/management.xml"
     validate: true
     input_type: xml
