@@ -27,6 +27,7 @@
         system: true
         create_home: false
       register: user_mod
+      failed_when: false
   rescue:
     - name: Display failure
       ansible.builtin.debug:

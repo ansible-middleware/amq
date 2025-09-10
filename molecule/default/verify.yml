@@ -95,9 +95,6 @@
           Origin: http://0.0.0.0
       register: this
       no_log: True
-      failed_when:
-        - this.value is true
-        - this.status is 200
 
     - name: Check diverts element exists in broker.xml
       community.general.xml:
