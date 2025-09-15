@@ -1,0 +1,16 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: yes
+  environment:
+    http_proxy: "{{ lookup('env', 'PROXY') }}"
+    https_proxy: "{{ lookup('env', 'PROXY') }}"
+    no_proxy: "{{ lookup('env', 'NO_PROXY') }}"
+  module_defaults:
+    ansible.builtin.get_url:
+      validate_certs: "{{ not lookup('env', 'PROXY') != '' }}"
+  vars:
+    activemq_version: 2.36.0
+    activemq_schema_src: "/tmp/amq_test/schema/activemq.xsd"
+  roles:
+    - middleware_automation.amq.activemq

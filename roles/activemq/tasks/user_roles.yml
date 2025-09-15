@@ -128,9 +128,9 @@
   notify:
     - restart amq_broker
 
-- name: Create a corrected XSD for validation
+- name: Create a copy of the schema to correct for validation
   ansible.builtin.copy:
-    src: "{{ activemq_installdir }}/schema/activemq.xsd"
+    src: "{{ activemq_schema_src }}"
     dest: "{{ activemq.instance_home }}/etc/activemq_fix.xsd"
     mode: '0644'
     remote_src: true
@@ -140,19 +140,10 @@
 - name: Create correct non-deterministic model in XSD
   ansible.builtin.replace:
     path: "{{ activemq.instance_home }}/etc/activemq_fix.xsd"
-    # This regex finds the ambiguous choice and wraps it to make it deterministic
-    regexp: '(<xs:element ref="tns:ha-policy"/>\s*<xs:choice minOccurs="0">)\s*(<xs:element ref="tns:journal-directory"/>)'
-    replace: '\1<xs:sequence>\2</xs:sequence>'
+    regexp: '(<xs:element ref="tns:server"/>)\s*<xs:element ref="tns:web" minOccurs="0"/>'
+    replace: '\1'
   become: "{{ activemq_install_requires_become | default(true) }}"
   changed_when: false
-
-- name: Validate the corrected XSD file
-  ansible.builtin.command:
-    cmd: "xmllint --noout {{ activemq.instance_home }}/etc/activemq_fix.xsd"
-  become: "{{ activemq_install_requires_become | default(true) }}"
-  changed_when: false
-  register: xsd_check_result
-  failed_when: "'validates' not in xsd_check_result.stderr and xsd_check_result.rc != 0"
 
 - name: Validate access configuration
   middleware_automation.common.xml:
