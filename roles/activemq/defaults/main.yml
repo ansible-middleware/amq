@@ -52,6 +52,7 @@ activemq_name: 'Apache ActiveMQ'
 activemq_service_name: activemq
 activemq_service_override_template: ''
 activemq_modular_configuration: false
+activemq_schema_src: "{{ activemq_installdir }}/schema/activemq.xsd"
 
 ### Enable configuration for clustering / high availability
 activemq_ha_enabled: false

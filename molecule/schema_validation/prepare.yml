@@ -1,0 +1,23 @@
+---
+- name: Prepare
+  hosts: all
+  vars:
+    temp_dir: "/tmp/amq_test"
+
+  tasks:
+    - name: "Run preparation common to all scenario"
+      ansible.builtin.include_tasks: ../prepare.yml
+
+    - name: "Setup: Create a fake installation directory"
+      ansible.builtin.file:
+        path: "{{ temp_dir }}/schema"
+        state: directory
+        mode: '0755'
+    
+    - name: "Setup: Place the broken XSD file"
+      ansible.builtin.copy:
+       src: "activemq.xsd"
+       dest: "{{ temp_dir }}/schema/activemq.xsd"
+       owner: root
+       group: root
+       mode: '0644'
