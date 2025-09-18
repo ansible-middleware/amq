@@ -4,6 +4,19 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.3.5
+======
+
+Major Changes
+-------------
+
+- AMW-413 Make amq collection compliant with ansible-core 2.19 `#249 <https://github.com/ansible-middleware/amq/pull/249>`_
+
+Minor Changes
+-------------
+
+- AMW--408 Error XMLSchemaParseError with Ansible collection 2.3.2 for AMQ 7.13 `#250 <https://github.com/ansible-middleware/amq/pull/250>`_
+
 v2.3.4
 ======
 

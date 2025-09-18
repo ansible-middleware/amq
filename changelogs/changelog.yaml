@@ -699,3 +699,18 @@ releases:
     release_date: '2025-07-17'
   2.3.4:
     release_date: '2025-08-08'
+  2.3.5:
+    changes:
+      major_changes:
+      - 'AMW-413 Make amq collection compliant with ansible-core 2.19 `#249 <https://github.com/ansible-middleware/amq/pull/249>`_
+
+        '
+      minor_changes:
+      - 'AMW--408 Error XMLSchemaParseError with Ansible collection 2.3.2 for AMQ
+        7.13 `#250 <https://github.com/ansible-middleware/amq/pull/250>`_
+
+        '
+    fragments:
+    - 249.yaml
+    - 250.yaml
+    release_date: '2025-09-18'
