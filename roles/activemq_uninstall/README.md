@@ -51,9 +51,20 @@ Role Defaults
 
 Example Playbook
 ----------------
-```
+```yaml
 ---
-- hosts: all
+- name: Uninstall ActiveMQ Service
+  hosts: all
+  become: true
+
+  vars:
+    activemq_uninstall_skip_user: true 
+    activemq_uninstall_skip_zipfile: false  
+    activemq_version: 2.34.0 
+    activemq_dest: /custom/amq 
+    activemq_service_user_home: /opt/amq/apache-artemis-2.34.0
+    activemq_shared_storage_path: /opt/amq/amq-broker/data/shared
+
   roles:
-    - middleware_automation.amq.activemq_uninstall
+    - role: middleware_automation.amq.activemq_uninstall
 ```

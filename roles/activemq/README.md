@@ -541,11 +541,49 @@ Role Variables
 
 Example Playbook
 ----------------
-```
+```yaml
 ---
-- hosts: all
+- name: Install and configure Apache ActiveMQ Artemis
+  hosts: all
+  become: true
+
   collections:
     - middleware_automation.amq
+
+  vars:
+    activemq_version: "2.40.0"
+    activemq_archive: "apache-artemis-2.40.0-bin.zip"
+    activemq_download_url: "https://archive.apache.org/dist/activemq/activemq-artemis/2.40.0/"
+    activemq_dest: "/opt/amq"
+    activemq_installdir: "/opt/amq/apache-artemis-2.40.0"
+    activemq_service_user: "amq-broker"
+    activemq_service_group: "amq-broker"
+    activemq_service_name: "activemq"
+    activemq_instance_name: "amq-broker"
+    activemq_bind_address: "0.0.0.0"
+    activemq_host: "localhost"
+    activemq_http_port: 8161
+    activemq_port: 61616
+    activemq_queues: "queue.in,queue.out"
+    activemq_users:
+      - user: amq
+        password: amqbrokerpass
+        roles: admin
+      - user: other
+        password: amqotherpass
+        roles: consumer, producer
+    activemq_roles:
+      - name: admin
+        permissions: "createNonDurableQueue,deleteNonDurableQueue,createDurableQueue,deleteDurableQueue,createAddress,deleteAddress,consume,browse,send,manage"
+      - name: consumer
+        match: topics.*
+        permissions: "consume,browse"
+      - name: producer
+        match: topics.*
+        permissions: "send,browse"
+    activemq_enable_audit: false
+    activemq_logger_level: "INFO"
+
   roles:
     - activemq
 ```
