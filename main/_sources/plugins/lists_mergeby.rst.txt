@@ -6,7 +6,7 @@
     :trim:
 
 .. meta::
-  :antsibull-docs: 2.21.0
+  :antsibull-docs: 2.23.0
 
 .. Anchors
 
@@ -27,7 +27,7 @@ lists_mergeby -- Merge two or more lists of dictionaries by a given attribute
     It is not included in ``ansible-core``.
     To check whether it is installed, run :code:`ansible-galaxy collection list`.
 
-    To install it, use: :code:`ansible-galaxy collection install middleware\_automation.amq`.
+    To install it, use: :code:`ansible\-galaxy collection install middleware\_automation.amq`.
 
     To use it in a playbook, specify: :code:`middleware_automation.amq.lists_mergeby`.
 
