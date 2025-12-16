@@ -214,6 +214,8 @@ Sample in-vm acceptor:
 
 #### Addresses configuration
 
+You can set specific queue attributes using the parameters dictionary.
+
 | Variable | Description | Default |
 |:---------|:------------|:--------|
 |`activemq_addresses`| Addresses/queue configuration; list of `{ name, [anycast or multicast], and parameters }` | Generate same configuration as `artemis create` |
@@ -231,6 +233,12 @@ Sample addresses:
         parameters:
           max_consumers: 5
           consumers_before_dispatch: 1
+      - name: my.address
+        anycast:
+          - name: my.queue
+            parameters:
+              last_value: true
+              last_value_key: "my_property_key"
 ```
 
 

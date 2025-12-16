@@ -79,6 +79,12 @@
           - name: DLQ
             parameters:
               durable: True
+      - name: my.address
+        anycast:
+          - name: my.queue
+            parameters:
+              last_value: true
+              last_value_key: "my_property_key"
       - name: ExpiryQueue
         anycast:
           - name: ExpiryQueue
