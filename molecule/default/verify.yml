@@ -128,3 +128,22 @@
           - ansible_facts.activemq.AddressNames | length > 0
           - "'client123.pubsub' in ansible_facts.activemq.AddressNames"
           - "'importantTopic' in ansible_facts.activemq.AddressNames"
+
+    - name: Check Last Value configuration for my.queue
+      ansible.builtin.uri:
+        url: 'http://0.0.0.0:8161/console/jolokia/read/org.apache.activemq.artemis:broker=!%22amq-broker!%22,component=addresses,address=!%22my.address!%22,subcomponent=queues,routing-type=!%22anycast!%22,queue=!%22my.queue!%22'
+        user: amq
+        password: amqbrokerpass
+        force_basic_auth: yes
+        status_code: 200
+        headers:
+          Origin: http://0.0.0.0
+      register: queue_stats
+
+    - name: Verify Last Value settings
+      ansible.builtin.assert:
+        that:
+          - queue_stats.json.value.LastValue == true
+          - queue_stats.json.value.LastValueKey == "my_property_key"
+        quiet: true
+        fail_msg: "Last Value configuration mismatch for my.queue"
