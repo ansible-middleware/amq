@@ -676,6 +676,7 @@
 </section>
 <section id="addresses-configuration">
 <h3>Addresses configuration<a class="headerlink" href="#addresses-configuration" title="Link to this heading"></a></h3>
+<p>You can set specific queue attributes using the parameters dictionary.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -701,6 +702,12 @@
 <span class="w">        </span><span class="nt">parameters</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">max_consumers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 <span class="w">          </span><span class="nt">consumers_before_dispatch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my.address</span>
+<span class="w">        </span><span class="nt">anycast</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my.queue</span>
+<span class="w">            </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">last_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">              </span><span class="nt">last_value_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_property_key&quot;</span>
 </pre></div>
 </div>
 </section>

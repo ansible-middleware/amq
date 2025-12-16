@@ -7,6 +7,16 @@ middleware\_automation.amq Release Notes
 v2.3.6-devel
 ============
 
+Minor Changes
+-------------
+
+- AMW-459 Setup lastvalue queues config using amq_broker collection `#255 <https://github.com/ansible-middleware/amq/pull/255>`_
+
+Bugfixes
+--------
+
+- AMW-454 Fix amq collecton sanity test issue `#254 <https://github.com/ansible-middleware/amq/pull/254>`_
+
 v2.3.5
 ======
 
