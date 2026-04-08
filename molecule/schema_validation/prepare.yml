@@ -1,19 +1,18 @@
 ---
-- name: Prepare
+- import_playbook: ../prepare.yml
+
+- name: Prepare schema validation
   hosts: all
   vars:
     temp_dir: "/tmp/amq_test"
-
   tasks:
-    - name: "Run preparation common to all scenario"
-      ansible.builtin.include_tasks: ../prepare.yml
-
     - name: "Setup: Create a fake installation directory"
       ansible.builtin.file:
         path: "{{ temp_dir }}/schema"
         state: directory
         mode: '0755'
-    
+      become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
+
     - name: "Setup: Place the broken XSD file"
       ansible.builtin.copy:
        src: "activemq.xsd"
@@ -21,3 +20,4 @@
        owner: root
        group: root
        mode: '0644'
+      become: "{{ activemq_install_require_privileges_escalation | default(true) }}"

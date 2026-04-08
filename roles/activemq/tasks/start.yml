@@ -5,4 +5,4 @@
     name: "{{ activemq.instance_name }}"
     enabled: true
     state: started
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_systemd_require_privilege_escalation | default(true) }}"

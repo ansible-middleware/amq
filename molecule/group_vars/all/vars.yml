@@ -1,0 +1,4 @@
+---
+activemq_systemd_require_privilege_escalation: "{{ activemq_install_requires_become | default(true) }}"
+activemq_install_require_privileges_escalation: "{{ activemq_install_requires_become | default(true) }}"
+activemq_uninstall_require_privileges_escalation: "{{ activemq_install_requires_become | default(true) }}"

@@ -1,5 +1,7 @@
 ---
-- name: Prepare
+- import_playbook: ../prepare.yml
+
+- name: Prepare AMQ upgrade
   hosts: all
   environment:
     http_proxy: "{{ lookup('env', 'PROXY') }}"
@@ -8,9 +10,6 @@
   module_defaults:
     ansible.builtin.get_url:
       validate_certs: "{{ not lookup('env', 'PROXY') != '' }}"
-  pre_tasks:
-    - name: "Run preparation common to all scenario"
-      ansible.builtin.include_tasks: ../prepare.yml
   tasks:
     - name: Include role for broker install
       ansible.builtin.include_role:

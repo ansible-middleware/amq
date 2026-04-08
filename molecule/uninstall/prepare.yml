@@ -1,11 +1,7 @@
 ---
-- name: Prepare
-  hosts: all
-  tasks:
-    - name: "Run preparation common to all scenario"
-      ansible.builtin.include_tasks: ../prepare.yml
+- import_playbook: ../prepare.yml
 
-- name: Install
+- name: Install for uninstall test
   hosts: all
   gather_facts: yes
   environment:

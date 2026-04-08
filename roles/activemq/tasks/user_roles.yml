@@ -3,7 +3,7 @@
   ansible.builtin.slurp:
     src: "{{ activemq.instance_home }}/etc/artemis-users.properties"
   register: existing_users
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
 - name: Set masked user passwords
   ansible.builtin.include_tasks: mask_password.yml
@@ -19,7 +19,7 @@
     group: "{{ activemq_service_group }}"
     mode: '0640'
   no_log: false
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
 - name: Set unique role lists
   ansible.builtin.set_fact:
@@ -39,17 +39,11 @@
     owner: "{{ activemq_service_user }}"
     group: "{{ activemq_service_group }}"
     mode: '0640'
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
 - name: Create security settings matches
   ansible.builtin.set_fact:
-    security_settings_matches: "{{ security_settings_matches | default({}) | \
-                                   combine( { match: { item.1: [ item.0.name ] }  }, recursive=true, list_merge='append' ) }}"
-  vars:
-    match: "{{ item.0.match | default('#') }}"
-  loop: "{{ activemq_roles | subelements('permissions') }}"
-  loop_control:
-    label: "{{ item.0.match | default('#') }}"
+    security_settings_matches: "{{ activemq_roles | middleware_automation.amq.create_security_matches }}"
 
 - name: Create security settings
   ansible.builtin.set_fact:
@@ -66,7 +60,7 @@
       conf: urn:activemq
       core: urn:activemq:core
     pretty_print: true
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   notify:
     - restart amq_broker with no config refresh
 
@@ -76,7 +70,7 @@
     regexp: '^HAWTIO_ROLES?=.*'
     line: "HAWTIO_ROLE{{ hawtio_roles }}='{{ activemq_hawtio_roles | unique | union(unique_default_managmement_roles) | \
                                       union(unique_managmement_roles) | sort | join(',') }}'"
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   vars:
     hawtio_roles: "{{ '' if (not amq_broker_enable | default(false) and activemq_version is version_compare('2.40.0', '<')) \
                       or (amq_broker_enable | default(false) and activemq_version is version_compare('7.13.0', '<')) else 'S' }}"
@@ -88,7 +82,7 @@
     path: "{{ activemq.instance_home }}/etc/management.xml"
     regexp: '<!--[\s\S]*?-->'
     replace: ''
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
 - name: Create management access default
   ansible.builtin.set_fact:
@@ -113,7 +107,7 @@
     input_type: yaml
     set_children: "{{ management_access_default }}"
     pretty_print: true
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   notify:
     - restart amq_broker
 
@@ -124,7 +118,7 @@
     input_type: yaml
     set_children: "{{ management_access_domains }}"
     pretty_print: true
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   notify:
     - restart amq_broker
 
@@ -134,7 +128,7 @@
     dest: "{{ activemq.instance_home }}/etc/activemq_fix.xsd"
     mode: '0644'
     remote_src: true
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   changed_when: false
 
 - name: Create correct non-deterministic model in XSD
@@ -142,7 +136,7 @@
     path: "{{ activemq.instance_home }}/etc/activemq_fix.xsd"
     regexp: '(<xs:element ref="tns:server"/>)\s*<xs:element ref="tns:web" minOccurs="0"/>'
     replace: '\1'
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   changed_when: false
 
 - name: Validate access configuration
@@ -151,5 +145,5 @@
     path: "{{ activemq.instance_home }}/etc/management.xml"
     validate: true
     input_type: xml
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   no_log: false

@@ -1,7 +1,7 @@
 ---
 - name: Configure ha policy
   when: activemq_ha_enabled or activemq_cluster_enabled
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   block:
     - name: "Ensure ha-policy element exists"
       middleware_automation.common.xml:
@@ -78,7 +78,7 @@
   when: activemq_broker_plugins | length > 0
 
 - name: "Configure prometheus metrics"
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   when: activemq_prometheus_enabled and amq_broker_enable is defined and amq_broker_enable
   block:
     - name: Find available library path from installation

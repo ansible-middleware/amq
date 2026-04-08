@@ -1,24 +1,35 @@
 ---
-- name: Display Ansible version
-  ansible.builtin.debug:
-    msg: "Ansible version is  {{ ansible_version.full }}"
-
-- name: "Set package name for sudo"
-  ansible.builtin.set_fact:
+- name: Prepare
+  hosts: all
+  gather_facts: true
+  vars:
     sudo_pkg_name: 'sudo'
+  tasks:
+    - name: Display Ansible version
+      ansible.builtin.debug:
+        msg: "Ansible version is {{ ansible_version.full }}, running with Python {{ ansible_python_version }}."
 
-- name: "Ensure {{ sudo_pkg_name }} is installed (if user is root)."
-  ansible.builtin.yum:
-    name: "{{ sudo_pkg_name }}"
-  retries: 3
-  when:
-    - ansible_user_id == 'root'
+    - name: "Ensure {{ sudo_pkg_name }} is installed on RHEL 8 (if user is root)."
+      ansible.builtin.command: "dnf install -y {{ sudo_pkg_name }}"
+      changed_when: false # dnf install is idempotent
+      when:
+        - ansible_user_id == 'root'
+        - ansible_distribution_major_version == '8'
 
-- name: Gather the package facts
-  ansible.builtin.package_facts:
-    manager: auto
+    - name: "Ensure {{ sudo_pkg_name }} is installed on RHEL 9+ (if user is root)."
+      ansible.builtin.yum:
+        name: "{{ sudo_pkg_name }}"
+      when:
+        - ansible_user_id == 'root'
+        - ansible_distribution_major_version != '8'
 
-- name: "Check if {{ sudo_pkg_name }} is installed."
-  ansible.builtin.assert:
-    that:
-      - sudo_pkg_name in ansible_facts.packages
+    - name: "Gather the package facts (skipping on RHEL 8)"
+      ansible.builtin.package_facts:
+        manager: auto
+      when: ansible_distribution_major_version != '8'
+
+    - name: "Check if {{ sudo_pkg_name }} is installed (skipping on RHEL 8)"
+      ansible.builtin.assert:
+        that:
+          - sudo_pkg_name in ansible_facts.packages
+      when: ansible_distribution_major_version != '8'

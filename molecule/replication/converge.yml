@@ -11,6 +11,8 @@
       validate_certs: "{{ not lookup('env', 'PROXY') != '' }}"
   vars:
     activemq_ha_enabled: true
+    activemq_cluster_enabled: true
+    activemq_cluster_discovery: static
     activemq_disable_hornetq_protocol: true
     activemq_disable_mqtt_protocol: true
     activemq_disable_amqp_protocol: true
@@ -21,8 +23,9 @@
     activemq_configure_firewalld: false
     activemq_modular_configuration: true
     activemq_ha_check_for_active_server: true
-    activemq_systemd_wait_for_log: true
     activemq_systemd_wait_for_port_number: 8161
+    activemq_ha_quorum_size: 1
+    activemq_ha_vote_on_replication_failure: true
     activemq_users:
     - user: amq
       password: amqbrokerpass
@@ -40,8 +43,10 @@
     activemq_connectors:
       - name: instance1
         address: instance1
+        port: "{{ activemq_port }}"
       - name: instance2
         address: instance2
+        port: "{{ activemq_port }}"
     activemq_addresses:
       - name: queue.in
         anycast:
@@ -73,5 +78,16 @@
         routing_type: ANYCAST
         filter: "msgType LIKE '%ff%'"
         exclusive: True
+  pre_tasks:
+    - name: Set HA role for instance1
+      ansible.builtin.set_fact:
+        activemq_ha_role: 'primary'
+      when: inventory_hostname == 'instance1'
+
+    - name: Set HA role for instance2
+      ansible.builtin.set_fact:
+        activemq_ha_role: 'backup'
+        activemq_replicated: true
+      when: inventory_hostname == 'instance2'
   roles:
     - middleware_automation.amq.activemq

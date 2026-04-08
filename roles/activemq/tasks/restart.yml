@@ -1,16 +1,42 @@
 ---
 - name: "Restart and enable instance {{ activemq.instance_name }} for {{ activemq.service_name }} service"
   when: requires_userhome_update is not defined
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_systemd_require_privilege_escalation | default(true) }}"
   throttle: 1
   ansible.builtin.systemd:
     name: "{{ activemq.instance_name }}"
     enabled: true
     state: restarted
+  register: restart_result
+  failed_when: false
+
+- name: Check broker logs on restart failure
+  when: requires_userhome_update is not defined and restart_result.failed
+  block:
+    - name: Check if artemis.log exists
+      ansible.builtin.stat:
+        path: "{{ activemq.instance_home }}/log/artemis.log"
+      register: artemis_log_stat
+
+    - name: Read broker logs
+      ansible.builtin.command:
+        cmd: tail -100 {{ activemq.instance_home }}/log/artemis.log
+      register: broker_logs
+      failed_when: false
+      changed_when: false
+      when: artemis_log_stat.stat.exists
+
+    - name: Show broker logs
+      ansible.builtin.debug:
+        msg: "{{ broker_logs.stdout_lines if artemis_log_stat.stat.exists else ['No artemis.log found'] }}"
+
+    - name: Fail with detailed error
+      ansible.builtin.fail:
+        msg: "Broker restart failed: {{ restart_result.msg | default('Unknown error') }}"
 
 - name: "Restart and enable instance {{ activemq.instance_name }} for {{ activemq.service_name }} service"
   when: requires_userhome_update is defined and requires_userhome_update
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_systemd_require_privilege_escalation | default(true) }}"
   block:
     - name: "Configure systemd unit override"
       ansible.builtin.template:

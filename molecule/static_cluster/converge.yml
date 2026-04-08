@@ -11,6 +11,10 @@
       validate_certs: "{{ not lookup('env', 'PROXY') != '' }}"
   vars:
     activemq_ha_enabled: true
+    activemq_cluster_enabled: false
+    activemq_broker_connections: []
+    activemq_systemd_wait_for_log: false
+    activemq_systemd_wait_for_port: false
     activemq_disable_hornetq_protocol: true
     activemq_disable_mqtt_protocol: true
     activemq_disable_amqp_protocol: true
@@ -89,5 +93,15 @@
       - name: b.test
         anycast:
           - name: b.test
+  pre_tasks:
+    - name: Set HA role for instance1
+      ansible.builtin.set_fact:
+        activemq_ha_role: 'primary'
+      when: inventory_hostname == 'instance1'
+
+    - name: Set HA role for instance2
+      ansible.builtin.set_fact:
+        activemq_ha_role: 'backup'
+      when: inventory_hostname == 'instance2'
   roles:
     - middleware_automation.amq.activemq

@@ -1,6 +1,2 @@
 ---
-- name: Prepare
-  hosts: all
-  tasks:
-    - name: "Run preparation common to all scenario"
-      ansible.builtin.include_tasks: ../prepare.yml
+- import_playbook: ../prepare.yml
