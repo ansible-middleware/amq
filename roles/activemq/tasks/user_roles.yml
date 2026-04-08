@@ -43,13 +43,7 @@
 
 - name: Create security settings matches
   ansible.builtin.set_fact:
-    security_settings_matches: "{{ security_settings_matches | default({}) | \
-                                   combine( { match: { item.1: [ item.0.name ] }  }, recursive=true, list_merge='append' ) }}"
-  vars:
-    match: "{{ item.0.match | default('#') }}"
-  loop: "{{ activemq_roles | subelements('permissions') }}"
-  loop_control:
-    label: "{{ item.0.match | default('#') }}"
+    security_settings_matches: "{{ activemq_roles | middleware_automation.amq.create_security_matches }}"
 
 - name: Create security settings
   ansible.builtin.set_fact:
