@@ -1,0 +1,114 @@
+---
+- name: Verify create_security_matches filter results
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: "Test 1: Normal role with all fields"
+      ansible.builtin.assert:
+        that:
+          - test1_result is mapping
+          - "'#' in test1_result"
+          - test1_result['#']['send'] == ['admin']
+          - test1_result['#']['consume'] == ['admin']
+          - test1_result['#']['manage'] == ['admin']
+        success_msg: "Test 1 passed: Normal role processed correctly"
+        fail_msg: "Test 1 failed: Normal role output incorrect"
+
+    - name: "Test 2: Role without 'match' field (defaults to '#')"
+      ansible.builtin.assert:
+        that:
+          - "'#' in test2_result"
+          - test2_result['#']['browse'] == ['manager']
+          - test2_result['#']['manage'] == ['manager']
+        success_msg: "Test 2 passed: Missing 'match' defaults to '#'"
+        fail_msg: "Test 2 failed: Default match pattern incorrect"
+
+    - name: "Test 3: Role with match: None (defaults to '#')"
+      ansible.builtin.assert:
+        that:
+          - "'#' in test3_result"
+          - test3_result['#']['consume'] == ['consumer']
+        success_msg: "Test 3 passed: match=None defaults to '#'"
+        fail_msg: "Test 3 failed: None match not handled correctly"
+
+    - name: "Test 4: Role with match: '' (defaults to '#')"
+      ansible.builtin.assert:
+        that:
+          - "'#' in test4_result"
+          - test4_result['#']['send'] == ['producer']
+        success_msg: "Test 4 passed: match='' defaults to '#'"
+        fail_msg: "Test 4 failed: Empty match not handled correctly"
+
+    - name: "Test 5: Role with empty permissions"
+      ansible.builtin.assert:
+        that:
+          - test5_result is mapping
+          - "'test.#' not in test5_result"
+        success_msg: "Test 5 passed: Empty permissions skipped"
+        fail_msg: "Test 5 failed: Empty permissions not skipped"
+
+    - name: "Test 6: Multiple roles same match pattern"
+      ansible.builtin.assert:
+        that:
+          - "'topics.#' in test6_result"
+          - test6_result['topics.#']['send'] == ['admin', 'user']
+          - test6_result['topics.#']['consume'] == ['admin']
+        success_msg: "Test 6 passed: Multiple roles appended correctly"
+        fail_msg: "Test 6 failed: Role appending incorrect"
+
+    - name: "Test 7: Empty roles list"
+      ansible.builtin.assert:
+        that:
+          - test7_result == {}
+        success_msg: "Test 7 passed: Empty list returns {}"
+        fail_msg: "Test 7 failed: Empty list handling incorrect"
+
+    - name: "Test 8: Role missing 'name' field (should fail)"
+      ansible.builtin.assert:
+        that:
+          - test8_failed
+          - "'missing required' in test8_msg | lower"
+        success_msg: "Test 8 passed: Missing 'name' raises error"
+        fail_msg: "Test 8 failed: Missing 'name' should raise error"
+
+    - name: "Test 9: Role with name: None (should fail)"
+      ansible.builtin.assert:
+        that:
+          - test9_failed
+          - "'missing required' in test9_msg | lower"
+        success_msg: "Test 9 passed: name=None raises error"
+        fail_msg: "Test 9 failed: name=None should raise error"
+
+    - name: "Test 10: Role with name: '' (should fail)"
+      ansible.builtin.assert:
+        that:
+          - test10_failed
+          - "'missing required' in test10_msg | lower"
+        success_msg: "Test 10 passed: name='' raises error"
+        fail_msg: "Test 10 failed: name='' should raise error"
+
+    - name: "Test 11: Input is not a list (should fail)"
+      ansible.builtin.assert:
+        that:
+          - test11_failed
+          - "'requires a list' in test11_msg | lower"
+        success_msg: "Test 11 passed: Non-list input raises error"
+        fail_msg: "Test 11 failed: Non-list should raise error"
+
+    - name: "Test 12: Multiple roles same match, first with empty permissions"
+      ansible.builtin.assert:
+        that:
+          - "'orders.#' in test12_result"
+          - test12_result['orders.#']['consume'] == ['reader']
+          - test12_result['orders.#']['browse'] == ['reader']
+          - "'noperm' not in (test12_result['orders.#'].values() | list | flatten)"
+        success_msg: "Test 12 passed: First role with empty permissions skipped, second processed"
+        fail_msg: "Test 12 failed: Empty permissions not handled correctly with multiple roles"
+
+    - name: "All tests passed"
+      ansible.builtin.debug:
+        msg:
+          - Valid inputs processed correctly
+          - Default values applied correctly
+          - Edge cases handled properly
+          - Invalid inputs rejected with errors

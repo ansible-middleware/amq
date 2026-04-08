@@ -16,4 +16,4 @@ jobs:
       fqcn: 'middleware_automation/amq'
       root_permission_varname: 'activemq_install_requires_become'
       molecule_tests: >-
-        [ "default", "amq_upgrade", "static_cluster", "replication", "schema_validation", "live_only", "mirroring", "custom_xml", "federation", "mask_passwords", "uninstall", "console_access" ]
+        [ "default", "amq_upgrade", "static_cluster", "replication", "schema_validation", "security_matches", "live_only", "mirroring", "custom_xml", "federation", "mask_passwords", "uninstall", "console_access" ]

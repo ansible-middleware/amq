@@ -70,14 +70,15 @@ def create_security_matches(amq_broker_roles):
         match_pattern = role.get('match') or '#'
         permissions = role.get('permissions', [])
 
-        if match_pattern not in result:
-            result[match_pattern] = {}
+        if permissions:
+            if match_pattern not in result:
+                result[match_pattern] = {}
 
-        for permission in permissions:
-            if permission not in result[match_pattern]:
-                result[match_pattern][permission] = []
+            for permission in permissions:
+                if permission not in result[match_pattern]:
+                    result[match_pattern][permission] = []
 
-            result[match_pattern][permission].append(role_name)
+                result[match_pattern][permission].append(role_name)
 
     return result
 
