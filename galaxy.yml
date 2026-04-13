@@ -4,6 +4,7 @@ name: amq
 version: "2.3.6"
 readme: README.md
 authors:
+  - Ranabir Chakraborty <ranabir@ibm.com>
   - Guido Grazioli <ggraziol@redhat.com>
 description: Install and configure activemq / AMQ broker services.
 license_file: "LICENSE"
