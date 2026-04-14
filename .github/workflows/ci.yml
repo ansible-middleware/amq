@@ -5,22 +5,15 @@ on:
     branches:
       - main
   pull_request:
-  workflow_dispatch:
-    inputs:
-      debug_verbosity:
-        description: 'ANSIBLE_VERBOSITY envvar value'
-        required: false
   schedule:
     - cron: '0 6 * * *'
 
 jobs:
   ci:
-    uses: ansible-middleware/github-actions/.github/workflows/cish.yml@main
+    uses: ansible-middleware/github-actions/.github/workflows/ci.yml@rootperm
     secrets: inherit
     with:
       fqcn: 'middleware_automation/amq'
-      debug_verbosity: "${{ github.event.inputs.debug_verbosity }}"
-      podman_tests_current: >-
-        [ "default", "amq_upgrade", "static_cluster", "replication", "schema_validation", "live_only", "mirroring", "custom_xml", "federation", "mask_passwords", "uninstall", "console_access" ]
-      podman_tests_next: >-
+      root_permission_varname: 'activemq_install_requires_become'
+      molecule_tests: >-
         [ "default", "amq_upgrade", "static_cluster", "replication", "schema_validation", "live_only", "mirroring", "custom_xml", "federation", "mask_passwords", "uninstall", "console_access" ]

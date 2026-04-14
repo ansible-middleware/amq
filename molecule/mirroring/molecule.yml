@@ -26,6 +26,8 @@ provisioner:
     converge: converge.yml
     verify: verify.yml
   inventory:
+    links:
+      group_vars: ../group_vars
     host_vars:
       localhost:
         ansible_python_interpreter: "{{ ansible_playbook_python }}"

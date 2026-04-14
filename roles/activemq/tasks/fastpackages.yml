@@ -10,7 +10,7 @@
     packages_to_install: "{{ packages_to_install | default([]) + rpm_info.stdout_lines | map('regex_findall', 'package (.+) is not installed$') | default([]) | flatten }}"
 
 - name: "Install packages: {{ packages_to_install }}"
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   ansible.builtin.dnf:
     name: "{{ packages_to_install }}"
     state: present

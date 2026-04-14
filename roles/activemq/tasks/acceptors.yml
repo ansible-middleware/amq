@@ -18,7 +18,7 @@
       conf: urn:activemq
       core: urn:activemq:core
     pretty_print: true
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   no_log: "{{ not ansible_check_mode }}"
   notify:
     - restart amq_broker

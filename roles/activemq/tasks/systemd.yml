@@ -4,7 +4,7 @@
     rpm_java_home: "/etc/alternatives/jre_{{ activemq_jvm_package | regex_search('(?<=java-)[0-9.]+') }}"
 
 - name: "Ensure privilege is adequate to tasks execution"
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_systemd_require_privilege_escalation | default(true) }}"
   block:
     - name: "Ensure systemd unit override directory exists"
       ansible.builtin.file:

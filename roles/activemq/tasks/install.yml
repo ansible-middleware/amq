@@ -11,7 +11,7 @@
     quiet: true
 
 - name: "Create {{ activemq.service_name }} service group"
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   ansible.builtin.group:
     name: "{{ activemq_service_group }}"
     system: true
@@ -19,7 +19,7 @@
 - name: "Create service user"
   block:
     - name: "Create {{ activemq.service_name }} service user"
-      become: "{{ activemq_install_requires_become | default(true) }}"
+      become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
       ansible.builtin.user:
         name: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
@@ -38,13 +38,13 @@
       notify: restart amq_broker
 
 - name: "Check {{ activemq.service_name }} install location"
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   ansible.builtin.stat:
     path: "{{ activemq_dest }}"
   register: install_location
 
 - name: "Create {{ activemq.service_name }} install location"
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   ansible.builtin.file:
     dest: "{{ activemq_dest }}"
     state: directory
@@ -59,7 +59,7 @@
     chown -R {{ activemq_service_user }}:{{ activemq_service_group }} {{ activemq_dest }}
   register: chown_status
   changed_when: chown_status.stdout != ""
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   when:
     - install_location.stat.exists
 
@@ -69,7 +69,7 @@
     archive: "{{ activemq_dest }}/{{ activemq.bundle }}"
 
 - name: Check download archive path
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   ansible.builtin.stat:
     path: "{{ archive }}"
   register: archive_path
@@ -148,13 +148,13 @@
     - not archive_path.stat.exists
     - local_archive_path.stat is defined
     - local_archive_path.stat.exists
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
 - name: "Check target directory: {{ activemq.home }}"
   ansible.builtin.stat:
     path: "{{ activemq.home }}"
   register: path_to_workdir
-  become: "{{ activemq_install_requires_become | default(true) }}"
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
 - name: "Extract zipfile"
   when:
@@ -168,7 +168,7 @@
         owner: "{{ activemq_service_user }}"
         group: "{{ activemq_service_group }}"
         list_files: true
-      become: "{{ activemq_install_requires_become | default(true) }}"
+      become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
       register: new_version_extracted
       when:
         - new_version_downloaded.changed or not path_to_workdir.stat.exists
@@ -179,10 +179,10 @@
       ansible.builtin.stat:
         path: "{{ activemq.home }}"
       register: path_to_workdir_after_extract
-      become: "{{ activemq_install_requires_become | default(true) }}"
+      become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
     - name: Link zipfile directory to wanted directory
-      become: "{{ activemq_install_requires_become | default(true) }}"
+      become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
       ansible.builtin.file:
         state: link
         src: "{{ activemq_dest }}/{{ new_version_extracted.files | first }}"
