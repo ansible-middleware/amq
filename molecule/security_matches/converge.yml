@@ -1,0 +1,154 @@
+---
+- name: Execute create_security_matches filter tests
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: "Test 1: Normal role with all fields"
+      ansible.builtin.set_fact:
+        test1_result: "{{ test_roles | middleware_automation.amq.create_security_matches }}"
+        cacheable: yes
+      vars:
+        test_roles:
+          - name: admin
+            match: '#'
+            permissions: [send, consume, manage]
+
+    - name: "Test 2: Role without 'match' field"
+      ansible.builtin.set_fact:
+        test2_result: "{{ test_roles | middleware_automation.amq.create_security_matches }}"
+        cacheable: yes
+      vars:
+        test_roles:
+          - name: manager
+            permissions: [browse, manage]
+
+    - name: "Test 3: Role with match: None"
+      ansible.builtin.set_fact:
+        test3_result: "{{ test_roles | middleware_automation.amq.create_security_matches }}"
+        cacheable: yes
+      vars:
+        test_roles:
+          - name: consumer
+            match: null
+            permissions: [consume]
+
+    - name: "Test 4: Role with match: ''"
+      ansible.builtin.set_fact:
+        test4_result: "{{ test_roles | middleware_automation.amq.create_security_matches }}"
+        cacheable: yes
+      vars:
+        test_roles:
+          - name: producer
+            match: ''
+            permissions: [send]
+
+    - name: "Test 5: Role with empty permissions"
+      ansible.builtin.set_fact:
+        test5_result: "{{ test_roles | middleware_automation.amq.create_security_matches }}"
+        cacheable: yes
+      vars:
+        test_roles:
+          - name: noperm
+            match: 'test.#'
+            permissions: []
+
+    - name: "Test 6: Multiple roles same match pattern"
+      ansible.builtin.set_fact:
+        test6_result: "{{ test_roles | middleware_automation.amq.create_security_matches }}"
+        cacheable: yes
+      vars:
+        test_roles:
+          - name: admin
+            match: 'topics.#'
+            permissions: [send, consume]
+          - name: user
+            match: 'topics.#'
+            permissions: [send]
+
+    - name: "Test 7: Empty roles list"
+      ansible.builtin.set_fact:
+        test7_result: "{{ test_roles | middleware_automation.amq.create_security_matches }}"
+        cacheable: yes
+      vars:
+        test_roles: []
+
+    - name: "Test 8: Role missing 'name' field (expect error)"
+      ansible.builtin.set_fact:
+        test8_result: "{{ test_roles | middleware_automation.amq.create_security_matches }}"
+      vars:
+        test_roles:
+          - match: '#'
+            permissions: [send]
+      register: test8_error
+      ignore_errors: yes
+
+    - name: "Cache test 8 error status"
+      ansible.builtin.set_fact:
+        test8_failed: "{{ test8_error is failed }}"
+        test8_msg: "{{ test8_error.msg | default('') }}"
+        cacheable: yes
+
+    - name: "Test 9: Role with name: None (expect error)"
+      ansible.builtin.set_fact:
+        test9_result: "{{ test_roles | middleware_automation.amq.create_security_matches }}"
+      vars:
+        test_roles:
+          - name: null
+            permissions: [send]
+      register: test9_error
+      ignore_errors: yes
+
+    - name: "Cache test 9 error status"
+      ansible.builtin.set_fact:
+        test9_failed: "{{ test9_error is failed }}"
+        test9_msg: "{{ test9_error.msg | default('') }}"
+        cacheable: yes
+
+    - name: "Test 10: Role with name: '' (expect error)"
+      ansible.builtin.set_fact:
+        test10_result: "{{ test_roles | middleware_automation.amq.create_security_matches }}"
+      vars:
+        test_roles:
+          - name: ''
+            permissions: [send]
+      register: test10_error
+      ignore_errors: yes
+
+    - name: "Cache test 10 error status"
+      ansible.builtin.set_fact:
+        test10_failed: "{{ test10_error is failed }}"
+        test10_msg: "{{ test10_error.msg | default('') }}"
+        cacheable: yes
+
+    - name: "Test 11: Input is not a list (expect error)"
+      ansible.builtin.set_fact:
+        test11_result: "{{ test_roles | middleware_automation.amq.create_security_matches }}"
+      vars:
+        test_roles:
+          name: admin
+          permissions: [send]
+      register: test11_error
+      ignore_errors: yes
+
+    - name: "Cache test 11 error status"
+      ansible.builtin.set_fact:
+        test11_failed: "{{ test11_error is failed }}"
+        test11_msg: "{{ test11_error.msg | default('') }}"
+        cacheable: yes
+
+    - name: "Test 12: Multiple roles same match, first with empty permissions"
+      ansible.builtin.set_fact:
+        test12_result: "{{ test_roles | middleware_automation.amq.create_security_matches }}"
+        cacheable: yes
+      vars:
+        test_roles:
+          - name: noperm
+            match: 'orders.#'
+            permissions: []
+          - name: reader
+            match: 'orders.#'
+            permissions: [consume, browse]
+
+    - name: "Converge phase complete"
+      ansible.builtin.debug:
+        msg: "All filter executions complete. Results cached for verification."
