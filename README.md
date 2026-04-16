@@ -101,6 +101,20 @@ When deploying clustered configurations, all hosts belonging to the cluster must
 <!--end support -->
 
 
+## Release and Upgrade Notes
+
+For details on changes between versions, please see [the changelog for this collection](https://github.com/ansible-middleware/amq/blob/main/CHANGELOG.rst).
+
+## Support
+
+<!--start support -->
+If you have any issues or questions related to this collection, please contact <Ansible-middleware-core@redhat.com> or open an issue at https://github.com/ansible-middleware/amq/issues.
+
+For more information about using this collection, see the [Product Documentation for Red Hat AMQ Broker](https://docs.redhat.com/en/documentation/red_hat_amq_broker/latest).
+<!--end support -->
+
 ## License
 
-[Apache License 2.0](https://github.com/ansible-middleware/amq/blob/main/LICENSE)
+Apache License v2.0 or later
+
+See [LICENSE](LICENSE) to view the full text.
