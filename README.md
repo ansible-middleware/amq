@@ -98,7 +98,15 @@ When deploying clustered configurations, all hosts belonging to the cluster must
 
 
 <!--start support -->
+
+For bug reports and feature requests, use [GitHub Issues](https://github.com/ansible-middleware/amq/issues).
+
 <!--end support -->
+
+
+## Release and Upgrade Notes
+
+See the [changelog](https://github.com/ansible-middleware/amq/blob/main/CHANGELOG.rst) for more details.
 
 
 ## License
