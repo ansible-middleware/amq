@@ -1,0 +1,63 @@
+---
+driver:
+  name: docker
+
+platforms:
+  - name: instance-ubi9
+    image: registry.access.redhat.com/ubi9/ubi-init:latest
+    pre_build_image: true
+    privileged: true
+    command: "/usr/sbin/init"
+    systemd: always
+    network: amq
+    tmpfs:
+      - "/tmp:exec"
+      - "/run:rw,noexec,nosuid,nodev"
+
+  - name: instance-ubi10
+    image: registry.access.redhat.com/ubi10/ubi-init:latest
+    pre_build_image: true
+    privileged: true
+    command: "/usr/sbin/init"
+    systemd: always
+    network: amq
+    tmpfs:
+      - "/tmp:exec"
+      - "/run:rw,noexec,nosuid,nodev"
+
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      interpreter_python: auto_silent
+    ssh_connection:
+      pipelining: false
+  playbooks:
+    prepare: prepare.yml
+    converge: converge.yml
+    verify: verify.yml
+  inventory:
+    links:
+      group_vars: ../group_vars
+    host_vars:
+      localhost:
+        ansible_python_interpreter: "{{ ansible_playbook_python }}"
+  env:
+    ANSIBLE_FORCE_COLOR: "true"
+    PROXY: "${PROXY}"
+    NO_PROXY: "${NO_PROXY}"
+
+verifier:
+  name: ansible
+
+scenario:
+  test_sequence:
+    - cleanup
+    - destroy
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - verify
+    - cleanup
+    - destroy

@@ -27,6 +27,9 @@ issues: https://github.com/ansible-middleware/amq/issues
 build_ignore:
   - .gitignore
   - .github
+  - .ansible-lint
+  - .yamllint
+  - .DS_Store
   - '*.tar.gz'
   - '*.zip'
   - molecule

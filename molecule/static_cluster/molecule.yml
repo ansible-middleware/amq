@@ -1,44 +1,32 @@
 ---
-driver:
-  name: podman
 platforms:
-  - name: instance1
+  - name: instance-ubi9
     image: registry.access.redhat.com/ubi9/ubi-init:latest
     pre_build_image: true
     privileged: true
     command: "/usr/sbin/init"
+    systemd: always
     network: amq
     volumes:
       - nfs:/opt/amq/amq-broker/data/shared
-  - name: instance2
-    image: registry.access.redhat.com/ubi9/ubi-init:latest
+
+  - name: instance-ubi10
+    image: registry.access.redhat.com/ubi10/ubi-init:latest
     pre_build_image: true
     privileged: true
     command: "/usr/sbin/init"
+    systemd: always
     network: amq
     volumes:
       - nfs:/opt/amq/amq-broker/data/shared
+
 provisioner:
-  name: ansible
-  config_options:
-    defaults:
-      interpreter_python: auto_silent
-    ssh_connection:
-      pipelining: false
-  playbooks:
-    prepare: prepare.yml
-    converge: converge.yml
-    verify: verify.yml
   inventory:
-    links:
-      group_vars: ../group_vars
     host_vars:
-      localhost:
-        ansible_python_interpreter: "{{ ansible_playbook_python }}"
-      instance1:
+      instance-ubi9:
         activemq_ha_role: 'primary'
         activemq_broker_connections:
-          - uri: 'tcp://instance1:61616?sslEnabled=True;keyStorePath=/opt/amq/amq-broker/etc/identity.ks;keyStorePassword=securepass;trustStorePath=/opt/amq/amq-broker/etc/trust.ks;trustStorePassword=securepass;verifyHost=False'
+          - uri: 'tcp://instance-ubi9:61616?sslEnabled=True;keyStorePath=/opt/amq/amq-broker/etc/identity.ks;keyStorePassword=securepass;trustStorePath=/opt/amq/amq-broker/etc/trust.ks;trustStorePassword=securepass;verifyHost=False'
             name: brokerA-2-brokerA
             user: amq-broker
             password: amq-broker
@@ -49,24 +37,6 @@ provisioner:
               - type: receiver
                 parameters:
                   address_match: 'a.#'
-      instance2:
+      instance-ubi10:
         activemq_ha_role: 'backup'
         activemq_ha_backup_failover_on_shutdown: true
-  env:
-    ANSIBLE_FORCE_COLOR: "true"
-    PROXY: "${PROXY}"
-    NO_PROXY: "${NO_PROXY}"
-verifier:
-  name: ansible
-scenario:
-  test_sequence:
-    - cleanup
-    - destroy
-    - create
-    - prepare
-    - converge
-    - idempotence
-    - side_effect
-    - verify
-    - cleanup
-    - destroy

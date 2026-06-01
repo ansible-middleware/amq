@@ -1,81 +1,32 @@
 ---
-driver:
-  name: podman
-platforms:
-  - name: amq_federation_instance1
-    image: registry.access.redhat.com/ubi9/ubi-init:latest
-    pre_build_image: true
-    privileged: true
-    command: "/usr/sbin/init"
-    systemd: always
-    network: amq_federation
-  - name: amq_federation_instance2
-    image: registry.access.redhat.com/ubi9/ubi-init:latest
-    pre_build_image: true
-    privileged: true
-    command: "/usr/sbin/init"
-    systemd: always
-    network: amq_federation
 provisioner:
-  name: ansible
-  config_options:
-    defaults:
-      interpreter_python: auto_silent
-    ssh_connection:
-      pipelining: false
-  playbooks:
-    prepare: prepare.yml
-    converge: converge.yml
-    verify: verify.yml
   inventory:
-    links:
-      group_vars: ../group_vars
     host_vars:
-      localhost:
-        ansible_python_interpreter: "{{ ansible_playbook_python }}"
-      amq_federation_instance1:
+      instance-ubi9:
         activemq_federations:
           - name: amq-federation
             upstreams:
-              - name: amq_federation_instance2
+              - name: instance-ubi10
                 user: amq-broker
                 password: amq-broker
                 static_connectors:
-                  - amq_federation_instance2
+                  - instance-ubi10
             queue_policies:
               - name: TEST
                 includes:
                   - queue_match: TEST
                     address_match: TEST
-      amq_federation_instance2:
+      instance-ubi10:
         activemq_federations:
           - name: amq-federation
             upstreams:
-              - name: amq_federation_instance1
+              - name: instance-ubi9
                 user: amq-broker
                 password: amq-broker
                 static_connectors:
-                  - amq_federation_instance1
+                  - instance-ubi9
             queue_policies:
               - name: TEST
                 includes:
                   - queue_match: TEST
                     address_match: TEST
-  env:
-    ANSIBLE_FORCE_COLOR: "true"
-    PROXY: "${PROXY}"
-    NO_PROXY: "${NO_PROXY}"
-verifier:
-  name: ansible
-scenario:
-  test_sequence:
-    - cleanup
-    - destroy
-    - create
-    - prepare
-    - converge
-    - idempotence
-    - side_effect
-    - verify
-    - cleanup
-    - destroy
