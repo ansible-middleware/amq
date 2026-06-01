@@ -1,7 +1,7 @@
 ---
 - name: Create federations configuration string
   ansible.builtin.set_fact:
-    federations: "{{ federations | default([]) + [ lookup('template', 'federations.broker.xml.j2') ] }}"
+    activemq_federations_xml: "{{ activemq_federations_xml | default([]) + [ lookup('template', 'federations.broker.xml.j2') ] }}"
   loop: "{{ activemq_federations }}"
   loop_control:
     loop_var: federation
@@ -24,7 +24,7 @@
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:federations
     input_type: xml
-    set_children: "{{ federations }}"
+    set_children: "{{ activemq_federations_xml }}"
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core

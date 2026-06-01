@@ -88,10 +88,10 @@
         use_regex: true
         recurse: true
         patterns: [ 'artemis-prometheus-metrics-plugin-([0-9]+[.]){3}redhat-[0-9]+.jar$' ]
-      register: prometheus_filename
+      register: activemq_prometheus_filename
     - name: Ensure lib is available to instance
       ansible.builtin.copy:
-        src: "{{ prometheus_filename.files[0].path }}"
+        src: "{{ activemq_prometheus_filename.files[0].path }}"
         dest: "{{ activemq.instance_home }}/lib/"
         remote_src: true
         owner: "{{ activemq_service_user }}"

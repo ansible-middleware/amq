@@ -1,7 +1,7 @@
 ---
 - name: Create acceptor configuration string
   ansible.builtin.set_fact:
-    acceptors: "{{ acceptors | default([]) + [ lookup('template', 'acceptors.broker.xml.j2') ] }}"
+    activemq_acceptors_xml: "{{ activemq_acceptors_xml | default([]) + [ lookup('template', 'acceptors.broker.xml.j2') ] }}"
   loop: "{{ activemq_acceptors }}"
   loop_control:
     loop_var: acceptor
@@ -13,7 +13,7 @@
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:acceptors
     input_type: xml
-    set_children: "{{ acceptors }}"
+    set_children: "{{ activemq_acceptors_xml }}"
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core

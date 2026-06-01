@@ -21,18 +21,18 @@
 
 - name: Set download archive path
   ansible.builtin.set_fact:
-    archive: "{{ activemq_dest }}/{{ activemq.bundle }}"
+    activemq_uninstall_archive: "{{ activemq_dest }}/{{ activemq.bundle }}"
 
 - name: Check download archive path
   become: "{{ activemq_uninstall_require_privileges_escalation | default(true) }}"
   ansible.builtin.stat:
-    path: "{{ archive }}"
-  register: archive_path
+    path: "{{ activemq_uninstall_archive }}"
+  register: activemq_uninstall_archive_stat
 
-- name: "Delete archive from target nodes {{ archive }}"
+- name: "Delete archive from target nodes {{ activemq_uninstall_archive }}"
   become: "{{ activemq_uninstall_require_privileges_escalation | default(true) }}"
   ansible.builtin.file:
-    dest: "{{ archive }}"
+    dest: "{{ activemq_uninstall_archive }}"
     state: absent
   when: not activemq_uninstall_skip_zipfile
 
@@ -40,7 +40,7 @@
   become: "{{ activemq_uninstall_require_privileges_escalation | default(true) }}"
   ansible.builtin.stat:
     path: "{{ activemq.home }}"
-  register: path_to_workdir
+  register: activemq_uninstall_workdir_stat
 
 - name: "Delete artemis installation directory {{ activemq.home }}"
   become: "{{ activemq_uninstall_require_privileges_escalation | default(true) }}"

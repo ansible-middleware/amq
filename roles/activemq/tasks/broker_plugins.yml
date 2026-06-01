@@ -1,7 +1,7 @@
 ---
 - name: Create broker-plugins configuration string
   ansible.builtin.set_fact:
-    broker_plugins: "{{ broker_plugins | default([]) + [ lookup('template', 'broker_plugins.broker.xml.j2') ] }}"
+    activemq_broker_plugins_xml: "{{ activemq_broker_plugins_xml | default([]) + [ lookup('template', 'broker_plugins.broker.xml.j2') ] }}"
   loop: "{{ activemq_broker_plugins }}"
   loop_control:
     loop_var: plugin
@@ -24,7 +24,7 @@
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:broker-plugins
     input_type: xml
-    set_children: "{{ broker_plugins }}"
+    set_children: "{{ activemq_broker_plugins_xml }}"
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core

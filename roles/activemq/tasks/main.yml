@@ -40,7 +40,7 @@
 
 - name: Validate custom broker.xml configuration
   middleware_automation.common.xml:
-    xsd_path: "{{ local_path.stat.path }}/artemis-server.xsd"
+    xsd_path: "{{ activemq_local_path.stat.path }}/artemis-server.xsd"
     xmlstring: "{{ lookup('ansible.builtin.template', activemq_config_override_template) }}"
     validate: true
     input_type: xml
@@ -79,26 +79,26 @@
 - name: "Check instance directory: {{ activemq_dest }}/{{ activemq.instance_name }}"
   ansible.builtin.stat:
     path: "{{ activemq_dest }}/{{ activemq.instance_name }}/bin"
-  register: instance_directory
+  register: activemq_instance_directory
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
 - name: "Generate artemis configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
   ansible.builtin.include_tasks: configure_artemis.yml
   when:
-    - not instance_directory.stat.exists
+    - not activemq_instance_directory.stat.exists
 
 - name: "Create instance {{ activemq.instance_name }} of {{ activemq.service_name }}"
   ansible.builtin.command:
     cmd: "{{ activemq.home }}/bin/artemis create {{ activemq.instance_home }} {{ activemq_options }}"
     creates: "{{ activemq.instance_home }}/bin/artemis-service"
   environment:
-    PATH: "{{ rpm_java_home | default(activemq_rpm_java_home, true) }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-    JAVA_HOME: "{{ rpm_java_home }}"
+    PATH: "{{ activemq_rpm_java_home }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    JAVA_HOME: "{{ activemq_rpm_java_home }}"
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   become_user: "{{ activemq_service_user }}"
-  register: broker_created
+  register: activemq_broker_created
   when:
-    - not instance_directory.stat.exists
+    - not activemq_instance_directory.stat.exists
 
 - name: "Configure custom broker.xml file for {{ activemq.instance_name }}"
   ansible.builtin.template:
@@ -115,37 +115,37 @@
 - name: "Check instance directory: {{ activemq_dest }}/{{ activemq.instance_name }}"
   ansible.builtin.stat:
     path: "{{ activemq_dest }}/{{ activemq.instance_name }}/bin"
-  register: instance_directory
+  register: activemq_instance_directory
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
 - name: "Check target directory profile version"
   when:
-    - instance_directory is defined
-    - instance_directory.stat.exists
+    - activemq_instance_directory is defined
+    - activemq_instance_directory.stat.exists
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   block:
     - name: Reset upgrade flag
       ansible.builtin.set_fact:
-        needs_upgrade: false
+        activemq_needs_upgrade: false
     - name: Read profile file
       ansible.builtin.slurp:
         src: "{{ activemq.instance_home }}/etc/artemis.profile"
-      register: profile_file
+      register: activemq_profile_file
     - name: Display versions
       ansible.builtin.debug:
-        msg: "Requested version: {{ activemq_version }} / current profile: {{ profile_file.content | b64decode | regex_search(\"ARTEMIS_HOME='?.*'?\", multiline=true) }}"
+        msg: "Requested version: {{ activemq_version }} / current profile: {{ activemq_profile_file.content | b64decode | regex_search(\"ARTEMIS_HOME='?.*'?\", multiline=true) }}"
     - name: Set upgrade flag
       ansible.builtin.set_fact:
-        needs_upgrade: true
-      when: (profile_file.content | b64decode | regex_search("ARTEMIS_HOME='?" + activemq_installdir + "'?", multiline=true)) == None
+        activemq_needs_upgrade: true
+      when: (activemq_profile_file.content | b64decode | regex_search("ARTEMIS_HOME='?" + activemq_installdir + "'?", multiline=true)) == None
 
 - name: Include post upgrade tasks
   ansible.builtin.include_tasks: upgrade.yml
   when:
-    - instance_directory is defined
-    - instance_directory.stat.exists
-    - needs_upgrade is defined
-    - needs_upgrade
+    - activemq_instance_directory is defined
+    - activemq_instance_directory.stat.exists
+    - activemq_needs_upgrade is defined
+    - activemq_needs_upgrade
 
 - name: Setup clustering with jgroups
   ansible.builtin.include_tasks: jgroups.yml
@@ -191,8 +191,8 @@
 - name: Verify file ownership
   ansible.builtin.command: |
     chown -R {{ activemq_service_user }}:{{ activemq_service_group }} {{ activemq.instance_home }}
-  register: chown_status
-  changed_when: chown_status.stdout != ""
+  register: activemq_instance_chown_status
+  changed_when: activemq_instance_chown_status.stdout != ""
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
 - name: Flush handlers

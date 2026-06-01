@@ -2,7 +2,7 @@
 - name: Retrieve existing users
   ansible.builtin.slurp:
     src: "{{ activemq.instance_home }}/etc/artemis-users.properties"
-  register: existing_users
+  register: activemq_existing_users
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
 - name: Set masked user passwords
@@ -23,14 +23,14 @@
 
 - name: Set unique role lists
   ansible.builtin.set_fact:
-    unique_security_settings_roles: "{{ activemq_roles | map(attribute='name') | list | unique | sort }}"
-    unique_default_managmement_roles: "{{ activemq_management_access_default | map(attribute='roles') | flatten | unique | sort }}"
-    unique_managmement_roles: "{{ activemq_management_access_domains | map(attribute='accesses') | flatten | map(attribute='roles') | flatten | unique | sort }}"
+    activemq_unique_security_settings_roles: "{{ activemq_roles | map(attribute='name') | list | unique | sort }}"
+    activemq_unique_default_managmement_roles: "{{ activemq_management_access_default | map(attribute='roles') | flatten | unique | sort }}"
+    activemq_unique_managmement_roles: "{{ activemq_management_access_domains | map(attribute='accesses') | flatten | map(attribute='roles') | flatten | unique | sort }}"
 
 - name: Collect all activemq roles
   ansible.builtin.set_fact:
-    all_roles: "{{ activemq_hawtio_roles | unique | union(unique_security_settings_roles) | \
-                   union(unique_default_managmement_roles) | union(unique_managmement_roles) | sort }}"
+    activemq_all_roles: "{{ activemq_hawtio_roles | unique | union(activemq_unique_security_settings_roles) | \
+                   union(activemq_unique_default_managmement_roles) | union(activemq_unique_managmement_roles) | sort }}"
 
 - name: Configure roles
   ansible.builtin.template:
@@ -43,19 +43,19 @@
 
 - name: Create security settings matches
   ansible.builtin.set_fact:
-    security_settings_matches: "{{ activemq_roles | middleware_automation.amq.create_security_matches }}"
+    activemq_security_settings_matches: "{{ activemq_roles | middleware_automation.amq.create_security_matches }}"
 
 - name: Create security settings
   ansible.builtin.set_fact:
-    security_settings: "{{ security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2', wantlist=true) ] }}"
-  loop: "{{ security_settings_matches | dict2items(key_name='match', value_name='permissions') }}"
+    activemq_security_settings: "{{ activemq_security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2', wantlist=true) ] }}"
+  loop: "{{ activemq_security_settings_matches | dict2items(key_name='match', value_name='permissions') }}"
 
 - name: Create messaging roles permissions
   middleware_automation.common.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:security-settings
     input_type: xml
-    set_children: "{{ security_settings | flatten }}"
+    set_children: "{{ activemq_security_settings | flatten }}"
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
@@ -68,8 +68,8 @@
   ansible.builtin.lineinfile:
     path: "{{ activemq.instance_home }}/etc/artemis.profile"
     regexp: '^HAWTIO_ROLES?=.*'
-    line: "HAWTIO_ROLE{{ hawtio_roles }}='{{ activemq_hawtio_roles | unique | union(unique_default_managmement_roles) | \
-                                      union(unique_managmement_roles) | sort | join(',') }}'"
+    line: "HAWTIO_ROLE{{ hawtio_roles }}='{{ activemq_hawtio_roles | unique | union(activemq_unique_default_managmement_roles) | \
+                                      union(activemq_unique_managmement_roles) | sort | join(',') }}'"
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   vars:
     hawtio_roles: "{{ '' if (not amq_broker_enable | default(false) and activemq_version is version_compare('2.40.0', '<')) \
@@ -86,7 +86,7 @@
 
 - name: Create management access default
   ansible.builtin.set_fact:
-    management_access_default: "{{ management_access_default | default([]) | union(lookup('template', 'default_access.management.xml.j2') | from_yaml | default([])) }}"
+    activemq_management_access_default_xml: "{{ activemq_management_access_default_xml | default([]) | union(lookup('template', 'default_access.management.xml.j2') | from_yaml | default([])) }}"
   loop: "{{ activemq_management_access_default }}"
   loop_control:
     loop_var: default_access
@@ -94,7 +94,7 @@
 
 - name: Create management access domains
   ansible.builtin.set_fact:
-    management_access_domains: "{{ management_access_domains | default([]) | union(lookup('template', 'role_access.management.xml.j2') | from_yaml | default([])) }}"
+    activemq_management_access_domains_xml: "{{ activemq_management_access_domains_xml | default([]) | union(lookup('template', 'role_access.management.xml.j2') | from_yaml | default([])) }}"
   loop: "{{ activemq_management_access_domains }}"
   loop_control:
     loop_var: access_domains
@@ -105,7 +105,7 @@
     path: "{{ activemq.instance_home }}/etc/management.xml"
     xpath: //*[local-name()='default-access']
     input_type: yaml
-    set_children: "{{ management_access_default }}"
+    set_children: "{{ activemq_management_access_default_xml }}"
     pretty_print: true
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   notify:
@@ -116,7 +116,7 @@
     path: "{{ activemq.instance_home }}/etc/management.xml"
     xpath: //*[local-name()='role-access']
     input_type: yaml
-    set_children: "{{ management_access_domains }}"
+    set_children: "{{ activemq_management_access_domains_xml }}"
     pretty_print: true
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   notify:
