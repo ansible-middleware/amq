@@ -37,13 +37,13 @@
           useEpoll: true
           sslEnabled: false
     activemq_connectors:
-      - name: instance1
-        address: instance1
-      - name: instance2
-        address: instance2
+      - name: instance-ubi9
+        address: instance-ubi9
+      - name: instance-ubi10
+        address: instance-ubi10
     activemq_cluster_connections:
-      - name: instance1
-      - name: instance2
+      - name: instance-ubi9
+      - name: instance-ubi10
     activemq_addresses:
       - name: queue.in
         anycast:

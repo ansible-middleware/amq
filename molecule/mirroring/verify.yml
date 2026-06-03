@@ -19,7 +19,7 @@
           - ansible_facts.services["amq-broker.service"]["state"] == "running"
           - ansible_facts.services["amq-broker.service"]["status"] == "enabled"
 
-    - name: Check cluster status via jolokia facts (instance1)
+    - name: Check cluster status via jolokia facts (instance-ubi9)
       ansible.builtin.assert:
         that:
           - ansible_facts.activemq.Active == true
@@ -27,9 +27,9 @@
           - ansible_facts.activemq.Clustered == false
           - ansible_facts.activemq.SharedStore == false
           - ansible_facts.activemq.HAPolicy == "Primary Only"
-      when: inventory_hostname == 'instance1'
+      when: inventory_hostname == 'instance-ubi9'
 
-    - name: Check cluster status via jolokia facts (instance2)
+    - name: Check cluster status via jolokia facts (instance-ubi10)
       ansible.builtin.assert:
         that:
           - ansible_facts.activemq.Active == true
@@ -37,4 +37,4 @@
           - ansible_facts.activemq.Clustered == false
           - ansible_facts.activemq.SharedStore == false
           - ansible_facts.activemq.HAPolicy == "Primary Only"
-      when: inventory_hostname == 'instance2'
+      when: inventory_hostname == 'instance-ubi10'

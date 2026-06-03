@@ -11,7 +11,6 @@
       validate_certs: "{{ not lookup('env', 'PROXY') != '' }}"
   vars:
     activemq_config_override_template: 'broker.xml.j2'
-    activemq_jvm_package: java-11-openjdk-headless
     activemq_properties_file: test.properties
     activemq_version: 2.36.0
   roles:
