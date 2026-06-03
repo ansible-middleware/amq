@@ -24,3 +24,4 @@ docs/_build/
 inventory
 changelogs/.plugin-cache.yaml
 molecule/static_cluster/nfs/certs/
+.ansible
