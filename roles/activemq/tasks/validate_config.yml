@@ -1,20 +1,20 @@
 ---
 - name: Clear internal validation variables
   ansible.builtin.set_fact:
-    validate_security_settings: []
-    validate_security_settings_matches: {}
-    validate_management_access_default: []
-    validate_management_access_domains: []
-    validate_addresses: []
-    validate_acceptors: []
-    validate_connectors: []
-    validate_address_settings: []
-    validate_diverts: []
-    validate_broker_connections: []
-    valid_core_configuration_list: []
-    valid_nc_configuration_list: []
-    validate_federations: []
-    validate_plugins: []
+    activemq_validate_security_settings: []
+    activemq_validate_security_settings_matches: {}
+    activemq_validate_management_access_default: []
+    activemq_validate_management_access_domains: []
+    activemq_validate_addresses: []
+    activemq_validate_acceptors: []
+    activemq_validate_connectors: []
+    activemq_validate_address_settings: []
+    activemq_validate_diverts: []
+    activemq_validate_broker_connections: []
+    activemq_valid_core_configuration_list: []
+    activemq_valid_nc_configuration_list: []
+    activemq_validate_federations: []
+    activemq_validate_plugins: []
 
 - name: Validate configuration/core and journal configuration
   ansible.builtin.include_tasks: validate_core_config.yml
@@ -37,7 +37,7 @@
 
 - name: Create address settings configuration string
   ansible.builtin.set_fact:
-    validate_address_settings: "{{ validate_address_settings | default([]) + [ lookup('template', 'address_settings.broker.xml.j2') ] }}"
+    activemq_validate_address_settings: "{{ activemq_validate_address_settings | default([]) + [ lookup('template', 'address_settings.broker.xml.j2') ] }}"
   loop: "{{ activemq_address_settings }}"
   loop_control:
     loop_var: address_setting
@@ -45,8 +45,8 @@
 
 - name: Validate address settings
   middleware_automation.common.xml:
-    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
-    xmlstring: "<core xmlns=\"urn:activemq:core\"><address-settings>{{ validate_address_settings | join(' ') | trim }}</address-settings></core>"
+    xsd_path: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><address-settings>{{ activemq_validate_address_settings | join(' ') | trim }}</address-settings></core>"
     validate: true
     input_type: xml
   run_once: true
@@ -54,7 +54,7 @@
 
 - name: Create acceptor configuration string
   ansible.builtin.set_fact:
-    validate_acceptors: "{{ validate_acceptors | default([]) + [ lookup('template', 'acceptors.broker.xml.j2') ] }}"
+    activemq_validate_acceptors: "{{ activemq_validate_acceptors | default([]) + [ lookup('template', 'acceptors.broker.xml.j2') ] }}"
   loop: "{{ activemq_acceptors }}"
   loop_control:
     loop_var: acceptor
@@ -63,8 +63,8 @@
 
 - name: Validate acceptors
   middleware_automation.common.xml:
-    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
-    xmlstring: "<core xmlns=\"urn:activemq:core\"><acceptors>{{ validate_acceptors | join(' ') | trim }}</acceptors></core>"
+    xsd_path: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><acceptors>{{ activemq_validate_acceptors | join(' ') | trim }}</acceptors></core>"
     validate: true
     input_type: xml
   run_once: true
@@ -73,13 +73,13 @@
 
 - name: Create final connector list using generated and declared lists
   ansible.builtin.set_fact:
-    validate_merged_connectors: "{{ activemq_cluster_nodes | default([]) | middleware_automation.amq.lists_mergeby(\
+    activemq_validate_merged_connectors: "{{ activemq_cluster_nodes | default([]) | middleware_automation.amq.lists_mergeby(\
                           activemq_connectors | default([]), 'name', recursive=true, list_merge='append') }}"
 
 - name: Create connector configuration string
   ansible.builtin.set_fact:
-    validate_connectors: "{{ validate_connectors | default([]) + [ lookup('template', 'connectors.broker.xml.j2') ] }}"
-  loop: "{{ validate_merged_connectors }}"
+    activemq_validate_connectors: "{{ activemq_validate_connectors | default([]) + [ lookup('template', 'connectors.broker.xml.j2') ] }}"
+  loop: "{{ activemq_validate_merged_connectors }}"
   loop_control:
     loop_var: connector
     label: "{{ connector.name }}"
@@ -87,8 +87,8 @@
 
 - name: Validate connectors
   middleware_automation.common.xml:
-    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
-    xmlstring: "<core xmlns=\"urn:activemq:core\"><connectors>{{ validate_connectors | join(' ') | trim }}</connectors></core>"
+    xsd_path: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><connectors>{{ activemq_validate_connectors | join(' ') | trim }}</connectors></core>"
     validate: true
     input_type: xml
   run_once: true
@@ -97,7 +97,7 @@
 
 - name: Create addresses string
   ansible.builtin.set_fact:
-    validate_addresses: "{{ validate_addresses | default([]) + [ lookup('template', 'addresses.broker.xml.j2') ] }}"
+    activemq_validate_addresses: "{{ activemq_validate_addresses | default([]) + [ lookup('template', 'addresses.broker.xml.j2') ] }}"
   loop: "{{ activemq_addresses }}"
   loop_control:
     loop_var: address
@@ -105,8 +105,8 @@
 
 - name: Validate addresses
   middleware_automation.common.xml:
-    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
-    xmlstring: "<core xmlns=\"urn:activemq:core\"><addresses>{{ validate_addresses | join(' ') | trim }}</addresses></core>"
+    xsd_path: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><addresses>{{ activemq_validate_addresses | join(' ') | trim }}</addresses></core>"
     validate: true
     input_type: xml
   run_once: true
@@ -114,7 +114,7 @@
 
 - name: Create diverts configuration string
   ansible.builtin.set_fact:
-    validate_diverts: "{{ validate_diverts | default([]) + [ lookup('template', 'diverts.broker.xml.j2') ] }}"
+    activemq_validate_diverts: "{{ activemq_validate_diverts | default([]) + [ lookup('template', 'diverts.broker.xml.j2') ] }}"
   when: activemq_diverts | length > 0
   loop: "{{ activemq_diverts }}"
   loop_control:
@@ -123,8 +123,8 @@
 
 - name: Validate diverts
   middleware_automation.common.xml:
-    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
-    xmlstring: "<core xmlns=\"urn:activemq:core\"><diverts>{{ validate_diverts | default([]) | join(' ') | trim }}</diverts></core>"
+    xsd_path: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><diverts>{{ activemq_validate_diverts | default([]) | join(' ') | trim }}</diverts></core>"
     validate: true
     input_type: xml
   when: activemq_diverts | length > 0
@@ -133,7 +133,7 @@
 
 - name: Create plugins configuration string
   ansible.builtin.set_fact:
-    validate_plugins: "{{ validate_plugins | default([]) + [ lookup('template', 'broker_plugins.broker.xml.j2') ] }}"
+    activemq_validate_plugins: "{{ activemq_validate_plugins | default([]) + [ lookup('template', 'broker_plugins.broker.xml.j2') ] }}"
   when: activemq_broker_plugins | length > 0
   loop: "{{ activemq_broker_plugins }}"
   loop_control:
@@ -142,8 +142,8 @@
 
 - name: Validate plugins
   middleware_automation.common.xml:
-    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
-    xmlstring: "<core xmlns=\"urn:activemq:core\"><broker-plugins>{{ validate_plugins | default([]) | join(' ') | trim }}</broker-plugins></core>"
+    xsd_path: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><broker-plugins>{{ activemq_validate_plugins | default([]) | join(' ') | trim }}</broker-plugins></core>"
     validate: true
     input_type: xml
   when: activemq_broker_plugins | length > 0
@@ -152,7 +152,7 @@
 
 - name: Create amqp broker connections configuration string
   ansible.builtin.set_fact:
-    validate_broker_connections: "{{ validate_broker_connections | default([]) + [ lookup('template', 'broker_connections.broker.xml.j2') ] }}"
+    activemq_validate_broker_connections: "{{ activemq_validate_broker_connections | default([]) + [ lookup('template', 'broker_connections.broker.xml.j2') ] }}"
   when: activemq_broker_connections | length > 0
   loop: "{{ activemq_broker_connections }}"
   loop_control:
@@ -161,8 +161,8 @@
 
 - name: Validate amqp broker connections
   middleware_automation.common.xml:
-    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
-    xmlstring: "<core xmlns=\"urn:activemq:core\"><broker-connections>{{ validate_broker_connections | default([]) | join(' ') | trim }}</broker-connections></core>"
+    xsd_path: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><broker-connections>{{ activemq_validate_broker_connections | default([]) | join(' ') | trim }}</broker-connections></core>"
     validate: true
     input_type: xml
   when: activemq_broker_connections | length > 0
@@ -171,17 +171,17 @@
 
 - name: Create security settings matches
   ansible.builtin.set_fact:
-    validate_security_settings_matches: "{{ activemq_roles | middleware_automation.amq.create_security_matches }}"
+    activemq_validate_security_settings_matches: "{{ activemq_roles | middleware_automation.amq.create_security_matches }}"
 
 - name: Create security settings
   ansible.builtin.set_fact:
-    validate_security_settings: "{{ validate_security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2', wantlist=true) ] }}"
-  loop: "{{ validate_security_settings_matches | dict2items(key_name='match', value_name='permissions') }}"
+    activemq_validate_security_settings: "{{ activemq_validate_security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2', wantlist=true) ] }}"
+  loop: "{{ activemq_validate_security_settings_matches | dict2items(key_name='match', value_name='permissions') }}"
 
 - name: Validate security settings
   middleware_automation.common.xml:
-    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
-    xmlstring: "<core xmlns=\"urn:activemq:core\"><security-settings>{{ validate_security_settings | flatten | join(' ') | trim }}</security-settings></core>"
+    xsd_path: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><security-settings>{{ activemq_validate_security_settings | flatten | join(' ') | trim }}</security-settings></core>"
     validate: true
     input_type: xml
   run_once: true
@@ -189,7 +189,7 @@
 
 - name: Create federations configuration string
   ansible.builtin.set_fact:
-    validate_federations: "{{ validate_federations | default([]) + [ lookup('template', 'federations.broker.xml.j2') ] }}"
+    activemq_validate_federations: "{{ activemq_validate_federations | default([]) + [ lookup('template', 'federations.broker.xml.j2') ] }}"
   loop: "{{ activemq_federations }}"
   loop_control:
     loop_var: federation
@@ -197,8 +197,8 @@
 
 - name: Validate federations
   middleware_automation.common.xml:
-    xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
-    xmlstring: "<core xmlns=\"urn:activemq:core\"><federations>{{ validate_federations | join(' ') | trim }}</federations></core>"
+    xsd_path: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><federations>{{ activemq_validate_federations | join(' ') | trim }}</federations></core>"
     validate: true
     input_type: xml
   run_once: true

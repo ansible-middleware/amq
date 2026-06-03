@@ -5,7 +5,7 @@
   block:
     - name: Create configuration element
       middleware_automation.common.xml:
-        xsd_path: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+        xsd_path: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
         xmlstring: "<core xmlns=\"urn:activemq:core\"><network-check-{{ item | replace('_', '-') }}>{{ value }}</network-check-{{ item | replace('_', '-') }}></core>"
         validate: true
         input_type: xml
@@ -13,7 +13,7 @@
         value: "{{ lookup('ansible.builtin.vars', 'activemq_network_check_' + item) | to_json | replace('\"', '') }}"
     - name: "Add item {{ item }} to valid element list"
       ansible.builtin.set_fact:
-        valid_nc_configuration_list: "{{ valid_nc_configuration_list | default([]) + [ item ] }}"
+        activemq_valid_nc_configuration_list: "{{ activemq_valid_nc_configuration_list | default([]) + [ item ] }}"
       when: lookup('ansible.builtin.vars', 'activemq_network_check_' + item) != ''
   rescue:
     - name: Display warning

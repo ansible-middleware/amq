@@ -1,17 +1,17 @@
 ---
 - name: Clear internal templating variables
   ansible.builtin.set_fact:
-    security_settings: []
-    security_settings_matches: {}
-    management_access_default: []
-    management_access_domains: []
-    addresses: []
-    acceptors: []
-    connectors: []
-    address_settings: []
-    diverts: []
-    broker_connections: []
-    masked_users: []
+    activemq_security_settings: []
+    activemq_security_settings_matches: {}
+    activemq_management_access_default_xml: []
+    activemq_management_access_domains_xml: []
+    activemq_addresses_xml: []
+    activemq_acceptors_xml: []
+    activemq_connectors_xml: []
+    activemq_address_settings_xml: []
+    activemq_diverts_xml: []
+    activemq_broker_connections_xml: []
+    activemq_masked_users: []
 
 - name: "Ensure target OS is supported."
   ansible.builtin.assert:
@@ -56,7 +56,7 @@
 - name: Check local download archive path
   ansible.builtin.stat:
     path: "{{ activemq_local_archive_repository }}"
-  register: local_path
+  register: activemq_local_path
   delegate_to: localhost
   run_once: true
   become: false
@@ -64,31 +64,31 @@
 - name: Validate local download path
   ansible.builtin.assert:
     that:
-      - local_path.stat.exists
-      - local_path.stat.readable
-      - activemq_offline_install or local_path.stat.writeable
+      - activemq_local_path.stat.exists
+      - activemq_local_path.stat.readable
+      - activemq_offline_install or activemq_local_path.stat.writeable
     quiet: true
     fail_msg: "Defined controller path for downloading resource is incorrect: {{ activemq_local_archive_repository }}"
-    success_msg: "Will download resource to controller path: {{ local_path.stat.path }}"
+    success_msg: "Will download resource to controller path: {{ activemq_local_path.stat.path }}"
   delegate_to: localhost
   run_once: true
 
 - name: Check downloaded archive if offline
   ansible.builtin.stat:
-    path: "{{ local_path.stat.path }}/{{ activemq.bundle }}"
+    path: "{{ activemq_local_path.stat.path }}/{{ activemq.bundle }}"
   when: activemq_offline_install
-  register: local_archive_path_check
+  register: activemq_local_archive_path_check
   delegate_to: localhost
   run_once: true
 
 - name: Validate local downloaded archive if offline
   ansible.builtin.assert:
     that:
-      - local_archive_path_check.stat.exists
-      - local_archive_path_check.stat.readable
+      - activemq_local_archive_path_check.stat.exists
+      - activemq_local_archive_path_check.stat.readable
     quiet: true
-    fail_msg: "Configured for offline install but install archive not found at: {{ local_archive_path_check.stat.path }}"
-    success_msg: "Will install offline with expected archive: {{ local_archive_path_check.stat.path }}"
+    fail_msg: "Configured for offline install but install archive not found at: {{ activemq_local_archive_path_check.stat.path }}"
+    success_msg: "Will install offline with expected archive: {{ activemq_local_archive_path_check.stat.path }}"
   when: activemq_offline_install
   delegate_to: localhost
   run_once: true
@@ -115,7 +115,7 @@
     - name: Make collection xsd available for validation
       ansible.builtin.copy: # noqa risky-file-permissions delegated, uses controller host user
         src: "artemis-configuration-{{ activemq_version.split('.')[:2] | join('.') }}.xsd"
-        dest: "{{ local_path.stat.path }}/artemis-configuration.xsd"
+        dest: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
         mode: '0644'
       delegate_to: localhost
       run_once: true
@@ -123,7 +123,7 @@
     - name: Make collection xsd available for validation
       ansible.builtin.copy: # noqa risky-file-permissions delegated, uses controller host user
         src: "artemis-server.xsd"
-        dest: "{{ local_path.stat.path }}/artemis-server.xsd"
+        dest: "{{ activemq_local_path.stat.path }}/artemis-server.xsd"
         mode: '0644'
       delegate_to: localhost
       run_once: true
@@ -131,7 +131,7 @@
     - name: Make collection xml.xsd available for validation
       ansible.builtin.copy: # noqa risky-file-permissions delegated, uses controller host user
         src: "xml.xsd"
-        dest: "{{ local_path.stat.path }}/xml.xsd"
+        dest: "{{ activemq_local_path.stat.path }}/xml.xsd"
         mode: '0644'
       delegate_to: localhost
       run_once: true
@@ -140,7 +140,7 @@
     - name: Fetch artemis configuration xsd schema for requested version
       ansible.builtin.get_url: # noqa risky-file-permissions delegated, uses controller host user
         url: "{{ item }}"
-        dest: "{{ local_path.stat.path }}/"
+        dest: "{{ activemq_local_path.stat.path }}/"
         mode: '0640'
       delegate_to: localhost
       changed_when: false  # it does not change targets, validation is on controller

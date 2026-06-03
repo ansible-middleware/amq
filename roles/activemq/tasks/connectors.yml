@@ -1,13 +1,13 @@
 ---
 - name: Create final connector list using generated and declared lists
   ansible.builtin.set_fact:
-    merged_connectors: "{{ activemq_cluster_nodes | default([]) | middleware_automation.amq.lists_mergeby(\
+    activemq_merged_connectors: "{{ activemq_cluster_nodes | default([]) | middleware_automation.amq.lists_mergeby(\
                           activemq_connectors | default([]), 'name', recursive=true, list_merge='append') }}"
 
 - name: Create connector configuration string
   ansible.builtin.set_fact:
-    connectors: "{{ connectors | default([]) + [ lookup('template', 'connectors.broker.xml.j2') ] }}"
-  loop: "{{ merged_connectors }}"
+    activemq_connectors_xml: "{{ activemq_connectors_xml | default([]) + [ lookup('template', 'connectors.broker.xml.j2') ] }}"
+  loop: "{{ activemq_merged_connectors }}"
   loop_control:
     loop_var: connector
     label: "{{ connector.name }}"
@@ -30,7 +30,7 @@
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:connectors
     input_type: xml
-    set_children: "{{ connectors }}"
+    set_children: "{{ activemq_connectors_xml }}"
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core
@@ -71,17 +71,17 @@
   block:
     - name: Create cluster connections configuration string
       ansible.builtin.set_fact:
-        cluster_connections: "{{ lookup('template', 'cluster_connections.broker.xml.j2') }}"
+        activemq_cluster_connections_xml: "{{ lookup('template', 'cluster_connections.broker.xml.j2') }}"
       vars:
         acceptor_names: "{{ activemq_acceptors | default([]) | map(attribute='name') }}"
-        merged_connector_names: "{{ merged_connectors | default([]) | map(attribute='name') }}"
+        merged_connector_names: "{{ activemq_merged_connectors | default([]) | map(attribute='name') }}"
 
     - name: Create cluster connections in broker.xml
       middleware_automation.common.xml:
         path: "{{ activemq.instance_home }}/etc/broker.xml"
         xpath: /conf:configuration/core:core/core:cluster-connections
         input_type: xml
-        set_children: "{{ cluster_connections }}"
+        set_children: "{{ activemq_cluster_connections_xml }}"
         namespaces:
           conf: urn:activemq
           core: urn:activemq:core

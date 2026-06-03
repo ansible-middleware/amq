@@ -21,13 +21,13 @@
   ansible.builtin.file:
     state: absent
     dest: "/etc/systemd/system/{{ activemq.instance_name }}.service"
-  register: systemdunit
+  register: activemq_uninstall_systemdunit
 
 - name: Reload systemd
   become: "{{ activemq_uninstall_require_privileges_escalation | default(true) }}"
   ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler
     daemon_reload: true
-  changed_when: systemdunit.changed
+  changed_when: activemq_uninstall_systemdunit.changed
 
 - name: "Delete instance directory {{ activemq.instance_home }}"
   become: "{{ activemq_uninstall_require_privileges_escalation | default(true) }}"

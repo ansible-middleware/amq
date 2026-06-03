@@ -1,17 +1,17 @@
 ---
 - name: "Check if packages are already installed" # noqa command-instead-of-module this runs faster
   ansible.builtin.command: "rpm -q {{ packages_list | join(' ') }}"
-  register: rpm_info
+  register: activemq_rpm_info
   changed_when: False
   failed_when: False
 
 - name: "Add missing packages to the install list"
   ansible.builtin.set_fact:
-    packages_to_install: "{{ packages_to_install | default([]) + rpm_info.stdout_lines | map('regex_findall', 'package (.+) is not installed$') | default([]) | flatten }}"
+    activemq_packages_to_install: "{{ activemq_packages_to_install | default([]) + activemq_rpm_info.stdout_lines | map('regex_findall', 'package (.+) is not installed$') | default([]) | flatten }}"
 
-- name: "Install packages: {{ packages_to_install }}"
+- name: "Install packages: {{ activemq_packages_to_install }}"
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   ansible.builtin.dnf:
-    name: "{{ packages_to_install }}"
+    name: "{{ activemq_packages_to_install }}"
     state: present
-  when: packages_to_install | default([]) | length > 0
+  when: activemq_packages_to_install | default([]) | length > 0

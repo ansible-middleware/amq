@@ -1,7 +1,7 @@
 ---
 - name: Create broker connections configuration string
   ansible.builtin.set_fact:
-    broker_connections: "{{ broker_connections | default([]) + [ lookup('template', 'broker_connections.broker.xml.j2') ] }}"
+    activemq_broker_connections_xml: "{{ activemq_broker_connections_xml | default([]) + [ lookup('template', 'broker_connections.broker.xml.j2') ] }}"
   loop: "{{ activemq_broker_connections }}"
   loop_control:
     loop_var: broker_connection
@@ -24,7 +24,7 @@
     path: "{{ activemq.instance_home }}/etc/broker.xml"
     xpath: /conf:configuration/core:core/core:broker-connections
     input_type: xml
-    set_children: "{{ broker_connections }}"
+    set_children: "{{ activemq_broker_connections_xml }}"
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core

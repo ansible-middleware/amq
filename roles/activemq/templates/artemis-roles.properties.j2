@@ -16,6 +16,6 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-{% for role in all_roles %}
+{% for role in activemq_all_roles %}
 {{ role }}={{ activemq_users | selectattr('roles', 'contains', role) | map(attribute='user') | join(',') }}
 {% endfor %}

@@ -1,7 +1,7 @@
 ---
 - name: Determine JAVA_HOME for selected JVM RPM
   ansible.builtin.set_fact:
-    rpm_java_home: "/etc/alternatives/jre_{{ activemq_jvm_package | regex_search('(?<=java-)[0-9.]+') }}"
+    activemq_rpm_java_home: "/etc/alternatives/jre_{{ activemq_jvm_package | regex_search('(?<=java-)[0-9.]+') }}"
 
 - name: "Ensure privilege is adequate to tasks execution"
   become: "{{ activemq_systemd_require_privilege_escalation | default(true) }}"
@@ -22,7 +22,6 @@
         group: root
         mode: '0644'
       vars:
-        activemq_rpm_java_home: "{{ rpm_java_home }}"
         activemq_logger_opts: "{{ '-Dlog4j.configurationFile=' + activemq_logger_config_template | basename | regex_replace('[.]j2$', '')\
                                   if activemq_logger_config_keep_name and activemq_logger_config_template != 'log4j2.properties.j2' }}"
         activemq_jmx_opts: "{{ '-javaagent:/usr/share/java/prometheus-jmx-exporter/jmx_prometheus_javaagent.jar=0.0.0.0:' + \
@@ -38,11 +37,11 @@
         owner: root
         group: root
         mode: '0644'
-      register: systemdunit
+      register: activemq_systemdunit
       notify:
         - restart amq_broker
 
     - name: Reload systemd
       ansible.builtin.systemd: # noqa no-handler definitely not a candidate for a handler, because of start/flush below
         daemon_reload: true
-      changed_when: systemdunit.changed
+      changed_when: activemq_systemdunit.changed

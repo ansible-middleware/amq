@@ -6,8 +6,8 @@
   ansible.builtin.command:
     cmd: "{{ activemq.home }}/bin/artemis upgrade {{ activemq.instance_home }}"
   environment:
-    PATH: "{{ rpm_java_home | default(activemq_rpm_java_home, true) }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-    JAVA_HOME: "{{ rpm_java_home }}"
+    PATH: "{{ activemq_rpm_java_home }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    JAVA_HOME: "{{ activemq_rpm_java_home }}"
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   become_user: "{{ activemq_service_user }}"
   changed_when: true
@@ -18,7 +18,7 @@
     regexp: '^ARTEMIS_HOME=.*'
     line: "ARTEMIS_HOME='{{ activemq.home }}'"
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
-  register: broker_updated
+  register: activemq_broker_updated
 
 - name: "Check artemis {{ activemq.home }} activemq schema"
   middleware_automation.common.xml:
