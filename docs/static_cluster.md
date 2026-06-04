@@ -15,7 +15,7 @@ or even bare-metal.
 
 On the machine running this guide, you'll need RHEL 9.2+, or in detail:
 
-* python 3.11+
+* python 3.12+
 * ansible-core >= 2.16
 * podman 5.1+
 

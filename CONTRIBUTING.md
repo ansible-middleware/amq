@@ -13,7 +13,7 @@ Clone the repository, checkout the tag you want to build, or pick the main branc
 
 Make sure your development machine has avilable:
 
-* python 3.11+
+* python 3.12+
 * virtualenv
 * docker (or podman)
 
