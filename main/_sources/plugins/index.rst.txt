@@ -5,6 +5,7 @@ Plugin Index
    :caption: filter plugins
    :maxdepth: 0
 
+   create_security_matches
    lists_mergeby
    pbkdf2_hmac
 

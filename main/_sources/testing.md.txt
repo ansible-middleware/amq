@@ -9,7 +9,7 @@ The test scenarios are available on the source code repository each on his own s
 
 ## Test playbooks
 
-Sample playbooks are provided in the `playbooks/` directory; to run the playbooks locally (requires a rhel system with python 3.9+, ansible, and systemd) the steps are as follows:
+Sample playbooks are provided in the `playbooks/` directory; to run the playbooks locally (requires a rhel system with python 3.12+, ansible, and systemd) the steps are as follows:
 
 ```
 # setup environment as above, then

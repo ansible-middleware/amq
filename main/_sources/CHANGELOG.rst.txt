@@ -7,15 +7,33 @@ middleware\_automation.amq Release Notes
 v2.3.6-devel
 ============
 
+Major Changes
+-------------
+
+- AMW-512 amq collection CI is having issues to run `#262 <https://github.com/ansible-middleware/amq/pull/262>`_
+- AMW-540 Fix the upstream collection requirements with common v1.2.4 `#266 <https://github.com/ansible-middleware/amq/pull/266>`_
+- Fix certification requirements for AMQ `#265 <https://github.com/ansible-middleware/amq/pull/265>`_
+
 Minor Changes
 -------------
 
 - AMW-459 Setup lastvalue queues config using amq_broker collection `#255 <https://github.com/ansible-middleware/amq/pull/255>`_
+- Add comprehensive tests for create_security_matches filter `#260 <https://github.com/ansible-middleware/amq/pull/260>`_
+- Amw 526 var naming incremental `#267 <https://github.com/ansible-middleware/amq/pull/267>`_
+- Optimize security settings creation with custom filter `#259 <https://github.com/ansible-middleware/amq/pull/259>`_
 
 Bugfixes
 --------
 
 - AMW-454 Fix amq collecton sanity test issue `#254 <https://github.com/ansible-middleware/amq/pull/254>`_
+
+New Plugins
+-----------
+
+Filter
+~~~~~~
+
+- middleware_automation.amq.create_security_matches - Create security settings matches from AMQ broker roles
 
 v2.3.5
 ======

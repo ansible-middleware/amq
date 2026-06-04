@@ -1,0 +1,188 @@
+.. Document meta
+
+:orphan:
+
+.. |antsibull-internal-nbsp| unicode:: 0xA0
+    :trim:
+
+.. meta::
+  :antsibull-docs: 2.24.0
+
+.. Anchors
+
+.. _ansible_collections.middleware_automation.amq.create_security_matches_filter:
+
+.. Anchors: short name for ansible.builtin
+
+.. Title
+
+create_security_matches -- Create security settings matches from AMQ broker roles
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. Collection note
+
+.. note::
+    This filter plugin is part of the `middleware_automation.amq collection <https://galaxy.ansible.com/ui/repo/published/middleware_automation/amq/>`_.
+
+    It is not included in ``ansible-core``.
+    To check whether it is installed, run :code:`ansible-galaxy collection list`.
+
+    To install it, use: :code:`ansible\-galaxy collection install middleware\_automation.amq`.
+
+    To use it in a playbook, specify: :code:`middleware_automation.amq.create_security_matches`.
+
+.. version_added
+
+.. rst-class:: ansible-version-added
+
+New in middleware\_automation.amq 2.3.6
+
+.. contents::
+   :local:
+   :depth: 1
+
+.. Deprecated
+
+
+Synopsis
+--------
+
+.. Description
+
+- Processes AMQ broker roles and permissions to create security settings matches.
+
+
+.. Aliases
+
+
+.. Requirements
+
+
+
+
+
+.. Input
+
+Input
+-----
+
+This describes the input of the filter, the value before ``| middleware_automation.amq.create_security_matches``.
+
+.. raw:: html
+
+  <table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
+  <thead>
+  <tr class="row-odd">
+    <th class="head"><p>Parameter</p></th>
+    <th class="head"><p>Comments</p></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="row-even">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="parameter-_input"></div>
+      <p class="ansible-option-title"><strong>Input</strong></p>
+      <a class="ansibleOptionLink" href="#parameter-_input" title="Permalink to this option"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">list</span>
+        / <span class="ansible-option-elements">elements=dictionary</span>
+        / <span class="ansible-option-required">required</span>
+      </p>
+
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>List of AMQ broker role dictionaries.</p>
+    </div></td>
+  </tr>
+  </tbody>
+  </table>
+
+
+
+
+
+.. Options
+
+
+.. Attributes
+
+
+.. Notes
+
+Notes
+-----
+
+.. note::
+   - Each role dict must have 'name' field.
+   - The 'match' field is optional and defaults to '#'.
+   - The 'permissions' field should be a list.
+
+.. Seealso
+
+
+.. Examples
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    # Create security settings matches from roles
+    - name: Create security settings
+      ansible.builtin.set_fact:
+        security_settings_matches: "{{ activemq_roles | middleware_automation.amq.create_security_matches }}"
+
+
+
+.. Facts
+
+
+.. Return values
+
+Return Value
+------------
+
+.. raw:: html
+
+  <table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
+  <thead>
+  <tr class="row-odd">
+    <th class="head"><p>Key</p></th>
+    <th class="head"><p>Description</p></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="row-even">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-_value"></div>
+      <p class="ansible-option-title"><strong>Return value</strong></p>
+      <a class="ansibleOptionLink" href="#return-_value" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">dictionary</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>Dictionary mapping match patterns to permissions and roles.</p>
+      <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> always</p>
+    </div></td>
+  </tr>
+  </tbody>
+  </table>
+
+
+
+..  Status (Presently only deprecated)
+
+
+.. Authors
+
+Authors
+~~~~~~~
+
+- Martin Cihlar
+
+
+.. Extra links
+
+
+.. Parsing errors

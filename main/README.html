@@ -8,16 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ansible Collection - AMQ &mdash; AMQ Ansible Collection  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=41de9001" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
-      <link rel="stylesheet" type="text/css" href="_static/ansible-basic-sphinx-ext.css" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -71,6 +70,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#release-and-upgrade-notes">Release and Upgrade Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
 </ul>
 </li>
@@ -150,8 +151,8 @@
 <section id="roles">
 <h3>Roles:<a class="headerlink" href="#roles" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">activemq</span></code>: perform installation and configuration</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">activemq_uninstall</span></code>: uninstallation of a deploment made by the collection</p></li>
+<li><p><a class="reference external" href="https://github.com/ansible-middleware/amq/blob/main/roles/activemq/README.md"><code class="docutils literal notranslate"><span class="pre">activemq</span></code></a>: perform installation and configuration</p></li>
+<li><p><a class="reference external" href="https://github.com/ansible-middleware/amq/blob/main/roles/activemq_uninstall/README.md"><code class="docutils literal notranslate"><span class="pre">activemq_uninstall</span></code></a>: uninstallation of a deploment made by the collection</p></li>
 </ul>
 </section>
 <section id="plugins">
@@ -224,14 +225,24 @@ the download tasks. The local path for the archive does match the downloaded arc
 <section id="clustered-high-availability-deployments">
 <h4>Clustered / high availability deployments<a class="headerlink" href="#clustered-high-availability-deployments" title="Link to this heading"></a></h4>
 <p>When deploying clustered configurations, all hosts belonging to the cluster must be present in <code class="docutils literal notranslate"><span class="pre">ansible_play_batch</span></code>; ie. they must be targeted by the same ansible-playbook execution.</p>
+</section>
+</section>
+</section>
+<section id="support">
+<h2>Support<a class="headerlink" href="#support" title="Link to this heading"></a></h2>
 <!--start support -->
+<p>If you have any issues or questions related to this collection, please contact <a class="reference external" href="mailto:Ansible-middleware-core&#37;&#52;&#48;redhat&#46;com">Ansible-middleware-core<span>&#64;</span>redhat<span>&#46;</span>com</a> or open an <a class="reference external" href="https://github.com/ansible-middleware/amq/issues">issue</a>.</p>
+<p>For more information about using this collection, see the <a class="reference external" href="https://docs.redhat.com/en/documentation/red_hat_amq_broker/latest">Product Documentation for Red Hat AMQ Broker</a>.</p>
 <!--end support -->
 </section>
-</section>
+<section id="release-and-upgrade-notes">
+<h2>Release and Upgrade Notes<a class="headerlink" href="#release-and-upgrade-notes" title="Link to this heading"></a></h2>
+<p>For details on changes between versions, please see the <a class="reference external" href="https://github.com/ansible-middleware/amq/blob/main/CHANGELOG.rst">CHANGELOG</a> for this collection.</p>
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Link to this heading"></a></h2>
-<p><a class="reference external" href="https://github.com/ansible-middleware/amq/blob/main/LICENSE">Apache License 2.0</a></p>
+<p>Apache License v2.0 or later</p>
+<p>See <a class="reference external" href="https://github.com/ansible-middleware/amq/blob/main/LICENSE">LICENSE</a> to view the full text.</p>
 </section>
 </section>
 
@@ -246,7 +257,7 @@ the download tasks. The local path for the archive does match the downloaded arc
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Red Hat, Inc..</p>
+    <p>&#169; Copyright 2026, Red Hat, Inc..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
