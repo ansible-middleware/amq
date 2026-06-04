@@ -44,7 +44,6 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx_antsibull_ext',
-    'ansible_basic_sphinx_ext',
 
 ]
 
