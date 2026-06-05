@@ -34,7 +34,7 @@ Role Defaults
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
-|`activemq_version`| Apache Artemis version | `2.34.0` |
+|`activemq_version`| Apache Artemis version | `2.54.0` |
 |`activemq_archive`| Apache Artemis install archive filename | `apache-artemis-{{ activemq_version }}-bin.zip` |
 |`activemq_installdir`| Apache Artemis Installation path | `{{ activemq_dest }}/apache-artemis-{{ activemq_version }}` |
 |`activemq_dest`| Root installation directory | `/opt/amq` |

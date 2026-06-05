@@ -220,8 +220,8 @@ our configuration, and run ansible-playbook to iteratively update our installati
 <p>The installed activemq version is specified using the <code class="docutils literal notranslate"><span class="pre">activemq_version</span></code> parameter for the <code class="docutils literal notranslate"><span class="pre">activemq</span></code> role.
 The collection default will change over time, using the most recent available version that has been tested.</p>
 <p>However, it is sometimes unwanted to operate updates without changing the underlying configuration, so the
-installed version can be pinned (2.34.0 is the collection default at the time of writing):</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.34.0</span>
+installed version can be pinned (2.40.0 is an older stable version):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.40.0</span>
 </pre></div>
 </div>
 <p>Let’s update <code class="docutils literal notranslate"><span class="pre">inventory/group_vars/amq.yml</span></code> file with the line above, so that all hosts in the <code class="docutils literal notranslate"><span class="pre">amq</span></code> group
@@ -236,8 +236,8 @@ PLAY<span class="w"> </span>RECAP<span class="w"> </span>***********************
 amq1<span class="w">                       </span>:<span class="w"> </span><span class="nv">ok</span><span class="o">=</span><span class="m">149</span><span class="w">  </span><span class="nv">changed</span><span class="o">=</span><span class="m">0</span><span class="w">   </span><span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">failed</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">skipped</span><span class="o">=</span><span class="m">43</span><span class="w">   </span><span class="nv">rescued</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">ignored</span><span class="o">=</span><span class="m">0</span>
 </pre></div>
 </div>
-<p>Now, we want to update to 2.36, so in <code class="docutils literal notranslate"><span class="pre">inventory/group_vars/amq.yml</span></code> we set:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.36.0</span>
+<p>Now, we want to update to 2.54.0, so in <code class="docutils literal notranslate"><span class="pre">inventory/group_vars/amq.yml</span></code> we set:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.54.0</span>
 </pre></div>
 </div>
 <p>and we run again:</p>
@@ -276,7 +276,7 @@ In yaml, is looks like so:</p>
 </pre></div>
 </div>
 <p>Let’s say we want to create an additional multicast topic, so we take the yaml above and copy to <code class="docutils literal notranslate"><span class="pre">inventory/group_vars/amq.yml</span></code>, adding the new config at the end (watch indentation, it’s important!):</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.36.0</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.54.0</span>
 <span class="nt">activemq_addresses</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue.in</span>
 <span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
@@ -320,7 +320,7 @@ the service by looking at the logs:</p>
 <span class="m">2024</span>-07-31<span class="w"> </span><span class="m">09</span>:29:13,035<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>org.apache.activemq.artemis.core.server<span class="o">]</span><span class="w"> </span>AMQ221056:<span class="w"> </span>Reloading<span class="w"> </span>configuration:<span class="w"> </span>bridges
 </pre></div>
 </div>
-<p>Many configurations can changed <a class="reference external" href="https://activemq.apache.org/components/artemis/documentation/2.32.0/config-reload.html">this way</a>, and way many more are possible with a restart.</p>
+<p>Many configurations can changed <a class="reference external" href="https://activemq.apache.org/components/artemis/documentation/latest/config-reload.html">this way</a>, and way many more are possible with a restart.</p>
 </section>
 </section>
 

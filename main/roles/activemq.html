@@ -167,29 +167,33 @@
 <tbody>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_version</span></code></p></td>
 <td class="text-left"><p>Apache Artemis version</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.40.0</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.54.0</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_archive</span></code></p></td>
 <td class="text-left"><p>Apache Artemis install archive filename</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">apache-artemis-{{</span> <span class="pre">activemq_version</span> <span class="pre">}}-bin.zip</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_download_url</span></code></p></td>
-<td class="text-left"><p>Apache Artemis download URL</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://archive.apache.org/dist/activemq/activemq-artemis/{{</span> <span class="pre">activemq_version</span> <span class="pre">}}/{{</span> <span class="pre">activemq_archive</span> <span class="pre">}}</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_download_path</span></code></p></td>
+<td class="text-left"><p>Apache Artemis download path</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">'artemis/artemis'</span> <span class="pre">if</span> <span class="pre">activemq_version</span> <span class="pre">is</span> <span class="pre">version('2.50.0',</span> <span class="pre">'&gt;=')</span> <span class="pre">else</span> <span class="pre">'activemq/activemq-artemis'</span> <span class="pre">}}</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_installdir</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_download_url</span></code></p></td>
+<td class="text-left"><p>Apache Artemis download URL</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://archive.apache.org/dist/{{</span> <span class="pre">activemq_download_path</span> <span class="pre">}}/{{</span> <span class="pre">activemq_version</span> <span class="pre">}}/{{</span> <span class="pre">activemq_archive</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_installdir</span></code></p></td>
 <td class="text-left"><p>Apache Artemis Installation path</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/apache-artemis-{{</span> <span class="pre">activemq_version</span> <span class="pre">}}</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_dest</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_dest</span></code></p></td>
 <td class="text-left"><p>Root installation directory</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt/amq</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_offline_install</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_offline_install</span></code></p></td>
 <td class="text-left"><p>Perform an offline installation</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_local_archive_repository</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_local_archive_repository</span></code></p></td>
 <td class="text-left"><p>Path local to controller for offline/download of install archives</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">lookup('env',</span> <span class="pre">'PWD')</span> <span class="pre">}}</span></code></p></td>
 </tr>

@@ -122,10 +122,10 @@ The installed activemq version is specified using the `activemq_version` paramet
 The collection default will change over time, using the most recent available version that has been tested.
 
 However, it is sometimes unwanted to operate updates without changing the underlying configuration, so the
-installed version can be pinned (2.34.0 is the collection default at the time of writing):
+installed version can be pinned (2.40.0 is an older stable version):
 
 ```yaml
-activemq_version: 2.34.0
+activemq_version: 2.40.0
 ```
 
 Let's update `inventory/group_vars/amq.yml` file with the line above, so that all hosts in the `amq` group
@@ -144,10 +144,10 @@ PLAY RECAP *********************************************************************
 amq1                       : ok=149  changed=0   unreachable=0    failed=0    skipped=43   rescued=0    ignored=0
 ```
 
-Now, we want to update to 2.36, so in `inventory/group_vars/amq.yml` we set:
+Now, we want to update to 2.54.0, so in `inventory/group_vars/amq.yml` we set:
 
 ```yaml
-activemq_version: 2.36.0
+activemq_version: 2.54.0
 ```
 
 and we run again:
@@ -192,7 +192,7 @@ activemq_addresses:
 Let's say we want to create an additional multicast topic, so we take the yaml above and copy to `inventory/group_vars/amq.yml`, adding the new config at the end (watch indentation, it's important!):
 
 ```yaml
-activemq_version: 2.36.0
+activemq_version: 2.54.0
 activemq_addresses:
   - name: queue.in
     anycast:
@@ -240,5 +240,5 @@ podman exec -ti amq1 tail /var/log/activemq/amq-broker/artemis.log
 2024-07-31 09:29:13,035 INFO  [org.apache.activemq.artemis.core.server] AMQ221056: Reloading configuration: bridges
 ```
 
-Many configurations can changed [this way](https://activemq.apache.org/components/artemis/documentation/2.32.0/config-reload.html), and way many more are possible with a restart.
+Many configurations can changed [this way](https://activemq.apache.org/components/artemis/documentation/latest/config-reload.html), and way many more are possible with a restart.
 
