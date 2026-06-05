@@ -2,15 +2,19 @@ argument_specs:
     main:
         options:
             activemq_version:
-                default: "2.40.0"
+                default: "2.54.0"
                 description: "Apache Artemis version"
                 type: "str"
             activemq_archive:
                 default: "apache-artemis-{{ activemq_version }}-bin.zip"
                 description: "Apache Artemis install archive filename"
                 type: "str"
+            activemq_download_path:
+                default: "{{ 'artemis/artemis' if activemq_version is version('2.50.0', '>=') else 'activemq/activemq-artemis' }}"
+                description: "Apache Artemis download path"
+                type: "str"
             activemq_download_url:
-                default: "https://archive.apache.org/dist/activemq/activemq-artemis/{{ activemq_version }}/{{ activemq_archive }}"
+                default: "https://archive.apache.org/dist/{{ activemq_download_path }}/{{ activemq_version }}/{{ activemq_archive }}"
                 description: "Apache Artemis download URL"
                 type: "str"
             activemq_installdir:
@@ -858,7 +862,7 @@ argument_specs:
     systemd:
         options:
             activemq_version:
-                default: "2.40.0"
+                default: "2.54.0"
                 description: "Apache Artemis version"
                 type: "str"
             activemq_installdir:

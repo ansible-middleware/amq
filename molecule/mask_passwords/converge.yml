@@ -10,7 +10,7 @@
     ansible.builtin.get_url:
       validate_certs: "{{ not lookup('env', 'PROXY') != '' }}"
   vars:
-    activemq_version: 2.29.0
+    activemq_version: 2.54.0
     activemq_service_user_home: /home/activemq
     activemq_hawtio_roles: [ 'Scientists' ]
     activemq_password_codec: "com.ansiblemiddleware.amq.utils.PBKDF2WithHmacCodec;iterations={{ activemq_mask_password_iterations }};hashname={{ activemq_mask_password_hashname }}"

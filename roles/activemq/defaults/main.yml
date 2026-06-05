@@ -1,8 +1,10 @@
 ---
 ### Version settings
-activemq_version: 2.40.0
+activemq_version: 2.54.0
 activemq_archive: "apache-artemis-{{ activemq_version }}-bin.zip"
-activemq_download_url: "https://archive.apache.org/dist/activemq/activemq-artemis/{{ activemq_version }}/{{ activemq_archive }}"
+# Apache Artemis download location changed from activemq/activemq-artemis/ to artemis/artemis/ starting with version 2.50.0
+activemq_download_path: "{{ 'artemis/artemis' if activemq_version is version('2.50.0', '>=') else 'activemq/activemq-artemis' }}"
+activemq_download_url: "https://archive.apache.org/dist/{{ activemq_download_path }}/{{ activemq_version }}/{{ activemq_archive }}"
 activemq_installdir: "{{ activemq_dest }}/apache-artemis-{{ activemq_version }}"
 activemq_install_extract_require_privilege_escalation: true
 

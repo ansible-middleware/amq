@@ -31,9 +31,10 @@ Role Defaults
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
-|`activemq_version`| Apache Artemis version | `2.40.0` |
+|`activemq_version`| Apache Artemis version | `2.54.0` |
 |`activemq_archive`| Apache Artemis install archive filename | `apache-artemis-{{ activemq_version }}-bin.zip` |
-|`activemq_download_url`| Apache Artemis download URL | `https://archive.apache.org/dist/activemq/activemq-artemis/{{ activemq_version }}/{{ activemq_archive }}` |
+|`activemq_download_path`| Apache Artemis download path | `{{ 'artemis/artemis' if activemq_version is version('2.50.0', '>=') else 'activemq/activemq-artemis' }}` |
+|`activemq_download_url`| Apache Artemis download URL | `https://archive.apache.org/dist/{{ activemq_download_path }}/{{ activemq_version }}/{{ activemq_archive }}` |
 |`activemq_installdir`| Apache Artemis Installation path | `{{ activemq_dest }}/apache-artemis-{{ activemq_version }}` |
 |`activemq_dest`| Root installation directory | `/opt/amq` |
 |`activemq_offline_install`| Perform an offline installation | `False` |
