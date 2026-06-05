@@ -110,7 +110,7 @@ Here's the list of what you may need to configure to fit your environment, with 
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
-|`activemq_version`| Apache Artemis version | `2.34.0` |
+|`activemq_version`| Apache Artemis version | `2.54.0` |
 |`activemq_installdir`| Apache Artemis Installation path | `{{ activemq_dest }}/apache-artemis-{{ activemq_version }}` |
 |`activemq_dest`| Root installation directory | `/opt/amq` |
 |`activemq_service_user`| POSIX user running the service | `amq-broker` |
@@ -147,7 +147,7 @@ You can now login on the target instance, and run:
      Memory: 394.2M
         CPU: 41.030s
      CGroup: /system.slice/amq-broker.service
-             └─4064 /etc/alternatives/jre_17/bin/java -Xms512M -Xmx2G -XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication -Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal -Djolokia.policyLocation=file:/opt/amq/amq-broker/etc/jolokia-access.xml -Dhawtio.role=admin -Djava.security.auth.login.config=/opt/amq/amq-broker/etc/login.config -classpath /opt/amq/apache-artemis-2.34.0/lib/artemis-boot.jar -Dartemis.home=/opt/amq/apache-artemis-2.34.0 -Dartemis.instance=/opt/amq/amq-broker -Djava.library.path=/opt/amq/apache-artemis-2.34.0/bin/lib/linux-x86_64 -Djava.io.tmpdir=/opt/amq/amq-broker/tmp -Ddata.dir=/opt/amq/amq-broker/data -Dartemis.instance.etc=/opt/amq/amq-broker/etc org.apache.activemq.artemis.boot.Artemis run
+             └─4064 /etc/alternatives/jre_17/bin/java -Xms512M -Xmx2G -XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication -Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal -Djolokia.policyLocation=file:/opt/amq/amq-broker/etc/jolokia-access.xml -Dhawtio.role=admin -Djava.security.auth.login.config=/opt/amq/amq-broker/etc/login.config -classpath /opt/amq/apache-artemis-2.54.0/lib/artemis-boot.jar -Dartemis.home=/opt/amq/apache-artemis-2.54.0 -Dartemis.instance=/opt/amq/amq-broker -Djava.library.path=/opt/amq/apache-artemis-2.54.0/bin/lib/linux-x86_64 -Djava.io.tmpdir=/opt/amq/amq-broker/tmp -Ddata.dir=/opt/amq/amq-broker/data -Dartemis.instance.etc=/opt/amq/amq-broker/etc org.apache.activemq.artemis.boot.Artemis run
 
 Aug 22 09:02:32 instance systemd[1]: Starting amq-broker Apache ActiveMQ Service...
 Aug 22 09:02:32 instance artemis-service[4061]: Starting artemis-service
