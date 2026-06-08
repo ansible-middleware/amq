@@ -41,11 +41,11 @@
           useEpoll: true
           sslEnabled: false
     activemq_connectors:
-      - name: instance-ubi9
-        address: instance-ubi9
+      - name: instance1
+        address: instance1
         port: "{{ activemq_port }}"
-      - name: instance-ubi10
-        address: instance-ubi10
+      - name: instance2
+        address: instance2
         port: "{{ activemq_port }}"
     activemq_addresses:
       - name: queue.in
@@ -79,15 +79,15 @@
         filter: "msgType LIKE '%ff%'"
         exclusive: True
   pre_tasks:
-    - name: Set HA role for instance-ubi9
+    - name: Set HA role for instance1
       ansible.builtin.set_fact:
         activemq_ha_role: 'primary'
-      when: inventory_hostname == 'instance-ubi9'
+      when: inventory_hostname == 'instance1'
 
-    - name: Set HA role for instance-ubi10
+    - name: Set HA role for instance2
       ansible.builtin.set_fact:
         activemq_ha_role: 'backup'
         activemq_replicated: true
-      when: inventory_hostname == 'instance-ubi10'
+      when: inventory_hostname == 'instance2'
   roles:
     - middleware_automation.amq.activemq

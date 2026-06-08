@@ -970,7 +970,7 @@ argument_specs:
                 type: "str"
             amq_broker_product_category:
                 default: "jboss.amq.broker"
-                description: "JBossNetwork API category for amq_broker"
+                description: "Unified Downloads API category for amq_broker"
                 type: "str"
             amq_broker_enable:
                 default: true

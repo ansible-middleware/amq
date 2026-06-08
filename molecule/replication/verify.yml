@@ -24,13 +24,19 @@
       ansible.builtin.debug:
         var: cluster_config.stdout_lines
 
-    - name: Populate activemq facts
+    - name: Wait for cluster to reach expected state
       middleware_automation.amq.activemq_facts:
         base_url: http://localhost:8161
         auth_username: amq
         auth_password: amqbrokerpass
         validate_certs: false
       register: facts_result
+      until:
+        - facts_result is succeeded
+        - ansible_facts.activemq is defined
+        - (inventory_hostname == 'instance1' and ansible_facts.activemq.Active | default(false) == true) or (inventory_hostname == 'instance2' and ansible_facts.activemq.Backup | default(false) == true)
+      retries: 30
+      delay: 5
       failed_when: false
 
     - name: Display Jolokia facts
@@ -44,18 +50,18 @@
           - ansible_facts.services["amq-broker.service"]["state"] == "running"
           - ansible_facts.services["amq-broker.service"]["status"] == "enabled"
 
-    - name: Read content of instance-ubi9 logs
+    - name: Read content of instance1 logs
       ansible.builtin.slurp:
         src: /var/log/activemq/amq-broker/artemis.log
       register: slurped_log_instance1
-      delegate_to: instance-ubi9
+      delegate_to: instance1
       run_once: true
 
-    - name: Read content of instance-ubi10 logs
+    - name: Read content of instance2 logs
       ansible.builtin.slurp:
         src: /var/log/activemq/amq-broker/artemis.log
       register: slurped_log_instance2
-      delegate_to: instance-ubi10
+      delegate_to: instance2
       run_once: true
 
     - name: Check primary server started
@@ -74,7 +80,7 @@
           - ansible_facts.activemq.Clustered == true
           - ansible_facts.activemq.SharedStore == false
           - ansible_facts.activemq.HAPolicy == "Replication Primary w/quorum voting"
-      when: inventory_hostname == 'instance-ubi9'
+      when: inventory_hostname == 'instance1'
 
     - name: Check cluster status via jolokia facts (backup)
       ansible.builtin.assert:
@@ -83,4 +89,4 @@
           - ansible_facts.activemq.Backup == true
           - ansible_facts.activemq.SharedStore == false
           - ansible_facts.activemq.HAPolicy == "Replication Backup w/quorum voting"
-      when: inventory_hostname == 'instance-ubi10'
+      when: inventory_hostname == 'instance2'

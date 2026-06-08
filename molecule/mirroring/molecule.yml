@@ -1,10 +1,37 @@
 ---
+driver:
+  name: docker
+platforms:
+  - name: instance1
+    image: registry.access.redhat.com/ubi9/ubi-init:latest
+    pre_build_image: true
+    privileged: true
+    command: "/usr/sbin/init"
+    network: amq
+  - name: instance2
+    image: registry.access.redhat.com/ubi9/ubi-init:latest
+    pre_build_image: true
+    privileged: true
+    command: "/usr/sbin/init"
+    network: amq
 provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      interpreter_python: auto_silent
+    ssh_connection:
+      pipelining: false
+  playbooks:
+    prepare: prepare.yml
+    converge: converge.yml
+    verify: verify.yml
   inventory:
     host_vars:
-      instance-ubi9:
+      localhost:
+        ansible_python_interpreter: "{{ ansible_playbook_python }}"
+      instance1:
         activemq_broker_connections:
-          - uri: "tcp://instance-ubi10:{{ activemq_port }}"
+          - uri: "tcp://instance2:{{ activemq_port }}"
             name: DC2
             sync: true
             user: amq-broker
@@ -13,9 +40,9 @@ provisioner:
               - type: mirror
                 parameters:
                   queue_removal: false
-      instance-ubi10:
+      instance2:
         activemq_broker_connections:
-          - uri: "tcp://instance-ubi9:{{ activemq_port }}"
+          - uri: "tcp://instance1:{{ activemq_port }}"
             name: DC1
             sync: true
             user: amq-broker
@@ -24,3 +51,21 @@ provisioner:
               - type: mirror
                 parameters:
                   queue_removal: false
+  env:
+    ANSIBLE_FORCE_COLOR: "true"
+    PROXY: "${PROXY}"
+    NO_PROXY: "${NO_PROXY}"
+verifier:
+  name: ansible
+scenario:
+  test_sequence:
+    - cleanup
+    - destroy
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - side_effect
+    - verify
+    - cleanup
+    - destroy

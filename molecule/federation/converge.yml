@@ -33,10 +33,10 @@
           useEpoll: true
           sslEnabled: false
     activemq_connectors:
-      - name: instance-ubi9
-        address: instance-ubi9
-      - name: instance-ubi10
-        address: instance-ubi10
+      - name: instance1
+        address: instance1
+      - name: instance2
+        address: instance2
     activemq_addresses:
       - name: queue.in
         anycast:
