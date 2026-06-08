@@ -19,19 +19,19 @@
           - ansible_facts.services["amq-broker.service"]["state"] == "running"
           - ansible_facts.services["amq-broker.service"]["status"] == "enabled"
 
-    - name: Read content of instance-ubi9 logs
+    - name: Read content of instance1 logs
       ansible.builtin.slurp:
         src: /var/log/activemq/amq-broker/artemis.log
       register: slurped_log_instance1
-      delegate_to: instance-ubi9
+      delegate_to: instance1
       run_once: true
       no_log: true
 
-    - name: Read content of instance-ubi10 logs
+    - name: Read content of instance2 logs
       ansible.builtin.slurp:
         src: /var/log/activemq/amq-broker/artemis.log
       register: slurped_log_instance2
-      delegate_to: instance-ubi10
+      delegate_to: instance2
       run_once: true
       no_log: true
 
@@ -57,7 +57,7 @@
           - ansible_facts.activemq.Clustered == true
           - ansible_facts.activemq.SharedStore == false
           - ansible_facts.activemq.HAPolicy == "Primary Only"
-      when: inventory_hostname == 'instance-ubi9'
+      when: inventory_hostname == 'instance1'
 
     - name: Check cluster status via jolokia facts (backup)
       ansible.builtin.assert:
@@ -67,4 +67,4 @@
           - ansible_facts.activemq.Clustered == true
           - ansible_facts.activemq.SharedStore == false
           - ansible_facts.activemq.HAPolicy == "Primary Only"
-      when: inventory_hostname == 'instance-ubi10'
+      when: inventory_hostname == 'instance2'

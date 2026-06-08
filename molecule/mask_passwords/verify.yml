@@ -8,8 +8,8 @@
 
     - name: Populate activemq facts
       middleware_automation.amq.activemq_facts:
-        auth_username: tesla
-        auth_password: password
+        auth_username: amq
+        auth_password: amqbrokerpass
         validate_certs: false
 
     - name: Check if amq-broker service is started
