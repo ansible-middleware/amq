@@ -19,6 +19,7 @@ Minor Changes
 
 - AMW-459 Setup lastvalue queues config using amq_broker collection `#255 <https://github.com/ansible-middleware/amq/pull/255>`_
 - AMW-509 Fix Artemis download URL for versions >= 2.50.0 and update to 2.54.0 `#271 <https://github.com/ansible-middleware/amq/pull/271>`_
+- AMW-564 amq_broker collection Unified Downloads API fix `#272 <https://github.com/ansible-middleware/amq/pull/272>`_
 - Add comprehensive tests for create_security_matches filter `#260 <https://github.com/ansible-middleware/amq/pull/260>`_
 - Amw 526 var naming incremental `#267 <https://github.com/ansible-middleware/amq/pull/267>`_
 - Optimize security settings creation with custom filter `#259 <https://github.com/ansible-middleware/amq/pull/259>`_
