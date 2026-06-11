@@ -1,7 +1,7 @@
 ---
 namespace: middleware_automation
 name: amq
-version: "2.3.6"
+version: "2.3.7"
 readme: README.md
 authors:
   - Ranabir Chakraborty <ranabir@ibm.com>
