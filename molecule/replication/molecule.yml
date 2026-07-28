@@ -7,7 +7,10 @@ platforms:
     pre_build_image: true
     privileged: true
     command: "/usr/sbin/init"
-    network: amq
+    docker_networks:
+      - name: amq
+    networks:
+      - name: amq
     volumes:
       - nfs:/opt/amq/amq-broker/data/shared
   - name: instance2
@@ -15,7 +18,8 @@ platforms:
     pre_build_image: true
     privileged: true
     command: "/usr/sbin/init"
-    network: amq
+    networks:
+      - name: amq
     volumes:
       - nfs:/opt/amq/amq-broker/data/shared
 provisioner:

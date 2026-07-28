@@ -8,8 +8,10 @@ platforms:
     pre_build_image: true
     privileged: true
     command: "/usr/sbin/init"
-    systemd: always
-    network: amq
+    docker_networks:
+      - name: amq
+    networks:
+      - name: amq
     tmpfs:
       - "/tmp:exec"
       - "/run:rw,noexec,nosuid,nodev"
@@ -19,8 +21,10 @@ platforms:
     pre_build_image: true
     privileged: true
     command: "/usr/sbin/init"
-    systemd: always
-    network: amq
+    docker_networks:
+      - name: amq
+    networks:
+      - name: amq
     tmpfs:
       - "/tmp:exec"
       - "/run:rw,noexec,nosuid,nodev"
