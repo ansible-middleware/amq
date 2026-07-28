@@ -7,13 +7,17 @@ platforms:
     pre_build_image: true
     privileged: true
     command: "/usr/sbin/init"
-    network: amq
+    docker_networks:
+      - name: amq
+    networks:
+      - name: amq
   - name: instance2
     image: registry.access.redhat.com/ubi9/ubi-init:latest
     pre_build_image: true
     privileged: true
     command: "/usr/sbin/init"
-    network: amq
+    networks:
+      - name: amq
 provisioner:
   name: ansible
   config_options:
