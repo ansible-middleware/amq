@@ -4,8 +4,16 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
-v2.3.6-devel
+v2.3.7-devel
 ============
+
+Bugfixes
+--------
+
+- AMW-592 AMW Github Actions are failing because of latest molecule `#274 <https://github.com/ansible-middleware/amq/pull/274>`_
+
+v2.3.6
+======
 
 Major Changes
 -------------
