@@ -11,6 +11,7 @@ Bugfixes
 --------
 
 - AMW-592 AMW Github Actions are failing because of latest molecule `#274 <https://github.com/ansible-middleware/amq/pull/274>`_
+- AMW-594 Upstream release is failing due to recent rules change `#273 <https://github.com/ansible-middleware/amq/pull/273>`_
 
 v2.3.6
 ======
