@@ -211,6 +211,7 @@ activemq_hawtio_role: amq  ## DEPRECATED, use activemq_hawtio_roles
 activemq_hawtio_roles: "{{ activemq_hawtio_role.split(',') }}"
 activemq_cors_allow_origin: [ '*://0.0.0.0*' ]
 activemq_cors_strict_checking: true
+activemq_cors_ignore_scheme: false
 
 # NIO option
 activemq_nio_enabled: false
