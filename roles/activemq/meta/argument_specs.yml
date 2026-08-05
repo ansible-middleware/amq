@@ -369,6 +369,10 @@ argument_specs:
                 description: "Whether to enforce strict checking for CORS"
                 default: true
                 type: "bool"
+            activemq_cors_ignore_scheme:
+                description: "Whether to ignore scheme (http/https) mismatch in CORS origin checks; enable when behind a TLS-terminating reverse proxy"
+                default: false
+                type: "bool"
             activemq_management_access_default:
                 description: "fine grained management console accesses methods and roles, `activemq_hawtio_roles` roles will be added to each access"
                 default: "[ 'list*', 'get*', 'is*', 'set*', 'browse*', 'count*', '*' ]"
