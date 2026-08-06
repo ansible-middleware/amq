@@ -61,6 +61,18 @@
         quiet: true
         fail_msg: "Failed to retrieve configured users"
 
+    - name: Read jolokia-access.xml
+      ansible.builtin.slurp:
+        src: /opt/amq/amq-broker/etc/jolokia-access.xml
+      register: slurped_jolokia_access
+
+    - name: Check ignore-scheme is present in jolokia-access.xml
+      ansible.builtin.assert:
+        that:
+          - "'<ignore-scheme/>' in slurped_jolokia_access.content | b64decode"
+        quiet: true
+        fail_msg: "ignore-scheme element not found in jolokia-access.xml"
+
     - name: Check console redirect to login page
       ansible.builtin.uri:
         url: http://0.0.0.0:8161/console/
