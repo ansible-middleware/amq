@@ -469,6 +469,7 @@ activemq_broker_plugins:
 |`activemq_management_access_domains`| Fine grained management console accesses methods and roles per domain and key, `activemq_hawtio_roles` will be added to each domain access | `java.lang`, `org.apache.artemis.activemq` |
 |`activemq_cors_allow_origin`| List of CORS allow origin setting for jolokia | `[ *://0.0.0.0* ]` |
 |`activemq_cors_strict_checking`| Whether to enforce strict checking for CORS | `True` |
+|`activemq_cors_ignore_scheme`| Whether to ignore scheme (http/https) mismatch in CORS origin checks; enable when behind a TLS-terminating reverse proxy | `False` |
 
 Sample user/role configuration with one admin, a consumer and a producer:
 
