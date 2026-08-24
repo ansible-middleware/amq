@@ -664,10 +664,10 @@
 <span class="w">      </span><span class="nt">protocols</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CORE</span>
 <span class="w">      </span><span class="nt">useEpoll</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">      </span><span class="nt">sslEnabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="w">      </span><span class="nt">keyStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">activemq_tls_keystore_dest</span><span class="nv"> </span><span class="s">}}&quot;</span>
-<span class="w">      </span><span class="nt">keyStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">activemq_tls_keystore_password</span><span class="nv"> </span><span class="s">}}&quot;</span>
-<span class="w">      </span><span class="nt">trustStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">activemq_tls_truststore_dest</span><span class="nv"> </span><span class="s">}}&quot;</span>
-<span class="w">      </span><span class="nt">trustStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">activemq_tls_truststore_password</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">keyStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">"{{</span><span class="nv"> </span><span class="s">activemq_tls_keystore_dest</span><span class="nv"> </span><span class="s">}}"</span>
+<span class="w">      </span><span class="nt">keyStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">"{{</span><span class="nv"> </span><span class="s">activemq_tls_keystore_password</span><span class="nv"> </span><span class="s">}}"</span>
+<span class="w">      </span><span class="nt">trustStorePath</span><span class="p">:</span><span class="w"> </span><span class="s">"{{</span><span class="nv"> </span><span class="s">activemq_tls_truststore_dest</span><span class="nv"> </span><span class="s">}}"</span>
+<span class="w">      </span><span class="nt">trustStorePassword</span><span class="p">:</span><span class="w"> </span><span class="s">"{{</span><span class="nv"> </span><span class="s">activemq_tls_truststore_password</span><span class="nv"> </span><span class="s">}}"</span>
 <span class="w">      </span><span class="nt">verifyHost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </pre></div>
 </div>
@@ -701,7 +701,7 @@
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Virtual</span>
 <span class="w">    </span><span class="nt">anycast</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Virtual</span>
-<span class="w">        </span><span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;discard=&#39;true&#39;&quot;</span>
+<span class="w">        </span><span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="s">"discard='true'"</span>
 <span class="w">        </span><span class="nt">parameters</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">max_consumers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 <span class="w">          </span><span class="nt">consumers_before_dispatch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
@@ -710,7 +710,7 @@
 <span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my.queue</span>
 <span class="w">            </span><span class="nt">parameters</span><span class="p">:</span>
 <span class="w">              </span><span class="nt">last_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">              </span><span class="nt">last_value_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_property_key&quot;</span>
+<span class="w">              </span><span class="nt">last_value_key</span><span class="p">:</span><span class="w"> </span><span class="s">"my_property_key"</span>
 </pre></div>
 </div>
 </section>
@@ -768,7 +768,7 @@
 <span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FROMQUEUE</span>
 <span class="w">    </span><span class="nt">forwarding_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TOQUEUE</span>
 <span class="w">    </span><span class="nt">routing_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANYCAST</span>
-<span class="w">    </span><span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;msgType</span><span class="nv"> </span><span class="s">LIKE</span><span class="nv"> </span><span class="s">&#39;%ff%&#39;&quot;</span>
+<span class="w">    </span><span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="s">"msgType</span><span class="nv"> </span><span class="s">LIKE</span><span class="nv"> </span><span class="s">'%ff%'"</span>
 <span class="w">    </span><span class="nt">exclusive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 </pre></div>
 </div>
@@ -924,7 +924,7 @@
 </table>
 <p>Sample of mirroring operation:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_broker_connections</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;tcp://&lt;hostname&gt;:&lt;port&gt;&#39;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="s">'tcp://&lt;hostname&gt;:&lt;port&gt;'</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DC2</span>
 <span class="w">    </span><span class="nt">sync</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">operations</span><span class="p">:</span>
@@ -935,17 +935,17 @@
 </div>
 <p>Sample for sender-receiver operation:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_broker_connections</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;tcp://&lt;hostname&gt;:&lt;port&gt;?&lt;options&gt;&#39;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="s">'tcp://&lt;hostname&gt;:&lt;port&gt;?&lt;options&gt;'</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">other-server</span>
 <span class="w">    </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
 <span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
 <span class="w">    </span><span class="nt">operations</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sender</span>
 <span class="w">        </span><span class="nt">parameters</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">address_match</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;queues.#&#39;</span>
+<span class="w">          </span><span class="nt">address_match</span><span class="p">:</span><span class="w"> </span><span class="s">'queues.#'</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">receiver</span>
 <span class="w">        </span><span class="nt">parameters</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">address_match</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;remotequeues.#&#39;</span>
+<span class="w">          </span><span class="nt">address_match</span><span class="p">:</span><span class="w"> </span><span class="s">'remotequeues.#'</span>
 </pre></div>
 </div>
 <p>Note: operations parameters keys are using underscore (<code class="docutils literal notranslate"><span class="pre">address_match:</span></code>) instead of dash (<code class="docutils literal notranslate"><span class="pre">address-match:</span></code>). Dash works only if using single quotes (ie. <code class="docutils literal notranslate"><span class="pre">'address-match':</span></code>)</p>
@@ -1269,7 +1269,7 @@
 </tbody>
 </table>
 <p>Sample user/role configuration with one admin, a consumer and a producer:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">activemq_hawtio_roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;admin&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">activemq_hawtio_roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">'admin'</span><span class="w"> </span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">activemq_users</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq</span>
 <span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amqbrokerpass</span>
@@ -1287,46 +1287,46 @@
 <span class="w">        </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topics.#</span>
 <span class="w">        </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">send</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">browse</span><span class="w"> </span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">activemq_management_access_default</span><span class="p">:</span>
-<span class="w">      </span><span class="c1"># the list of default accesses. Each entry defines the list of &#39;methods&#39; and &#39;roles&#39; to  apply.</span>
+<span class="w">      </span><span class="c1"># the list of default accesses. Each entry defines the list of 'methods' and 'roles' to  apply.</span>
 <span class="w">      </span><span class="c1"># * methods: non empty list of allowed methods</span>
 <span class="w">      </span><span class="c1"># * roles: list of roles to apply. It will be supplemented with the activemq_hawtio_roles. An empty list is equal to the value of activemq_hawtio_roles</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;list*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;get*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;is*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;set*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;browse*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;count*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
-<span class="w">        </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;monitoring_user&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">'list*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'get*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'is*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'set*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'browse*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'count*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'*'</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">'monitoring_user'</span><span class="w"> </span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">activemq_management_access_domains</span><span class="p">:</span>
-<span class="w">      </span><span class="c1"># Each entry accepts the following keys: &#39;name&#39;, &#39;key&#39; and &#39;accesses&#39;.</span>
-<span class="w">      </span><span class="c1"># * name: optional, the domain to use, default to &#39;org.apache.activemq.artemis&#39;</span>
+<span class="w">      </span><span class="c1"># Each entry accepts the following keys: 'name', 'key' and 'accesses'.</span>
+<span class="w">      </span><span class="c1"># * name: optional, the domain to use, default to 'org.apache.activemq.artemis'</span>
 <span class="w">      </span><span class="c1"># * key: optional, the value of the key attribute</span>
-<span class="w">      </span><span class="c1"># * accesses: the list of accesses. Each entry defines the list of &#39;methods&#39; and &#39;roles&#39; to  apply.</span>
+<span class="w">      </span><span class="c1"># * accesses: the list of accesses. Each entry defines the list of 'methods' and 'roles' to  apply.</span>
 <span class="w">      </span><span class="c1">#   + methods: non empty list of allowed methods</span>
 <span class="w">      </span><span class="c1">#   + roles: list of roles to apply. It will be supplemented with the activemq_hawtio_roles. An empty list is equal to the value of activemq_hawtio_roles</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.activemq.artemis</span>
 <span class="w">        </span><span class="nt">accesses</span><span class="p">:</span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;list*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;get*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;is*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;set*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;browse*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;count*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">'list*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'get*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'is*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'set*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'browse*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'count*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'*'</span><span class="w"> </span><span class="p p-Indicator">]</span>
 <span class="w">            </span><span class="c1"># will default to the roles in activemq_hawtio_roles</span>
 <span class="w">            </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="p p-Indicator">]</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">java.lang</span>
 <span class="w">        </span><span class="nt">accesses</span><span class="p">:</span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;list*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;get*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;is*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;set*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
-<span class="w">            </span><span class="c1"># activemq_hawtio_roles roles will be added resulting in: &#39;monitoring,&#39; + activemq_hawtio_roles.join(&#39;,&#39;)</span>
-<span class="w">            </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;monitoring&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
-<span class="w">      </span><span class="c1"># The &#39;name&#39; field is not specified, it will default to domain=&#39;org.apache.activemq.artemis&#39;.</span>
-<span class="w">      </span><span class="c1"># If activemq_hawtio_roles has the value [ &#39;admin&#39;, &#39;monitoring&#39; ] then the entry here below will result in:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">'list*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'get*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'is*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'set*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'*'</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">            </span><span class="c1"># activemq_hawtio_roles roles will be added resulting in: 'monitoring,' + activemq_hawtio_roles.join(',')</span>
+<span class="w">            </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">'monitoring'</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="c1"># The 'name' field is not specified, it will default to domain='org.apache.activemq.artemis'.</span>
+<span class="w">      </span><span class="c1"># If activemq_hawtio_roles has the value [ 'admin', 'monitoring' ] then the entry here below will result in:</span>
 <span class="w">      </span><span class="c1">#</span>
-<span class="w">      </span><span class="c1"># &lt;match domain=&#39;org.apache.activemq.artemis&#39; key=&#39;address=topic.stock.*&#39;&gt;</span>
-<span class="w">      </span><span class="c1">#   &lt;access method=&quot;list*&quot; roles=&quot;admin, consumer, monitoring, producer&quot;/&gt;</span>
-<span class="w">      </span><span class="c1">#   &lt;access method=&quot;get*&quot; roles=&quot;admin, consumer, monitoring, producer&quot;/&gt;</span>
-<span class="w">      </span><span class="c1">#   &lt;access method=&quot;browse*&quot; roles=&quot;admin, consumer, monitoring, producer/&gt;</span>
-<span class="w">      </span><span class="c1">#   &lt;access method=&quot;count*&quot; roles=&quot;admin, consumer, monitoring, producer&quot;/&gt;</span>
-<span class="w">      </span><span class="c1">#   &lt;access method=&quot;is*&quot; roles=&quot;admin, monitoring, producer&quot;/&gt;</span>
-<span class="w">      </span><span class="c1">#   &lt;access method=&quot;set*&quot; roles=&quot;admin, monitoring, producer&quot;/&gt;</span>
-<span class="w">      </span><span class="c1">#   &lt;access method=&quot;*&quot; roles=&quot;admin, monitoring, producer&quot;/&gt;</span>
+<span class="w">      </span><span class="c1"># &lt;match domain='org.apache.activemq.artemis' key='address=topic.stock.*'&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method="list*" roles="admin, consumer, monitoring, producer"/&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method="get*" roles="admin, consumer, monitoring, producer"/&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method="browse*" roles="admin, consumer, monitoring, producer/&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method="count*" roles="admin, consumer, monitoring, producer"/&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method="is*" roles="admin, monitoring, producer"/&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method="set*" roles="admin, monitoring, producer"/&gt;</span>
+<span class="w">      </span><span class="c1">#   &lt;access method="*" roles="admin, monitoring, producer"/&gt;</span>
 <span class="w">      </span><span class="c1"># &lt;/match&gt;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;address=topic.stock.*&#39;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">'address=topic.stock.*'</span>
 <span class="w">        </span><span class="nt">accesses</span><span class="p">:</span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;list*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;get*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;browse*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;count*&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
-<span class="w">            </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;consumer&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;producer&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;is*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;set*&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
-<span class="w">            </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&#39;producer&#39;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">'list*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'get*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'browse*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'count*'</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">            </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">'consumer'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'producer'</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">'is*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'set*'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'*'</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">            </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">'producer'</span><span class="w"> </span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </section>

@@ -4,7 +4,7 @@
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta content="2.25.0" name="antsibull-docs" />
+<meta content="2.26.0" name="antsibull-docs" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lists_mergeby – Merge two or more lists of dictionaries by a given attribute &mdash; AMQ Ansible Collection  documentation</title>
@@ -298,10 +298,10 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
 <span class="w">      </span><span class="cp">{{</span> <span class="nv">list1</span> <span class="o">|</span> <span class="nf">middleware_automation</span><span class="nv">.amq.lists_mergeby</span><span class="o">(</span>
                     <span class="nv">list2</span><span class="o">,</span>
-                    <span class="s1">&#39;index&#39;</span><span class="o">,</span>
+                    <span class="s1">'index'</span><span class="o">,</span>
                     <span class="k">recursive</span><span class="o">=</span><span class="kp">True</span><span class="o">,</span>
-                    <span class="nv">list_merge</span><span class="o">=</span><span class="s1">&#39;append&#39;</span>
-                 <span class="o">)</span> <span class="cp">}}</span><span class="no">&quot;</span>
+                    <span class="nv">list_merge</span><span class="o">=</span><span class="s1">'append'</span>
+                 <span class="o">)</span> <span class="cp">}}</span><span class="no">"</span>
 <span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">list1</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">a</span>
@@ -315,17 +315,17 @@ example: <code class="docutils literal notranslate"><span class="pre">input</spa
 <span class="w">        </span><span class="nt">foo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">baz</span>
 <span class="w">  </span><span class="c1"># Produces the following list of dictionaries:</span>
 <span class="w">  </span><span class="c1">#   {</span>
-<span class="w">  </span><span class="c1">#     &quot;index&quot;: &quot;a&quot;,</span>
-<span class="w">  </span><span class="c1">#     &quot;foo&quot;: &quot;bar&quot;,</span>
-<span class="w">  </span><span class="c1">#     &quot;value&quot;: 123</span>
+<span class="w">  </span><span class="c1">#     "index": "a",</span>
+<span class="w">  </span><span class="c1">#     "foo": "bar",</span>
+<span class="w">  </span><span class="c1">#     "value": 123</span>
 <span class="w">  </span><span class="c1">#   },</span>
 <span class="w">  </span><span class="c1">#   {</span>
-<span class="w">  </span><span class="c1">#     &quot;index&quot;: &quot;b&quot;,</span>
-<span class="w">  </span><span class="c1">#     &quot;value&quot;: 42</span>
+<span class="w">  </span><span class="c1">#     "index": "b",</span>
+<span class="w">  </span><span class="c1">#     "value": 42</span>
 <span class="w">  </span><span class="c1">#   },</span>
 <span class="w">  </span><span class="c1">#   {</span>
-<span class="w">  </span><span class="c1">#     &quot;index&quot;: &quot;c&quot;,</span>
-<span class="w">  </span><span class="c1">#     &quot;foo&quot;: &quot;baz&quot;</span>
+<span class="w">  </span><span class="c1">#     "index": "c",</span>
+<span class="w">  </span><span class="c1">#     "foo": "baz"</span>
 <span class="w">  </span><span class="c1">#   }</span>
 </pre></div>
 </div>

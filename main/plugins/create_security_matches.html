@@ -4,7 +4,7 @@
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta content="2.25.0" name="antsibull-docs" />
+<meta content="2.26.0" name="antsibull-docs" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>create_security_matches – Create security settings matches from AMQ broker roles &mdash; AMQ Ansible Collection  documentation</title>
@@ -190,7 +190,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create security settings matches from roles</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create security settings</span>
 <span class="w">  </span><span class="nt">ansible.builtin.set_fact</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">security_settings_matches</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">activemq_roles</span> <span class="o">|</span> <span class="nf">middleware_automation</span><span class="nv">.amq.create_security_matches</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">security_settings_matches</span><span class="p">:</span><span class="w"> </span><span class="s">"</span><span class="cp">{{</span> <span class="nv">activemq_roles</span> <span class="o">|</span> <span class="nf">middleware_automation</span><span class="nv">.amq.create_security_matches</span> <span class="cp">}}</span><span class="s">"</span>
 </pre></div>
 </div>
 </section>

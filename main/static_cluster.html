@@ -194,11 +194,11 @@ Those parameters will be relevant to all amq nodes, so we write them in the grou
 </div>
 <p>We will let the amq collection use all other defaults.</p>
 <p>Now we need to pick which instance will be initially the primary node (and thus which is the backup). In the inventory/host_vars/amq1.yml file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_ha_role</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;primary&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_ha_role</span><span class="p">:</span><span class="w"> </span><span class="s">'primary'</span>
 </pre></div>
 </div>
 <p>And (optionally, since it’s default) in inventory/host_vars/amq2.yml:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_ha_role</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;backup&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_ha_role</span><span class="p">:</span><span class="w"> </span><span class="s">'backup'</span>
 </pre></div>
 </div>
 </section>
