@@ -1,4 +1,4 @@
-# Using custom encypted passwords
+# Using custom encrypted passwords
 
 TODO pick the corresponding molecule test and write down the guide
 

@@ -25,7 +25,7 @@ The following new parameters allows to configure a secondary (sufficient) or pri
 
 ## Configuration example
 
-The following example shows how to connect to a test LDAP service publivly available:
+The following example shows how to connect to a test LDAP service publicly available:
 
 ```yaml
     activemq_hawtio_role: Scientists

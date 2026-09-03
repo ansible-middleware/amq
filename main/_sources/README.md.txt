@@ -22,7 +22,7 @@ This collection has been tested against following Ansible versions: **>=2.16.0**
 ### Roles:
 
 * [`activemq`](https://github.com/ansible-middleware/amq/blob/main/roles/activemq/README.md): perform installation and configuration
-* [`activemq_uninstall`](https://github.com/ansible-middleware/amq/blob/main/roles/activemq_uninstall/README.md): uninstallation of a deploment made by the collection
+* [`activemq_uninstall`](https://github.com/ansible-middleware/amq/blob/main/roles/activemq_uninstall/README.md): uninstallation of a deployment made by the collection
 
 
 ### Plugins:

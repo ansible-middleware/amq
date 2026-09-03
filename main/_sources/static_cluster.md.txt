@@ -160,7 +160,7 @@ podman exec -ti amq2 tail -n 3 /var/log/activemq/amq-broker/artemis.log
 
 
 
-## Futher reading
+## Further reading
 
 You can find an asciinema recording of this [guide here](https://asciinema.org/a/670215)
 
