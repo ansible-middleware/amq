@@ -12,6 +12,7 @@ Minor Changes
 
 - AMW-620 amq collection spelling and grammar checking for PRs `#279 <https://github.com/ansible-middleware/amq/pull/279>`_
 - Add support for ignore-scheme in jolokia-access.xml `#276 <https://github.com/ansible-middleware/amq/pull/276>`_
+- Replace deprecated _collections_compat import `#280 <https://github.com/ansible-middleware/amq/pull/280>`_
 
 Bugfixes
 --------
