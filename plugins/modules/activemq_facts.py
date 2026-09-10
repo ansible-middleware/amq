@@ -110,7 +110,7 @@ import traceback
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.urls import open_url, basic_auth_header
-from ansible.module_utils.six.moves.urllib.error import HTTPError
+from urllib.error import HTTPError
 from ansible.module_utils.common.text.converters import to_native
 
 

@@ -99,7 +99,7 @@ RETURN = '''
 '''
 
 from ansible.errors import AnsibleFilterError
-from ansible.module_utils.common._collections_compat import Mapping, Sequence
+from collections.abc import Mapping, Sequence
 from ansible.utils.vars import merge_hash
 
 from collections import defaultdict
