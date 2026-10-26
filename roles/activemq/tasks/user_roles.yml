@@ -25,7 +25,9 @@
   ansible.builtin.set_fact:
     activemq_unique_security_settings_roles: "{{ activemq_roles | map(attribute='name') | list | unique | sort }}"
     activemq_unique_default_management_roles: "{{ activemq_management_access_default | map(attribute='roles') | flatten | unique | sort }}"
-    activemq_unique_management_roles: "{{ activemq_management_access_domains | map(attribute='accesses') | flatten | map(attribute='roles') | flatten | unique | sort }}"
+    activemq_unique_management_roles: "{{ activemq_management_access_domains | \
+      map(attribute='accesses') | flatten | \
+      map(attribute='roles') | flatten | unique | sort }}"
 
 - name: Collect all activemq roles
   ansible.builtin.set_fact:
@@ -86,7 +88,9 @@
 
 - name: Create management access default
   ansible.builtin.set_fact:
-    activemq_management_access_default_xml: "{{ activemq_management_access_default_xml | default([]) | union(lookup('template', 'default_access.management.xml.j2') | from_yaml | default([])) }}"
+    activemq_management_access_default_xml: "{{ activemq_management_access_default_xml | \
+      default([]) | union(lookup('template', \
+      'default_access.management.xml.j2') | from_yaml | default([])) }}"
   loop: "{{ activemq_management_access_default }}"
   loop_control:
     loop_var: default_access
@@ -94,7 +98,9 @@
 
 - name: Create management access domains
   ansible.builtin.set_fact:
-    activemq_management_access_domains_xml: "{{ activemq_management_access_domains_xml | default([]) | union(lookup('template', 'role_access.management.xml.j2') | from_yaml | default([])) }}"
+    activemq_management_access_domains_xml: "{{ activemq_management_access_domains_xml | \
+      default([]) | union(lookup('template', \
+      'role_access.management.xml.j2') | from_yaml | default([])) }}"
   loop: "{{ activemq_management_access_domains }}"
   loop_control:
     loop_var: access_domains

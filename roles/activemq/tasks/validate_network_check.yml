@@ -6,7 +6,9 @@
     - name: Create configuration element
       middleware_automation.common.xml:
         xsd_path: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
-        xmlstring: "<core xmlns=\"urn:activemq:core\"><network-check-{{ item | replace('_', '-') }}>{{ value }}</network-check-{{ item | replace('_', '-') }}></core>"
+        xmlstring: "<core xmlns=\"urn:activemq:core\">\
+          <network-check-{{ item | replace('_', '-') }}>{{ value }}\
+          </network-check-{{ item | replace('_', '-') }}></core>"
         validate: true
         input_type: xml
       vars:

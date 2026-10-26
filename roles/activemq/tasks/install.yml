@@ -115,7 +115,9 @@
 
     - name: Determine install zipfile from search results
       ansible.builtin.set_fact:
-        activemq_rhn_filtered_products: "{{ activemq_rhn_products.results | selectattr('file_name', 'match', '.*/amq-broker-' + amq_broker_version + '-bin.zip') | list }}"
+        activemq_rhn_filtered_products: "{{ activemq_rhn_products.results | \
+          selectattr('file_name', 'match', \
+          '.*/amq-broker-' + amq_broker_version + '-bin.zip') | list }}"
       delegate_to: localhost
       run_once: true
 

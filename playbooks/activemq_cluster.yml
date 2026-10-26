@@ -8,7 +8,7 @@
     activemq_shared_storage: true
     activemq_configure_firewalld: true
   roles:
-   - middleware_automation.amq.activemq
+    - middleware_automation.amq.activemq
   pre_tasks:
     - name: Create nfs shared directory
       ansible.builtin.file:
@@ -19,8 +19,8 @@
         mode: '0775'
     - name: Create mount NFS volume
       ansible.posix.mount:
-       src: 10.0.153.34:/nfs
-       path: /opt/amq/amq-broker/data/shared
-       opts: rw,sync,hard,intr
-       state: mounted
-       fstype: nfs
+        src: 10.0.153.34:/nfs
+        path: /opt/amq/amq-broker/data/shared
+        opts: rw,sync,hard,intr
+        state: mounted
+        fstype: nfs

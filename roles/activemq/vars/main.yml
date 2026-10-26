@@ -18,7 +18,9 @@ activemq:  # noqa var-naming false positive
   package_list: "{{ activemq_base_package_list + [activemq_jvm_package] + \
                    ([activemq_jmx_exporter_package] if activemq_jmx_exporter_enabled else []) + \
                    (['iputils'] if activemq_network_check_enabled else []) }}"
-  prometheus_package: "{{ 'com.redhat.amq.broker.' if amq_broker_enable is defined and amq_broker_enable and activemq_version.split('.')[1] | int >= 11 else 'org.apache.activemq.artemis.' }}"
+  prometheus_package: "{{ 'com.redhat.amq.broker.' if amq_broker_enable is defined and \
+    amq_broker_enable and activemq_version.split('.')[1] | int >= 11 \
+    else 'org.apache.activemq.artemis.' }}"
 
 activemq_base_package_list:
   - unzip

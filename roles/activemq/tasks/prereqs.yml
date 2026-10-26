@@ -17,7 +17,7 @@
   ansible.builtin.assert:
     that:
       - ansible_facts['os_family'] == "RedHat"
-    quiet: True
+    quiet: true
     fail_msg: "This collection only supports OS from the RedHat family"
   when:
     - ansible_facts['os_family'] is defined
