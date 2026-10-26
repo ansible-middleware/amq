@@ -147,3 +147,27 @@
           - queue_stats.json.value.LastValueKey == "my_property_key"
         quiet: true
         fail_msg: "Last Value configuration mismatch for my.queue"
+
+    - name: Read artemis.profile
+      ansible.builtin.slurp:
+        src: /opt/amq/amq-broker/etc/artemis.profile
+      register: artemis_profile
+
+    - name: Verify JAVA_ARGS in artemis.profile contains custom settings
+      ansible.builtin.assert:
+        that:
+          - "activemq_java_opts_mem in artemis_profile.content | b64decode"
+          - "activemq_java_opts_extra in artemis_profile.content | b64decode"
+        fail_msg: "artemis.profile does not contain custom JAVA_ARGS"
+
+    - name: Read sysconfig file
+      ansible.builtin.slurp:
+        src: /etc/sysconfig/amq-broker
+      register: sysconfig_file
+
+    - name: Verify sysconfig contains custom settings
+      ansible.builtin.assert:
+        that:
+          - "activemq_java_opts_mem in sysconfig_file.content | b64decode"
+          - "activemq_java_opts_extra in sysconfig_file.content | b64decode"
+        fail_msg: "sysconfig does not contain custom JAVA_ARGS"
