@@ -551,7 +551,7 @@ Role Variables
 
 Example Playbook
 ----------------
-```
+```yaml
 ---
 - hosts: all
   collections:
