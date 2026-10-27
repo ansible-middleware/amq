@@ -1,5 +1,5 @@
 # {{ ansible_managed }}
-JAVA_ARGS="{{ activemq_java_opts }} {{ activemq_logger_opts }} {{ activemq_jmx_opts }} {{ activemq_properties_opts }}"
+JAVA_ARGS="{{ [activemq_java_opts, activemq_logger_opts, activemq_jmx_opts, activemq_properties_opts] | select | join(' ') }}"
 JAVA_HOME={{ activemq_java_home  | default(activemq_rpm_java_home, true) }}
 {% if (not amq_broker_enable | default(false) and activemq_version is version_compare('2.40.0', '<'))
    or (amq_broker_enable | default(false) and activemq_version is version_compare('7.13.0', '<')) %}

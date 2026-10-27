@@ -149,6 +149,18 @@
     - activemq_needs_upgrade is defined
     - activemq_needs_upgrade
 
+- name: "Update JAVA_ARGS in artemis.profile for {{ activemq.instance_name }}"
+  ansible.builtin.lineinfile:
+    path: "{{ activemq.instance_home }}/etc/artemis.profile"
+    regexp: '^JAVA_ARGS=.*'
+    line: "JAVA_ARGS=\"{{ [activemq_java_opts, activemq_logger_opts, activemq_jmx_opts, activemq_properties_opts] | select | join(' ') }}\""
+  become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
+  when:
+    - activemq_instance_directory is defined
+    - activemq_instance_directory.stat.exists
+  notify:
+    - restart amq_broker
+
 - name: Setup clustering with jgroups
   ansible.builtin.include_tasks: jgroups.yml
   when:
