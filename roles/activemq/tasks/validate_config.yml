@@ -152,7 +152,8 @@
 
 - name: Create amqp broker connections configuration string
   ansible.builtin.set_fact:
-    activemq_validate_broker_connections: "{{ activemq_validate_broker_connections | default([]) + [ lookup('template', 'broker_connections.broker.xml.j2') ] }}"
+    activemq_validate_broker_connections: "{{ activemq_validate_broker_connections | \
+      default([]) + [lookup('template', 'broker_connections.broker.xml.j2')] }}"
   when: activemq_broker_connections | length > 0
   loop: "{{ activemq_broker_connections }}"
   loop_control:
@@ -162,7 +163,9 @@
 - name: Validate amqp broker connections
   middleware_automation.common.xml:
     xsd_path: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
-    xmlstring: "<core xmlns=\"urn:activemq:core\"><broker-connections>{{ activemq_validate_broker_connections | default([]) | join(' ') | trim }}</broker-connections></core>"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><broker-connections>\
+      {{ activemq_validate_broker_connections | default([]) | join(' ') | trim }}\
+      </broker-connections></core>"
     validate: true
     input_type: xml
   when: activemq_broker_connections | length > 0
@@ -175,13 +178,17 @@
 
 - name: Create security settings
   ansible.builtin.set_fact:
-    activemq_validate_security_settings: "{{ activemq_validate_security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2', wantlist=true) ] }}"
+    activemq_validate_security_settings: "{{ activemq_validate_security_settings | \
+      default([]) + [lookup('template', \
+      'security_settings.broker.xml.j2', wantlist=true)] }}"
   loop: "{{ activemq_validate_security_settings_matches | dict2items(key_name='match', value_name='permissions') }}"
 
 - name: Validate security settings
   middleware_automation.common.xml:
     xsd_path: "{{ activemq_local_path.stat.path }}/artemis-configuration.xsd"
-    xmlstring: "<core xmlns=\"urn:activemq:core\"><security-settings>{{ activemq_validate_security_settings | flatten | join(' ') | trim }}</security-settings></core>"
+    xmlstring: "<core xmlns=\"urn:activemq:core\"><security-settings>\
+      {{ activemq_validate_security_settings | flatten | join(' ') | trim }}\
+      </security-settings></core>"
     validate: true
     input_type: xml
   run_once: true

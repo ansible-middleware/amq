@@ -160,7 +160,11 @@
       - "--ssl-trust {{ activemq_tls_truststore_dest }}"
       - "--ssl-trust-password {{ activemq_tls_truststore_password }}"
       - "--use-client-auth"
-  when: activemq_tls_enabled and activemq_tls_mutual_authentication and activemq_tls_truststore_path | length > 0 and activemq_tls_truststore_password | length > 0
+  when:
+    - activemq_tls_enabled
+    - activemq_tls_mutual_authentication
+    - activemq_tls_truststore_path | length > 0
+    - activemq_tls_truststore_password | length > 0
   no_log: "{{ not ansible_check_mode }}"
 
 - name: Create final broker creation options

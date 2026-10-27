@@ -133,7 +133,9 @@
       register: activemq_profile_file
     - name: Display versions
       ansible.builtin.debug:
-        msg: "Requested version: {{ activemq_version }} / current profile: {{ activemq_profile_file.content | b64decode | regex_search(\"ARTEMIS_HOME='?.*'?\", multiline=true) }}"
+        msg: "Requested version: {{ activemq_version }} / current profile: \
+          {{ activemq_profile_file.content | b64decode | \
+          regex_search(\"ARTEMIS_HOME='?.*'?\", multiline=true) }}"
     - name: Set upgrade flag
       ansible.builtin.set_fact:
         activemq_needs_upgrade: true
