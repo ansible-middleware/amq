@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service configuration with systemd &mdash; AMQ Ansible Collection  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=41de9001" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="LDAP authentication" href="ldap_auth.html" />
+    <link rel="prev" title="Base deployment" href="base_deployment.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            AMQ Ansible Collection
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Ansible Collection - AMQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins/index.html">Plugin Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roles/index.html">Role Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage guides</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="base_deployment.html">Base deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_deployment.html#base-configuration">Base configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Systemd configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#base-systemd-unit-definition">Base systemd unit definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-for-ha-clustering">Configuration for HA / clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-systemd-configuration-on-itself">Running the systemd configuration on itself</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verify-deployment">Verify deployment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ldap_auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static_cluster.html">HA setup active/standby</a></li>
+<li class="toctree-l1"><a class="reference internal" href="masked_passwords.html">Encrypted passwords</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developing.html">Developing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releasing.html">Releasing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ Broker</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/keycloak/">Keycloak / Red Hat Single Sign-On</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/common/main/">Ansible Middleware utilities</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AMQ Ansible Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Service configuration with systemd</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/systemd.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="service-configuration-with-systemd">
+<h1>Service configuration with systemd<a class="headerlink" href="#service-configuration-with-systemd" title="Link to this heading"></a></h1>
+<p>After the download, installation, and configuration phases of an <code class="docutils literal notranslate"><span class="pre">activemq</span></code> role execution,
+additional configuration is performed by the collection to allow the service to be controlled
+as a systemd unit.</p>
+<section id="base-systemd-unit-definition">
+<h2>Base systemd unit definition<a class="headerlink" href="#base-systemd-unit-definition" title="Link to this heading"></a></h2>
+<p>The template used for the systemd unit is:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="c1"># </span><span class="cp">{{</span> <span class="nv">ansible_managed</span> <span class="cp">}}</span>
+<span class="p p-Indicator">[</span><span class="nv">Unit</span><span class="p p-Indicator">]</span>
+<span class="l l-Scalar l-Scalar-Plain">Description=</span><span class="cp">{{</span> <span class="nv">activemq.instance_name</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain"> </span><span class="cp">{{</span> <span class="nv">activemq.name</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain"> Service</span>
+<span class="l l-Scalar l-Scalar-Plain">After=network.target</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">activemq_shared_storage</span> <span class="k">and</span> <span class="nv">activemq_shared_storage_mounted</span> <span class="cp">%}</span>
+<span class="l l-Scalar l-Scalar-Plain">RequiresMountsFor=</span><span class="cp">{{</span> <span class="nv">activemq_shared_storage_path</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+
+<span class="l l-Scalar l-Scalar-Plain">[Service]</span>
+<span class="l l-Scalar l-Scalar-Plain">User=</span><span class="cp">{{</span> <span class="nv">activemq_service_user</span> <span class="cp">}}</span>
+<span class="l l-Scalar l-Scalar-Plain">Group=</span><span class="cp">{{</span> <span class="nv">activemq_service_group</span> <span class="cp">}}</span>
+<span class="l l-Scalar l-Scalar-Plain">Type=forking</span>
+<span class="l l-Scalar l-Scalar-Plain">EnvironmentFile=-/etc/sysconfig/</span><span class="cp">{{</span> <span class="nv">activemq.instance_name</span> <span class="cp">}}</span>
+<span class="l l-Scalar l-Scalar-Plain">PIDFile=</span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/</span><span class="cp">{{</span> <span class="nv">activemq_service_pidfile</span> <span class="cp">}}</span>
+<span class="l l-Scalar l-Scalar-Plain">ExecStart=</span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/bin/artemis-service start</span>
+<span class="l l-Scalar l-Scalar-Plain">ExecStop=</span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/bin/artemis-service stop</span>
+<span class="l l-Scalar l-Scalar-Plain">SuccessExitStatus = 0 143</span>
+<span class="l l-Scalar l-Scalar-Plain">RestartSec = 120</span>
+<span class="l l-Scalar l-Scalar-Plain">Restart = on-failure</span>
+<span class="l l-Scalar l-Scalar-Plain">LimitNOFILE=102642</span>
+<span class="l l-Scalar l-Scalar-Plain">TimeoutSec=600</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">activemq_systemd_wait_for_port</span> <span class="cp">%}</span>
+<span class="l l-Scalar l-Scalar-Plain">ExecStartPost=/usr/bin/timeout </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_timeout</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain"> sh -c 'while ! ss -H -t -l -n sport =</span><span class="w"> </span><span class="p p-Indicator">:</span><span class="cp">{{</span> <span class="nv">activemq_port</span> <span class="cp">}}</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="err"> grep -q "^LISTEN.*:</span><span class="cp">{{</span> <span class="nv">activemq_port</span> <span class="cp">}}</span><span class="err">"; do sleep 1; done &amp;&amp; /bin/sleep </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_delay</span> <span class="cp">}}</span><span class="err">'</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">activemq_systemd_wait_for_log</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">activemq_ha_enabled</span> <span class="cp">%}</span>
+<span class="l l-Scalar l-Scalar-Plain">ExecStartPost=/usr/bin/timeout </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_timeout</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain"> sh -c 'tail -n 15 -f </span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/log/artemis.log | sed "/AMQ221109|AMQ221001/ q" &amp;&amp; /bin/sleep </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_delay</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">'</span>
+<span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<span class="l l-Scalar l-Scalar-Plain">ExecStartPost=/usr/bin/timeout </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_timeout</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain"> sh -c 'tail -n 15 -f </span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/log/artemis.log | sed "/AMQ221034/ q" &amp;&amp; /bin/sleep </span><span class="cp">{{</span> <span class="nv">activemq_systemd_wait_for_delay</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">'</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+
+<span class="p p-Indicator">[</span><span class="nv">Install</span><span class="p p-Indicator">]</span>
+<span class="l l-Scalar l-Scalar-Plain">WantedBy=multi-user.target</span>
+</pre></div>
+</div>
+<p>The notable configurations are for the paths and user/group that runs the service, in addition to the “wait_for” feature that will be discussed in the
+next paragraph.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">/etc/sysconfig/&lt;instance_name&gt;</span></code> is an environment variable definition file, also created and maintained by the collection, which
+populates the environment for the service as follows:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="c1"># </span><span class="cp">{{</span> <span class="nv">ansible_managed</span> <span class="cp">}}</span>
+<span class="l l-Scalar l-Scalar-Plain">JAVA_ARGS='</span><span class="cp">{{</span> <span class="nv">activemq_java_opts</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain"> </span><span class="cp">{{</span> <span class="nv">activemq_logger_opts</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain"> </span><span class="cp">{{</span> <span class="nv">activemq_jmx_opts</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain"> </span><span class="cp">{{</span> <span class="nv">activemq_properties_opts</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">'</span>
+<span class="l l-Scalar l-Scalar-Plain">JAVA_HOME=</span><span class="cp">{{</span> <span class="nv">activemq_java_home</span>  <span class="o">|</span> <span class="nf">default</span><span class="o">(</span><span class="nv">activemq_rpm_java_home</span><span class="o">,</span> <span class="kp">true</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="l l-Scalar l-Scalar-Plain">HAWTIO_ROLE='</span><span class="cp">{{</span> <span class="nv">activemq_hawtio_role</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">'</span>
+<span class="l l-Scalar l-Scalar-Plain">ARTEMIS_INSTANCE_URI='file:</span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/'</span>
+<span class="l l-Scalar l-Scalar-Plain">ARTEMIS_INSTANCE_ETC_URI='file:</span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/etc/'</span>
+<span class="l l-Scalar l-Scalar-Plain">ARTEMIS_HOME='</span><span class="cp">{{</span> <span class="nv">activemq.home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">'</span>
+<span class="l l-Scalar l-Scalar-Plain">ARTEMIS_INSTANCE='</span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">'</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">activemq_shared_storage</span> <span class="cp">%}</span>
+<span class="l l-Scalar l-Scalar-Plain">ARTEMIS_DATA_DIR='</span><span class="cp">{{</span> <span class="nv">activemq_shared_storage_path</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">'</span>
+<span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<span class="l l-Scalar l-Scalar-Plain">ARTEMIS_DATA_DIR='</span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/data'</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="l l-Scalar l-Scalar-Plain">ARTEMIS_ETC_DIR='</span><span class="cp">{{</span> <span class="nv">activemq.instance_home</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/etc'</span>
+<span class="l l-Scalar l-Scalar-Plain">ARTEMIS_USER=</span><span class="cp">{{</span> <span class="nv">activemq_service_user</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+</section>
+<section id="configuration-for-ha-clustering">
+<h2>Configuration for HA / clustering<a class="headerlink" href="#configuration-for-ha-clustering" title="Link to this heading"></a></h2>
+<p>A few parameters are available, that when enabled (by default when ha is enabled), add configurations
+to the systemd unit, so that service start/restart commands return only after certain conditions (ie. some port is open / a console log line):</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port</span></code></p></td>
+<td class="text-left"><p>Whether or not systemd unit should wait for <code class="docutils literal notranslate"><span class="pre">activemq_port</span></code> before returning</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> when activemq_ha_enabled is <code class="docutils literal notranslate"><span class="pre">true</span></code> and activemq_shared_storage is <code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code></p></td>
+<td class="text-left"><p>Whether or not systemd unit should wait for service to be up in logs</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> when activemq_ha_enabled and activemq_shared_storage are <code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_timeout</span></code></p></td>
+<td class="text-left"><p>How long to wait for service to be alive (seconds)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_delay</span></code></p></td>
+<td class="text-left"><p>Activation delay for service systemd unit (seconds)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log_ha_string</span></code></p></td>
+<td class="text-left"><p>The string to match in the logs when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code> is true and HA is enabled</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ221109|AMQ221001</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log_string</span></code></p></td>
+<td class="text-left"><p>The string to match in the logs when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code> is true and HA is not enabled</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AMQ221034</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port_number</span></code></p></td>
+<td class="text-left"><p>The port number to wait for when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port</span></code> is true</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_port</span> <span class="pre">}}</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>By default, the wait_for_port is used for replication HA, while wait_for_log for shared store HA, however, they can be individually or both together
+used along with any other configuration.</p>
+</section>
+<section id="running-the-systemd-configuration-on-itself">
+<h2>Running the systemd configuration on itself<a class="headerlink" href="#running-the-systemd-configuration-on-itself" title="Link to this heading"></a></h2>
+<p>The task file <code class="docutils literal notranslate"><span class="pre">systemd.yml</span></code> provided by the collection is also defined as an entrypoint, meaning that you can:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Configure systemd unit</span>
+<span class="w">  </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">activemq</span>
+<span class="w">      </span><span class="nt">tasks_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">systemd</span>
+</pre></div>
+</div>
+<p>That allows to configure systemd on existing installation of activemq, requiring a subset of the parameters
+needed by the full execution of the <code class="docutils literal notranslate"><span class="pre">activemq</span></code> role.</p>
+<p>Here’s the list of what you may need to configure to fit your environment, with the default value:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_version</span></code></p></td>
+<td class="text-left"><p>Apache Artemis version</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.54.0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_installdir</span></code></p></td>
+<td class="text-left"><p>Apache Artemis Installation path</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_dest</span> <span class="pre">}}/apache-artemis-{{</span> <span class="pre">activemq_version</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_dest</span></code></p></td>
+<td class="text-left"><p>Root installation directory</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt/amq</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_user</span></code></p></td>
+<td class="text-left"><p>POSIX user running the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_group</span></code></p></td>
+<td class="text-left"><p>POSIX group running the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_service_name</span></code></p></td>
+<td class="text-left"><p>systemd service unit name</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_instance_name</span></code></p></td>
+<td class="text-left"><p>Name of broker instance to deploy</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq-broker</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_java_opts</span></code></p></td>
+<td class="text-left"><p>Additional JVM options for the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-Xms512M</span> <span class="pre">-Xmx2G</span> <span class="pre">[...]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_jvm_package</span></code></p></td>
+<td class="text-left"><p>RPM package to install for the service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">java-17-openjdk-headless</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_java_home</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code> of installed JRE, leave empty for using specified <code class="docutils literal notranslate"><span class="pre">activemq_jvm_package</span></code> path</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">no</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">activemq_hawtio_role</span></code></p></td>
+<td class="text-left"><p>Artemis role for hawtio console access</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port</span></code> | Whether or not systemd unit should wait for <code class="docutils literal notranslate"><span class="pre">activemq_port</span></code> before returning | <code class="docutils literal notranslate"><span class="pre">true</span></code> when activemq_ha_enabled is <code class="docutils literal notranslate"><span class="pre">true</span></code> and activemq_shared_storage is <code class="docutils literal notranslate"><span class="pre">false</span></code> |
+|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code> | Whether or not systemd unit should wait for service to be up in logs | <code class="docutils literal notranslate"><span class="pre">true</span></code> when activemq_ha_enabled and activemq_shared_storage are <code class="docutils literal notranslate"><span class="pre">true</span></code> |
+|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_timeout</span></code>| How long to wait for service to be alive (seconds)  |<code class="docutils literal notranslate"><span class="pre">60</span></code>|
+|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_delay</span></code>| Activation delay for service systemd unit (seconds)  |<code class="docutils literal notranslate"><span class="pre">10</span></code>|
+|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log_ha_string</span></code> | The string to match in the logs when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code> is true and HA is enabled | <code class="docutils literal notranslate"><span class="pre">AMQ221109\|AMQ221001</span></code> |
+|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log_string</span></code> | The string to match in the logs when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_log</span></code> is true and HA is not enabled | <code class="docutils literal notranslate"><span class="pre">AMQ221034</span></code> |
+|<code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port_number</span></code>| The port number to wait for when <code class="docutils literal notranslate"><span class="pre">activemq_systemd_wait_for_port</span></code> is true | <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">activemq_port</span> <span class="pre">}}</span></code> |</p>
+</section>
+<section id="verify-deployment">
+<h2>Verify deployment<a class="headerlink" href="#verify-deployment" title="Link to this heading"></a></h2>
+<p>You can now login on the target instance, and run:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">root@instance /</span><span class="p p-Indicator">]</span><span class="c1"># systemctl status amq-broker</span>
+<span class="l l-Scalar l-Scalar-Plain">● amq-broker.service - amq-broker Apache ActiveMQ Service</span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">Loaded</span><span class="nt">: loaded (/etc/systemd/system/amq-broker.service; enabled; preset</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">disabled)</span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">Active</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">active (running) since Thu 2024-08-22 09:02:33 UTC; 3h 33min ago</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">Process</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4061 ExecStart=/opt/amq/amq-broker/bin/artemis-service start (code=exited, status=0/SUCCESS)</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">Main PID</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4064 (java)</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Tasks</span><span class="nt">: 66 (limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30641)</span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">Memory</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">394.2M</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">CPU</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">41.030s</span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">CGroup</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/system.slice/amq-broker.service</span>
+<span class="w">             </span><span class="l l-Scalar l-Scalar-Plain">└─4064 /etc/alternatives/jre_17/bin/java -Xms512M -Xmx2G -XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication -Dhawtio.disableProxy=true -Dhawtio.realm=activemq -Dhawtio.offline=true -Dhawtio.rolePrincipalClasses=org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal -Djolokia.policyLocation=file:/opt/amq/amq-broker/etc/jolokia-access.xml -Dhawtio.role=admin -Djava.security.auth.login.config=/opt/amq/amq-broker/etc/login.config -classpath /opt/amq/apache-artemis-2.54.0/lib/artemis-boot.jar -Dartemis.home=/opt/amq/apache-artemis-2.54.0 -Dartemis.instance=/opt/amq/amq-broker -Djava.library.path=/opt/amq/apache-artemis-2.54.0/bin/lib/linux-x86_64 -Djava.io.tmpdir=/opt/amq/amq-broker/tmp -Ddata.dir=/opt/amq/amq-broker/data -Dartemis.instance.etc=/opt/amq/amq-broker/etc org.apache.activemq.artemis.boot.Artemis run</span>
+
+<span class="l l-Scalar l-Scalar-Plain">Aug 22 09:02:32 instance systemd[1]</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Starting amq-broker Apache ActiveMQ Service...</span>
+<span class="l l-Scalar l-Scalar-Plain">Aug 22 09:02:32 instance artemis-service[4061]</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Starting artemis-service</span>
+<span class="l l-Scalar l-Scalar-Plain">Aug 22 09:02:33 instance artemis-service[4061]</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">artemis-service is now running (4064)</span>
+<span class="l l-Scalar l-Scalar-Plain">Aug 22 09:02:33 instance systemd[1]</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Started amq-broker Apache ActiveMQ Service.</span>
+</pre></div>
+</div>
+<p>The systemd journal also will be available, with:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">root@instance /</span><span class="p p-Indicator">]</span><span class="c1"># journalctl -u amq-broker -n 50</span>
+<span class="l l-Scalar l-Scalar-Plain">Aug 22 12:37:30 instance systemd[1]</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Stopping amq-broker Apache ActiveMQ Service...</span>
+<span class="l l-Scalar l-Scalar-Plain">Aug 22 12:37:30 instance artemis-service[6072]</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Gracefully Stopping artemis-service</span>
+<span class="l l-Scalar l-Scalar-Plain">Aug 22 12:37:31 instance systemd[1]</span><span class="nt">: amq-broker.service</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deactivated successfully.</span>
+<span class="l l-Scalar l-Scalar-Plain">Aug 22 12:37:31 instance systemd[1]</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Stopped amq-broker Apache ActiveMQ Service.</span>
+<span class="l l-Scalar l-Scalar-Plain">Aug 22 12:37:31 instance systemd[1]</span><span class="nt">: amq-broker.service</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Consumed 42.425s CPU time.</span>
+<span class="l l-Scalar l-Scalar-Plain">Aug 22 12:37:31 instance systemd[1]</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Starting amq-broker Apache ActiveMQ Service...</span>
+<span class="l l-Scalar l-Scalar-Plain">Aug 22 12:37:31 instance artemis-service[6156]</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Starting artemis-service</span>
+<span class="l l-Scalar l-Scalar-Plain">Aug 22 12:37:32 instance artemis-service[6156]</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">artemis-service is now running (6159)</span>
+<span class="l l-Scalar l-Scalar-Plain">Aug 22 12:37:32 instance systemd[1]</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Started amq-broker Apache ActiveMQ Service.</span>
+</pre></div>
+</div>
+<p>And eventually, the other systemctl commands: <code class="docutils literal notranslate"><span class="pre">start</span></code>, <code class="docutils literal notranslate"><span class="pre">stop</span></code>, and <code class="docutils literal notranslate"><span class="pre">restart</span></code>.</p>
+<p>If configuration for the wait_for conditions was enabled, you’ll additionally notice that the commands
+do not return immediately, but only after the service is considered healthy (ie. the condition has been met).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="base_deployment.html" class="btn btn-neutral float-left" title="Base deployment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ldap_auth.html" class="btn btn-neutral float-right" title="LDAP authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Red Hat, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

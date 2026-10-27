@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ha configuration with active/standby nodes &mdash; AMQ Ansible Collection  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=41de9001" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using custom encrypted passwords" href="masked_passwords.html" />
+    <link rel="prev" title="LDAP authentication" href="ldap_auth.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            AMQ Ansible Collection
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Ansible Collection - AMQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins/index.html">Plugin Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roles/index.html">Role Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage guides</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="base_deployment.html">Base deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_deployment.html#base-configuration">Base configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="systemd.html">Systemd configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap_auth.html">LDAP authentication</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">HA setup active/standby</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prepare-the-instances">Prepare the instances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prepare-a-shared-file-system">Prepare a shared file-system</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#create-an-inventory-with-two-nodes">Create an inventory with two nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-points-for-ha">Configuration points for HA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-installation-of-activemq">Run installation of activemq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deployment-and-validation">Deployment and validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="masked_passwords.html">Encrypted passwords</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developing.html">Developing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releasing.html">Releasing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ Broker</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/keycloak/">Keycloak / Red Hat Single Sign-On</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/common/main/">Ansible Middleware utilities</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AMQ Ansible Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Ha configuration with active/standby nodes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/static_cluster.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ha-configuration-with-active-standby-nodes">
+<h1>Ha configuration with active/standby nodes<a class="headerlink" href="#ha-configuration-with-active-standby-nodes" title="Link to this heading"></a></h1>
+<p>This guide will show how to deploy activemq on two nodes, configured with active/standby <a class="reference external" href="https://activemq.apache.org/components/artemis/documentation/latest/ha.html#terminology">high availability</a>.
+In this setup, the two instances act as a single messaging node, with the ‘primary’ (active) instance brokering
+all messages, and the ‘backup’ instance standing-by on a lock, ready to pick up the ‘active’ work as soon
+as the ‘primary’ instance terminates, or fails.</p>
+<p>The guide will rely on podman containers, but it can easily be adapted to other virtual machine or cloud providers,
+or even bare-metal.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<section id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h3>
+<p>On the machine running this guide, you’ll need RHEL 9.2+, or in detail:</p>
+<ul class="simple">
+<li><p>python 3.12+</p></li>
+<li><p>ansible-core &gt;= 2.16</p></li>
+<li><p>podman 5.1+</p></li>
+</ul>
+<p>Then install the collections:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>containers.podman
+ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>middleware_automation.amq
+</pre></div>
+</div>
+<p>And python deps, for instance via pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>lxml<span class="w"> </span>jmespath
+</pre></div>
+</div>
+</section>
+<section id="prepare-the-instances">
+<h3>Prepare the instances<a class="headerlink" href="#prepare-the-instances" title="Link to this heading"></a></h3>
+<p>We will create two podman containers using the <a class="reference external" href="https://catalog.redhat.com/software/containers/ubi8/ubi-init/5c359b97d70cc534b3a378c8">ubi-init image</a>, sharing the same network.</p>
+<p>Lets create the network first:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>amq
+</pre></div>
+</div>
+<p>We will create the containers inside the network like the following command, but hold on and skip to the next paragraph:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>amq<span class="w"> </span>-d<span class="w"> </span>--name<span class="o">=</span>amq1<span class="w"> </span>ubi9/ubi-init:latest
+</pre></div>
+</div>
+</section>
+<section id="prepare-a-shared-file-system">
+<h3>Prepare a shared file-system<a class="headerlink" href="#prepare-a-shared-file-system" title="Link to this heading"></a></h3>
+<p>Artemis activemq supports a set of <a class="reference external" href="https://activemq.apache.org/components/artemis/documentation/latest/ha.html#shared-store">shared store filesystems</a> with different characteristics.
+For the sake of keeping it simple, in this guide, and thanks to fact we are using containers, we will rely on a shared directory on the containerization host, mounted on both containers.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>sharedfs
+podman<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>amq<span class="w"> </span>--privileged<span class="w"> </span>-d<span class="w"> </span>--name<span class="o">=</span>amq1<span class="w"> </span>--volume<span class="w"> </span>sharedfs:/opt/amq/amq-broker/data/shared:rw,z<span class="w"> </span>ubi9/ubi-init:latest
+podman<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>amq<span class="w"> </span>--privileged<span class="w"> </span>-d<span class="w"> </span>--name<span class="o">=</span>amq2<span class="w"> </span>--volume<span class="w"> </span>sharedfs:/opt/amq/amq-broker/data/shared:rw,z<span class="w"> </span>ubi9/ubi-init:latest
+</pre></div>
+</div>
+<p>Note that in the mounted path above <code class="docutils literal notranslate"><span class="pre">/opt/amq/</span></code> is the default installation root directory, and <code class="docutils literal notranslate"><span class="pre">/opt/amq/amq-broker/</span></code> is the default amq instance directory.</p>
+</section>
+</section>
+<section id="create-an-inventory-with-two-nodes">
+<h2>Create an inventory with two nodes<a class="headerlink" href="#create-an-inventory-with-two-nodes" title="Link to this heading"></a></h2>
+<p>Now lets prepare the inventory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>inventory<span class="w"> </span>inventory/group_vars<span class="w"> </span>inventory/host_vars
+cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; inventory/hosts</span>
+<span class="s">[amq]</span>
+<span class="s">amq1 ansible_connection=podman</span>
+<span class="s">amq2 ansible_connection=podman</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p>As you can see, we listed the two instance by name, setting for each the Ansible connection driver to <code class="docutils literal notranslate"><span class="pre">podman</span></code>.
+We could alternatively set it in <code class="docutils literal notranslate"><span class="pre">ansible.cfg</span></code>.</p>
+</section>
+<section id="configuration-points-for-ha">
+<h2>Configuration points for HA<a class="headerlink" href="#configuration-points-for-ha" title="Link to this heading"></a></h2>
+<p>To tell the collection we wnat to deploy an HA node pair in active/standby, we need to set some parameters.
+Those parameters will be relevant to all amq nodes, so we write them in the group_vars/amq.yml file</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># enable the ha configuration (default is primary/backup)</span>
+<span class="nt">activemq_ha_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="c1"># enable using the shared filesystem (we do not need to set path, because we are mounting at the default location)</span>
+<span class="nt">activemq_shared_storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="c1"># disable firewall configuration (firewalld not available on ubi containers)</span>
+<span class="nt">activemq_configure_firewalld</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+<p>We will let the amq collection use all other defaults.</p>
+<p>Now we need to pick which instance will be initially the primary node (and thus which is the backup). In the inventory/host_vars/amq1.yml file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_ha_role</span><span class="p">:</span><span class="w"> </span><span class="s">'primary'</span>
+</pre></div>
+</div>
+<p>And (optionally, since it’s default) in inventory/host_vars/amq2.yml:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">activemq_ha_role</span><span class="p">:</span><span class="w"> </span><span class="s">'backup'</span>
+</pre></div>
+</div>
+</section>
+<section id="run-installation-of-activemq">
+<h2>Run installation of activemq<a class="headerlink" href="#run-installation-of-activemq" title="Link to this heading"></a></h2>
+<p>Now that we have our inventory ready with all configuration, we can create a playbook <code class="docutils literal notranslate"><span class="pre">deploy.yml</span></code> and execute the deployment, with the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory/<span class="w"> </span>deploy.yml
+</pre></div>
+</div>
+<p>The playbook itself needs nothing else than the collection role invocation, except in this case we need the <code class="docutils literal notranslate"><span class="pre">sudo</span></code> package which is not installed by default in the ubi-init images:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prepare instance</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">install sudo</span>
+<span class="w">     </span><span class="nt">package</span><span class="p">:</span>
+<span class="w">       </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sudo</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Playbook for ActiveMQ Artemis</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">roles</span><span class="p">:</span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">middleware_automation.amq.activemq</span>
+</pre></div>
+</div>
+</section>
+<section id="deployment-and-validation">
+<h2>Deployment and validation<a class="headerlink" href="#deployment-and-validation" title="Link to this heading"></a></h2>
+<p>Hopefully the execution will end successfully, returning the following output at the end:</p>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">PLAY RECAP *******************************************************************************************************</span>
+<span class="l l-Scalar l-Scalar-Plain">amq1</span><span class="w">                       </span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ok=173  changed=29   unreachable=0    failed=0    skipped=48   rescued=0    ignored=0</span>
+<span class="nt">amq2                       </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ok=162  changed=29   unreachable=0    failed=0    skipped=40   rescued=0    ignored=0</span>
+</pre></div>
+</div>
+<p>We can now inspect if the desired configuration was applied correctly.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-ti<span class="w"> </span>amq1<span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">3</span><span class="w"> </span>/var/log/activemq/amq-broker/artemis.log
+<span class="m">2024</span>-07-30<span class="w"> </span><span class="m">16</span>:00:25,453<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>org.apache.activemq.artemis<span class="o">]</span><span class="w"> </span>AMQ241001:<span class="w"> </span>HTTP<span class="w"> </span>Server<span class="w"> </span>started<span class="w"> </span>at<span class="w"> </span>http://0.0.0.0:8161
+<span class="m">2024</span>-07-30<span class="w"> </span><span class="m">16</span>:00:25,455<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>org.apache.activemq.artemis<span class="o">]</span><span class="w"> </span>AMQ241002:<span class="w"> </span>Artemis<span class="w"> </span>Jolokia<span class="w"> </span>REST<span class="w"> </span>API<span class="w"> </span>available<span class="w"> </span>at<span class="w"> </span>http://0.0.0.0:8161/console/jolokia
+<span class="m">2024</span>-07-30<span class="w"> </span><span class="m">16</span>:00:25,455<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>org.apache.activemq.artemis<span class="o">]</span><span class="w"> </span>AMQ241004:<span class="w"> </span>Artemis<span class="w"> </span>Console<span class="w"> </span>available<span class="w"> </span>at<span class="w"> </span>http://0.0.0.0:8161/console
+</pre></div>
+</div>
+<p>amq1 is definitely the active nodes here, let’s check amq2 too:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-ti<span class="w"> </span>amq2<span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">3</span><span class="w"> </span>/var/log/activemq/amq-broker/artemis.log
+<span class="m">2024</span>-07-30<span class="w"> </span><span class="m">16</span>:00:36,801<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>org.apache.activemq.artemis.core.server<span class="o">]</span><span class="w"> </span>AMQ221034:<span class="w"> </span>Waiting<span class="w"> </span>indefinitely<span class="w"> </span>to<span class="w"> </span>obtain<span class="w"> </span>primary<span class="w"> </span>lock
+</pre></div>
+</div>
+</section>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading"></a></h2>
+<p>You can find an asciinema recording of this <a class="reference external" href="https://asciinema.org/a/670215">guide here</a></p>
+<p>More guides are available in asciinema format at this links:</p>
+<ul class="simple">
+<li><p>https://asciinema.org/a/668257</p></li>
+<li><p>https://asciinema.org/a/670220</p></li>
+<li><p>https://asciinema.org/a/668260</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ldap_auth.html" class="btn btn-neutral float-left" title="LDAP authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="masked_passwords.html" class="btn btn-neutral float-right" title="Using custom encrypted passwords" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Red Hat, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
