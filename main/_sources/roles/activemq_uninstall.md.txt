@@ -51,7 +51,7 @@ Role Defaults
 
 Example Playbook
 ----------------
-```
+```yaml
 ---
 - hosts: all
   roles:
