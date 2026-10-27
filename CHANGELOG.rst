@@ -4,6 +4,25 @@ middleware\_automation.amq Release Notes
 
 .. contents:: Topics
 
+v2.4.0
+======
+
+Minor Changes
+-------------
+
+- AMW-620 amq collection spelling and grammar checking for PRs `#279 <https://github.com/ansible-middleware/amq/pull/279>`_
+- Add support for ignore-scheme in jolokia-access.xml `#276 <https://github.com/ansible-middleware/amq/pull/276>`_
+- Replace deprecated _collections_compat import `#280 <https://github.com/ansible-middleware/amq/pull/280>`_
+- Replace deprecated top-level fact variables with ansible_fact `#281 <https://github.com/ansible-middleware/amq/pull/281>`_
+
+Bugfixes
+--------
+
+- AMW-592 AMW Github Actions are failing because of latest molecule `#274 <https://github.com/ansible-middleware/amq/pull/274>`_
+- AMW-594 Upstream release is failing due to recent rules change `#273 <https://github.com/ansible-middleware/amq/pull/273>`_
+- Fix LDAP passwordCodec using wrong variable in login.config.j2 `#284 <https://github.com/ansible-middleware/amq/pull/284>`_
+- Update JAVA_ARGS in artemis.profile from role variables `#287 <https://github.com/ansible-middleware/amq/pull/287>`_
+
 v2.3.6
 ======
 
