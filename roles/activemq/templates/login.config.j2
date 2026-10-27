@@ -37,8 +37,8 @@ activemq {
         connectionUsername="{{ activemq_auth_ldap_conn_username }}"
         connectionPassword="{{ activemq_auth_ldap_conn_password }}"
         connectionProtocol="{{ activemq_auth_ldap_conn_protocol }}"
-{% if activemq_password_codec != 'org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec' %}
-        passwordCodec="{{ activemq_password_codec }}"
+{% if activemq_auth_ldap_conn_codec != 'org.apache.activemq.artemis.utils.DefaultSensitiveStringCodec' %}
+        passwordCodec="{{ activemq_auth_ldap_conn_codec }}"
 {% endif %}
         authentication="{{ activemq_auth_ldap_auth }}"
         userBase="{{ activemq_auth_ldap_user_base }}"
