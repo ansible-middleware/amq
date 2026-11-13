@@ -34,13 +34,11 @@ activemq_jolokia_url: "{{ activemq_console_url }}jolokia"
 activemq_configuration_file_refresh_period: 5000
 activemq_jvm_package: java-21-openjdk-headless
 activemq_java_home:
-activemq_java_opts: "{{ [
-   activemq_java_opts_mem,
+activemq_java_opts: "{{ [activemq_java_opts_mem,
    activemq_java_opts_gc,
    activemq_java_opts_hawtio,
    '-Djolokia.policyLocation=file:' + activemq_dest + '/' + activemq_instance_name + '/etc/jolokia-access.xml',
-   activemq_java_opts_extra | default('')
- ] | join(' ') }}"
+   activemq_java_opts_extra | default('')] | join(' ') }}"
 activemq_java_opts_extra: ''
 activemq_java_opts_mem: '-Xms512M -Xmx2G'
 activemq_java_opts_gc: '-XX:+PrintClassHistogram -XX:+UseG1GC -XX:+UseStringDeduplication'
@@ -133,7 +131,7 @@ activemq_id_cache_size: 20000
 # file journal configuration
 # journal type, valid values are [ ASYNCIO: libaio, MAPPED: mmap files, NIO: Plain Java Files  ]
 activemq_journal_type: ASYNCIO
-activemq_data_directory: "{{ activemq_shared_storage_path if activemq_shared_storage else activemq_dest + '/' + activemq_instance_name  + '/data' }}"
+activemq_data_directory: "{{ activemq_shared_storage_path if activemq_shared_storage else activemq_dest + '/' + activemq_instance_name + '/data' }}"
 activemq_paging_directory: "{{ activemq_data_directory }}/paging"
 activemq_bindings_directory: "{{ activemq_data_directory }}/bindings"
 activemq_journal_directory: "{{ activemq_data_directory }}/journal"

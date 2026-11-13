@@ -1,7 +1,7 @@
 ---
 - name: Create acceptor configuration string
   ansible.builtin.set_fact:
-    activemq_acceptors_xml: "{{ activemq_acceptors_xml | default([]) + [ lookup('template', 'acceptors.broker.xml.j2') ] }}"
+    activemq_acceptors_xml: "{{ activemq_acceptors_xml | default([]) + [lookup('template', 'acceptors.broker.xml.j2')] }}"
   loop: "{{ activemq_acceptors }}"
   loop_control:
     loop_var: acceptor

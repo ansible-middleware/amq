@@ -13,9 +13,9 @@
         input_type: xml
       vars:
         value: "{{ lookup('ansible.builtin.vars', 'activemq_network_check_' + item) | to_json | replace('\"', '') }}"
-    - name: "Add item {{ item }} to valid element list"
+    - name: "Add to valid element list item {{ item }}"
       ansible.builtin.set_fact:
-        activemq_valid_nc_configuration_list: "{{ activemq_valid_nc_configuration_list | default([]) + [ item ] }}"
+        activemq_valid_nc_configuration_list: "{{ activemq_valid_nc_configuration_list | default([]) + [item] }}"
       when: lookup('ansible.builtin.vars', 'activemq_network_check_' + item) != ''
   rescue:
     - name: Display warning

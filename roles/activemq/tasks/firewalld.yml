@@ -12,7 +12,7 @@
     enabled: true
     state: started
 
-- name: "Configure firewall for {{ activemq.service_name }} ports"
+- name: "Configure firewall ports for {{ activemq.service_name }}"
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   ansible.posix.firewalld:
     port: "{{ item }}"

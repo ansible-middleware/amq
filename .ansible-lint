@@ -38,9 +38,6 @@ skip_list:
   - file_is_small_enough
   - file_has_valid_name
   - role_vars_start_with_role_name
-  - jinja[spacing]
-  - schema[meta]
-  - name[template]
   - run_once[task]
 
 use_default_rules: true
