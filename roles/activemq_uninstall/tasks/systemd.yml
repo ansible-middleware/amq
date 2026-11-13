@@ -2,7 +2,7 @@
 - name: Check systemd service
   ansible.builtin.service_facts:
 
-- name: "Disable and stop instance {{ activemq.instance_name }} for {{ activemq.service_name }} service"
+- name: "Disable and stop service instance {{ activemq.instance_name }}"
   become: "{{ activemq_uninstall_require_privileges_escalation | default(true) }}"
   ansible.builtin.systemd:
     name: "{{ activemq.instance_name }}"
@@ -16,7 +16,7 @@
     state: absent
     dest: "/etc/sysconfig/{{ activemq.instance_name }}"
 
-- name: "Delete systemd unit file for /etc/systemd/system/{{ activemq.instance_name }}.service"
+- name: "Delete systemd unit file for {{ activemq.instance_name }}"
   become: "{{ activemq_uninstall_require_privileges_escalation | default(true) }}"
   ansible.builtin.file:
     state: absent

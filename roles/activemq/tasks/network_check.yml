@@ -2,8 +2,8 @@
 - name: Set network check configuration
   middleware_automation.common.xml:
     path: "{{ activemq.instance_home }}/etc/broker.xml"
-    xpath: "/conf:configuration/core:core/core:network-check-{{ item | replace('_','-') }}"
-    value: "{{ lookup('ansible.builtin.vars', 'activemq_network_check_' + item) | to_json | replace('\"','') }}"
+    xpath: "/conf:configuration/core:core/core:network-check-{{ item | replace('_', '-') }}"
+    value: "{{ lookup('ansible.builtin.vars', 'activemq_network_check_' + item) | to_json | replace('\"', '') }}"
     namespaces:
       conf: urn:activemq
       core: urn:activemq:core

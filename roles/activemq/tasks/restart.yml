@@ -1,5 +1,5 @@
 ---
-- name: "Restart and enable instance {{ activemq.instance_name }} for {{ activemq.service_name }} service"
+- name: "Restart and enable service instance {{ activemq.instance_name }}"
   when: activemq_requires_userhome_update is not defined
   become: "{{ activemq_systemd_require_privilege_escalation | default(true) }}"
   throttle: 1
@@ -34,7 +34,7 @@
       ansible.builtin.fail:
         msg: "Broker restart failed: {{ activemq_restart_result.msg | default('Unknown error') }}"
 
-- name: "Restart and enable instance {{ activemq.instance_name }} for {{ activemq.service_name }} service"
+- name: "Restart and enable service instance with userhome update {{ activemq.instance_name }}"
   when: activemq_requires_userhome_update is defined and activemq_requires_userhome_update
   become: "{{ activemq_systemd_require_privilege_escalation | default(true) }}"
   block:
