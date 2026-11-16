@@ -116,6 +116,30 @@
         quiet: true
         fail_msg: "Failed to retrieve generated divert"
 
+    - name: Verify purge-page-folders configuration (requires Artemis >= 2.54 / AMQ Broker >= 7.14)
+      block:
+        - name: Check purge-page-folders in broker.xml
+          community.general.xml:
+            path: "/opt/amq/amq-broker/etc/broker.xml"
+            xpath: /conf:configuration/core:core/core:purge-page-folders
+            content: text
+            namespaces:
+              conf: urn:activemq
+              core: urn:activemq:core
+          register: purge_page_folders
+
+        - name: Verify purge-page-folders is enabled
+          ansible.builtin.assert:
+            that:
+              - purge_page_folders.matches[0]['{urn:activemq:core}purge-page-folders'] == 'true'
+            quiet: true
+            fail_msg: "purge-page-folders not correctly configured in broker.xml"
+      rescue:
+        - name: Display warning for unsupported version
+          ansible.builtin.debug:
+            msg: "WARNING: purge-page-folders is not supported in this broker version (requires Artemis >= 2.54 or AMQ Broker >= 7.14)"
+          changed_when: true
+
     - name: Check divert configuration via jolokia
       ansible.builtin.assert:
         that:

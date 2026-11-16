@@ -61,6 +61,7 @@ activemq_core_configuration_list:
   - configuration_file_refresh_period
   - global_max_messages
   - global_max_size
+  - purge_page_folders
   - password_codec
   - message_counter_enabled
   - message_counter_sample_period

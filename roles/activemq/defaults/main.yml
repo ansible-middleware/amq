@@ -151,6 +151,7 @@ activemq_journal_max_io: "{{ 4096 if activemq_journal_type == 'ASYNCIO' else 1 }
 # message Full Policy configured
 activemq_global_max_messages: -1
 activemq_global_max_size: '-1'
+activemq_purge_page_folders: false
 # database configuration for JDBC persistence
 activemq_db_enabled: false
 activemq_db_jdbc_url: 'jdbc:derby:target/derby/database-store;create=true'
