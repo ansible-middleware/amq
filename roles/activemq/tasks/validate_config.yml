@@ -16,6 +16,11 @@
     activemq_validate_federations: []
     activemq_validate_plugins: []
 
+- name: Add purge_page_folders to core config when enabled
+  ansible.builtin.set_fact:
+    activemq_core_configuration_list: "{{ activemq_core_configuration_list + ['purge_page_folders'] }}"
+  when: activemq_purge_page_folders | bool
+
 - name: Validate configuration/core and journal configuration
   ansible.builtin.include_tasks: validate_core_config.yml
   loop: "{{ activemq_core_configuration_list }}"
