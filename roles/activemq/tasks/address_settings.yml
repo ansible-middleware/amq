@@ -5,7 +5,7 @@
   block:
     - name: Create address settings configuration string
       ansible.builtin.set_fact:
-        activemq_address_settings_xml: "{{ activemq_address_settings_xml | default([]) + [ lookup('template', 'address_settings.broker.xml.j2') ] }}"
+        activemq_address_settings_xml: "{{ activemq_address_settings_xml | default([]) + [lookup('template', 'address_settings.broker.xml.j2')] }}"
       loop: "{{ activemq_address_settings }}"
       loop_control:
         loop_var: address_setting

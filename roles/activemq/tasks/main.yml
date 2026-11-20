@@ -76,18 +76,18 @@
   tags:
     - systemd
 
-- name: "Check instance directory: {{ activemq_dest }}/{{ activemq.instance_name }}"
+- name: "Check instance directory for {{ activemq.instance_name }}"
   ansible.builtin.stat:
     path: "{{ activemq_dest }}/{{ activemq.instance_name }}/bin"
   register: activemq_instance_directory
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
-- name: "Generate artemis configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
+- name: "Generate artemis configuration for {{ activemq.instance_name }}"
   ansible.builtin.include_tasks: configure_artemis.yml
   when:
     - not activemq_instance_directory.stat.exists
 
-- name: "Create instance {{ activemq.instance_name }} of {{ activemq.service_name }}"
+- name: "Create broker instance {{ activemq.instance_name }}"
   ansible.builtin.command:
     cmd: "{{ activemq.home }}/bin/artemis create {{ activemq.instance_home }} {{ activemq_options }}"
     creates: "{{ activemq.instance_home }}/bin/artemis-service"
@@ -112,7 +112,7 @@
   notify:
     - restart amq_broker
 
-- name: "Check instance directory: {{ activemq_dest }}/{{ activemq.instance_name }}"
+- name: "Check instance directory for {{ activemq.instance_name }}"
   ansible.builtin.stat:
     path: "{{ activemq_dest }}/{{ activemq.instance_name }}/bin"
   register: activemq_instance_directory
@@ -195,11 +195,11 @@
         mode: '0640'
       loop: "{{ activemq_additional_libs }}"
 
-- name: "Generate broker.xml configuration for: {{ activemq_dest }}/{{ activemq.instance_name }}"
+- name: "Generate broker.xml configuration for {{ activemq.instance_name }}"
   ansible.builtin.include_tasks: configure_broker.yml
   when: activemq_config_override_template == ''
 
-- name: "Generate broker config files for: {{ activemq_dest }}/{{ activemq.instance_name }}"
+- name: "Generate broker config files for {{ activemq.instance_name }}"
   ansible.builtin.include_tasks: configure_files.yml
 
 - name: Verify file ownership
@@ -227,7 +227,7 @@
           - activemq_service_status is defined
           - activemq_service_status.stdout is defined
   rescue:
-    - name: "Start and wait for {{ activemq.service_name }} service"
+    - name: "Start and wait for service {{ activemq.service_name }}"
       ansible.builtin.include_tasks: start.yml
       run_once: true
 

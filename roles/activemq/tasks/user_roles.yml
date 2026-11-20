@@ -49,7 +49,7 @@
 
 - name: Create security settings
   ansible.builtin.set_fact:
-    activemq_security_settings: "{{ activemq_security_settings | default([]) + [ lookup('template', 'security_settings.broker.xml.j2', wantlist=true) ] }}"
+    activemq_security_settings: "{{ activemq_security_settings | default([]) + [lookup('template', 'security_settings.broker.xml.j2', wantlist=true)] }}"
   loop: "{{ activemq_security_settings_matches | dict2items(key_name='match', value_name='permissions') }}"
 
 - name: Create messaging roles permissions
@@ -94,7 +94,7 @@
   loop: "{{ activemq_management_access_default }}"
   loop_control:
     loop_var: default_access
-    label: "{{ default_access.roles|join(',') }}: {{ default_access.methods|join(',') }}"
+    label: "{{ default_access.roles | join(',') }}: {{ default_access.methods | join(',') }}"
 
 - name: Create management access domains
   ansible.builtin.set_fact:

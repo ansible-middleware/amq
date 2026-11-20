@@ -49,7 +49,7 @@
     state: absent
   when: not activemq_uninstall_skip_artemis
 
-- name: "Delete logs directory symlink /var/log/{{ activemq.service_name }}/{{ activemq.instance_name }}"
+- name: "Delete logs directory symlink for {{ activemq.instance_name }}"
   become: "{{ activemq_uninstall_require_privileges_escalation | default(true) }}"
   ansible.builtin.file:
     state: absent

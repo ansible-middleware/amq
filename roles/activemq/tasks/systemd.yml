@@ -14,7 +14,7 @@
         group: root
         mode: '0755'
 
-    - name: "Configure sysconfig file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
+    - name: "Configure sysconfig file for service {{ activemq.instance_name }}"
       ansible.builtin.template:
         src: amq_broker.sysconfig.j2
         dest: "/etc/sysconfig/{{ activemq.instance_name }}"
@@ -24,7 +24,7 @@
       notify:
         - restart amq_broker
 
-    - name: "Configure systemd unit file for {{ activemq.instance_name }} {{ activemq.service_name }} service"
+    - name: "Configure systemd unit file for service {{ activemq.instance_name }}"
       ansible.builtin.template:
         src: "{{ activemq_service_override_template | default('amq_broker.service.j2', true) }}"
         dest: "/etc/systemd/system/{{ activemq.instance_name }}.service"

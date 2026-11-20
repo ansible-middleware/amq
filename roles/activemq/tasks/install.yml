@@ -10,7 +10,7 @@
       - activemq.version is defined
     quiet: true
 
-- name: "Create {{ activemq.service_name }} service group"
+- name: "Create service group for {{ activemq.service_name }}"
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   ansible.builtin.group:
     name: "{{ activemq_service_group }}"
@@ -18,7 +18,7 @@
 
 - name: "Create service user"
   block:
-    - name: "Create {{ activemq.service_name }} service user"
+    - name: "Create service user for {{ activemq.service_name }}"
       become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
       ansible.builtin.user:
         name: "{{ activemq_service_user }}"
@@ -37,13 +37,13 @@
         activemq_requires_userhome_update: true
       notify: restart amq_broker
 
-- name: "Check {{ activemq.service_name }} install location"
+- name: "Check install location for {{ activemq.service_name }}"
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   ansible.builtin.stat:
     path: "{{ activemq_dest }}"
   register: activemq_install_location
 
-- name: "Create {{ activemq.service_name }} install location"
+- name: "Create install location for {{ activemq.service_name }}"
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   ansible.builtin.file:
     dest: "{{ activemq_dest }}"
@@ -162,7 +162,7 @@
   when:
     - activemq_new_version_downloaded.changed or not activemq_path_to_workdir.stat.exists
   block:
-    - name: "Extract {{ activemq.name }} archive on target"
+    - name: "Extract archive on target for {{ activemq.name }}"
       ansible.builtin.unarchive: # noqa no-handler definitely not a candidate for a handler
         remote_src: true
         src: "{{ activemq_archive_full_path }}"

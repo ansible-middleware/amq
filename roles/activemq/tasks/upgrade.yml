@@ -2,7 +2,7 @@
 - name: "Stop ActiveMQ broker before upgrading"
   ansible.builtin.include_tasks: stop.yml
 
-- name: "Update instance {{ activemq.instance_name }} of {{ activemq.service_name }}"
+- name: "Update service instance {{ activemq.instance_name }}"
   ansible.builtin.command:
     cmd: "{{ activemq.home }}/bin/artemis upgrade {{ activemq.instance_home }}"
   environment:
@@ -12,7 +12,7 @@
   become_user: "{{ activemq_service_user }}"
   changed_when: true
 
-- name: "Update profile for instance {{ activemq.instance_name }} with new artemis version"
+- name: "Update profile with new artemis version for instance {{ activemq.instance_name }}"
   ansible.builtin.lineinfile:
     path: "{{ activemq.instance_home }}/etc/artemis.profile"
     regexp: '^ARTEMIS_HOME=.*'
@@ -20,7 +20,7 @@
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
   register: activemq_broker_updated
 
-- name: "Check artemis {{ activemq.home }} activemq schema"
+- name: "Check artemis activemq schema for {{ activemq.home }}"
   middleware_automation.common.xml:
     path: "{{ activemq.home }}/schema/activemq.xsd"
     xpath: /xs:schema
@@ -30,20 +30,14 @@
   register: activemq_xsd
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
-- name: >-
-    Ensure bootstrap xsd namespace
-    {{ activemq_xsd.matches[0]['{http://www.w3.org/2001/XMLSchema}schema'].targetNamespace }}
-    is correct for instance {{ activemq.instance_name }}
+- name: "Ensure bootstrap xsd namespace is correct for instance {{ activemq.instance_name }}"
   ansible.builtin.replace:
     path: "{{ activemq.instance_home }}/etc/bootstrap.xml"
     regexp: '(?<=<broker )xmlns=".*?"'
     replace: "xmlns=\"{{ activemq_xsd.matches[0]['{http://www.w3.org/2001/XMLSchema}schema'].targetNamespace }}\""
   become: "{{ activemq_install_require_privileges_escalation | default(true) }}"
 
-- name: >-
-    Ensure mgmt context xsd namespace
-    {{ activemq_xsd.matches[0]['{http://www.w3.org/2001/XMLSchema}schema'].targetNamespace }}
-    is correct for instance {{ activemq.instance_name }}
+- name: "Ensure mgmt context xsd namespace is correct for instance {{ activemq.instance_name }}"
   ansible.builtin.lineinfile:
     path: "{{ activemq.instance_home }}/etc/management.xml"
     regexp: '<management-context xmlns=".*">'
