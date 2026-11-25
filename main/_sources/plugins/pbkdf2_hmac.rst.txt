@@ -6,7 +6,7 @@
     :trim:
 
 .. meta::
-  :antsibull-docs: 2.28.0
+  :antsibull-docs: 2.29.1
 
 .. Anchors
 
@@ -105,7 +105,7 @@ This describes the input of the filter, the value before ``| middleware_automati
 Keyword parameters
 ------------------
 
-This describes keyword parameters of the filter. These are the values ``key1=value1``, ``key2=value2`` and so on in the following
+This describes keyword parameters of the filter plugin. These are the values ``key1=value1``, ``key2=value2`` and so on in the following
 example: ``input | middleware_automation.amq.pbkdf2_hmac(key1=value1, key2=value2, ...)``
 
 .. raw:: html

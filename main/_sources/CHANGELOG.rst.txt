@@ -7,11 +7,6 @@ middleware\_automation.amq Release Notes
 v2.4.1-devel
 ============
 
-Bugfixes
---------
-
-- Fix jinja[spacing] and name[template] lint violations `#294 <https://github.com/ansible-middleware/amq/pull/294>`_
-
 v2.4.0
 ======
 
