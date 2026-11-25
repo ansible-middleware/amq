@@ -555,6 +555,12 @@ argument_specs:
                   Supports byte notation like 'K', 'Mb', 'MiB', 'GB', etc.
                 default: '-1'
                 type: "str"
+            activemq_purge_page_folders:
+                description: >
+                  Whether to purge page folders when an address exits paging state. Can significantly speed up broker startup.
+                  Requires Artemis >= 2.54 or AMQ Broker >= 7.14.
+                default: false
+                type: "bool"
             activemq_logger_rollover_files:
                 description: "Number of rollover log files"
                 default: 5
